@@ -1,0 +1,700 @@
+<title>Mercurio Enforcement Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: FZS-inspired — full-bleed deep-teal hero, warm paper ground, one 1100px reading column, square buttons, raspberry accents; sections follow the project from context to team workflow. */
+:root{
+  --paper:#f3efeb; --card:#ffffff; --tint:#e8e2db; --rule:#d9d1c8;
+  --teal:#1b3f44; --teal-2:#2c5a60; --on-teal:#ffffff; --on-teal-2:#c9dcdc;
+  --ink:#1b3f44; --ink-2:#4b5f61; --ink-3:#6f7f80;
+  --rasp:#c2185b; --rasp-soft:#f7dde7;
+  --leaf:#2f7f32; --leaf-soft:#e1eedd;
+  --s-treated:#c2185b; --s-control:#2a78d6; --s-rest:#b37a00;
+  --ok:#2f7f32; --warn:#a86400; --bad:#b3261e;
+  --ok-soft:#e1eedd; --warn-soft:#f6e6c8; --bad-soft:#f6dcd9;
+  --sans:"Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --mono:"Roboto Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11201f; --card:#1d3236; --tint:#24393d; --rule:#33494c;
+    --teal:#0c2326; --teal-2:#1b3f44; --on-teal:#ffffff; --on-teal-2:#a9c3c3;
+    --ink:#eef4f3; --ink-2:#bccbcb; --ink-3:#8fa3a3;
+    --rasp:#e0558f; --rasp-soft:#3d1f2b;
+    --leaf:#7fc37c; --leaf-soft:#1f3624;
+    --s-treated:#e0558f; --s-control:#4d94e8; --s-rest:#c98500;
+    --ok:#7fc37c; --warn:#e9a845; --bad:#ef8077;
+    --ok-soft:#1f3624; --warn-soft:#3a2e15; --bad-soft:#3d2220;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11201f; --card:#1d3236; --tint:#24393d; --rule:#33494c;
+  --teal:#0c2326; --teal-2:#1b3f44; --on-teal:#ffffff; --on-teal-2:#a9c3c3;
+  --ink:#eef4f3; --ink-2:#bccbcb; --ink-3:#8fa3a3;
+  --rasp:#e0558f; --rasp-soft:#3d1f2b;
+  --leaf:#7fc37c; --leaf-soft:#1f3624;
+  --s-treated:#e0558f; --s-control:#4d94e8; --s-rest:#c98500;
+  --ok:#7fc37c; --warn:#e9a845; --bad:#ef8077;
+  --ok-soft:#1f3624; --warn-soft:#3a2e15; --bad-soft:#3d2220;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;margin:0}
+.col{max-width:1100px;margin:0 auto;padding-inline:20px}
+h1,h2,h3,h4{margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(2.3rem,6vw,4.4rem);font-weight:900;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:900;letter-spacing:-.01em}
+h3{font-size:1.12rem;font-weight:700}
+h4{font-size:.95rem;font-weight:700}
+p{margin:0;max-width:70ch}
+ul,ol{margin:0}
+a{color:var(--rasp);text-underline-offset:2px}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--rasp);outline-offset:2px}
+.kicker{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--rasp)}
+.muted{color:var(--ink-2)}
+.small{font-size:.86rem}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+.src{font-size:.8rem;color:var(--ink-3)}
+
+/* hero */
+.hero{background:var(--teal);color:var(--on-teal);position:relative;overflow:hidden}
+.hero .col{padding-block:64px 56px;display:grid;gap:22px;position:relative;z-index:1}
+.hero .kicker{color:#f48fb1}
+.hero p.lede{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--on-teal-2);max-width:60ch}
+.hero-facts{display:flex;flex-wrap:wrap;gap:10px}
+.hero-facts span{border:1px solid rgba(255,255,255,.35);padding:5px 12px;font-size:.85rem;color:var(--on-teal)}
+.hero svg.river{position:absolute;right:-60px;top:0;height:100%;width:auto;opacity:.22;z-index:0}
+.byline{font-size:.88rem;color:var(--on-teal-2)}
+
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--card);border-bottom:1px solid var(--rule)}
+nav.toc .col{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
+nav.toc a{font-size:.84rem;font-weight:500;color:var(--ink-2);text-decoration:none;padding:6px 10px;white-space:nowrap;border-bottom:2px solid transparent}
+nav.toc a:hover{color:var(--ink);border-bottom-color:var(--rasp)}
+
+section{padding-block:64px 0;scroll-margin-top:56px}
+section>.col{display:grid;gap:26px}
+.head{display:grid;gap:10px}
+.head p{font-size:1.05rem;color:var(--ink-2)}
+.band{background:var(--tint);padding-block:56px;margin-top:64px}
+.band>.col{display:grid;gap:24px}
+
+/* generic cards */
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.card{background:var(--card);padding:20px;display:grid;gap:10px;align-content:start;min-width:0;border-top:4px solid var(--teal-2)}
+.card.rasp{border-top-color:var(--rasp)}
+.card.leaf{border-top-color:var(--leaf)}
+.card.plain{border-top:0;border:1px solid var(--rule)}
+.card p,.card li{font-size:.94rem;color:var(--ink-2)}
+.card ul{padding-left:18px;display:grid;gap:4px}
+.stat{display:grid;gap:2px}
+.stat b{font-size:2rem;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.85rem;color:var(--ink-2)}
+.swatch{display:inline-block;width:11px;height:11px;margin-right:7px;vertical-align:baseline}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;width:max-content}
+.tag.d{background:var(--leaf-soft);color:var(--leaf)}
+.tag.c{background:var(--rasp-soft);color:var(--rasp)}
+.tag.v{background:var(--warn-soft);color:var(--warn)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:700;padding:3px 9px;width:max-content}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+
+/* tables */
+.tw{overflow-x:auto;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+thead th{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);background:var(--card)}
+td.r,th.r{text-align:right}
+tr.hl td{background:var(--rasp-soft)}
+
+/* timeline */
+.tl{display:grid;gap:0;position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--rule)}
+.ev{position:relative;padding-block:0 18px;display:grid;gap:3px}
+.ev::before{content:"";position:absolute;left:-23px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--card);border:3px solid var(--teal-2)}
+.ev.key::before{border-color:var(--rasp);background:var(--rasp)}
+.ev.weak::before{border-color:var(--warn)}
+.ev .when{font-family:var(--mono);font-size:.8rem;color:var(--ink-3)}
+.ev p{font-size:.95rem;color:var(--ink-2)}
+
+/* charts */
+.panel{background:var(--card);padding:22px;display:grid;gap:14px;min-width:0}
+.ph{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.86rem;color:var(--ink-2)}
+.chart{position:relative;width:100%;overflow-x:auto}
+.chart svg,.diagram svg{display:block;width:100%;min-width:580px;height:auto}
+.diagram{overflow-x:auto}
+.tip{position:absolute;pointer-events:none;background:var(--teal);color:#fff;font-size:.8rem;padding:8px 10px;white-space:nowrap;transform:translate(-50%,-100%);line-height:1.45;font-variant-numeric:tabular-nums;z-index:3}
+.btn{font:inherit;font-size:.82rem;font-weight:500;background:transparent;color:var(--ink);border:1px solid var(--ink);padding:5px 12px;cursor:pointer}
+
+/* stress test */
+.stress{display:grid;gap:12px}
+.st{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,1.3fr);gap:0;background:var(--card)}
+.st>div{padding:16px 18px;display:grid;gap:6px;align-content:start}
+.st>div+div{border-left:1px solid var(--rule)}
+.st .lab{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.st p{font-size:.93rem;color:var(--ink-2)}
+.st .was p{color:var(--ink)}
+@media (max-width:760px){.st{grid-template-columns:1fr}.st>div+div{border-left:0;border-top:1px solid var(--rule)}}
+
+/* process */
+.proc{display:grid;gap:0;counter-reset:s}
+.pstep{display:grid;grid-template-columns:72px minmax(0,1fr);gap:18px;padding-block:20px;border-top:1px solid var(--rule)}
+.pstep:last-child{border-bottom:1px solid var(--rule)}
+.pstep .n{font-size:2.6rem;font-weight:900;color:var(--rasp);line-height:1;font-variant-numeric:tabular-nums}
+.pstep .body{display:grid;gap:8px}
+.pstep .meta{display:flex;flex-wrap:wrap;gap:8px}
+.pstep .meta span{font-size:.78rem;background:var(--tint);padding:3px 9px;color:var(--ink-2)}
+.pstep p,.pstep li{font-size:.95rem;color:var(--ink-2)}
+.pstep ul{padding-left:18px;display:grid;gap:3px}
+@media (max-width:560px){.pstep{grid-template-columns:1fr;gap:6px}}
+
+/* did */
+.did{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px}
+@media (max-width:760px){.did{grid-template-columns:1fr}}
+.g22{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:1px;background:var(--rule);font-variant-numeric:tabular-nums}
+.g22>div{background:var(--card);padding:14px}
+.g22 .h{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.g22 .big{font-size:1.5rem;font-weight:900}
+.g22 .dl{font-size:1.15rem;font-weight:700;color:var(--ink-2)}
+.result{background:var(--teal);color:#fff;padding:20px;display:grid;gap:8px;align-content:start}
+.result .big{font-size:2.6rem;font-weight:900;line-height:1}
+.result p{color:#d6e4e4;font-size:.92rem}
+.eq{font-family:var(--mono);font-size:.94rem;background:var(--tint);padding:14px 16px;overflow-x:auto;white-space:nowrap}
+.eq b{color:var(--rasp);font-weight:500}
+dl.terms{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:.9rem}
+dl.terms dt{font-family:var(--mono);color:var(--rasp)}
+dl.terms dd{margin:0;color:var(--ink-2)}
+
+/* team plan */
+.plan{display:grid;gap:0;background:var(--card)}
+.pi{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding:18px 20px;border-bottom:1px solid var(--rule)}
+.pi:last-child{border-bottom:0}
+.pi .n{font-weight:900;font-size:1.3rem;color:var(--rasp)}
+.pi h4{margin-bottom:4px}
+.pi p{font-size:.95rem;color:var(--ink-2)}
+.slot{display:inline-block;min-width:110px;border-bottom:1px dashed var(--ink-3);color:var(--ink-3);font-style:italic;padding:0 4px}
+
+/* code */
+pre{margin:0;background:var(--teal);color:#e6f0ef;padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:.86rem;line-height:1.55}
+code{font-family:var(--mono);font-size:.88em;background:var(--tint);padding:1px 5px}
+pre code{background:none;padding:0;font-size:inherit}
+.prompts{display:grid;gap:8px}
+.prompt{background:var(--card);border-left:4px solid var(--rasp);padding:12px 14px;font-size:.93rem;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start}
+.prompt .copy{font:inherit;font-size:.75rem;border:1px solid var(--rule);background:transparent;color:var(--ink-2);padding:2px 8px;cursor:pointer}
+
+.qs{display:grid;gap:10px;counter-reset:q}
+.q{background:var(--card);padding:16px 18px;display:grid;gap:4px;border-left:4px solid var(--warn)}
+.q p{font-size:.93rem;color:var(--ink-2)}
+
+footer{background:var(--teal);color:var(--on-teal-2);margin-top:72px}
+footer .col{padding-block:36px;display:grid;gap:10px;font-size:.84rem}
+footer a{color:#f48fb1}
+footer strong{color:#fff}
+</style>
+
+<header class="hero">
+  <svg class="river" viewBox="0 0 400 600" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">
+    <path d="M250 0 C 120 80, 360 160, 220 240 S 80 380, 240 450 S 330 560, 200 600" fill="none" stroke="#ffffff" stroke-width="26" stroke-linecap="round"/>
+    <path d="M330 0 C 260 90, 400 170, 320 260 S 230 400, 350 470" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="232" cy="300" r="34" fill="#c2185b"/>
+  </svg>
+  <div class="col">
+    <span class="kicker">Data for Good · Group Giant Anteater · Question 2 · Peru and Brazil</span>
+    <h1>Does enforcement stop gold mining, or move it?</h1>
+    <p class="lede">Our shared starting point for the brief to the Frankfurt Zoological Society: the landscape, the enforcement history, the plan we stress-tested, the method, the team plan, and how we work together with Claude Code.</p>
+    <div class="hero-facts"><span>Peru: Operation Mercurio · Feb 2019</span><span>Brazil: Yanomami operation · Feb 2023</span><span>Tambopata buffer zone, Madre de Dios</span><span>MapBiomas Peru, Collection 4</span><span>2014–2025</span></div>
+    <span class="byline">Working document of the student group, prepared for FZS. Last updated 9 October 2026. Not an FZS publication.</span>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections"><div class="col">
+  <a href="#context">1 Context</a><a href="#landscape">2 Landscape</a><a href="#enforcement">3 Enforcement</a><a href="#question">4 Question</a><a href="#stress">5 Stress test</a><a href="#strategy">6 Strategy</a><a href="#method">7 Method</a><a href="#results">8 First results</a><a href="#models">9 Models</a><a href="#spatial">10 Spatial extension</a><a href="#teamplan">11 Team plan</a><a href="#claude">12 Claude Code</a><a href="#open">13 Open questions</a>
+</div></nav>
+
+<!-- 1 CONTEXT -->
+<section id="context"><div class="col">
+  <div class="head">
+    <span class="kicker">1 · Why FZS cares</span>
+    <h2>The operation we study happened in FZS's own landscape</h2>
+    <p>FZS runs a program in the Bahuaja Sonene–Tambopata landscape in Madre de Dios and Puno. Among other work, it supports Peru's protected-area authority SERNANP in law-enforcement operations against alluvial gold mining in the buffer and core zones. Our question is therefore not abstract for our audience: FZS helps pay for the kind of intervention we evaluate.</p>
+  </div>
+  <div class="grid g4">
+    <div class="card stat"><b>10,914 km²</b><span>Bahuaja-Sonene National Park</span></div>
+    <div class="card stat"><b>2,746 km²</b><span>Tambopata National Reserve</span></div>
+    <div class="card stat"><b>4,500 km²</b><span>their shared buffer zone. Our data: 4,506 km² for the two MapBiomas buffer zones together</span></div>
+    <div class="card stat rasp"><b>112,622 ha</b><span>mining area in Madre de Dios, 2025 (MapBiomas)</span></div>
+  </div>
+  <div class="grid g3">
+    <div class="card"><h3>What FZS does there</h3><ul><li>Remote surveillance: satellite data, overflights, drones</li><li>Ranger control posts and patrols</li><li>Support for SERNANP enforcement operations against alluvial gold mining</li><li>Giant otter and river turtle monitoring</li></ul></div>
+    <div class="card"><h3>Why mining matters here</h3><p>Alluvial gold mining clears floodplain forest, digs up riverbeds and releases mercury. The landscape protects Andean headwaters that feed the Amazon and holds about 20% of Peru's species, including the giant otter.</p></div>
+    <div class="card"><h3>What FZS needs from us</h3><p>When an operation ends, what happens in the targeted area and around it? Does the money buy lasting reductions, a temporary pause, or a shift of the problem to the next river?</p></div>
+  </div>
+  <p class="src">Source: FZS, "Bahuaja Sonene and Tambopata", fzs.org/en/programs/peru/bahuaja-sonene-and-tambopata/ (accessed 9 Oct 2026). Mining area: MapBiomas Peru, Collection 4.</p>
+</div></section>
+
+<!-- 2 LANDSCAPE -->
+<section id="landscape" class="band"><div class="col">
+  <div class="head">
+    <span class="kicker">2 · The areas</span>
+    <h2>Four kinds of land, four legal regimes</h2>
+    <p>Mining is not illegal everywhere. Whether a hectare of mining is legal depends on where it is. Our data measure the mining area, not its legality, so we have to know which legal category each unit belongs to.</p>
+  </div>
+
+  <div class="panel">
+    <div class="ph"><h3>How the units relate</h3><span class="src">Schematic, not to scale. Relative positions only.</span></div>
+    <div class="diagram">
+      <svg viewBox="0 0 900 420" role="img" aria-label="Schematic map of Madre de Dios: Amarakaeri buffer zone in the west with Camanti, the mining corridor along the Interoceanic Highway, the Tambopata buffer zone with La Pampa, Tambopata National Reserve with the Malinowski River, Bahuaja-Sonene National Park to the south, and displacement sites Pariamanu and Chaspa">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-3)"/></marker></defs>
+        <rect x="8" y="8" width="884" height="404" fill="var(--card)" stroke="var(--rule)"/>
+        <text x="24" y="34" fill="var(--ink-3)" font-family="Roboto Mono, monospace" font-size="11" letter-spacing="1">MADRE DE DIOS (rest of department)</text>
+        <!-- corridor -->
+        <path d="M120 120 C 260 150, 380 170, 520 175 S 720 160, 860 140" fill="none" stroke="var(--s-rest)" stroke-width="44" stroke-opacity=".22" stroke-linecap="round"/>
+        <path d="M120 120 C 260 150, 380 170, 520 175 S 720 160, 860 140" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="7 5"/>
+        <text x="760" y="128" fill="var(--ink-2)" font-size="12" font-family="Roboto, sans-serif">Interoceanic Highway</text>
+        <text x="300" y="132" fill="var(--s-rest)" font-size="12" font-weight="700" font-family="Roboto, sans-serif">Mining corridor (mining can be formalised)</text>
+        <!-- Amarakaeri -->
+        <ellipse cx="170" cy="270" rx="135" ry="95" fill="var(--s-control)" fill-opacity=".14" stroke="var(--s-control)" stroke-width="2"/>
+        <ellipse cx="150" cy="300" rx="60" ry="40" fill="var(--card)" stroke="var(--s-control)" stroke-dasharray="4 4"/>
+        <text x="150" y="297" text-anchor="middle" fill="var(--ink-2)" font-size="11" font-family="Roboto, sans-serif">Amarakaeri</text>
+        <text x="150" y="311" text-anchor="middle" fill="var(--ink-2)" font-size="11" font-family="Roboto, sans-serif">Communal Reserve</text>
+        <text x="170" y="200" text-anchor="middle" fill="var(--ink)" font-size="12" font-weight="700" font-family="Roboto, sans-serif">Amarakaeri buffer zone</text>
+        <circle cx="245" cy="330" r="7" fill="var(--s-control)"/><text x="256" y="334" fill="var(--ink-2)" font-size="11" font-family="Roboto, sans-serif">Camanti (Cusco)</text>
+        <!-- Tambopata BZ -->
+        <ellipse cx="560" cy="275" rx="190" ry="95" fill="var(--s-treated)" fill-opacity=".12" stroke="var(--s-treated)" stroke-width="2"/>
+        <text x="460" y="232" text-anchor="middle" fill="var(--ink)" font-size="12" font-weight="700" font-family="Roboto, sans-serif">Tambopata buffer zone</text>
+        <!-- reserve -->
+        <ellipse cx="630" cy="300" rx="95" ry="52" fill="var(--card)" stroke="var(--s-treated)" stroke-dasharray="4 4"/>
+        <text x="640" y="304" text-anchor="middle" fill="var(--ink-2)" font-size="11" font-family="Roboto, sans-serif">Tambopata National Reserve</text>
+        <path d="M545 262 C 590 250, 640 246, 715 262" fill="none" stroke="var(--s-control)" stroke-width="2.5"/>
+        <text x="720" y="258" fill="var(--ink-2)" font-size="11" font-family="Roboto, sans-serif">Malinowski River</text>
+        <!-- La Pampa -->
+        <circle cx="470" cy="190" r="17" fill="var(--s-treated)"/>
+        <text x="470" y="194" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" font-family="Roboto Mono, monospace">2019</text>
+        <text x="493" y="210" fill="var(--ink)" font-size="12" font-weight="700" font-family="Roboto, sans-serif">La Pampa</text>
+        <!-- Bahuaja -->
+        <path d="M470 400 C 560 360, 760 350, 880 380 L 880 404 L 470 404 Z" fill="var(--leaf)" fill-opacity=".14" stroke="var(--leaf)"/>
+        <text x="690" y="395" text-anchor="middle" fill="var(--ink-2)" font-size="11" font-family="Roboto, sans-serif">Bahuaja-Sonene National Park (mostly Puno)</text>
+        <!-- displacement sites -->
+        <circle cx="560" cy="70" r="6" fill="var(--ink-3)"/><text x="572" y="74" fill="var(--ink-2)" font-size="11" font-family="Roboto, sans-serif">Pariamanu (north of the highway)</text>
+        <circle cx="360" cy="230" r="6" fill="var(--ink-3)"/><text x="300" y="250" fill="var(--ink-2)" font-size="11" font-family="Roboto, sans-serif">Chaspa (new front)</text>
+        <path d="M462 175 C 470 130, 520 95, 550 76" fill="none" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+        <path d="M455 196 C 420 205, 390 215, 368 226" fill="none" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+      </svg>
+    </div>
+    <p class="src">Places named in MAAP #130 and MAAP #241. Positions are illustrative; use the real boundaries (SERNANP) for any analysis.</p>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>Category</th><th>Mining allowed?</th><th>In our data</th><th>Our role for it</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Protected area core</strong> (Tambopata National Reserve, Bahuaja-Sonene NP)</td><td>No</td><td>Not in the pack; needs the MapBiomas "Áreas naturales protegidas" file</td><td>Displacement into the reserve (MAAP #241)</td></tr>
+      <tr><td><strong>Buffer zone</strong> (<em>zona de amortiguamiento</em>)</td><td>Only activities compatible with the protected area. La Pampa lies outside the corridor, so mining there is illegal</td><td><code>peru_bufferzone_year.csv</code></td><td>Treated unit (Tambopata) and control (Amarakaeri)</td></tr>
+      <tr><td><strong>Mining corridor</strong> (<em>corredor minero</em>)</td><td>Small-scale mining can be formalised here</td><td>Inside "rest of Madre de Dios" (department minus buffer zones)</td><td>Displacement destination; legal and illegal mixed</td></tr>
+      <tr><td><strong>Native communities</strong> (titled land)</td><td>Depends on title and permits</td><td>Not separable in the pack</td><td>Part 4: what we cannot see</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src"><span class="tag v">To cite</span> Legal status must be cited in the brief from a primary or reliable source: Peru's Protected Natural Areas Law (Ley 26834) for buffer zones, D.L. 1100 (2012) for the mining corridor, or MAAP #130/#208. We have not yet opened these texts.</p>
+</div></section>
+
+<!-- 3 ENFORCEMENT -->
+<section id="enforcement"><div class="col">
+  <div class="head">
+    <span class="kicker">3 · Enforcement</span>
+    <h2>Not one operation but a sequence of them</h2>
+    <p>The question card treats February 2019 as the date. The record shows enforcement before, after and on top of Mercurio, plus a period when it collapsed. This shapes every comparison we make.</p>
+  </div>
+  <div class="grid g2">
+    <div class="tl">
+      <div class="ev"><span class="when">2017–2018</span><h4>Earlier operations and interdictions</h4><p>The "before" period is not enforcement-free.</p></div>
+      <div class="ev key"><span class="when">February 2019</span><h4>Operation Mercurio</h4><p>Multisectoral police and military intervention, starting in La Pampa in the Tambopata buffer zone. Mining deforestation there fell 90%.</p></div>
+      <div class="ev weak"><span class="when">2020</span><h4>COVID-19: fewer patrols</h4><p>Police and military presence dropped; miners re-entered Tambopata.</p></div>
+      <div class="ev key"><span class="when">2021</span><h4>Plan Restauración</h4><p>Military interventions across critical mining zones of the southern Peruvian Amazon. A second treatment wave.</p></div>
+      <div class="ev key"><span class="when">7 April 2023 →</span><h4>State of emergency</h4><p>Six districts including Tambopata, Inambari, Laberinto and Huepetuhe; police control backed by the armed forces, renewed every 60 days.</p></div>
+      <div class="ev weak"><span class="when">2025</span><h4>Navy leaves the Malinowski River</h4><p>Control posts on the reserve's northern boundary were left without funding.</p></div>
+      <div class="ev"><span class="when">H2 2025 – Feb 2026</span><h4>Mining inside the reserve</h4><p>About 500 ha of new mining deforestation inside Tambopata National Reserve, ~1,000 people. Operations in Jan–Mar 2026 did not reverse it.</p></div>
+    </div>
+    <div class="grid" style="align-content:start">
+      <div class="card rasp"><h3>MAAP #130: after Mercurio</h3>
+        <div class="tw"><table>
+          <thead><tr><th>Site</th><th class="r">Before</th><th class="r">After</th></tr></thead>
+          <tbody>
+            <tr><td>La Pampa</td><td class="r">4,450 ha</td><td class="r">300 ha</td></tr>
+            <tr><td>Alto Malinowski</td><td class="r">1,558</td><td class="r">419</td></tr>
+            <tr class="hl"><td>Camanti (Amarakaeri BZ)</td><td class="r">336</td><td class="r">105</td></tr>
+            <tr><td>Pariamanu</td><td class="r">72</td><td class="r">98</td></tr>
+            <tr><td>Apaylon</td><td class="r">73</td><td class="r">78</td></tr>
+            <tr><td>Chaspa (new front)</td><td class="r">–</td><td class="r">113</td></tr>
+          </tbody>
+        </table></div>
+        <p class="small">Camanti lies in our control zone and also declined: the control was partly treated. The mining corridor was excluded from MAAP's analysis.</p>
+      </div>
+      <div class="card"><h3>What satellites cannot see</h3><ul><li>River dredges: MAAP #241 counts 53 dredges in one sector alone</li><li>Mercury in rivers and fish</li><li>Legality of a mine</li><li>Who mines: people, gangs, money flows</li></ul></div>
+    </div>
+  </div>
+  <p class="src">Sources: MAAP #130, Finer & Mamani (1 Dec 2020), maapprogram.org/gold-mining-peru/; MAAP #241, Pacsi et al. (10 May 2026), maapprogram.org/mining-peru-tambopata/, which cites AIDER (2021), Romo (2020) and DS 046-2023-PCM. Before/after periods as defined by MAAP. Each team member opens the report before citing it.</p>
+</div></section>
+
+<!-- 4 QUESTION -->
+<section id="question" class="band"><div class="col">
+  <div class="head">
+    <span class="kicker">4 · Our question</span>
+    <h2>Deterrence, displacement or delay?</h2>
+    <p>Enforcement raises the expected cost of mining in the targeted area. Three things can happen, and in the targeted area alone they look identical. That is why we need comparison areas and a department-wide total.</p>
+  </div>
+  <div class="grid g3">
+    <div class="card leaf"><span class="tag d">Deterrence</span><h3>Mining stops</h3><p>New mining falls in the target, and the department total falls too. Best case for FZS.</p></div>
+    <div class="card rasp"><span class="tag c">Displacement</span><h3>Mining moves</h3><p>New mining falls in the target but rises elsewhere: Amarakaeri, the corridor, the reserve interior. The total stays flat.</p></div>
+    <div class="card"><span class="tag v">Delay</span><h3>Mining returns</h3><p>New mining falls, then comes back when enforcement weakens (2020, 2023, 2025). The gap closes over time.</p></div>
+  </div>
+  <div class="card plain"><h3>Our question, in one sentence</h3><p style="font-size:1.08rem;color:var(--ink)">After Operation Mercurio, did new gold mining in the Tambopata buffer zone fall, did it move to neighbouring areas, and did it return as enforcement weakened?</p></div>
+</div></section>
+
+<!-- 5 STRESS TEST -->
+<section id="stress"><div class="col">
+  <div class="head">
+    <span class="kicker">5 · Stress test</span>
+    <h2>What we challenged in our first plans</h2>
+    <p>Before committing, we checked our first design and Ruby's conceptual draft against the data and the published record. Each row: what we assumed, what we found, what we do now.</p>
+  </div>
+  <div class="stress">
+    <div class="st"><div class="was"><span class="lab">We assumed</span><p>Amarakaeri is an untreated control.</p></div><div><span class="lab">We found</span><p>Camanti, in Amarakaeri's buffer zone, declined after Mercurio (MAAP #130). Huepetuhe and Madre de Dios districts are under the 2023 emergency.</p></div><div><span class="lab">So we</span><p>Describe the DiD as <em>more vs less enforcement</em>, and say both spillovers and partial treatment bias it.</p></div></div>
+    <div class="st"><div class="was"><span class="lab">We assumed</span><p>One treatment date: February 2019.</p></div><div><span class="lab">We found</span><p>Operations in 2017–18, Restauración 2021, emergency 2023, COVID gap 2020, Navy withdrawal 2025.</p></div><div><span class="lab">So we</span><p>Mark every wave in the figures; keep 2019–21 as the main "after"; read 2022–25 as a mix of return, gold price and new enforcement.</p></div></div>
+    <div class="st"><div class="was"><span class="lab">We assumed</span><p>Displacement goes to Amarakaeri.</p></div><div><span class="lab">We found</span><p>MAAP's increases were in Pariamanu, Apaylon and Chaspa, and later inside the reserve. "Rest of Madre de Dios" more than doubled after 2019.</p></div><div><span class="lab">So we</span><p>Add "rest of Madre de Dios" and the reserve interior (ANP file) as displacement destinations.</p></div></div>
+    <div class="st"><div class="was"><span class="lab">We assumed</span><p>Bahuaja-Sonene is a second control.</p></div><div><span class="lab">We found</span><p>Its buffer-zone mining (532 ha in 2025) is almost all in Puno, far from La Pampa.</p></div><div><span class="lab">So we</span><p>Drop it as a control. Mention it as part of FZS's landscape.</p></div></div>
+    <div class="st"><div class="was"><span class="lab">Draft idea</span><p>Pick controls with "no enforcement at all" via a geographic twin.</p></div><div><span class="lab">We found</span><p>Outside Madre de Dios the largest Amazon mining area is Puno with 1,938 ha (2025); inside, enforcement reached almost everywhere.</p></div><div><span class="lab">So we</span><p>Use enforcement intensity; build twins from grid cells, not departments (section 10).</p></div></div>
+    <div class="st"><div class="was"><span class="lab">Draft idea</span><p>AMW polygons show where gold and rivers are.</p></div><div><span class="lab">We found</span><p>AMW detects mining on land, not river dredges (question card 4). Annual periods start in 2018: no pre-trend for 2019.</p></div><div><span class="lab">So we</span><p>Use AMW for locations; take pre-trends from MapBiomas; select controls on pre-2019 mining only.</p></div></div>
+    <div class="st"><div class="was"><span class="lab">Draft idea</span><p>Do Peru and Brazil (Yanomami 2023).</p></div><div><span class="lab">We found</span><p>The question card describes both cases. Brazil needs other data (municipalities, indigenous territories file ending in 2024) and the brief is only two pages.</p></div><div><span class="lab">So we</span><p><strong>Decided: both.</strong> One design applied twice; Peru is the deeper case, Brazil the mirror image (weak enforcement 2019–22, then an operation).</p></div></div>
+    <div class="st"><div class="was"><span class="lab">Draft idea</span><p>Gold/coca relative prices as an instrument for gang activity.</p></div><div><span class="lab">We found</span><p>The gold price affects mining directly, so the exclusion restriction fails; reliable coca price series are hard to find.</p></div><div><span class="lab">So we</span><p>Keep it as one sentence in brief part 4 ("what would let us say more").</p></div></div>
+  </div>
+</div></section>
+
+<!-- 6 STRATEGY -->
+<section id="strategy" class="band"><div class="col">
+  <div class="head">
+    <span class="kicker">6 · Strategy</span>
+    <h2>A safe core, an ambitious extension</h2>
+    <p>The grade rewards careful description and honest claims (30%) more than a model we cannot explain. We secure the required comparison first, then add evidence on displacement. The extension runs in parallel and only goes into the brief if it is finished and checked.</p>
+  </div>
+  <div class="grid g3">
+    <div class="card leaf"><span class="kicker" style="color:var(--leaf)">Core · required</span><h3>Buffer-zone comparison</h3><ul><li>Tambopata vs Amarakaeri, 2014–2025</li><li>Four numbers + DiD</li><li>Displacement total for Madre de Dios</li><li>Placebo 2016, persistence to 2025</li><li>Inside the reserve (ANP file)</li></ul></div>
+    <div class="card"><span class="kicker" style="color:var(--teal-2)">Robustness · optional</span><h3>Event study</h3><ul><li>One coefficient per year, 2018 as reference</li><li>Enforcement waves marked</li><li>Drop-the-largest-unit check</li><li>Clear statement: 2 units, no p-values</li></ul></div>
+    <div class="card rasp"><span class="kicker">Extension · if time allows</span><h3>Spatial design</h3><ul><li>Grid cells or AMW polygons as units</li><li>Distance rings around La Pampa</li><li>Matched control cells</li><li>Fallback: describe it in brief part 4</li></ul></div>
+  </div>
+  <div class="card rasp"><span class="kicker">Second case · Brazil</span><h3>Yanomami: a mirror image of Mercurio</h3>
+    <p>Between 2019 and 2022 federal enforcement is widely reported to have weakened (source still to find), and artisanal mining inside Brazil's indigenous territories rose from 13,704 ha (2018) to 30,980 ha (2022). In January 2023 the government declared a health emergency in the Yanomami territory; operations to remove miners started in February 2023.</p>
+    <ul><li><strong>Treated:</strong> Yanomami territory (mostly Roraima: 446 ha of mining in 2018, 4,745 ha in 2024)</li><li><strong>Comparison:</strong> Munduruku and Kayapó territories</li><li><strong>Added data:</strong> MapBiomas Brazil "Indigenous Territories", Collection 10.1, ends in 2024: two post-operation years</li><li><strong>Measure:</strong> most mining in indigenous lands has no substance recorded; use gold + no substance</li></ul>
+    <p class="src">Source: question card 2. Check number: all indigenous territories, artisanal mining, 2025: 39,915 ha (MapBiomas Brazil, Collection 11).</p>
+  </div>
+  <div class="card plain"><h3>The claim we aim for</h3><p><span class="tag d">Description</span> New mining in the Tambopata buffer zone fell sharply after 2019 while it rose elsewhere in Madre de Dios; it returned from 2022. <span class="tag c">Cautious causal reading</span> This pattern is consistent with the operation deterring mining locally and displacing part of it. We do not claim a point estimate of the effect.</p></div>
+</div></section>
+
+<!-- 7 METHOD -->
+<section id="method"><div class="col">
+  <div class="head">
+    <span class="kicker">7 · Method and process</span>
+    <h2>Six steps from raw file to brief</h2>
+    <p>Each step produces something concrete that the next step uses. All numbers flow from code, so the instructor can trace any one of them back to the publisher.</p>
+  </div>
+  <div class="proc">
+    <div class="pstep"><span class="n">0</span><div class="body"><h3>Set up and check</h3><p>Pull the repo, <code>uv sync</code>, run the starter: six OK lines. Download the ANP file, log it in <code>DOWNLOAD_LOG.csv</code>, add a <code>check()</code> line that reproduces a number the publisher shows.</p><div class="meta"><span>Output: verified data</span><span>Role: data &amp; log</span></div></div></div>
+    <div class="pstep"><span class="n">1</span><div class="body"><h3>Describe</h3><p>One table per unit and year, in levels and annual additions. Units: Tambopata BZ, Amarakaeri BZ, rest of Madre de Dios, reserve interior. Rules: sum a zone's departments first; additions = this year minus last year; negative additions are reclassification.</p><div class="meta"><span>Output: describe table (required)</span><span>Role: analysis</span></div></div></div>
+    <div class="pstep"><span class="n">2</span><div class="body"><h3>Compare</h3><p>Two groups × two periods = four numbers, plus their difference-in-differences. We justify the control (same department, same gold belt, same size, similar mining in 2014) and the date (Mercurio, Feb 2019; 2016–18 vs 2019–21 avoids most of Restauración and the 2023 emergency).</p><div class="meta"><span>Output: four numbers (required)</span><span>Role: analysis</span></div></div></div>
+    <div class="pstep"><span class="n">3</span><div class="body"><h3>Stress the comparison</h3><ul><li><strong>Displacement:</strong> sum treated + neighbours + rest of department. Did the total fall?</li><li><strong>Placebo in time:</strong> pretend the operation was in 2016.</li><li><strong>Persistence:</strong> extend to 2022–25.</li><li><strong>Inside the reserve:</strong> does mining appear in the core zone?</li></ul><div class="meta"><span>Output: robustness table</span><span>Role: analysis</span></div></div></div>
+    <div class="pstep"><span class="n">4</span><div class="body"><h3>Model (optional)</h3><p>Event study with zone and year fixed effects. With two units it reproduces the figure; it becomes informative only in the spatial extension with many cells.</p><div class="meta"><span>Output: event-study plot</span><span>Role: analysis</span></div></div></div>
+    <div class="pstep"><span class="n">5</span><div class="body"><h3>Write and replicate</h3><p>One figure that makes the main point. Every claim labelled description, prediction or causal. Part 4 uses the required AI prompt; we keep the raw answer and our edit in the appendix. The replication zip runs from one file and writes every number of the brief to <code>output/</code>.</p><div class="meta"><span>Output: brief, slides, zip</span><span>Roles: brief &amp; slides, replication</span></div></div></div>
+  </div>
+</div></section>
+
+<!-- 8 RESULTS -->
+<section id="results" class="band"><div class="col">
+  <div class="head">
+    <span class="kicker">8 · First results</span>
+    <h2>What the data pack already shows</h2>
+    <p>All numbers below come from the MapBiomas tables in the data pack and are reproduced by our code. <span class="tag d">Description</span></p>
+  </div>
+  <div class="panel">
+    <div class="ph">
+      <div class="legend"><span><span class="swatch" style="background:var(--s-treated)"></span>Tambopata buffer zone (treated)</span><span><span class="swatch" style="background:var(--s-control)"></span>Amarakaeri buffer zone (control)</span></div>
+      <button class="btn" id="tglA" type="button" aria-pressed="false">Show table</button>
+    </div>
+    <div class="chart" id="chartA"></div>
+    <div class="tw" id="tblA" hidden></div>
+    <p class="src">New mining area per year (annual additions to MapBiomas class 4.2 Minería), Madre de Dios part of each buffer zone, 2014–2025. Vertical lines mark enforcement waves. Source: MapBiomas Peru, Collection 4.</p>
+  </div>
+
+  <div class="did">
+    <div class="g22" role="table" aria-label="Mean annual additions, hectares per year">
+      <div class="h">ha / year</div><div class="h">2016–18</div><div class="h">2019–21</div><div class="h">Change</div>
+      <div><span class="swatch" style="background:var(--s-treated)"></span>Tambopata</div><div class="big">1,640</div><div class="big">163</div><div class="dl">−1,477</div>
+      <div><span class="swatch" style="background:var(--s-control)"></span>Amarakaeri</div><div class="big">289</div><div class="big">574</div><div class="dl">+285</div>
+    </div>
+    <div class="result">
+      <span class="kicker" style="color:#f48fb1">Difference-in-differences</span>
+      <span class="big num">−1,762 <span style="font-size:1rem;font-weight:400">ha/yr</span></span>
+      <p class="mono">(163 − 1,640) − (574 − 289)</p>
+      <p>Matches the question card's check numbers. Spillovers into Amarakaeri make it too large; partial treatment of Amarakaeri makes it too small. Description, not an effect size.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ph"><h3>Displacement: did the department total fall?</h3>
+      <div class="legend"><span><span class="swatch" style="background:var(--s-treated)"></span>Tambopata BZ</span><span><span class="swatch" style="background:var(--s-control)"></span>Amarakaeri BZ</span><span><span class="swatch" style="background:var(--s-rest)"></span>Rest of Madre de Dios</span></div></div>
+    <div class="chart" id="chartB"></div>
+    <p>Tambopata's drop (−1,475 ha/yr) is more than offset by growth elsewhere: the department total <strong>rose</strong> from 3,610 to 4,640 ha/yr. This fits displacement, but also COVID and a rising gold price, and the rest of the department includes the legal corridor. <span class="tag d">Description</span></p>
+    <p class="src">Mean annual additions, Madre de Dios rows only. Rest of Madre de Dios = department total minus all buffer-zone rows in Madre de Dios. Source: MapBiomas Peru, Collection 4.</p>
+  </div>
+</div></section>
+
+<!-- 9 MODELS -->
+<section id="models"><div class="col">
+  <div class="head">
+    <span class="kicker">9 · Models and assumptions</span>
+    <h2>The comparison written as a regression</h2>
+    <p>With one treated and one control unit the regression adds nothing beyond the figure. We write it down because it makes the assumptions explicit, and because it carries over to the spatial extension where there are many units.</p>
+  </div>
+  <div class="grid g2">
+    <div class="panel"><h3>Difference-in-differences</h3>
+      <div class="eq">y<sub>it</sub> = α<sub>i</sub> + γ<sub>t</sub> + <b>β</b>·(Tambopata<sub>i</sub> × Post<sub>t</sub>) + ε<sub>it</sub></div>
+      <dl class="terms"><dt>y<sub>it</sub></dt><dd>new mining ha, zone i, year t</dd><dt>α<sub>i</sub></dt><dd>zone effect: size, geology, access</dd><dt>γ<sub>t</sub></dt><dd>year effect: gold price, COVID, region-wide operations</dd><dt>β</dt><dd>change in Tambopata relative to the control</dd></dl></div>
+    <div class="panel"><h3>Event study (the card's model)</h3>
+      <div class="eq">y<sub>it</sub> = α<sub>i</sub> + γ<sub>t</sub> + Σ<sub>k≠2018</sub> <b>β<sub>k</sub></b>·(Tambopata<sub>i</sub> × 1[t=k]) + ε<sub>it</sub></div>
+      <dl class="terms"><dt>β<sub>2014–17</sub></dt><dd>pre-trends, should be near zero</dd><dt>β<sub>2019–21</sub></dt><dd>short-run response to Mercurio</dd><dt>β<sub>2022–25</sub></dt><dd>return, mixed with Restauración, emergency and gold price</dd></dl></div>
+  </div>
+  <div class="grid g3">
+    <div class="card plain"><span class="pill warn">Shaky</span><h3>Parallel trends</h3><p>Tambopata grew +6,400 ha 2014–18; Amarakaeri +1,200 ha.</p></div>
+    <div class="card plain"><span class="pill bad">Likely violated</span><h3>No spillovers</h3><p>Miners may move into the control; the effect then looks too large.</p></div>
+    <div class="card plain"><span class="pill bad">Violated</span><h3>Untreated control</h3><p>Camanti declined too; the effect then looks too small.</p></div>
+    <div class="card plain"><span class="pill warn">Shaky</span><h3>No concurrent shock</h3><p>COVID in 2020, Restauración in 2021, both region-wide but not necessarily equal.</p></div>
+    <div class="card plain"><span class="pill bad">Not met</span><h3>Enough units</h3><p>Two units: no meaningful standard errors. Use figure and placebos.</p></div>
+    <div class="card plain"><span class="pill ok">Fine</span><h3>Consistent outcome</h3><p>Same collection and class throughout. Re-mining old scars counts as new.</p></div>
+  </div>
+</div></section>
+
+<!-- 10 SPATIAL -->
+<section id="spatial" class="band"><div class="col">
+  <div class="head">
+    <span class="kicker">10 · Spatial extension</span>
+    <h2>From two zones to thousands of cells</h2>
+    <p>Ruby's draft points the right way: more units, controls chosen on geography, displacement measured by distance. Here is how to make it work with the data that exist.</p>
+  </div>
+  <div class="grid g4">
+    <div class="card"><h3>1 · Boundaries</h3><ul><li>Protected areas and buffer zones: SERNANP geoportal or WDPA</li><li>Mining corridor and concessions: INGEMMET GEOCATMIN</li><li>Titled native communities</li></ul></div>
+    <div class="card"><h3>2 · Mining</h3><ul><li>MapBiomas Peru annual maps, 1985–2025 (pre-trends)</li><li>Amazon Mining Watch polygons, 2018– (locations)</li><li>Unit: 1 km or 0.05° grid cell × year</li></ul></div>
+    <div class="card"><h3>3 · Covariates (fixed before 2019)</h3><ul><li>Elevation (Copernicus DEM)</li><li>Distance to rivers (HydroRIVERS), to highway (OSM)</li><li>Alluvial geology, legal category in 2018</li><li>Mining before 2019</li></ul></div>
+    <div class="card"><h3>4 · Treatment and twins</h3><ul><li>Treated: Mercurio area, from MAAP maps</li><li>Rings: 0–10, 10–25, 25–50 km</li><li>Twins: nearest-neighbour or synthetic control on step-3 covariates</li></ul></div>
+  </div>
+  <div class="panel">
+    <div class="eq">newmining<sub>ct</sub> = α<sub>c</sub> + γ<sub>t</sub> + <b>β<sub>0</sub></b>·(Core<sub>c</sub>×Post<sub>t</sub>) + Σ<sub>r</sub> <b>β<sub>r</sub></b>·(Ring<sub>rc</sub>×Post<sub>t</sub>) + ε<sub>ct</sub></div>
+    <p class="small muted">β<sub>0</sub> is the change in the enforced area and β<sub>r</sub> the change in each distance ring, both relative to matched twins far away. Positive β<sub>r</sub> means displacement. With many cells, standard errors can be clustered (ideally spatially).</p>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Draft criterion for controls</th><th>Keep?</th><th>How we implement it</th></tr></thead>
+    <tbody>
+      <tr><td>Gold present (Andean rivers)</td><td>Yes</td><td>Alluvial geology + distance to rivers; mining before 2019</td></tr>
+      <tr><td>Far away</td><td>Yes</td><td>Outside the 50 km ring</td></tr>
+      <tr><td>Same country</td><td>Yes</td><td>Peru only</td></tr>
+      <tr><td>Geographic twin</td><td>Yes</td><td>Matching on pre-2019 covariates only</td></tr>
+      <tr><td>No enforcement at all</td><td>Relax</td><td>Likely impossible in Madre de Dios; code enforcement intensity instead</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src"><span class="tag v">To verify</span> Data sources in this section are suggestions; each must be opened, logged and checked before use. This work needs GIS tools (geopandas, rasterio, possibly Earth Engine), which the brief does not require.</p>
+</div></section>
+
+<!-- 11 TEAM PLAN -->
+<section id="teamplan"><div class="col">
+  <div class="head">
+    <span class="kicker">11 · Team plan</span>
+    <h2>Our answers to the seven prompts</h2>
+    <p>The structure of <code>templates/TEAM_PLAN.docx</code>, filled in with the current design. Fill the open slots together, then copy into the template.</p>
+  </div>
+  <div class="plan">
+    <div class="pi"><span class="n">1</span><div><h4>Our question, in one sentence</h4><p>After Operation Mercurio (February 2019), did new gold mining in the Tambopata buffer zone fall, did it move to neighbouring areas, and did it return as enforcement weakened?</p></div></div>
+    <div class="pi"><span class="n">2</span><div><h4>Unit of observation and years</h4><p>One buffer zone (Tambopata, Amarakaeri) or area (rest of Madre de Dios, reserve interior) in one year, 2014–2025. Outcome: annual addition to the MapBiomas class 4.2 Minería, in hectares.</p></div></div>
+    <div class="pi"><span class="n">3</span><div><h4>Comparison</h4><p>We compare the Tambopata buffer zone (La Pampa, targeted) with the Amarakaeri buffer zone, 2016–18 vs 2019–21, then extend to 2025. Amarakaeri is in the same department and gold belt, of similar size and with similar mining in 2014; it was less, not un-, treated. For displacement we add the rest of Madre de Dios and the reserve interior.</p></div></div>
+    <div class="pi"><span class="n">4</span><div><h4>Sources</h4><p>Pack: MapBiomas Peru, Collection 4 (buffer zones, departments); World Bank Pink Sheet, Sept 2026. Added: MapBiomas Peru Collection 4 "Áreas naturales protegidas" (peru.mapbiomas.org/descargas/estadisticas). Context: MAAP #130 (2020), #193 (2023), #241 (2026).</p></div></div>
+    <div class="pi"><span class="n">5</span><div><h4>Initial statistics</h4><p>Our table shows 20,730 ha of mining in the Tambopata buffer zone in 2025; MapBiomas Peru shows 20,730 ha. Mean new mining fell from 1,640 to 163 ha/yr in Tambopata and rose from 289 to 574 ha/yr in Amarakaeri.</p></div></div>
+    <div class="pi"><span class="n">6</span><div><h4>Main concern</h4><p>Miners pushed out of La Pampa may have moved into the comparison area or elsewhere in Madre de Dios, while enforcement also reached the comparison area. COVID (2020) and later operations (2021, 2023) overlap the post-period, and with one targeted unit we cannot compute meaningful standard errors.</p></div></div>
+    <div class="pi"><span class="n">7</span><div><h4>Who does what</h4><p>Data and data log: <span class="slot">name</span> · Analysis: <span class="slot">name</span> · Figure: <span class="slot">name</span> · Brief and slides: <span class="slot">name</span> · Replication files: <span class="slot">name</span> · Spatial extension: <span class="slot">name</span></p></div></div>
+  </div>
+  <div class="grid g3">
+    <div class="card"><span class="kicker" style="color:var(--teal-2)">Day 1 · 8 Oct</span><h3>Team plan</h3><p>Half a page, submitted by end of day.</p></div>
+    <div class="card"><span class="kicker" style="color:var(--teal-2)">Before Lesson 4</span><h3>Data checked</h3><p>Added data downloaded, logged, checked; first describe table.</p></div>
+    <div class="card rasp"><span class="kicker">Lesson 5</span><h3>Brief, slides, zip</h3><p>One upload per group before class. 10 min talk + 5 min Q&amp;A; open with two giant anteater facts.</p></div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Grading component</th><th class="r">Weight</th><th>What it means for us</th></tr></thead>
+    <tbody>
+      <tr><td>Analysis and honesty about the claim</td><td class="r">30%</td><td>Label claims; say both biases; no accidental causal claims</td></tr>
+      <tr><td>Provenance</td><td class="r">25%</td><td>Data log, check numbers, replication zip, "cannot see" paragraph</td></tr>
+      <tr><td>Framing and partner perspective</td><td class="r">20%</td><td>Start from FZS's landscape and its enforcement support</td></tr>
+      <tr><td>Would FZS act on it</td><td class="r">15%</td><td>Answer: what to expect in and around the target after an operation</td></tr>
+      <tr><td>The figure</td><td class="r">10%</td><td>One figure, enforcement waves marked, source line</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 12 CLAUDE CODE -->
+<section id="claude" class="band"><div class="col">
+  <div class="head">
+    <span class="kicker">12 · Working with Claude Code</span>
+    <h2>How we use an AI coding assistant on this project</h2>
+    <p>Claude Code runs in your terminal inside the repo. It reads <code>CLAUDE.md</code>, which loads <code>agent.md</code>, so every session starts with the same project knowledge. The course allows AI as a coding assistant; we stay responsible for what is estimated.</p>
+  </div>
+  <div class="grid g2">
+    <div class="panel"><h3>Install and start</h3>
+<pre><code># macOS / Linux
+curl -fsSL https://claude.ai/install.sh | bash
+# or, with Node.js
+npm install -g @anthropic-ai/claude-code
+
+# every session
+cd GroupAnteaterDataForGood
+git pull
+uv sync
+claude</code></pre>
+      <p class="small muted">Log in with your Claude account the first time. Windows users: see the install instructions at docs.claude.com.</p>
+    </div>
+    <div class="panel"><h3>Useful controls</h3>
+      <div class="tw"><table><tbody>
+        <tr><td><code>Shift+Tab</code></td><td>Cycle modes, including plan mode: Claude proposes before it edits</td></tr>
+        <tr><td><code>Esc</code></td><td>Stop Claude mid-answer</td></tr>
+        <tr><td><code>! command</code></td><td>Run a shell command yourself, e.g. <code>! git status</code></td></tr>
+        <tr><td><code>/clear</code></td><td>Start a fresh conversation for a new task</td></tr>
+        <tr><td><code>@file</code></td><td>Point Claude at a file, e.g. <code>@data/peru_bufferzone_year.csv</code></td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+  <h3>Prompts that work well here</h3>
+  <div class="prompts">
+    <div class="prompt"><span>Run the starter and tell me whether all six checks pass.</span><button class="copy" type="button">Copy</button></div>
+    <div class="prompt"><span>Build the describe table for Tambopata, Amarakaeri and rest of Madre de Dios, 2014–2025, in levels and additions. Write it to output/ and print it.</span><button class="copy" type="button">Copy</button></div>
+    <div class="prompt"><span>I downloaded the ANP file to data_raw/. Add a row to DOWNLOAD_LOG.csv and a check() line that reproduces the publisher's number for Tambopata National Reserve.</span><button class="copy" type="button">Copy</button></div>
+    <div class="prompt"><span>Run the placebo: pretend Operation Mercurio started in 2016 and compute the same four numbers.</span><button class="copy" type="button">Copy</button></div>
+    <div class="prompt"><span>Review my figure script against the rules in agent.md and the assignment brief.</span><button class="copy" type="button">Copy</button></div>
+    <div class="prompt"><span>We decided X. Update agent.md and commit with a clear message.</span><button class="copy" type="button">Copy</button></div>
+  </div>
+  <div class="grid g3">
+    <div class="card leaf"><h3>Do</h3><ul><li>One task per session; <code>/clear</code> between tasks</li><li>Ask for a plan first on bigger changes</li><li>Read the diff before accepting</li><li>Update <code>agent.md</code> when we decide something</li><li>Pull before you start, push small commits</li></ul></div>
+    <div class="card rasp"><h3>Don't</h3><ul><li>Copy numbers from the chat into the brief: only from <code>output/</code></li><li>Cite Claude for facts or references</li><li>Let it edit raw files in <code>data_raw/</code></li><li>Commit files over 50 MB (log the link instead)</li></ul></div>
+    <div class="card"><h3>Course AI rules</h3><ul><li>AI output is not a source</li><li>List only references you opened yourself</li><li>Part 4: use the required prompt; keep the raw answer and our edited version in the appendix</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 13 OPEN QUESTIONS -->
+<section id="open"><div class="col">
+  <div class="head">
+    <span class="kicker">13 · Open questions</span>
+    <h2>Decisions we still need to make together</h2>
+  </div>
+  <div class="qs">
+    <div class="q"><h3>Who does what?</h3><p>Names for the six roles in the team plan, including one owner for the spatial extension.</p></div>
+    <div class="q"><h3>How do Peru and Brazil share two pages?</h3><p>Decided: we do both. Open: one figure with two panels, or Peru as the figure and Brazil as a short comparison paragraph? Which Brazilian comparison territories (Munduruku, Kayapó)?</p></div>
+    <div class="q"><h3>How far do we take the spatial extension?</h3><p>Into the findings with its own figure, or into brief part 4 as "what would let us say more"? Decide by Lesson 4 based on progress.</p></div>
+    <div class="q"><h3>Which "after" period is the headline?</h3><p>2019–21 is cleanest for Mercurio but includes COVID; 2022–25 shows the return but mixes Restauración, the 2023 emergency and the gold price.</p></div>
+    <div class="q"><h3>"Planes" in the limitations list</h3><p>What did we mean: overflights as enforcement, airstrips, or something else?</p></div>
+  </div>
+</div></section>
+
+<footer><div class="col">
+  <span><strong>Sources.</strong> MapBiomas Peru, Collection 4 (class 4.2 Minería), buffer-zone and department statistics, via the course data pack. FZS, "Bahuaja Sonene and Tambopata" (accessed 9 Oct 2026). MAAP #130, Finer &amp; Mamani (2020). MAAP #241, Pacsi et al. (2026). Question card 2 and assignment brief, Data for Good, October 2026.</span>
+  <span>Every number from our data can be reproduced from <code style="background:transparent;color:inherit">data/peru_bufferzone_year.csv</code> and <code style="background:transparent;color:inherit">data/peru_department_year.csv</code>. Repo: <a href="https://github.com/RubyAnn777/GroupAnteaterDataForGood">github.com/RubyAnn777/GroupAnteaterDataForGood</a>.</span>
+  <span>Group Giant Anteater, Data for Good, October 2026. A student working document; not affiliated with or published by FZS.</span>
+</div></footer>
+
+<script>
+(function(){
+  const years=[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+  const T=[1590,1463,707,2455,1753,417,183,-111,580,3567,1276,1894];
+  const A=[541,297,360,449,42,242,734,644,1068,2096,720,911];
+  const NS="http://www.w3.org/2000/svg";
+  const fmt=v=>(v<0?"−":"")+Math.abs(Math.round(v)).toLocaleString("en-US");
+  function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+  function txt(p,x,y,s,a){const t=el("text",Object.assign({x,y,fill:"var(--ink-3)","font-size":"12","font-family":"Roboto, sans-serif"},a||{}),p);t.textContent=s;return t}
+  function tipFor(c){const t=document.createElement("div");t.className="tip";t.hidden=true;c.appendChild(t);return t}
+  function showTip(tip,c,e,html){const r=c.getBoundingClientRect();tip.innerHTML=html;tip.hidden=false;tip.style.left=(e.clientX-r.left+c.scrollLeft)+"px";tip.style.top=(e.clientY-r.top-10)+"px"}
+  function hover(hit,tip,box,html){
+    hit.addEventListener("mousemove",e=>showTip(tip,box,e,html));
+    hit.addEventListener("mouseleave",()=>tip.hidden=true);
+    hit.addEventListener("focus",()=>{const b=hit.getBoundingClientRect();showTip(tip,box,{clientX:b.left+b.width/2,clientY:b.top+30},html)});
+    hit.addEventListener("blur",()=>tip.hidden=true);
+  }
+
+  // Chart A: grouped bars with enforcement waves
+  (function(){
+    const box=document.getElementById("chartA");
+    const W=920,H=360,m={l:58,r:14,t:48,b:34};
+    const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img","aria-label":"Grouped bars of new mining area per year in the Tambopata and Amarakaeri buffer zones, 2014 to 2025, with enforcement waves marked"},box);
+    const min=-500,max=4000,y=v=>m.t+(max-v)/(max-min)*(H-m.t-m.b);
+    const band=(W-m.l-m.r)/years.length,xAt=i=>m.l+band*i;
+    for(let v=0;v<=max;v+=1000){el("line",{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v),stroke:"var(--rule)","stroke-width":v===0?1.5:1},svg);txt(svg,m.l-8,y(v)+4,v.toLocaleString("en-US"),{"text-anchor":"end"})}
+    txt(svg,m.l-8,m.t-30,"ha / year",{"text-anchor":"end"});
+    el("rect",{x:xAt(6),y:m.t,width:band,height:H-m.t-m.b,fill:"var(--ink-3)","fill-opacity":".08"},svg);
+    txt(svg,xAt(6)+band/2,m.t+14,"COVID",{"text-anchor":"middle","font-size":"11"});
+    [[5,"Mercurio",1],[7,"Restauración",2],[9,"Emergency",1]].forEach(([i,l,row])=>{
+      const x=xAt(i);
+      el("line",{x1:x,x2:x,y1:m.t-22+(row-1)*0,y2:H-m.b,stroke:"var(--rasp)","stroke-width":1.5,"stroke-dasharray":"4 3"},svg);
+      txt(svg,x+4,m.t-26,l,{fill:"var(--rasp)","font-weight":"700","font-size":"11"});
+    });
+    const tip=tipFor(box),bw=Math.min(24,band*0.34),gap=2;
+    years.forEach((yr,i)=>{
+      const cx=xAt(i)+band/2;
+      [[T[i],"var(--s-treated)",-1],[A[i],"var(--s-control)",1]].forEach(([v,c,s])=>{
+        const x=s<0?cx-bw-gap/2:cx+gap/2,y0=y(0),y1=y(v);
+        el("rect",{x,y:Math.min(y0,y1),width:bw,height:Math.max(1,Math.abs(y1-y0)),fill:c},svg);
+      });
+      txt(svg,cx,H-m.b+20,String(yr),{"text-anchor":"middle"});
+      const hit=el("rect",{x:xAt(i),y:m.t,width:band,height:H-m.t-m.b,fill:"transparent",tabindex:"0"},svg);
+      hover(hit,tip,box,`<strong>${yr}</strong><br>Tambopata ${fmt(T[i])} ha<br>Amarakaeri ${fmt(A[i])} ha`);
+    });
+    txt(svg,xAt(7)+band/2-bw/2,y(-111)+16,"−111",{"text-anchor":"middle",fill:"var(--ink-2)","font-size":"11"});
+    txt(svg,xAt(9)+band/2-bw/2,y(3567)-6,"3,567",{"text-anchor":"middle",fill:"var(--ink-2)","font-size":"11"});
+    const t=document.getElementById("tblA");
+    t.innerHTML="<table><thead><tr><th>Year</th><th class='r'>Tambopata (ha)</th><th class='r'>Amarakaeri (ha)</th></tr></thead><tbody>"+years.map((yr,i)=>`<tr><td>${yr}</td><td class='r'>${fmt(T[i])}</td><td class='r'>${fmt(A[i])}</td></tr>`).join("")+"</tbody></table>";
+    const b=document.getElementById("tglA");
+    b.addEventListener("click",()=>{const on=t.hidden;t.hidden=!on;b.setAttribute("aria-pressed",String(on));b.textContent=on?"Hide table":"Show table"});
+  })();
+
+  // Chart B: stacked bars by period
+  (function(){
+    const box=document.getElementById("chartB");
+    const rows=[["2016–18","before",1638,284,1688,3610],["2019–21","after",163,540,3937,4640],["2022–25","return",1829,1199,9020,12049]];
+    const W=920,H=210,m={l:110,r:110,t:10,b:32};
+    const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img","aria-label":"Stacked bars of mean annual mining additions in Madre de Dios by period"},box);
+    const max=12500,x=v=>m.l+v/max*(W-m.l-m.r);
+    for(let v=0;v<=12000;v+=3000){el("line",{x1:x(v),x2:x(v),y1:m.t,y2:H-m.b,stroke:"var(--rule)"},svg);txt(svg,x(v),H-m.b+20,v.toLocaleString("en-US"),{"text-anchor":"middle"})}
+    txt(svg,x(12000)+30,H-m.b+20,"ha / year");
+    const tip=tipFor(box),rh=(H-m.t-m.b)/rows.length,bh=rh*0.56;
+    const cols=["var(--s-treated)","var(--s-control)","var(--s-rest)"],names=["Tambopata BZ","Amarakaeri BZ","Rest of Madre de Dios"];
+    rows.forEach((r,i)=>{
+      const yc=m.t+rh*i+(rh-bh)/2;
+      txt(svg,m.l-12,yc+bh/2-2,r[0],{"text-anchor":"end",fill:"var(--ink)","font-weight":"700","font-size":"13"});
+      txt(svg,m.l-12,yc+bh/2+14,r[1],{"text-anchor":"end"});
+      let acc=0;
+      [r[2],r[3],r[4]].forEach((v,j)=>{const w=x(acc+v)-x(acc);el("rect",{x:x(acc)+(j?2:0),y:yc,width:Math.max(0,w-(j?2:0)),height:bh,fill:cols[j]},svg);acc+=v});
+      txt(svg,x(r[5])+8,yc+bh/2+4,fmt(r[5])+" total",{fill:"var(--ink)","font-weight":"700"});
+      const hit=el("rect",{x:m.l,y:m.t+rh*i,width:W-m.l-m.r,height:rh,fill:"transparent",tabindex:"0"},svg);
+      hover(hit,tip,box,`<strong>${r[0]} (${r[1]})</strong><br>${names[0]} ${fmt(r[2])}<br>${names[1]} ${fmt(r[3])}<br>${names[2]} ${fmt(r[4])}<br>Total ${fmt(r[5])} ha/yr`);
+    });
+  })();
+
+  // copy buttons
+  document.querySelectorAll(".prompt .copy").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const s=b.previousElementSibling.textContent;
+      const done=()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1500)};
+      try{navigator.clipboard.writeText(s).then(done,()=>{selectText(b.previousElementSibling)})}catch(e){selectText(b.previousElementSibling)}
+    });
+  });
+  function selectText(n){const r=document.createRange();r.selectNodeContents(n);const s=window.getSelection();s.removeAllRanges();s.addRange(r)}
+})();
+</script>

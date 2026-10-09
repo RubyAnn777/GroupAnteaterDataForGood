@@ -1,58 +1,108 @@
-# GroupAnteaterDataForGood
-This is the final project of the Data for Good class of October 2026
+# Group Giant Anteater · Data for Good, October 2026
 
+**Illegal gold mining in the Amazon. Question 2: How does mining move with enforcement?**
+Two cases, both described on our question card:
+- **Peru:** Operation Mercurio (February 2019), La Pampa, Tambopata buffer zone, Madre de Dios.
+- **Brazil:** weaker enforcement in indigenous territories (2019–2022), then the operation in the **Yanomami** territory (from February 2023).
+Practice partner: **Frankfurt Zoological Society (FZS)**. We present to Christof Schenck (Executive Director) in Lesson 5.
 
-2 exercises:
-a) measure displacement of gold mining activity due to enforcement in Peru and Brazil (both enforcements are in the question)
-*Figure out where the people went*
+> **New here?** Read [`agent.md`](agent.md) first: it is the shared project reference (assignment, data rules, check numbers, decisions). The strategy page (HTML) explains the setup visually.
 
-b) Dif in Dif for each case study - creating a control group for each enforcement
+---
 
+## Quick start
 
-a)
-Focus on displacement of gold mining activity due to enforcement in Peru and Brazil. Check in the buffer zone, around the enforcement areas, close mines and check for new mines
+```bash
+git clone https://github.com/RubyAnn777/GroupAnteaterDataForGood.git
+cd GroupAnteaterDataForGood
+uv sync                                   # creates .venv with pandas, matplotlib, pyfixest, openpyxl
+cd starter && uv run python gold_starter.py
+```
 
+You should see **six lines starting with `OK`** and a figure in `starter/output/starter_figure.png`.
+No `uv`? Install it with `curl -LsSf https://astral.sh/uv/install.sh | sh`. The R starter (`starter/gold_starter.R`) needs base R only.
 
+## The question
 
-b)
-Control group selection
+FZS supports Peru's protected-area authority (SERNANP) in enforcement against illegal gold mining in the Bahuaja-Sonene–Tambopata landscape. It needs to know whether an operation **reduces** mining (deterrence), **moves** it elsewhere (displacement), or only **delays** it.
 
-First get a map of all protected areas with buffer zones
+**What our brief must tell FZS:** what should they expect in the targeted area, and around it, when an enforcement operation ends?
 
-get the AMW polygons (panel structure by quarter and zone for Peru and Brazil)
-for all protected areas, check if there are any active mines in the buffer zone !! then check whether there is active enforcement! check 
+## Deliverables
 
-The control group should be selected based on the following criteria:
+| When | What |
+|---|---|
+| Day 1, end of day | Team plan, half a page ([`templates/TEAM_PLAN.docx`](templates/TEAM_PLAN.docx)) |
+| Before Lesson 4 | Our added data downloaded, logged and checked; first descriptive statistics |
+| Lesson 5 | Brief (2-page PDF), slides, replication zip. Presentation: 10 min + 5 min Q&A, opening with two fun facts about giant anteaters |
 
-Gold is there -> river is there originating in the Andes (this is satisfied by checking whether a polygon is found inside the zone as the algorithm detects active mines along rivers only)
-further away -> to avoid spillover
-same country -> to avoid different regulations and gold prices etc.
-Geographic similarity (same climate, terrain, etc.) -> get this data for our treated and potential control zones
-Needs to not have enforcement at all
+## Repository layout
 
-find geographic twin -> find sophisticated algorithm that does that
+| Path | What it is |
+|---|---|
+| `agent.md` | Shared project reference for humans and AI assistants |
+| `CLAUDE.md` | Tells Claude Code to load `agent.md` automatically |
+| `README.txt` | The course's original "start here" note |
+| `gold_assignment_brief.pdf` | Assignment: deliverables, grading, data notes |
+| `gold_question_cards.pdf` | Question cards; **page 3 is ours** |
+| `docs/strategy.html` | Strategy page: context, design, method, team plan, Claude Code how-to |
+| `DATA_DICTIONARY.pdf` | Every variable in every table |
+| `DOWNLOAD_LOG.csv` | Provenance log: one row per raw file (last row is an example to replace) |
+| `data/` | The six data-pack tables (MapBiomas, World Bank Pink Sheet) |
+| `starter/` | Starter code (Python, notebook, R): checks, levels vs additions, first DiD table |
+| `how_the_panels_were_built/` | Scripts that built `data/` from raw files (reference only) |
+| `templates/` | Team plan and replication README templates |
+| `pyproject.toml`, `uv.lock` | Python environment |
 
-Then we run Dif in Dif
+## Ground rules (from the assignment)
 
-Limtiations
-planes 
-what does enforcement mean
+- **Annual additions, not levels.** Sum a unit's rows first, then take the difference from the previous year.
+- **Label every claim** as description, prediction or causal.
+- **Every number in the brief comes from our code**; cite outside numbers (MAAP etc.) with page or figure.
+- **Say what satellites can't see**: river dredges, mercury, legality.
+- **AI is not a source.** Keep the AI output for brief part 4 in the appendix.
 
+---
 
+## Conceptual draft (team brainstorm, 8 Oct)
 
-Other idea: 
+*Working ideas, not final decisions. See the strategy page and `agent.md` for the open questions.*
 
-figure out when gangs were active and when they were not -> looka t relative prices of gold and coca (instrumental variable)
+### Two exercises
 
+**a) Displacement: figure out where the miners went.**
+Measure how gold mining moves after enforcement. Look in the buffer zone and around the enforcement areas: which mines close, and where do new ones appear? The draft considers both enforcement cases on the card: Peru (Operation Mercurio, 2019) and Brazil (Yanomami territory, 2023).
 
+**b) Difference-in-differences for each case, with a constructed control group.**
 
-Descriptive exercise:
+### Control group selection
 
+1. Get a map of all protected areas with their buffer zones.
+2. Get the Amazon Mining Watch (AMW) polygons and build a panel by period and zone.
+3. For every protected area, check whether its buffer zone has active mines, then whether there was active enforcement.
+4. Pick controls that meet these criteria:
 
-Control variables: 
+| Criterion | Why | How to check |
+|---|---|---|
+| Gold is present (rivers from the Andes) | Mining is possible at all | AMW polygons inside the zone |
+| Far from the treated area | Avoid spillovers | Distance to La Pampa |
+| Same country | Same regulation, same prices | Peru only |
+| Geographically similar (climate, terrain) | Comparable conditions | Covariate data for treated and candidate zones |
+| No enforcement at all | Otherwise it is not a control | Enforcement records (to be found) |
 
+5. Find each treated zone's "geographic twin" with a matching algorithm, then run the DiD.
 
-Graphs: 
+### Limitations noted so far
 
+- Planes *(to clarify)*
+- What exactly counts as "enforcement"?
 
+### Other idea
 
+Find out when gangs were active and when not, using relative prices of gold and coca as an instrumental variable.
+
+### Still to fill in
+
+- Descriptive exercise
+- Control variables
+- Graphs

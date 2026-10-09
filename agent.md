@@ -1,6 +1,8 @@
-# agent.md: Group Giant Anteater, Question 2 (Peru)
+# agent.md: Group Giant Anteater, Question 2 (Peru and Brazil)
 
-Reference for future sessions (human or AI). It covers what the repo contains, what the assignment asks for, and the rules we must follow. **Status (2026-10-08): repo explored only. No analysis done yet.**
+> Claude Code loads this file automatically through `CLAUDE.md`. Keep it current: when a decision is made or a fact is verified, update this file in the same commit.
+
+Reference for future sessions (human or AI). It covers what the repo contains, what the assignment asks for, and the rules we must follow. **Status (2026-10-09):** environment set up, starter verified, research design drafted (strategy page `docs/strategy.html`). No final analysis yet. Team decisions still open: see §12.
 
 ## 1. The assignment in one paragraph
 
@@ -58,6 +60,18 @@ Framing and partner perspective 20% · Provenance (data log, source check, repli
 - (Brazil-side, not ours: all indigenous territories artisanal 2025 = 39,915 ha; Roraima 446 ha in 2018 → 4,745 ha in 2024)
 - Pack-wide: gold Aug 2026 = $4,411/oz; Madre de Dios 2025 = 112,622 ha; Brazil all municipalities 2024 = 609,637 ha.
 
+## 3b. Brazil case (decided 2026-10-09: we do both countries)
+
+From question card 2: **Brazil: indigenous territories 2019–2022, and the operation in the Yanomami territory from February 2023.**
+- Between 2019 and 2022 federal enforcement against illegal mining is widely reported to have weakened (**we must find and cite a source**). Artisanal mining inside indigenous territories rose from **13,704 ha (2018) to 30,980 ha (2022)**.
+- January 2023: federal public-health emergency in the Yanomami territory; operations to remove miners from **February 2023**.
+- So Brazil gives the mirror image of Peru: a period of *weaker* enforcement (2019–22), then a targeted operation (2023).
+- **Data we add:** MapBiomas Brazil "Indigenous Territories" statistics (**Collection 10.1**, brasil.mapbiomas.org/en/estatisticas) for the **Yanomami, Munduruku and Kayapó** territories. It ends in **2024**, so only two post-operation years.
+- **Pack data:** `mining_area.csv` (all indigenous lands combined, by type/substance, 1985–2025, Collection 11) and `brazil_municipality_year.csv` (Collection 10.1, to 2024). Don't mix collections in one series.
+- **Brazil check numbers:** all Brazilian indigenous territories, artisanal, 2025: **39,915 ha** · Roraima (where most of the Yanomami territory lies), all municipalities: **446 ha (2018) → 4,745 ha (2024)** · Brazil all municipalities 2024: 609,637 ha.
+- Possible design: Yanomami (treated 2023) vs Munduruku and Kayapó (comparison), additions 2014–2024; displacement into neighbouring municipalities / territories.
+- Caveats: inside indigenous territories most artisanal mining has "no substance" recorded (27,875 of 39,915 ha in 2025), so define the measure; only 2 post years; municipal mining class includes industrial mines (iron ore Parauapebas, bauxite Oriximiná/Paragominas).
+
 ## 4. Repo layout
 
 ```
@@ -82,7 +96,7 @@ how_the_panels_were_built/      01-04 scripts that built data/ from raw publishe
 | `peru_bufferzone_year.csv` | buffer zone × pa_category × department × year | 1985-2025 | **Main table.** Cols: `buffer_zone, pa_category, department, year, mining_ha, forest_ha, total_ha` |
 | `peru_department_year.csv` | department × biome × year | 1985-2025 | Context (Madre de Dios totals). Keep `biome == "Amazonía"` |
 | `prices_annual.csv` / `prices_monthly.csv` | year (1961-2025) / month (to Aug 2026) | | Gold price context (2023 confounder). Nominal USD |
-| `brazil_municipality_year.csv`, `mining_area.csv` | Brazil | | Not for us (Brazil variant of Q2) |
+| `brazil_municipality_year.csv`, `mining_area.csv` | Brazil | 1985-2024 / 1985-2025 | **Brazil case.** Municipalities: keep `biome == "Amazônia"`, identify by state + name, drop tiny border rows. `mining_area.csv`: national vs all indigenous lands, by type/substance; working measure of illegal gold = `gold_or_nosub_artisanal_ha` |
 
 **Buffer zones in Madre de Dios** (candidate targeted + comparison units): Tambopata (Reserva Nacional) is **TARGETED**. Others: Amarakaeri (Reserva Comunal), Bahuaja-Sonene (Parque Nacional), del Manu (Parque Nacional), Alto Purús (Parque Nacional), Purús (Reserva Comunal), Megantoni (Santuario Nacional). Some span several departments.
 
@@ -125,14 +139,64 @@ Two panels with a shared x-axis rather than twin y-axes; title; source line unde
 - Run anything with `uv run python <file>`; add packages with `uv add <pkg>`. Notebook kernel: select `.venv` in VS Code/Jupyter.
 - Starter: `cd starter && uv run python gold_starter.py`. It must be run from inside `starter/`, and it writes `starter/output/starter_figure.png`.
 - System `python3` (3.9, no pandas) should not be used. R is at `/usr/local/bin/R` if needed.
+- Teammates: `git pull && uv sync`, then work as usual.
 - **Starter verified:** all 6 checks print OK; the Tambopata/Amarakaeri table reproduces the card's numbers (1,640→163 and 289→574 ha; hand-computed DiD −1,762 ha/yr, which is *description*, not causal).
 
-## 10. Open items / next steps
+## 10. Context and facts verified 2026-10-09 (cite the source, not this file)
+
+**FZS's stake.** FZS runs a program in the *Bahuaja Sonene and Tambopata* landscape: Bahuaja-Sonene NP 10,914 km², Tambopata NR 2,746 km², buffer zone 4,500 km². It explicitly supports SERNANP's law-enforcement operations against alluvial gold mining in the buffer and core zones (fzs.org/en/programs/peru/bahuaja-sonene-and-tambopata/, accessed 2026-10-09). So FZS is part of the enforcement we study.
+- Cross-check: Tambopata BZ + Bahuaja-Sonene BZ `total_ha` 2025 = 450,629 ha ≈ 4,506 km², which matches FZS's 4,500 km².
+
+**Enforcement is a sequence, not one event** (MAAP #241, Pacsi et al., 10 May 2026, maapprogram.org/mining-peru-tambopata/):
+| When | What |
+|---|---|
+| 2017–2018 | Series of operations and interdictions in the region (AIDER 2021, cited in MAAP #241), so the pre-period is not enforcement-free |
+| Feb 2019 | **Operation Mercurio**, multisectoral, starting in La Pampa |
+| 2020 | COVID-19: fewer patrols; miners re-entered Tambopata (Romo 2020, cited in MAAP #241) |
+| 2021 | **Plan Restauración**: military interventions across critical zones of southern Peruvian Amazon |
+| 7 Apr 2023 → | **State of emergency** (DS 046-2023-PCM): Tambopata, Inambari, Las Piedras, Laberinto, Madre de Dios and Huepetuhe districts, renewed every 60 days |
+| 2025 | Navy units withdrawn from Malinowski River control posts (funding) |
+| H2 2025–Feb 2026 | ~500 ha of new mining deforestation **inside** Tambopata NR (Malinowski River); Jan–Mar 2026 operations |
+
+**Displacement evidence** (MAAP #130, Finer & Mamani, 1 Dec 2020, maapprogram.org/gold-mining-peru/), mining deforestation before → after Mercurio:
+La Pampa 4,450 → 300 ha (165 → 17 ha/month, −90%) · Alto Malinowski 1,558 → 419 · **Camanti (Amarakaeri buffer zone) 336 → 105** · Pariamanu 72 → 98 · Apaylon 73 → 78 · Chaspa: new front, 113 ha. The legal mining corridor was excluded from MAAP's analysis.
+
+**Implications for our design**
+1. The control (Amarakaeri) was partly treated as well (Camanti declined; Huepetuhe/Madre de Dios districts are under the 2023 emergency). The DiD compares *more vs less* enforcement, not treated vs untreated.
+2. 2021 (Restauración) and 2023 (emergency) are further treatment waves; mark them in every time-series figure.
+3. Displacement may go **into the reserve** (MAAP #241) and **outside buffer zones** (Pariamanu, Chaspa), so we need the ANP file and the "rest of Madre de Dios" series.
+4. No usable control outside Madre de Dios: in 2025 the Amazon-biome mining area is Puno 1,938 ha, Cusco 1,607, Huánuco 1,176, others < 400 ha (vs MdD 112,622).
+5. "Rest of Madre de Dios" (department minus all buffer zones) includes the legal mining corridor, and MapBiomas can't tell legal from illegal.
+
+**Descriptive numbers already produced (Madre de Dios rows, mean additions ha/yr):**
+| Period | Tambopata BZ | Amarakaeri BZ | Rest of MdD | MdD total |
+|---|---|---|---|---|
+| 2016–18 | 1,638 | 284 | 1,688 | 3,610 |
+| 2019–21 | 163 | 540 | 3,937 | 4,640 |
+| 2022–25 | 1,829 | 1,199 | 9,020 | 12,049 |
+The department total did not fall after Mercurio (description).
+
+## 11. Team brainstorm (Ruby's conceptual draft, README.md)
+
+Two exercises: (a) displacement, i.e. where did miners go; (b) DiD per enforcement case, with a control group chosen by criteria (gold present, far away, same country, geographic twin, no enforcement) and a matching algorithm. Other idea: gold/coca relative prices as an IV for gang activity. Our review of this draft:
+- AMW detects mining **on land**, not river dredges (question card 4); polygon presence = mining happened, not "gold present". Select controls on **pre-2019** mining only, otherwise we select on the outcome.
+- "No enforcement at all" is unlikely to exist in Madre de Dios 2019–2025 (Restauración, state of emergency). Use enforcement *intensity* or "less treated".
+- AMW annual periods start in 2018, so there is essentially no pre-trend for Feb 2019. Pre-trends must come from MapBiomas.
+- "Geographic twin" algorithms: nearest-neighbour / Mahalanobis matching on pre-2019 covariates, synthetic control, synthetic DiD.
+- The gold/coca IV fails the exclusion restriction (the gold price drives mining directly); keep it for part 4 at most.
+
+## 12. Open decisions (team)
+
+- [ ] Members and roles (team plan item 7).
+- [x] **Decided 2026-10-09: Peru AND Brazil.** Two case studies, one design (deterrence / displacement / delay). See §3b.
+- [ ] How far to take the spatial extension (AMW + boundaries + covariates): core analysis or brief part 4 only?
+- [ ] Meaning of "planes" in the limitations list.
+
+## 13. Open items / next steps
 
 - [x] Run the starter and confirm the 6 OK checks (done 2026-10-08).
-- [ ] Fill in `TEAM_PLAN.docx` (members, roles still unknown).
+- [ ] Fill in `TEAM_PLAN.docx` (members, roles still unknown). Draft answers are in `docs/strategy.html`.
 - [ ] Download "Áreas naturales protegidas" Colección 4 → log → check number.
 - [ ] Replace the example last row of `DOWNLOAD_LOG.csv`.
-- [ ] Decide comparison group(s) and justify (Amarakaeri is the starter default but suffers spillovers).
 - [ ] Describe → Compare (+ displacement, placebo, persistence) → optional event study.
-- [ ] Find MAAP #130 / #193 / #208 and cite with page/figure.
+- [ ] Open and cite MAAP #130, #193, #208, #241 with page/figure (each team member opens what they cite).
