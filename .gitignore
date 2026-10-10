@@ -8,3 +8,4 @@ starter/output/
 data_raw/amw/amazon_basin_detections.geojson
 data_raw/ibama/*.zip
 data_raw/ibama/*.csv
+data_raw/funai/tis_poligonais.geojson
