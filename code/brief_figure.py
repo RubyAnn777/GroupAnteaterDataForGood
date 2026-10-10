@@ -42,7 +42,7 @@ def run(pack):
     a1.plot(x_of(yrs), nr.loc[yrs], marker="^", markersize=3.5, color=C_NR, linewidth=1.5, linestyle="--",
             label="Inside Tambopata National Reserve", zorder=3)
     a1.set_ylabel("New mining area\nin the year (ha)")
-    a1.set_title("Mining fell where Mercurio hit, rose around it, and came back",
+    a1.set_title("After Mercurio, new mining fell in the Tambopata buffer zone and returned from 2022;\nAmarakaeri and the rest of Madre de Dios rose",
                  loc="left", pad=EVENT_TITLE_PAD, fontsize=10.5, fontweight="bold")
     a1.set_ylim(-150, 4900)
     a1.legend(fontsize=7, frameon=False, loc="upper left", ncol=1, bbox_to_anchor=(0.0, 0.99))

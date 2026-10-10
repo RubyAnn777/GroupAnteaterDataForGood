@@ -1,0 +1,57 @@
+spec,donor,weight
+core_add,Allpahuayo Mishana|Reserva Nacional,0.9866
+core_add,Alto Mayo|Bosque de Protección,0.003
+core_add,Cordillera Azul|Parque Nacional,0.0
+core_add,El Sira|Reserva Comunal,0.0042
+core_add,Huascarán|Parque Nacional,0.0035
+core_add,Nor Yauyos-Cochas|Reserva Paisajistica,0.0
+core_add,Subcuenca del Cotahuasi|Reserva Paisajistica,0.0
+core_add,de Junín|Reserva Nacional,0.0006
+core_add,de Lachay|Reserva Nacional,0.0021
+core_add,del Río Abiseo|Parque Nacional,0.0
+core_addsc,Allpahuayo Mishana|Reserva Nacional,0.0
+core_addsc,Cordillera Azul|Parque Nacional,0.1559
+core_addsc,Subcuenca del Cotahuasi|Reserva Paisajistica,0.7707
+core_addsc,de Junín|Reserva Nacional,0.0
+core_addsc,del Río Abiseo|Parque Nacional,0.0735
+core_cum,Allpahuayo Mishana|Reserva Nacional,0.3333
+core_cum,Alto Mayo|Bosque de Protección,0.0
+core_cum,Cordillera Azul|Parque Nacional,0.0
+core_cum,El Sira|Reserva Comunal,0.0
+core_cum,Huascarán|Parque Nacional,0.0
+core_cum,Nor Yauyos-Cochas|Reserva Paisajistica,0.0
+core_cum,Subcuenca del Cotahuasi|Reserva Paisajistica,0.3333
+core_cum,de Junín|Reserva Nacional,0.0
+core_cum,de Lachay|Reserva Nacional,0.0
+core_cum,del Río Abiseo|Parque Nacional,0.3333
+ext_add,Allpahuayo Mishana|Reserva Nacional,0.0018
+ext_add,Alto Mayo|Bosque de Protección,0.0
+ext_add,Amarakaeri|Reserva Comunal,0.9982
+ext_add,Bahuaja-Sonene|Parque Nacional,0.0
+ext_add,Cordillera Azul|Parque Nacional,0.0
+ext_add,El Sira|Reserva Comunal,0.0
+ext_add,Huascarán|Parque Nacional,0.0
+ext_add,Nor Yauyos-Cochas|Reserva Paisajistica,0.0
+ext_add,Subcuenca del Cotahuasi|Reserva Paisajistica,0.0
+ext_add,de Junín|Reserva Nacional,0.0
+ext_add,de Lachay|Reserva Nacional,0.0
+ext_add,del Río Abiseo|Parque Nacional,0.0
+ext_addsc,Allpahuayo Mishana|Reserva Nacional,0.0
+ext_addsc,Amarakaeri|Reserva Comunal,0.2838
+ext_addsc,Bahuaja-Sonene|Parque Nacional,0.2674
+ext_addsc,Cordillera Azul|Parque Nacional,0.0555
+ext_addsc,Subcuenca del Cotahuasi|Reserva Paisajistica,0.0
+ext_addsc,de Junín|Reserva Nacional,0.0575
+ext_addsc,del Río Abiseo|Parque Nacional,0.3358
+ext_cum,Allpahuayo Mishana|Reserva Nacional,0.5
+ext_cum,Alto Mayo|Bosque de Protección,0.0
+ext_cum,Amarakaeri|Reserva Comunal,0.5
+ext_cum,Bahuaja-Sonene|Parque Nacional,0.0
+ext_cum,Cordillera Azul|Parque Nacional,0.0
+ext_cum,El Sira|Reserva Comunal,0.0
+ext_cum,Huascarán|Parque Nacional,0.0
+ext_cum,Nor Yauyos-Cochas|Reserva Paisajistica,0.0
+ext_cum,Subcuenca del Cotahuasi|Reserva Paisajistica,0.0
+ext_cum,de Junín|Reserva Nacional,0.0
+ext_cum,de Lachay|Reserva Nacional,0.0
+ext_cum,del Río Abiseo|Parque Nacional,0.0

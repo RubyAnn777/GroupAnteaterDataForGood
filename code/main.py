@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from common import Numbers, load_pack
 import checks, peru, peru_anp, brazil
-import peru_production, brazil_deter, spatial, brief_figure
+import peru_production, brazil_deter, spatial, brief_figure, peru_synth, spatial_zones
 
 def main():
     pack = load_pack()
@@ -21,6 +21,8 @@ def main():
     peru_production.run(pack, reg)
     brazil_deter.run(pack, reg)
     spatial.run(reg)                 # AMW robustness (needs data_raw/amw, funai; else reads data_intermediate/)
+    peru_synth.run(pack, reg)        # synthetic control, Tambopata BZ (description)
+    spatial_zones.run(reg)           # AMW new area by zone (needs data_intermediate/amw_zone_year.csv)
     brief_figure.run(pack)           # the ONE figure for the brief (needs peru + peru_anp modules only)
     reg.save()
 
