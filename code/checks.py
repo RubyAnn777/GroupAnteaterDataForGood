@@ -13,6 +13,15 @@ def check(label: str, value: float, expected: float, tol: float = 1.0):
     if not ok:
         raise AssertionError(f"{label}: got {value:,.0f}, expected {expected:,.0f}")
 
+def check_pending(label: str, our_value: float, note: str = "pending: platform check"):
+    """Publisher-side check not yet done: recorded in checks.csv as pending (not a pass, not a failure)."""
+    print(f"PEND {label:70s} {our_value:>12,.1f}   ({note})")
+    _rows.append(dict(label=label, value=our_value, expected=float("nan"), ok=note))
+
+def save():
+    """(Re)write output/checks.csv with every check recorded so far (modules call this after adding checks)."""
+    pd.DataFrame(_rows).to_csv(OUT / "checks.csv", index=False)
+
 def run_checks(pack: dict) -> None:
     pm, pe, zb, br, sub = pack["prices_m"], pack["pe"], pack["zb"], pack["br"], pack["substance"]
     print("\n== Source checks ==")
@@ -53,5 +62,5 @@ def run_checks(pack: dict) -> None:
     print(f"     (info) MdD-rows-only means: Tambopata 2016-18 {period_mean(ms['Tambopata|Reserva Nacional'],2016,2018):,.1f}, "
           f"Amarakaeri 2016-18 {period_mean(ms['Amarakaeri|Reserva Comunal'],2016,2018):,.1f} "
           f"vs all-department definition {t0:,.1f} / {a0:,.1f}")
-    pd.DataFrame(_rows).to_csv(OUT / "checks.csv", index=False)
+    save()
     print("All checks OK.")

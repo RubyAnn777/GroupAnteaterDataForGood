@@ -1,12 +1,17 @@
 label,value,expected,ok
-"Gold price, August 2026, $ per troy ounce",4411.0,4411,True
-"Brazil, mining class, all municipalities, 2024, ha",609636.5118376398,609637,True
-"Peru, Madre de Dios, mining class, 2025, ha",112621.7103475198,112622,True
-"Peru, Tambopata buffer zone, mining class, 2025, ha",20730.029704557666,20730,True
-"Brazil, artisanal mining (garimpo), 2025, ha",445986.5425454708,445987,True
-"Brazil, artisanal mining in all indigenous lands, 2025, ha",39914.5076630114,39915,True
-"Card: Tambopata mean annual addition 2016-18, ha/yr",1639.64575545337,1640,True
-"Card: Tambopata mean annual addition 2019-21, ha/yr",162.50627448541127,163,True
-"Card: Amarakaeri mean annual addition 2016-18, ha/yr",289.1708096027872,289,True
-"Card: Amarakaeri mean annual addition 2019-21, ha/yr",573.8330493285642,574,True
-"Starter: hand-computed DiD (Tambopata minus Amarakaeri), ha/yr",-1761.8017206937357,-1762,True
+"Gold price, August 2026, $ per troy ounce",4411.0,4411.0,True
+"Brazil, mining class, all municipalities, 2024, ha",609636.5118376398,609637.0,True
+"Peru, Madre de Dios, mining class, 2025, ha",112621.7103475198,112622.0,True
+"Peru, Tambopata buffer zone, mining class, 2025, ha",20730.029704557666,20730.0,True
+"Brazil, artisanal mining (garimpo), 2025, ha",445986.5425454708,445987.0,True
+"Brazil, artisanal mining in all indigenous lands, 2025, ha",39914.5076630114,39915.0,True
+"Card: Tambopata mean annual addition 2016-18, ha/yr",1639.64575545337,1640.0,True
+"Card: Tambopata mean annual addition 2019-21, ha/yr",162.50627448541127,163.0,True
+"Card: Amarakaeri mean annual addition 2016-18, ha/yr",289.1708096027872,289.0,True
+"Card: Amarakaeri mean annual addition 2019-21, ha/yr",573.8330493285642,574.0,True
+"Starter: hand-computed DiD (Tambopata minus Amarakaeri), ha/yr",-1761.8017206937357,-1762.0,True
+"ANP file: Tambopata NR mining 2025 (class 4.2), ha, rounded to 0.1",776.9,776.9,True
+"ANP file: all ANP mining 2025 (class 4.2), ha, rounded",834.0,834.0,True
+"ANP file: Tambopata total area constant 2000 vs 2025 (diff, ha)",6.693881005048752e-09,0.0,True
+"ANP file: Tambopata total area, km2 (FZS says 2,746; plausibility only, tol 50)",2778.285269732206,2746.0,True
+Publisher check: Tambopata NR class 4.2 Minería 2025 (ha) vs MapBiomas Peru platform,776.8867359313983,,pending: platform check

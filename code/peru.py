@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 import pyfixest as pf
 
 from common import (OUT, BZ_KEY, additions, period_mean, x_of, style_axes, add_event_markers,
-                    set_year_ticks, finish_figure, SRC_MAPBIOMAS, SRC_PRICE)
+                    set_year_ticks, finish_figure, EVENT_TITLE_PAD, SRC_MAPBIOMAS, SRC_PRICE)
 
 TAM, AMA, BAH = "Tambopata", "Amarakaeri", "Bahuaja-Sonene"
 Y0, Y1 = 2014, 2025
@@ -211,11 +211,11 @@ def run_event_study(adds, lv_w, pack, reg):
     ax.plot(x_of(yrs), bA.loc[yrs], color="#B03A2E", marker="o", markersize=7, linewidth=2,
             label="Tambopata vs MdD buffer zones (pool A, main)")
     ax.axhline(0, color="black", linewidth=0.8)
-    ax.scatter([2018.5], [0], marker="o", facecolors="white", edgecolors="black", zorder=5, label="2018 = reference year (0 by construction)")
+    ax.scatter([2018], [0], marker="o", facecolors="white", edgecolors="black", zorder=5, label="2018 = reference year (0 by construction)")
     ax.set_ylabel("Event-study coefficient\n(ha per year vs 2018)")
-    ax.set_title("Tambopata buffer zone vs comparison zones: additions relative to 2018", loc="left")
+    ax.set_title("Tambopata buffer zone vs comparison zones: additions relative to 2018", loc="left", pad=EVENT_TITLE_PAD)
     ax.set_ylim(-3600, None)
-    ax.legend(fontsize=7, frameon=False, loc="lower left")
+    ax.legend(fontsize=7, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="lower left").set_zorder(10)
     add_event_markers(ax, label=True)
     # bottom: the raw additions of the treated unit and main control (what the coefficients are made of)
     ax2.plot(x_of(range(Y0, Y1 + 1)), ad_all.loc[Y0:Y1, TU], color="#d9a441", marker="o", label="Tambopata")
@@ -228,7 +228,7 @@ def run_event_study(adds, lv_w, pack, reg):
     set_year_ticks(ax2, range(Y0, Y1 + 1))
     note = ("One treated unit: standard errors clustered by unit are not informative (inference needs many treated clusters; "
             "Conley & Taber 2011), so no CIs are drawn.\nThe grey band is the placebo-in-space alternative. Descriptive; not causal.")
-    finish_figure(fig, f"{note}\nSource: {SRC_MAPBIOMAS}.", OUT / "fig_peru_event_study.png", rect_bottom=0.08)
+    finish_figure(fig, f"{note}\nSource: {SRC_MAPBIOMAS}.", OUT / "fig_peru_event_study.png", rect_bottom=0.08, event_note=True)
     return bA, bB, rank_raw, rank_sc, n
 
 # ----------------------------------------------------------------------------- figures
@@ -240,7 +240,7 @@ def fig_additions(adds, pack):
     for u, c in [(TAM, "#d9a441"), (AMA, "#7a9cc6"), (BAH, "#6aa84f")]:
         a1.plot(x_of(yrs), adds.loc[yrs, u], marker="o", color=c, linewidth=2, label=f"{u} buffer zone")
     a1.set_ylabel("New mining area\nin the year (ha)")
-    a1.set_title("Madre de Dios: new mining area each year, by buffer zone, and the gold price", loc="left")
+    a1.set_title("Madre de Dios: new mining area each year, by buffer zone, and the gold price", loc="left", pad=EVENT_TITLE_PAD)
     a1.set_ylim(None, 4800)
     a1.legend(fontsize=8, frameon=False, loc="upper left", ncol=3)
     a2.plot(x_of(yrs), adds.loc[yrs, "Madre de Dios total"], marker="o", color="black", linewidth=2, label="Madre de Dios total")
@@ -254,7 +254,7 @@ def fig_additions(adds, pack):
         style_axes(a); add_event_markers(a, label=(i == 0))
     set_year_ticks(a3, yrs)
     finish_figure(fig, f"Sources: {SRC_MAPBIOMAS}; {SRC_PRICE}.\nAdditions = change in area classified as mining; "
-                       "river dredging and mercury are invisible.", OUT / "fig_peru_additions.png")
+                       "river dredging and mercury are invisible.", OUT / "fig_peru_additions.png", event_note=True)
 
 def fig_displacement(adds):
     yrs = list(range(Y0, Y1 + 1))
@@ -269,18 +269,18 @@ def fig_displacement(adds):
     a1.plot(x_of(yrs), adds.loc[yrs, "Three buffer zones (sum)"], color="black", marker="o", markersize=4, linewidth=1.2,
             label="Sum of the three buffer zones")
     a1.set_ylabel("New mining area (ha)")
-    a1.set_title("Did the total fall, or did mining move? Three buffer zones vs all of Madre de Dios", loc="left")
-    a1.legend(fontsize=8, frameon=False, loc="upper left")
+    a1.set_title("Did the total fall, or did mining move? Three buffer zones vs all of Madre de Dios", loc="left", pad=EVENT_TITLE_PAD)
+    a1.legend(fontsize=8, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="upper left").set_zorder(10)
     a2.bar(x_of(yrs), adds.loc[yrs, "Madre de Dios total"], color="#B8B8B8", width=0.8, label="Madre de Dios total")
     a2.plot(x_of(yrs), adds.loc[yrs, "Rest of Madre de Dios"], color="#8E7CC3", marker="o", linewidth=1.8,
             label="Rest of Madre de Dios (incl. legal mining corridor)")
     a2.set_ylabel("New mining area (ha)")
-    a2.legend(fontsize=8, frameon=False, loc="upper left")
+    a2.legend(fontsize=8, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="upper left").set_zorder(10)
     for i, a in enumerate((a1, a2)):
         style_axes(a); add_event_markers(a, label=(i == 0))
     set_year_ticks(a2, yrs)
     finish_figure(fig, f"Source: {SRC_MAPBIOMAS}. Description only; MapBiomas cannot separate legal from illegal mining.",
-                  OUT / "fig_peru_displacement.png")
+                  OUT / "fig_peru_displacement.png", event_note=True)
 
 # ----------------------------------------------------------------------------- entry point
 def run(pack, reg):
@@ -292,4 +292,6 @@ def run(pack, reg):
     res = run_event_study(adds, lv_w, pack, reg)
     fig_additions(adds, pack)
     fig_displacement(adds)
+    import peru_robust
+    peru_robust.run(pack, reg, series=(levels, adds, lv_w))
     return dict(levels=levels, adds=adds, period_means=pm, did=did_tab, event=res)

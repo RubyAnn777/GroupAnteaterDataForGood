@@ -78,41 +78,73 @@ class Numbers:
         print(f"Saved {path.relative_to(ROOT)} ({len(self.rows)} numbers)")
 
 # --------------------------------------------------------------------------- figure style
-# Event timeline marked on every time-series figure (agent.md §10). Decimal years: Feb 2019 = 2019.1.
-EVENTS = [
-    (2019.1,  "Mercurio\nFeb 2019", "#B03A2E"),
-    (2020.2,  "COVID-19\n2020",      "#7F8C8D"),
-    (2021.0,  "Plan\nRestauración",  "#7F8C8D"),
-    (2023.27, "State of emergency\nfrom Apr 2023", "#7F8C8D"),
+# Event markers. CONVENTION (all time-series figures): the value for year t is plotted at x = t
+# (addition(t) = map(t) - map(t-1)), and an event in calendar year Y is drawn as a vertical line at
+# x = Y - 0.5, i.e. between the Y-1 and Y points: just before the first annual addition that can reflect it.
+# (State of emergency = DS 046-2023-PCM, 7 Apr 2023.)
+# An event is a dict: year, label (month + year), color, style ("solid" = emphasised, else dashed).
+PERU_EVENTS = [
+    dict(year=2019, label="Mercurio Feb 2019",                color="#B03A2E", style="solid"),
+    dict(year=2020, label="COVID-19 Mar 2020",                color="#6C7A7B", style="dashed"),
+    dict(year=2021, label="Plan Restauración 2021",           color="#6C7A7B", style="dashed"),
+    dict(year=2023, label="State of emergency Apr 2023", color="#6C7A7B", style="dashed"),
 ]
-# Convention for ALL time-series plots: the value for year t is drawn at x = t + 0.5 (the year
-# spans [t, t+1)), so that decimal-dated events sit in the right year.
+EVENTS = PERU_EVENTS      # backwards-compatible alias
+EVENT_TITLE_PAD = 30      # points of space above an axes whose event labels are drawn (title pad)
+EVENT_NOTE = ("Vertical lines: an event in year Y is drawn at Y - 0.5, just before the first annual "
+              "addition that can reflect it (addition(Y) = map(Y) - map(Y-1)).")
 
 def x_of(years):
-    return pd.Series(years, dtype=float) + 0.5
+    """x position of year t's value: t itself (see the event convention above)."""
+    return pd.Series(years, dtype=float)
 
 def style_axes(ax):
     ax.spines["top"].set_visible(False); ax.spines["right"].set_visible(False)
     ax.yaxis.grid(True, color="#E8EEF0"); ax.set_axisbelow(True)
     ax.yaxis.set_major_formatter(FuncFormatter(lambda v, pos: f"{v:,.0f}"))
 
-def add_event_markers(ax, label: bool = False):
-    """Vertical lines for the four enforcement/shock events. label=True writes small labels at the top."""
-    for x, text, col in EVENTS:
-        ax.axvline(x, color=col, linestyle="--" if col != "#B03A2E" else "-", linewidth=0.9, alpha=0.8, zorder=0)
-        if label:
-            ax.annotate(text, xy=(x, 1.0), xycoords=("data", "axes fraction"), xytext=(2, -2),
-                        textcoords="offset points", fontsize=6.5, color=col, va="top", ha="left")
+def add_event_markers(ax, label: bool = False, events=None):
+    """Vertical lines at x = year - 0.5 for each event (default: PERU_EVENTS; Brazil passes its own list).
+    label=True writes the labels in a strip ABOVE the axes, alternating two rows so neighbours never
+    overlap; leave room with ax.set_title(..., pad=EVENT_TITLE_PAD)."""
+    events = PERU_EVENTS if events is None else events
+    xmin, xmax = ax.get_xlim()
+    fig_w = ax.figure.get_size_inches()[0]
+    in_per_x = 0.86 * fig_w / (xmax - xmin)            # rough inches per x-unit (axes ~86% of figure width)
+    placed: list[list[tuple[float, float]]] = []        # per row: occupied [x0, x1] intervals (data units)
+    for ev in sorted(events, key=lambda e: e["year"]):
+        x = ev["year"] - 0.5
+        ax.axvline(x, color=ev["color"], linestyle="-" if ev["style"] == "solid" else "--",
+                   linewidth=1.6 if ev["style"] == "solid" else 0.9, alpha=0.9, zorder=0)
+        if not label:
+            continue
+        half = 0.5 * len(ev["label"]) * 0.056 / in_per_x + 0.1   # half text width in data units, + gap
+        row = 0
+        while row < len(placed) and any(x - half < b and x + half > a for a, b in placed[row]):
+            row += 1
+        if row == len(placed):
+            placed.append([])
+        placed[row].append((x - half, x + half))
+        ax.annotate(ev["label"], xy=(x, 1.0), xycoords=("data", "axes fraction"),
+                    xytext=(0, 3 + 8.5 * row), textcoords="offset points", fontsize=6.5,
+                    color=ev["color"], va="bottom", ha="center", annotation_clip=False,
+                    fontweight="bold" if ev["style"] == "solid" else "normal")
+    ax.set_xlim(xmin, xmax)
 
 def set_year_ticks(ax, years):
     years = list(years)
     step = 1 if len(years) <= 14 else 2
-    ax.set_xticks([y + 0.5 for y in years][::step])
+    ax.set_xticks([y for y in years][::step])
     ax.set_xticklabels([str(y) for y in years][::step])
 
-def finish_figure(fig, source: str, path: Path, rect_bottom: float = 0.04):
-    """Source line under the figure, tight layout, save at 200 dpi."""
-    fig.text(0.01, 0.01, source, fontsize=7.5, color="#555555")
+def finish_figure(fig, source: str, path: Path, rect_bottom: float = 0.04, event_note: bool = False):
+    """Source line under the figure (+ optional event-convention footnote), tight layout, save at 200 dpi."""
+    import textwrap
+    text = source + ("\n" + EVENT_NOTE if event_note else "")
+    wrap = int(fig.get_size_inches()[0] * 17)          # ~16 characters per inch at 7.5 pt
+    text = "\n".join("\n".join(textwrap.wrap(l, wrap)) or "" for l in text.split("\n"))
+    rect_bottom = max(rect_bottom, 0.012 + 0.0225 * (text.count("\n") + 1) * (7.5 / 7.5))
+    fig.text(0.01, 0.01, text, fontsize=7.5, color="#555555", va="bottom")
     fig.tight_layout(rect=(0, rect_bottom, 1, 1))
     fig.savefig(path, dpi=200)
     plt.close(fig)
