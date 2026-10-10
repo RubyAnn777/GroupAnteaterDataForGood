@@ -50,3 +50,9 @@ Start: 2026-10-10 23:40 CEST.
 - DONE Peru ANP+robustness (code/peru_anp.py, peru_robust.py), Brazil (brazil.py, brazil_ibama.py), DETER (brazil_deter.py), production (peru_production.py). All committed.
 - Running: spatial module/maps; Chrome publisher checks + MAAP HTML; literature verification.
 - NEXT: merge DOWNLOAD_LOG rows; brief main figure; report builder (numbers pulled from output/numbers.csv); clean-run verification.
+
+### Round 1, continued (00:30)
+- DONE: publisher checks (Peru ANP platform 777 ha = file 776.9 ha OK; Brazil TI: platform only Col 11 → collection mismatch, no Col 11 per-TI file exists); MAAP pages saved as rendered text (raw HTML blocked); literature verified (notes/literature.md); DOWNLOAD_LOG merged (30 rows, sha256); agent.md §14 + README updated; brief figure `output/fig_brief_main.png`; report builder + REPORT.html/REPORT.md (draft).
+- Firecrawl total still 14 / 100 (Chrome-check, literature, Col 11 search: 0 each).
+- Running: adversarial review (read-only), synthetic control + AMW zones, visual QA of REPORT.html.
+- NEXT: apply review fixes; add synth + zones to report; clean run from scratch; publish artifact; final log.
