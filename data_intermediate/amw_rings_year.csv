@@ -1,0 +1,136 @@
+region,unit,year,new_ha,n_patches,is_stock,provisional
+La Pampa ring,0-10 km,2018,14842.9,1921,True,False
+La Pampa ring,0-10 km,2019,1201.1,177,False,False
+La Pampa ring,0-10 km,2020,1143.5,161,False,False
+La Pampa ring,0-10 km,2021,545.9,110,False,False
+La Pampa ring,0-10 km,2022,483.3,94,False,False
+La Pampa ring,0-10 km,2023,852.2,195,False,False
+La Pampa ring,0-10 km,2024,1167.3,184,False,False
+La Pampa ring,0-10 km,2025,1359.4,266,False,True
+La Pampa ring,0-10 km,2026,1774.0,344,False,True
+La Pampa ring,10-25 km,2018,13579.8,1458,True,False
+La Pampa ring,10-25 km,2019,2524.4,254,False,False
+La Pampa ring,10-25 km,2020,3258.2,356,False,False
+La Pampa ring,10-25 km,2021,2157.4,316,False,False
+La Pampa ring,10-25 km,2022,2184.2,276,False,False
+La Pampa ring,10-25 km,2023,2302.0,286,False,False
+La Pampa ring,10-25 km,2024,1854.7,248,False,False
+La Pampa ring,10-25 km,2025,1440.1,226,False,True
+La Pampa ring,10-25 km,2026,2288.3,289,False,True
+La Pampa ring,25-50 km,2018,23624.2,1907,True,False
+La Pampa ring,25-50 km,2019,7530.0,731,False,False
+La Pampa ring,25-50 km,2020,9177.8,932,False,False
+La Pampa ring,25-50 km,2021,8286.2,932,False,False
+La Pampa ring,25-50 km,2022,7149.0,789,False,False
+La Pampa ring,25-50 km,2023,6867.4,819,False,False
+La Pampa ring,25-50 km,2024,6597.6,826,False,False
+La Pampa ring,25-50 km,2025,7155.6,942,False,True
+La Pampa ring,25-50 km,2026,6108.0,793,False,True
+Yanomami TI ring,0-10 km,2018,1339.2,126,True,False
+Yanomami TI ring,0-10 km,2019,69.3,7,False,False
+Yanomami TI ring,0-10 km,2020,132.4,9,False,False
+Yanomami TI ring,0-10 km,2021,386.5,30,False,False
+Yanomami TI ring,0-10 km,2022,940.8,69,False,False
+Yanomami TI ring,0-10 km,2023,432.8,33,False,False
+Yanomami TI ring,0-10 km,2024,248.1,17,False,False
+Yanomami TI ring,0-10 km,2025,51.9,5,False,True
+Yanomami TI ring,0-10 km,2026,173.0,14,False,True
+Yanomami TI ring,10-25 km,2018,1766.0,133,True,False
+Yanomami TI ring,10-25 km,2019,86.5,8,False,False
+Yanomami TI ring,10-25 km,2020,196.2,16,False,False
+Yanomami TI ring,10-25 km,2021,321.6,35,False,False
+Yanomami TI ring,10-25 km,2022,132.6,13,False,False
+Yanomami TI ring,10-25 km,2023,351.3,26,False,False
+Yanomami TI ring,10-25 km,2024,173.3,14,False,False
+Yanomami TI ring,10-25 km,2025,467.3,36,False,True
+Yanomami TI ring,10-25 km,2026,271.1,18,False,True
+Yanomami TI ring,25-50 km,2018,4208.6,361,True,False
+Yanomami TI ring,25-50 km,2019,559.9,47,False,False
+Yanomami TI ring,25-50 km,2020,138.0,13,False,False
+Yanomami TI ring,25-50 km,2021,450.9,46,False,False
+Yanomami TI ring,25-50 km,2022,132.9,14,False,False
+Yanomami TI ring,25-50 km,2023,184.8,15,False,False
+Yanomami TI ring,25-50 km,2024,184.7,15,False,False
+Yanomami TI ring,25-50 km,2025,669.3,55,False,True
+Yanomami TI ring,25-50 km,2026,357.2,39,False,True
+Yanomami TI ring,inside,2018,1516.9,109,True,False
+Yanomami TI ring,inside,2019,2295.1,170,False,False
+Yanomami TI ring,inside,2020,1078.5,80,False,False
+Yanomami TI ring,inside,2021,3011.0,236,False,False
+Yanomami TI ring,inside,2022,8569.6,704,False,False
+Yanomami TI ring,inside,2023,3961.4,350,False,False
+Yanomami TI ring,inside,2024,495.7,38,False,False
+Yanomami TI ring,inside,2025,190.3,14,False,True
+Yanomami TI ring,inside,2026,40.4,4,False,True
+Munduruku TI ring,0-10 km,2018,13544.2,1171,True,False
+Munduruku TI ring,0-10 km,2019,2335.6,224,False,False
+Munduruku TI ring,0-10 km,2020,1984.6,179,False,False
+Munduruku TI ring,0-10 km,2021,1154.2,109,False,False
+Munduruku TI ring,0-10 km,2022,1747.4,157,False,False
+Munduruku TI ring,0-10 km,2023,992.4,99,False,False
+Munduruku TI ring,0-10 km,2024,715.6,69,False,False
+Munduruku TI ring,0-10 km,2025,956.9,83,False,True
+Munduruku TI ring,0-10 km,2026,570.3,64,False,True
+Munduruku TI ring,10-25 km,2018,33193.1,3032,True,False
+Munduruku TI ring,10-25 km,2019,3915.5,416,False,False
+Munduruku TI ring,10-25 km,2020,4919.6,481,False,False
+Munduruku TI ring,10-25 km,2021,3801.1,418,False,False
+Munduruku TI ring,10-25 km,2022,4173.0,461,False,False
+Munduruku TI ring,10-25 km,2023,2816.0,306,False,False
+Munduruku TI ring,10-25 km,2024,1771.3,170,False,False
+Munduruku TI ring,10-25 km,2025,1920.9,192,False,True
+Munduruku TI ring,10-25 km,2026,2462.5,285,False,True
+Munduruku TI ring,25-50 km,2018,39873.9,3393,True,False
+Munduruku TI ring,25-50 km,2019,7658.2,717,False,False
+Munduruku TI ring,25-50 km,2020,6715.2,658,False,False
+Munduruku TI ring,25-50 km,2021,9917.9,1000,False,False
+Munduruku TI ring,25-50 km,2022,10388.4,1073,False,False
+Munduruku TI ring,25-50 km,2023,5473.9,536,False,False
+Munduruku TI ring,25-50 km,2024,2687.5,277,False,False
+Munduruku TI ring,25-50 km,2025,2940.9,290,False,True
+Munduruku TI ring,25-50 km,2026,2860.2,279,False,True
+Munduruku TI ring,inside,2018,8831.8,772,True,False
+Munduruku TI ring,inside,2019,9007.9,816,False,False
+Munduruku TI ring,inside,2020,11195.8,1037,False,False
+Munduruku TI ring,inside,2021,7729.6,708,False,False
+Munduruku TI ring,inside,2022,3651.2,348,False,False
+Munduruku TI ring,inside,2023,981.6,82,False,False
+Munduruku TI ring,inside,2024,224.8,19,False,False
+Munduruku TI ring,inside,2025,311.6,28,False,True
+Munduruku TI ring,inside,2026,219.2,15,False,True
+Kayapó TI ring,0-10 km,2018,9221.8,798,True,False
+Kayapó TI ring,0-10 km,2019,1596.9,186,False,False
+Kayapó TI ring,0-10 km,2020,1446.9,146,False,False
+Kayapó TI ring,0-10 km,2021,1804.7,185,False,False
+Kayapó TI ring,0-10 km,2022,980.2,111,False,False
+Kayapó TI ring,0-10 km,2023,744.0,85,False,False
+Kayapó TI ring,0-10 km,2024,363.4,45,False,False
+Kayapó TI ring,0-10 km,2025,173.0,20,False,True
+Kayapó TI ring,0-10 km,2026,473.0,48,False,True
+Kayapó TI ring,10-25 km,2018,3112.6,244,True,False
+Kayapó TI ring,10-25 km,2019,530.7,45,False,False
+Kayapó TI ring,10-25 km,2020,789.4,68,False,False
+Kayapó TI ring,10-25 km,2021,1148.0,104,False,False
+Kayapó TI ring,10-25 km,2022,611.8,48,False,False
+Kayapó TI ring,10-25 km,2023,438.7,39,False,False
+Kayapó TI ring,10-25 km,2024,75.0,5,False,False
+Kayapó TI ring,10-25 km,2025,236.8,23,False,True
+Kayapó TI ring,10-25 km,2026,594.5,50,False,True
+Kayapó TI ring,25-50 km,2018,69.1,4,True,False
+Kayapó TI ring,25-50 km,2019,46.3,3,False,False
+Kayapó TI ring,25-50 km,2020,98.3,6,False,False
+Kayapó TI ring,25-50 km,2021,133.1,8,False,False
+Kayapó TI ring,25-50 km,2022,104.2,10,False,False
+Kayapó TI ring,25-50 km,2023,0.0,0,False,False
+Kayapó TI ring,25-50 km,2024,11.6,1,False,False
+Kayapó TI ring,25-50 km,2025,0.0,0,False,True
+Kayapó TI ring,25-50 km,2026,353.2,27,False,True
+Kayapó TI ring,inside,2018,17875.7,1631,True,False
+Kayapó TI ring,inside,2019,4606.9,507,False,False
+Kayapó TI ring,inside,2020,4711.0,475,False,False
+Kayapó TI ring,inside,2021,6103.2,635,False,False
+Kayapó TI ring,inside,2022,3858.4,365,False,False
+Kayapó TI ring,inside,2023,2883.2,312,False,False
+Kayapó TI ring,inside,2024,1338.6,132,False,False
+Kayapó TI ring,inside,2025,1839.5,192,False,True
+Kayapó TI ring,inside,2026,1188.3,113,False,True

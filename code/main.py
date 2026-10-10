@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from common import Numbers, load_pack
 import checks, peru, peru_anp, brazil
-import peru_production, brazil_deter
+import peru_production, brazil_deter, spatial
 
 def main():
     pack = load_pack()
@@ -20,6 +20,7 @@ def main():
     brazil.run(pack, reg)            # TODO hook: runs when the Brazil data is added
     peru_production.run(pack, reg)
     brazil_deter.run(pack, reg)
+    spatial.run(reg)                 # AMW robustness (needs data_raw/amw, funai; else reads data_intermediate/)
     reg.save()
 
 if __name__ == "__main__":

@@ -1,0 +1,73 @@
+region,unit,year,new_ha,n_patches,is_stock,provisional
+Madre de Dios zone,Amarakaeri BZ,2018,11760.3,1409,True,False
+Madre de Dios zone,Amarakaeri BZ,2019,2126.8,262,False,False
+Madre de Dios zone,Amarakaeri BZ,2020,1646.4,219,False,False
+Madre de Dios zone,Amarakaeri BZ,2021,1731.6,248,False,False
+Madre de Dios zone,Amarakaeri BZ,2022,1170.6,166,False,False
+Madre de Dios zone,Amarakaeri BZ,2023,1413.4,171,False,False
+Madre de Dios zone,Amarakaeri BZ,2024,1303.7,164,False,False
+Madre de Dios zone,Amarakaeri BZ,2025,817.5,108,False,True
+Madre de Dios zone,Amarakaeri BZ,2026,979.2,124,False,True
+Madre de Dios zone,Amarakaeri RC,2018,23.3,1,True,False
+Madre de Dios zone,Amarakaeri RC,2019,15.7,1,False,False
+Madre de Dios zone,Amarakaeri RC,2020,0.0,0,False,False
+Madre de Dios zone,Amarakaeri RC,2021,0.0,0,False,False
+Madre de Dios zone,Amarakaeri RC,2022,0.0,0,False,False
+Madre de Dios zone,Amarakaeri RC,2023,0.0,0,False,False
+Madre de Dios zone,Amarakaeri RC,2024,0.0,0,False,False
+Madre de Dios zone,Amarakaeri RC,2025,0.0,0,False,True
+Madre de Dios zone,Amarakaeri RC,2026,0.0,0,False,True
+Madre de Dios zone,Bahuaja-Sonene BZ,2018,116.4,7,True,False
+Madre de Dios zone,Bahuaja-Sonene BZ,2019,133.9,7,False,False
+Madre de Dios zone,Bahuaja-Sonene BZ,2020,349.1,19,False,False
+Madre de Dios zone,Bahuaja-Sonene BZ,2021,131.7,8,False,False
+Madre de Dios zone,Bahuaja-Sonene BZ,2022,356.2,28,False,False
+Madre de Dios zone,Bahuaja-Sonene BZ,2023,412.6,27,False,False
+Madre de Dios zone,Bahuaja-Sonene BZ,2024,226.7,13,False,False
+Madre de Dios zone,Bahuaja-Sonene BZ,2025,334.9,22,False,True
+Madre de Dios zone,Bahuaja-Sonene BZ,2026,285.2,19,False,True
+Madre de Dios zone,Bahuaja-Sonene NP,2018,0.0,0,True,False
+Madre de Dios zone,Bahuaja-Sonene NP,2019,0.0,0,False,False
+Madre de Dios zone,Bahuaja-Sonene NP,2020,23.2,1,False,False
+Madre de Dios zone,Bahuaja-Sonene NP,2021,0.0,0,False,False
+Madre de Dios zone,Bahuaja-Sonene NP,2022,0.0,0,False,False
+Madre de Dios zone,Bahuaja-Sonene NP,2023,0.0,0,False,False
+Madre de Dios zone,Bahuaja-Sonene NP,2024,0.0,0,False,False
+Madre de Dios zone,Bahuaja-Sonene NP,2025,0.0,0,False,True
+Madre de Dios zone,Bahuaja-Sonene NP,2026,0.0,0,False,True
+Madre de Dios zone,Mining corridor (DL 1100),2018,52946.9,4785,True,False
+Madre de Dios zone,Mining corridor (DL 1100),2019,14639.0,1600,False,False
+Madre de Dios zone,Mining corridor (DL 1100),2020,16520.2,1834,False,False
+Madre de Dios zone,Mining corridor (DL 1100),2021,13556.5,1783,False,False
+Madre de Dios zone,Mining corridor (DL 1100),2022,11433.3,1426,False,False
+Madre de Dios zone,Mining corridor (DL 1100),2023,11091.1,1449,False,False
+Madre de Dios zone,Mining corridor (DL 1100),2024,9814.8,1361,False,False
+Madre de Dios zone,Mining corridor (DL 1100),2025,8739.5,1263,False,True
+Madre de Dios zone,Mining corridor (DL 1100),2026,6402.4,924,False,True
+Madre de Dios zone,Other Madre de Dios box,2018,13118.3,1131,True,False
+Madre de Dios zone,Other Madre de Dios box,2019,3644.5,371,False,False
+Madre de Dios zone,Other Madre de Dios box,2020,4129.7,454,False,False
+Madre de Dios zone,Other Madre de Dios box,2021,3501.6,415,False,False
+Madre de Dios zone,Other Madre de Dios box,2022,2496.2,263,False,False
+Madre de Dios zone,Other Madre de Dios box,2023,2673.7,283,False,False
+Madre de Dios zone,Other Madre de Dios box,2024,1962.9,208,False,False
+Madre de Dios zone,Other Madre de Dios box,2025,3287.8,310,False,True
+Madre de Dios zone,Other Madre de Dios box,2026,2349.8,253,False,True
+Madre de Dios zone,Tambopata BZ,2018,21362.1,2514,True,False
+Madre de Dios zone,Tambopata BZ,2019,2371.0,296,False,False
+Madre de Dios zone,Tambopata BZ,2020,1709.3,198,False,False
+Madre de Dios zone,Tambopata BZ,2021,985.0,137,False,False
+Madre de Dios zone,Tambopata BZ,2022,675.2,109,False,False
+Madre de Dios zone,Tambopata BZ,2023,1147.6,227,False,False
+Madre de Dios zone,Tambopata BZ,2024,1708.6,247,False,False
+Madre de Dios zone,Tambopata BZ,2025,2058.1,369,False,True
+Madre de Dios zone,Tambopata BZ,2026,3220.0,481,False,True
+Madre de Dios zone,Tambopata NR,2018,1464.2,137,True,False
+Madre de Dios zone,Tambopata NR,2019,63.9,4,False,False
+Madre de Dios zone,Tambopata NR,2020,46.4,2,False,False
+Madre de Dios zone,Tambopata NR,2021,46.4,4,False,False
+Madre de Dios zone,Tambopata NR,2022,5.8,2,False,False
+Madre de Dios zone,Tambopata NR,2023,11.6,2,False,False
+Madre de Dios zone,Tambopata NR,2024,34.8,2,False,False
+Madre de Dios zone,Tambopata NR,2025,640.1,50,False,True
+Madre de Dios zone,Tambopata NR,2026,1459.3,164,False,True
