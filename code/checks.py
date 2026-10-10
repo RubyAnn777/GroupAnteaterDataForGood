@@ -18,6 +18,11 @@ def check_pending(label: str, our_value: float, note: str = "pending: platform c
     print(f"PEND {label:70s} {our_value:>12,.1f}   ({note})")
     _rows.append(dict(label=label, value=our_value, expected=float("nan"), ok=note))
 
+def check_documented(label: str, value: float, expected: float, status: str):
+    """Publisher-side comparison done and documented but NOT asserted (e.g. a known collection difference)."""
+    print(f"{status:5.5s}{label:70s} {value:>12,.0f}   (publisher: {expected:,.0f})")
+    _rows.append(dict(label=label, value=value, expected=expected, ok=status))
+
 def save():
     """(Re)write output/checks.csv with every check recorded so far (modules call this after adding checks)."""
     pd.DataFrame(_rows).to_csv(OUT / "checks.csv", index=False)
@@ -35,7 +40,7 @@ def run_checks(pack: dict) -> None:
           zb.loc[(zb["buffer_zone"] == "Tambopata") & (zb["year"] == 2025), "mining_ha"].sum(), 20730)
     check("Brazil, artisanal mining (garimpo), 2025, ha",
           sub.loc[(sub["territory"] == "Brasil") & (sub["year"] == 2025), "mining_artisanal_ha"].sum(), 445987)
-    check("Brazil, artisanal mining in all indigenous lands, 2025, ha",
+    check("Brazil publisher check (course card, MapBiomas Brazil Col 11): artisanal mining in all indigenous lands, 2025, ha",
           sub.loc[(sub["territory"] == "all indigenous lands combined") & (sub["year"] == 2025),
                   "mining_artisanal_ha"].sum(), 39915)
 

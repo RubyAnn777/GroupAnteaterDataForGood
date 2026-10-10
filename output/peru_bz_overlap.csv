@@ -1,0 +1,22 @@
+zone_a,zone_b,overlap_ha,smaller_zone_ha,overlap_pct_of_smaller,warning
+Bahuaja-Sonene,Tambopata,42309.86,231693.37,18.26,WARNING: overlap > 1% of the smaller zone; 'rest of MdD' (dept minus sum of buffer-zone rows) double-subtracts this area
+Amarakaeri,del Manu,25521.83,283475.47,9.0,WARNING: overlap > 1% of the smaller zone; 'rest of MdD' (dept minus sum of buffer-zone rows) double-subtracts this area
+Megantoni,del Manu,7100.86,205885.19,3.45,WARNING: overlap > 1% of the smaller zone; 'rest of MdD' (dept minus sum of buffer-zone rows) double-subtracts this area
+Alto Purús,del Manu,710.67,664834.86,0.11,
+Bahuaja-Sonene,Megantoni,0.0,205885.19,0.0,
+Purús,del Manu,0.0,222356.01,0.0,
+Purús,Tambopata,0.0,222356.01,0.0,
+Megantoni,Tambopata,0.0,205885.19,0.0,
+Megantoni,Purús,0.0,205885.19,0.0,
+Bahuaja-Sonene,del Manu,0.0,261271.09,0.0,
+Bahuaja-Sonene,Purús,0.0,222356.01,0.0,
+Alto Purús,Amarakaeri,0.0,283475.47,0.0,
+Alto Purús,Bahuaja-Sonene,0.0,261271.09,0.0,
+Amarakaeri,Tambopata,0.0,231693.37,0.0,
+Amarakaeri,Purús,0.0,222356.01,0.0,
+Amarakaeri,Megantoni,0.0,205885.19,0.0,
+Amarakaeri,Bahuaja-Sonene,0.0,261271.09,0.0,
+Alto Purús,Tambopata,0.0,231693.37,0.0,
+Alto Purús,Purús,0.0,222356.01,0.0,
+Alto Purús,Megantoni,0.0,205885.19,0.0,
+Tambopata,del Manu,0.0,231693.37,0.0,

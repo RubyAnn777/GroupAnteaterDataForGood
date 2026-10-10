@@ -17,7 +17,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from common import OUT, period_mean
+from common import ROOT, OUT, period_mean
 import peru
 
 TU = "Tambopata|Reserva Nacional"
@@ -38,6 +38,67 @@ def _unit_adds(zb: pd.DataFrame) -> pd.DataFrame:
 
 def _did(t: pd.Series, c: pd.Series, pre, post) -> float:
     return (period_mean(t, *post) - period_mean(t, *pre)) - (period_mean(c, *post) - period_mean(c, *pre))
+
+GEOJSON = ROOT / "data_raw" / "sernanp" / "zonas_amortiguamiento.geojson"
+
+def bz_overlap_check(zb, pe, reg):
+    """Do the Madre de Dios buffer zones overlap each other? 'Rest of MdD' = department minus the SUM of buffer-zone
+    rows, which double-subtracts any overlap. Part 1: geometry (SERNANP polygons, equal-area CRS ESRI:102033).
+    Part 2: MapBiomas, sum of MdD buffer-zone total_ha vs department total_ha (Amazonia). Descriptive."""
+    # ---- part 2 (always possible): MapBiomas areas
+    mdd_bz = zb[zb["department"] == "Madre de Dios"]
+    bz_area = float(mdd_bz[mdd_bz["year"] == 2025]["total_ha"].sum())
+    dep_area = float(pe[(pe["department"] == "Madre de Dios") & (pe["biome"] == "Amazonía") & (pe["year"] == 2025)]["total_ha"].sum())
+    reg.add("bz_mdd_total_ha_sum_2025", bz_area, "ha", "Sum of total_ha over all buffer-zone rows in Madre de Dios, 2025 (MapBiomas Peru Col 4). "
+            "If buffer zones overlapped, this would double-count area.", "description", SRC)
+    reg.add("bz_mdd_dept_total_ha_2025", dep_area, "ha", "total_ha of Madre de Dios department, Amazonia biome, 2025 (MapBiomas Peru Col 4)", "description", SRC)
+    reg.add("bz_mdd_share_of_dept_area", 100 * bz_area / dep_area, "%", "Sum of MdD buffer-zone area as % of the department area (Amazonia biome). "
+            "Below 100 is plausible for non-overlapping zones; the subtraction in 'rest of MdD' is then possible.", "description", SRC)
+    print(f"(e) MdD buffer-zone area sum {bz_area:,.0f} ha = {100*bz_area/dep_area:.1f}% of department {dep_area:,.0f} ha")
+    # ---- part 1: geometry
+    if not GEOJSON.exists():
+        print(f"WARNING: {GEOJSON} missing; skipping buffer-zone overlap geometry check")
+        return
+    import geopandas as gpd
+    g = gpd.read_file(GEOJSON)
+    cols = list(g.columns)
+    print("buffer-zone geojson columns:", cols)
+    namecol = next((c for c in cols if c.lower() in ("anp_nomb", "nombre", "name", "anp_nombre", "zoa_nomb")), None) \
+        or next(c for c in cols if g[c].dtype == object)
+    g = g.to_crs("ESRI:102033")
+    g["geometry"] = g.geometry.make_valid()
+    wanted = ["Tambopata", "Bahuaja", "Amarakaeri", "Manu", "Purús", "Purus", "Megantoni"]
+    mask = g[namecol].astype(str).str.contains("|".join(wanted), case=False, regex=True)
+    sel = g[mask].reset_index(drop=True)
+    names = sel[namecol].astype(str).tolist()
+    # merge polygons that belong to the same-named zone
+    sel = sel.dissolve(by=namecol).reset_index()
+    names = sel[namecol].astype(str).tolist()
+    print("zones used for overlap check:", names)
+    rows = []
+    for i in range(len(sel)):
+        for j in range(i + 1, len(sel)):
+            a, b = sel.geometry[i], sel.geometry[j]
+            inter = a.intersection(b).area / 1e4
+            amin = min(a.area, b.area) / 1e4
+            rows.append(dict(zone_a=names[i], zone_b=names[j], overlap_ha=inter, smaller_zone_ha=amin,
+                             overlap_pct_of_smaller=100 * inter / amin if amin else np.nan))
+    ov = pd.DataFrame(rows).sort_values("overlap_ha", ascending=False)
+    top = ov.iloc[0]
+    material = bool((ov["overlap_pct_of_smaller"] > 1).any())
+    ov["warning"] = np.where(ov["overlap_pct_of_smaller"] > 1,
+                             "WARNING: overlap > 1% of the smaller zone; 'rest of MdD' (dept minus sum of buffer-zone rows) double-subtracts this area", "")
+    ov.round(2).to_csv(OUT / "peru_bz_overlap.csv", index=False)
+    print(ov.round(1).head(6).to_string(index=False))
+    warn = (" WARNING: overlap is material (> 1% of the smaller zone), so 'rest of MdD' is understated by about this area "
+            "(upper bound: only the mining share of it)." if material else " Not material (<= 1% of the smaller zone).")
+    reg.add("bz_overlap_max_ha", float(top.overlap_ha), "ha",
+            f"Largest pairwise geographic overlap among Madre de Dios buffer zones (SERNANP polygons, ESRI:102033): "
+            f"{top.zone_a} x {top.zone_b} ({top.overlap_pct_of_smaller:.2f}% of the smaller zone).{warn} Pair table: output/peru_bz_overlap.csv",
+            "description", "data_raw/sernanp/zonas_amortiguamiento.geojson")
+    reg.add("bz_overlap_max_pct_of_smaller", float(top.overlap_pct_of_smaller), "%",
+            f"Same pair ({top.zone_a} x {top.zone_b}), overlap as % of the smaller zone.{warn}", "description",
+            "data_raw/sernanp/zonas_amortiguamiento.geojson")
 
 def run(pack, reg, series=None):
     print("\n== Peru robustness (Phase 5) ==")
@@ -86,8 +147,9 @@ def run(pack, reg, series=None):
     ids = ["amarakaeri", "bahuaja", "ama_bah_mean", "ama_bah_sum", "rest_mdd", "amazon_pool", "all_peru_poolB"]
     for (name, (cid, cs, note)), sid in zip(controls.items(), ids):
         for w, (pre, post) in WINDOWS.items():
+            sp = "SUM of controls (scale mismatch; do not cite): " if sid == "ama_bah_sum" else ""
             reg.add(f"robust_did_{w}_{sid}", _did(ad_all[TU], cs, pre, post), "ha/yr",
-                    f"DiD of mean annual additions, Tambopata BZ minus control [{name}], {w} windows "
+                    f"{sp}DiD of mean annual additions, Tambopata BZ minus control [{name}], {w} windows "
                     f"{pre[0]}-{pre[1]} -> {post[0]}-{post[1]}. Descriptive contrast; not causal.", "description", SRC)
 
     # ---- (b) drop the largest unit
@@ -153,6 +215,7 @@ def run(pack, reg, series=None):
                      note=f"Value = max abs difference in annual additions (ha). MdD non-Amazon-biome mining max {mx:.2f} ha; "
                           f"that biome is {area.get('Andes', np.nan)/area.sum():.2%} of the department area. Mismatch negligible; the real "
                           f"issue is the legal mining corridor inside 'rest'."))
+    bz_overlap_check(zb, pe, reg)
     tab = pd.DataFrame(rows)
     tab.to_csv(OUT / "peru_robustness.csv", index=False)
     show = tab[tab.spec.str.startswith("(a)")][["spec", "DiD_ha_per_yr"]]

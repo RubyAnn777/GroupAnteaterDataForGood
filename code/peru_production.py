@@ -68,6 +68,9 @@ def run(pack, reg):
     reg.add("pe_prod_mean_2022_25_t", tn.loc[2022:2025].mean(), "t fine gold/yr", "Mean declared gold production 2022-25", "description", src)
     reg.add("pe_prod_change_2018_2025_pct", 100 * (tn[2025] / tn[2018] - 1), "%",
             "Change in declared production 2018 to 2025 (within one source; not compared with area)", "description", src)
+    reg.add("pe_prod_fall_2018_2025_pct", -100 * (tn[2025] / tn[2018] - 1), "%", "Fall in declared production 2018 to 2025, as a positive percentage", "description", src)
+    reg.add("pe_prod_fall_2019_2020_pct", -100 * (tn[2020] / tn[2019] - 1), "%", "Fall in declared production 2019 to 2020 (COVID year), as a positive percentage", "description", src)
+    reg.add("pe_prod_2017_t", tn[2017], "t fine gold", "Declared gold production, Madre de Dios, 2017", "description", src)
     reg.add("pe_prod_mapbiomas_level_2018_ha", t.mapbiomas_mining_ha[2018], "ha", "MapBiomas mining area level, Madre de Dios (Amazonía), 2018", "description", SRC_MAPBIOMAS)
     reg.add("pe_prod_mapbiomas_level_2025_ha", t.mapbiomas_mining_ha[2025], "ha", "MapBiomas mining area level, Madre de Dios (Amazonía), 2025 (matches 112,622 ha check)", "description", SRC_MAPBIOMAS)
 

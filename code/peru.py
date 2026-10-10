@@ -94,6 +94,19 @@ def describe_and_compare(levels, adds, reg):
                 "description", SRC)
         reg.add(f"did_{k}_tambopata_change", dt, "ha/yr", f"Change in Tambopata mean addition, {name}", "description", SRC)
         reg.add(f"did_{k}_amarakaeri_change", dc, "ha/yr", f"Change in Amarakaeri mean addition, {name}", "description", SRC)
+    # extra series numbers (text quotes)
+    for yr in (2022, 2023, 2024, 2025):
+        reg.add(f"add_tambopata_{yr}", adds.loc[yr, TAM], "ha", f"Annual addition to mining area, Tambopata BZ, {yr}", "description", SRC)
+    reg.add("mean_add_tambopata_2022_25_ex2023", adds.loc[[2022, 2024, 2025], TAM].mean(), "ha/yr",
+            "Mean annual addition, Tambopata BZ, 2022, 2024 and 2025 (2023 excluded: a year in which every unit spiked)", "description", SRC)
+    reg.add("mean_add_amarakaeri_2014_18", period_mean(adds[AMA], 2014, 2018), "ha/yr", "Mean annual addition, Amarakaeri BZ, 2014-18", "description", SRC)
+    reg.add("mean_add_tambopata_2014_18", period_mean(adds[TAM], 2014, 2018), "ha/yr", "Mean annual addition, Tambopata BZ, 2014-18", "description", SRC)
+    dt_b, dc_b, d_b = did(TAM, AMA, (2014, 2018), (2019, 2021))
+    reg.add("did_main_base_2014_18", d_b, "ha/yr",
+            "DiD of mean annual additions, Tambopata minus Amarakaeri, baseline 2014-18 vs 2019-21 (longer baseline than the main 2016-18; "
+            "shows sensitivity to Amarakaeri's low 2016-18 level). Descriptive; not causal.", "description", SRC)
+    reg.add("add_amarakaeri_2023", adds.loc[2023, AMA], "ha", "Annual addition to mining area, Amarakaeri BZ, 2023", "description", SRC)
+    reg.add("add_rest_mdd_2023", adds.loc[2023, "Rest of Madre de Dios"], "ha", "Annual addition to mining area, rest of Madre de Dios (dept. minus MdD buffer-zone rows), 2023", "description", SRC)
     did_tab = pd.DataFrame(rows)
     did_tab.round(1).to_csv(OUT / "fig_peru_did_table.csv", index=False)   # "figure" = table (CSV)
     print("\nDiD table (ha/yr):\n", did_tab.drop(columns="note").round(0).to_string(index=False))
@@ -201,6 +214,11 @@ def run_event_study(adds, lv_w, pack, reg):
     reg.add("placebo_space_rank_scaled", rank_sc, "rank", f"Same, scaled by each unit's own mean addition 2014-18", "description", SRC)
     reg.add("placebo_space_n_units", n, "count", "Number of units in the placebo-in-space donor pool B", "description", SRC)
 
+    for yr in (2016, 2019, 2023, 2024, 2025):
+        reg.add(f"eventstudy_band_min_{yr}", es.loc[yr, "placebo_min"], "ha", f"Placebo-in-space band (pool B, each other zone treated in turn): minimum event-study coefficient {yr}", "description", SRC)
+        reg.add(f"eventstudy_band_max_{yr}", es.loc[yr, "placebo_max"], "ha", f"Placebo-in-space band (pool B): maximum event-study coefficient {yr}", "description", SRC)
+    placebo_restricted(pack, reg)
+
     # ---- figure
     fig, (ax, ax2) = plt.subplots(2, 1, figsize=(8.5, 7), sharex=True, gridspec_kw={"height_ratios": [1.5, 1]})
     yrs = sorted(bA.index)
@@ -230,6 +248,36 @@ def run_event_study(adds, lv_w, pack, reg):
             "Conley & Taber 2011), so no CIs are drawn.\nThe grey band is the placebo-in-space alternative. Descriptive; not causal.")
     finish_figure(fig, f"{note}\nSource: {SRC_MAPBIOMAS}.", OUT / "fig_peru_event_study.png", rect_bottom=0.08, event_note=True)
     return bA, bB, rank_raw, rank_sc, n
+
+def placebo_restricted(pack, reg, thresh=10.0):
+    """Placebo-in-space with a meaningful donor pool: buffer zones with mean 2014-18 additions > `thresh` ha/yr AND
+    rows in Amazon-biome departments (same department-based filter as peru_robust). Tambopata is ranked among
+    donors + itself on the mean event-study beta 2019-21 (1 = most negative). Description only; minimum p = 1/n."""
+    zb, pe = pack["zb"], pack["pe"]
+    amz = set(pe.loc[pe["biome"] == "Amazonía", "department"])
+    zr = zb[zb["department"].isin(amz)]
+    zr = zr.assign(unit=zr["buffer_zone"] + "|" + zr["pa_category"])
+    ad = zr.groupby(["unit", "year"])["mining_ha"].sum().unstack("unit").diff()
+    TU = "Tambopata|Reserva Nacional"
+    pre = ad.loc[2014:2018].mean()
+    pool = sorted(u for u in pre.index if pre[u] > thresh)
+    assert TU in pool
+    stat = {u: peru_beta(ad[pool], u).loc[2019:2021].mean() for u in pool}
+    st = pd.DataFrame({"mean_beta_2019_21_ha": stat, "mean_add_2014_18_ha": pre[pool]})
+    st["rank_most_negative_first"] = st["mean_beta_2019_21_ha"].rank()
+    st["role"] = np.where(st.index == TU, "treated (real)", "donor")
+    st.round(2).to_csv(OUT / "peru_placebo_in_space_restricted.csv")
+    n = len(pool)
+    rk = int(st.loc[TU, "rank_most_negative_first"])
+    donors = "; ".join(u.split("|")[0] for u in pool if u != TU)
+    print(f"Placebo-in-space RESTRICTED (mean 2014-18 > {thresh:g} ha/yr, Amazon-biome departments): n={n}, Tambopata rank {rk}/{n}; donors: {donors}")
+    reg.add("placebo_space_rank_restricted", rk, "rank",
+            f"Rank of Tambopata among {n} buffer zones (itself + {n-1} donors with mean 2014-18 additions > {thresh:g} ha/yr in Amazon-biome departments; "
+            f"1 = most negative) in mean event-study beta 2019-21. Donors: {donors}. See output/peru_placebo_in_space_restricted.csv", "description", SRC)
+    reg.add("placebo_space_n_restricted", n, "count", f"Number of units (Tambopata + donors) in the restricted placebo-in-space pool; minimum possible rank share is 1/{n}", "description", SRC)
+
+def peru_beta(wide, treated):
+    return beta_by_formula(wide, treated)
 
 # ----------------------------------------------------------------------------- figures
 def fig_additions(adds, pack):
@@ -290,6 +338,11 @@ def run(pack, reg):
     pm, did_tab = describe_and_compare(levels, adds, reg)
     print("\nPeriod means (ha/yr):\n", pm.round(0).to_string())
     res = run_event_study(adds, lv_w, pack, reg)
+    gp = pack["prices"].set_index("year")["gold"]
+    for yr in (2018, 2022, 2023, 2025):
+        reg.add(f"gold_price_{yr}", gp[yr], "USD/oz", f"Gold price, annual mean, nominal, {yr} ({SRC_PRICE})", "description", "prices_annual.csv")
+    reg.add("gold_price_ratio_2025_2018", gp[2025] / gp[2018], "ratio", "Gold price 2025 divided by 2018 (nominal annual means)", "description", "prices_annual.csv")
+    reg.add("gold_price_pct_change_2022_2023", 100 * (gp[2023] / gp[2022] - 1), "%", "Gold price change 2022 to 2023 (nominal annual means)", "description", "prices_annual.csv")
     fig_additions(adds, pack)
     fig_displacement(adds)
     import peru_robust

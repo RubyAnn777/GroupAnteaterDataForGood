@@ -14,6 +14,7 @@ import pandas as pd, numpy as np
 import matplotlib.pyplot as plt
 from common import ROOT, OUT, additions, period_mean, style_axes, finish_figure
 import brazil_ibama
+import checks
 
 TI101 = ROOT / "data_raw/mapbiomas_brazil/MAPBIOMAS_BRAZIL-COVERAGE_STATISTICS-COL.10.1-INDIGENOUS_TERRITORIES_STATE_BIOME.xlsx"
 TI10 = ROOT / "data_raw/mapbiomas_brazil/MAPBIOMAS_BRAZIL-COL.10-INDIGENOUS_TERRITORIES_STATE_BIOME_DOI.xlsx"
@@ -92,6 +93,13 @@ def adds_of(level: pd.Series) -> pd.Series:
 def group_adds(w, codes):
     return adds_of(w[list(codes)].sum(axis=1)), w[list(codes)].sum(axis=1)
 
+def group_adds_mean(w, codes):
+    """Per-unit MEAN of the controls (same scale as one treated unit), additions and stock."""
+    m = w[list(codes)].mean(axis=1)
+    return adds_of(m), m
+
+SUM_SPECS = {"vs_Munduruku+Kayapo_pooled", "vs_other_top5_by_2022_stock", "vs_all_19_other_territories"}
+
 # ------------------------------------------------------------------ DiD (descriptive)
 def did_row(spec, tname, cname, t_add, c_add, t_stock, c_stock, pre=PRE, post=POST, note="", claim="description"):
     tp0, tp1 = period_mean(t_add, *pre), period_mean(t_add, *post)
@@ -160,9 +168,12 @@ def run(pack, reg):
         reg.add("br_col10_vs_col101_max_rel_diff_pct", 100 * worst, "%", "Max relative difference Col 10 vs Col 10.1, three territories, 2018-2024 (2014-17: larger, up to 2% for Yanomami)", "description", "data_raw/mapbiomas_brazil (two xlsx)")
     else:
         print("note: Collection 10 sibling file not found; consistency check skipped")
-    CHECKS.append(dict(label="Publisher-side check for Col 10.1 per-territory numbers (platform value for Kayapo 2022 = 15,748 ha)",
-                       value=np.nan, expected=15748, ok=None, kind="pending platform"))
-    print("PENDING publisher-side check: read Kayapo 2022 on plataforma.brasil.mapbiomas.org (Col 10.1); expected 15,748 ha")
+    # Publisher-side comparison for the per-territory file (platform read 2026-10-10 is Collection 11, the file is Col 10.1)
+    CHECKS.append(dict(label="Kayapo 2024: file Col 10.1 = 18,176 ha; platform Col 11 = 17,632 ha (2026-10-10): collection difference",
+                       value=float(w.loc[2024, KAY]), expected=17632, ok="MISMATCH-documented", kind="publisher (not asserted)"))
+    checks.check_documented("Kayapo 2024 mining, ha: file Col 10.1 vs platform Col 11 (2026-10-10), collection difference, not asserted",
+                            float(w.loc[2024, KAY]), 17632, "MISMATCH-documented")
+    checks.save()
 
     A, STK = {}, {}
     for c in w.columns:
@@ -207,6 +218,12 @@ def run(pack, reg):
                      note="Best control 2023-24 (one PF action Jun 2023; desintrusao only May 2025)"))
     R.append(did_row("vs_Munduruku+Kayapo_pooled", "Yanomami", "Munduruku + Kayapo (pooled)", Yd, MK_a, Ys, MK_s,
                      note="Pooled control is dominated by Kayapo (about 2/3 of the stock)"))
+    MKm_a, MKm_s = group_adds_mean(w, [MUN, KAY])
+    O19m_a, O19m_s = group_adds_mean(w, others)
+    R.append(did_row("vs_Munduruku_Kayapo_mean", "Yanomami", "Munduruku and Kayapo (per-unit mean)", Yd, MKm_a, Ys, MKm_s,
+                     note="Control = equal-weight MEAN of the two territories (same scale as the treated unit)"))
+    R.append(did_row("vs_all_19_other_mean", "Yanomami", "19 other territories (per-unit mean)", Yd, O19m_a, Ys, O19m_s,
+                     note="Control = equal-weight MEAN of the 19 other territories with mining rows (Sarare drives most of the 2023-24 rise)"))
     R.append(did_row("drop_Kayapo_from_pool", "Yanomami", "Munduruku only", Yd, Mc, Ys, STK[MUN],
                      note="Same as main_vs_Munduruku: dropping the largest unit (Kayapo) from the pooled control leaves Munduruku"))
     R.append(did_row("drop_Munduruku_from_pool", "Yanomami", "Kayapo only", Yd, Kc, Ys, STK[KAY],
@@ -230,8 +247,9 @@ def run(pack, reg):
     rob.round(3).to_csv(OUT / "brazil_did.csv", index=False)
     print(rob[["spec", "treated_pre_ha_yr", "treated_post_ha_yr", "control_pre_ha_yr", "control_post_ha_yr", "DiD_ha_yr", "DiD_pct_of_2022_stock"]].round(1).to_string())
     for r in R:
-        reg.add(f"br_did_{r['spec']}_ha_yr", r["DiD_ha_yr"], "ha/yr", f"Descriptive DiD in mean annual additions: {r['treated']} vs {r['control']}, {r['pre']} -> {r['post']} ({SRC101})", "description", TI101.name)
-        reg.add(f"br_did_{r['spec']}_pct", r["DiD_pct_of_2022_stock"], "pp of 2022 stock", f"Same, additions as % of 2022 stock", "description", TI101.name)
+        pre_txt = "SUM of controls (scale mismatch; do not cite): " if r["spec"] in SUM_SPECS else ""
+        reg.add(f"br_did_{r['spec']}_ha_yr", r["DiD_ha_yr"], "ha/yr", f"{pre_txt}Descriptive DiD in mean annual additions: {r['treated']} vs {r['control']}, {r['pre']} -> {r['post']} ({SRC101})", "description", TI101.name)
+        reg.add(f"br_did_{r['spec']}_pct", r["DiD_pct_of_2022_stock"], "pp of 2022 stock", f"{pre_txt}Same, additions as % of 2022 stock", "description", TI101.name)
     out["did"] = rob
 
     # ---- 3. displacement ---------------------------------------------------------------------------------
@@ -278,6 +296,16 @@ def run(pack, reg):
     reg.add("br_other19_stock_2024", o_stk[2024], "ha", "Stock of 19 other territories 2024", "description", TI101.name)
     for c in [c for c in others if c in (42101, 44701, 12101)]:
         reg.add(f"br_ti_{c}_add_2023_24_sum", float(A[c][2023] + A[c][2024]), "ha", f"Sum of additions 2023+2024, {names[c]} ({SRC101})", "description", TI101.name)
+    SAR = 42101
+    print("Territory 42101 =", names[SAR])
+    oex = [c for c in others if c != SAR]
+    oex_a, _ = group_adds_mean(w, oex)
+    for (y0, y1) in [(2020, 2022), (2023, 2024)]:
+        reg.add(f"br_other18_ex_sarare_add_mean_{y0}_{y1}", period_mean(oex_a, y0, y1), "ha/yr",
+                f"Per-unit MEAN annual addition of the {len(oex)} other territories with mining excluding {names[SAR]} (geocode 42101), {y0}-{y1}; "
+                f"each territory's addition averaged over the group, then over years ({SRC101})", "description", TI101.name)
+    reg.add("br_sarare_add_2023_24_sum", float(A[SAR][2023] + A[SAR][2024]), "ha",
+            f"Sum of additions 2023+2024, {names[SAR]} (geocode 42101)", "description", TI101.name)
     big3_a, big3_s = group_adds(w, BIG3)
     all_a, all_s = group_adds(w, list(w.columns))
     reg.add("br_all22_stock_2022", all_s[2022], "ha", f"All 22 territories with mining, stock 2022 ({SRC101})", "description", TI101.name)

@@ -105,7 +105,10 @@ def run(pack, reg):
     checks.check("ANP file: Tambopata total area constant 2000 vs 2025 (diff, ha)", abs(area["y2025"] - area["y2000"]), 0, tol=1)
     # file-total area vs FZS (Tambopata NR 2,746 km2 per fzs.org, via agent.md §10): external plausibility, +1.2%
     checks.check("ANP file: Tambopata total area, km2 (FZS says 2,746; plausibility only, tol 50)", area["y2025"] / 100, 2746, tol=50)
-    checks.check_pending("Publisher check: Tambopata NR class 4.2 Minería 2025 (ha) vs MapBiomas Peru platform", float(tam.loc[2025]))
+    PUBLISHER_PERU_ANP_TAMBOPATA_2025 = 777   # MapBiomas Peru platform, Col 4, read 2026-10-10 (tooltip rounds to integer)
+    checks.check("Publisher check (MapBiomas Peru platform, Col 4, read 2026-10-10; "
+                 "data_raw/mapbiomas_peru/platform_check_tambopata_reserve_2026-10-10.jpg): Tambopata NR mining 2025, ha",
+                 round(float(tam.loc[2025])), PUBLISHER_PERU_ANP_TAMBOPATA_2025, tol=0.5)
     checks.save()
 
     # ---- series

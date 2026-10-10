@@ -5,6 +5,6 @@ label,value,expected,ok,kind
 "Kayapo, mining class, 2024, ha (Col 10.1 file; rounds to 18,176)",18175.85096720563,18176.0,True,numeric
 "Yanomami (RR rows summed; AM row has no mining row), 2022, ha (Col 10.1)",3573.075115838613,3573.0,True,numeric
 "Col 10 sibling file vs Col 10.1 per territory (max rel diff, 2018-2024)",0.0007351292586308963,0.001,True,consistency
-"Publisher-side check for Col 10.1 per-territory numbers (platform value for Kayapo 2022 = 15,748 ha)",,15748.0,,pending platform
+"Kayapo 2024: file Col 10.1 = 18,176 ha; platform Col 11 = 17,632 ha (2026-10-10): collection difference",18175.85096720563,17632.0,MISMATCH-documented,publisher (not asserted)
 "Roraima, mining class, all Amazonia municipalities, 2018, ha (card 446)",446.24068242187565,446.0,True,numeric
 "Roraima, mining class, all Amazonia municipalities, 2024, ha (card 4,745)",4745.3797950012295,4745.0,True,numeric
