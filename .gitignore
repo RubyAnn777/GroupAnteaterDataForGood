@@ -3,3 +3,8 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 starter/output/
+
+# Raw downloads > 50 MB (linked in DOWNLOAD_LOG.csv instead)
+data_raw/amw/amazon_basin_detections.geojson
+data_raw/ibama/*.zip
+data_raw/ibama/*.csv
