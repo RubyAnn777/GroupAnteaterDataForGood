@@ -206,4 +206,4 @@ All 269 numbers, with unit, description, claim type and producing function: [`ou
 **Part 4. What FZS can do with this.** (a) **[prediction]** Expect a local fall, a regional shift and a return within 3–4 years unless presence is maintained; budget for permanent presence and watch the next-nearest unprotected land and the reserve core. (b) Why it could mislead: one treated unit; spillovers into the control; COVID and the gold price; MapBiomas cannot tell legal from illegal mining; river dredging and mercury are invisible. (c) What would let us say more: dated enforcement records (patrol days, interdictions per zone), the AMW patches in distance rings with 2018+ quarterly data, more treated units (Plan Restauración zones 2021), river-dredge counts (MAAP-style SkySat), mercury sampling. Include the required AI prompt output in the appendix, both raw and edited.
 
 ---
-*Built 2026-10-11 00:03 from git commit c3930a3 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (269 rows).*
+*Built 2026-10-11 00:04 from git commit fe6199e (working tree may contain uncommitted changes). Numbers from output/numbers.csv (269 rows).*

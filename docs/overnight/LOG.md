@@ -36,7 +36,7 @@ Start: 2026-10-10 23:40 CEST.
 - Created branch from main (15f6049). Read agent.md, basics.html §6–7.
 - Launched batch 1 (parallel): Peru ANP download, Brazil TI download, Brazil enforcement source, MAAP citations, enforcement records, spatial data feasibility, code/main.py (Peru core).
 
-### Round 1 results (00:05)
+### Round 1 results (23:50)
 - DONE Peru ANP Col 4 (`data_raw/mapbiomas_peru/…AREAS-PROTEGIDAS.xlsx`, curl). Publisher-side check PENDING (platform is JS; try Chrome).
 - DONE Brazil TI Col 10.1 (Dataverse doi:10.58053/MapBiomas/1F2TLA). Publisher check PENDING (MapBiomas factsheets quote Col 7/8 garimpo only; try platform via Chrome).
 - DONE IBAMA autos de infração (zip via Azure blob behind dadosabertos; dadosabertos itself 403). Embargo file BLOCKED (no URL found). Sources: Nunes et al. 2024 Sci Rep (opened).
@@ -46,12 +46,12 @@ Start: 2026-10-10 23:40 CEST.
 - Batch 2 launched: Peru ANP+robustness+figure fixes; Brazil module (TI, Roraima, IBAMA, robustness). Still running: spatial feasibility, extra-data scout.
 - NEXT: Chrome agent for publisher-side checks + MAAP HTML; merge DOWNLOAD_LOG rows; phase 6 review; report.
 
-### Round 1, continued (00:00)
+### Round 1, continued (23:58)
 - DONE Peru ANP+robustness (code/peru_anp.py, peru_robust.py), Brazil (brazil.py, brazil_ibama.py), DETER (brazil_deter.py), production (peru_production.py). All committed.
 - Running: spatial module/maps; Chrome publisher checks + MAAP HTML; literature verification.
 - NEXT: merge DOWNLOAD_LOG rows; brief main figure; report builder (numbers pulled from output/numbers.csv); clean-run verification.
 
-### Round 1, continued (00:30)
+### Round 1, continued (00:04)
 - DONE: publisher checks (Peru ANP platform 777 ha = file 776.9 ha OK; Brazil TI: platform only Col 11 → collection mismatch, no Col 11 per-TI file exists); MAAP pages saved as rendered text (raw HTML blocked); literature verified (notes/literature.md); DOWNLOAD_LOG merged (30 rows, sha256); agent.md §14 + README updated; brief figure `output/fig_brief_main.png`; report builder + REPORT.html/REPORT.md (draft).
 - Firecrawl total still 14 / 100 (Chrome-check, literature, Col 11 search: 0 each).
 - Running: adversarial review (read-only), synthetic control + AMW zones, visual QA of REPORT.html.
