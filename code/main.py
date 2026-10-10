@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from common import Numbers, load_pack
 import checks, peru, peru_anp, brazil
+import peru_production, brazil_deter
 
 def main():
     pack = load_pack()
@@ -17,6 +18,8 @@ def main():
     peru.run(pack, reg)
     peru_anp.run(pack, reg)          # TODO hook: runs when the ANP data is added
     brazil.run(pack, reg)            # TODO hook: runs when the Brazil data is added
+    peru_production.run(pack, reg)
+    brazil_deter.run(pack, reg)
     reg.save()
 
 if __name__ == "__main__":
