@@ -20,6 +20,8 @@ cd starter && uv run python gold_starter.py
 ```
 
 You should see **six lines starting with `OK`** and a figure in `starter/output/starter_figure.png`.
+
+**Full analysis (overnight branch):** from the repo root run `uv run python code/main.py` (about 1 minute). It re-runs every check, fails loudly if one fails, and writes all figures, tables and `output/numbers.csv` (every citable number with the function that produced it) to `output/`. Then `uv run python docs/overnight/build_report.py` rebuilds `docs/overnight/REPORT.html` and `REPORT.md` from those numbers. Three large raw files are not in git (see `DOWNLOAD_LOG.csv`); without them `main.py` falls back to the small committed intermediates in `data_intermediate/` and skips the two maps.
 No `uv`? Install it with `curl -LsSf https://astral.sh/uv/install.sh | sh`. The R starter (`starter/gold_starter.R`) needs base R only.
 
 ## The question
@@ -48,7 +50,12 @@ FZS supports Peru's protected-area authority (SERNANP) in enforcement against il
 | `docs/basics.html` | Start here: plain-language primer (map, legal zones, buffer zones, enforcement timeline) |
 | `docs/strategy.html` | Strategy page: context, design, method, team plan, Claude Code how-to |
 | `DATA_DICTIONARY.pdf` | Every variable in every table |
-| `DOWNLOAD_LOG.csv` | Provenance log: one row per raw file (last row is an example to replace) |
+| `DOWNLOAD_LOG.csv` | Provenance log: one row per raw file, with URL, date, collection, sha256 and check number |
+| `data_raw/` | Our own downloads, exactly as downloaded, one folder per source (MapBiomas Peru/Brazil, IBAMA, INPE DETER, BCRP, AMW, SERNANP, FUNAI, INGEMMET, MAAP) |
+| `data_intermediate/` | Small derived tables rebuilt by `code/` from git-ignored raw files (IBAMA, AMW) |
+| `code/` | Analysis: `main.py` is the single entry point; one module per part (Peru, Peru ANP, robustness, production, Brazil, IBAMA, DETER, spatial, brief figure) |
+| `output/` | Everything `code/main.py` writes: figures, tables, `numbers.csv`, `checks.csv` |
+| `docs/overnight/` | Overnight run of 10/11 Oct 2026: `LOG.md` (what happened, decisions), `REPORT.html`/`REPORT.md` (draft findings), `notes/` (per-source notes and quotes) |
 | `data/` | The six data-pack tables (MapBiomas, World Bank Pink Sheet) |
 | `starter/` | Starter code (Python, notebook, R): checks, levels vs additions, first DiD table |
 | `how_the_panels_were_built/` | Scripts that built `data/` from raw files (reference only) |

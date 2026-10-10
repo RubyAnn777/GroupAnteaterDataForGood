@@ -189,14 +189,35 @@ Two exercises: (a) displacement, i.e. where did miners go; (b) DiD per enforceme
 
 - [ ] Members and roles (team plan item 7).
 - [x] **Decided 2026-10-09: Peru AND Brazil.** Two case studies, one design (deterrence / displacement / delay). See §3b.
-- [ ] How far to take the spatial extension (AMW + boundaries + covariates): core analysis or brief part 4 only?
+- [ ] How far to take the spatial extension? Overnight prototype (`code/spatial.py`) works; recommendation: brief part 4 / one robustness panel, not the core (AMW starts 2018 = stock, no pre-period).
 - [ ] Meaning of "planes" in the limitations list.
 
 ## 13. Open items / next steps
 
 - [x] Run the starter and confirm the 6 OK checks (done 2026-10-08).
 - [ ] Fill in `TEAM_PLAN.docx` (members, roles still unknown). Draft answers are in `docs/strategy.html`.
-- [ ] Download "Áreas naturales protegidas" Colección 4 → log → check number.
-- [ ] Replace the example last row of `DOWNLOAD_LOG.csv`.
-- [ ] Describe → Compare (+ displacement, placebo, persistence) → optional event study.
-- [ ] Open and cite MAAP #130, #193, #208, #241 with page/figure (each team member opens what they cite).
+- [x] Download "Áreas naturales protegidas" Colección 4 → log → check number (overnight 2026-10-10; platform shows 777 ha = file 776.9 ha).
+- [x] Replace the example last row of `DOWNLOAD_LOG.csv` (overnight run).
+- [x] Describe → Compare (+ displacement, placebo, persistence) → event study (overnight run, `code/`; **team must review**).
+- [ ] Open and cite MAAP #130, #193, #208, #241 with page/figure (each team member opens what they cite). Quotes + locations drafted in `docs/overnight/notes/maap_citations.md`; raw HTML still needs a browser "Save as" (site blocks scripts).
+- [ ] Review `docs/overnight/REPORT.html` (draft) and decide the brief figure (`output/fig_brief_main.png` proposed).
+
+## 14. Overnight run 2026-10-10/11 (branch `analysis/overnight-2026-10-10`; DRAFT, needs team review)
+
+Full story in `docs/overnight/LOG.md` (decisions D1–D11+) and `docs/overnight/REPORT.html`. Run: `uv run python code/main.py` → `output/` (+ `output/numbers.csv`, `output/checks.csv`).
+
+**New data (all in `DOWNLOAD_LOG.csv`, raw files in `data_raw/<source>/`):**
+| Data | Collection / version | Check |
+|---|---|---|
+| MapBiomas Peru ANP statistics `MAPBIOMAS-PERU-LULC-COL4-AREAS-PROTEGIDAS.xlsx` (sheet COVERAGE_4, ANP name `territory_level_2_1`, category `_3_1`, mining class 30 "4.2. Minería") | Collection 4 | Tambopata NR mining 2025 = 776.9 ha; platform shows 777 ha (screenshot) |
+| MapBiomas Brazil coverage by indigenous territory (Dataverse doi:10.58053/MapBiomas/1F2TLA), class 30 = 4.3 Mining, all mining (no garimpo split per territory); identify by `geocode`, sum state/biome rows | Collection 10.1, to 2024 | Kayapó 2024 = 18,176 ha; platform shows only Col 11 (17,632 ha) → collection difference. No Col 11 per-territory file published (checked 2026-10-11) |
+| IBAMA autos de infração (zip, 117 MB, git-ignored) | download 2026-10-10 | no total on IBAMA site; intermediate `data_intermediate/ibama_autos_annual.csv` |
+| INPE DETER class MINERACAO (WFS) + FUNAI TI polygons | 2016–2026 | 2019 total 105.64 km² vs dashboard 105.40 km² |
+| BCRP (source MINEM) declared gold production, Madre de Dios | 2001–2025 | monthly sums = annual |
+| Amazon Mining Watch patches (source.coop, 112 MB, git-ignored), SERNANP ANP/BZ, FUNAI TIs, INGEMMET D.L. 1100 corridor | current | prototype only |
+
+**Decisions made overnight (see LOG.md for alternatives):** buffer-zone units sum ALL department rows (reproduces the card; §10's 1,638/284 were MdD rows only); event-study pool A = Tambopata + Amarakaeri + Bahuaja-Sonene BZ, inference by placebo-in-space rank, not clustered SEs; event markers at Y − 0.5; Brazil DiD in ha AND % of 2022 stock; Kayapó = best Brazil control (Munduruku treated Aug 2023, Nov 2024).
+
+**Headline descriptive results (numbers from `output/numbers.csv`):** Peru DiD −1,762 ha/yr (placebo +209; persistence −737 vs Amarakaeri, ≈0 vs all buffer zones); Tambopata ranks 1/15 in placebo-in-space; Madre de Dios total additions 3,610 → 4,640 → 12,049 ha/yr (2016–18 / 2019–21 / 2022–25), so no regional fall; Tambopata NR (inside) +241 ha in 2025; declared MdD gold production −88% 2018→2025 while mapped area 50,506 → 112,622 ha. Brazil: Yanomami additions 1,617 (2022) → 824 (2023) → 179 ha (2024), but Kayapó and Munduruku also fell, so the 2×2 is inconclusive (sign flips with scaling); IBAMA Legal Amazon autos 6,920/yr (2015–18) → 4,359/yr (2019–22) → 7,907 (2023).
+
+**New facts from sources (cite the source, not this file):** MAAP #193: 148 → 598 dredges in La Pampa (2021 → 2023; the page's "more than 400%" is really +304%, cite the counts). MAAP #208: 74% of 2021–24 mining deforestation in MdD was inside the legal corridor. MAAP #241: 500 ha inside Tambopata NR (431 ha H2 2025 + 69 ha to Feb 2026); navy withdrawn from Malinowski posts in 2025. Nunes et al. 2024 (Sci. Rep., doi:10.1038/s41598-024-52180-7): embargoes −59% and confiscations −55% in 2019–2020. Munduruku operation from Aug 2023, desintrusão Nov 2024; Kayapó desintrusão May 2025 (search snippets only, verify).
