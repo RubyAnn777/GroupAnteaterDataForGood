@@ -1,0 +1,110 @@
+region,unit,year,new_ha
+Peru zone,Mining corridor (DL 1100),2018,59424
+Peru zone,Mining corridor (DL 1100),2019,15746
+Peru zone,Mining corridor (DL 1100),2020,17298
+Peru zone,Mining corridor (DL 1100),2021,14624
+Peru zone,Mining corridor (DL 1100),2022,11943
+Peru zone,Mining corridor (DL 1100),2023,11464
+Peru zone,Mining corridor (DL 1100),2024,10012
+Peru zone,Mining corridor (DL 1100),2025,8979
+Peru zone,Mining corridor (DL 1100),2026,6655
+Peru zone,Other ANP,2020,23
+Peru zone,Other buffer zones,2018,5299
+Peru zone,Other buffer zones,2019,1157
+Peru zone,Other buffer zones,2020,1183
+Peru zone,Other buffer zones,2021,811
+Peru zone,Other buffer zones,2022,1036
+Peru zone,Other buffer zones,2023,1479
+Peru zone,Other buffer zones,2024,1356
+Peru zone,Other buffer zones,2025,879
+Peru zone,Other buffer zones,2026,1038
+Peru zone,Outside all (rest of box),2018,13113
+Peru zone,Outside all (rest of box),2019,3643
+Peru zone,Outside all (rest of box),2020,4128
+Peru zone,Outside all (rest of box),2021,3500
+Peru zone,Outside all (rest of box),2022,2495
+Peru zone,Outside all (rest of box),2023,2673
+Peru zone,Outside all (rest of box),2024,1962
+Peru zone,Outside all (rest of box),2025,3287
+Peru zone,Outside all (rest of box),2026,2348
+Peru zone,Tambopata NR (core),2018,1463
+Peru zone,Tambopata NR (core),2019,64
+Peru zone,Tambopata NR (core),2020,46
+Peru zone,Tambopata NR (core),2021,46
+Peru zone,Tambopata NR (core),2022,6
+Peru zone,Tambopata NR (core),2023,12
+Peru zone,Tambopata NR (core),2024,35
+Peru zone,Tambopata NR (core),2025,640
+Peru zone,Tambopata NR (core),2026,1458
+Peru zone,Tambopata buffer zone,2018,21352
+Peru zone,Tambopata buffer zone,2019,2370
+Peru zone,Tambopata buffer zone,2020,1708
+Peru zone,Tambopata buffer zone,2021,985
+Peru zone,Tambopata buffer zone,2022,675
+Peru zone,Tambopata buffer zone,2023,1147
+Peru zone,Tambopata buffer zone,2024,1708
+Peru zone,Tambopata buffer zone,2025,2057
+Peru zone,Tambopata buffer zone,2026,3218
+Peru La Pampa ring,0-10 km,2018,2064
+Peru La Pampa ring,0-10 km,2019,991
+Peru La Pampa ring,0-10 km,2020,767
+Peru La Pampa ring,0-10 km,2021,772
+Peru La Pampa ring,0-10 km,2022,772
+Peru La Pampa ring,0-10 km,2023,524
+Peru La Pampa ring,0-10 km,2024,776
+Peru La Pampa ring,0-10 km,2025,84
+Peru La Pampa ring,0-10 km,2026,79
+Peru La Pampa ring,10-25 km,2018,27866
+Peru La Pampa ring,10-25 km,2019,5241
+Peru La Pampa ring,10-25 km,2020,3966
+Peru La Pampa ring,10-25 km,2021,2997
+Peru La Pampa ring,10-25 km,2022,1608
+Peru La Pampa ring,10-25 km,2023,1907
+Peru La Pampa ring,10-25 km,2024,872
+Peru La Pampa ring,10-25 km,2025,1024
+Peru La Pampa ring,10-25 km,2026,927
+Peru La Pampa ring,25-50 km,2018,35915
+Peru La Pampa ring,25-50 km,2019,7853
+Peru La Pampa ring,25-50 km,2020,9399
+Peru La Pampa ring,25-50 km,2021,7371
+Peru La Pampa ring,25-50 km,2022,6108
+Peru La Pampa ring,25-50 km,2023,7748
+Peru La Pampa ring,25-50 km,2024,7895
+Peru La Pampa ring,25-50 km,2025,4951
+Peru La Pampa ring,25-50 km,2026,5599
+Yanomami ring,inside Yanomami TI,2018,1537
+Yanomami ring,inside Yanomami TI,2019,2324
+Yanomami ring,inside Yanomami TI,2020,1093
+Yanomami ring,inside Yanomami TI,2021,3054
+Yanomami ring,inside Yanomami TI,2022,8683
+Yanomami ring,inside Yanomami TI,2023,4012
+Yanomami ring,inside Yanomami TI,2024,502
+Yanomami ring,inside Yanomami TI,2025,193
+Yanomami ring,inside Yanomami TI,2026,41
+Yanomami ring,outside 0-10 km,2018,1294
+Yanomami ring,outside 0-10 km,2019,70
+Yanomami ring,outside 0-10 km,2020,87
+Yanomami ring,outside 0-10 km,2021,380
+Yanomami ring,outside 0-10 km,2022,925
+Yanomami ring,outside 0-10 km,2023,439
+Yanomami ring,outside 0-10 km,2024,252
+Yanomami ring,outside 0-10 km,2025,53
+Yanomami ring,outside 0-10 km,2026,175
+Yanomami ring,outside 10-25 km,2018,1806
+Yanomami ring,outside 10-25 km,2019,87
+Yanomami ring,outside 10-25 km,2020,245
+Yanomami ring,outside 10-25 km,2021,348
+Yanomami ring,outside 10-25 km,2022,152
+Yanomami ring,outside 10-25 km,2023,355
+Yanomami ring,outside 10-25 km,2024,152
+Yanomami ring,outside 10-25 km,2025,462
+Yanomami ring,outside 10-25 km,2026,274
+Yanomami ring,outside 25-50 km,2018,4232
+Yanomami ring,outside 25-50 km,2019,519
+Yanomami ring,outside 25-50 km,2020,139
+Yanomami ring,outside 25-50 km,2021,450
+Yanomami ring,outside 25-50 km,2022,152
+Yanomami ring,outside 25-50 km,2023,128
+Yanomami ring,outside 25-50 km,2024,181
+Yanomami ring,outside 25-50 km,2025,661
+Yanomami ring,outside 25-50 km,2026,338
