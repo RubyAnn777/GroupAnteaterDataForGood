@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Força todos os recursos a carregarem em HTTPS (resolve "conteúdo misto") -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="description" content="Datos estadísticos de la Colección 3 de MapBiomas Perú">
+    <link rel="icon" href="https://peru.mapbiomas.org/wp-content/themes/mapbiomas_Peru/assets/img/favicons/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://peru.mapbiomas.org/wp-content/themes/mapbiomas_Peru/assets/img/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://peru.mapbiomas.org/wp-content/themes/mapbiomas_Peru/assets/img/favicons/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://peru.mapbiomas.org/wp-content/themes/mapbiomas_Peru/assets/img/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="https://peru.mapbiomas.org/wp-content/themes/mapbiomas_Peru/assets/img/favicons/favicon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="https://peru.mapbiomas.org/wp-content/themes/mapbiomas_Peru/assets/img/favicons/favicon-512x512.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts: carregamento não-bloqueante (não trava a renderização) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"></noscript>
+    <!-- Swiper CSS: carregamento não-bloqueante -->
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
+    <title>Estadísticas &#8211; MapBiomas Perú</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//unpkg.com' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://peru.mapbiomas.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fperu.mapbiomas.org%2Fdescargas%2Festadisticas%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://peru.mapbiomas.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fperu.mapbiomas.org%2Fdescargas%2Festadisticas%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+<link rel='stylesheet' id='dashicons-css' href='https://peru.mapbiomas.org/wp-includes/css/dashicons.min.css?ver=7.1.3' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='leaflet-css-css' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css?ver=1.9.4' media='all' />
+<link rel='stylesheet' id='mbmap-style-css' href='https://peru.mapbiomas.org/wp-content/plugins/mapbiomasmap/assets/mbmap.css?ver=2.2.1' media='all' />
+<link rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='foundation-icons-css' href='https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css?ver=3.0.0' media='all' />
+<link rel='stylesheet' id='mapbiomas-style-css' href='https://peru.mapbiomas.org/wp-content/themes/mapbiomas_Peru/style.css?ver=1787063690' media='all' />
+<link rel='stylesheet' id='trp-language-switcher-v2-css' href='https://peru.mapbiomas.org/wp-content/plugins/translatepress-multilingual/assets/css/trp-language-switcher-v2.css?ver=3.3.7' media='all' />
+<script id="mbmap-translate-js-extra">
+var MBTR = {"endpoint":"https://peru.mapbiomas.org/wp-json/mbmap-translate/v1/translate","nonce":"ad9eaa1f91","langs":["en","es","fr","id"]};
+//# sourceURL=mbmap-translate-js-extra
+</script>
+<script id="mbmap-translate-js" src="https://peru.mapbiomas.org/wp-content/plugins/mapbiomas-translate/assets/translate.js?ver=1.0.0"></script>
+<script id="trp-language-switcher-js-v2-js" src="https://peru.mapbiomas.org/wp-content/plugins/translatepress-multilingual/assets/js/trp-frontend-language-switcher.js?ver=3.3.7"></script>
+<link rel="https://api.w.org/" href="https://peru.mapbiomas.org/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://peru.mapbiomas.org/wp-json/wp/v2/pages/2132" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://peru.mapbiomas.org/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1.3" />
+<link rel="canonical" href="https://peru.mapbiomas.org/descargas/estadisticas/" />
+<link rel='shortlink' href='https://peru.mapbiomas.org/?p=2132' />
+<meta name="generator" content="Redux 4.5.15" /><link rel="alternate" hreflang="en-US" href="https://peru.mapbiomas.org/descargas/estadisticas/"/>
+<link rel="alternate" hreflang="en" href="https://peru.mapbiomas.org/descargas/estadisticas/"/>
+<meta name="redi-version" content="1.3.0" /><style id="uagb-style-frontend-2132">.uag-blocks-common-selector{z-index:var(--z-index-desktop) !important}@media(max-width: 976px){.uag-blocks-common-selector{z-index:var(--z-index-tablet) !important}}@media(max-width: 767px){.uag-blocks-common-selector{z-index:var(--z-index-mobile) !important}}</style><link rel="icon" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/cropped-apple-touch-icon-1-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/cropped-apple-touch-icon-1-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/cropped-apple-touch-icon-1-180x180.png" />
+<meta name="msapplication-TileImage" content="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/cropped-apple-touch-icon-1-270x270.png" />
+  </head>
+  
+  <style>
+  	.mega-panel__inner {
+		overflow: hidden;
+    }
+    .mega-item__desc {
+    	white-space: break-spaces;
+    }
+  </style>
+  
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const mobileMenuItems = document.querySelectorAll(
+            '.main-navigation .menu > li.has-mega > a'
+        );
+        mobileMenuItems.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                if (window.innerWidth > 1199) {
+                    return;
+                }
+                const parent = this.parentElement;
+                event.preventDefault();
+                document
+                    .querySelectorAll('.main-navigation .menu > li.has-mega.mobile-open')
+                    .forEach(function (item) {
+                        if (item !== parent) {
+                            item.classList.remove('mobile-open');
+                        }
+                    });
+                parent.classList.toggle('mobile-open');
+            });
+        });
+    });
+   </script>
+
+  <body class="wp-singular page-template page-template-material-download page-template-material-download-php page page-id-2132 page-child parent-pageid-33 wp-theme-mapbiomas_Peru translatepress-en_US">
+        <!-- HEADER -->
+    <header class="header" data-aos="fade-down">
+    <div class="container">
+        <div class="header__inner">
+            <div class="branding" translate="no">
+                <a class="logo-link" href="https://peru.mapbiomas.org/">
+                                                <img
+                                class="logo"
+                                src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/peru-es-horizontal-1.png"
+                                alt="peru-es-horizontal (1)"
+                                width="186"
+                                height="47"
+                            />
+                                    </a>
+            </div>
+            <nav class="main-navigation" aria-label="Menú principal">
+                <ul id="menu-menu" class="menu"><li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30 has-mega"><a href="https://peru.mapbiomas.org/conoce-mapbiomas/">Conoce MapBiomas</a><div class="mega-panel"><div class="mega-panel__inner"><span class="mega-panel__label">Conoce MapBiomas</span><div class="mega-panel__grid"><a class="mega-item" href="https://peru.mapbiomas.org/conoce-mapbiomas/#sobre"><span class="mega-item__icon" style="background:#D1FAE5;color:#065F46;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Sobre MapBiomas</span><span class="mega-item__desc">Quiénes somos y qué hacemos.</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/conoce-mapbiomas/#equipes"><span class="mega-item__icon" style="background:#CCFBF1;color:#0F766E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Coordinación y equipos</span><span class="mega-item__desc">Las personas e instituciones de MapBiomas.</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/conoce-mapbiomas/#linha-do-tempo"><span class="mega-item__icon" style="background:#DCFCE7;color:#166534;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Línea de tiempo</span><span class="mega-item__desc">La trayectoria del proyecto.</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/conoce-mapbiomas/#faq"><span class="mega-item__icon" style="background:#FEF3C7;color:#92400E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Preguntas frecuentes</span><span class="mega-item__desc">Respuestas a tus preguntas sobre MapBiomas.</span></span></a></div></div></div></li>
+<li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36 has-mega"><a href="https://peru.mapbiomas.org/iniciativas-y-productos/">Iniciativas y productos</a><div class="mega-panel"><div class="mega-panel__inner"><span class="mega-panel__label">Iniciativas y productos</span><div class="mega-panel__grid"><a class="mega-item mega-item--nodesc" href="https://peru.mapbiomas.org/iniciativas-y-productos/metodologia-mapbiomas/"><span class="mega-item__icon" style="background:#D1FAE5;color:#065F46;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21V13C15 12.7348 14.8946 12.4804 14.7071 12.2929C14.5196 12.1054 14.2652 12 14 12H10C9.73478 12 9.48043 12.1054 9.29289 12.2929C9.10536 12.4804 9 12.7348 9 13V21M3 10C2.99993 9.70907 3.06333 9.42162 3.18579 9.15771C3.30824 8.89381 3.4868 8.65979 3.709 8.472L10.709 2.473C11.07 2.16791 11.5274 2.00052 12 2.00052C12.4726 2.00052 12.93 2.16791 13.291 2.473L20.291 8.472C20.5132 8.65979 20.6918 8.89381 20.8142 9.15771C20.9367 9.42162 21.0001 9.70907 21 10V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V10Z"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Metodología MapBiomas</span></span></a><a class="mega-item mega-item--nodesc" href="https://peru.mapbiomas.org/iniciativas-y-productos/cobertura-y-uso-del-suelo/"><span class="mega-item__icon" style="background:rgba(63,163,77,0.12);color:#3fa34d;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(2 2)"><path d="M5.83349 13.3333L5.83349 18.3333M10.8335 15.8333V18.3333M10.0002 15.8333H16.9168C17.0799 15.831 17.2388 15.7809 17.3737 15.6892C17.5086 15.5975 17.6136 15.4682 17.6757 15.3174C17.7378 15.1665 17.7543 15.0008 17.7231 14.8407C17.6919 14.6806 17.6144 14.5331 17.5002 14.4167L15.0002 11.6667H15.2502C15.4133 11.6644 15.5721 11.6143 15.707 11.5225C15.8419 11.4308 15.9469 11.3015 16.009 11.1507C16.0711 10.9999 16.0876 10.8341 16.0564 10.674C16.0252 10.5139 15.9477 10.3665 15.8335 10.25L13.3335 7.5H13.5002C13.6704 7.51535 13.8412 7.478 13.9895 7.39301C14.1377 7.30802 14.2563 7.1795 14.329 7.02487C14.4018 6.87023 14.4253 6.69696 14.3963 6.52854C14.3672 6.36013 14.2871 6.2047 14.1668 6.08333L10.8335 2.5L9.66683 3.75M8.33349 8.33333V8.5C8.88001 8.71017 9.33543 9.1055 9.62031 9.61707C9.9052 10.1286 10.0015 10.724 9.89238 11.2992C9.78327 11.8745 9.4757 12.3933 9.02329 12.765C8.57088 13.1367 8.00235 13.3379 7.41683 13.3333H4.16683C3.5883 13.3189 3.03269 13.1043 2.59475 12.726C2.15681 12.3477 1.86368 11.8292 1.76536 11.2589C1.66703 10.6886 1.7696 10.1018 2.05557 9.59873C2.34154 9.09562 2.79319 8.7073 3.33349 8.5V8.33333C3.33349 7.67029 3.59689 7.03441 4.06573 6.56557C4.53457 6.09673 5.17045 5.83333 5.83349 5.83333C6.49654 5.83333 7.13242 6.09673 7.60126 6.56557C8.0701 7.03441 8.33349 7.67029 8.33349 8.33333Z"/></g></svg></span><span class="mega-item__body"><span class="mega-item__title">Cobertura y uso del suelo</span></span></a><a class="mega-item mega-item--nodesc" href="https://peru.mapbiomas.org/iniciativas-y-productos/agua/"><span class="mega-item__icon" style="background:rgba(74,144,217,0.12);color:#4a90d9;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5 1.5 1.2 2 3.5 2 5.5a6 6 0 0 1-11 3.4"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Agua</span></span></a><a class="mega-item mega-item--nodesc" href="https://peru.mapbiomas.org/iniciativas-y-productos/fuego/"><span class="mega-item__icon" style="background:rgba(239,106,42,0.12);color:#ef6a2a;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Fuego</span></span></a></div></div></div></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor menu-item-35 has-mega"><a href="https://peru.mapbiomas.org/descargas/">Descargas</a><div class="mega-panel"><div class="mega-panel__inner"><span class="mega-panel__label">Descargas</span><div class="mega-panel__grid"><a class="mega-item" href="https://peru.mapbiomas.org/descargas/mapbiomas-fuego/"><span class="mega-item__icon" style="background:rgba(59,125,216,0.12);color:#3B7DD8;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/MapBiomas-Fuego-400x300-1.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">MapBiomas Fuego</span><span class="mega-item__desc">Acceso a los Mapas y Datos de MapBiomas Fuego</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/descargas/mapas-de-referencia/"><span class="mega-item__icon" style="background:rgba(71,168,107,0.12);color:#47A86B;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/icon_referencia.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">Mapas de referencia</span><span class="mega-item__desc">Referencias externas utilizadas en las colecciones de MapBiomas Perú</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/descargas/mosaicos-landsat/"><span class="mega-item__icon" style="background:rgba(59,125,216,0.12);color:#3B7DD8;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/icon_mosaico.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">Mosaicos Landsat</span><span class="mega-item__desc">Mosaicos de imágenes de satélite Landsat para cada año desde 1985</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/descargas/mapa-mural/"><span class="mega-item__icon" style="background:rgba(71,168,107,0.12);color:#47A86B;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/icon_mapamural.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">Mapa Mural</span><span class="mega-item__desc">Mapa detallado de cobertura y uso del suelo para Perú en 2024</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/descargas/infografias/"><span class="mega-item__icon" style="background:rgba(59,125,216,0.12);color:#3B7DD8;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/icon_infografico.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">Infografías</span><span class="mega-item__desc">Materiales gráficos con la dinámica del cambio de cobertura y usos</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/descargas/hallazgos-onesheet/"><span class="mega-item__icon" style="background:rgba(59,125,216,0.12);color:#3B7DD8;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/Screenshot-2025-10-29-at-17.01.45-400x300-1.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">Hallazgos (Onesheet)</span><span class="mega-item__desc">Hallazgos resumidos en una página, por iniciativa</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/descargas/hallazgos-factsheet/"><span class="mega-item__icon" style="background:rgba(59,125,216,0.12);color:#3B7DD8;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/unnamed-2-400x300-1.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">Hallazgos (Factsheet)</span><span class="mega-item__desc">Principales destaques sobre los datos</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/descargas/informacion-de-las-leyendas/"><span class="mega-item__icon" style="background:rgba(59,125,216,0.12);color:#3B7DD8;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/icon_leyenda.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">Información de las Leyendas</span><span class="mega-item__desc">Códigos de la leyenda de la Colección 3 de MapBiomas Perú</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/descargas/estadisticas/"><span class="mega-item__icon" style="background:rgba(59,125,216,0.12);color:#3B7DD8;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/icon_estadistica.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">Estadísticas</span><span class="mega-item__desc">Datos estadísticos de la Colección 3 de MapBiomas Perú</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/descargas/mapas-de-las-colecciones/"><span class="mega-item__icon" style="background:rgba(71,168,107,0.12);color:#47A86B;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/icon_cobertura_uso.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">Mapas de las Colecciones</span><span class="mega-item__desc">Todos los mapas generados por MapBiomas Perú</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/descargas/capas/"><span class="mega-item__icon" style="background:rgba(59,125,216,0.12);color:#3B7DD8;"><img src="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/IMG_Downloads__1_.png" alt="" loading="lazy"></span><span class="mega-item__body"><span class="mega-item__title">Capas</span><span class="mega-item__desc">Descargue los shapefiles disponibles en la plataforma de mapas, según las respectivas&hellip;</span></span></a></div></div></div></li>
+<li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45 has-mega"><a href="https://peru.mapbiomas.org/plataforma/">Plataforma</a><div class="mega-panel"><div class="mega-panel__inner"><span class="mega-panel__label">Plataforma</span><div class="mega-panel__grid"><a class="mega-item" href="https://plataforma.mapbiomas.org/projects/mapbiomas/peru"><span class="mega-item__icon" style="background:#D1FAE5;color:#065F46;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Plataforma MapBiomas</span><span class="mega-item__desc">Iniciativas Cobertura y Uso, Agua y Fuego</span></span></a><a class="mega-item" href="https://plataforma.peru.alerta.mapbiomas.org/mapa?monthRange%5B0%5D=2019-01&#038;monthRange%5B1%5D=2020-03&#038;sources%5B0%5D=All&#038;territoryType=all&#038;authorization=all&#038;embargoed=all&#038;embargoedAlerta=all&#038;embargoedRuralProperty=all&#038;locationType=alert_code&#038;activeBaseMap=2&#038;map=-12.845277%2C-69.609375%2C4"><span class="mega-item__icon" style="background:#CCFBF1;color:#0F766E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Plataforma MapBiomas Alerta</span><span class="mega-item__desc">Sistema de validación y refinamiento de alertas de deforestación</span></span></a><a class="mega-item" href="https://acuracia.znapp.com.br/peru"><span class="mega-item__icon" style="background:#DCFCE7;color:#166534;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Plataforma Validación</span><span class="mega-item__desc">Validación del producto Cobertura y Uso - Colección 4</span></span></a></div></div></div></li>
+<li id="menu-item-46" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46 has-mega"><a href="https://peru.mapbiomas.org/comunicacion/">Comunicación</a><div class="mega-panel"><div class="mega-panel__inner"><span class="mega-panel__label">Comunicación</span><div class="mega-panel__grid"><a class="mega-item" href="https://peru.mapbiomas.org/comunicacion/#noticias"><span class="mega-item__icon" style="background:#D1FAE5;color:#065F46;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Noticias</span><span class="mega-item__desc">Últimas noticias y novedades.</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/comunicacion/#eventos"><span class="mega-item__icon" style="background:#CCFBF1;color:#0F766E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Eventos</span><span class="mega-item__desc">Próximos eventos y webinarios.</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/comunicacion/#materiais"><span class="mega-item__icon" style="background:#DCFCE7;color:#166534;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Materiales y publicaciones</span><span class="mega-item__desc">Artículos, informes, guías, infografías.</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/comunicacion/#manual"><span class="mega-item__icon" style="background:#FEF3C7;color:#92400E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Manual de marca</span><span class="mega-item__desc">Logos y lineamientos de uso.</span></span></a><a class="mega-item" href="https://peru.mapbiomas.org/comunicacion/#contato"><span class="mega-item__icon" style="background:#DBEAFE;color:#1E40AF;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Contacto</span><span class="mega-item__desc">Contacta a nuestro equipo.</span></span></a></div></div></div></li>
+<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47 has-mega"><a href="https://peru.mapbiomas.org/uso-de-los-datos/">Uso de los datos</a><div class="mega-panel"><div class="mega-panel__inner"><span class="mega-panel__label">Uso de los datos</span><div class="mega-panel__grid"><a class="mega-item" href="https://peru.mapbiomas.org/premio/"><span class="mega-item__icon" style="background:#D1FAE5;color:#065F46;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.453 15h11.094"/><path d="M8.5 2h7"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Premio MapBiomas</span><span class="mega-item__desc">Reconoce el uso de los datos de MapBiomas Perú en investigaciones y políticas públicas.</span></span></a></div></div></div></li>
+<li id="menu-item-48" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48 has-mega"><a href="https://peru.mapbiomas.org/preguntas-frecuentes-faq/">FAQ</a><div class="mega-panel"><div class="mega-panel__inner"><span class="mega-panel__label">FAQ</span><div class="mega-panel__grid"><a class="mega-item mega-item--nodesc" href="https://peru.mapbiomas.org/preguntas-frecuentes-faq/?tema=red"><span class="mega-item__icon" style="background:#D1FAE5;color:#065F46;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Red</span></span></a><a class="mega-item mega-item--nodesc" href="https://peru.mapbiomas.org/preguntas-frecuentes-faq/?tema=concepto"><span class="mega-item__icon" style="background:#CCFBF1;color:#0F766E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Concepto</span></span></a><a class="mega-item mega-item--nodesc" href="https://peru.mapbiomas.org/preguntas-frecuentes-faq/?tema=datos"><span class="mega-item__icon" style="background:#DCFCE7;color:#166534;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><span class="mega-item__body"><span class="mega-item__title">Datos</span></span></a></div></div></div></li>
+<li class="menu-item menu-item-global-mobile"><a href="https://mapbiomas.org" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>MapBiomas Global</a></li></ul>            </nav>
+            <div id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <a class="header__global" href="https://mapbiomas.org" target="_blank" rel="noopener" aria-label="Ir al sitio mundial de MapBiomas">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                <span>Mundial</span>
+            </a>
+
+            <div class="header__language" id="header-lang-switcher">
+                <button type="button" class="language-current active" aria-expanded="false" translate="no">
+                    <svg class="language-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                    <span class="country-name" id="lang-current-label">PT</span>
+                    <svg class="language-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+
+                <ul class="language-list">
+                                        <li class="language-item">
+                        <button type="button" class="language-option current" data-lang="pt" translate="no">
+                            <span class="language-label">Português</span>
+                        </button>
+                    </li>
+                                        <li class="language-item">
+                        <button type="button" class="language-option" data-lang="en" translate="no">
+                            <span class="language-label">English</span>
+                        </button>
+                    </li>
+                                        <li class="language-item">
+                        <button type="button" class="language-option" data-lang="es" translate="no">
+                            <span class="language-label">Español</span>
+                        </button>
+                    </li>
+                                        <li class="language-item">
+                        <button type="button" class="language-option" data-lang="fr" translate="no">
+                            <span class="language-label">Français</span>
+                        </button>
+                    </li>
+                                        <li class="language-item">
+                        <button type="button" class="language-option" data-lang="id" translate="no">
+                            <span class="language-label">Bahasa</span>
+                        </button>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </div>
+</header>
+    <main id="content">
+<section class="breadcrumb__title bg-color-blue">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9" data-aos="fade-left">
+                <ul class="breadcrumb">
+                    <li><a href="https://peru.mapbiomas.org/">Inicio</a></li>
+                    <li><a href="https://peru.mapbiomas.org/descargas/">Descargas</a></li>
+                    <li><span>Estadísticas</span></li>
+                </ul>
+                <h1 class="title">Estadísticas</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="dl-material" data-aos="fade-up">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+
+                <a href="https://peru.mapbiomas.org/descargas/" class="dl-back">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    Volver a Descargas                </a>
+
+                                <div class="dl-material__intro"><p><b id="docs-internal-guid-5a46ef99-7fff-dbfd-56ae-eae6034e5574" style="font-weight: normal"><span style="font-size: 11pt;font-family: Arial,sans-serif;color: #4b4d52;background-color: transparent;font-weight: 400;font-style: normal;font-variant: normal;text-decoration: none;vertical-align: baseline;white-space: pre-wrap">Aquí puede descargar la base de datos de las estadísticas de mapas de MapBiomas Perú</span></b></p>
+<p><b id="docs-internal-guid-a30d6780-7fff-2f8f-59e3-f6d309414379" style="font-weight: normal"><span style="font-size: 10.5pt;font-family: Arial,sans-serif;color: #4b4d52;background-color: transparent;font-weight: bold;font-style: normal;font-variant: normal;text-decoration: none;vertical-align: baseline;white-space: pre-wrap">COBERTURA Y TRANSICIONES</span><span style="font-size: 10.5pt;font-family: Arial,sans-serif;color: #4b4d52;background-color: transparent;font-weight: 400;font-style: normal;font-variant: normal;text-decoration: none;vertical-align: baseline;white-space: pre-wrap">: Datos de superficie (ha) por clase de cobertura o uso del suelo</span></b></p>
+<p><b id="docs-internal-guid-13e975d1-7fff-5686-fe71-02e5d3513cd3" style="font-weight: normal"><span style="font-size: 10.5pt;font-family: Arial,sans-serif;color: #4b4d52;background-color: transparent;font-weight: bold;font-style: normal;font-variant: normal;text-decoration: none;vertical-align: baseline;white-space: pre-wrap">PÉRDIDA Y VEGETACIÓN SECUNDÁRIA: </span><span style="font-size: 10.5pt;font-family: Arial,sans-serif;color: #4b4d52;background-color: transparent;font-weight: 400;font-style: normal;font-variant: normal;text-decoration: none;vertical-align: baseline;white-space: pre-wrap">Datos de superficie (ha) de pérdida y vegetación secundaria</span></b><b id="docs-internal-guid-ed5fbbec-7fff-0641-e3fa-00877fae92c8" style="font-weight: normal"><span style="font-size: 11pt;font-family: Arial,sans-serif;color: #4b4d52;background-color: transparent;font-weight: bold;font-style: normal;font-variant: normal;text-decoration: none;vertical-align: baseline;white-space: pre-wrap"></span></b></p>
+</div>
+                
+                
+                <div class="dl-filters" data-dl-table>
+                                        <div class="dl-filter">
+                        <label>Colección</label>
+                        <select data-dl-filter="colecao">
+                            <option value="">Todas</option>
+                                                        <option value="Colección 2">Colección 2</option>
+                                                        <option value="Colección 3">Colección 3</option>
+                                                        <option value="Colección 4">Colección 4</option>
+                                                    </select>
+                    </div>
+                    
+                                        <div class="dl-filter">
+                        <label>Iniciativa / tema</label>
+                        <select data-dl-filter="iniciativa">
+                            <option value="">Todas</option>
+                                                        <option value="Cobertura y uso del suelo">Cobertura y uso del suelo</option>
+                                                        <option value="Vegetación secundaria">Vegetación secundaria</option>
+                                                    </select>
+                    </div>
+                    
+                    <div class="dl-filter dl-filter--search">
+                        <label>Buscar</label>
+                        <input type="text" data-dl-search placeholder="Buscar por nombre o descripción...">
+                    </div>
+                </div>
+
+                <div class="dl-table-wrap">
+                    <table class="dl-table">
+                        <thead>
+                            <tr>
+                                <th>Dato</th>
+                                <th>Descripción</th>
+                                <th>Colección</th>                                <th class="dl-table__actions-th">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="biomas estadísticas a nivel de bioma, 1985–2025. colección 4 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Biomas</td>
+                                <td class="dl-row__desc">Estadísticas a nivel de bioma, 1985–2025.</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/MAPBIOMAS-PERU-LULC-COL4-BIOMES.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="límites políticos estadísticas por límites políticos, 1985–2025. colección 4 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Límites políticos</td>
+                                <td class="dl-row__desc">Estadísticas por límites políticos, 1985–2025.</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/MAPBIOMAS-PERU-LULC-COL4-LIMITES-POLITICOS.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="cuencas hidrográficas estadísticas por cuencas hidrográficas, 1985-2025. colección 4 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Cuencas hidrográficas</td>
+                                <td class="dl-row__desc">Estadísticas por cuencas hidrográficas, 1985-2025.</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/MAPBIOMAS-PERU-LULC-COL4-CUENCAS.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="áreas naturales protegidas estadísticas por áreas naturales protegidas, 1985-2025. colección 4 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Áreas naturales protegidas</td>
+                                <td class="dl-row__desc">Estadísticas por áreas naturales protegidas, 1985-2025.</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/MAPBIOMAS-PERU-LULC-COL4-AREAS-PROTEGIDAS.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="zona de amortiguamiento estadísticas por zona de amortiguamiento, 1985-2025. colección 4 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Zona de amortiguamiento</td>
+                                <td class="dl-row__desc">Estadísticas por zona de amortiguamiento, 1985-2025.</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/MAPBIOMAS-PERU-LULC-COL4-ZONA-AMORTIGUAMIENTO.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="áreas de conservación privada estadísticas por áreas de conservación privada, 1985-2025. colección 4 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Áreas de conservación privada</td>
+                                <td class="dl-row__desc">Estadísticas por áreas de conservación privada, 1985-2025.</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/MAPBIOMAS-PERU-LULC-COL4-AREAS-CONSERVACION-PRIVADA.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="áreas de conservación regional estadísticas por áreas de conservación regional, 1985-2025. colección 4 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Áreas de conservación regional</td>
+                                <td class="dl-row__desc">Estadísticas por áreas de conservación regional, 1985-2025.</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/MAPBIOMAS-PERU-LULC-COL4-AREAS-CONSERVACION-REGIONAL-1.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="comunidades nativas tituladas estadísticas por comunidades nativas tituladas, 1985-2025. colección 4 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Comunidades nativas tituladas</td>
+                                <td class="dl-row__desc">Estadísticas por comunidades nativas tituladas, 1985-2025.</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                                                            </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="reserva de biosfera estadísticas por reserva de biosfera, 1985-2025. colección 4 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Reserva de biosfera</td>
+                                <td class="dl-row__desc">Estadísticas por reserva de biosfera, 1985-2025.</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/MAPBIOMAS-PERU-LULC-COL4-RESERVA-BIOSFERA.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Vegetación secundaria"
+                                data-search="vegetación secundaria datos de la superficie anual de vegetación primaria y secundaria colección 4 vegetación secundaria">
+                                <td class="dl-row__nome">Vegetación secundaria</td>
+                                <td class="dl-row__desc">Datos de la superficie anual de vegetación primaria y secundaria</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/MAPBIOMAS-PERU-LULC-COL4-VEGETACION-SECUNDARIA.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 4"
+                                data-iniciativa="Vegetación secundaria"
+                                data-search="perdida de vegetación pérdida anual de vegetación primaria y vegetación secundaria. colección 4 vegetación secundaria">
+                                <td class="dl-row__nome">Perdida de vegetación</td>
+                                <td class="dl-row__desc">Pérdida anual de vegetación primaria y vegetación secundaria.</td>
+                                                                <td><span class="dl-tag">Colección 4</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/09/MAPBIOMAS-PERU-LULC-COL4-PERDIDA-VEGETACION.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="biomas estadísticas a nivel de bioma, 1985–2024. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Biomas</td>
+                                <td class="dl-row__desc">Estadísticas a nivel de bioma, 1985–2024.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-BIOMES.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="límites políticos estadísticas por límites políticos. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Límites políticos</td>
+                                <td class="dl-row__desc">Estadísticas por límites políticos.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://storage.googleapis.com/mapbiomas-public/initiatives/peru/collection_3/statistics/MAPBIOMAS-PERU-LULC-COL3-LIMITES-POLITICOS.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="cuencas hidrográficas estadísticas por cuencas hidrográficas. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Cuencas hidrográficas</td>
+                                <td class="dl-row__desc">Estadísticas por cuencas hidrográficas.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-CUENCAS.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="áreas naturales protegidas estadísticas por áreas naturales protegidas. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Áreas naturales protegidas</td>
+                                <td class="dl-row__desc">Estadísticas por áreas naturales protegidas.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-AREAS-PROTEGIDAS.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="zona de amortiguamiento estadísticas por zona de amortiguamiento. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Zona de amortiguamiento</td>
+                                <td class="dl-row__desc">Estadísticas por zona de amortiguamiento.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-ZONA-AMORTIGUAMIENTO.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="áreas de conservación privada estadísticas por áreas de conservación privada. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Áreas de conservación privada</td>
+                                <td class="dl-row__desc">Estadísticas por áreas de conservación privada.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-AREAS-CONSERVACION-PRIVADA.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="áreas de conservación regional estadísticas por áreas de conservación regional. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Áreas de conservación regional</td>
+                                <td class="dl-row__desc">Estadísticas por áreas de conservación regional.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-AREAS-CONSERVACION-REGIONAL-1.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="comunidades nativas tituladas estadísticas por comunidades nativas tituladas. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Comunidades nativas tituladas</td>
+                                <td class="dl-row__desc">Estadísticas por comunidades nativas tituladas.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://storage.googleapis.com/mapbiomas-public/initiatives/peru/collection_3/statistics/MAPBIOMAS-PERU-LULC-COL3-CN-TITULADA.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="solicitudes para comunidades nativas estadísticas por solicitudes de ampliación/titulación. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Solicitudes para comunidades nativas</td>
+                                <td class="dl-row__desc">Estadísticas por solicitudes de ampliación/titulación.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-SOLICITUD-AMPLIACION-TITULACION.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="comunidades campesinas tituladas estadísticas por comunidades campesinas tituladas. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Comunidades campesinas tituladas</td>
+                                <td class="dl-row__desc">Estadísticas por comunidades campesinas tituladas.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://storage.googleapis.com/mapbiomas-public/initiatives/peru/collection_3/statistics/MAPBIOMAS-PERU-LULC-COL3-CC-TITULADA.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="comunidades campesinas reconocidas estadísticas por comunidades campesinas reconocidas. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Comunidades campesinas reconocidas</td>
+                                <td class="dl-row__desc">Estadísticas por comunidades campesinas reconocidas.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-COMUNIDAD-CAMPESINA-RECONOCIDA.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="reserva territorial estadísticas por reserva territorial. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Reserva territorial</td>
+                                <td class="dl-row__desc">Estadísticas por reserva territorial.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-RESERVA-TERRITORIAL.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="reserva indígena estadísticas por reserva indígena. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Reserva indígena</td>
+                                <td class="dl-row__desc">Estadísticas por reserva indígena.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-RESERVA-INDIGENA.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="reserva de biosfera estadísticas por reserva de biosfera. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Reserva de biosfera</td>
+                                <td class="dl-row__desc">Estadísticas por reserva de biosfera.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-RESERVA-BIOSFERA.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 3"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="ecozonas estadísticas por ecozona. colección 3 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Ecozonas</td>
+                                <td class="dl-row__desc">Estadísticas por ecozona.</td>
+                                                                <td><span class="dl-tag">Colección 3</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/14/2025/06/MAPBIOMAS-PERU-LULC-COL3-ECOZONA.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 2"
+                                data-iniciativa="Cobertura y uso del suelo"
+                                data-search="coberturas y transiciones estadísticas de coberturas y transiciones (colección 2). colección 2 cobertura y uso del suelo">
+                                <td class="dl-row__nome">Coberturas y transiciones</td>
+                                <td class="dl-row__desc">Estadísticas de coberturas y transiciones (Colección 2).</td>
+                                                                <td><span class="dl-tag">Colección 2</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://storage.googleapis.com/mapbiomas-public/initiatives/peru/collection_2/download/statistics_lulc_peru_col2.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                        <tr class="dl-row"
+                                data-colecao="Colección 2"
+                                data-iniciativa="Vegetación secundaria"
+                                data-search="pérdida de vegetación secundaria estadísticas de pérdida de vegetación secundaria. colección 2 vegetación secundaria">
+                                <td class="dl-row__nome">Pérdida de vegetación secundaria</td>
+                                <td class="dl-row__desc">Estadísticas de pérdida de vegetación secundaria.</td>
+                                                                <td><span class="dl-tag">Colección 2</span></td>
+                                                                <td class="dl-row__actions">
+                                                                                                            <a class="dl-act" href="https://peru.mapbiomas.org/wp-content/uploads/sites/6/2026/08/Estadisticas-Perdida-Vegetacion-Secundaria-Peru-Coleccion-2.0.xlsx" title="Descargar" target="_blank" rel="noopener noreferrer" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    </a>
+                                                                                                        </td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                    <p class="dl-empty" hidden>No hay resultados para los filtros aplicados.</p>
+                </div>
+
+                <div class="dl-pagination" data-dl-pagination></div>
+
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var table = document.querySelector('.dl-table');
+    if (!table) return;
+
+    var rows      = Array.prototype.slice.call(table.querySelectorAll('.dl-row'));
+    var selCol    = document.querySelector('[data-dl-filter="colecao"]');
+    var selIni    = document.querySelector('[data-dl-filter="iniciativa"]');
+    var search    = document.querySelector('[data-dl-search]');
+    var emptyMsg  = document.querySelector('.dl-empty');
+    var pager     = document.querySelector('[data-dl-pagination]');
+    var PER_PAGE  = 15;
+    var page      = 1;
+
+    function matches(row) {
+        if (selCol && selCol.value && row.dataset.colecao !== selCol.value) return false;
+        if (selIni && selIni.value && row.dataset.iniciativa !== selIni.value) return false;
+        if (search && search.value.trim()) {
+            var q = search.value.trim().toLowerCase();
+            if ((row.dataset.search || '').indexOf(q) === -1) return false;
+        }
+        return true;
+    }
+
+    function render() {
+        var visible = rows.filter(matches);
+        var pages   = Math.max(1, Math.ceil(visible.length / PER_PAGE));
+        if (page > pages) page = pages;
+        var start = (page - 1) * PER_PAGE;
+        var end   = start + PER_PAGE;
+
+        rows.forEach(function (r) { r.style.display = 'none'; });
+        visible.slice(start, end).forEach(function (r) { r.style.display = ''; });
+
+        if (emptyMsg) emptyMsg.hidden = visible.length !== 0;
+
+        // Paginação
+        pager.innerHTML = '';
+        if (pages > 1) {
+            var mk = function (label, target, disabled, active) {
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'dl-page' + (active ? ' is-active' : '');
+                b.textContent = label;
+                if (disabled) b.disabled = true;
+                else b.addEventListener('click', function () { page = target; render(); window.scrollTo({ top: table.getBoundingClientRect().top + window.pageYOffset - 120, behavior: 'smooth' }); });
+                return b;
+            };
+            pager.appendChild(mk('Anterior', page - 1, page === 1, false));
+            for (var p = 1; p <= pages; p++) pager.appendChild(mk(String(p), p, false, p === page));
+            pager.appendChild(mk('Siguiente', page + 1, page === pages, false));
+        }
+    }
+
+    if (selCol)  selCol.addEventListener('change', function () { page = 1; render(); });
+    if (selIni)  selIni.addEventListener('change', function () { page = 1; render(); });
+    if (search)  search.addEventListener('input',  function () { page = 1; render(); });
+
+    // Copiar
+    table.querySelectorAll('.dl-act--copy').forEach(function (btn) {
+
+        btn.addEventListener('click', function () {
+            var val = btn.getAttribute('data-copy') || '';
+            var done = function () {
+                btn.classList.add('is-copied');
+                setTimeout(function () { btn.classList.remove('is-copied'); }, 1500);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(val).then(done).catch(function () {});
+            } else {
+                var ta = document.createElement('textarea');
+                ta.value = val; document.body.appendChild(ta); ta.select();
+                try { document.execCommand('copy'); done(); } catch (e) {}
+                document.body.removeChild(ta);
+            }
+        });
+    });
+
+    render();
+});
+</script>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer> 
+    <div class="container">
+        <div class="footer-content-nav" data-aos="fade-up">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://peru.mapbiomas.org/wp-content/themes/mapbiomas_Peru/assets/img/logo-MapBiomas-10anos-header.svg" alt="MapBiomas Logo" width="273" height="69" />
+                    <p>La ciencia en cada píxel.</p>
+                </div>
+                <div class="footer-cc">
+                    <img src="https://peru.mapbiomas.org/wp-content/themes/mapbiomas_Peru/assets/img/cc-sticker-2007%201.png" alt="Creative Commons" width="67" height="66" />
+                    <p>Los datos de MapBiomas son de uso público, abierto y gratuito, sujetos a citación.<br> CC BY 4.0 →</p>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer-navigation" aria-label="Menú de pie de página Mapa del sitio">
+                    <h4>Mapa del sitio</h4>
+                    <ul id="menu-menu-mapa" class="footer-menu"><li id="menu-item-2161" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-2161"><a href="https://peru.mapbiomas.org/">Home</a></li>
+<li id="menu-item-2162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2162"><a href="https://peru.mapbiomas.org/conoce-mapbiomas/">Conoce MapBiomas</a></li>
+<li id="menu-item-2163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2163"><a href="https://peru.mapbiomas.org/iniciativas-y-productos/">Iniciativas y productos</a></li>
+<li id="menu-item-2164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2164"><a href="https://peru.mapbiomas.org/plataforma/">Plataforma</a></li>
+<li id="menu-item-2165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2165"><a href="https://peru.mapbiomas.org/comunicacion/">Comunicación</a></li>
+<li id="menu-item-2166" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2166"><a href="https://peru.mapbiomas.org/uso-de-los-datos/">Uso de los datos</a></li>
+<li id="menu-item-2167" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2167"><a href="https://peru.mapbiomas.org/preguntas-frecuentes-faq/">Preguntas frecuentes (FAQ)</a></li>
+</ul>                </nav>
+                <nav class="footer-navigation" aria-label="Menú de pie de página Contacto">
+                    <h4>Contacto</h4>
+                    <ul id="menu-menu-contato" class="footer-menu2"><li id="menu-item-2186" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2186"><a href="mailto:mapbiomas.peru@gmail.com">mapbiomas.peru@gmail.com</a></li>
+</ul>                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<section class="footer-info">
+    <div class="container">
+        <div class="footer-content">
+            <p>© 2026 Todos los derechos reservados.</p>
+            <div class="social">
+                <a href="https://www.youtube.com/@osfac" class="youtube" target="_blank" rel="noopener" aria-label="YouTube de MapBiomas"></a>
+                <!--
+                <a href="https://www.instagram.com/mapbiomasbrasil/" class="instagram" target="_blank" rel="noopener" aria-label="Instagram de MapBiomas"></a>
+                <a href="https://www.linkedin.com/company/mapbiomas/posts/?feedView=all" class="linkedin" target="_blank" rel="noopener" aria-label="LinkedIn de MapBiomas"></a>
+                <a href="https://x.com/mapbiomas" class="x" target="_blank" rel="noopener" aria-label="X (Twitter) de MapBiomas"></a>
+                <a href="https://www.facebook.com/mapbiomas/" class="facebook" target="_blank" rel="noopener" aria-label="Facebook de MapBiomas"></a>
+                -->
+                <a href="https://github.com/mapbiomas-peru " class="git" target="_blank" rel="noopener" aria-label="GitHub de MapBiomas"></a>
+                
+            </div>
+        </div>
+    </div>
+</section>
+    <template id="tp-language" data-tp-language="en_US"></template><script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/sites/6/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/mapbiomas_Peru/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="leaflet-js-js" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js?ver=1.9.4"></script>
+<script id="topojson-js-js" src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js?ver=3.1.0"></script>
+<script id="mbmap-script-js" src="https://peru.mapbiomas.org/wp-content/plugins/mapbiomasmap/assets/mbmap.js?ver=2.2.1"></script>
+<script id="mapbiomas-script-js" src="https://peru.mapbiomas.org/wp-content/themes/mapbiomas_Peru/script.js?ver=1787131679"></script>
+
+<nav
+    class="trp-language-switcher trp-floating-switcher trp-ls-dropdown trp-switcher-position-bottom"
+    style="--bg:#ffffff;--bg-hover:#0000000d;--text:#143852;--text-hover:#1d2327;--border:1px solid #1438521a;--border-radius:8px 8px 0px 0px;--flag-radius:2px;--flag-size:18px;--aspect-ratio:4/3;--font-size:14px;--switcher-width:auto;--switcher-padding:10px 0;--transition-duration:0.2s;--bottom:0px;--right:10vw"
+    role="navigation"
+    aria-label="Website language selector"
+    data-no-translation
+>
+    
+            <div class="trp-language-switcher-inner">
+            <div class="trp-language-item trp-language-item__current" title="English" role="button" tabindex="0" aria-expanded="false" aria-label="Change language" aria-controls="trp-switcher-dropdown-list" data-no-translation><img src="https://peru.mapbiomas.org/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/en_US.svg" class="trp-flag-image" alt="" role="presentation" loading="lazy" decoding="async" width="18" height="14" /><span class="trp-language-item-name">English</span></div>
+            <div
+                class="trp-switcher-dropdown-list"
+                id="trp-switcher-dropdown-list"
+                role="group"
+                aria-label="Available languages"
+                hidden
+                inert
+            >
+                            </div>
+        </div>
+
+    </nav>
+
+    <!-- Language Switcher — cookie + localStorage -->
+    <script>
+    (function () {
+        var LANG_KEY  = 'mbmap_lang';
+        var SUPPORTED = ['pt', 'en', 'es', 'fr', 'id'];
+        var LABELS    = { pt: 'PT', en: 'EN', es: 'ES', fr: 'FR', id: 'ID' };
+
+        function getCookieLang() {
+            var m = document.cookie.match(/(?:^|;\s*)mbmap_lang=([^;]+)/);
+            return (m && SUPPORTED.indexOf(m[1]) !== -1) ? m[1] : null;
+        }
+
+        function setCookieLang(lang) {
+            document.cookie = LANG_KEY + '=' + lang + '; path=/; max-age=31536000; SameSite=Lax';
+        }
+
+        function getCurrentLang() {
+            try {
+                var saved = localStorage.getItem(LANG_KEY);
+                if (saved && SUPPORTED.indexOf(saved) !== -1) return saved;
+            } catch (e) {}
+            return getCookieLang() || 'pt';
+        }
+
+        function init() {
+            var currentLang = getCurrentLang();
+
+            var cookieLang = getCookieLang();
+            if (cookieLang && cookieLang !== currentLang) currentLang = cookieLang;
+            try { localStorage.setItem(LANG_KEY, currentLang); } catch (e) {}
+
+            var label = document.getElementById('lang-current-label');
+            if (label) label.textContent = LABELS[currentLang] || currentLang.toUpperCase();
+
+            document.querySelectorAll('.language-option[data-lang]').forEach(function (btn) {
+                var lang = btn.getAttribute('data-lang');
+                if (lang === currentLang) btn.classList.add('current');
+
+                btn.addEventListener('click', function () {
+                    var headerLang = document.querySelector('.header__language');
+                    if (headerLang) headerLang.classList.remove('is-open');
+                    var langBtn = document.querySelector('.language-current');
+                    if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+
+                    var activeLang = getCookieLang() || 'pt';
+                    try {
+                        var stored = localStorage.getItem(LANG_KEY);
+                        if (stored && SUPPORTED.indexOf(stored) !== -1) activeLang = stored;
+                    } catch (e) {}
+
+                    if (lang === activeLang) return;
+
+                    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+                    setCookieLang(lang);
+                    location.reload();
+                });
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+    </script>
+
+    <!-- Expande largura do stat card quando o número é longo -->
+    <script>
+    (function () {
+        function fitStatCards() {
+            document.querySelectorAll('.stat-number[data-target]').forEach(function (el) {
+                var len = (el.getAttribute('data-target') || '').length;
+                var card = el.closest('.stat-item');
+                if (!card) return;
+                if (len >= 9)      { card.style.width = '290px'; card.style.paddingRight = '1.25rem'; }
+                else if (len >= 7) { card.style.width = '245px'; card.style.paddingRight = '1rem'; }
+            });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fitStatCards);
+        } else {
+            fitStatCards();
+        }
+    })();
+    </script>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Avis relatif aux cookies" aria-live="polite" style="display:none;">
+        <div class="cookie-banner__inner">
+            <p class="cookie-banner__text" id="cookie-banner-text"></p>
+            <div class="cookie-banner__actions">
+                <a id="cookie-banner-link" href="https://peru.mapbiomas.org/politica-de-privacidade/" class="cookie-banner__link" target="_blank" rel="noopener"></a>
+                <button id="cookie-banner-accept" class="cookie-banner__accept"></button>
+            </div>
+        </div>
+    </div>
+    <script>
+    (function () {
+        var COOKIE_KEY = 'mbmap_cookies_accepted';
+        var LANG_KEY   = 'mbmap_lang';
+        var SUPPORTED  = ['pt', 'en', 'es', 'fr', 'id'];
+
+        var T = {
+            pt: { text: 'Utilizamos cookies para melhorar sua experiência de navegação. Ao continuar, você concorda com nossa', link: 'Política de Privacidade', accept: 'Aceitar' },
+            en: { text: 'We use cookies to improve your browsing experience. By continuing, you agree to our', link: 'Privacy Policy', accept: 'Accept' },
+            es: { text: 'Utilizamos cookies para mejorar tu experiencia de navegación. Al continuar, aceptas nuestra', link: 'Política de Privacidad', accept: 'Aceptar' },
+            fr: { text: 'Nous utilisons des cookies pour améliorer votre navigation. En continuant, vous acceptez notre', link: 'Politique de Confidentialité', accept: 'Accepter' },
+            id: { text: 'Kami menggunakan cookie untuk meningkatkan pengalaman Anda. Dengan melanjutkan, Anda menyetujui', link: 'Kebijakan Privasi', accept: 'Terima' }
+        };
+
+        function getLang() {
+            try {
+                var s = localStorage.getItem(LANG_KEY);
+                if (s && SUPPORTED.indexOf(s) !== -1) return s;
+            } catch (e) {}
+            var nav = (navigator.language || 'pt').toLowerCase().split('-')[0];
+            return SUPPORTED.indexOf(nav) !== -1 ? nav : 'pt';
+        }
+
+        function init() {
+            try { if (localStorage.getItem(COOKIE_KEY)) return; } catch (e) { return; }
+
+            var lang = getLang();
+            var t    = T[lang] || T['pt'];
+
+            document.getElementById('cookie-banner-text').textContent   = t.text + ' ';
+            document.getElementById('cookie-banner-link').textContent   = t.link + '.';
+            document.getElementById('cookie-banner-accept').textContent = t.accept;
+
+            var banner = document.getElementById('cookie-banner');
+            banner.style.display = '';
+            setTimeout(function () { banner.classList.add('cookie-banner--visible'); }, 100);
+
+            document.getElementById('cookie-banner-accept').addEventListener('click', function () {
+                try { localStorage.setItem(COOKIE_KEY, '1'); } catch (e) {}
+                banner.classList.remove('cookie-banner--visible');
+                setTimeout(function () { banner.style.display = 'none'; }, 400);
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  </body>
+</html>
