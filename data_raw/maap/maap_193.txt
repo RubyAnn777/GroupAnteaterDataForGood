@@ -1,0 +1,31 @@
+RENDERED TEXT (not raw HTML) of https://www.maapprogram.org/es/retorno-mineria-la-pampa-peru/ , captured 2026-10-10 via Chrome get_page_text (<main>). Spanish only; no English version exists (the English-slug URL redirects to this page; the "English" switcher only links to the MAAP home page). Figure/image content not saved.
+MAAP #193: El Retorno de la Minería Aurífera Ilegal en Zonas Degradadas de la Pampa (Zona de Amortiguamiento de la Reserva Nacional de Tambopata)
+septiembre 28, 2023
+
+Pese a los esfuerzos del Estado peruano en combatir la minería aurífera ilegal en la Amazonía sudeste del Perú, lamentablemente, esta actividad persiste en Comunidades Nativas y Zonas de Amortiguamiento de Áreas Naturales Protegidas (ver MAAP #185).
+
+Un logro significativo, respaldado por evidencia documentada, de las acciones del gobierno peruano ha sido la importante disminución de la deforestación por minería ilegal en la zona crítica conocida como La Pampa. Esta área se encuentra en la zona de amortiguamiento de la Reserva Nacional Tambopata y se ha logrado a través de la exitosa Operación Mercurio a principios de 2019.
+
+Sin embargo, un análisis más detallado que utiliza imágenes de muy alta resolución (0.5 metros) muestra un significativo incremento de infraestructuras mineras y la actividad minera en áreas previamente deforestadas por la minería ilegal, las cuales habían sido recuperadas por el gobierno peruano tras la Operación Mercurio.
+
+En el presente reporte, mostramos un incremento alarmante de más de 400% en la cantidad de infraestructuras mineras en áreas degradadas de La Pampa respecto al año 2021. Además, por primera vez, presentamos un análisis de la actividad minera en pozas residuales, como un método indirecto que confirma la presencia de minería ilegal en dichas áreas previamente minadas.
+
+Incremento notable de infraestructuras mineras en La Pampa
+El Mapa Base compara la ubicación de dragas mineras en el interior de la zona de amortiguamiento de la Reserva Nacional de Tambopata entre 2021 (agosto y octubre) y 2023 (agosto).
+En el análisis de 2021, que coincidió con el fin de la Operación Mercurio e inicio del Plan Restauración, se identificaron 148 dragas remanentes en espacios degradados. Dos años después, en agosto de 2023, utilizando la misma tecnología, se han encontrado 598 dragas, un aumento de más del 400%. Este hallazgo demuestra el retorno de la minería ilegal en la zona de La Pampa.
+Basándonos en la cantidad y tipo de dragas encontradas, aplicamos un factor de conversión para estimar el número de personas ... (4 personas por draga). En 2021, se estimaron 592 personas, mientras que en 2023 se estimaron 2,392 personas (Ver Figura 2).
+
+Análisis de densidad minera 2021-2023
+... incremento notable de la presencia de estas infraestructuras mineras ilegales que han ido avanzando de norte a sur, en dirección a la Reserva Nacional Tambopata. (Figura 3)
+
+Análisis de las pozas residuales mineras
+Uno de los impactos que deja la minería ilegal, además de áreas deforestadas, es la generación de pozas residuales donde se concentran sedimentos removidos del suelo y elementos contaminantes utilizados durante la extracción del oro (Ej: mercurio). [...color of active vs inactive ponds...]
+En la Figura 5, se aprecia que en el año 2021 la gran mayoría de pozas se encontraban inactivas (de color violeta), y solo se tenía una superficie de 788 hectáreas de pozas activas (de color amarillo). Sin embargo, en el año 2023 la mayoría de éstas pasaron a ser pozas activas, incrementándose la superficie en 2,550 hectáreas (un incremento de más de 320% en solo dos años).
+
+Metodología
+Datos 2021: estudio "Estimación de la Población Minera Informal e Ilegal en el Departamento de Madre de Dios". 2023: SkySat 0.5 m, análisis visual y colecta manual; Kernel Density (radio 500 m); Random Forest en Google Earth Engine (75 árboles, 150 puntos por clase).
+
+Cita
+Yupanqui O, Quispe M, Novoa S, Castañeda C, Escalante E, Finer M, Mamani N (2023) EL RETORNO DE MINERÍA ILEGAL EN LA PAMPA (ZONA DE AMORTIGUAMIENTO DE LA RESERVA NACIONAL DE TAMBOPATA). MAAP: 193.
+
+[Acknowledgments (USAID Prevenir) omitted.]

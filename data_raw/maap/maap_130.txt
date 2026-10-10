@@ -1,0 +1,49 @@
+RENDERED TEXT (not raw HTML) of https://www.maapprogram.org/gold-mining-peru/ , captured 2026-10-10 via Chrome get_page_text (<main> element). Image captions retained, images not saved.
+Title: MAAP #130: Illegal Gold Mining Down 78% in Peruvian Amazon, But Still Threatens Key Areas
+December 1, 2020
+
+As part of USAID's Prevent Project (dedicated to combating environmental crimes in the Amazon), we conducted an updated analysis of illegal gold mining deforestation in the southern Peruvian Amazon.
+
+In early 2019, the Peruvian government launched Operation Mercury, an unprecedented crackdown on the rampant illegal gold mining in the region.
+
+The Operation initially targeted an area known as La Pampa, the epicenter of the illegal mining. In 2020, it expanded to surrounding critical areas.
+
+In this report, we compare rates of gold mining deforestation before vs after Operation Mercury at six key sites (see Base Map and Methodology below).
+
+We report four major results:
+
+1) Gold mining deforestation decreased 90% in La Pampa (the most critical mining area) following Operation Mercury.
+
+2) Gold mining deforestation increased in three key areas -Apaylon, Pariamanu, and Chaspa - indicating that some miners expelled from La Pampa moved to surrounding areas. The Peruvian government, however, has recently carried out major interventions in all three of these areas.
+
+3) Overall, gold mining deforestation decreased 78% across all six sites following Operation Mercury.
+
+4) Illegal mining does persist, however. We documented 1,115 hectares of gold mining deforestation across all six sites since Operation Mercury (but, compared to 6,490 hectares before the Operation).
+
+Base Map - 6 Major Illegal Gold Mining Sites
+Red indicates gold mining deforestation post Operation Mercury (March 2019 - October 2020), while yellow indicates the pre Operation baseline (January 2017 - February 2019).
+
+In La Pampa, we documented the dramatic loss of 4,450 hectares within the buffer zone of Tambopata National Reserve (Madre de Dios region) prior to Operation Mercury. Following the Operation, we confirmed the loss of 300 hectares. Note the main mining front in the core of the buffer zone has essentially been stopped, with most recent activity further north near the Interoceanic Highway.
+
+In neighboring Alto Malinowski, located in the buffer zone of Bahuaja Sonene National Park (Madre de Dios region), we documented the loss of 1,558 hectares prior to Operation Mercury. Following the Operation, we confirmed the loss of 419 hectares.
+
+In Camanti, located in the buffer zone of Amarakaeri Commuanl Reserve, we documented the loss of 336 hectares prior to Operation Mercury. Following the Operation, we confirmed the loss of 105 hectares.
+
+In Pariamanu ... loss of 72 hectares prior ... 98 hectares after. In response, the government conducted a major intervention in August 2020.
+
+In Apaylon, located in the buffer zone Tambopata National Reserve, 73 hectares prior; 78 hectares after. Series of interventions during 2020.
+
+Chaspa, located in the buffer zone of Bahuaja Sonene National Park (Puno region), represents a unique case of a new gold mining front that appeared following Operation Mercury. Starting in September 2019, 113 hectares ... In response, the government conducted a major intervention in October 2020.
+
+Gold Mining Deforestation Trends
+... overall gold mining deforestation decreased 78% across all six major sites following Operation Mercury.
+In La Pampa, ... averaged 165 hectares per month prior ... dropped to 17 hectares per month, an overall 90% decrease.
+Alto Malinowski: 58 -> 23 ha/month, 60% decrease. Camanti: 12.5 -> 6 ha/month, 54% decrease. Pariamanu: 2.8 -> 5, 87% increase. Apaylon: 2.8 -> 4, 43% increase. Chaspa: new front (8.5 ha/month).
+
+Methodology
+Planet imagery (3 m) via Planet Explorer; digitized gold mining deforestation across six sites, identified from GLAD alerts and Geobosques. "The area referred to as the 'mining corridor' is not included in the analysis because the issue of legality is more complex." Before = Jan 2017-Feb 2019 (26 months); after = Mar 2019-Oct 2020 (20 months); standardized per month. Data updated through October 2020.
+
+Citation
+Finer M, Mamani N (2020) Illegal Gold Mining Down 79% in Peruvian Amazon, But Still Threatens Key Areas. MAAP: 130.
+
+[Sections on Skysat imagery (Images 2-6), Acknowledgments (USAID Prevent) abridged here; see live page.]
