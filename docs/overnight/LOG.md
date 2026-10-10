@@ -3,17 +3,17 @@
 Branch: `analysis/overnight-2026-10-10`. Orchestrator: Claude Opus (subagents: sonnet/haiku). Deadline: 07:00 Berlin, 2026-10-11.
 Start: 2026-10-10 23:40 CEST.
 
-**Firecrawl calls used: 13 / 100** (ANP 1, MAAP 5, IBAMA 5, Brazil TI 2; spatial + scout pending)
+**Firecrawl calls used: 14 / 100** (ANP 1, MAAP 5, IBAMA 5, Brazil TI 2, scout 1, spatial 0, DETER/prod 0; Chrome-check + literature agents pending)
 
 ## Status by phase
 | Phase | Status |
 |---|---|
-| 1 Data | in progress |
-| 2 Code skeleton | in progress |
-| 3 Peru descriptive | in progress |
-| 4 Brazil descriptive | todo |
-| 5 Robustness | todo |
-| 6 Spatial feasibility | todo |
+| 1 Data | mostly done (publisher-side checks via Chrome pending) |
+| 2 Code | done (main.py + modules; all checks OK) |
+| 3 Peru descriptive | done (incl. ANP inside reserves, event study, placebo-in-space) |
+| 4 Brazil descriptive | done (TI Col 10.1, Roraima, IBAMA, DETER monthly) |
+| 5 Robustness | done (Peru + Brazil robustness CSVs) |
+| 6 Spatial feasibility | in progress (code/spatial.py + maps) |
 | 7 Report | todo |
 
 ## Decisions
@@ -27,6 +27,8 @@ Start: 2026-10-10 23:40 CEST.
 | D7 | IBAMA zip (123 MB) git-ignored; code/brazil_ibama.py rebuilds a small committed intermediate `data_intermediate/ibama_autos_annual.csv` when the zip is present, else reads it. | Commit zip / skip | Keeps replication possible without a >50 MB file in git |
 | D8 | Brazil per-territory = MapBiomas Col 10.1 class 4.3 (all mining; no garimpo/substance split per territory exists). Pack all-TIs series (Col 11, artisanal) kept as a separate panel, never in one series. | Mix collections | Rule 7 |
 | D9 | Brazil best control 2023–24 = Kayapó (only light action, formal desintrusão May 2025, after data end); Munduruku partly treated (operation Aug 2023, desintrusão Nov 2024). | Pool both | Enforcement timeline evidence |
+| D10 | Extra datasets added: INPE DETER mining alerts (monthly, per TI via FUNAI polygons) and BCRP/MINEM declared gold production Madre de Dios. GFW skipped (API key). | More sources | Monthly resolution around Feb 2023; formal vs mapped mining contrast |
+| D11 | Brazil 2×2 DiD reported in ha/yr AND relative to 2022 stock; sign flips → reported as inconclusive. | One metric | Units differ ~4× in size; honest reporting |
 | D2 | Pack-based Peru analysis (phase 2/3) starts in parallel with the downloads; new datasets plug in later as separate modules. | Wait for downloads | The core Peru design only needs `data/` |
 
 ## Round log
@@ -43,3 +45,8 @@ Start: 2026-10-10 23:40 CEST.
 - DONE code/main.py Peru core; all checks OK.
 - Batch 2 launched: Peru ANP+robustness+figure fixes; Brazil module (TI, Roraima, IBAMA, robustness). Still running: spatial feasibility, extra-data scout.
 - NEXT: Chrome agent for publisher-side checks + MAAP HTML; merge DOWNLOAD_LOG rows; phase 6 review; report.
+
+### Round 1, continued (00:00)
+- DONE Peru ANP+robustness (code/peru_anp.py, peru_robust.py), Brazil (brazil.py, brazil_ibama.py), DETER (brazil_deter.py), production (peru_production.py). All committed.
+- Running: spatial module/maps; Chrome publisher checks + MAAP HTML; literature verification.
+- NEXT: merge DOWNLOAD_LOG rows; brief main figure; report builder (numbers pulled from output/numbers.csv); clean-run verification.
