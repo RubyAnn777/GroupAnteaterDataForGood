@@ -1,0 +1,555 @@
+<title>Gold Mining Basics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: same FZS look as strategy.html (teal hero, paper ground, one 1000px column). One idea per section, a picture first, then three short sentences. Traffic-light colours encode "can you mine here?". */
+:root{
+  --paper:#f3efeb; --card:#ffffff; --tint:#e8e2db; --rule:#d9d1c8;
+  --teal:#1b3f44; --on-teal:#ffffff; --on-teal-2:#c9dcdc;
+  --ink:#1b3f44; --ink-2:#4b5f61; --ink-3:#6f7f80;
+  --rasp:#c2185b;
+  --peru:#c2185b; --brazil:#2a78d6;
+  --land:#e4ddd4; --land-line:#bfb4a7;
+  --no:#b3261e; --no-soft:#f6dcd9;
+  --maybe:#a86400; --maybe-soft:#f6e6c8;
+  --yes:#2f7f32; --yes-soft:#e1eedd;
+  --sans:"Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --mono:"Roboto Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11201f; --card:#1d3236; --tint:#24393d; --rule:#33494c;
+    --teal:#0c2326; --on-teal:#ffffff; --on-teal-2:#a9c3c3;
+    --ink:#eef4f3; --ink-2:#bccbcb; --ink-3:#8fa3a3;
+    --rasp:#e0558f; --peru:#e0558f; --brazil:#4d94e8;
+    --land:#2a4245; --land-line:#466064;
+    --no:#ef8077; --no-soft:#3d2220; --maybe:#e9a845; --maybe-soft:#3a2e15; --yes:#7fc37c; --yes-soft:#1f3624;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11201f; --card:#1d3236; --tint:#24393d; --rule:#33494c;
+  --teal:#0c2326; --on-teal:#ffffff; --on-teal-2:#a9c3c3;
+  --ink:#eef4f3; --ink-2:#bccbcb; --ink-3:#8fa3a3;
+  --rasp:#e0558f; --peru:#e0558f; --brazil:#4d94e8;
+  --land:#2a4245; --land-line:#466064;
+  --no:#ef8077; --no-soft:#3d2220; --maybe:#e9a845; --maybe-soft:#3a2e15; --yes:#7fc37c; --yes-soft:#1f3624;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;margin:0}
+.col{max-width:1000px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(2.1rem,5.5vw,3.6rem);font-weight:900;letter-spacing:-.02em}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:900}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0;max-width:68ch}
+ul{margin:0;padding-left:1.2em}
+a{color:var(--rasp);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--rasp);outline-offset:2px}
+.kicker{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--rasp)}
+.muted{color:var(--ink-2)}
+.src{font-size:.8rem;color:var(--ink-3)}
+.num{font-variant-numeric:tabular-nums}
+
+.hero{background:var(--teal);color:var(--on-teal)}
+.hero .col{padding-block:56px 48px;display:grid;gap:18px}
+.hero .kicker{color:#f48fb1}
+.hero p{color:var(--on-teal-2);font-size:clamp(1.05rem,2vw,1.25rem)}
+.steps{display:flex;flex-wrap:wrap;gap:8px}
+.steps a{color:var(--on-teal);border:1px solid rgba(255,255,255,.35);padding:5px 12px;font-size:.88rem;text-decoration:none}
+.steps a:hover{background:rgba(255,255,255,.1)}
+
+section{padding-block:60px 0}
+section>.col{display:grid;gap:22px}
+.head{display:grid;gap:8px}
+.big{font-size:1.15rem}
+
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
+.two>*{min-width:0}
+.card{background:var(--card);border:1px solid var(--rule);padding:20px;display:grid;gap:10px;align-content:start}
+.card.peru{border-top:4px solid var(--peru)}
+.card.brazil{border-top:4px solid var(--brazil)}
+.flag{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.peru .flag{color:var(--peru)} .brazil .flag{color:var(--brazil)}
+dl.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:.95rem}
+dl.facts dt{color:var(--ink-3)} dl.facts dd{margin:0}
+
+.figure{background:var(--card);border:1px solid var(--rule);padding:16px;display:grid;gap:10px}
+.figure svg{width:100%;height:auto;display:block}
+.svgwrap{overflow-x:auto}
+.mapgrid{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:24px;align-items:center}
+@media (max-width:720px){.mapgrid{grid-template-columns:1fr}}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.88rem;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;display:inline-block;border:1px solid var(--rule)}
+
+/* traffic-light rule table */
+.rules{display:grid;gap:10px}
+.rule{display:grid;grid-template-columns:120px 1fr;gap:16px;background:var(--card);border:1px solid var(--rule);padding:14px 16px;align-items:start}
+.rule>div{min-width:0}
+@media (max-width:560px){.rule{grid-template-columns:1fr;gap:6px}}
+.pill{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;text-align:center}
+.pill.no{background:var(--no-soft);color:var(--no)}
+.pill.maybe{background:var(--maybe-soft);color:var(--maybe)}
+.pill.yes{background:var(--yes-soft);color:var(--yes)}
+.rule h3{font-size:1rem}
+.rule p{font-size:.95rem;color:var(--ink-2)}
+.where{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+
+/* timeline */
+.tl{display:grid;grid-template-columns:72px 1fr 1fr;border:1px solid var(--rule);background:var(--card)}
+.tl>div{padding:10px 14px;border-top:1px solid var(--rule);min-width:0;font-size:.94rem}
+.tl .th{border-top:0;font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+.tl .th.p{color:var(--peru)} .tl .th.b{color:var(--brazil)}
+.tl .yr{font-family:var(--mono);font-weight:500;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.tl .up{border-left:4px solid var(--no)}
+.tl .down{border-left:4px solid var(--yes)}
+.tl .mid{border-left:4px solid var(--rule)}
+.tl strong{color:var(--ink)}
+@media (max-width:640px){.tl{grid-template-columns:56px 1fr}.tl .bcol{grid-column:2}.tl .th.b{display:none}.tl .bcol::before{content:"Brazil · ";font-weight:700;color:var(--brazil)}.tl .pcol::before{content:"Peru · ";font-weight:700;color:var(--peru)}.tl .th.p{display:none}.tl .blank{display:none}}
+
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px}
+.three .card h3{font-size:1.05rem}
+.eq{font-family:var(--mono);font-size:.9rem;background:var(--tint);padding:2px 6px}
+
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:0 28px}
+.gloss div{border-top:1px solid var(--rule);padding-block:10px;display:grid;gap:2px}
+.gloss b{font-size:.98rem}
+.gloss span{font-size:.92rem;color:var(--ink-2)}
+
+.callout{background:var(--card);border-left:4px solid var(--rasp);padding:16px 20px;display:grid;gap:6px}
+
+/* treated vs control */
+.role{display:grid;gap:4px;padding:12px 14px;border:1px solid var(--rule)}
+.role.t{border-left:4px solid var(--peru);background:var(--card)}
+.role.c{border-left:4px solid var(--brazil);background:var(--card)}
+.role .lab{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.role.t .lab{color:var(--peru)} .role.c .lab{color:var(--brazil)}
+.role p{font-size:.94rem;color:var(--ink-2)}
+.role b{color:var(--ink)}
+.case{display:grid;gap:12px}
+.weak{font-size:.92rem;color:var(--ink-2);border-top:1px dashed var(--rule);padding-top:10px}
+.weak b{color:var(--maybe)}
+
+table{border-collapse:collapse;width:100%;font-size:.94rem;background:var(--card)}
+th,td{border:1px solid var(--rule);padding:9px 12px;text-align:left;vertical-align:top}
+th{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--tint)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tw{overflow-x:auto}
+tr.res td{font-weight:700;background:var(--tint)}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;white-space:nowrap}
+.tag.have{background:var(--yes-soft);color:var(--yes)}
+.tag.must{background:var(--no-soft);color:var(--no)}
+.tag.nice{background:var(--maybe-soft);color:var(--maybe)}
+code{font-family:var(--mono);font-size:.86em;background:var(--tint);padding:1px 5px;overflow-wrap:anywhere}
+
+/* unit picture */
+.units{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:18px}
+.unit{background:var(--card);border:1px solid var(--rule);padding:16px;display:grid;gap:10px;align-content:start}
+.unit svg{width:100%;height:auto;display:block}
+footer{padding-block:60px 48px}
+footer .col{display:grid;gap:8px}
+</style>
+
+<header class="hero"><div class="col">
+  <span class="kicker">Group Giant Anteater · Start here</span>
+  <h1>Gold mining, in five pictures</h1>
+  <p>Where our two places are, where mining is allowed and where it is not, and what "enforcement" actually was. Read this first; the strategy page builds on it.</p>
+  <nav class="steps" aria-label="Sections">
+    <a href="#where">1 · Where</a><a href="#rules">2 · The rules</a><a href="#peru">3 · Peru up close</a><a href="#enforcement">4 · Enforcement</a><a href="#study">5 · Our study</a><a href="#treated">6 · Treated vs control</a><a href="#data">7 · Our data</a><a href="#words">Words</a>
+  </nav>
+</div></header>
+
+<!-- 1 WHERE -->
+<section id="where"><div class="col">
+  <div class="head">
+    <span class="kicker">1 · Where</span>
+    <h2>Two countries, two places, about 1,800 km apart</h2>
+    <p class="big">Both places are in the Amazon rainforest. Gold sits in river sand washed down from the Andes. Miners clear the forest, dig up the sand and wash out the gold with mercury.</p>
+  </div>
+
+  <div class="mapgrid">
+    <div class="figure">
+      <svg viewBox="0 0 362 515" role="img" aria-label="Simplified map of South America. Peru is on the west coast; the Madre de Dios region sits in its south-east corner on the border with Brazil and Bolivia. Brazil fills the east; the Yanomami territory is in its far north on the border with Venezuela.">
+        <path d="M48 44 L59 30 L84 19 L98 23 L127 29 L156 29 L170 44 L192 62 L214 64 L231 74 L242 106 L286 124 L325 132 L350 145 L350 170 L322 199 L317 235 L307 264 L286 271 L253 293 L250 311 L218 348 L192 358 L188 383 L156 386 L134 408 L116 437 L109 469 L109 484 L98 502 L70 480 L62 444 L73 408 L75 372 L88 322 L96 239 L88 233 L54 205 L47 192 L34 163 L17 149 L17 137 L26 113 L26 98 L34 95 L41 55 L48 44 Z" fill="var(--land)" stroke="var(--land-line)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M72 159 L98 136 L103 114 L100 98 L120 91 L142 77 L165 68 L171 74 L185 95 L214 89 L231 74 L242 106 L286 124 L325 132 L350 145 L350 170 L322 199 L317 235 L307 264 L286 271 L253 293 L250 311 L218 348 L188 323 L215 300 L209 290 L203 278 L185 264 L186 232 L169 223 L170 203 L132 176 L123 177 L101 184 L94 174 L80 174 Z" fill="var(--brazil)" fill-opacity=".16" stroke="var(--brazil)" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M17 137 L24 130 L34 142 L44 126 L60 106 L73 119 L98 136 L72 159 L80 174 L94 174 L101 184 L108 196 L106 208 L103 218 L102 232 L96 237 L88 233 L54 205 L47 192 L34 163 L17 149 Z" fill="var(--peru)" fill-opacity=".16" stroke="var(--peru)" stroke-width="1.5" stroke-linejoin="round"/>
+        <text x="50" y="168" fill="var(--peru)" font-family="Roboto, sans-serif" font-size="15" font-weight="900">PERU</text>
+        <text x="225" y="200" fill="var(--brazil)" font-family="Roboto, sans-serif" font-size="17" font-weight="900">BRAZIL</text>
+        <text x="110" y="52" fill="var(--ink-3)" font-family="Roboto, sans-serif" font-size="10">Venezuela</text>
+        <text x="58" y="80" fill="var(--ink-3)" font-family="Roboto, sans-serif" font-size="10">Colombia</text>
+        <text x="128" y="235" fill="var(--ink-3)" font-family="Roboto, sans-serif" font-size="10">Bolivia</text>
+        <text x="28" y="92" fill="var(--ink-3)" font-family="Roboto, sans-serif" font-size="10">Ecuador</text>
+        <!-- Yanomami -->
+        <ellipse cx="143" cy="89" rx="20" ry="13" fill="var(--brazil)" fill-opacity=".55" stroke="var(--card)" stroke-width="2"/>
+        <text x="168" y="108" fill="var(--ink)" font-family="Roboto, sans-serif" font-size="12" font-weight="700">Yanomami</text>
+        <text x="168" y="121" fill="var(--ink-2)" font-family="Roboto, sans-serif" font-size="10">Roraima + Amazonas</text>
+        <!-- Madre de Dios -->
+        <ellipse cx="95" cy="194" rx="15" ry="11" fill="var(--peru)" fill-opacity=".6" stroke="var(--card)" stroke-width="2"/>
+        <text x="114" y="203" fill="var(--ink)" font-family="Roboto, sans-serif" font-size="12" font-weight="700">Madre de Dios</text>
+        <text x="114" y="216" fill="var(--ink-2)" font-family="Roboto, sans-serif" font-size="10">south-east Peru</text>
+        <path d="M100 184 L138 100" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="4 4" fill="none"/>
+        <text x="122" y="150" fill="var(--ink-3)" font-family="Roboto Mono, monospace" font-size="9" transform="rotate(-66 122 150)">~1,800 km</text>
+      </svg>
+      <p class="src">Simplified outline, drawn by hand from rough coordinates. Fine for orientation, not for analysis.</p>
+    </div>
+
+    <div class="two" style="grid-template-columns:1fr">
+      <div class="card peru">
+        <span class="flag">Peru · main case</span>
+        <h3>Madre de Dios region</h3>
+        <dl class="facts">
+          <dt>Where</dt><dd>South-east corner of Peru, bordering Brazil and Bolivia. Capital: Puerto Maldonado.</dd>
+          <dt>Who mines</dt><dd>Thousands of small "artisanal" miners. Biggest gold-mining hotspot in the Peruvian Amazon.</dd>
+          <dt>Protected</dt><dd>Tambopata National Reserve and Bahuaja-Sonene National Park. FZS works here.</dd>
+          <dt>Operation</dt><dd><strong>Mercurio, February 2019</strong>, at La Pampa.</dd>
+        </dl>
+      </div>
+      <div class="card brazil">
+        <span class="flag">Brazil · second case</span>
+        <h3>Yanomami indigenous territory</h3>
+        <dl class="facts">
+          <dt>Where</dt><dd>Far north of Brazil (states Roraima and Amazonas), bordering Venezuela. About 9.6 million ha, the largest indigenous territory in Brazil.</dd>
+          <dt>Who mines</dt><dd>Outside wildcat miners (<em>garimpeiros</em>) who invaded the territory.</dd>
+          <dt>Operation</dt><dd><strong>Federal operation from February 2023</strong>, after a health emergency was declared.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 2 RULES -->
+<section id="rules"><div class="col">
+  <div class="head">
+    <span class="kicker">2 · The rules</span>
+    <h2>Can you mine here?</h2>
+    <p class="big">Mining is not illegal everywhere. It depends on <strong>where</strong> you dig. Satellites only see that forest became a mine, not whether that was legal. So we have to know which zone each place is in.</p>
+  </div>
+
+  <div class="rules">
+    <div class="rule"><div><span class="pill no">Never</span></div><div>
+      <span class="where">Peru</span>
+      <h3>Inside a protected area (national reserve, national park, communal reserve)</h3>
+      <p>The core of a protected area. No mining allowed. Example: Tambopata National Reserve.</p>
+    </div></div>
+    <div class="rule"><div><span class="pill no">Never</span></div><div>
+      <span class="where">Brazil</span>
+      <h3>Inside an indigenous territory</h3>
+      <p>The constitution (Art. 231) allows mining there only with a special law and approval by Congress. That law has never been passed, so all outside mining in indigenous territories is illegal. Example: Yanomami.</p>
+    </div></div>
+    <div class="rule"><div><span class="pill maybe">Almost never</span></div><div>
+      <span class="where">Peru</span>
+      <h3>In a buffer zone</h3>
+      <p>A protective belt of land <em>around</em> a protected area. People live and farm there, but nothing may harm the reserve. In Madre de Dios, mining is only legal inside the mining corridor (next row), so mining in a buffer zone outside the corridor is illegal. <strong>La Pampa is in the Tambopata buffer zone, outside the corridor: illegal.</strong></p>
+    </div></div>
+    <div class="rule"><div><span class="pill yes">With a permit</span></div><div>
+      <span class="where">Peru</span>
+      <h3>In the mining corridor (<em>corredor minero</em>)</h3>
+      <p>A strip of Madre de Dios set aside for small-scale mining by a 2012 law (D.L. 1100). Miners can register and become legal here. Most mining deforestation in the region happens inside this corridor (MAAP #208 puts it at about three quarters).</p>
+    </div></div>
+    <div class="rule"><div><span class="pill yes">With a permit</span></div><div>
+      <span class="where">Brazil</span>
+      <h3>Ordinary land outside indigenous territories and protected areas</h3>
+      <p>Small-scale mining (<em>garimpo</em>) can be legal with a mining permit from the federal agency (ANM).</p>
+    </div></div>
+  </div>
+  <p class="src">To check before the brief: open D.L. 1100 (Peru) for the corridor and where it overlaps buffer zones, and cite Art. 231 §3 of the Brazilian constitution. We have only read summaries so far (MAAP #208; Brazilian court and law-firm summaries).</p>
+</div></section>
+
+<!-- 3 PERU UP CLOSE -->
+<section id="peru"><div class="col">
+  <div class="head">
+    <span class="kicker">3 · Peru up close</span>
+    <h2>A reserve, a belt around it, and a mining strip</h2>
+    <p class="big">Think of a fried egg. The yolk is the reserve (no mining). The white is the buffer zone (protective belt). Next to it runs the mining corridor along the highway, where mining can be legal.</p>
+  </div>
+
+  <div class="figure">
+    <div class="svgwrap">
+    <svg viewBox="0 0 900 400" role="img" aria-label="Schematic of Madre de Dios. Along the top runs the Interoceanic Highway with the mining corridor where mining can be legal. To the west is Amarakaeri, a reserve with its buffer zone, our comparison area. To the east is Tambopata National Reserve surrounded by its buffer zone, with La Pampa inside the buffer zone, the target of Operation Mercurio. Arrows show miners moving from La Pampa to other places.">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-3)"/></marker></defs>
+      <rect x="2" y="2" width="896" height="396" fill="var(--card)" stroke="var(--rule)"/>
+      <text x="20" y="28" fill="var(--ink-3)" font-family="Roboto Mono, monospace" font-size="11" letter-spacing="1">MADRE DE DIOS · not to scale</text>
+      <!-- corridor -->
+      <path d="M60 110 C 250 140, 420 150, 560 145 S 760 120, 880 105" fill="none" stroke="var(--yes)" stroke-width="48" stroke-opacity=".18" stroke-linecap="round"/>
+      <path d="M60 110 C 250 140, 420 150, 560 145 S 760 120, 880 105" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="7 5"/>
+      <text x="240" y="100" fill="var(--yes)" font-family="Roboto, sans-serif" font-size="13" font-weight="700">Mining corridor: legal with a permit</text>
+      <text x="700" y="96" fill="var(--ink-3)" font-family="Roboto, sans-serif" font-size="11">Interoceanic Highway</text>
+      <!-- Amarakaeri -->
+      <ellipse cx="190" cy="285" rx="150" ry="88" fill="var(--maybe)" fill-opacity=".14" stroke="var(--maybe)" stroke-width="2"/>
+      <ellipse cx="170" cy="305" rx="70" ry="42" fill="var(--no)" fill-opacity=".14" stroke="var(--no)" stroke-width="1.5"/>
+      <text x="170" y="302" text-anchor="middle" fill="var(--ink)" font-family="Roboto, sans-serif" font-size="12" font-weight="700">Amarakaeri</text>
+      <text x="170" y="317" text-anchor="middle" fill="var(--ink-2)" font-family="Roboto, sans-serif" font-size="11">Communal Reserve</text>
+      <text x="190" y="225" text-anchor="middle" fill="var(--ink)" font-family="Roboto, sans-serif" font-size="12" font-weight="700">its buffer zone</text>
+      <text x="190" y="240" text-anchor="middle" fill="var(--ink-2)" font-family="Roboto, sans-serif" font-size="11">= our comparison area</text>
+      <!-- Tambopata -->
+      <ellipse cx="620" cy="285" rx="215" ry="92" fill="var(--maybe)" fill-opacity=".14" stroke="var(--maybe)" stroke-width="2"/>
+      <ellipse cx="680" cy="305" rx="110" ry="52" fill="var(--no)" fill-opacity=".14" stroke="var(--no)" stroke-width="1.5"/>
+      <text x="680" y="302" text-anchor="middle" fill="var(--ink)" font-family="Roboto, sans-serif" font-size="12" font-weight="700">Tambopata</text>
+      <text x="680" y="317" text-anchor="middle" fill="var(--ink-2)" font-family="Roboto, sans-serif" font-size="11">National Reserve</text>
+      <text x="560" y="226" text-anchor="middle" fill="var(--ink)" font-family="Roboto, sans-serif" font-size="12" font-weight="700">Tambopata buffer zone</text>
+      <text x="560" y="241" text-anchor="middle" fill="var(--ink-2)" font-family="Roboto, sans-serif" font-size="11">= our target area</text>
+      <!-- La Pampa -->
+      <circle cx="470" cy="275" r="19" fill="var(--peru)"/>
+      <text x="470" y="279" text-anchor="middle" fill="#fff" font-family="Roboto Mono, monospace" font-size="9" font-weight="700">2019</text>
+      <text x="470" y="312" text-anchor="middle" fill="var(--ink)" font-family="Roboto, sans-serif" font-size="12" font-weight="700">La Pampa</text>
+      <text x="470" y="326" text-anchor="middle" fill="var(--ink-2)" font-family="Roboto, sans-serif" font-size="11">Operation Mercurio</text>
+      <!-- moves -->
+      <path d="M452 266 C 400 240, 360 230, 330 236" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+      <path d="M476 256 C 490 210, 500 180, 510 158" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+      <path d="M489 280 C 540 300, 560 300, 585 300" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+      <text x="740" y="385" text-anchor="middle" fill="var(--ink-3)" font-family="Roboto, sans-serif" font-size="11">Bahuaja-Sonene National Park lies further south (mostly in Puno)</text>
+      <text x="20" y="385" fill="var(--ink-3)" font-family="Roboto, sans-serif" font-size="11">Dashed arrows: where miners may have gone. Finding that out is our job.</text>
+    </svg>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--no-soft);border-color:var(--no)"></i>Protected area: no mining</span>
+      <span><i class="sw" style="background:var(--maybe-soft);border-color:var(--maybe)"></i>Buffer zone: illegal outside the corridor</span>
+      <span><i class="sw" style="background:var(--yes-soft);border-color:var(--yes)"></i>Mining corridor: legal with a permit</span>
+    </div>
+    <p class="src">Positions are illustrative. Real boundaries come from SERNANP (Peru's protected-area agency).</p>
+  </div>
+
+  <div class="two">
+    <div class="card"><h3>Why the buffer zone matters to us</h3><p class="muted">Our main data table measures mining <strong>per buffer zone</strong>, not per reserve. So our "target" is the Tambopata buffer zone (where La Pampa is), and our comparison is the Amarakaeri buffer zone next door.</p></div>
+    <div class="card"><h3>Why it matters to FZS</h3><p class="muted">FZS supports Peru's park service in Tambopata and Bahuaja-Sonene, including patrols against mining. The FZS program area is the reserve plus about 4,500 km² of buffer zone. They want to know whether those patrols work or just push miners elsewhere.</p></div>
+  </div>
+</div></section>
+
+<!-- 4 ENFORCEMENT -->
+<section id="enforcement"><div class="col">
+  <div class="head">
+    <span class="kicker">4 · Enforcement</span>
+    <h2>What "enforcement" actually was</h2>
+    <p class="big">Enforcement means police, soldiers and park rangers going in: destroying machines and camps, setting up checkpoints and staying there. It was never a single switch. It got stronger and weaker over time.</p>
+  </div>
+
+  <div class="legend">
+    <span><i class="sw" style="background:var(--yes)"></i>Enforcement up</span>
+    <span><i class="sw" style="background:var(--no)"></i>Enforcement down</span>
+    <span><i class="sw" style="background:var(--rule)"></i>Context</span>
+  </div>
+
+  <div class="tl" role="table" aria-label="Enforcement timeline for Peru and Brazil">
+    <div class="th" role="columnheader">Year</div><div class="th p" role="columnheader">Peru · Madre de Dios</div><div class="th b" role="columnheader">Brazil · indigenous territories</div>
+
+    <div class="yr">2017–18</div><div class="pcol mid">Mining in La Pampa at its peak. Some smaller raids, but miners keep coming back.</div><div class="bcol mid">Mining in indigenous territories still fairly low (13,704 ha in 2018, all territories).</div>
+
+    <div class="yr">2019</div><div class="pcol down"><strong>Feb: Operation Mercurio.</strong> Police and military move into La Pampa and set up permanent bases. Mining there drops by about 90% (MAAP #130).</div><div class="bcol up"><strong>New government (2019–22).</strong> Federal enforcement against illegal mining is widely reported to weaken. <em>We still need a citable source.</em></div>
+
+    <div class="yr">2020</div><div class="pcol up">COVID: fewer patrols, miners return to parts of Tambopata.</div><div class="bcol up">Mining in indigenous territories keeps growing.</div>
+
+    <div class="yr">2021</div><div class="pcol down"><strong>Plan Restauración:</strong> military operations across several mining hotspots, not only La Pampa.</div><div class="bcol up">Growth continues.</div>
+
+    <div class="yr">2022</div><div class="pcol mid">Miners return to already cleared land (MAAP #193).</div><div class="bcol up">Peak of the weak period: 30,980 ha mined in all indigenous territories, more than double 2018.</div>
+
+    <div class="yr">2023</div><div class="pcol down"><strong>Apr: state of emergency</strong> in six districts of Madre de Dios, renewed every 60 days.</div><div class="bcol down"><strong>Jan: health emergency in Yanomami. Feb: federal operation</strong> to expel miners (environment agency, federal police, army).</div>
+
+    <div class="yr">2025–26</div><div class="pcol up">Navy posts on the Malinowski River withdrawn (no money). About 500 ha of new mining <strong>inside</strong> the Tambopata reserve (MAAP #241). New raids in early 2026.</div><div class="bcol mid">Our Brazil data per territory stop in 2024, so we only see two years after the operation.</div>
+  </div>
+  <p class="src">Peru: MAAP #130 (2020), #193 (2023), #241 (May 2026), decree DS 046-2023-PCM. Brazil numbers: our data pack (<code>mining_area.csv</code>). Each of us must open what we cite.</p>
+
+  <div class="callout">
+    <strong>The key contrast</strong>
+    <p>Peru: enforcement goes <strong>up</strong> in one place (La Pampa, 2019). Brazil: enforcement goes <strong>down</strong> everywhere (2019–22), then <strong>up</strong> in one place (Yanomami, 2023). Same question, two directions.</p>
+  </div>
+</div></section>
+
+<!-- 5 STUDY -->
+<section id="study"><div class="col">
+  <div class="head">
+    <span class="kicker">5 · Our study</span>
+    <h2>What we are actually asking</h2>
+    <p class="big">When the police clear one mining area, what happens to the mining? There are three possible answers. In the target area alone, all three look the same at first: mining drops.</p>
+  </div>
+  <div class="three">
+    <div class="card"><h3>It stops</h3><p class="muted">Deterrence. Miners give up. Mining falls in the target and does not rise anywhere else.</p></div>
+    <div class="card"><h3>It moves</h3><p class="muted">Displacement. Miners go next door: to the comparison area, the corridor or into the reserve. The total stays the same.</p></div>
+    <div class="card"><h3>It pauses</h3><p class="muted">Delay. Mining comes back as soon as the police leave.</p></div>
+  </div>
+  <div class="two">
+    <div class="card">
+      <h3>How we tell them apart</h3>
+      <ul class="muted">
+        <li>Count <strong>new</strong> mining per year (this year minus last year), not the total stock.</li>
+        <li>Compare the target (Tambopata buffer zone) with a similar area that got less enforcement (Amarakaeri buffer zone), before and after 2019.</li>
+        <li>Add up the whole region to see if the total fell (stops) or not (moves).</li>
+        <li>Follow the years after the operation to see if it comes back (pauses).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>First look at the numbers (Peru)</h3>
+      <p class="muted">New mining per year in Madre de Dios, averages:</p>
+      <dl class="facts num">
+        <dt>Tambopata BZ</dt><dd>1,638 ha (2016–18) → <strong>163 ha</strong> (2019–21)</dd>
+        <dt>Whole region</dt><dd>3,610 ha → <strong>4,640 ha</strong></dd>
+      </dl>
+      <p class="muted">So the target dropped, but the region went <strong>up</strong>. That looks like "it moves". It is a description, not yet proof: COVID and the gold price also changed.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 6 TREATED VS CONTROL -->
+<section id="treated"><div class="col">
+  <div class="head">
+    <span class="kicker">6 · Treated vs control</span>
+    <h2>Who got the operation, and who we compare them with</h2>
+    <p class="big">Same idea as a medical trial. The <strong>treated</strong> area got the "medicine" (the police operation). The <strong>control</strong> area is a similar place that did not, or got much less. The control shows what would have happened to the treated area <em>without</em> the operation.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Why we need a control at all</strong>
+    <p>If we only look at Tambopata, mining fell after 2019. But maybe it would have fallen anyway: COVID, gold prices, the rains. The control area went through all of that too, just without Mercurio. So the <em>difference</em> between the two is our best guess of what the operation did.</p>
+  </div>
+
+  <div class="two">
+    <div class="card peru case">
+      <span class="flag">Peru · Operation Mercurio</span>
+      <div class="role t"><span class="lab">Treated</span><p><b>Tambopata buffer zone.</b> Why: La Pampa, where Mercurio started in February 2019 and set up permanent police and army bases, lies inside it.</p></div>
+      <div class="role c"><span class="lab">Control</span><p><b>Amarakaeri buffer zone.</b> Why: same region, same gold rivers, real mining before 2019, but not the target of Mercurio.</p></div>
+      <div class="role"><span class="lab" style="color:var(--ink-3)">Time</span><p><b>Before</b> 2016–18 · <b>After</b> 2019–21 · later years (to 2025) check whether it comes back.</p></div>
+      <p class="weak"><b>Weak spot:</b> Amarakaeri was not untouched. Mining there also dropped in some places, and in 2023 it got the state of emergency too. So we compare "a lot of enforcement" with "some enforcement". And if miners moved from Tambopata into Amarakaeri, the control goes up because of the treatment, which makes the effect look bigger than it is.</p>
+    </div>
+    <div class="card brazil case">
+      <span class="flag">Brazil · Yanomami operation</span>
+      <div class="role t"><span class="lab">Treated</span><p><b>Yanomami territory.</b> Why: the federal operation from February 2023 targeted it specifically, after the health emergency.</p></div>
+      <div class="role c"><span class="lab">Control</span><p><b>Munduruku and Kayapó territories</b> (in Pará). Why: the other two big gold-mining territories, with heavy mining before 2023, but not the target of the 2023 operation.</p></div>
+      <div class="role"><span class="lab" style="color:var(--ink-3)">Time</span><p><b>Before</b> 2020–22 · <b>After</b> 2023–24 (the per-territory data stop in 2024).</p></div>
+      <p class="weak"><b>Weak spot:</b> only two years after. And Munduruku and Kayapó may have had their own operations later. We have to check that before calling them a control. The 2019–22 "weak enforcement" period hit the whole country at once, so there is no control for it inside Brazil. We can only describe it.</p>
+    </div>
+  </div>
+
+  <div class="head">
+    <h3>The calculation, step by step (Peru, real numbers)</h3>
+    <p class="muted">New mining per year (ha), averaged over each period. This is the "difference-in-differences": first the change in each area, then the difference between those changes.</p>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th></th><th class="n">Before (2016–18)</th><th class="n">After (2019–21)</th><th class="n">Change</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Treated:</strong> Tambopata buffer zone</td><td class="n">1,640</td><td class="n">163</td><td class="n">−1,477</td></tr>
+      <tr><td><strong>Control:</strong> Amarakaeri buffer zone</td><td class="n">289</td><td class="n">574</td><td class="n">+285</td></tr>
+      <tr class="res"><td>Difference of the changes (treated − control)</td><td></td><td></td><td class="n">−1,762</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted">Read it as: "compared with Amarakaeri, Tambopata added about 1,760 ha less new mining per year after Mercurio". That is a <strong>description</strong>. It only becomes a causal claim if both areas would have moved in parallel without the operation, which we have to argue (and doubt) in the brief.</p>
+  <p class="src">Numbers from the starter code (<code>starter/gold_starter.py</code>), MapBiomas Peru Collection 4, buffer-zone rows.</p>
+
+  <div class="three">
+    <div class="card"><h3>Displacement check</h3><p class="muted">Add up the whole region. If the total fell, mining stopped. If it stayed flat or rose, it moved. (Peru: the region rose from 3,610 to 4,640 ha/yr.)</p></div>
+    <div class="card"><h3>Placebo check</h3><p class="muted">Pretend the operation happened in 2016. If we still find a big "effect", our method is picking up something else.</p></div>
+    <div class="card"><h3>Persistence check</h3><p class="muted">Look at 2022–25. Does mining come back once enforcement weakens? (Peru: Tambopata back to about 1,800 ha/yr.)</p></div>
+  </div>
+</div></section>
+
+<!-- 7 DATA -->
+<section id="data"><div class="col">
+  <div class="head">
+    <span class="kicker">7 · Our data</span>
+    <h2>What we have, what is missing, what we add</h2>
+    <p class="big">All our mining numbers come from <strong>MapBiomas</strong>: satellite maps that label every 30 m pixel each year as forest, river, mining and so on. The course gave us a "data pack" of ready-made tables. The catch: Peru and Brazil are cut into <strong>different pieces</strong>.</p>
+  </div>
+
+  <div class="units">
+    <div class="unit">
+      <span class="flag" style="color:var(--peru)">Peru: counted per buffer zone</span>
+      <svg viewBox="0 0 300 150" role="img" aria-label="Peru unit: one row per buffer zone per year. The reserve inside is not in the pack.">
+        <ellipse cx="150" cy="78" rx="130" ry="60" fill="var(--peru)" fill-opacity=".18" stroke="var(--peru)" stroke-width="2"/>
+        <ellipse cx="150" cy="80" rx="58" ry="28" fill="var(--card)" stroke="var(--ink-3)" stroke-dasharray="4 4"/>
+        <text x="150" y="78" text-anchor="middle" fill="var(--ink-2)" font-family="Roboto, sans-serif" font-size="11">reserve inside:</text>
+        <text x="150" y="92" text-anchor="middle" fill="var(--ink-2)" font-family="Roboto, sans-serif" font-size="11">NOT in the pack</text>
+        <text x="150" y="36" text-anchor="middle" fill="var(--ink)" font-family="Roboto, sans-serif" font-size="12" font-weight="700">buffer zone = 1 row per year</text>
+      </svg>
+      <p class="muted">We see the Tambopata buffer zone (where La Pampa is) directly. We do <strong>not</strong> see the reserve itself, so we would miss miners who moved into it.</p>
+    </div>
+    <div class="unit">
+      <span class="flag" style="color:var(--brazil)">Brazil: per municipality, or all territories lumped</span>
+      <svg viewBox="0 0 300 150" role="img" aria-label="Brazil unit: municipalities, whose borders do not match the Yanomami territory, plus one national total for all indigenous lands combined.">
+        <g stroke="var(--ink-3)" stroke-width="1" fill="var(--card)">
+          <path d="M20 20 L110 20 L120 70 L20 80 Z"/><path d="M110 20 L210 20 L200 75 L120 70 Z"/><path d="M210 20 L280 20 L280 90 L200 75 Z"/>
+          <path d="M20 80 L120 70 L130 130 L20 130 Z"/><path d="M120 70 L200 75 L215 130 L130 130 Z"/><path d="M200 75 L280 90 L280 130 L215 130 Z"/>
+        </g>
+        <path d="M70 45 C 120 25, 200 35, 235 70 C 250 105, 170 120, 110 108 C 60 100, 45 70, 70 45 Z" fill="var(--brazil)" fill-opacity=".25" stroke="var(--brazil)" stroke-width="2"/>
+        <text x="150" y="78" text-anchor="middle" fill="var(--ink)" font-family="Roboto, sans-serif" font-size="12" font-weight="700">Yanomami</text>
+        <text x="150" y="146" text-anchor="middle" fill="var(--ink-3)" font-family="Roboto, sans-serif" font-size="10">grey boxes = municipalities; borders don't match</text>
+      </svg>
+      <p class="muted">The pack has <strong>no row for Yanomami alone</strong>. Municipalities cut across the territory and also include mines outside it. The indigenous-land table adds up <em>all</em> territories in Brazil into one number. So for Brazil we must download the per-territory data ourselves.</p>
+    </div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>File (in <code>data/</code>)</th><th>Country</th><th>One row is</th><th>Years</th><th>What we use it for</th></tr></thead>
+    <tbody>
+      <tr><td><code>peru_bufferzone_year.csv</code></td><td>Peru</td><td>one buffer zone, one year (60 zones)</td><td class="n">1985–2025</td><td><strong>Main Peru table.</strong> Treated (Tambopata) and control (Amarakaeri)</td></tr>
+      <tr><td><code>peru_department_year.csv</code></td><td>Peru</td><td>one region (department), one year</td><td class="n">1985–2025</td><td>Madre de Dios total, for the displacement check</td></tr>
+      <tr><td><code>mining_area.csv</code></td><td>Brazil</td><td>one year, for "all of Brazil" or "all indigenous lands combined"</td><td class="n">1985–2025</td><td>The 2019–22 story: mining in indigenous lands more than doubled. Cannot separate Yanomami</td></tr>
+      <tr><td><code>brazil_municipality_year.csv</code></td><td>Brazil</td><td>one municipality, one year</td><td class="n">1985–2024</td><td>Rough proxy (Roraima municipalities around Yanomami), displacement into neighbouring areas</td></tr>
+      <tr><td><code>prices_annual.csv</code>, <code>prices_monthly.csv</code></td><td>World</td><td>gold price per year / month</td><td class="n">1961–2026</td><td>Context: a rising gold price pulls miners in, whatever the police do</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Pack sources: MapBiomas Peru Collection 4; MapBiomas Brazil Collection 10.1 (municipalities) and Collection 11 (indigenous lands); World Bank Pink Sheet (prices). Never mix two collections in one series.</p>
+
+  <div class="two">
+    <div class="card">
+      <h3>A first Brazil description from the pack</h3>
+      <p class="muted">New artisanal mining per year in all indigenous lands combined, averages:</p>
+      <dl class="facts num">
+        <dt>2016–18</dt><dd>1,332 ha</dd>
+        <dt>2019–22</dt><dd><strong>4,319 ha</strong> (weak enforcement)</dd>
+        <dt>2023–25</dt><dd>2,978 ha</dd>
+      </dl>
+      <p class="muted">Mining in indigenous lands rose more than threefold in the weak years and slowed after 2023. Description only, all territories mixed.</p>
+      <p class="src">Computed from <code>mining_area.csv</code>, column <code>mining_artisanal_ha</code>, first differences.</p>
+    </div>
+    <div class="card">
+      <h3>The big difference in one line</h3>
+      <p class="muted"><strong>Peru:</strong> the treated area is already a row in our data. We can start today.</p>
+      <p class="muted"><strong>Brazil:</strong> the treated area is not in our data. Until we download the per-territory file, we can only describe Brazil as a whole.</p>
+    </div>
+  </div>
+
+  <div class="head"><h3>Data we want to add</h3><p class="muted">Ordered by priority. Every download goes into <code>DOWNLOAD_LOG.csv</code> with one check number that matches the publisher.</p></div>
+  <div class="tw"><table>
+    <thead><tr><th>Priority</th><th>What</th><th>Where from</th><th>Why we need it</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag must">Must</span></td><td><strong>Brazil per indigenous territory</strong>: mining per year for Yanomami, Munduruku, Kayapó</td><td>MapBiomas Brazil statistics, Collection 10.1 (brasil.mapbiomas.org)</td><td>Without it there is no Brazil treated or control area at all</td></tr>
+      <tr><td><span class="tag must">Must</span></td><td><strong>Peru protected areas (ANP)</strong>: mining inside each reserve and park</td><td>MapBiomas Peru statistics, "Áreas naturales protegidas", Collection 4</td><td>To see if miners moved <em>into</em> the Tambopata reserve (MAAP #241 says they did in 2025)</td></tr>
+      <tr><td><span class="tag must">Must</span></td><td>A citable source that Brazilian enforcement weakened in 2019–22</td><td>IBAMA fines / operations statistics, reports, papers</td><td>Our Brazil story rests on it; "widely reported" is not a source</td></tr>
+      <tr><td><span class="tag nice">Nice</span></td><td>Enforcement records (dates, places of operations)</td><td>SERNANP, Peruvian government press, IBAMA, Federal Police</td><td>To know who was really treated when, and measure intensity instead of yes/no</td></tr>
+      <tr><td><span class="tag nice">Nice</span></td><td>Amazon Mining Watch polygons</td><td>amazonminingwatch.org</td><td>Exact mine locations for the spatial idea (distance rings, where new mines appear). Starts 2018, so no pre-trend</td></tr>
+      <tr><td><span class="tag nice">Nice</span></td><td>Boundaries: reserves, buffer zones, territories, mining corridor</td><td>SERNANP geoportal, WDPA, FUNAI, INGEMMET</td><td>To place AMW polygons in zones and draw a real map</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- WORDS -->
+<section id="words"><div class="col">
+  <div class="head">
+    <span class="kicker">Words we keep using</span>
+    <h2>Mini glossary</h2>
+  </div>
+  <div class="gloss">
+    <div><b>Protected area (ANP)</b><span>Land the state protects by law: national park, national reserve, communal reserve. Peru: run by SERNANP.</span></div>
+    <div><b>Buffer zone (zona de amortiguamiento)</b><span>The belt around a protected area that shields it. Activities allowed only if they don't harm the reserve.</span></div>
+    <div><b>Communal reserve</b><span>Protected area co-managed with indigenous communities. Amarakaeri is one.</span></div>
+    <div><b>Mining corridor</b><span>The strip in Madre de Dios where small-scale mining can be legalised (D.L. 1100, 2012).</span></div>
+    <div><b>Artisanal mining</b><span>Small-scale mining with simple machines (pumps, small dredges). Usually informal or illegal.</span></div>
+    <div><b>Garimpo / garimpeiro</b><span>Brazilian word for artisanal gold mining / the miner.</span></div>
+    <div><b>Indigenous territory (Terra Indígena)</b><span>Land legally reserved for indigenous peoples in Brazil. Outside mining is illegal.</span></div>
+    <div><b>La Pampa</b><span>The largest illegal mining area in Peru, in the Tambopata buffer zone. Target of Mercurio.</span></div>
+    <div><b>MapBiomas</b><span>Satellite-based land-use maps. Our main data: hectares of mining per area per year.</span></div>
+    <div><b>MAAP</b><span>Amazon monitoring project that publishes short satellite reports (#130, #241 ...). Our main written source.</span></div>
+    <div><b>Target vs comparison</b><span>The area that got the operation vs a similar area that did not (or got less). Comparing both before and after is a difference-in-differences.</span></div>
+    <div><b>Additions</b><span>New mining in a year: this year's hectares minus last year's.</span></div>
+    <div><b>Treated / control</b><span>Treated: the area that got the operation. Control: a similar area that did not (or less), showing what would have happened anyway.</span></div>
+    <div><b>Data pack</b><span>The ready-made tables the course gave us in <code>data/</code>.</span></div>
+    <div><b>Collection</b><span>A MapBiomas release version (e.g. Collection 4). Numbers differ between collections, so never mix them.</span></div>
+  </div>
+</div></section>
+
+<footer><div class="col">
+  <p class="muted">Next: the <a href="strategy.html">strategy page</a> (design, method, team plan) and <code>agent.md</code> (rules, check numbers).</p>
+  <p class="src">Group Giant Anteater · Data for Good, October 2026. Map and diagrams are schematic. Sources: MAAP #130, #193, #208, #241 (maapprogram.org); FZS Bahuaja-Sonene and Tambopata program page; MapBiomas Peru and Brazil via the course data pack.</p>
+</div></footer>

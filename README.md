@@ -6,7 +6,7 @@ Two cases, both described on our question card:
 - **Brazil:** weaker enforcement in indigenous territories (2019–2022), then the operation in the **Yanomami** territory (from February 2023).
 Practice partner: **Frankfurt Zoological Society (FZS)**. We present to Christof Schenck (Executive Director) in Lesson 5.
 
-> **New here?** Read [`agent.md`](agent.md) first: it is the shared project reference (assignment, data rules, check numbers, decisions). The strategy page (HTML) explains the setup visually.
+> **New here?** Start with [`docs/basics.html`](docs/basics.html): where the places are, where mining is legal, what a buffer zone is, and what the enforcement was (5 min). Then read [`agent.md`](agent.md), the shared project reference (assignment, data rules, check numbers, decisions), and the strategy page `docs/strategy.html`.
 
 ---
 
@@ -45,6 +45,7 @@ FZS supports Peru's protected-area authority (SERNANP) in enforcement against il
 | `README.txt` | The course's original "start here" note |
 | `gold_assignment_brief.pdf` | Assignment: deliverables, grading, data notes |
 | `gold_question_cards.pdf` | Question cards; **page 3 is ours** |
+| `docs/basics.html` | Start here: plain-language primer (map, legal zones, buffer zones, enforcement timeline) |
 | `docs/strategy.html` | Strategy page: context, design, method, team plan, Claude Code how-to |
 | `DATA_DICTIONARY.pdf` | Every variable in every table |
 | `DOWNLOAD_LOG.csv` | Provenance log: one row per raw file (last row is an example to replace) |
