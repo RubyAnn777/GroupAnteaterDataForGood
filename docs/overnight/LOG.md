@@ -3,18 +3,18 @@
 Branch: `analysis/overnight-2026-10-10`. Orchestrator: Claude Opus (subagents: sonnet/haiku). Deadline: 07:00 Berlin, 2026-10-11.
 Start: 2026-10-10 23:40 CEST.
 
-**Firecrawl calls used: 14 / 100** (ANP 1, MAAP 5, IBAMA 5, Brazil TI 2, scout 1, spatial 0, DETER/prod 0; Chrome-check + literature agents pending)
+**Firecrawl calls used: 14 / 100** (ANP 1, MAAP 5, IBAMA 5, Brazil TI 2, scout 1; all other agents 0)
 
 ## Status by phase
 | Phase | Status |
 |---|---|
-| 1 Data | mostly done (publisher-side checks via Chrome pending) |
+| 1 Data | DONE (IBAMA embargoes BLOCKED; MAAP raw HTML manual) |
 | 2 Code | done (main.py + modules; all checks OK) |
 | 3 Peru descriptive | done (incl. ANP inside reserves, event study, placebo-in-space) |
 | 4 Brazil descriptive | done (TI Col 10.1, Roraima, IBAMA, DETER monthly) |
 | 5 Robustness | done (Peru + Brazil robustness CSVs) |
-| 6 Spatial feasibility | in progress (code/spatial.py + maps) |
-| 7 Report | todo |
+| 6 Spatial feasibility | DONE (prototype + maps; recommendation: part 4 / robustness only) |
+| 7 Report | DONE (REPORT.html published as private artifact, REPORT.md, agent.md, README) |
 
 ## Decisions
 | # | Decision | Alternatives | Why |
@@ -63,3 +63,26 @@ Start: 2026-10-10 23:40 CEST.
 - Firecrawl total still 14 / 100 (Chrome-check, literature, Col 11 search: 0 each).
 - Running: adversarial review (read-only), synthetic control + AMW zones, visual QA of REPORT.html.
 - NEXT: apply review fixes; add synth + zones to report; clean run from scratch; publish artifact; final log.
+
+### FINAL (00:20, 2026-10-11) — loop stopped
+
+**Done**
+- Phase 1: new data downloaded, logged (DOWNLOAD_LOG.csv, 30 rows, sha256 + check numbers): MapBiomas Peru protected areas Col 4; MapBiomas Brazil indigenous territories Col 10.1 (+ Col 10); IBAMA autos de infração; INPE DETER mining alerts; BCRP/MINEM Madre de Dios gold production; Amazon Mining Watch; SERNANP, FUNAI, INGEMMET boundaries; MAAP #130/#193/#208/#241 text captures; literature notes.
+- Phases 2–6: `code/main.py` (+ modules) runs from scratch in ~56 s after `rm -rf output` and `uv sync`, exit 0, all checks OK (incl. Peru ANP platform check 777 ha), 16 figures, 418 numbers. Fallback without the three big files also exits 0 (414 numbers; maps skipped).
+- Phase 5 + review: adversarial review (`notes/review.md`), high/medium items fixed in code and text.
+- Phase 7: `docs/overnight/REPORT.html` (self-contained, ~9.6 MB) + `REPORT.md`; private artifact https://claude.ai/artifact/Uxv7gt7n5iNcnjP9hregjo (only the owner can open it until shared); agent.md §14 and README updated.
+- Extra: replication zip builder `docs/overnight/make_replication_zip.py` → `replication/GroupAnteater_Q2_replication.zip` (82 MB, git-ignored); unzipped copy reproduces numbers.csv exactly (max rel. diff 7e-15).
+
+**BLOCKED / manual steps**
+1. MAAP raw HTML: maapprogram.org returns 403 to scripts. Open each URL in notes/maap_citations.md in a browser → File › Save Page As (HTML only) → `data_raw/maap/maap_<n>.html` → `shasum -a 256` → update DOWNLOAD_LOG.csv rows.
+2. IBAMA embargo file ("Termos de embargo"): no URL found. Browse https://dadosabertos.ibama.gov.br (Cloudflare blocks scripts), find the embargo dataset, download the CSV into `data_raw/ibama/`, log it.
+3. Brazil per-territory publisher check: the MapBiomas platform shows only Collection 11; our file is Collection 10.1. Either wait for a Col 11 per-territory file on https://brasil.mapbiomas.org/en/estatisticas/ or the Dataverse, or state the mismatch (D14) and use 39,915 ha (pack, Col 11) as the Brazil check.
+4. IBAMA check number: IBAMA's site shows no totals; if the team finds the IBAMA "Painel de fiscalização" totals, add one year's count as the check.
+5. Verify the Kayapó desintrusão date (May 2025) and the "26 Sep 2024 Ibama Kayapó" item, which rest on search snippets (gov.br was offline).
+
+**Firecrawl:** 14 of 100 used.
+
+**First three things the team should do**
+1. Read REPORT.html §1 and §7 together and agree on the claim wording. The DiD is description only, parallel trends fail (2016 pre-coefficient), and sources disagree on the regional rise. Decide whether `output/fig_brief_main.png` is the brief figure.
+2. Each person re-opens the sources they will cite (MAAP pages, Nunes et al. 2024, FZS page) and saves raw HTML (manual step 1). AI is not a source.
+3. Run the required AI prompt for brief part 4 and keep the raw and edited answers for the appendix. Then draft the 2-page brief from §9 (brief skeleton) and build the replication zip with `uv run python docs/overnight/make_replication_zip.py`.
