@@ -16,8 +16,8 @@ NUMBERS = ROOT / "output" / "numbers.csv"
 
 # Free-text placeholders: edit here (e.g. when the Collection 11 per-territory file arrives).
 TEXT = {
-    "CHECK_BRAZIL_TI": "MISMATCH by collection: platform shows only Collection 11 (Kayapó 2024 = 17,632 ha) vs 18,176 ha in our Col 10.1 file; Col 11 per-territory file being sought",
-    "CHECK_BRAZIL_TI_SHORT": "Kayapó mining 2024 = 18,176 ha (Collection 10.1); platform (Collection 11) shows 17,632 ha — collection difference, see log",
+    "CHECK_BRAZIL_TI": "MISMATCH by collection: platform shows only Collection 11 (Kayapó 2024 = 17,632 ha) vs 18,176 ha in our Col 10.1 file; no Col 11 per-territory file published (checked 2026-10-11)",
+    "CHECK_BRAZIL_TI_SHORT": "Kayapó mining 2024 = 18,176 ha (Collection 10.1); platform (Collection 11) shows 17,632 ha (collection difference, no publisher match)",
 }
 
 BRIEF_FIG = "![The brief's one figure: new mining area per year, Tambopata and Amarakaeri buffer zones, Tambopata National Reserve, Madre de Dios total and rest](output/fig_brief_main.png)\n**Reading:** [[D]] Tambopata's additions fall after Mercurio (Feb 2019) and return from 2022; Amarakaeri and the rest of Madre de Dios rise. Description only."
