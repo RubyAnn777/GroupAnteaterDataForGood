@@ -144,7 +144,7 @@ def steps_svg() -> str:
             parts.append(f'<path d="M{x1} {y1} V{ym} H{x2} V{y2-1}" class="arrow" fill="none"{ds} marker-end="url(#arr)"/>')
     for a, b in [(1, 2), (2, 3), (3, 4), (4, 5), (5, 6)]:
         arrow(a, b)
-    arrow(2, 7, True); arrow(8, 9, True)
+    arrow(8, 9, True)  # optional steps are independent; a 2->7 arrow ran through step 5
     parts.append("</svg>")
     return "\n".join(parts)
 
@@ -306,7 +306,7 @@ CSS = r"""
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.6;margin:0}
-.draft{position:sticky;top:0;z-index:50;background:var(--no);color:#fff;font-weight:900;letter-spacing:.06em;text-transform:uppercase;font-size:.85rem;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.draft{position:sticky;top:0;z-index:50;background:#b3201a;color:#fff;font-weight:900;letter-spacing:.06em;text-transform:uppercase;font-size:.85rem;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .draft button{font:inherit;font-size:.75rem;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7);padding:3px 10px;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:500}
 .hero{background:var(--teal);color:var(--on-teal)}
 .hero .in{max-width:1200px;margin:0 auto;padding:36px 20px 30px}
@@ -344,6 +344,9 @@ section>table{display:block;overflow-x:auto}
 details.ng{margin:10px 0;border:1px solid var(--rule);background:var(--card)}
 details.ng>summary{cursor:pointer;font-weight:700;padding:8px 12px;background:var(--tint)}
 details.ng .tw{margin:0;max-height:520px;overflow:auto}
+table.nums td:first-child code{overflow-wrap:normal;white-space:nowrap;font-size:.78em}
+table.nums td:nth-child(4){min-width:240px}
+table.nums td:last-child code{overflow-wrap:normal;white-space:nowrap}
 #nfilter{width:100%;max-width:520px;font:inherit;padding:8px 12px;background:var(--card);color:var(--ink);border:1px solid var(--rule)}
 .figure{background:var(--card);border:1px solid var(--rule);padding:12px}.svgwrap{overflow-x:auto}
 svg.flow{width:100%;min-width:760px;height:auto;display:block;color:var(--ink-2);font-family:var(--sans)}

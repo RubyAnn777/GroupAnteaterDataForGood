@@ -7,7 +7,7 @@ Sections are split on "## ". Lines starting with "> " become callouts.
 
 # Overnight analysis report: how does mining move with enforcement?
 
-> DRAFT for the team (Group Giant Anteater, Question 2, Peru + Brazil). Produced overnight on 10/11 Oct 2026 on branch `analysis/overnight-2026-10-10` by Claude, an AI assistant, and its subagents. Every number below is read from `output/numbers.csv`, which `uv run python code/main.py` writes. Nothing here is checked by a human yet. Read it critically, re-open the sources you cite, and treat every claim tag as a proposal.
+> For the team (Group Giant Anteater, Question 2, Peru + Brazil). Produced overnight on 10/11 Oct 2026 on branch `analysis/overnight-2026-10-10` by Claude, an AI assistant, and its subagents. Every number below is read from `output/numbers.csv`, which `uv run python code/main.py` writes. Nothing here is checked by a human yet. Read it critically, re-open the sources you cite, and treat every claim tag as a proposal.
 
 ## 1. Summary of findings
 
