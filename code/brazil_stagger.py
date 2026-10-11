@@ -110,8 +110,9 @@ def run(reg):
         reg.add(f"bs_{k}_pool_change_pct", r.pool_change_pct, "percent",
                 f"Same windows, no-operation pool ({len(pool)} territories)", "description", SRC)
         reg.add(f"bs_{k}_gap_logpts", r.gap_log_points, "log points", f"{r.group} minus pool, ln change", "description", SRC)
-        reg.add(f"bs_{k}_first_below_half", r.first_year_below_half, "year",
-                f"First year from 2022 with AMW new area below half the 2019-21 mean, {r.group}", "description", SRC)
+        if not np.isnan(r.first_year_below_half):          # Sarare never fell below half: no number
+            reg.add(f"bs_{k}_first_below_half", r.first_year_below_half, "year",
+                    f"First year from 2022 with AMW new area below half the 2019-21 mean, {r.group}", "description", SRC)
     for y in (2019, 2022, 2023, 2024, 2025):
         reg.add(f"bs_pool_new_ha_{y}", g.loc[y, POOL], "ha", f"AMW new mining {y}, no-operation pool" +
                 (" (PROVISIONAL)" if y == 2025 else ""), "description", SRC)

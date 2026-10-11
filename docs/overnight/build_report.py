@@ -29,14 +29,14 @@ TEXT = {
 # ---------------------------------------------------------------------------------------- next steps
 STEPS = [  # (no, lane, step, owner, data)
     (1, "now", "Share the walkthrough page with the team (it is private until shared)", "Sebastian", "none"),
-    (2, "now", "Agree the claim wording, esp. the one conditional causal sentence", "whole team", "none"),
-    (3, "now", "Re-open every cited source; save MAAP pages with \"Save as\"", "each citer", "raw MAAP HTML"),
-    (4, "l5", "Fill in TEAM_PLAN.docx (members, roles)", "team lead", "none"),
-    (5, "l5", "Edit docs/brief/BRIEF_DRAFT to 2 pages; keep or re-run the AI prompt", "writer + editor", "none"),
-    (6, "l5", "Build the replication zip; make slides from the walkthrough figures", "data lead", "none"),
-    (7, "opt", "Ask FZS/SERNANP for dated patrol / interdiction records per zone", "team lead", "enforcement intensity"),
-    (8, "opt", "Brazil: Collection 11 per-territory file, if published", "Brazil analyst", "Col 11 territory file"),
-    (9, "opt", "Verify the Kayapó operation date; find the IBAMA embargo file", "Brazil analyst", "gov.br pages"),
+    (2, "now", "Ruby checks step 8: her four rules and the cut-offs", "Ruby", "none"),
+    (3, "now", "Agree the claim wording, esp. the one conditional causal sentence", "whole team", "none"),
+    (4, "now", "Re-open every cited source; save MAAP pages with \"Save as\"", "each citer", "raw MAAP HTML"),
+    (5, "l5", "Fill in TEAM_PLAN.docx (members, roles)", "team lead", "none"),
+    (6, "l5", "Edit the brief (section 15) to final; keep or re-run the AI prompt", "writer + editor", "none"),
+    (7, "l5", "Build the replication zip; make slides from the walkthrough figures", "data lead", "none"),
+    (8, "opt", "Ask FZS/SERNANP for dated patrol / interdiction records per zone", "team lead", "enforcement intensity"),
+    (9, "opt", "Brazil: search Munduruku operations 2019-21; Col 11 territory file", "Brazil analyst", "news, MapBiomas"),
 ]
 LANES = {"now": "Now (before Lesson 4)", "l5": "Before Lesson 5", "opt": "Optional / extension"}
 
@@ -229,6 +229,9 @@ def build_html(text: str, nums: dict, decisions, build_info: str) -> str:
         "".join("<tr>" + "".join(f"<td>{inline_md(c)}</td>" for c in r[:4]) + "</tr>" for r in decisions) + "</tbody></table></div>"))
     text = text.replace("{{NUMBERS_TABLE}}", stash_put(numbers_html(nums)))
     text = text.replace("{{NEXT_STEPS_DIAGRAM}}", stash_put('<div class="figure svgwrap">' + steps_svg() + "</div>"))
+    brief = brief_body_html(nums, "85%").replace("<h1>", '<h3 class="papertitle">').replace("</h1>", "</h3>")
+    brief = re.sub(r"<h2>(.*?)</h2>", r'<h4>\1</h4>', brief)
+    text = text.replace("{{BRIEF_BODY}}", stash_put('<div class="paper">' + brief + "</div>"))
     text = fill(text, nums, used)
     # figures
     def fig(m):
@@ -269,7 +272,8 @@ def build_md(text: str, nums: dict, decisions, build_info: str) -> str:
     used: list = []
     text, _ = prepare(text, nums)
     text = fill(text.replace("{{NUMBERS_TABLE}}", "@@NUMS@@").replace("{{DECISIONS_TABLE}}", "@@DEC@@")
-                .replace("{{NEXT_STEPS_DIAGRAM}}", "@@STEPS@@"), nums, used)
+                .replace("{{NEXT_STEPS_DIAGRAM}}", "@@STEPS@@")
+                .replace("{{BRIEF_BODY}}", "The full draft: [`docs/brief/BRIEF_DRAFT.md`](../brief/BRIEF_DRAFT.md)."), nums, used)
     # headline numbers = those used in section 1
     sec1 = re.search(r"(?s)## 1\..*?(?=\n## 2\.)", text)
     s1_used: list = []
@@ -289,6 +293,15 @@ def build_md(text: str, nums: dict, decisions, build_info: str) -> str:
     text = text.replace("](output/", "](../../output/")
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.rstrip() + f"\n\n---\n*{build_info}*\n"
+
+def brief_body_html(nums: dict, fig_width: str = "60%") -> str:
+    """The brief's HTML body (numbers filled, claim badges, figure embedded). Used by the print page and the walkthrough."""
+    text = re.sub(r"\A\s*<!--.*?-->", "", BRIEF_CONTENT.read_text(encoding="utf-8"), flags=re.S).lstrip()
+    text = fix_lists(fill(text, nums))
+    h = re.sub(r"\[\[([DPC])\]\]", lambda m: f'<span class="badge {m.group(1).lower()}">{BADGE_NAME[m.group(1)]}</span>', text)
+    h = re.sub(r"(?m)^!\[([^\]]*)\]\(([^)]+)\)\s*$",
+               lambda m: f'<figure><img src="{img_data_uri(m.group(2))}" alt="{html.escape(m.group(1))}" style="width:{fig_width}"><figcaption>Figure 1. {html.escape(m.group(1))}. Source: MapBiomas Peru, Collection 4.</figcaption></figure>', h)
+    return markdown.markdown(h, extensions=["tables", "sane_lists"])
 
 def build_brief(nums: dict, build_info: str) -> tuple[str, str]:
     """Brief draft: fill numbers, claim badges; Markdown (links to output/) and print-ready HTML (figure embedded)."""
@@ -346,6 +359,9 @@ CSS = r"""
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#11201f;--card:#1d3236;--tint:#24393d;--rule:#33494c;--teal:#0c2326;--on-teal-2:#a9c3c3;--ink:#eef4f3;--ink-2:#bccbcb;--ink-3:#8fa3a3;--rasp:#e0558f;--no:#ef8077;--no-soft:#3d2220;--maybe:#e9a845;--maybe-soft:#3a2e15;--yes:#7fc37c;--yes-soft:#1f3624;--blue:#4d94e8;color-scheme:dark}}
 :root[data-theme="dark"]{--paper:#11201f;--card:#1d3236;--tint:#24393d;--rule:#33494c;--teal:#0c2326;--on-teal-2:#a9c3c3;--ink:#eef4f3;--ink-2:#bccbcb;--ink-3:#8fa3a3;--rasp:#e0558f;--no:#ef8077;--no-soft:#3d2220;--maybe:#e9a845;--maybe-soft:#3a2e15;--yes:#7fc37c;--yes-soft:#1f3624;--blue:#4d94e8;color-scheme:dark}
 *{box-sizing:border-box}
+.paper{background:var(--card);border:1px solid var(--rule);box-shadow:0 2px 10px rgba(0,0,0,.08);padding:28px 34px;margin:12px 0 20px;max-width:820px;font-size:.95rem}
+.paper h3.papertitle{font-size:1.35rem;font-weight:900;margin:0 0 4px}.paper h4{font-size:1.05rem;margin:22px 0 6px;border-bottom:1px solid var(--rule);padding-bottom:3px}
+.paper figure{border:0;padding:0;text-align:center}.paper figure img{margin:0 auto}.paper p,.paper li{max-width:none}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.6;margin:0}
 .draft{position:sticky;top:0;z-index:50;background:#b3201a;color:#fff;font-weight:900;letter-spacing:.06em;text-transform:uppercase;font-size:.85rem;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}

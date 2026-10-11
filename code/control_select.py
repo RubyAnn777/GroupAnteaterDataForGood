@@ -225,6 +225,9 @@ def run(reg):
                     f"{k}, Tambopata BZ vs {r['control']} (AMW new mining per year as % of own 2018 stock; during = 2019-21, "
                     "after = 2022-25, 2025 provisional)", "description", SRC)
     for r, tag in zip(rows, ["strict", "relaxed"] if cs and cr else ["strict" if cs else "relaxed"]):
+        reg.add(f"ctl_{tag}_during_ratio", r["tam_during"] / r["ctl_during"], "ratio",
+                f"Tambopata's 2019-21 pace of new mining as a share of {r['control']}'s (both as % of own 2018 AMW stock)",
+                "description", SRC)
         reg.add(f"ctl_{tag}_during_gap_ha", r["during_gap"] / 100 * w.loc[TU, 2018], "ha/yr (AMW scale)",
                 f"During gap vs {r['control']} converted to hectares at Tambopata's 2018 AMW stock (AMW hectares run large; "
                 "never compare with MapBiomas hectares)", "description", SRC)
