@@ -16,3 +16,5 @@ label,value,expected,ok
 "ANP file: Tambopata total area, km2 (FZS says 2,746; plausibility only, tol 50)",2778.285269732206,2746.0,True
 "Publisher check (MapBiomas Peru platform, Col 4, read 2026-10-10; data_raw/mapbiomas_peru/platform_check_tambopata_reserve_2026-10-10.jpg): Tambopata NR mining 2025, ha",777.0,777.0,True
 "Kayapo 2024 mining, ha: file Col 10.1 vs platform Col 11 (2026-10-10), collection difference, not asserted",18175.85096720563,17632.0,MISMATCH-documented
+"MapBiomas Amazonia Col 6, mining area whole region 2023, ha (factsheet p.3: 0.78 Mha)",775745.8721407066,780000.0,True
+"MapBiomas Brazil Col 11 mining module, garimpo, all Brazil 2025, ha (platform 445,987)",445986.54254546907,445987.0,True

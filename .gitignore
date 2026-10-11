@@ -10,3 +10,7 @@ data_raw/ibama/*.zip
 data_raw/ibama/*.csv
 data_raw/funai/tis_poligonais.geojson
 replication/
+
+# RAISG protected areas (ArcGIS REST pages, 17-64 MB each; URLs in DOWNLOAD_LOG.csv)
+data_raw/raisg/*.geojson
+data_raw/mapbiomas_amazonia/*.xlsx

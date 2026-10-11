@@ -69,3 +69,19 @@ def run_checks(pack: dict) -> None:
           f"vs all-department definition {t0:,.1f} / {a0:,.1f}")
     save()
     print("All checks OK.")
+
+def run_new_data_checks() -> None:
+    """Publisher checks for data added on 2026-10-11 (rule-based control search, Brazil). Called from main after the
+    intermediates exist. MapBiomas Amazonia Col 6 is read from data_intermediate (raw xlsx is 260 MB, git-ignored)."""
+    from common import ROOT
+    print("\n== Source checks: new data (2026-10-11) ==")
+    f = ROOT / "data_intermediate" / "mb_amazonia_col6_check.csv"
+    if f.exists():
+        v = pd.read_csv(f)["value"].iloc[0]
+        check("MapBiomas Amazonia Col 6, mining area whole region 2023, ha (factsheet p.3: 0.78 Mha)", v, 780_000, tol=5_000)
+    m = ROOT / "data_raw/mapbiomas_brazil/MAPBIOMAS-BRAZIL-MINED-SUBSTANCES-MUNICIPALITY-COLLECTION_11.xlsx"
+    if m.exists():
+        x = pd.read_excel(m, sheet_name="MINED_SUBSTANCE")
+        g = x.loc[x["CLASS_LEVEL_1"] == "Garimpo", "y2025"].sum()
+        check("MapBiomas Brazil Col 11 mining module, garimpo, all Brazil 2025, ha (platform 445,987)", g, 445_987, tol=1)
+    save()

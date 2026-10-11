@@ -1,0 +1,1175 @@
+unit_id,country,kind,name,area_km2,lon,lat,dist_la_pampa_km,dist_yanomami_km
+PE-ANP-BP01,Peru,protected area,Aledaño a la Bocatoma del Canal Nuevo Imperial (Bosque de Protección),0.2,-76.2181,-13.0438,649.4,1822.3
+PE-ANP-BP02,Peru,protected area,Puquio Santa Rosa (Bosque de Protección),0.7,-78.7154,-8.5973,1049.2,1676.8
+PE-ANP-BP03,Peru,protected area,de Pui Pui (Bosque de Protección),600.5,-75.0659,-11.2746,548.2,1576.8
+PE-ANP-BP04,Peru,protected area,San Matias-San Carlos (Bosque de Protección),1481.8,-74.9181,-10.56,542.3,1483.9
+PE-ANP-BP05,Peru,protected area,de Pagaibamba (Bosque de Protección),20.8,-79.0606,-6.4129,1215.9,1589.0
+PE-ANP-BP06,Peru,protected area,Alto Mayo (Bosque de Protección),1817.8,-77.5829,-5.7476,1085.7,1392.6
+PE-ANP-BP07,Peru,protected area,Tijae-Río Nieva (Bosque de Protección),299.7,-77.8435,-5.4879,1176.5,1414.1
+PE-ANP-CC01,Peru,protected area,El Angolo (Coto de Caza),650.5,-80.786,-4.3025,1498.0,1676.7
+PE-ANP-CC02,Peru,protected area,Sunchubamba (Coto de Caza),596.7,-78.4471,-7.4323,1079.3,1570.6
+PE-ANP-PN01,Peru,protected area,de Cutervo (Parque Nacional),82.1,-78.788,-6.2186,1203.0,1547.9
+PE-ANP-PN02,Peru,protected area,de Tingo María (Parque Nacional),47.8,-76.0029,-9.3699,748.6,1495.6
+PE-ANP-PN03,Peru,protected area,del Manu (Parque Nacional),16987.4,-71.6991,-12.0851,120.8,1402.0
+PE-ANP-PN04,Peru,protected area,Huascarán (Parque Nacional),3396.9,-77.4057,-9.3934,823.9,1588.7
+PE-ANP-PN05,Peru,protected area,Cerros de Amotape (Parque Nacional),1521.5,-80.4751,-3.9898,1494.5,1612.9
+PE-ANP-PN06,Peru,protected area,del Río Abiseo (Parque Nacional),2743.3,-77.2293,-7.7261,942.6,1443.2
+PE-ANP-PN07,Peru,protected area,Yanachaga-Chemillén (Parque Nacional),1138.2,-75.403,-10.37,609.3,1516.8
+PE-ANP-PN08,Peru,protected area,Bahuaja-Sonene (Parque Nacional),10929.2,-69.4059,-13.3716,14.5,1428.1
+PE-ANP-PN09,Peru,protected area,Cordillera Azul (Parque Nacional),13539.0,-75.9478,-7.7249,770.9,1268.7
+PE-ANP-PN10,Peru,protected area,Otishi (Parque Nacional),3060.6,-73.6276,-11.8443,357.0,1515.9
+PE-ANP-PN11,Peru,protected area,Alto Purús (Parque Nacional),25076.9,-71.5426,-10.7629,192.6,1218.5
+PE-ANP-PN12,Peru,protected area,Ichigkat Muja-Cordillera del Cóndor (Parque Nacional),883.3,-78.139,-3.366,1374.7,1339.7
+PE-ANP-PN13,Peru,protected area,Güeppí-Sekime (Parque Nacional),2038.3,-75.2148,-0.3711,1467.1,967.9
+PE-ANP-PN14,Peru,protected area,Sierra del Divisor (Parque Nacional),13552.2,-74.0237,-7.1958,673.0,1035.0
+PE-ANP-PN15,Peru,protected area,Yaguas (Parque Nacional),8682.8,-71.23,-2.865,1082.5,574.1
+PE-ANP-RC01,Peru,protected area,Yanesha (Reserva Comunal),339.3,-75.2786,-10.2964,607.8,1510.7
+PE-ANP-RC02,Peru,protected area,El Sira (Reserva Comunal),6168.5,-74.4768,-9.8782,507.7,1341.6
+PE-ANP-RC03,Peru,protected area,Amarakaeri (Reserva Comunal),4022.1,-70.9523,-12.7914,61.8,1465.6
+PE-ANP-RC04,Peru,protected area,Ashaninka (Reserva Comunal),1845.5,-73.7851,-11.8196,376.1,1506.5
+PE-ANP-RC05,Peru,protected area,Machiguenga (Reserva Comunal),2189.0,-73.3097,-11.9371,318.0,1483.3
+PE-ANP-RC06,Peru,protected area,Purús (Reserva Comunal),2019.1,-71.1538,-10.2215,300.5,1206.1
+PE-ANP-RC07,Peru,protected area,Tuntanain (Reserva Comunal),947.9,-78.0544,-4.1122,1290.5,1383.4
+PE-ANP-RC08,Peru,protected area,Chayu Naín (Reserva Comunal),235.6,-78.2426,-5.4484,1215.8,1457.6
+PE-ANP-RC09,Peru,protected area,Airo Pai (Reserva Comunal),2481.4,-74.9393,-0.7343,1436.1,924.3
+PE-ANP-RC10,Peru,protected area,Huimeki (Reserva Comunal),1413.5,-74.8581,-0.4029,1450.7,916.4
+PE-ANP-RC11,Peru,protected area,Bajo Putumayo Yaguas (Reserva Comunal),1605.7,-70.7693,-2.6478,1120.5,555.2
+PE-ANP-RN01,Peru,protected area,Pampa Galeras Barbara D' Achille (Reserva Nacional),79.4,-74.3692,-14.6926,488.6,1867.1
+PE-ANP-RN02,Peru,protected area,de Junín (Reserva Nacional),530.2,-76.1145,-11.0036,663.5,1628.3
+PE-ANP-RN03,Peru,protected area,de Paracas (Reserva Nacional),3357.8,-76.2809,-14.1533,640.8,1892.3
+PE-ANP-RN04,Peru,protected area,de Lachay (Reserva Nacional),50.7,-77.3617,-11.3741,790.8,1757.1
+PE-ANP-RN05,Peru,protected area,del Titicaca (Reserva Nacional),362.0,-69.9178,-15.6518,264.8,1745.6
+PE-ANP-RN06,Peru,protected area,de Salinas y Aguada Blanca (Reserva Nacional),3667.2,-71.2194,-16.1024,338.2,1842.5
+PE-ANP-RN07,Peru,protected area,de Calipuy (Reserva Nacional),639.2,-78.3429,-8.5708,1000.2,1625.3
+PE-ANP-RN08,Peru,protected area,Pacaya-Samiria (Reserva Nacional),21718.7,-74.78,-5.2189,935.1,942.2
+PE-ANP-RN09,Peru,protected area,Tambopata (Reserva Nacional),2778.4,-69.3316,-12.906,6.8,1414.3
+PE-ANP-RN10,Peru,protected area,Allpahuayo Mishana (Reserva Nacional),580.8,-73.5508,-3.9337,1069.7,905.6
+PE-ANP-RN11,Peru,protected area,de Tumbes (Reserva Nacional),192.8,-80.2698,-3.9449,1493.3,1611.6
+PE-ANP-RN12,Peru,protected area,Matsés (Reserva Nacional),4206.9,-73.5633,-5.5778,834.6,955.2
+PE-ANP-RN13.01,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Isla Lobos de Tierra (Reserva Nacional)",182.9,-80.8585,-6.4283,1367.6,1766.3
+PE-ANP-RN13.02,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Islas Lobos de Afuera (Reserva Nacional)",82.7,-80.726,-6.9392,1327.0,1777.1
+PE-ANP-RN13.03,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Islas Macabí (Reserva Nacional)",80.2,-79.4995,-7.8056,1162.2,1699.4
+PE-ANP-RN13.04-05,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Islas Guañape Norte y Guañape Sur (Reserva Nacional)",84.8,-78.9648,-8.5502,1069.7,1691.8
+PE-ANP-RN13.06,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Isla Chao (Reserva Nacional)",44.9,-78.7992,-8.764,1044.1,1691.3
+PE-ANP-RN13.07,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Islote Corcovado (Reserva Nacional)",52.2,-78.701,-8.9384,1025.0,1692.9
+PE-ANP-RN13.08,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Isla Santa (Reserva Nacional)",66.6,-78.6875,-9.0318,1017.4,1698.0
+PE-ANP-RN13.09,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta Culebras (Reserva Nacional)",29.5,-78.242,-9.9612,931.1,1723.7
+PE-ANP-RN13.10,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta Colorado (Reserva Nacional)",22.1,-77.981,-10.4953,884.5,1739.9
+PE-ANP-RN13.11,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta La Litera (Reserva Nacional)",20.3,-77.8995,-10.6183,871.1,1742.6
+PE-ANP-RN13.12,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Islote Don Martín (Reserva Nacional)",33.1,-77.683,-11.0267,834.0,1756.0
+PE-ANP-RN13.13-15,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta Salinas, Isla Huampanú e Isla Mazorca (Reserva Nacional)",141.9,-77.709,-11.3527,824.8,1774.5
+PE-ANP-RN13.16,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Islote Grupo de Pescadores (Reserva Nacional)",69.1,-77.2364,-11.7941,765.7,1780.0
+PE-ANP-RN13.17-18,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Islas Cavinzas e Islotes Palominos (Reserva Nacional)",51.4,-77.2301,-12.1348,758.7,1809.4
+PE-ANP-RN13.19,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Islas Pachacamac (Reserva Nacional)",42.9,-76.9047,-12.3139,722.4,1802.5
+PE-ANP-RN13.20,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Isla Asia (Reserva Nacional)",39.3,-76.6299,-12.7999,689.0,1825.7
+PE-ANP-RN13.21-23,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Isla Chincha Norte, Centro y Sur (Reserva Nacional)",94.1,-76.3967,-13.6335,666.3,1880.9
+PE-ANP-RN13.24-26,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Isla Ballestas Norte, Centro y Sur (Reserva Nacional)",72.0,-76.3944,-13.736,667.9,1890.9
+PE-ANP-RN13.27,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta Lomitas (Reserva Nacional)",24.7,-75.8647,-14.7248,638.9,1954.6
+PE-ANP-RN13.28,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta San Juan (Reserva Nacional)",29.7,-75.2065,-15.3786,603.7,1981.9
+PE-ANP-RN13.29,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta Lomas (Reserva Nacional)",24.1,-74.8648,-15.5812,584.1,1984.0
+PE-ANP-RN13.30,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta Atico (Reserva Nacional)",34.7,-73.7081,-16.2481,535.0,1997.1
+PE-ANP-RN13.31,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta La Chira (Reserva Nacional)",24.4,-72.9336,-16.5377,508.0,1995.5
+PE-ANP-RN13.32,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta Hornillos (Reserva Nacional)",26.8,-72.2986,-16.891,507.1,2008.9
+PE-ANP-RN13.33,Peru,protected area,"Sistema de Islas, Islotes y Puntas Guaneras - Punta Coles (Reserva Nacional)",33.6,-71.3847,-17.7129,562.1,2063.6
+PE-ANP-RN14,Peru,protected area,Pucacuro (Reserva Nacional),6385.3,-75.3295,-2.4389,1204.8,1007.8
+PE-ANP-RN15,Peru,protected area,San Fernando (Reserva Nacional),1548.4,-75.3496,-15.0014,577.2,1930.0
+PE-ANP-RN16,Peru,protected area,Dorsal de Nasca (Reserva Nacional),62344.9,-77.3083,-16.296,695.9,2037.3
+PE-ANP-RN17,Peru,protected area,Illescas (Reserva Nacional),365.8,-81.0758,-5.967,1408.3,1768.8
+PE-ANP-RN18,Peru,protected area,Mar Tropical de Grau (Reserva Nacional),1157.6,-81.1604,-4.1247,1469.1,1694.9
+PE-ANP-RP01,Peru,protected area,Nor Yauyos-Cochas (Reserva Paisajistica),2214.0,-75.8504,-12.0825,593.3,1676.2
+PE-ANP-RP02,Peru,protected area,Subcuenca del Cotahuasi (Reserva Paisajistica),4902.6,-72.8045,-15.0667,321.2,1780.6
+PE-ANP-RVS01,Peru,protected area,Laquipampa (Refugio de Vida Silvestre),83.3,-79.4933,-6.3467,1255.9,1624.6
+PE-ANP-RVS02,Peru,protected area,Los Pantanos de Villa (Refugio de Vida Silvestre),2.6,-76.9889,-12.2138,736.4,1802.0
+PE-ANP-RVS03,Peru,protected area,Bosques Nublados de Udima (Refugio de Vida Silvestre),121.8,-79.0799,-6.8142,1180.1,1603.9
+PE-ANP-SH01,Peru,protected area,de Chacamarca (Santuario Histórico),25.0,-75.9765,-11.2189,654.3,1644.1
+PE-ANP-SH02,Peru,protected area,de la Pampa de Ayacucho (Santuario Histórico),3.0,-74.1191,-13.0338,428.4,1694.7
+PE-ANP-SH03,Peru,protected area,Machupicchu (Santuario Histórico),372.6,-72.4949,-13.224,248.9,1619.8
+PE-ANP-SH04,Peru,protected area,Bosque de Pomac (Santuario Histórico),58.9,-79.7773,-6.4762,1270.8,1661.4
+PE-ANP-SN01,Peru,protected area,de Huayllay (Santuario Nacional),68.2,-76.3407,-10.9504,698.3,1646.7
+PE-ANP-SN02,Peru,protected area,de Calipuy (Santuario Nacional),44.9,-78.2952,-8.3506,1020.3,1620.3
+PE-ANP-SN03,Peru,protected area,Lagunas de Mejía (Santuario Nacional),6.9,-71.8611,-17.1478,516.6,2021.6
+PE-ANP-SN04,Peru,protected area,de Ampay (Santuario Nacional),38.5,-72.893,-13.5798,304.6,1684.2
+PE-ANP-SN05,Peru,protected area,los Manglares de Tumbes (Santuario Nacional),29.7,-80.2768,-3.4269,1537.4,1611.2
+PE-ANP-SN06,Peru,protected area,Megantoni (Santuario Nacional),2155.9,-72.3384,-12.253,213.9,1497.4
+PE-ANP-SN07,Peru,protected area,Pampa Hermosa (Santuario Nacional),115.5,-75.4922,-11.0421,611.6,1588.8
+PE-ANP-SN08,Peru,protected area,Tabaconas-Namballe (Santuario Nacional),321.2,-79.2681,-5.1794,1311.1,1547.1
+PE-ANP-SN09,Peru,protected area,Cordillera de Colán (Santuario Nacional),391.5,-78.1521,-5.5254,1199.5,1443.4
+PE-BZ-BP03,Peru,buffer zone,de Pui Pui buffer zone,454.0,-75.0596,-11.2881,545.5,1570.8
+PE-BZ-BP04,Peru,buffer zone,San Matias-San Carlos buffer zone,1285.8,-74.9486,-10.5178,540.1,1481.4
+PE-BZ-BP05,Peru,buffer zone,de Pagaibamba buffer zone,41.0,-79.0611,-6.4085,1215.0,1587.0
+PE-BZ-BP06,Peru,buffer zone,Alto Mayo buffer zone,2226.8,-77.5807,-5.7842,1079.3,1383.3
+PE-BZ-CC01,Peru,buffer zone,El Angolo buffer zone,296.1,-80.7814,-4.4068,1493.7,1672.7
+PE-BZ-CC02,Peru,buffer zone,Sunchubamba buffer zone,283.7,-78.4273,-7.4479,1071.3,1568.7
+PE-BZ-PN01,Peru,buffer zone,de Cutervo buffer zone,190.0,-78.7808,-6.2247,1199.3,1545.1
+PE-BZ-PN02,Peru,buffer zone,de Tingo María buffer zone,41.3,-76.0293,-9.3936,747.7,1495.4
+PE-BZ-PN03,Peru,buffer zone,del Manu buffer zone,6648.3,-72.0352,-12.0287,79.3,1420.9
+PE-BZ-PN04,Peru,buffer zone,Huascarán buffer zone,1782.6,-77.4155,-9.4051,823.1,1584.9
+PE-BZ-PN05,Peru,buffer zone,Cerros de Amotape buffer zone,915.9,-80.4933,-3.961,1489.7,1611.6
+PE-BZ-PN06,Peru,buffer zone,del Río Abiseo buffer zone,6709.6,-77.1419,-7.6898,903.1,1414.7
+PE-BZ-PN07,Peru,buffer zone,Yanachaga-Chemillén buffer zone,608.3,-75.5254,-10.3446,610.8,1519.7
+PE-BZ-PN08,Peru,buffer zone,Bahuaja-Sonene buffer zone,2612.7,-69.8062,-13.573,14.7,1513.0
+PE-BZ-PN09,Peru,buffer zone,Cordillera Azul buffer zone,23058.2,-75.8142,-7.6079,740.2,1227.1
+PE-BZ-PN10,Peru,buffer zone,Otishi buffer zone,388.9,-73.4838,-12.3514,356.2,1584.4
+PE-BZ-PN11,Peru,buffer zone,Alto Purús buffer zone,16999.8,-71.4621,-10.991,93.6,1206.1
+PE-BZ-PN12,Peru,buffer zone,Ichigkat Muja-Cordillera del Cóndor buffer zone,1387.1,-78.0774,-3.4663,1359.8,1340.5
+PE-BZ-PN14,Peru,buffer zone,Sierra del Divisor buffer zone,6319.7,-74.1937,-7.207,661.7,1032.3
+PE-BZ-PN15,Peru,buffer zone,Yaguas buffer zone,2408.9,-71.1938,-2.8456,1077.5,569.1
+PE-BZ-RC01,Peru,buffer zone,Yanesha buffer zone,514.2,-75.2188,-10.2398,603.9,1496.7
+PE-BZ-RC02,Peru,buffer zone,El Sira buffer zone,10964.8,-74.5587,-9.9077,493.6,1330.2
+PE-BZ-RC03,Peru,buffer zone,Amarakaeri buffer zone,2834.8,-70.8929,-12.7507,53.8,1460.3
+PE-BZ-RC04,Peru,buffer zone,Ashaninka buffer zone,3258.3,-73.8477,-11.6829,381.1,1486.7
+PE-BZ-RC05,Peru,buffer zone,Machiguenga buffer zone,5198.9,-73.2244,-11.9771,305.1,1459.8
+PE-BZ-RC06,Peru,buffer zone,Purús buffer zone,2223.6,-70.9187,-10.0189,311.5,1170.7
+PE-BZ-RC07,Peru,buffer zone,Tuntanain buffer zone,2876.8,-78.0979,-4.0433,1281.0,1365.5
+PE-BZ-RC08,Peru,buffer zone,Chayu Naín buffer zone,123.7,-78.2436,-5.413,1215.3,1450.2
+PE-BZ-RC09,Peru,buffer zone,Airo Pai buffer zone,624.7,-74.7666,-0.8621,1431.1,919.2
+PE-BZ-RC10,Peru,buffer zone,Huimeki buffer zone,221.7,-74.6866,-0.4335,1448.8,914.3
+PE-BZ-RN01,Peru,buffer zone,Pampa Galeras Barbara D' Achille buffer zone,145.4,-74.3794,-14.689,486.0,1864.6
+PE-BZ-RN02,Peru,buffer zone,de Junín buffer zone,1009.0,-76.0755,-10.9512,651.1,1612.8
+PE-BZ-RN03,Peru,buffer zone,de Paracas buffer zone,1409.7,-76.0168,-14.1768,622.2,1887.7
+PE-BZ-RN04,Peru,buffer zone,de Lachay buffer zone,33.5,-77.3614,-11.3664,789.9,1755.8
+PE-BZ-RN05,Peru,buffer zone,del Titicaca buffer zone,1646.6,-69.8459,-15.5883,259.9,1739.7
+PE-BZ-RN06,Peru,buffer zone,de Salinas y Aguada Blanca buffer zone,3100.6,-71.2499,-16.0366,327.1,1831.6
+PE-BZ-RN07,Peru,buffer zone,de Calipuy buffer zone,366.1,-78.3858,-8.5911,996.9,1622.7
+PE-BZ-RN08,Peru,buffer zone,Pacaya-Samiria buffer zone,12206.2,-74.7275,-5.3112,918.3,936.7
+PE-BZ-RN09,Peru,buffer zone,Tambopata buffer zone,2316.9,-69.7073,-12.8783,0.0,1405.9
+PE-BZ-RN10,Peru,buffer zone,Allpahuayo Mishana buffer zone,659.7,-73.5504,-3.9321,1064.7,900.6
+PE-BZ-RN12,Peru,buffer zone,Matsés buffer zone,2314.4,-73.6012,-5.351,839.3,953.1
+PE-BZ-RN14,Peru,buffer zone,Pucacuro buffer zone,3397.9,-75.3619,-2.4613,1197.3,1001.5
+PE-BZ-RN15,Peru,buffer zone,San Fernando buffer zone,733.1,-75.3257,-15.0152,571.0,1922.5
+PE-BZ-RN17,Peru,buffer zone,Illescas buffer zone,260.1,-81.0315,-5.9819,1406.7,1764.7
+PE-BZ-RP01,Peru,buffer zone,Nor Yauyos-Cochas buffer zone,1095.0,-75.8266,-12.1009,588.0,1674.9
+PE-BZ-RP02,Peru,buffer zone,Subcuenca del Cotahuasi buffer zone,4848.5,-72.8503,-15.0523,304.7,1769.4
+PE-BZ-RVS01,Peru,buffer zone,Laquipampa buffer zone,46.2,-79.4835,-6.3315,1255.8,1623.1
+PE-BZ-RVS02,Peru,buffer zone,Los Pantanos de Villa buffer zone,10.3,-76.9909,-12.2051,736.2,1799.8
+PE-BZ-RVS03,Peru,buffer zone,Bosques Nublados de Udima buffer zone,40.2,-79.0676,-6.7926,1177.6,1601.8
+PE-BZ-SH01,Peru,buffer zone,de Chacamarca buffer zone,13.3,-75.9691,-11.2178,653.7,1643.1
+PE-BZ-SH02,Peru,buffer zone,de la Pampa de Ayacucho buffer zone,4.3,-74.1148,-13.0324,427.6,1693.8
+PE-BZ-SH03,Peru,buffer zone,Machupicchu buffer zone,1329.4,-72.4709,-13.2008,239.3,1603.2
+PE-BZ-SH04,Peru,buffer zone,Bosque de Pomac buffer zone,92.9,-79.7764,-6.4882,1268.8,1658.6
+PE-BZ-SN01,Peru,buffer zone,de Huayllay buffer zone,48.4,-76.34,-10.9572,696.9,1645.1
+PE-BZ-SN02,Peru,buffer zone,de Calipuy buffer zone,104.9,-78.2951,-8.3536,1016.8,1617.3
+PE-BZ-SN03,Peru,buffer zone,Lagunas de Mejía buffer zone,18.8,-71.8568,-17.1402,514.8,2019.8
+PE-BZ-SN04,Peru,buffer zone,de Ampay buffer zone,57.0,-72.9052,-13.5676,302.9,1681.1
+PE-BZ-SN05,Peru,buffer zone,los Manglares de Tumbes buffer zone,52.1,-80.289,-3.4538,1536.1,1610.8
+PE-BZ-SN06,Peru,buffer zone,Megantoni buffer zone,2058.9,-72.553,-12.2959,219.5,1502.8
+PE-BZ-SN07,Peru,buffer zone,Pampa Hermosa buffer zone,86.6,-75.5114,-11.0447,609.7,1588.4
+PE-BZ-SN08,Peru,buffer zone,Tabaconas-Namballe buffer zone,449.9,-79.2378,-5.1686,1301.5,1540.5
+PE-BZ-SN09,Peru,buffer zone,Cordillera de Colán buffer zone,188.3,-78.1315,-5.5561,1194.2,1440.2
+PE-BZ-ZR01,Peru,buffer zone,Chancaybaños buffer zone,40.4,-78.9053,-6.5477,1190.8,1576.9
+PE-BZ-ZR03,Peru,buffer zone,Santiago Comaina buffer zone,2045.4,-77.5851,-3.8438,1252.4,1299.6
+BR-TI-101,Brazil,indigenous territory,Acapuri de Cima,181.5,-66.828,-2.5971,1202.6,288.4
+BR-TI-201,Brazil,indigenous territory,Acimã,406.2,-66.1808,-7.8409,694.5,822.5
+BR-TI-401,Brazil,indigenous territory,Água Preta/Inari,1396.7,-67.1696,-7.476,675.3,800.6
+BR-TI-501,Brazil,indigenous territory,Águas Belas,12.1,-39.2783,-16.9212,3205.4,3181.4
+BR-TI-601,Brazil,indigenous territory,Aconã,2.7,-36.926,-10.0524,3517.1,3020.5
+BR-TI-701,Brazil,indigenous territory,Aldeia Kondá,21.3,-52.5645,-27.2183,2394.1,3317.9
+BR-TI-801,Brazil,indigenous territory,Aldeia Limão Verde,6.9,-55.2042,-23.1741,1906.5,2785.4
+BR-TI-901,Brazil,indigenous territory,Aldeia Velha,20.0,-39.1032,-16.4634,3221.6,3164.7
+BR-TI-1001,Brazil,indigenous territory,Alto Rio Guamá,2842.3,-46.7234,-2.3313,2774.2,1692.0
+BR-TI-1101,Brazil,indigenous territory,Alto Rio Negro,79515.9,-68.5287,0.5624,1325.6,88.7
+BR-TI-1201,Brazil,indigenous territory,Alto Rio Purus,2618.9,-70.0836,-9.2964,386.9,1082.4
+BR-TI-1301,Brazil,indigenous territory,Alto Sepatini,262.1,-66.3407,-8.0175,673.9,849.1
+BR-TI-1401,Brazil,indigenous territory,Alto Tarauacá,1423.7,-71.9084,-9.6031,411.4,1208.9
+BR-TI-1501,Brazil,indigenous territory,Alto Turiaçu,5292.7,-46.2513,-2.868,2768.5,1750.2
+BR-TI-1601,Brazil,indigenous territory,Amambai,24.3,-55.187,-23.0695,1897.9,2773.5
+BR-TI-1701,Brazil,indigenous territory,Amanayé,1628.6,-48.6834,-3.9214,2499.8,1547.7
+BR-TI-1801,Brazil,indigenous territory,Anambé,85.8,-49.3027,-2.8584,2513.2,1462.8
+BR-TI-1901,Brazil,indigenous territory,Ananás,19.2,-61.4236,3.8903,2081.4,68.7
+BR-TI-2001,Brazil,indigenous territory,Andirá-Marau,7905.7,-56.9245,-3.7404,1690.5,733.0
+BR-TI-2101,Brazil,indigenous territory,Aningal,76.6,-61.4031,3.461,2039.5,71.1
+BR-TI-2201,Brazil,indigenous territory,Anta,31.8,-61.1483,3.3637,2043.9,93.2
+BR-TI-2301,Brazil,indigenous territory,Apiaka/Kayabi,1092.8,-57.3947,-10.9421,1334.3,1404.2
+BR-TI-2401,Brazil,indigenous territory,Apinayé,1423.4,-47.6212,-6.1168,2502.4,1747.6
+BR-TI-2501,Brazil,indigenous territory,Apipica,6.5,-59.3419,-3.3672,1578.2,575.1
+BR-TI-2601,Brazil,indigenous territory,Apucarana,56.0,-50.9295,-23.7908,2292.8,3038.6
+BR-TI-2701,Brazil,indigenous territory,Apurinã do Igarapé São João,182.5,-63.1369,-5.5693,1105.4,596.9
+BR-TI-2801,Brazil,indigenous territory,Apurinã Igarapé Tauamirim,1004.7,-62.9988,-5.6866,1095.9,607.9
+BR-TI-2901,Brazil,indigenous territory,Apurinã Km 124 BR-317,423.7,-67.2173,-9.3048,498.4,1009.0
+BR-TI-3002,Brazil,indigenous territory,Apyterewa,7737.3,-52.0365,-5.6372,2040.7,1267.7
+BR-TI-3101,Brazil,indigenous territory,Araçá,504.4,-61.1052,3.6252,2063.0,91.9
+BR-TI-3201,Brazil,indigenous territory,Arara,2744.1,-53.0484,-3.7523,2062.3,1086.6
+BR-TI-3301,Brazil,indigenous territory,Arara do Rio Branco,1148.2,-59.5997,-9.7722,1140.7,1182.8
+BR-TI-3401,Brazil,indigenous territory,Arara do Igarapé Humaitá,873.2,-72.3767,-8.4298,548.4,1140.7
+BR-TI-3501,Brazil,indigenous territory,Araribá,19.2,-49.3553,-22.2733,2353.2,2960.1
+BR-TI-3601,Brazil,indigenous territory,Arariboia,4135.5,-46.4244,-5.0699,2650.9,1821.1
+BR-TI-3701,Brazil,indigenous territory,Arary,402.9,-60.0294,-4.7539,1407.6,658.3
+BR-TI-3801,Brazil,indigenous territory,Araweté Igarapé Ipixuna,9402.1,-52.4491,-4.9585,2034.4,1190.4
+BR-TI-3901,Brazil,indigenous territory,Areões,1802.7,-51.9615,-14.3891,1854.3,2031.3
+BR-TI-4201,Brazil,indigenous territory,Aripuanã,7509.0,-59.9717,-10.5738,1035.7,1199.4
+BR-TI-4301,Brazil,indigenous territory,Ariramba,104.9,-62.2758,-6.119,1127.4,696.7
+BR-TI-4401,Brazil,indigenous territory,Arroio-Korá,71.1,-55.2797,-23.711,1936.0,2835.8
+BR-TI-4501,Brazil,indigenous territory,Atikum,163.0,-38.8181,-8.2951,3354.5,2753.4
+BR-TI-4602,Brazil,indigenous territory,Avá-Canoeiro,313.8,-48.2332,-13.8281,2270.2,2240.0
+BR-TI-4701,Brazil,indigenous territory,Avá-Guarani do Ocoí,2.5,-54.3137,-25.2408,2120.1,3040.1
+BR-TI-4801,Brazil,indigenous territory,Awa,1167.7,-46.4627,-3.3341,2747.8,1776.4
+BR-TI-4901,Brazil,indigenous territory,Bacurizinho,825.1,-45.7953,-5.8844,2703.4,1931.8
+BR-TI-4902,Brazil,indigenous territory,Bacurizinho,1339.9,-45.8218,-5.9099,2693.3,1929.2
+BR-TI-5001,Brazil,indigenous territory,Badjonkore,2216.9,-52.0048,-8.8572,1948.2,1532.6
+BR-TI-5101,Brazil,indigenous territory,Baía dos Guató,192.3,-56.5576,-16.966,1458.8,2067.7
+BR-TI-5201,Brazil,indigenous territory,Bakairi,621.2,-54.6234,-14.2979,1595.9,1880.2
+BR-TI-5301,Brazil,indigenous territory,Balaio,2570.4,-66.6237,0.4228,1496.4,0.0
+BR-TI-5402,Brazil,indigenous territory,Banawá,1926.0,-64.9127,-6.7631,846.5,676.4
+BR-TI-5501,Brazil,indigenous territory,Barão de Antonina,37.6,-50.8779,-23.6618,2287.6,3028.1
+BR-TI-5601,Brazil,indigenous territory,Barata Livramento,125.8,-61.0528,3.3054,2042.2,98.1
+BR-TI-5701,Brazil,indigenous territory,Barra,0.6,-43.251,-12.171,2815.7,2531.7
+BR-TI-5801,Brazil,indigenous territory,Barra Velha,90.6,-39.2283,-16.8581,3197.0,3170.3
+BR-TI-5802,Brazil,indigenous territory,Barra Velha do Monte Pascoal,527.8,-39.3352,-16.8649,3183.4,3158.1
+BR-TI-5901,Brazil,indigenous territory,Barreira da Missão,17.8,-64.6354,-3.4165,1216.6,335.7
+BR-TI-6001,Brazil,indigenous territory,Batovi,50.4,-53.9262,-12.9523,1683.5,1794.9
+BR-TI-6101,Brazil,indigenous territory,Baú,15385.2,-54.4804,-7.3575,1720.1,1163.9
+BR-TI-6201,Brazil,indigenous territory,Betania,1223.5,-68.0963,-3.0449,1102.6,374.9
+BR-TI-6301,Brazil,indigenous territory,Boa Vista Sertão do Promirim,9.5,-44.982,-23.3536,2794.0,3300.3
+BR-TI-6302,Brazil,indigenous territory,Boa Vista Sertão do Promirim,54.2,-44.999,-23.3528,2791.5,3297.5
+BR-TI-6401,Brazil,indigenous territory,Boca do Acre,264.4,-67.1448,-9.0745,524.6,983.1
+BR-TI-6501,Brazil,indigenous territory,Bom Intento,12.4,-70.0049,-4.3457,964.9,636.2
+BR-TI-6601,Brazil,indigenous territory,Bom Jesus,8.9,-59.8424,3.4511,2128.6,219.0
+BR-TI-6701,Brazil,indigenous territory,Boqueirão,164.2,-61.2951,3.2513,2024.3,68.6
+BR-TI-6901,Brazil,indigenous territory,Brejo do Burgo,179.4,-38.5471,-9.3395,3354.6,2822.6
+BR-TI-7001,Brazil,indigenous territory,Buriti,20.9,-55.1857,-20.8611,1763.8,2539.5
+BR-TI-7002,Brazil,indigenous territory,Buriti,169.8,-55.1683,-20.9057,1762.4,2536.3
+BR-TI-7101,Brazil,indigenous territory,Buritizinho,0.1,-54.9751,-20.9395,1789.1,2560.3
+BR-TI-7201,Brazil,indigenous territory,Caarapó,36.3,-54.965,-22.5972,1884.5,2731.7
+BR-TI-7301,Brazil,indigenous territory,Cabeceira do Rio Acre,794.8,-69.9701,-10.8691,218.2,1265.4
+BR-TI-7401,Brazil,indigenous territory,Cacau do Tarauaca,286.5,-69.9085,-7.4304,612.4,910.2
+BR-TI-7501,Brazil,indigenous territory,Cachoeira dos Inácios,0.8,-48.799,-28.1824,2743.7,3586.3
+BR-TI-7601,Brazil,indigenous territory,Cachoeira Seca,7324.4,-54.1674,-4.3343,1888.3,1001.7
+BR-TI-7701,Brazil,indigenous territory,Cachoeirinha,26.3,-56.2763,-20.1891,1631.5,2422.2
+BR-TI-7702,Brazil,indigenous territory,Cachoeirinha,362.9,-56.2206,-20.096,1624.6,2402.8
+BR-TI-7801,Brazil,indigenous territory,Cacique Doble,44.0,-51.6285,-27.8252,2504.9,3418.6
+BR-TI-7901,Brazil,indigenous territory,Caiçara/Ilha de São Pedro,44.0,-37.3845,-9.815,3471.9,2962.3
+BR-TI-8003,Brazil,indigenous territory,Tupiniquim,142.9,-40.1782,-19.871,3144.3,3322.9
+BR-TI-8101,Brazil,indigenous territory,Caititu,3107.5,-64.7733,-7.8683,767.8,764.1
+BR-TI-8201,Brazil,indigenous territory,Cajueiro,44.7,-61.3138,3.7635,2075.0,80.2
+BR-TI-8301,Brazil,indigenous territory,Cajuhiri Atravessado,125.4,-63.3744,-3.9819,1227.4,429.6
+BR-TI-8401,Brazil,indigenous territory,Camadeni,1506.5,-67.1092,-7.2273,696.0,765.3
+BR-TI-8501,Brazil,indigenous territory,Camicua,583.3,-67.5761,-8.6333,545.3,940.5
+BR-TI-8601,Brazil,indigenous territory,Campinas/Katukina,363.6,-72.1861,-7.7963,614.9,1076.1
+BR-TI-8701,Brazil,indigenous territory,Cana Brava/Guajajara,1365.7,-45.5487,-5.6195,2738.0,1933.3
+BR-TI-8801,Brazil,indigenous territory,Canauanim,116.2,-60.505,2.7791,2024.6,110.1
+BR-TI-8901,Brazil,indigenous territory,Cantagalo,2.8,-51.0235,-30.1908,2734.1,3694.2
+BR-TI-9001,Brazil,indigenous territory,Capivara,274.7,-59.4408,-3.6502,1533.3,589.9
+BR-TI-9101,Brazil,indigenous territory,Capivari,0.4,-50.3549,-30.3585,2793.2,3739.7
+BR-TI-9201,Brazil,indigenous territory,Capoto/Jarina,6341.3,-53.15,-10.2097,1776.2,1527.3
+BR-TI-9301,Brazil,indigenous territory,Caramuru/Paraguassu,542.7,-39.7032,-15.3415,3155.7,3025.8
+BR-TI-9401,Brazil,indigenous territory,Carretão I,17.2,-50.0409,-15.1091,2093.0,2232.9
+BR-TI-9501,Brazil,indigenous territory,Carretão II,0.7,-50.0192,-15.0551,2096.0,2231.8
+BR-TI-9601,Brazil,indigenous territory,Carreteiro,6.1,-52.014,-28.1948,2509.1,3444.6
+BR-TI-9701,Brazil,indigenous territory,Caru,1701.8,-46.3331,-3.7184,2727.8,1778.4
+BR-TI-9801,Brazil,indigenous territory,Catipari/Mamoria,1148.2,-66.7801,-7.4995,691.3,790.7
+BR-TI-9901,Brazil,indigenous territory,Cerrito,20.7,-54.29,-23.5887,2005.1,2864.3
+BR-TI-10001,Brazil,indigenous territory,Chão Preto,126.8,-53.2245,-14.5937,1749.7,1990.7
+BR-TI-10101,Brazil,indigenous territory,Coata-Laranjal,11528.7,-59.1363,-4.671,1423.6,646.8
+BR-TI-10202,Brazil,indigenous territory,Comboios,37.4,-40.0143,-19.7567,3159.7,3331.7
+BR-TI-10301,Brazil,indigenous territory,Coroa Vermelha,14.9,-39.0507,-16.3521,3227.9,3161.7
+BR-TI-10401,Brazil,indigenous territory,Córrego João Pereira,31.6,-39.9622,-3.1055,3435.2,2492.8
+BR-TI-10601,Brazil,indigenous territory,Cuia,13.4,-59.2063,-3.5176,1578.2,596.8
+BR-TI-10701,Brazil,indigenous territory,Cuiu-Cuiu,364.3,-65.0267,-2.3686,1287.6,210.5
+BR-TI-10801,Brazil,indigenous territory,Cunhã-Sapucaia,4712.0,-60.4416,-4.4975,1344.9,599.4
+BR-TI-10901,Brazil,indigenous territory,Deni,15282.1,-67.536,-6.7857,668.8,693.2
+BR-TI-11001,Brazil,indigenous territory,Diahui,474.8,-62.2315,-7.9645,987.6,876.4
+BR-TI-11101,Brazil,indigenous territory,Dourados,35.1,-54.8363,-22.1708,1867.9,2691.6
+BR-TI-11201,Brazil,indigenous territory,Enawenê-Nawê,7457.3,-59.1388,-12.2289,1060.8,1413.8
+BR-TI-11301,Brazil,indigenous territory,Entre Serras,75.5,-38.185,-9.102,3402.3,2848.7
+BR-TI-11401,Brazil,indigenous territory,Erikpatsá,813.9,-58.2682,-11.266,1245.3,1385.5
+BR-TI-11501,Brazil,indigenous territory,Escondido,1681.8,-58.6464,-9.5109,1242.3,1186.7
+BR-TI-11601,Brazil,indigenous territory,Espírito Santo,338.4,-67.0932,-2.7606,1175.3,308.6
+BR-TI-11801,Brazil,indigenous territory,Estação Parecis,21.7,-56.9227,-14.1379,1372.0,1772.9
+BR-TI-11901,Brazil,indigenous territory,Estivadinho,20.3,-58.6423,-14.5955,1199.2,1734.2
+BR-TI-12001,Brazil,indigenous territory,Estrela da Paz,125.8,-66.8587,-2.8467,1176.5,313.9
+BR-TI-12101,Brazil,indigenous territory,Évare I,5484.1,-69.5959,-3.7632,971.0,487.9
+BR-TI-12201,Brazil,indigenous territory,Évare II,1726.9,-69.2729,-3.7933,991.9,498.0
+BR-TI-12301,Brazil,indigenous territory,Faxinal,20.2,-51.2769,-24.6476,2316.7,3109.7
+BR-TI-12401,Brazil,indigenous territory,Fazenda Bahiana,3.1,-39.2028,-13.9653,3219.8,2999.8
+BR-TI-12501,Brazil,indigenous territory,Fazenda Canto,2.9,-36.5849,-9.3937,3569.9,3029.8
+BR-TI-12601,Brazil,indigenous territory,Tuxá de Inajá,1.4,-37.6961,-8.774,3469.6,2893.2
+BR-TI-12701,Brazil,indigenous territory,Fazenda Guarani,34.2,-43.1195,-19.0382,2842.4,3043.8
+BR-TI-12801,Brazil,indigenous territory,Figueiras,98.8,-58.6473,-14.7698,1197.8,1748.4
+BR-TI-12901,Brazil,indigenous territory,Fortaleza do Castanho,27.5,-60.526,-3.7519,1455.4,546.8
+BR-TI-13001,Brazil,indigenous territory,Fortaleza do Patauá,7.6,-60.739,-3.1459,1490.5,478.4
+BR-TI-13101,Brazil,indigenous territory,Fulni-ô,116.0,-37.1108,-9.1137,3515.9,2960.9
+BR-TI-13201,Brazil,indigenous territory,Funil,157.4,-48.3116,-9.6359,2326.1,1918.6
+BR-TI-13301,Brazil,indigenous territory,Galibi,67.5,-51.7266,3.9604,2748.7,1132.0
+BR-TI-13401,Brazil,indigenous territory,Gavião,84.0,-59.4821,-3.4258,1560.3,568.7
+BR-TI-13501,Brazil,indigenous territory,Geralda Toco Preto,185.2,-45.6979,-5.018,2762.0,1920.0
+BR-TI-13601,Brazil,indigenous territory,Governador,420.8,-46.6573,-5.498,2641.6,1834.0
+BR-TI-13701,Brazil,indigenous territory,Guaimbé,7.3,-55.2022,-22.8532,1884.5,2751.2
+BR-TI-13801,Brazil,indigenous territory,Guajahã,50.3,-66.8559,-7.7286,677.0,830.4
+BR-TI-14001,Brazil,indigenous territory,Guarani Araponga,2.2,-44.7751,-23.31,2813.0,3310.4
+BR-TI-14101,Brazil,indigenous territory,Guarani Barra do Ouro,23.0,-50.2952,-29.6776,2740.4,3666.0
+BR-TI-14201,Brazil,indigenous territory,Guarani da Barragem,0.3,-46.6502,-23.8689,2670.2,3259.9
+BR-TI-14301,Brazil,indigenous territory,Guarani de Águas Brancas,2.2,-51.6245,-30.7608,2740.8,3731.4
+BR-TI-14401,Brazil,indigenous territory,Guarani de Bracui,21.5,-44.3851,-22.8799,2830.3,3292.5
+BR-TI-14501,Brazil,indigenous territory,Guarani do Aguapeu,43.5,-46.6516,-24.0464,2674.8,3274.0
+BR-TI-14601,Brazil,indigenous territory,Guarani de Araçai,27.9,-53.1132,-26.8695,2328.0,3259.5
+BR-TI-14701,Brazil,indigenous territory,Guarani Votouro,7.5,-52.6791,-27.5033,2408.3,3344.5
+BR-TI-14801,Brazil,indigenous territory,Guarita,234.1,-53.651,-27.4377,2326.4,3292.0
+BR-TI-14901,Brazil,indigenous territory,Guasuti,9.4,-55.5014,-23.073,1875.2,2761.8
+BR-TI-15001,Brazil,indigenous territory,Guató,109.0,-57.7317,-17.6173,1369.3,2085.2
+BR-TI-15101,Brazil,indigenous territory,Guyraroká,113.4,-54.6246,-22.5272,1905.2,2734.8
+BR-TI-15201,Brazil,indigenous territory,Hi Merimã,6768.2,-65.7434,-6.9575,753.9,683.7
+BR-TI-15301,Brazil,indigenous territory,Ibirama,140.4,-49.7,-26.8072,2573.6,3398.6
+BR-TI-15302,Brazil,indigenous territory,Ibirama-La Klãnô,370.0,-49.7588,-26.7841,2563.8,3388.9
+BR-TI-15401,Brazil,indigenous territory,Tuxá de Ibotirama,20.2,-43.2522,-12.0755,2813.8,2523.0
+BR-TI-15501,Brazil,indigenous territory,Icatu,3.0,-50.3131,-21.5653,2234.8,2843.4
+BR-TI-15601,Brazil,indigenous territory,Igarapé Capana,1295.2,-68.1459,-8.8622,477.6,974.6
+BR-TI-15701,Brazil,indigenous territory,Igarapé do Caucho,120.6,-70.6968,-8.2732,527.8,1039.0
+BR-TI-15801,Brazil,indigenous territory,Igarapé Grande,11.9,-64.8734,-3.2256,1223.8,313.1
+BR-TI-16101,Brazil,indigenous territory,Igarapé Lage,1073.9,-65.0242,-10.5269,571.0,1118.6
+BR-TI-16201,Brazil,indigenous territory,Igarapé Lourdes,1965.4,-61.6447,-10.4718,909.0,1145.5
+BR-TI-16301,Brazil,indigenous territory,Igarapé Ribeirão,480.0,-65.0897,-10.2696,591.8,1090.4
+BR-TI-16501,Brazil,indigenous territory,Ilha da Cotinga,16.9,-48.4408,-25.5247,2598.8,3331.5
+BR-TI-16601,Brazil,indigenous territory,Ilha do Camaleão,1.7,-61.4998,-3.6727,1391.3,504.4
+BR-TI-16803,Brazil,indigenous territory,Imbiriba,4.1,-39.1594,-16.6555,3218.1,3175.2
+BR-TI-16901,Brazil,indigenous territory,Inauini/Teuini,4683.3,-68.2044,-7.9274,570.9,876.4
+BR-TI-17001,Brazil,indigenous territory,Inawebohona,3781.0,-50.1328,-10.7371,2084.0,1817.9
+BR-TI-17101,Brazil,indigenous territory,Inhacorá,28.3,-53.8923,-27.8503,2351.4,3334.3
+BR-TI-17201,Brazil,indigenous territory,Ipixuna,2153.2,-62.1682,-6.7773,1042.3,741.7
+BR-TI-17301,Brazil,indigenous territory,Irantxe,445.5,-57.9701,-12.8464,1255.2,1577.6
+BR-TI-17302,Brazil,indigenous territory,Manoki,2508.7,-57.6772,-12.7553,1255.2,1560.4
+BR-TI-17401,Brazil,indigenous territory,Irapuá,2.2,-53.1972,-30.3393,2606.9,3630.9
+BR-TI-17501,Brazil,indigenous territory,Itaitinga,1.4,-59.1971,-3.5626,1577.0,603.4
+BR-TI-17601,Brazil,indigenous territory,Itaóca,5.3,-46.6982,-24.0848,2674.9,3277.4
+BR-TI-17701,Brazil,indigenous territory,Ivai,73.2,-51.5858,-24.5868,2282.1,3083.8
+BR-TI-17801,Brazil,indigenous territory,Jabuti,141.9,-60.2911,3.2078,2074.6,155.1
+BR-TI-17901,Brazil,indigenous territory,Jacamim,1932.1,-59.8674,1.9905,1963.6,150.0
+BR-TI-18001,Brazil,indigenous territory,Jacaré de São Domingos,50.4,-35.0835,-6.7352,3800.2,3100.9
+BR-TI-18101,Brazil,indigenous territory,Jaguapiré,22.6,-54.9533,-23.7219,1961.8,2852.6
+BR-TI-18201,Brazil,indigenous territory,Jaguari,4.4,-54.9191,-23.0556,1921.3,2783.9
+BR-TI-18301,Brazil,indigenous territory,Jaminaua/Envira,805.8,-71.0681,-9.5236,385.6,1161.2
+BR-TI-18401,Brazil,indigenous territory,Jaminawa Arara do Rio Bagé,288.8,-72.1933,-8.8345,511.8,1173.6
+BR-TI-18501,Brazil,indigenous territory,Jaminawa do Igarapé Preto,255.3,-72.9083,-8.0335,627.5,1147.1
+BR-TI-18601,Brazil,indigenous territory,Japuira,1541.0,-58.2331,-10.7353,1256.3,1329.4
+BR-TI-18701,Brazil,indigenous territory,Jaquiri,14.1,-64.8709,-3.0827,1237.8,297.7
+BR-TI-18801,Brazil,indigenous territory,Jaraguá,0.0,-46.7542,-23.4642,2642.5,3215.2
+BR-TI-18802,Brazil,indigenous territory,Jaraguá,5.2,-46.771,-23.4601,2639.2,3212.2
+BR-TI-18901,Brazil,indigenous territory,Jarara,4.9,-54.6087,-22.9247,1937.6,2782.8
+BR-TI-19001,Brazil,indigenous territory,Jarawara/Jamamadi/Kanamati,3889.6,-65.4041,-7.1632,780.7,709.9
+BR-TI-19101,Brazil,indigenous territory,Jarudore,46.9,-54.3203,-16.1836,1666.8,2096.0
+BR-TI-19201,Brazil,indigenous territory,Jatuarana,50.9,-60.914,-3.0856,1480.2,460.3
+BR-TI-19301,Brazil,indigenous territory,Jauary,248.2,-59.0738,-3.4181,1585.8,590.8
+BR-TI-19402,Brazil,indigenous territory,Geripancó,2.0,-38.0343,-9.2294,3421.9,2876.3
+BR-TI-19501,Brazil,indigenous territory,Juininha,704.3,-59.156,-14.4679,1132.0,1685.2
+BR-TI-19601,Brazil,indigenous territory,Juma,385.4,-63.9736,-7.3562,894.8,766.3
+BR-TI-19701,Brazil,indigenous territory,Jumina,440.1,-51.5868,4.0366,2749.6,1138.0
+BR-TI-20001,Brazil,indigenous territory,Kadiwéu,5386.4,-57.2424,-20.6585,1540.3,2386.9
+BR-TI-20101,Brazil,indigenous territory,Kaingang de Iraí,2.8,-53.2411,-27.1916,2345.9,3290.7
+BR-TI-20201,Brazil,indigenous territory,Kambiwá,315.1,-37.8675,-8.6577,3444.0,2858.7
+BR-TI-20301,Brazil,indigenous territory,Kampa do Igarapé Primavera,219.4,-71.7337,-8.6373,512.4,1129.2
+BR-TI-20401,Brazil,indigenous territory,Kampa do Rio Amônia,858.4,-72.9705,-9.3026,499.1,1255.2
+BR-TI-20501,Brazil,indigenous territory,Kampa e Isolados do Rio Envira,2323.0,-71.7696,-9.8107,378.9,1210.9
+BR-TI-20601,Brazil,indigenous territory,Kanamari do Rio Juruá,6014.7,-69.075,-6.8884,653.2,771.8
+BR-TI-20701,Brazil,indigenous territory,Kanela,1255.7,-45.1038,-6.0641,2766.2,2011.3
+BR-TI-20702,Brazil,indigenous territory,Kanela Memortumré,1003.0,-45.2067,-6.2148,2737.4,2009.2
+BR-TI-20801,Brazil,indigenous territory,Kantaruré,18.1,-38.389,-9.1659,3384.8,2836.1
+BR-TI-20901,Brazil,indigenous territory,Kapinawá,124.0,-37.3464,-8.6158,3499.8,2912.6
+BR-TI-21001,Brazil,indigenous territory,Karajá de Aruanã I,0.1,-51.0819,-14.9154,1986.2,2152.4
+BR-TI-21101,Brazil,indigenous territory,Karajá de Aruanã II,8.9,-51.1021,-14.9085,1982.1,2149.0
+BR-TI-21201,Brazil,indigenous territory,Karajá de Aruanã III,6.9,-51.0802,-14.8779,1985.2,2146.2
+BR-TI-21301,Brazil,indigenous territory,Karajá Santana do Araguaia,15.0,-49.7705,-8.8804,2202.1,1748.7
+BR-TI-21401,Brazil,indigenous territory,Karapotó,10.9,-36.6267,-10.0142,3549.2,3048.2
+BR-TI-21501,Brazil,indigenous territory,Kararaô,3310.1,-52.9417,-4.1097,2057.5,1116.4
+BR-TI-21601,Brazil,indigenous territory,Karipuna,1525.7,-64.4859,-10.0012,638.4,1024.9
+BR-TI-21701,Brazil,indigenous territory,Kariri-Xocó,7.1,-36.8279,-10.157,3525.7,3034.3
+BR-TI-21702,Brazil,indigenous territory,Kariri-Xocó,46.9,-36.8337,-10.1406,3522.5,3029.4
+BR-TI-21801,Brazil,indigenous territory,Karitiana,897.2,-64.0516,-9.3324,735.0,986.3
+BR-TI-21901,Brazil,indigenous territory,Katukina/Kaxinawá,232.8,-70.4109,-8.0762,544.6,1002.1
+BR-TI-22001,Brazil,indigenous territory,Kaxarari,1462.1,-66.2954,-9.3969,540.9,981.8
+BR-TI-22101,Brazil,indigenous territory,Kaxinawá Ashaninka do Rio Breu,312.6,-72.3109,-9.5219,439.0,1246.0
+BR-TI-22201,Brazil,indigenous territory,Kaxinawá Colônia Vinte e Sete,1.0,-70.7843,-8.1018,555.1,1032.8
+BR-TI-22301,Brazil,indigenous territory,Kaxinawá da Praia do Carapanã,604.5,-71.3605,-8.3958,515.9,1074.7
+BR-TI-22401,Brazil,indigenous territory,Kaxinawá do Baixo Rio Jordão,87.1,-72.0166,-9.2696,459.3,1207.5
+BR-TI-22501,Brazil,indigenous territory,Kaxinawá do Rio Humaitá,1288.1,-71.5072,-9.2482,418.3,1143.4
+BR-TI-22601,Brazil,indigenous territory,Kaxinawá do Rio Jordão,886.9,-72.134,-9.5315,422.3,1215.9
+BR-TI-22701,Brazil,indigenous territory,Kaxinawá Nova Olinda,276.6,-70.7098,-9.1246,426.8,1123.1
+BR-TI-22801,Brazil,indigenous territory,Kaxinawá Seringal Independência,115.6,-71.9163,-9.3144,454.4,1205.3
+BR-TI-22902,Brazil,indigenous territory,Kayabi,10540.6,-57.2914,-8.7147,1374.1,1094.3
+BR-TI-23001,Brazil,indigenous territory,Kayapó,32812.0,-51.9183,-7.7091,1914.5,1348.8
+BR-TI-23101,Brazil,indigenous territory,Kiriri,123.1,-38.6314,-10.6569,3321.1,2873.0
+BR-TI-23201,Brazil,indigenous territory,Koatinemo,3880.0,-52.2778,-4.2776,2127.0,1175.2
+BR-TI-23301,Brazil,indigenous territory,Kraolandia,3060.3,-47.4142,-8.3808,2428.3,1893.2
+BR-TI-23401,Brazil,indigenous territory,Krenak,40.2,-41.3032,-19.2177,3024.3,3190.5
+BR-TI-23402,Brazil,indigenous territory,Krenak de Sete Salões,155.8,-41.3558,-19.284,3014.3,3184.6
+BR-TI-23501,Brazil,indigenous territory,Krikati,1448.4,-46.9284,-5.904,2576.5,1816.9
+BR-TI-23601,Brazil,indigenous territory,Krukutu,0.3,-46.6206,-23.8636,2672.5,3260.8
+BR-TI-23602,Brazil,indigenous territory,Tenondé Porã,159.6,-46.6205,-23.9422,2669.1,3258.4
+BR-TI-23701,Brazil,indigenous territory,Kulina do Medio Jurua,7271.3,-70.6202,-7.2016,587.5,882.8
+BR-TI-23801,Brazil,indigenous territory,Kulina do Rio Envira,819.0,-71.4057,-9.456,406.0,1177.7
+BR-TI-23901,Brazil,indigenous territory,Kulina Igarapé do Pau,455.7,-70.9748,-9.2712,409.1,1145.4
+BR-TI-24001,Brazil,indigenous territory,Kumaru do Lago Ualá,799.1,-65.7898,-2.966,1190.5,271.2
+BR-TI-24101,Brazil,indigenous territory,Kwazá do Rio São Pedro,168.0,-61.4056,-12.3688,901.9,1387.8
+BR-TI-24201,Brazil,indigenous territory,Lago Aiapua,239.3,-62.1413,-4.3775,1276.8,534.8
+BR-TI-24301,Brazil,indigenous territory,Lago Capanã,62.3,-62.197,-6.0424,1139.2,695.4
+BR-TI-24401,Brazil,indigenous territory,Lago do Beruri,42.7,-61.2753,-3.8072,1393.2,521.5
+BR-TI-24501,Brazil,indigenous territory,Lago do Limão,82.0,-59.9196,-4.2723,1460.5,626.2
+BR-TI-24701,Brazil,indigenous territory,Lago Jauari,118.1,-61.9711,-6.2019,1146.0,720.9
+BR-TI-24801,Brazil,indigenous territory,Lagoa Comprida,132.0,-45.7354,-5.325,2746.2,1928.6
+BR-TI-24901,Brazil,indigenous territory,Lagoa  Encantada,17.3,-38.2712,-3.9822,3573.5,2697.2
+BR-TI-25001,Brazil,indigenous territory,Lagoa dos Brincos,17.8,-60.1876,-13.2621,1029.5,1530.6
+BR-TI-25101,Brazil,indigenous territory,Lalima,29.8,-56.279,-20.5775,1652.8,2464.0
+BR-TI-25301,Brazil,indigenous territory,Laranjinha,2.9,-50.4083,-23.2837,2311.4,3015.0
+BR-TI-25401,Brazil,indigenous territory,Lauro Sodré,94.8,-69.9016,-4.4952,943.1,638.1
+BR-TI-25501,Brazil,indigenous territory,Ligeiro,46.1,-51.9431,-27.9552,2493.6,3418.9
+BR-TI-25601,Brazil,indigenous territory,Jatayvari,88.0,-55.3053,-22.3559,1839.0,2690.5
+BR-TI-25701,Brazil,indigenous territory,Limão Verde,52.1,-55.6897,-20.3352,1690.0,2462.0
+BR-TI-25901,Brazil,indigenous territory,Macarrão,434.6,-67.1411,-2.9197,1152.5,327.1
+BR-TI-26001,Brazil,indigenous territory,Mãe Maria,625.9,-48.9183,-5.1202,2426.3,1587.5
+BR-TI-26101,Brazil,indigenous territory,Malacacheta,287.8,-60.4735,2.601,2003.1,105.1
+BR-TI-26201,Brazil,indigenous territory,Mamoadate,3098.6,-70.2652,-10.6687,231.4,1225.4
+BR-TI-26301,Brazil,indigenous territory,Mangueira,41.4,-61.4053,3.2695,2022.5,59.3
+BR-TI-26401,Brazil,indigenous territory,Mangueirinha,172.4,-52.326,-25.8934,2314.4,3180.6
+BR-TI-26501,Brazil,indigenous territory,Manoa/Pium,443.1,-60.0792,2.9488,2053.4,149.6
+BR-TI-26601,Brazil,indigenous territory,Mapari,1589.3,-67.2126,-2.1366,1215.2,229.7
+BR-TI-26701,Brazil,indigenous territory,Maraã Urubaxi,943.9,-65.5103,-1.6318,1334.0,128.9
+BR-TI-26801,Brazil,indigenous territory,Maraitá,542.9,-68.3475,-3.21,1092.9,413.3
+BR-TI-26901,Brazil,indigenous territory,Maraiwatsede,1648.6,-51.6907,-11.7601,1906.6,1796.9
+BR-TI-27001,Brazil,indigenous territory,Marajai,9.8,-64.8311,-3.1957,1228.7,310.1
+BR-TI-27101,Brazil,indigenous territory,Maranduba,3.8,-49.6998,-8.8713,2211.2,1754.9
+BR-TI-27201,Brazil,indigenous territory,Marechal Rondon,1003.6,-53.9734,-13.9561,1667.9,1875.7
+BR-TI-27401,Brazil,indigenous territory,Lago do Marinheiro,35.8,-59.997,-3.5994,1506.6,558.3
+BR-TI-27501,Brazil,indigenous territory,Marrecas,168.5,-51.4024,-25.0554,2326.7,3139.8
+BR-TI-27601,Brazil,indigenous territory,Massacara,80.2,-38.7791,-10.4295,3311.3,2848.6
+BR-TI-27701,Brazil,indigenous territory,Massaco,4197.4,-62.5726,-12.5628,729.8,1354.8
+BR-TI-27901,Brazil,indigenous territory,Mata da Cafurna,1.1,-36.6344,-9.3788,3565.7,3024.4
+BR-TI-28001,Brazil,indigenous territory,Mata Medonha,6.0,-39.0095,-16.1546,3232.1,3153.7
+BR-TI-28101,Brazil,indigenous territory,Matintin,219.6,-68.4633,-2.8836,1128.5,394.8
+BR-TI-28201,Brazil,indigenous territory,Mawetek,1155.3,-70.2825,-6.6229,700.6,833.5
+BR-TI-28301,Brazil,indigenous territory,Maxacali,53.2,-40.5814,-16.8746,3070.3,3071.2
+BR-TI-28401,Brazil,indigenous territory,Mbiguaçu,0.6,-48.6462,-27.4625,2707.2,3522.0
+BR-TI-28501,Brazil,indigenous territory,Médio Rio Negro I,17832.7,-67.6261,-0.7152,1304.8,26.4
+BR-TI-28601,Brazil,indigenous territory,Médio Rio Negro II,3163.7,-66.3047,-0.1901,1454.1,10.2
+BR-TI-28701,Brazil,indigenous territory,Menkragnoti,49288.2,-53.3236,-8.6211,1717.7,1306.3
+BR-TI-28801,Brazil,indigenous territory,Menkü,452.4,-58.4181,-12.1917,1212.4,1486.8
+BR-TI-28901,Brazil,indigenous territory,Meria,5.8,-64.8534,-3.2235,1224.9,313.2
+BR-TI-29001,Brazil,indigenous territory,Merure,826.2,-53.0573,-15.5572,1772.7,2086.7
+BR-TI-29101,Brazil,indigenous territory,Miguel/Josefa,16.3,-59.1509,-3.8073,1560.6,627.2
+BR-TI-29201,Brazil,indigenous territory,Miratu,139.2,-65.2406,-3.0276,1220.7,288.5
+BR-TI-29301,Brazil,indigenous territory,Monte Caseros,11.0,-51.7092,-28.3599,2542.8,3473.9
+BR-TI-29401,Brazil,indigenous territory,Morro Alto,8.9,-48.6631,-26.2984,2630.3,3403.2
+BR-TI-29501,Brazil,indigenous territory,Morro Branco,0.5,-46.1295,-5.8223,2691.5,1916.3
+BR-TI-29601,Brazil,indigenous territory,Morro dos Cavalos,19.8,-48.648,-27.7879,2725.2,3550.6
+BR-TI-29701,Brazil,indigenous territory,Moskow,142.8,-60.1665,2.7574,2042.4,146.1
+BR-TI-29801,Brazil,indigenous territory,Munduruku,23933.8,-57.5606,-7.4539,1417.4,934.1
+BR-TI-30001,Brazil,indigenous territory,Muriru,55.5,-60.2082,2.5627,2024.3,133.6
+BR-TI-30101,Brazil,indigenous territory,Murutinga/Tracaja,133.1,-59.2199,-3.3702,1576.9,577.4
+BR-TI-30201,Brazil,indigenous territory,Nambikwara,10032.7,-59.4717,-12.9392,1050.8,1474.9
+BR-TI-30301,Brazil,indigenous territory,Ñande Ru Marangatu,93.8,-56.0373,-22.2419,1773.6,2649.4
+BR-TI-30401,Brazil,indigenous territory,Natal/Felicidade,3.3,-59.221,-3.5657,1573.0,602.4
+BR-TI-30501,Brazil,indigenous territory,Nhamundá/Mapuera,10498.5,-58.1092,-0.8199,1820.2,413.2
+BR-TI-30601,Brazil,indigenous territory,Nioaque,30.1,-55.7385,-21.1573,1732.0,2547.7
+BR-TI-30701,Brazil,indigenous territory,Nonoai,198.6,-52.9275,-27.3587,2372.3,3314.8
+BR-TI-30801,Brazil,indigenous territory,Nonoai/Rio da Várzea,162.4,-53.0427,-27.4267,2373.2,3318.0
+BR-TI-30901,Brazil,indigenous territory,Nossa Senhora de Fátima,0.9,-56.1349,-20.3675,1656.2,2450.4
+BR-TI-31001,Brazil,indigenous territory,Nova Esperança do Rio Jandiatuba,199.1,-68.7373,-3.5779,1052.4,482.0
+BR-TI-31101,Brazil,indigenous territory,Nova Jacundá,4.1,-48.9621,-4.7477,2452.6,1579.3
+BR-TI-31201,Brazil,indigenous territory,Nove de Janeiro,2292.6,-62.5718,-7.4341,980.0,797.7
+BR-TI-31301,Brazil,indigenous territory,Nukini,319.7,-73.4657,-7.371,716.1,1134.3
+BR-TI-31401,Brazil,indigenous territory,Ofayé-Xavante,19.3,-52.1659,-21.2625,2052.4,2724.7
+BR-TI-31402,Brazil,indigenous territory,Ofayé-Xavante,4.8,-52.1338,-21.2501,2055.6,2726.5
+BR-TI-31501,Brazil,indigenous territory,Ouro,141.6,-60.6717,3.494,2083.1,146.4
+BR-TI-31601,Brazil,indigenous territory,Pacaas Novas,2810.4,-65.1034,-11.3701,525.2,1182.4
+BR-TI-31701,Brazil,indigenous territory,Pacheca,18.4,-51.785,-31.1684,2762.7,3767.1
+BR-TI-31901,Brazil,indigenous territory,Padre,8.0,-59.1828,-3.7425,1563.7,619.6
+BR-TI-32002,Brazil,indigenous territory,Palmas,36.9,-52.0697,-26.5319,2380.1,3266.6
+BR-TI-32101,Brazil,indigenous territory,Panambizinho,12.6,-54.6708,-22.1254,1881.4,2695.7
+BR-TI-32201,Brazil,indigenous territory,Panará,4995.2,-54.1836,-9.3684,1699.4,1398.3
+BR-TI-32301,Brazil,indigenous territory,Pankararé,294.1,-38.5899,-9.4497,3346.9,2818.9
+BR-TI-32401,Brazil,indigenous territory,Pankararu,83.8,-38.2036,-9.1459,3402.6,2850.7
+BR-TI-32601,Brazil,indigenous territory,Paquiçamba,41.4,-51.8059,-3.4766,2238.1,1231.4
+BR-TI-32602,Brazil,indigenous territory,Paquiçamba,200.9,-51.7677,-3.4585,2236.7,1229.2
+BR-TI-32701,Brazil,indigenous territory,Parabubure,2256.1,-53.1694,-14.3812,1736.6,1946.2
+BR-TI-32801,Brazil,indigenous territory,Paracuhuba,9.4,-59.0725,-3.5526,1586.5,609.4
+BR-TI-32901,Brazil,indigenous territory,Parakanã,3504.0,-50.1308,-4.7979,2292.5,1435.3
+BR-TI-33001,Brazil,indigenous territory,Paraná do Arauató,55.0,-58.6572,-3.2166,1642.9,606.3
+BR-TI-33101,Brazil,indigenous territory,Parana do Boa Boa,2450.0,-67.1274,-1.668,1277.5,186.0
+BR-TI-33201,Brazil,indigenous territory,Parana do Paricá,80.1,-65.8388,-1.8772,1312.6,180.2
+BR-TI-33301,Brazil,indigenous territory,Parati-Mirim,0.9,-44.6528,-23.2548,2822.7,3313.1
+BR-TI-33401,Brazil,indigenous territory,Paresi,5623.7,-58.647,-14.2591,1150.6,1658.1
+BR-TI-33501,Brazil,indigenous territory,Parque do Araguaia,13594.5,-50.3708,-11.6857,2030.3,1816.4
+BR-TI-33601,Brazil,indigenous territory,Parque do Aripuanã,16022.7,-59.9052,-11.5669,1016.9,1283.5
+BR-TI-33701,Brazil,indigenous territory,Parque do Tumucumaque,30704.4,-55.4666,1.5801,2147.3,567.9
+BR-TI-33801,Brazil,indigenous territory,Parque do Xingu,26400.9,-53.4019,-12.0061,1680.9,1611.1
+BR-TI-33901,Brazil,indigenous territory,Patauá,6.2,-59.3001,-3.4433,1577.2,584.9
+BR-TI-34101,Brazil,indigenous territory,Paukalirajausu,82.3,-59.6474,-14.755,1095.7,1704.7
+BR-TI-34201,Brazil,indigenous territory,Paumari do Cuniua,428.1,-64.9036,-6.0662,935.9,614.2
+BR-TI-34302,Brazil,indigenous territory,Paumari do Lago Manissuã,229.7,-64.5947,-5.8019,984.1,591.1
+BR-TI-34402,Brazil,indigenous territory,Paumari do Lago Marahã,1185.3,-65.2366,-7.627,769.1,776.4
+BR-TI-34501,Brazil,indigenous territory,Paumari do Lago Paricá,157.9,-64.7116,-5.9348,967.6,608.7
+BR-TI-34601,Brazil,indigenous territory,Paumari do Rio Ituxi,75.7,-64.979,-7.3726,823.7,767.5
+BR-TI-34701,Brazil,indigenous territory,Peneri/Tacaquiri,1898.1,-67.0945,-8.15,592.9,849.6
+BR-TI-34801,Brazil,indigenous territory,Pequizal,99.7,-59.8577,-14.2652,1064.8,1645.4
+BR-TI-34901,Brazil,indigenous territory,Perigara,107.3,-56.1909,-16.8653,1495.9,2077.8
+BR-TI-35001,Brazil,indigenous territory,Peruíbe,4.8,-46.985,-24.185,2654.6,3272.3
+BR-TI-35101,Brazil,indigenous territory,Piaçaguera,27.7,-46.9404,-24.2322,2658.2,3275.9
+BR-TI-35201,Brazil,indigenous territory,Pilad Rebuá,2.2,-56.3619,-20.2549,1629.5,2428.7
+BR-TI-35301,Brazil,indigenous territory,Pimentel Barbosa,3291.5,-51.6335,-13.4219,1883.9,1950.4
+BR-TI-35401,Brazil,indigenous territory,Pinatuba,296.5,-60.75,-5.67,1279.8,722.1
+BR-TI-35501,Brazil,indigenous territory,Pinhal,8.8,-52.4524,-27.1467,2398.1,3316.8
+BR-TI-35502,Brazil,indigenous territory,Toldo Pinhal,48.3,-52.4624,-27.1407,2394.2,3312.8
+BR-TI-35601,Brazil,indigenous territory,Pinhalzinho,5.9,-50.0713,-23.5598,2354.5,3058.1
+BR-TI-35701,Brazil,indigenous territory,Pirahã,3469.9,-62.0928,-7.1065,1003.9,756.4
+BR-TI-35801,Brazil,indigenous territory,Pirai,30.1,-48.8287,-26.4874,2628.1,3412.8
+BR-TI-35901,Brazil,indigenous territory,Pirajuí,21.4,-55.2838,-23.955,1953.2,2864.5
+BR-TI-36001,Brazil,indigenous territory,Pirakua,23.8,-56.0405,-22.0085,1760.8,2625.7
+BR-TI-36101,Brazil,indigenous territory,Pirineus de Souza,285.3,-59.933,-12.741,1048.8,1479.3
+BR-TI-36201,Brazil,indigenous territory,Pitaguary,17.3,-38.6338,-3.9403,3538.7,2657.3
+BR-TI-36301,Brazil,indigenous territory,Pium,43.8,-61.1044,3.403,2051.4,100.8
+BR-TI-36401,Brazil,indigenous territory,Ponta da Serra,158.4,-60.881,3.6049,2079.5,128.2
+BR-TI-36501,Brazil,indigenous territory,Ponte de Pedra,170.7,-57.3498,-13.5665,1318.6,1687.9
+BR-TI-36601,Brazil,indigenous territory,Porquinhos,794.1,-45.6368,-6.0943,2711.6,1961.4
+BR-TI-36602,Brazil,indigenous territory,Porquinhos dos Canela-Apãnjekra,3012.5,-45.6013,-6.215,2694.1,1959.9
+BR-TI-36701,Brazil,indigenous territory,Porto Lindo,16.7,-54.5876,-23.7866,1994.4,2873.4
+BR-TI-36702,Brazil,indigenous territory,Yvy-katu,94.3,-54.5467,-23.768,1992.7,2869.8
+BR-TI-36801,Brazil,indigenous territory,Porto Praia,41.2,-65.1227,-2.8925,1243.6,274.4
+BR-TI-36901,Brazil,indigenous territory,Potiguara,211.8,-35.0021,-6.6889,3806.2,3103.6
+BR-TI-37001,Brazil,indigenous territory,Potiguara de Monte-Mor,75.6,-35.0534,-6.7766,3799.5,3100.9
+BR-TI-37101,Brazil,indigenous territory,Potrero Guaçu,40.1,-55.3748,-23.9451,1944.1,2860.0
+BR-TI-37201,Brazil,indigenous territory,Poyanawa,244.1,-73.0882,-7.5476,684.5,1119.9
+BR-TI-37301,Brazil,indigenous territory,Praia do Índio,0.3,-56.0273,-4.2823,1800.1,898.4
+BR-TI-37401,Brazil,indigenous territory,Praia do Mangue,0.3,-55.9737,-4.2563,1806.7,900.3
+BR-TI-37501,Brazil,indigenous territory,Queimadas,30.2,-50.9668,-24.2383,2316.5,3082.8
+BR-TI-37601,Brazil,indigenous territory,Quixaba,0.3,-38.3025,-9.2245,3394.7,2849.9
+BR-TI-37701,Brazil,indigenous territory,Raimundão,42.7,-61.3145,2.884,1993.1,57.6
+BR-TI-37801,Brazil,indigenous territory,Rancho Jacaré,7.9,-55.118,-22.8495,1891.4,2754.5
+BR-TI-37901,Brazil,indigenous territory,Raposa Serra do Sol,17424.9,-60.2682,4.3328,2096.4,111.7
+BR-TI-38001,Brazil,indigenous territory,Recreio/São Félix,2.4,-59.1994,-3.5454,1577.7,601.7
+BR-TI-38101,Brazil,indigenous territory,Guarani do Ribeirão Silveira,9.5,-45.7975,-23.7291,2738.2,3291.4
+BR-TI-38102,Brazil,indigenous territory,Ribeirão Silveira,84.7,-45.8051,-23.713,2732.7,3284.6
+BR-TI-38201,Brazil,indigenous territory,Rio Apaporis,1070.2,-69.2632,-1.1629,1294.7,334.6
+BR-TI-38301,Brazil,indigenous territory,Rio Areia,13.6,-51.2397,-25.7615,2391.0,3225.5
+BR-TI-38501,Brazil,indigenous territory,Rio Biá,11856.3,-67.7245,-4.8266,837.3,449.2
+BR-TI-38601,Brazil,indigenous territory,Rio Branco,2362.6,-62.6423,-12.1559,747.9,1305.3
+BR-TI-38701,Brazil,indigenous territory,Rio Branco Itanhaém,28.5,-46.6627,-24.0001,2671.8,3269.3
+BR-TI-38902,Brazil,indigenous territory,Kuruáya,1666.2,-54.5861,-5.74,1821.8,1106.0
+BR-TI-39001,Brazil,indigenous territory,Rio das Cobras,190.3,-52.7019,-25.2914,2234.7,3103.8
+BR-TI-39101,Brazil,indigenous territory,Rio dos Índios,7.1,-53.4128,-27.1822,2333.0,3282.6
+BR-TI-39201,Brazil,indigenous territory,Rio dos Pardos,7.3,-50.9838,-26.4781,2459.5,3310.0
+BR-TI-39301,Brazil,indigenous territory,Rio Formoso,198.3,-58.0847,-14.5102,1250.8,1741.4
+BR-TI-39402,Brazil,indigenous territory,Rio Gregório,1874.7,-71.7628,-8.3642,527.6,1084.3
+BR-TI-39501,Brazil,indigenous territory,Rio Guaporé,1159.7,-64.7148,-11.9511,546.6,1272.5
+BR-TI-39601,Brazil,indigenous territory,Rio Jumas,95.7,-59.8873,-3.8514,1493.8,586.8
+BR-TI-39701,Brazil,indigenous territory,Rio Manicoré,193.3,-61.5244,-6.1851,1181.9,741.3
+BR-TI-39801,Brazil,indigenous territory,Rio Mequens,1075.6,-61.7427,-12.6288,853.0,1393.3
+BR-TI-40001,Brazil,indigenous territory,Rio Negro Ocaia,1050.3,-64.636,-11.0829,583.0,1178.9
+BR-TI-40002,Brazil,indigenous territory,Rio Negro Ocaia,2350.7,-64.6613,-11.079,565.7,1169.0
+BR-TI-40101,Brazil,indigenous territory,Rio Omerê,261.7,-61.105,-12.8126,928.1,1443.4
+BR-TI-40201,Brazil,indigenous territory,Rio Paru DEste,11942.4,-54.5137,0.6138,2201.8,719.1
+BR-TI-40301,Brazil,indigenous territory,Rio Pindaré,155.1,-45.5152,-3.6313,2840.1,1887.6
+BR-TI-40401,Brazil,indigenous territory,Rio Téa,4113.7,-66.1683,-0.6147,1387.6,10.9
+BR-TI-40501,Brazil,indigenous territory,Rio Urubu,274.7,-58.9508,-3.1042,1623.7,566.4
+BR-TI-40601,Brazil,indigenous territory,Rodeador,23.2,-45.2284,-5.7034,2785.3,2001.1
+BR-TI-40701,Brazil,indigenous territory,Roosevelt,2294.6,-60.5983,-11.0975,998.0,1248.6
+BR-TI-40801,Brazil,indigenous territory,Sagarana,182.4,-64.9706,-11.9167,537.4,1277.9
+BR-TI-40901,Brazil,indigenous territory,Sai-Cinza,1244.3,-58.0006,-6.4672,1456.0,931.9
+BR-TI-41001,Brazil,indigenous territory,Salto Grande do Jacuí,2.3,-53.2327,-29.0604,2496.2,3491.3
+BR-TI-41101,Brazil,indigenous territory,Sangradouro/Volta Grande,1028.9,-53.8613,-15.4477,1692.4,2023.8
+BR-TI-41201,Brazil,indigenous territory,Santa Inez,302.1,-61.3663,4.1731,2104.1,66.0
+BR-TI-41301,Brazil,indigenous territory,Santana,359.3,-55.4488,-14.1685,1516.1,1823.7
+BR-TI-41501,Brazil,indigenous territory,São Francisco do Canimari,33.2,-68.334,-3.3819,1083.9,439.6
+BR-TI-41601,Brazil,indigenous territory,São Jeronimo,13.5,-50.7585,-23.7426,2305.2,3044.5
+BR-TI-41701,Brazil,indigenous territory,São Leopoldo,724.1,-69.7331,-4.5494,923.5,616.2
+BR-TI-41801,Brazil,indigenous territory,São Pedro,6.2,-59.2374,-3.7321,1558.2,616.2
+BR-TI-41901,Brazil,indigenous territory,São Pedro do Sepatini,276.0,-65.794,-7.8908,717.5,822.1
+BR-TI-42001,Brazil,indigenous territory,São Sebastião,601.5,-67.595,-2.6719,1158.3,316.4
+BR-TI-42101,Brazil,indigenous territory,Sararé,677.9,-59.4919,-14.8081,1102.8,1702.9
+BR-TI-42201,Brazil,indigenous territory,Sassoró,19.2,-54.7683,-23.5931,1967.9,2846.1
+BR-TI-42301,Brazil,indigenous territory,Sepoti,2514.1,-61.6237,-7.202,1077.8,761.5
+BR-TI-42401,Brazil,indigenous territory,Serra da Moça,113.8,-60.6868,3.2516,2057.7,130.9
+BR-TI-42501,Brazil,indigenous territory,Serra do Itatins,12.1,-47.1157,-24.3498,2650.1,3281.2
+BR-TI-42601,Brazil,indigenous territory,Serra Morena,1471.2,-59.3567,-11.0153,1128.3,1307.6
+BR-TI-42701,Brazil,indigenous territory,Serrinha,117.2,-52.8733,-27.6676,2402.3,3348.7
+BR-TI-42801,Brazil,indigenous territory,Seruini/Mariene,1449.2,-66.8442,-8.1667,601.8,853.9
+BR-TI-42901,Brazil,indigenous territory,Sete Cerros,88.8,-55.4677,-23.5765,1907.7,2814.6
+BR-TI-43001,Brazil,indigenous territory,Sete de Setembro,2490.0,-61.188,-10.9583,932.8,1220.6
+BR-TI-43101,Brazil,indigenous territory,Setemã,491.9,-60.094,-5.0049,1378.2,686.7
+BR-TI-43201,Brazil,indigenous territory,Sororó,259.3,-48.6934,-5.9366,2416.3,1655.2
+BR-TI-43301,Brazil,indigenous territory,Sucuba,60.0,-61.1567,2.9697,2008.2,76.8
+BR-TI-43401,Brazil,indigenous territory,Sucuriy,5.4,-55.1112,-21.653,1816.7,2627.9
+BR-TI-43501,Brazil,indigenous territory,Tabalascada,130.4,-60.5718,2.6865,2010.9,100.1
+BR-TI-43601,Brazil,indigenous territory,Tabocal,9.1,-60.4043,-3.7304,1466.6,553.2
+BR-TI-43701,Brazil,indigenous territory,Tadarimana,95.6,-54.5126,-16.5306,1651.9,2123.9
+BR-TI-43801,Brazil,indigenous territory,Taihantesu,52.4,-59.5444,-14.1086,1098.9,1644.4
+BR-TI-43901,Brazil,indigenous territory,Takuaraty/Yvykuarusu,25.4,-55.1647,-23.7628,1949.1,2848.6
+BR-TI-44001,Brazil,indigenous territory,Tapirapé/Karajá,660.8,-50.6815,-10.6355,2052.0,1793.8
+BR-TI-44101,Brazil,indigenous territory,Taquaperi,17.8,-55.4332,-23.2172,1890.3,2780.2
+BR-TI-44201,Brazil,indigenous territory,Taquara,96.9,-54.6239,-22.737,1920.0,2756.5
+BR-TI-44301,Brazil,indigenous territory,Pindoty,32.7,-48.69,-26.4133,2633.4,3412.5
+BR-TI-44401,Brazil,indigenous territory,Taunay/Ipegue,64.7,-56.0716,-20.2567,1650.5,2438.5
+BR-TI-44402,Brazil,indigenous territory,Taunay/Ipegue,339.3,-56.0545,-20.2489,1645.8,2431.2
+BR-TI-44501,Brazil,indigenous territory,Tekohá Añetete,17.5,-54.0672,-25.0186,2120.7,3025.0
+BR-TI-44601,Brazil,indigenous territory,Tembé,10.5,-48.2744,-2.6854,2625.6,1573.4
+BR-TI-44701,Brazil,indigenous territory,Tenharim do Igarapé Preto,881.1,-61.1739,-8.4958,1044.7,974.7
+BR-TI-44801,Brazil,indigenous territory,Tenharim Marmelos,4976.2,-61.9513,-8.3141,964.6,882.0
+BR-TI-44901,Brazil,indigenous territory,Terena Gleba Iriri,302.2,-53.8315,-9.7069,1741.7,1492.9
+BR-TI-45001,Brazil,indigenous territory,Tereza Cristina,352.3,-55.0818,-16.573,1586.6,2099.2
+BR-TI-45103,Brazil,indigenous territory,Itixi Mitari,1823.3,-62.6551,-4.7029,1187.7,519.5
+BR-TI-45201,Brazil,indigenous territory,Tibagy/Mococa,8.3,-50.7528,-24.0161,2321.6,3072.9
+BR-TI-45301,Brazil,indigenous territory,Tikúna de Feijoal,415.0,-69.444,-4.3484,954.9,585.7
+BR-TI-45402,Brazil,indigenous territory,Tingui Botó,5.3,-36.7172,-9.9173,3542.9,3036.0
+BR-TI-45501,Brazil,indigenous territory,Tirecatinga,1309.5,-58.4167,-13.1401,1198.1,1565.1
+BR-TI-45601,Brazil,indigenous territory,Toldo Chimbangue,9.8,-52.527,-27.1601,2393.7,3314.5
+BR-TI-45701,Brazil,indigenous territory,Toldo Chimbangue II,9.6,-52.5174,-27.1341,2391.5,3312.4
+BR-TI-45801,Brazil,indigenous territory,Toldo Imbu,19.6,-52.3607,-26.5782,2362.0,3259.0
+BR-TI-45901,Brazil,indigenous territory,Torá,550.7,-61.6474,-6.3153,1160.1,738.2
+BR-TI-46001,Brazil,indigenous territory,Tremembé de Almofala,48.4,-39.8133,-2.9739,3454.9,2505.8
+BR-TI-46101,Brazil,indigenous territory,Trincheira,17.4,-59.2655,-3.722,1556.5,612.0
+BR-TI-46201,Brazil,indigenous territory,Trincheira Bacaja,16528.4,-51.4894,-4.664,2121.7,1253.5
+BR-TI-46301,Brazil,indigenous territory,Trocará,216.9,-49.7104,-3.5785,2424.5,1444.0
+BR-TI-46302,Brazil,indigenous territory,Trocará - Doação,0.1,-49.8256,-3.6476,2424.2,1445.5
+BR-TI-46401,Brazil,indigenous territory,Trombetas/Mapuera,39784.0,-58.6854,-0.0139,1773.8,215.5
+BR-TI-46501,Brazil,indigenous territory,Truaru,56.1,-60.9746,3.2332,2043.1,107.3
+BR-TI-46601,Brazil,indigenous territory,Truká,15.7,-39.4189,-8.518,3292.7,2707.1
+BR-TI-46602,Brazil,indigenous territory,Truká - Ilha da Assunção,53.5,-39.3699,-8.5284,3289.9,2706.5
+BR-TI-46701,Brazil,indigenous territory,Tubarão Latunde,1160.3,-60.6353,-12.6245,968.4,1424.1
+BR-TI-46801,Brazil,indigenous territory,Tikuna de Santo Antonio,10.7,-69.995,-4.3982,959.4,641.1
+BR-TI-46901,Brazil,indigenous territory,Tukuna Porto Espiritual,29.7,-69.828,-4.4701,947.3,632.1
+BR-TI-47001,Brazil,indigenous territory,Tukuna Umariaçu,48.1,-69.8859,-4.2649,973.7,618.2
+BR-TI-47101,Brazil,indigenous territory,Tumiã,1242.0,-66.5836,-7.9812,631.1,830.9
+BR-TI-47201,Brazil,indigenous territory,Tupã-Supé,85.9,-65.0202,-3.147,1219.3,299.3
+BR-TI-47301,Brazil,indigenous territory,Turé/Mariquita,1.5,-48.338,-2.2931,2642.5,1556.6
+BR-TI-47401,Brazil,indigenous territory,Turé/Mariquita II,5.9,-48.3519,-2.2847,2640.8,1553.8
+BR-TI-47601,Brazil,indigenous territory,Uaçá,4703.3,-51.4988,3.5357,2699.5,1121.8
+BR-TI-47701,Brazil,indigenous territory,Uati-Paraná,1253.7,-67.3782,-2.3718,1196.0,274.9
+BR-TI-47801,Brazil,indigenous territory,Ubawawe,521.5,-53.5045,-14.567,1719.8,1967.0
+BR-TI-47901,Brazil,indigenous territory,Uirapuru,218.8,-59.3245,-14.3496,1119.4,1671.8
+BR-TI-48001,Brazil,indigenous territory,Umutina,279.3,-57.0515,-14.9985,1359.8,1843.9
+BR-TI-48101,Brazil,indigenous territory,Uneiuxi,4015.3,-66.7392,-1.3199,1298.7,118.7
+BR-TI-48102,Brazil,indigenous territory,Uneiuxi - Reestudo,5515.2,-66.7078,-1.3821,1298.7,118.7
+BR-TI-48201,Brazil,indigenous territory,Uru-Eu-Wau-Wau,18688.6,-63.4784,-11.1837,627.1,1131.2
+BR-TI-48301,Brazil,indigenous territory,Urubu Branco,1676.8,-51.2477,-10.7057,1983.7,1744.8
+BR-TI-48401,Brazil,indigenous territory,Urucu/Juruá,126.5,-45.917,-5.3758,2724.4,1910.7
+BR-TI-48501,Brazil,indigenous territory,Utiariti,4098.4,-58.2706,-13.6483,1194.3,1583.4
+BR-TI-48601,Brazil,indigenous territory,Vale do Guaporé,2414.7,-59.9403,-13.7283,1018.3,1516.0
+BR-TI-48701,Brazil,indigenous territory,Vale do Javari,85315.8,-71.3658,-5.8643,688.0,649.3
+BR-TI-48801,Brazil,indigenous territory,Vanuire,7.1,-50.3831,-21.8023,2238.7,2863.3
+BR-TI-48901,Brazil,indigenous territory,Vargem Alegre,10.0,-43.7808,-13.4046,2745.5,2567.0
+BR-TI-49001,Brazil,indigenous territory,Varzinha,7.8,-50.2399,-29.7166,2748.7,3675.9
+BR-TI-49101,Brazil,indigenous territory,Ventarra,7.5,-52.2786,-27.7989,2460.0,3391.6
+BR-TI-49201,Brazil,indigenous territory,Votouro,33.3,-52.6433,-27.4575,2405.8,3339.4
+BR-TI-49301,Brazil,indigenous territory,Vui-Uata-In,1215.8,-68.3907,-3.5612,1044.6,439.6
+BR-TI-49401,Brazil,indigenous territory,Waiãpi,6046.5,-52.898,1.1282,2393.8,938.5
+BR-TI-49501,Brazil,indigenous territory,Waimiri-Atroari,25896.9,-60.6637,-0.8421,1560.4,194.3
+BR-TI-49601,Brazil,indigenous territory,WaiWái,4040.9,-59.6381,1.393,1910.4,175.6
+BR-TI-49701,Brazil,indigenous territory,Wassu-Cocal,118.0,-35.7139,-9.0506,3663.9,3100.8
+BR-TI-49801,Brazil,indigenous territory,Wawi,1500.3,-53.0639,-11.7493,1774.7,1709.5
+BR-TI-49901,Brazil,indigenous territory,Xacriabá,459.7,-44.2883,-14.8828,2673.0,2625.2
+BR-TI-49902,Brazil,indigenous territory,Xacriabá,433.8,-44.2138,-14.9837,2667.0,2623.9
+BR-TI-50001,Brazil,indigenous territory,Xakriabá Rancharia,68.4,-44.1243,-14.9321,2699.4,2646.2
+BR-TI-50101,Brazil,indigenous territory,Xambioá,32.6,-49.1646,-7.1288,2324.8,1684.9
+BR-TI-50201,Brazil,indigenous territory,Xapecó,155.5,-52.5106,-26.7417,2355.7,3266.8
+BR-TI-50301,Brazil,indigenous territory,Xerente,1712.6,-48.1146,-9.5345,2333.2,1900.4
+BR-TI-50401,Brazil,indigenous territory,Herarekã Xetá,26.8,-53.432,-23.4373,2064.1,2884.0
+BR-TI-50501,Brazil,indigenous territory,Xikrin do Rio Catete,4372.7,-50.8149,-6.3574,2160.4,1441.6
+BR-TI-50601,Brazil,indigenous territory,Xipaya,1785.4,-54.6832,-5.43,1827.4,1070.1
+BR-TI-50701,Brazil,indigenous territory,Xukuru-Kariri,70.1,-36.6245,-9.3886,3559.9,3020.0
+BR-TI-50801,Brazil,indigenous territory,Xukuru,275.2,-36.7678,-8.3245,3566.1,2961.4
+BR-TI-50901,Brazil,indigenous territory,Yanomami,94941.9,-63.496,2.1449,1505.0,0.0
+BR-TI-51001,Brazil,indigenous territory,Zoe,6688.0,-55.7868,-0.1224,2064.7,624.0
+BR-TI-51101,Brazil,indigenous territory,Zoró,3542.8,-60.8207,-10.5848,973.8,1183.0
+BR-TI-51201,Brazil,indigenous territory,Zuruahã,2381.2,-66.3951,-6.9114,750.9,698.5
+BR-TI-51301,Brazil,indigenous territory,Riozinho do Alto Envira,2584.9,-71.2264,-9.7516,362.9,1172.0
+BR-TI-51401,Brazil,indigenous territory,Apurinã do Alto Tupana,2513.9,-61.1894,-4.2283,1322.8,547.1
+BR-TI-51501,Brazil,indigenous territory,Sapotal,12.7,-69.5202,-4.2522,976.5,594.3
+BR-TI-51601,Brazil,indigenous territory,Anaro,302.5,-60.9642,3.9069,2097.8,114.2
+BR-TI-51801,Brazil,indigenous territory,Arara do Rio Amônia,205.2,-72.8766,-9.0847,522.9,1239.2
+BR-TI-52201,Brazil,indigenous territory,Barro Alto,19.4,-67.6787,-2.7682,1162.7,345.4
+BR-TI-52401,Brazil,indigenous territory,Batelão,1174.6,-56.5935,-11.146,1411.1,1446.3
+BR-TI-52601,Brazil,indigenous territory,Apurinã do Igarapé Mucuim,733.7,-66.022,-7.5569,727.5,785.3
+BR-TI-52701,Brazil,indigenous territory,Lago do Correio,132.2,-69.0542,-2.9428,1116.4,445.4
+BR-TI-52801,Brazil,indigenous territory,Guanabara,156.1,-69.8715,-4.5474,924.0,635.9
+BR-TI-52901,Brazil,indigenous territory,"Paiol, Cajual e Palhal",1146.1,-60.7476,-3.9275,1396.7,536.5
+BR-TI-53201,Brazil,indigenous territory,Ponciano,43.2,-59.4549,-3.5131,1556.0,579.1
+BR-TI-53401,Brazil,indigenous territory,Prosperidade,55.7,-67.4822,-2.6726,1176.9,324.5
+BR-TI-53501,Brazil,indigenous territory,Riozinho,3661.6,-67.0145,-3.556,1049.6,346.1
+BR-TI-53601,Brazil,indigenous territory,Santa Cruz da Nova Aliança,59.7,-67.7064,-2.7826,1158.4,345.3
+BR-TI-53801,Brazil,indigenous territory,Mato Preto,41.7,-52.221,-27.8096,2462.2,3393.3
+BR-TI-53901,Brazil,indigenous territory,Sururuá,361.5,-69.545,-4.4829,940.1,611.1
+BR-TI-54001,Brazil,indigenous territory,Votouro/Kandóia,60.0,-52.6659,-27.4415,2402.2,3334.7
+BR-TI-54101,Brazil,indigenous territory,Vista Alegre,131.7,-60.4824,-3.7113,1456.6,541.2
+BR-TI-54601,Brazil,indigenous territory,Tapeba,52.8,-38.6912,-3.7436,3536.5,2643.9
+BR-TI-55001,Brazil,indigenous territory,Sombrerito,127.6,-54.7477,-23.8141,1981.3,2865.9
+BR-TI-55101,Brazil,indigenous territory,Maró,423.0,-55.8241,-2.7858,1899.9,797.0
+BR-TI-55201,Brazil,indigenous territory,Pequizal do Naruvôtu,278.7,-52.839,-12.9297,1786.0,1854.6
+BR-TI-55501,Brazil,indigenous territory,Tupinambá de Olivença,473.9,-39.1222,-15.0277,3205.2,3059.4
+BR-TI-56601,Brazil,indigenous territory,Nawa,651.5,-73.5303,-7.5707,699.9,1141.7
+BR-TI-56701,Brazil,indigenous territory,Sawré Muybu (Pimental),1802.1,-56.5923,-4.9576,1672.5,884.8
+BR-TI-56801,Brazil,indigenous territory,Las Casas,214.0,-49.9112,-7.8705,2214.8,1660.1
+BR-TI-57101,Brazil,indigenous territory,Porto Limoeiro,43.6,-68.941,-3.0631,1107.5,449.2
+BR-TI-58001,Brazil,indigenous territory,Munduruku-Taquara,252.3,-55.0278,-3.251,1948.5,891.6
+BR-TI-58101,Brazil,indigenous territory,São Marcos - MT,1730.7,-52.7149,-15.2156,1790.6,2054.8
+BR-TI-58201,Brazil,indigenous territory,São Domingos do Jacapari e Estação,1347.8,-67.3588,-2.8195,1142.7,312.9
+BR-TI-58301,Brazil,indigenous territory,São Domingos - MT,61.7,-50.7159,-11.2721,2042.0,1856.0
+BR-TI-58401,Brazil,indigenous territory,São Marcos - RR,6508.0,-60.8036,3.9116,2055.1,66.6
+BR-TI-58502,Brazil,indigenous territory,Boa Vista - AM,3.4,-59.3757,-3.2256,1587.5,561.0
+BR-TI-58601,Brazil,indigenous territory,Boa Vista - PR,59.9,-52.3453,-25.2174,2265.0,3114.5
+BR-TI-58701,Brazil,indigenous territory,Cacique Fontoura,323.2,-50.8056,-11.3587,2024.8,1848.9
+BR-TI-58801,Brazil,indigenous territory,Barreirinha,23.9,-48.4127,-3.291,2578.3,1576.6
+BR-TI-58901,Brazil,indigenous territory,Sarauá,187.1,-48.0401,-3.0754,2616.6,1600.7
+BR-TI-59001,Brazil,indigenous territory,Portal do Encantado,430.1,-59.48,-16.1524,1140.8,1855.9
+BR-TI-59101,Brazil,indigenous territory,Tarumã,21.6,-48.703,-26.4616,2635.5,3417.3
+BR-TI-59201,Brazil,indigenous territory,Tumbalalá,450.1,-39.3799,-8.6698,3284.1,2706.0
+BR-TI-59301,Brazil,indigenous territory,Caieiras Velha II,0.6,-40.1678,-19.9488,3153.7,3336.0
+BR-TI-59401,Brazil,indigenous territory,Cobra Grande,89.0,-55.1632,-2.3161,1999.9,833.6
+BR-TI-59601,Brazil,indigenous territory,Cué Cué/ Marabitanas,7856.0,-66.9365,0.629,1464.2,0.0
+BR-TI-60001,Brazil,indigenous territory,Arara da Volta Grande do Xingu,253.9,-51.6802,-3.6064,2238.1,1242.1
+BR-TI-60701,Brazil,indigenous territory,Caxixó,55.0,-45.0752,-19.3405,2655.0,2931.5
+BR-TI-61401,Brazil,indigenous territory,Kawahiva do Rio Pardo,4094.3,-59.9643,-9.0005,1119.7,1063.1
+BR-TI-62001,Brazil,indigenous territory,Juruna do Km 17,23.5,-52.1323,-2.6402,2232.7,1160.7
+BR-TI-62101,Brazil,indigenous territory,Aracá-Padauiri (Baixo Rio Negro),33883.9,-63.6737,0.1834,1481.2,0.0
+BR-TI-62201,Brazil,indigenous territory,Fazenda Cristo Rei,30.3,-38.1975,-9.2644,3401.0,2857.9
+BR-TI-62301,Brazil,indigenous territory,Krahó-Kanela,76.5,-49.8996,-11.0112,2129.7,1897.3
+BR-TI-62401,Brazil,indigenous territory,Utaria Wyhyna/Iròdu Iràna,1775.8,-50.231,-10.1768,2087.7,1788.1
+BR-TI-62501,Brazil,indigenous territory,Bragança-Marituba,135.0,-55.0087,-3.0517,1960.8,887.8
+BR-TI-62701,Brazil,indigenous territory,Riozinho do Iaco (anteriormente chamada de Manchineri do Seringal Guanabara),1989.6,-69.8938,-10.3287,273.2,1190.8
+BR-TI-62801,Brazil,indigenous territory,Pipipã,625.1,-38.0257,-8.5732,3422.0,2839.6
+BR-TI-62901,Brazil,indigenous territory,Tenharim Marmelos (Gleba B),4749.4,-61.9193,-7.3885,1022.6,777.7
+BR-TI-63901,Brazil,indigenous territory,Tuwa Apekuokawera,117.6,-48.8089,-5.933,2406.1,1645.2
+BR-TI-64001,Brazil,indigenous territory,Yvyporã Laranjinha,12.4,-50.4707,-23.3076,2305.9,3013.2
+BR-TI-64501,Brazil,indigenous territory,Kapôt Nhinore,3546.4,-52.363,-9.748,1841.0,1588.2
+BR-TI-64601,Brazil,indigenous territory,Tremembé de Queimadas,7.7,-40.0247,-3.0936,3432.8,2488.8
+BR-TI-64801,Brazil,indigenous territory,Panambi - Lagoa Rica,120.4,-54.6193,-21.983,1874.2,2677.3
+BR-TI-64901,Brazil,indigenous territory,Xapecó (Pinhalzinho-Canhadão),6.3,-52.4266,-26.6556,2363.6,3265.6
+BR-TI-65101,Brazil,indigenous territory,Comexatibá,280.2,-39.2389,-17.0285,3197.4,3180.3
+BR-TI-65301,Brazil,indigenous territory,Passo Grande do Rio Forquilha,19.2,-51.771,-27.8649,2500.6,3418.8
+BR-TI-65401,Brazil,indigenous territory,Maracaxi,7.2,-47.9684,-2.3502,2674.2,1596.9
+BR-TI-65601,Brazil,indigenous territory,Tekoha Itamarã,2.2,-54.0498,-25.0046,2122.9,3025.7
+BR-TI-65701,Brazil,indigenous territory,Hãm Yîxux,5.2,-41.6694,-17.6406,2969.4,3046.4
+BR-TI-65801,Brazil,indigenous territory,Krenrehé,59.8,-51.4698,-11.0527,1964.4,1781.9
+BR-TI-65901,Brazil,indigenous territory,Jacareúba/Katauixi (restrição uso),6088.6,-64.4187,-8.322,729.1,809.1
+BR-TI-66001,Brazil,indigenous territory,Mundo Verde/Cachoeirinha,6.1,-41.2699,-17.5609,3009.4,3071.3
+BR-TI-66101,Brazil,indigenous territory,Tekoha Jevy (Rio Pequeno),23.6,-44.7541,-23.1192,2804.3,3291.3
+BR-TI-66301,Brazil,indigenous territory,Tanaru ( restrição de uso ),80.2,-61.3683,-12.6528,903.2,1420.2
+BR-TI-66901,Brazil,indigenous territory,Piripkura ( restrição de uso ),2423.9,-61.001,-9.6695,998.6,1089.0
+BR-TI-67101,Brazil,indigenous territory,Dourados-Amambaipeguá I,555.8,-54.9615,-22.7541,1873.4,2724.2
+BR-TI-67401,Brazil,indigenous territory,Jurubaxi-téa,12073.5,-65.2218,-0.9688,1362.9,11.7
+BR-TI-67501,Brazil,indigenous territory,Ilhas da Tapera/São Félix/Porto,5.0,-39.5729,-8.6038,3276.2,2694.5
+BR-TI-67601,Brazil,indigenous territory,Igarapé Taboca do Alto Tarauacá,2.9,-71.8953,-9.4404,444.9,1223.5
+BR-TI-67701,Brazil,indigenous territory,Cerco Grande,13.9,-48.292,-25.3141,2601.3,3319.3
+BR-TI-67801,Brazil,indigenous territory,Sambaqui,27.9,-48.4704,-25.6174,2604.2,3341.0
+BR-TI-68101,Brazil,indigenous territory,Kaxuyana-Tunayana,21845.1,-57.254,-0.3226,1816.7,422.3
+BR-TI-68301,Brazil,indigenous territory,Apiaká do Pontal e Isolados,9849.3,-58.1059,-8.3941,1303.3,1025.8
+BR-TI-68601,Brazil,indigenous territory,Mato Castelhano,35.7,-52.1717,-28.3133,2505.1,3448.5
+BR-TI-68901,Brazil,indigenous territory,Tupinambá de Belmonte,95.3,-39.1795,-15.9392,3208.9,3122.1
+BR-TI-69001,Brazil,indigenous territory,Sissaíma,87.4,-59.4296,-3.4201,1563.4,566.7
+BR-TI-69801,Brazil,indigenous territory,Fazenda Remanso,3.4,-43.3226,-12.3486,2803.3,2535.1
+BR-TI-69901,Brazil,indigenous territory,Fazenda Sítio,4.1,-38.7318,-10.632,3316.1,2867.4
+BR-TI-70101,Brazil,indigenous territory,Tekoha Guasú Guavirá,238.7,-54.1159,-24.0624,2042.0,2916.3
+BR-TI-70201,Brazil,indigenous territory,Xukuru de Cimbres,11.6,-36.8312,-8.4252,3569.0,2969.6
+BR-TI-70601,Brazil,indigenous territory,Tremembé da Barra do Mundaú,35.0,-39.4345,-3.1823,3486.9,2554.5
+BR-TI-71001,Brazil,indigenous territory,Pankará da Serra do Arapuá,149.2,-38.7097,-8.4153,3365.7,2770.2
+BR-TI-71201,Brazil,indigenous territory,Pindoty/Araçá-Mirim,10.3,-47.8509,-24.7563,2608.8,3284.8
+BR-TI-71301,Brazil,indigenous territory,Tapyi/Rio Branquinho,11.5,-48.0254,-24.9188,2603.1,3292.6
+BR-TI-71401,Brazil,indigenous territory,Guaviraty,12.5,-47.7734,-24.8224,2618.7,3294.5
+BR-TI-71501,Brazil,indigenous territory,Ka´aguy Mirim,11.9,-47.3129,-24.2787,2629.7,3263.8
+BR-TI-71601,Brazil,indigenous territory,Djaiko-Aty,12.1,-47.3359,-24.1977,2623.4,3255.6
+BR-TI-71701,Brazil,indigenous territory,Amba Porã,71.8,-47.3528,-24.1164,2614.5,3243.3
+BR-TI-71801,Brazil,indigenous territory,Peguaoty,62.2,-48.0352,-24.1938,2560.4,3217.5
+BR-TI-71901,Brazil,indigenous territory,Pakurity,57.2,-47.9742,-25.0947,2614.9,3306.8
+BR-TI-72001,Brazil,indigenous territory,Ka´aguy Hovy,19.5,-47.4829,-24.6681,2633.1,3294.8
+BR-TI-72301,Brazil,indigenous territory,Campo Bonito,0.9,-49.7957,-29.3638,2755.0,3659.9
+BR-TI-72401,Brazil,indigenous territory,Estrada do Mar,0.4,-50.1542,-29.8667,2768.1,3696.4
+BR-TI-72501,Brazil,indigenous territory,Riozinho - RS,0.2,-50.4059,-29.628,2732.9,3661.8
+BR-TI-72601,Brazil,indigenous territory,Ituna/Itatá (restrição de uso),1428.0,-52.0001,-4.0832,2162.5,1226.0
+BR-TI-72701,Brazil,indigenous territory,Canelinha,2.0,-48.7408,-27.2983,2688.9,3500.5
+BR-TI-72801,Brazil,indigenous territory,Águas Claras,1.4,-48.9397,-27.3733,2678.1,3498.2
+BR-TI-72901,Brazil,indigenous territory,Amaral/Tekoá Kuriy,5.0,-48.7608,-27.3808,2692.2,3507.3
+BR-TI-73001,Brazil,indigenous territory,Morro da Palha,2.2,-48.6639,-27.3397,2697.7,3508.7
+BR-TI-73301,Brazil,indigenous territory,Taego Ãwa,287.9,-49.7917,-11.9552,2122.6,1974.6
+BR-TI-73601,Brazil,indigenous territory,Wedezé,1457.5,-51.3108,-13.5463,1930.3,1989.4
+BR-TI-73701,Brazil,indigenous territory,Itãnury Pupykary (antiga Baixo Seruini),1766.4,-66.5603,-7.7984,654.4,811.3
+BR-TI-73702,Brazil,indigenous territory,Iguatemipegua I,405.5,-54.7066,-23.4254,1948.4,2816.7
+BR-TI-73703,Brazil,indigenous territory,Pindó Poty (Lami),0.7,-51.1029,-30.2279,2732.3,3695.7
+BR-TI-73708,Brazil,indigenous territory,Pirititi,400.4,-60.4393,0.0503,1750.8,193.8
+BR-TI-73709,Brazil,indigenous territory,Muã Mimatxi (Fazenda Modelo Diniz),1.0,-45.0459,-20.4711,2690.1,3036.4
+BR-TI-73711,Brazil,indigenous territory,Fazenda Boa Vista - MG,1.3,-46.3325,-21.9457,2617.2,3092.4
+BR-TI-73713,Brazil,indigenous territory,Ygua Porã (Amâncio),13.9,-48.7822,-27.3553,2689.0,3502.9
+BR-TI-73714,Brazil,indigenous territory,Taba dos Anacé,5.4,-38.727,-3.7071,3538.9,2643.1
+BR-TI-73717,Brazil,indigenous territory,Fazenda Jenipapeiro,15.1,-44.7491,-11.0286,2675.7,2324.0
+BR-TI-73718,Brazil,indigenous territory,Krenyê,80.4,-44.7724,-6.0272,2816.8,2056.4
+BR-TI-73720,Brazil,indigenous territory,Takuari,21.6,-48.216,-24.5342,2563.9,3243.1
+BR-TI-73722,Brazil,indigenous territory,Ypoi/Triunfo,199.3,-55.4235,-23.6917,1912.0,2820.6
+BR-TI-73727,Brazil,indigenous territory,Sawré Bap in (Apompu),1488.4,-56.5813,-4.6542,1685.2,867.4
+BR-TI-73742,Brazil,indigenous territory,Fazenda Sempre Verde,10.0,-43.2724,-12.178,2810.0,2527.7
+BR-TI-73744,Brazil,indigenous territory,Apykai,10.6,-54.8877,-22.2723,1873.2,2702.7
+BR-TI-73745,Brazil,indigenous territory,Uty-Xunati,9.0,-60.0142,-12.4072,1053.2,1447.5
+BR-TI-73755,Brazil,indigenous territory,Tekoa Gwyra Pepo,3.3,-47.5556,-23.9528,2593.8,3220.2
+BR-TI-73756,Brazil,indigenous territory,Barragem Norte,8.6,-49.6947,-26.886,2584.1,3410.0
+BR-TI-73769,Brazil,indigenous territory,Fazenda Mabel (Gavião/Akrãtikatêjê),27.7,-48.9805,-4.9631,2436.6,1585.0
+BR-TI-73770,Brazil,indigenous territory,Wassu Cocal,27.4,-35.7138,-9.0461,3668.2,3104.3
+BR-TI-73774,Brazil,indigenous territory,Kariri de Serra Grande,21.1,-41.3537,-8.6896,3085.8,2519.1
+BR-TI-73785,Brazil,indigenous territory,Guajanaíra,13.8,-49.9797,-4.9198,2341.1,1485.8
+BR-TI-73789,Brazil,indigenous territory,Reserva Indígena Avá Canoeiro,39.5,-48.2169,-13.8795,2273.8,2241.5
+BR-TI-73793,Brazil,indigenous territory,Aldeia Katurama,0.3,-44.2255,-20.056,2758.9,3054.5
+BR-TI-73795,Brazil,indigenous territory,Kulina do Rio Ueré,2716.0,-67.0958,-5.5013,845.9,558.7
+BR-TI-73796,Brazil,indigenous territory,Vera Tupã’i,0.1,-52.2747,-24.0263,2198.6,3001.7
+BR-TI-73798,Brazil,indigenous territory,Tuxá Setsor Bragagá,55.7,-45.2148,-16.7487,2599.0,2704.3
+BR-TI-73799,Brazil,indigenous territory,Kiriri de Caldas,0.4,-46.4108,-21.893,2608.2,3083.4
+BR-TI-73806,Brazil,indigenous territory,Aldeia Escola Floresta,1.3,-41.3904,-17.9041,3001.6,3088.4
+BR-TI-73807,Brazil,indigenous territory,Tekoá Guavirá,0.3,-50.3806,-29.628,2734.5,3662.8
+BR-TI-73808,Brazil,indigenous territory,Curriã,592.8,-65.6143,-7.754,737.1,798.6
+BR-TI-73809,Brazil,indigenous territory,Kapyra Kanakury,5681.6,-67.652,-7.7685,602.6,831.6
+BR-TI-73810,Brazil,indigenous territory,Baixo Marmelos,2633.0,-61.5616,-6.6731,1125.7,729.7
+BR-TI-73812,Brazil,indigenous territory,Ararà,7269.1,-58.8026,-1.3242,1717.4,333.0
+BR-TI-73813,Brazil,indigenous territory,Aldeia Cerroy,0.3,-55.8074,-21.4791,1748.9,2582.0
+BR-TI-73814,Brazil,indigenous territory,Baixo Rio Negro e Rio Caurés,7777.1,-63.1061,-1.3277,1424.6,137.4
+BR-TI-73815,Brazil,indigenous territory,Gaviãozinho,1280.8,-68.93,-6.4189,728.2,751.9
+BR-TI-73816,Brazil,indigenous territory,Curara,8726.9,-60.8582,-6.2991,1189.0,721.2
+BR-TI-73836,Brazil,indigenous territory,Fazenda Peró,1.8,-37.1222,-9.165,3519.0,2966.2
+BR-TI-73839,Brazil,indigenous territory,Aldeia Pó Mág,0.1,-51.7279,-29.6744,2646.7,3613.6
+BR-TI-73841,Brazil,indigenous territory,Aldeia Por Fi Ga,0.1,-51.0987,-29.7709,2696.7,3648.3
+BR-TI-73856,Brazil,indigenous territory,Valparaíso (RI),198.8,-67.2617,-8.6429,563.3,940.1
+BR-TI-73857,Brazil,indigenous territory,Kanela do Araguaia,149.7,-51.1271,-11.0049,1989.4,1796.9
+BR-TI-73865,Brazil,indigenous territory,Sabanê,300.4,-59.8231,-12.1804,1068.3,1422.3
+BR-TI-73866,Brazil,indigenous territory,Crim Patehi,7.6,-49.8502,-11.3325,2134.7,1931.1
+BR-TI-73875,Brazil,indigenous territory,Mamoriá Grande,2587.4,-66.521,-7.2904,719.2,759.6
+BR-TI-73878,Brazil,indigenous territory,Mashco do Rio Chandless,5434.6,-70.3686,-10.0235,273.5,1144.6
+RAISG-1,Guyane Française,protected area,Petit Cayenne (),1.2,-52.4408,4.8419,2763.0,1078.6
+RAISG-2,Suriname,protected area,Peruvia Nature Reserve (Nature Reserve),236.5,-56.0276,5.7063,2561.7,715.5
+RAISG-3,Guyane Française,protected area,Kaw-Roura (Reserva Nacional Natural),876.8,-52.2753,4.6202,2739.6,1076.3
+RAISG-4,Suriname,protected area,Coppename mouth Nature Reserve (Nature Reserve),210.3,-55.7308,5.9587,2589.5,738.6
+RAISG-5,Suriname,protected area,Snake creek Nature Reserve (Nature Reserve),31.9,-56.9148,5.1346,2459.1,602.0
+RAISG-6,Guyane Française,protected area,Bassin versant et chutes de la crique Voltaire (Monumento Natural),179.1,-54.0651,4.9492,2639.4,893.4
+RAISG-7,Guyane Française,protected area,Trinité (Reserva Natural),766.4,-53.2993,4.5891,2661.6,958.1
+RAISG-8,Guyane Française,protected area,Fondation TRESOR (Reserva Natural da Região),23.2,-52.3012,4.5955,2752.1,1084.9
+RAISG-9,Suriname,protected area,North Saramacca (Multiple Use Management Area),1856.0,-55.605,5.9515,2590.2,738.4
+RAISG-10,Suriname,protected area,Brownsberg Nature Reserve (Nature Reserve),140.1,-55.1741,4.9238,2556.1,771.7
+RAISG-11,Suriname,protected area,Kaboeri creek Nature Reserve (Nature Reserve),727.3,-57.0233,5.3165,2452.8,580.4
+RAISG-12,Suriname,protected area,Central Suriname Nature Reserve (Nature Reserve),15970.6,-56.3618,3.9732,2314.1,530.4
+RAISG-13,Guyane Française,protected area,Parc Amazonien de Guyane (Parque Nacional),20508.7,-53.255,2.9635,2398.1,781.6
+RAISG-14,Guyane Française,protected area,"Mont Grand Matoury, du lac des américains et de la plaine de la crique Bernard (Reserva Natural)",22.4,-52.3675,4.8578,2767.5,1083.8
+RAISG-15,Suriname,protected area,Copie Nature Reserve (Nature Reserve),274.7,-54.8105,5.4679,2622.4,826.9
+RAISG-16,Suriname,protected area,Brinckheuvel Nature Reserve (Nature Reserve),67.6,-55.3521,5.1399,2566.3,763.6
+RAISG-17,Guyane Française,protected area,Nouragues (Reserva Natural),1050.2,-52.7321,4.0736,2662.1,1000.8
+RAISG-18,Suriname,protected area,Bigi Pan (Multiple Use Management Area),1165.2,-56.7289,5.9954,2527.1,619.5
+RAISG-19,Guyana,protected area,C.I. Concession (Other Conversation Sites),832.9,-58.2485,3.4671,2210.6,363.4
+RAISG-20,Guyane Française,protected area,Amana (Reserva Natural),163.1,-53.6778,5.6543,2717.8,942.5
+RAISG-21,Guyane Française,protected area,Pointe Isére - Kanawa (Sítio Natural),13.3,-53.866,5.7363,2724.3,950.6
+RAISG-22,Suriname,protected area,Nanni Nature Reserve (Nature Reserve),362.5,-56.9187,5.7115,2498.3,609.3
+RAISG-23,Suriname,protected area,Wia Wia Nature Reserve (Nature Reserve),684.6,-54.5436,5.8985,2669.9,863.3
+RAISG-24,Suriname,protected area,Mac Clemen (Forest Reserve),65.6,-57.1554,5.5384,2476.7,587.5
+RAISG-25,Guyane Française,protected area,Piste de l'Anse (),0.4,-52.8721,5.3519,2769.9,1046.8
+RAISG-26,Guyane Française,protected area,Piste de l'Anse (),11.7,-52.8711,5.3702,2770.5,1045.8
+RAISG-27,Suriname,protected area,Wane creek Nature Reserve (Nature Reserve),477.2,-54.1376,5.7025,2691.2,911.3
+RAISG-28,Guyane Française,protected area,Montagne d'Argent (),7.4,-51.7095,4.3812,2784.9,1148.2
+RAISG-29,Guyane Française,protected area,Île du Grand Connétable (Reserva Natural),78.1,-51.9366,4.8271,2797.6,1130.8
+RAISG-30,Suriname,protected area,North Commewijne + Marowijne (Multiple Use Management Area),1854.4,-54.793,6.0109,2651.2,828.2
+RAISG-31,Guyana,protected area,Iwokrama (Protected Areas),3718.4,-58.8261,4.4539,2242.0,324.9
+RAISG-32,Guyana,protected area,Kanuku Mts. (Parque Nacional),3640.7,-59.1299,3.2115,2109.8,230.5
+RAISG-33,Guyane Française,protected area,Lucifer Dékou-Dékou (Reserva Biológica de Floresta),1110.8,-53.8934,4.7728,2620.3,889.0
+RAISG-34,Guyana,protected area,Extended Kaieteur  (Parque Nacional),617.4,-59.497,5.1742,2288.0,297.1
+RAISG-35,Guyane Française,protected area,Forêt des Sables Blancs de Mana (Área de Relevante Interesse Ecológico),259.3,-53.5869,5.5222,2716.7,962.0
+RAISG-36,Guyane Française,protected area,Abattis et Montagne Kotika (Monumento Natural),331.3,-54.2237,3.9971,2549.2,842.5
+RAISG-37,Suriname,protected area,Sipaliwini Reserve (Nature Reserve),763.8,-56.0324,2.0431,2251.0,592.9
+RAISG-38,Suriname,protected area,North Coronie (Multiple Use Management Area),748.1,-56.1463,5.8667,2560.3,689.4
+RAISG-39,Guyane Française,protected area,Marais de Yiyi (Sítio Natural),92.1,-53.1087,5.4843,2759.4,1020.3
+RAISG-40,Guyane Française,protected area,Parc Amazonien de Guyane (Parque Nacional),13314.3,-53.6841,3.2546,2428.2,808.4
+RAISG-41,Suriname,protected area,Upper Coesewijne Nature Reserve (Nature Reserve),298.9,-55.5802,5.4505,2564.3,744.6
+RAISG-42,Guyane Française,protected area,Piste de l'Anse (),5.6,-52.8822,5.3649,2769.5,1045.5
+RAISG-43,Guyane Française,protected area,Parc Naturel Régional de la Guyane (Parque Natural Regional),12732.2,-52.6845,4.9692,2682.1,935.0
+RAISG-44,Venezuela,protected area,Serranía Yutajé / Corocoro (Monumento Natural),596.6,-66.1642,5.6342,2067.3,192.2
+RAISG-45,Venezuela,protected area,Cerro Guaiquinima (Monumento Natural),5569.1,-63.7828,5.8346,2124.6,140.1
+RAISG-46,Venezuela,protected area,Caura (Parque Nacional),75487.5,-64.5119,5.7006,1970.1,0.0
+RAISG-47,Venezuela,protected area,Duida Marahuaca (Parque Nacional),10333.6,-65.49,3.4772,1815.9,27.2
+RAISG-48,Venezuela,protected area,Sierra Unturán (Monumento Natural),456.2,-65.4648,1.7442,1675.0,43.9
+RAISG-49,Venezuela,protected area,Cerro Guaiquinima (Monumento Natural),1235.4,-63.6023,5.8247,2157.5,170.4
+RAISG-50,Venezuela,protected area,Sierra Marutaní (Monumento Natural),1367.1,-62.9905,3.9592,1994.9,0.0
+RAISG-51,Venezuela,protected area,Cerro Yavi (Monumento Natural),183.9,-65.8988,5.6421,2080.1,182.2
+RAISG-52,Venezuela,protected area,Cerro Vinilla y Aratitiyope (Monumento Natural),2015.8,-65.4171,2.3339,1734.2,96.9
+RAISG-53,Venezuela,protected area,Parima Tapirapeco (Parque Nacional),38302.2,-64.6272,2.455,1657.5,0.0
+RAISG-54,Venezuela,protected area,Sierra Maigualida (Monumento Natural),13998.4,-65.1311,5.6576,2011.8,56.5
+RAISG-55,Venezuela,protected area,Sierra Unturán (Monumento Natural),3132.4,-65.4097,1.7029,1663.4,28.7
+RAISG-56,Venezuela,protected area,Cerro Guanay (Monumento Natural),240.0,-66.4052,5.8638,2085.7,241.1
+RAISG-57,Venezuela,protected area,Cerro Vinilla y Aratitiyope (Monumento Natural),34.1,-65.3901,2.2908,1741.2,104.2
+RAISG-58,Venezuela,protected area,Delta del Orinoco (Parque Nacional),3331.4,-61.4458,9.4023,2565.7,508.3
+RAISG-59,Venezuela,protected area,Tortuga Arrau (Refugio de Fauna Silvestre),71.3,-67.1408,6.5164,2139.6,355.6
+RAISG-60,Venezuela,protected area,Piedra de Cocuy (Monumento Natural),0.2,-66.8168,1.2597,1614.7,79.2
+RAISG-61,Venezuela,protected area,Sierra Marutaní (Monumento Natural),850.7,-62.9481,3.7986,1985.0,0.0
+RAISG-62,Venezuela,protected area,Cerro Guanay (Monumento Natural),113.8,-66.389,5.8467,2085.7,236.5
+RAISG-64,Venezuela,protected area,Cerro Yavi (Monumento Natural),88.3,-65.9025,5.7178,2088.9,192.8
+RAISG-65,Venezuela,protected area,Piedra de Cocuy (Monumento Natural),10.6,-66.8,1.2579,1613.7,75.7
+RAISG-66,Venezuela,protected area,Macizo Parú-Euaja (Monumento Natural),1554.3,-65.5278,4.4107,1950.4,59.5
+RAISG-67,Venezuela,protected area,Canaima (Parque Nacional),28152.0,-61.9834,5.5075,2123.1,55.3
+RAISG-68,Venezuela,protected area,Piedra de Cocuy (Monumento Natural),44.7,-66.7998,1.236,1608.3,72.3
+RAISG-69,Venezuela,protected area,Cerro Tamacuari y Serranía Tapirapecó (Monumento Natural),1158.0,-64.7899,1.394,1662.9,0.0
+RAISG-70,Venezuela,protected area,Piedra Pintada (Monumento Natural),15.4,-67.5528,5.5435,2042.4,346.5
+RAISG-71,Venezuela,protected area,Cerro Camaní y Cerro Morrocoy (Monumento Natural),126.3,-66.357,5.4074,2041.8,201.4
+RAISG-72,Venezuela,protected area,Macizo Parú-Euaja (Monumento Natural),1594.9,-65.6045,4.5372,1943.9,61.9
+RAISG-73,Venezuela,protected area,Cerro Ichum y Guanacoco (Monumento Natural),2333.3,-63.5798,4.4529,1997.5,2.0
+RAISG-74,Venezuela,protected area,Macizo Cuao-Sipapo y Cerro Moriche (Monumento Natural),8356.1,-66.8721,4.7132,1920.9,173.5
+RAISG-75,Venezuela,protected area,Cerro Ichum y Guanacoco (Monumento Natural),7482.5,-63.5626,4.5137,1983.0,2.0
+RAISG-80,Venezuela,protected area,Piedra La Tortuga (Monumento Natural),5.2,-67.5954,5.5637,2044.8,353.0
+RAISG-81,Venezuela,protected area,Cerro Tamacuari y Serranía Tapirapecó (Monumento Natural),198.6,-64.7599,1.3075,1657.5,0.0
+RAISG-82,Venezuela,protected area,Duida Marahuaca (Parque Nacional),1955.1,-65.5531,3.6155,1854.6,54.5
+RAISG-83,Venezuela,protected area,Macizo Cuao-Sipapo y Cerro Moriche (Monumento Natural),3913.5,-66.9595,4.8257,1927.1,189.0
+RAISG-84,Venezuela,protected area,Serranía La Neblina (Parque Nacional),14002.2,-65.8359,1.2713,1574.8,0.0
+RAISG-85,Venezuela,protected area,Cerro Camaní y Cerro Morrocoy (Monumento Natural),1031.4,-66.2369,5.3522,2032.4,179.4
+RAISG-96,Venezuela,protected area,Cerro Autana (Monumento Natural),5.5,-67.4462,4.8606,1974.7,313.8
+RAISG-97,Venezuela,protected area,Sierra Maigualida (Monumento Natural),6418.2,-65.2443,5.6812,2026.9,56.5
+RAISG-98,Venezuela,protected area,Yapacana (Parque Nacional),2812.6,-66.7555,3.8516,1852.0,201.1
+RAISG-99,Venezuela,protected area,Tortuga Arrau (Refugio de Fauna Silvestre),102.3,-67.1381,6.5029,2137.4,353.5
+RAISG-100,Venezuela,protected area,Serranía Yutajé / Corocoro (Monumento Natural),506.0,-66.1332,5.741,2076.9,205.0
+RAISG-167, ,protected area,El Choré (Área Natural de Manejo Integrado),2246.6,-64.3268,-16.4963,640.9,1735.9
+RAISG-168,Bolivia,protected area,Amboró (Parque Nacional),4426.9,-64.0495,-17.747,771.2,1920.3
+RAISG-170,Bolivia,protected area,Pilón Lajas (Reserva de la Biósfera y Territorio Indígena),3858.6,-67.3573,-14.97,311.7,1597.3
+RAISG-171,Bolivia,protected area,Manuripi (Reserva Nacional de Vida Silvestre Amazónica),7407.5,-68.2194,-11.8536,152.7,1243.3
+RAISG-172,Bolivia,protected area,Madidi (Parque Nacional),12729.3,-68.5771,-14.0934,120.2,1433.2
+RAISG-173,Venezuela,protected area,Cerro Venamo (Monumento Natural),30.5,-61.2613,5.7751,2267.9,189.5
+RAISG-174,Venezuela,protected area,Cadena de Tepuyes Orientales (Monumento Natural),1251.1,-60.9044,5.2392,2216.5,152.6
+RAISG-175,Guyana,protected area,Shell Beach (Parque Nacional),1186.1,-59.2418,8.0083,2564.7,508.2
+RAISG-178,Guyana,protected area,Roraima (Parque Nacional),376.8,-60.4064,5.2418,2243.4,188.7
+RAISG-179,Bolivia,protected area,Kaa-Iya del Gran Chaco (Área Natural de Manejo Integrado),14941.8,-61.436,-18.6848,1030.6,2011.8
+RAISG-180,Bolivia,protected area,Isiboro Securé (Parque Nacional y Territorio Indigena),13008.7,-65.7945,-16.1483,445.9,1695.1
+RAISG-181,Bolivia,protected area,Toro Toro (Parque Nacional),168.0,-65.7916,-18.1061,727.0,1991.8
+RAISG-182,Bolivia,protected area,Apolobamba (Area Natural de Manejo Integrado Nacional),4746.2,-68.8649,-15.035,221.0,1661.0
+RAISG-183,Bolivia,protected area,Madidi (Área Natural de Manejo Integrado),6038.4,-68.1148,-14.4601,214.3,1564.4
+RAISG-184,Bolivia,protected area,Kaa-Iya del Gran Chaco (Parque Nacional),19274.8,-61.4244,-19.2483,1053.9,2064.2
+RAISG-185,Bolivia,protected area,Carrasco (Parque Nacional),6916.9,-65.0441,-17.381,653.3,1877.0
+RAISG-186,Bolivia,protected area,Tunari (Parque Nacional),3285.0,-66.3548,-17.221,587.1,1864.6
+RAISG-187,Bolivia,protected area,Amboró (Área Natural de Manejo Integrado),1746.7,-64.0452,-17.7103,770.4,1902.2
+RAISG-188,Bolivia,protected area,Cotapata (Área Natural de Manejo Integrado),388.2,-67.9573,-16.2341,422.6,1796.0
+RAISG-189,Bolivia,protected area,Cotapata (Parque Nacional),225.7,-67.8981,-16.2031,421.9,1791.9
+RAISG-190,Bolivia,protected area,El Palmar (Área Natural de Manejo Integrado),602.7,-64.8644,-18.6631,827.8,2043.5
+RAISG-191,Bolivia,protected area,Estación Biológica del Beni (Reserva de la Biósfera),1348.4,-66.3045,-14.6416,409.5,1586.3
+RAISG-192,Bolivia,protected area,Iñao (Área Natural de Manejo Integrado),1720.8,-63.9517,-19.3357,917.7,2101.3
+RAISG-193,Bolivia,protected area,Iñao (Parque Nacional),913.8,-63.914,-19.3184,941.3,2110.2
+RAISG-194,Bolivia,protected area,Noel Kempff Mercado (Parque Nacional),15849.5,-60.9071,-14.2146,859.9,1511.4
+RAISG-321, ,protected area,El Choré (Parque Nacional),5461.1,-64.4339,-16.5365,640.3,1733.7
+RAISG-422,Brazil,protected area,Saracá-Taquera (Floresta Nacional),4407.6,-56.6294,-1.6541,1886.9,603.1
+RAISG-423,Brazil,protected area,Mapuá (Reserva Extrativista),956.5,-50.1754,-1.1324,2505.9,1281.2
+RAISG-424,Brazil,protected area,Marinha de Araí-Peroba (Reserva Extrativista),619.4,-46.4778,-0.9846,2876.8,1716.6
+RAISG-425,Brazil,protected area,Maracá-Jipioca (Estação Ecológica),514.4,-50.4323,2.0246,2711.0,1249.9
+RAISG-426,Brazil,protected area,Taiamã (Estação Ecológica),115.6,-57.5107,-16.8587,1357.7,2013.2
+RAISG-427,Brazil,protected area,Arióca Pruanã (Reserva Extrativista),835.6,-50.0041,-2.3496,2465.3,1359.5
+RAISG-428,Brazil,protected area,Javari-Buriti (Área de Relevante Interesse Ecológico),159.9,-67.825,-3.1136,1112.0,378.6
+RAISG-429,Brazil,protected area,Anavilhanas (Parque Nacional),3431.7,-60.8191,-2.4784,1513.5,353.4
+RAISG-430,Brazil,protected area,Cabo Orange (Parque Nacional),6533.1,-51.193,3.656,2710.3,1163.8
+RAISG-431,Brazil,protected area,Itaituba I (Floresta Nacional),2132.4,-56.5357,-5.423,1648.3,904.7
+RAISG-432,Brazil,protected area,Nascentes do Lago Jari (Parque Nacional),8120.4,-62.6325,-5.7433,1055.1,596.9
+RAISG-433,Brazil,protected area,Barreiro das Antas (Reserva Extrativista),1051.7,-64.6308,-11.5468,565.1,1223.1
+RAISG-434,Brazil,protected area,Amanã (Floresta Nacional),6806.2,-57.5654,-5.2757,1511.3,817.7
+RAISG-435,Brazil,protected area,Pau-Rosa (Floresta Nacional),9926.0,-58.0411,-4.6891,1464.0,682.6
+RAISG-436,Brazil,protected area,Mulata (Floresta Nacional),2158.2,-54.6781,-1.1854,2079.9,759.3
+RAISG-437,Brazil,protected area,Jatuarana (Floresta Nacional),5771.5,-59.4905,-7.5638,1226.7,944.8
+RAISG-438,Brazil,protected area,Rio Cajari (Reserva Extrativista),5026.3,-51.9929,-0.6738,2364.3,1058.5
+RAISG-439,Brazil,protected area,Seringal Nova Esperança (Área de Relevante Interesse Ecológico),25.7,-68.4354,-10.8862,285.9,1222.3
+RAISG-440,Brazil,protected area,Baia do Tubarão (Reserva Extrativista),2230.3,-43.7466,-2.4017,3042.2,2033.1
+RAISG-441,Brazil,protected area,Alto Tarauacá (Reserva Extrativista),1569.4,-71.9352,-8.8913,470.1,1140.4
+RAISG-442,Brazil,protected area,Recanto das Araras de Terra Ronca (Reserva Extrativista),120.5,-46.2933,-13.6933,2477.1,2382.7
+RAISG-443,Brazil,protected area,Marinha Cuinarana (Reserva Extrativista),109.2,-47.6671,-0.773,2785.7,1591.6
+RAISG-444,Brazil,protected area,Jaru (Reserva Biológica),3466.2,-61.7124,-9.8414,915.2,1054.5
+RAISG-445,Brazil,protected area,Pico da Neblina (Parque Nacional),22391.9,-65.9075,0.3487,1479.9,0.0
+RAISG-446,Brazil,protected area,Rio Acre (Estação Ecológica),847.7,-70.2767,-10.9328,216.8,1270.3
+RAISG-447,Brazil,protected area,Amapá (Floresta Nacional),4529.2,-51.6606,1.3813,2519.8,1082.0
+RAISG-448,Brazil,protected area,Marinha de Caeté-Taperaçu (Reserva Extrativista),419.6,-46.7002,-0.8805,2865.9,1696.2
+RAISG-449,Brazil,protected area,Urupadi (Floresta Nacional),5363.0,-58.4539,-6.0977,1395.3,827.4
+RAISG-450,Brazil,protected area,São João da Ponta (Reserva Extrativista),33.8,-47.9755,-0.81,2756.6,1557.8
+RAISG-451,Brazil,protected area,Carajás (Floresta Nacional),3325.5,-50.3459,-6.1545,2212.7,1471.8
+RAISG-452,Brazil,protected area,Igarapé Gelado (Área de Proteção Ambiental),206.2,-50.2516,-5.954,2247.4,1491.7
+RAISG-453,Brazil,protected area,Monte Roraima (Parque Nacional),1217.0,-60.359,5.0981,2215.2,182.9
+RAISG-454,Brazil,protected area,Jari (Estação Ecológica),2314.9,-52.9881,-0.4369,2277.5,946.2
+RAISG-455,Brazil,protected area,Mata Grande (Reserva Extrativista),113.9,-47.3371,-5.5048,2575.0,1773.1
+RAISG-456,Brazil,protected area,Terra Grande-Pracuúba (Reserva Extrativista),1947.5,-49.9562,-1.3733,2497.7,1319.2
+RAISG-457,Brazil,protected area,Chapada dos Veadeiros (Parque Nacional),2402.7,-47.3681,-13.9596,2314.2,2300.1
+RAISG-458,Brazil,protected area,Rio Unini (Reserva Extrativista),8428.6,-63.3436,-1.6302,1344.4,135.0
+RAISG-459,Brazil,protected area,Marinha de Tracuateua (Reserva Extrativista),276.5,-46.884,-0.8443,2846.6,1675.2
+RAISG-460,Brazil,protected area,Marinha Mocapajuba (Reserva Extrativista),212.5,-48.0361,-0.7208,2751.6,1544.3
+RAISG-461,Brazil,protected area,Serra do Divisor (Parque Nacional),8286.8,-73.3387,-8.1134,539.6,1135.6
+RAISG-462,Brazil,protected area,Arapixi (Reserva Extrativista),1326.3,-67.8667,-8.893,478.7,961.3
+RAISG-463,Brazil,protected area,Campos Ferruginosos (Parque Nacional),790.4,-50.13,-6.2929,2239.5,1519.2
+RAISG-464,Brazil,protected area,Médio Purus (Reserva Extrativista),6046.3,-66.0623,-7.5906,662.6,748.5
+RAISG-465,Brazil,protected area,Lago de Piratuba (Reserva Biológica),3925.3,-50.2235,1.5009,2662.2,1247.8
+RAISG-466,Brazil,protected area,Caracaraí (Estação Ecológica),842.7,-61.3032,1.7732,1874.3,0.0
+RAISG-467,Brazil,protected area,Serra da Mocidade (Parque Nacional),3596.8,-61.9998,1.1634,1719.1,0.0
+RAISG-468,Brazil,protected area,Médio Juruá (Reserva Extrativista),2854.9,-67.4639,-5.2681,864.3,553.4
+RAISG-469,Brazil,protected area,Baixo Juruá (Reserva Extrativista),1796.7,-65.9643,-3.5446,1099.0,322.3
+RAISG-470,Brazil,protected area,Alto Juruá (Reserva Extrativista),5282.7,-72.4445,-9.1397,461.7,1169.5
+RAISG-471,Brazil,protected area,Nascentes do Rio Vermelho (Área de Proteção Ambiental),1770.2,-46.1406,-14.4121,2477.3,2429.8
+RAISG-472,Brazil,protected area,Quilombo Frechal (Reserva Extrativista),87.5,-44.8033,-2.0326,2995.6,1933.3
+RAISG-473,Brazil,protected area,Terra do Meio (Estação Ecológica),33700.6,-53.6807,-5.6968,1834.8,1071.4
+RAISG-474,Brazil,protected area,Serra da Cutia (Parque Nacional),2835.6,-64.3847,-11.6586,560.7,1230.9
+RAISG-475,Brazil,protected area,Mapiá-Inauini (Floresta Nacional),3674.4,-68.1718,-8.3325,529.1,909.4
+RAISG-476,Brazil,protected area,Mãe Grande de Curuçá (Reserva Extrativista),385.2,-47.8669,-0.6389,2763.3,1561.2
+RAISG-477,Brazil,protected area,Tapajós (Floresta Nacional),5265.7,-55.0739,-3.5783,1879.1,880.5
+RAISG-478,Brazil,protected area,Riozinho da Liberdade (Reserva Extrativista),3240.0,-72.1012,-8.2656,519.7,1069.5
+RAISG-479,Brazil,protected area,Mapinguari (Parque Nacional),17728.4,-64.6281,-8.501,620.6,784.3
+RAISG-480,Brazil,protected area,Tapirapé-Aquiri (Floresta Nacional),1968.8,-50.7751,-5.7981,2190.1,1419.9
+RAISG-481,Brazil,protected area,Cururupu (Reserva Extrativista),1863.8,-44.8376,-1.5324,2998.6,1897.4
+RAISG-482,Brazil,protected area,Serra Geral do Tocantins (Estação Ecológica),7122.4,-46.6875,-10.8568,2422.8,2082.2
+RAISG-483,Brazil,protected area,Gurupá-Melgaço (Reserva Extrativista),1457.1,-51.2782,-1.3535,2380.6,1182.1
+RAISG-484,Brazil,protected area,Roraima (Floresta Nacional),1690.0,-61.8071,2.9445,1937.1,0.0
+RAISG-485,Brazil,protected area,Amazonas (Floresta Nacional),18607.9,-63.7411,1.3053,1522.4,0.0
+RAISG-486,Brazil,protected area,Marinha de Soure (Reserva Extrativista),293.4,-48.4587,-0.4921,2715.4,1493.6
+RAISG-487,Brazil,protected area,Jamanxim (Parque Nacional),8624.3,-55.7815,-5.6814,1675.4,969.8
+RAISG-488,Brazil,protected area,Extremo Norte do Tocantins (Reserva Extrativista),90.7,-48.0077,-5.3484,2513.9,1698.6
+RAISG-489,Brazil,protected area,Balata-Tufari (Floresta Nacional),10803.4,-63.9263,-7.0396,861.7,688.1
+RAISG-490,Brazil,protected area,Brasília (Parque Nacional),404.8,-48.0161,-15.6439,2291.1,2399.0
+RAISG-491,Brazil,protected area,Itatupã-Baquiá (Reserva de Desenvolvimento Sustentável),643.8,-51.3431,-0.7517,2438.7,1170.9
+RAISG-492,Brazil,protected area,Jamari (Floresta Nacional),2200.5,-62.9369,-9.2174,837.3,979.2
+RAISG-493,Brazil,protected area,Pantanal Mato-Grossense (Parque Nacional),1357.3,-57.4321,-17.6557,1381.6,2087.9
+RAISG-494,Brazil,protected area,Rio Trombetas (Reserva Biológica),4088.1,-56.6923,-1.1368,1929.3,588.9
+RAISG-495,Brazil,protected area,Pacaás Novos (Parque Nacional),7106.0,-63.335,-11.1352,670.5,1134.5
+RAISG-496,Brazil,protected area,Guaporé (Reserva Biológica),6144.7,-62.7916,-12.5205,683.0,1336.1
+RAISG-497,Brazil,protected area,Lago do Cuniã (Reserva Extrativista),742.0,-63.5427,-8.3219,839.8,872.4
+RAISG-498,Brazil,protected area,Sauim-de-Coleira (Reserva de Desenvolvimento Sustentável),152.9,-59.2207,-2.9944,1608.1,546.5
+RAISG-499,Brazil,protected area,Lago do Capanã Grande (Reserva Extrativista),3043.7,-62.0819,-5.8474,1125.7,648.1
+RAISG-500,Brazil,protected area,Iquiri (Floresta Nacional),14679.1,-66.2347,-8.5411,497.5,808.4
+RAISG-501,Brazil,protected area,Lago do Cedro (Reserva Extrativista),175.9,-51.0154,-14.7508,1985.2,2131.0
+RAISG-502,Brazil,protected area,Altamira (Floresta Nacional),7595.7,-55.0949,-5.9417,1727.2,1027.9
+RAISG-503,Brazil,protected area,Mata Grande (Floresta Nacional),20.0,-46.7334,-13.5705,2436.1,2342.4
+RAISG-504,Brazil,protected area,Chapada dos Guimarães (Parque Nacional),324.7,-55.8833,-15.3238,1485.3,1930.6
+RAISG-505,Brazil,protected area,Rio Xingu (Reserva Extrativista),3061.6,-52.8679,-5.0224,2018.6,1185.6
+RAISG-506,Brazil,protected area,Serra da Tabatinga (Área de Proteção Ambiental),414.0,-45.847,-10.2977,2563.1,2161.8
+RAISG-507,Brazil,protected area,Maracá (Estação Ecológica),1529.9,-61.8107,3.3578,1981.2,0.0
+RAISG-508,Brazil,protected area,Crepori (Floresta Nacional),7388.8,-57.0994,-6.4852,1513.9,947.8
+RAISG-509,Brazil,protected area,Tapajós-Arapiuns (Reserva Extrativista),6780.2,-55.5277,-3.063,1840.7,813.8
+RAISG-510,Brazil,protected area,Proj. Dinâmica B. de Fragmentos Florestais (Área de Relevante Interesse Ecológico),31.8,-59.8488,-2.4084,1606.9,435.2
+RAISG-511,Brazil,protected area,Itacaiúnas (Floresta Nacional),1360.8,-50.9418,-5.9092,2150.2,1415.9
+RAISG-512,Brazil,protected area,Tapajós (Área de Proteção Ambiental),20423.1,-56.6801,-6.5236,1505.2,909.5
+RAISG-513,Brazil,protected area,Chapada das Mesas (Parque Nacional),1600.3,-47.1449,-7.1524,2508.1,1844.7
+RAISG-514,Brazil,protected area,Verde para Sempre (Reserva Extrativista),12843.8,-52.6959,-2.2002,2154.4,1011.0
+RAISG-515,Brazil,protected area,Cazumbá-Iracema (Reserva Extrativista),7538.1,-69.4754,-9.5141,298.5,1050.0
+RAISG-516,Brazil,protected area,Serra das Araras (Estação Ecológica),280.4,-57.19,-15.6443,1361.0,1897.0
+RAISG-517,Brazil,protected area,Bom Futuro (Floresta Nacional),1000.6,-63.9124,-9.4559,725.4,977.8
+RAISG-518,Brazil,protected area,Parima (Floresta Nacional),1095.5,-62.0822,3.6639,2005.2,0.0
+RAISG-519,Brazil,protected area,Marinha de Gurupi-Piriá (Reserva Extrativista),721.4,-46.2207,-1.0452,2891.0,1749.2
+RAISG-520,Brazil,protected area,Marinha Mestre Lucindo (Reserva Extrativista),274.5,-47.7,-0.6472,2779.2,1582.6
+RAISG-521,Brazil,protected area,Anauá (Floresta Nacional),2621.1,-60.8844,0.7331,1765.7,86.3
+RAISG-522,Brazil,protected area,Chico Mendes (Reserva Extrativista),9316.4,-68.9767,-10.5003,227.7,1138.0
+RAISG-523,Brazil,protected area,Manicoré (Reserva Biológica),3593.3,-60.9762,-6.9613,1137.6,825.1
+RAISG-524,Brazil,protected area,Meandros do Rio Araguaia (Área de Proteção Ambiental),3332.5,-50.6816,-13.1432,2002.9,1972.3
+RAISG-525,Brazil,protected area,Tapirapé (Reserva Biológica),992.3,-50.6118,-5.6297,2212.2,1432.4
+RAISG-526,Brazil,protected area,Juami-Japurá (Estação Ecológica),8285.7,-68.3644,-2.2367,1137.9,248.3
+RAISG-527,Brazil,protected area,Jamanxim (Floresta Nacional),13010.9,-55.7847,-7.4394,1597.6,1082.8
+RAISG-528,Brazil,protected area,Ituxi (Reserva Extrativista),7781.3,-65.2874,-8.375,636.3,829.6
+RAISG-529,Brazil,protected area,Abufari (Reserva Biológica),2225.3,-63.0432,-5.1854,1122.7,545.5
+RAISG-530,Brazil,protected area,Nascentes da Serra do Cachimbo (Reserva Biológica),3428.7,-54.6713,-8.9801,1666.9,1337.9
+RAISG-531,Brazil,protected area,Auatí-Paraná (Reserva Extrativista),1441.2,-66.3793,-2.0234,1237.9,196.2
+RAISG-532,Brazil,protected area,Niquiá (Estação Ecológica),2821.2,-61.5035,1.2563,1781.2,2.4
+RAISG-533,Brazil,protected area,Jaú (Parque Nacional),23630.4,-62.6453,-2.253,1324.4,247.0
+RAISG-534,Brazil,protected area,Filhos do Mangue (Reserva Extrativista),407.1,-46.9928,-0.7814,2838.9,1660.6
+RAISG-535,Brazil,protected area,Contagem (Reserva Biológica),34.6,-47.8809,-15.6397,2317.3,2422.9
+RAISG-536,Brazil,protected area,Itapetininga (Reserva Extrativista),156.2,-44.7088,-2.3431,2984.9,1949.4
+RAISG-537,Brazil,protected area,Campos Amazônicos (Parque Nacional),9613.5,-61.181,-8.3931,964.5,930.1
+RAISG-538,Brazil,protected area,Rio Jutaí (Reserva Extrativista),2735.7,-67.3304,-3.5058,1056.6,352.5
+RAISG-539,Brazil,protected area,Baixo Rio Branco - Jauaperi (Reserva Extrativista),5800.4,-61.5753,-0.8758,1569.1,147.4
+RAISG-540,Brazil,protected area,Marinha do Maracanã (Reserva Extrativista),319.2,-47.4817,-0.7187,2798.0,1602.9
+RAISG-541,Brazil,protected area,Juruena (Parque Nacional),19543.1,-58.4236,-8.0502,1252.8,951.8
+RAISG-542,Brazil,protected area,Renascer (Reserva Extrativista),2105.6,-53.4392,-2.2643,2132.3,985.7
+RAISG-543,Brazil,protected area,Gurupi (Reserva Biológica),2933.0,-46.6912,-3.7347,2698.3,1751.6
+RAISG-544,Brazil,protected area,Humaitá (Floresta Nacional),4756.2,-62.4867,-8.0687,951.8,826.7
+RAISG-545,Brazil,protected area,Iquê (Estação Ecológica),2191.1,-59.3046,-12.0681,1101.8,1413.9
+RAISG-546,Brazil,protected area,Itaituba II (Floresta Nacional),3961.6,-56.4842,-5.077,1669.1,887.6
+RAISG-547,Brazil,protected area,Riozinho do Anfrísio (Reserva Extrativista),7364.8,-55.0799,-4.9894,1777.8,966.9
+RAISG-548,Brazil,protected area,Tefé (Floresta Nacional),8314.7,-65.5601,-4.0897,1029.3,344.4
+RAISG-549,Brazil,protected area,Macauã (Floresta Nacional),1765.4,-69.6537,-9.9351,312.5,1133.1
+RAISG-550,Brazil,protected area,Bacia do Rio Descoberto (Área de Proteção Ambiental),412.1,-48.1638,-15.6999,2279.2,2398.6
+RAISG-551,Brazil,protected area,Amazônia (Parque Nacional),10661.7,-56.7799,-4.3797,1637.4,798.1
+RAISG-552,Brazil,protected area,Acari (Parque Nacional),8957.3,-59.313,-6.2495,1302.5,821.7
+RAISG-553,Brazil,protected area,São Francisco (Floresta Nacional),211.8,-69.3747,-9.8836,339.4,1141.0
+RAISG-554,Brazil,protected area,Campos de Manicoré (Área de Proteção Ambiental),1520.1,-61.3593,-7.1151,1112.3,821.5
+RAISG-555,Brazil,protected area,Araguaia (Parque Nacional),5571.8,-50.1652,-10.5577,2084.0,1788.1
+RAISG-556,Brazil,protected area,Rio Ouro Preto (Reserva Extrativista),1997.6,-64.7681,-10.7829,554.9,1137.2
+RAISG-557,Brazil,protected area,Planalto Central (Área de Proteção Ambiental),4958.3,-47.7723,-15.6875,2280.9,2376.5
+RAISG-558,Brazil,protected area,Cuniã (Estação Ecológica),1834.4,-63.4027,-8.1478,844.3,861.3
+RAISG-559,Brazil,protected area,Aripuanã (Floresta Nacional),7511.1,-60.5675,-6.9753,1114.7,826.4
+RAISG-560,Brazil,protected area,Viriandeua (Reserva Extrativista),343.1,-47.188,-0.7333,2818.3,1624.0
+RAISG-561,Brazil,protected area,Serra do Pardo (Parque Nacional),4457.7,-52.9901,-5.815,1964.1,1210.7
+RAISG-562,Brazil,protected area,Caxiuanã (Floresta Nacional),3190.5,-51.6731,-1.958,2303.9,1150.6
+RAISG-563,Brazil,protected area,Trairão (Floresta Nacional),2569.1,-55.5765,-4.8488,1755.6,952.9
+RAISG-564,Brazil,protected area,Santa Rosa do Purus (Floresta Nacional),2297.0,-70.8523,-9.3873,382.4,1116.6
+RAISG-565,Brazil,protected area,Nascentes do Rio Parnaíba (Parque Nacional),7510.0,-46.0119,-9.9699,2497.5,2074.9
+RAISG-566,Brazil,protected area,Ipaú-Anilzinho (Reserva Extrativista),558.8,-49.7552,-3.1505,2443.7,1418.1
+RAISG-567,Brazil,protected area,Rio Cautário (Reserva Extrativista),740.0,-64.1875,-11.8178,597.0,1257.1
+RAISG-568,Brazil,protected area,Purus (Floresta Nacional),2558.0,-67.674,-8.2657,563.2,891.4
+RAISG-569,Brazil,protected area,Montanhas do Tumucumaque (Parque Nacional),38067.8,-52.9281,1.9626,2344.9,760.3
+RAISG-570,Brazil,protected area,Jacundá (Floresta Nacional),2216.2,-63.0484,-8.4588,869.2,890.4
+RAISG-571,Brazil,protected area,Alto Maués (Estação Ecológica),6696.9,-58.3012,-5.5777,1422.6,815.1
+RAISG-572,Brazil,protected area,Rio Iriri (Reserva Extrativista),3961.6,-54.297,-4.8492,1851.7,1045.3
+RAISG-573,Brazil,protected area,Chocoaré - Mato Grosso (Reserva Extrativista),46.0,-47.3731,-0.8717,2807.5,1628.2
+RAISG-574,Brazil,protected area,Uatumã (Reserva Biológica),9415.8,-59.4558,-1.2283,1693.3,317.3
+RAISG-576,Brazil,protected area,Ciriaco (Reserva Extrativista),80.9,-47.8144,-5.2603,2539.0,1715.3
+RAISG-577,Brazil,protected area,Viruá (Parque Nacional),2803.8,-61.1113,1.295,1816.3,30.5
+RAISG-578,Brazil,protected area,Jutaí-Solimões (Estação Ecológica),2861.7,-67.5893,-3.1473,1089.4,343.2
+RAISG-579,Brazil,protected area,Rio Novo (Parque Nacional),5381.5,-56.4407,-7.7592,1511.1,1076.9
+RAISG-582,Brazil,protected area,Arapiranga - Tromaí (Reserva Extrativista),1852.5,-45.866,-1.0051,2924.9,1784.6
+RAISG-584,Ecuador,protected area,Cayambe Coca (Parque Nacional),4073.7,-77.8313,-0.0667,1636.3,1250.1
+RAISG-585,Ecuador,protected area,Limoncocha (Reserva Biológica),36.7,-76.5902,-0.4014,1568.0,1156.6
+RAISG-586,Ecuador,protected area,Quimsacocha (Área Nacional De Recreación),32.2,-79.2368,-3.0139,1491.1,1486.8
+RAISG-587,Ecuador,protected area,El Zarza (Refugio De Vida Silvestre),36.9,-78.5373,-3.8155,1376.0,1433.0
+RAISG-589,Ecuador,protected area,Yasuni (Parque Nacional),10227.6,-76.0552,-1.1221,1408.0,1032.4
+RAISG-590,Ecuador,protected area,El Quimi (Reserva Biológica),90.6,-78.3861,-3.4535,1392.7,1405.4
+RAISG-591,Ecuador,protected area,Cerro Plateado (Reserva Biológica),307.6,-78.7779,-4.5714,1324.8,1474.2
+RAISG-592,Ecuador,protected area,Cofán Bermejo (Reserva Ecológica),548.0,-77.3165,0.3186,1664.9,1220.4
+RAISG-593,Ecuador,protected area,Cuyabeno (Reserva De Produccion De Fauna),5906.4,-75.7857,-0.3265,1456.1,1006.3
+RAISG-594,Ecuador,protected area,Rio Negro Sopladora (Parque Nacional),337.1,-78.5204,-2.769,1456.3,1395.7
+RAISG-595,Ecuador,protected area,Cajas (Parque Nacional),293.9,-79.2426,-2.8471,1500.9,1479.0
+RAISG-596,Ecuador,protected area,Llanganates (Parque Nacional),2199.0,-78.241,-1.1357,1561.7,1323.7
+RAISG-597,Ecuador,protected area,Podocarpus (Parque Nacional),1384.4,-79.0068,-4.2746,1350.0,1476.4
+RAISG-598,Ecuador,protected area,El Condor (Reserva Biológica),23.9,-78.2344,-3.4418,1382.6,1392.3
+RAISG-603,Ecuador,protected area,Sangay (Parque Nacional),4859.9,-78.3988,-2.109,1461.9,1338.5
+RAISG-606,Ecuador,protected area,Chimborazo (Reserva De Produccion De Fauna),526.5,-78.8442,-1.429,1593.4,1407.0
+RAISG-610,Ecuador,protected area,Cotopaxi (Parque Nacional),327.8,-78.4504,-0.6481,1638.3,1363.5
+RAISG-611,Ecuador,protected area,El Boliche (Área Nacional De Recreación),4.0,-78.5688,-0.6143,1660.5,1386.3
+RAISG-615,Ecuador,protected area,San Jorge de Patate (Área de Protección Hídrica),2.1,-78.4562,-1.2912,1593.3,1378.4
+RAISG-616,Ecuador,protected area,Teligote (Área de Protección Hídrica),2.0,-78.5654,-1.3741,1592.6,1391.9
+RAISG-618,Ecuador,protected area,Los Ilinizas (Reserva Ecológica),1341.7,-78.9446,-0.7169,1648.4,1393.8
+RAISG-629,Ecuador,protected area,KAYAMBI (Área de Protección Hídrica),99.0,-78.0548,0.0241,1680.9,1318.8
+RAISG-630,Ecuador,protected area,CHINI - DELEG (Área de Protección Hídrica),21.2,-78.9638,-2.7296,1497.7,1452.1
+RAISG-634,Ecuador,protected area,HUAMBALÓ-LA MOYA (Área de Protección Hídrica),1.6,-78.5427,-1.4245,1586.5,1389.2
+RAISG-635,Ecuador,protected area,Rio Pindo Grande (Área de Protección Hídrica),2.3,-78.0708,-1.4452,1555.3,1336.2
+RAISG-637,Ecuador,protected area,"AGUARICO, CHINGUAL Y COFANES (Área de Protección Hídrica)",1004.4,-77.5756,0.3492,1658.1,1247.9
+RAISG-640,Ecuador,protected area,FLOR DEL VALLE (Área de Protección Hídrica),36.5,-77.3322,0.0971,1651.2,1239.0
+RAISG-641,Ecuador,protected area,YANTZAZA (Área de Protección Hídrica),31.7,-78.7112,-3.7776,1392.1,1445.4
+RAISG-642,Ecuador,protected area,RETÉN ICHUBAMBA (Área de Protección Hídrica),44.9,-78.5711,-2.037,1531.1,1396.5
+RAISG-643,Ecuador,protected area,Santa Elena (Área de Protección Hídrica),1.7,-78.4487,-0.9137,1626.7,1374.0
+RAISG-644,Ecuador,protected area,Simiátug (Área de Protección Hídrica),40.9,-78.9191,-1.2877,1619.6,1427.2
+RAISG-645,Ecuador,protected area,CUTURIVÍ CHICO (Área de Protección Hídrica),9.1,-78.7789,-1.0147,1637.0,1411.6
+RAISG-646,Ecuador,protected area,RÍO SUNO (Área de Protección Hídrica),20.2,-77.4035,-0.6011,1588.1,1246.3
+RAISG-648,Ecuador,protected area,EL PANGUI (Área de Protección Hídrica),42.1,-78.638,-3.642,1394.6,1439.2
+RAISG-653,Ecuador,protected area,SUR DEL ECUADOR (Área de Protección Hídrica),611.8,-79.3535,-3.6265,1431.3,1493.5
+RAISG-655,Ecuador,protected area,Yacuri (Parque Nacional),483.5,-79.3204,-4.6585,1356.2,1527.0
+RAISG-656,Ecuador,protected area,PIMAMPIRO (Refugio De Vida Silvestre),36.8,-77.8592,0.3282,1705.3,1300.5
+RAISG-657,Ecuador,protected area,SHAUSHI - PUEBLO VIEJO - SAN VICENTE (Área de Protección Hídrica),1.7,-78.571,-1.3925,1591.2,1392.8
+RAISG-658,Ecuador,protected area,VERDÚN (Área de Protección Hídrica),81.0,-79.2597,-4.0848,1405.2,1518.9
+RAISG-660,Ecuador,protected area,Antisana (Parque Nacional),1220.3,-78.0404,-0.591,1603.1,1300.1
+RAISG-661,Ecuador,protected area,Colonso Chalupas (Reserva Biológica),929.6,-78.0509,-0.8803,1583.3,1309.8
+RAISG-662,Ecuador,protected area,APH PONCE PALUGUILLO (Área de Protección Hídrica),42.5,-78.2414,-0.326,1664.1,1344.8
+RAISG-664,Ecuador,protected area,Sumaco Napo-Galeras (Parque Nacional),2133.4,-77.5582,-0.4285,1571.5,1230.4
+RAISG-672,Ecuador,protected area,Sangay_Podocarpus (Corredor De Conectividad),5667.2,-78.8237,-3.3255,1386.3,1392.4
+RAISG-673,Ecuador,protected area,Podocarpus Yacuri (Corredor De Conectividad),7384.9,-79.04,-4.4404,1318.7,1445.6
+RAISG-674,Ecuador,protected area,Llanganates_Sangay (Corredor De Conectividad),920.0,-78.1895,-1.422,1529.5,1323.2
+RAISG-675,Ecuador,protected area,Andes Norte (Corredor De Conectividad),2722.9,-78.1179,0.3382,1684.4,1278.3
+RAISG-676,Ecuador,protected area,Altitudinal Llanganates - Reserva de Biosfera Yasuní (Corredor De Conectividad),2154.0,-77.7786,-1.2984,1518.7,1275.5
+RAISG-677,Ecuador,protected area,Cuyabeno - Yasuní (Corredor De Conectividad),2733.0,-75.851,-0.6166,1451.5,1007.4
+RAISG-678,Ecuador,protected area,Palora_Pastaza (Corredor De Conectividad),3155.2,-77.7117,-1.9669,1444.2,1255.6
+RAISG-679,Ecuador,protected area,Baquerizo Moreno (Área de Protección Hídrica),4.1,-78.4683,-1.1995,1602.0,1378.6
+RAISG-681,Ecuador,protected area,Corazón de laAmazonía (Área de Protección Hídrica),199.6,-79.2358,-4.6106,1358.0,1525.0
+RAISG-682,Ecuador,protected area,Microcuenca del Río Tabacay (Área de Protección Hídrica),45.0,-78.8079,-2.6692,1491.8,1434.3
+RAISG-683,Ecuador,protected area,Runahurco (Área de Protección Hídrica),720.1,-78.7451,-3.3109,1415.7,1423.6
+RAISG-684,Ecuador,protected area,Cerro la Igualata (Área de Protección Hídrica),14.6,-78.6435,-1.4835,1585.3,1399.0
+RAISG-685,Ecuador,protected area,Machángara - Tomebamba (Refugio De Vida Silvestre),418.1,-79.1061,-2.7021,1499.2,1456.5
+RAISG-699,Colombia,protected area,Nukak (Reserva Natural),8756.7,-71.5059,1.9372,1595.9,525.0
+RAISG-702,Colombia,protected area,La Serranía de Chiribiquete (Parque Nacional Natural),42663.2,-73.0196,0.7912,1424.8,579.5
+RAISG-703,Colombia,protected area,Sumapaz (Parque Nacional Natural),2111.2,-74.135,3.9055,1875.8,929.7
+RAISG-704,Colombia,protected area,Sierra de la Macarena (Parque Nacional Natural),6205.9,-73.6034,2.6545,1728.2,769.1
+RAISG-705,Colombia,protected area,Cuenca Alta del Río Mocoa (Reservas Forestales Protectoras Nacionales),374.8,-76.7669,1.2544,1729.7,1176.7
+RAISG-714,Colombia,protected area,Tinigua (Parque Nacional Natural),2081.3,-74.1429,2.4865,1732.4,877.7
+RAISG-721,Colombia,protected area,Isla de la Corota (Santuario de Flora),0.2,-77.1495,1.129,1747.2,1229.8
+RAISG-722,Colombia,protected area,"Serranía El Capricho, Mirolindo y Cerritos (Reservas Forestales Protectoras Nacionales)",69.1,-72.7915,2.3586,1711.4,747.4
+RAISG-723,Colombia,protected area,Puinawai (Reserva Natural),10970.3,-69.1745,2.2877,1627.1,293.7
+RAISG-725,Colombia,protected area,La Paya (Parque Nacional Natural),4400.2,-75.2334,0.1547,1515.1,942.6
+RAISG-745,Colombia,protected area,Complejo Volcánico Doña Juana Cascabel (Parque Nacional Natural),656.3,-76.7794,1.5515,1756.5,1173.6
+RAISG-748,Colombia,protected area,Serranía La Lindosa - Angosturas II (Reservas Forestales Protectoras Nacionales),282.1,-72.7528,2.5182,1724.2,741.5
+RAISG-753,Bolivia,protected area,El Choré (Parque Nacional),5461.1,-64.4339,-16.5365,640.3,1733.7
+RAISG-758,Colombia,protected area,Alto Fragua - Indi Wasi (Parque Nacional Natural),759.6,-76.0984,1.4229,1711.7,1091.3
+RAISG-762,Colombia,protected area,Yaigojé Apaporis (Parque Nacional Natural),10531.9,-70.2604,-0.6585,1308.9,364.9
+RAISG-764,Colombia,protected area,Cueva de los Guácharos (Parque Nacional Natural),71.3,-76.1278,1.585,1741.3,1111.6
+RAISG-769,Colombia,protected area,Cordillera de los Picachos (Parque Nacional Natural),2879.0,-74.6105,2.8295,1775.3,926.7
+RAISG-773,Bolivia,protected area,El Choré (Área Natural de Manejo Integrado),2246.6,-64.3268,-16.4963,640.9,1735.9
+RAISG-778,Colombia,protected area,Plantas Medicinales Orito - Ingi Ande (Santuario de Flora),103.9,-77.0952,0.7605,1698.2,1211.5
+RAISG-784,Colombia,protected area,Río Bobo y Buesaquillo (Reservas Forestales Protectoras Nacionales),46.9,-77.2274,1.1428,1749.7,1232.9
+RAISG-787,Colombia,protected area,Amacayacu (Parque Nacional Natural),2672.4,-70.1441,-3.4396,1024.8,536.9
+RAISG-799,Colombia,protected area,Río Puré (Parque Nacional Natural),9696.6,-70.0915,-1.9595,1177.5,396.5
+RAISG-800,Colombia,protected area,Cahuinarí (Parque Nacional Natural),5568.7,-71.1208,-1.4294,1252.9,477.5
+RAISG-802,Colombia,protected area,Laguna La Cocha Cerro Patascoy (Reservas Forestales Protectoras Nacionales),498.9,-77.1345,1.0251,1719.8,1215.1
+RAISG-810,Colombia,protected area,Serranía de los Churumbelos  - Auka Wasi (Parque Nacional Natural),972.1,-76.3567,1.2936,1710.4,1118.7
