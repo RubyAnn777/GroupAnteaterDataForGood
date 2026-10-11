@@ -478,4 +478,4 @@ All 447 numbers, with unit, description, claim type and producing function: [`ou
 | `tam_add_2017` | 2,455 | ha | Annual addition, Tambopata BZ, 2017 |
 
 ---
-*Built 2026-10-11 14:31 from git commit 677e979 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (447 rows).*
+*Built 2026-10-11 14:31 from git commit a30d04c (working tree may contain uncommitted changes). Numbers from output/numbers.csv (447 rows).*
