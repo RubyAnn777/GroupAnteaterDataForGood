@@ -1,4 +1,4 @@
-# Adversarial review of report_content.md / REPORT.md (2026-10-11)
+# Adversarial review of report_content.md / REPORT.md (2026-10-11; both since replaced by EXPLAINER, see LOG D20)
 
 Scope: report text, numbers.csv, checks.csv, notes, peru.py, peru_robust.py, brazil.py, brief_figure.py (other modules skimmed). Line numbers refer to docs/overnight/report_content.md. Ranked by severity.
 

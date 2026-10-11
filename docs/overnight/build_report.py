@@ -1,4 +1,7 @@
-"""Build docs/overnight/REPORT.html and REPORT.md from report_content.md + output/numbers.csv.
+"""Build the team walkthrough and the brief draft from markdown sources + output/numbers.csv.
+
+  docs/overnight/explainer_content.md -> docs/overnight/EXPLAINER.html + EXPLAINER.md  (guided walkthrough)
+  docs/brief/brief_content.md         -> docs/brief/BRIEF_DRAFT.html + BRIEF_DRAFT.md   (2-page brief draft)
 
 Run:  uv run python docs/overnight/build_report.py
 Placeholders {{id}} / {{id:fmt}} come from output/numbers.csv (default fmt ",.0f"); unknown ids raise.
@@ -10,7 +13,9 @@ import markdown
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-CONTENT = HERE / "report_content.md"
+CONTENT = HERE / "explainer_content.md"
+BRIEF_DIR = ROOT / "docs" / "brief"
+BRIEF_CONTENT = BRIEF_DIR / "brief_content.md"
 LOG = HERE / "LOG.md"
 NUMBERS = ROOT / "output" / "numbers.csv"
 
@@ -20,19 +25,18 @@ TEXT = {
     "CHECK_BRAZIL_TI_SHORT": "Kayapó mining 2024 = 18,176 ha (Collection 10.1); platform (Collection 11) shows 17,632 ha (collection difference, no publisher match)",
 }
 
-BRIEF_FIG = "![The brief's one figure: new mining area per year, Tambopata and Amarakaeri buffer zones, Tambopata National Reserve, Madre de Dios total and rest](output/fig_brief_main.png)\n**Reading:** [[D]] Tambopata's additions fall after Mercurio (Feb 2019) and return from 2022; Amarakaeri and the rest of Madre de Dios rise. Description only."
 
 # ---------------------------------------------------------------------------------------- next steps
 STEPS = [  # (no, lane, step, owner, data)
-    (1, "now", "Re-open every cited source and save MAAP pages with \"Save as\"", "each citer", "raw MAAP HTML"),
-    (2, "now", "Agree the brief figure (fig_brief_main) and the claim wording", "whole team", "none"),
-    (3, "now", "Brazil: switch per-territory series to MapBiomas Collection 11 if available (3 post years, publisher match)", "Brazil analyst", "Col 11 TI file"),
-    (4, "l5", "Run the required AI prompt for brief part 4; keep raw + edited", "writer", "none"),
-    (5, "l5", "Write brief parts 1–4, 2 pages", "writer + editor", "none"),
-    (6, "l5", "Build the replication zip from code/main.py + output/", "data lead", "none"),
-    (7, "opt", "Ask FZS/SERNANP for dated patrol / interdiction records per zone", "team lead", "enforcement intensity, Peru"),
-    (8, "opt", "Validate AMW vs MapBiomas inside Tambopata BZ; get an official La Pampa polygon", "spatial analyst", "official La Pampa polygon"),
-    (9, "opt", "River dredges / mercury: cite MAAP #193 dredge counts; no satellite fix", "writer", "none (cite MAAP #193)"),
+    (1, "now", "Share the walkthrough page with the team (it is private until shared)", "Sebastian", "none"),
+    (2, "now", "Agree the claim wording, esp. the one conditional causal sentence", "whole team", "none"),
+    (3, "now", "Re-open every cited source; save MAAP pages with \"Save as\"", "each citer", "raw MAAP HTML"),
+    (4, "l5", "Fill in TEAM_PLAN.docx (members, roles)", "team lead", "none"),
+    (5, "l5", "Edit docs/brief/BRIEF_DRAFT to 2 pages; keep or re-run the AI prompt", "writer + editor", "none"),
+    (6, "l5", "Build the replication zip; make slides from the walkthrough figures", "data lead", "none"),
+    (7, "opt", "Ask FZS/SERNANP for dated patrol / interdiction records per zone", "team lead", "enforcement intensity"),
+    (8, "opt", "Brazil: Collection 11 per-territory file, if published", "Brazil analyst", "Col 11 territory file"),
+    (9, "opt", "Verify the Kayapó operation date; find the IBAMA embargo file", "Brazil analyst", "gov.br pages"),
 ]
 LANES = {"now": "Now (before Lesson 4)", "l5": "Before Lesson 5", "opt": "Optional / extension"}
 
@@ -196,10 +200,17 @@ BADGE_NAME = {"D": "description", "P": "prediction", "C": "causal"}
 def prepare(text: str, nums: dict) -> tuple[str, list]:
     """Common preprocessing: strip header comment, inject brief figure, fill placeholders."""
     text = re.sub(r"\A\s*<!--.*?-->", "", text, flags=re.S).lstrip()
-    # first figure in §5 and start of §9
-    text = re.sub(r"(## 5\. Figures\n\n)", lambda m: m.group(1) + BRIEF_FIG + "\n\n", text, count=1)
-    text = re.sub(r"(## 9\. Brief skeleton \(draft\)\n\n)", lambda m: m.group(1) + BRIEF_FIG + "\n\n", text, count=1)
-    return text, []
+    return fix_lists(text), []
+
+def fix_lists(text: str) -> str:
+    """Python-Markdown needs a blank line before a list; insert one after any non-list, non-table line."""
+    out, prev = [], ""
+    item = re.compile(r"^\s*(- |\d+\. )")
+    for line in text.split("\n"):
+        if item.match(line) and prev.strip() and not item.match(prev) and not prev.lstrip().startswith(("|", ">")):
+            out.append("")
+        out.append(line); prev = line
+    return "\n".join(out)
 
 def section_split(text: str):
     parts = re.split(r"(?m)^(?=## )", text)
@@ -279,6 +290,34 @@ def build_md(text: str, nums: dict, decisions, build_info: str) -> str:
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.rstrip() + f"\n\n---\n*{build_info}*\n"
 
+def build_brief(nums: dict, build_info: str) -> tuple[str, str]:
+    """Brief draft: fill numbers, claim badges; Markdown (links to output/) and print-ready HTML (figure embedded)."""
+    text = re.sub(r"\A\s*<!--.*?-->", "", BRIEF_CONTENT.read_text(encoding="utf-8"), flags=re.S).lstrip()
+    text = fix_lists(fill(text, nums))
+    md_text = re.sub(r"\[\[([DPC])\]\]", lambda m: f"**[{BADGE_NAME[m.group(1)]}]**", text)
+    md_text = md_text.replace("](output/", "](../../output/") + f"\n\n---\n*{build_info}*\n"
+    h = re.sub(r"\[\[([DPC])\]\]", lambda m: f'<span class="badge {m.group(1).lower()}">{BADGE_NAME[m.group(1)]}</span>', text)
+    h = re.sub(r"(?m)^!\[([^\]]*)\]\(([^)]+)\)\s*$",
+               lambda m: f'<figure><img src="{img_data_uri(m.group(2))}" alt="{html.escape(m.group(1))}"><figcaption>Figure 1. {html.escape(m.group(1))}. Source: MapBiomas Peru, Collection 4.</figcaption></figure>', h)
+    body = markdown.markdown(h, extensions=["tables", "sane_lists"])
+    body = body.replace("<h2>References</h2>", '<h2 class="pb">References</h2>')
+    page = BRIEF_TEMPLATE.format(body=body, build=html.escape(build_info))
+    assert "{{" not in page and "[[" not in page, "leftover placeholder in brief"
+    return md_text, page
+
+BRIEF_TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Brief draft: Group Giant Anteater, Q2</title>
+<style>
+@page{{size:A4;margin:16mm 17mm}}
+body{{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10pt;line-height:1.38;color:#1b1b1b;max-width:180mm;margin:0 auto;padding:10px}}
+h1{{font-size:15pt;margin:0 0 2px;line-height:1.2}} h1+p{{color:#666;margin:0 0 8px;font-size:9pt}}
+h2{{font-size:11.5pt;margin:10px 0 3px;color:#1b3f44;border-bottom:1px solid #d9d1c8}}
+p{{margin:0 0 5px}} ul{{margin:0 0 5px;padding-left:1.2em}} li{{margin:0 0 2px}}
+figure{{margin:4px 0 6px;text-align:center}} figure img{{width:60%}} figcaption{{font-size:8pt;color:#555;text-align:left}}
+.badge{{font-size:7pt;font-weight:700;text-transform:uppercase;padding:0 4px;border-radius:2px;white-space:nowrap}}
+.badge.d{{background:#e1eedd;color:#2f7f32}}.badge.p{{background:#f6e6c8;color:#a86400}}.badge.c{{background:#f6dcd9;color:#b3261e}}
+code{{font-size:8.5pt}} .pb{{break-before:page}} .foot{{color:#999;font-size:7.5pt;margin-top:12px}}
+</style></head><body>{body}<p class="foot">{build}</p></body></html>"""
+
 def main():
     nums = load_numbers()
     decisions = parse_decisions()
@@ -290,11 +329,14 @@ def main():
     info = f"Built {stamp} from git commit {commit} (working tree may contain uncommitted changes). Numbers from output/numbers.csv ({len(nums)} rows)."
     text = CONTENT.read_text(encoding="utf-8")
     h = build_html(text, nums, decisions, info)
-    (HERE / "REPORT.html").write_text(h, encoding="utf-8")
+    (HERE / "EXPLAINER.html").write_text(h, encoding="utf-8")
     m = build_md(text, nums, decisions, info)
     assert "{{" not in m, "leftover placeholder in md"
-    (HERE / "REPORT.md").write_text(m, encoding="utf-8")
-    print(f"REPORT.html {len(h)/1e6:.2f} MB, REPORT.md {len(m)/1e3:.0f} kB")
+    (HERE / "EXPLAINER.md").write_text(m, encoding="utf-8")
+    bm, bh = build_brief(nums, info)
+    (BRIEF_DIR / "BRIEF_DRAFT.md").write_text(bm, encoding="utf-8")
+    (BRIEF_DIR / "BRIEF_DRAFT.html").write_text(bh, encoding="utf-8")
+    print(f"EXPLAINER.html {len(h)/1e6:.2f} MB, EXPLAINER.md {len(m)/1e3:.0f} kB, BRIEF_DRAFT.html {len(bh)/1e6:.2f} MB")
 
 # ---------------------------------------------------------------------------------------- template
 CSS = r"""

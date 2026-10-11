@@ -14,7 +14,7 @@ Start: 2026-10-10 23:40 CEST.
 | 4 Brazil descriptive | done (TI Col 10.1, Roraima, IBAMA, DETER monthly) |
 | 5 Robustness | done (Peru + Brazil robustness CSVs) |
 | 6 Spatial feasibility | DONE (prototype + maps; recommendation: part 4 / robustness only) |
-| 7 Report | DONE (REPORT.html published as private artifact, REPORT.md, agent.md, README) |
+| 7 Report | DONE; replaced 2026-10-11 by EXPLAINER.html (walkthrough, artifact) + docs/brief/BRIEF_DRAFT (2 pages) |
 
 ## Decisions
 | # | Decision | Alternatives | Why |
@@ -36,6 +36,8 @@ Start: 2026-10-10 23:40 CEST.
 | D16 | Report states source disagreements explicitly (MapBiomas regional surge vs AMW corridor decline; DETER Yanomami 2023 rise vs annual maps fall) instead of picking one. | Cite the agreeing source only | Honesty criterion (30% of grade); review item 7 |
 | D17 | Tambopata "return" reported with and without 2023; "came back when enforcement ended" dropped (2023 spike is inside the state of emergency). | Keep the simple story | Review item 6 |
 | D18 | Brief figure title made neutral/descriptive. | "fell where Mercurio hit…" | Reads as causal (review item 13) |
+| D19 | Brief makes ONE conditional causal claim: Mercurio cut new mining in the Tambopata buffer zone by ~1,450–1,860 ha/yr in 2019–21, if the other zones show the counterfactual. Everything else stays description/prediction. | Description only (previous version) | `peru_models.py`: fall survives gold-price sensitivity, zone trends and size scaling; fake-date effects 4–9× smaller; rank 1 of 15 everywhere. The earlier "pre-trends fail" rested on one noisy year (2016). Grading rewards a clearly labelled claim with its threats |
+| D20 | Replace the technical REPORT with a plain-language walkthrough (`EXPLAINER.html`) plus a 2-page brief draft (`docs/brief/`). | Keep REPORT.html | User found the report hard to follow (2026-10-11) |
 | D2 | Pack-based Peru analysis (phase 2/3) starts in parallel with the downloads; new datasets plug in later as separate modules. | Wait for downloads | The core Peru design only needs `data/` |
 
 ## Round log
@@ -86,3 +88,9 @@ Start: 2026-10-10 23:40 CEST.
 1. Read REPORT.html §1 and §7 together and agree on the claim wording. The DiD is description only, parallel trends fail (2016 pre-coefficient), and sources disagree on the regional rise. Decide whether `output/fig_brief_main.png` is the brief figure.
 2. Each person re-opens the sources they will cite (MAAP pages, Nunes et al. 2024, FZS page) and saves raw HTML (manual step 1). AI is not a source.
 3. Run the required AI prompt for brief part 4 and keep the raw and edited answers for the appendix. Then draft the 2-page brief from §9 (brief skeleton) and build the replication zip with `uv run python docs/overnight/make_replication_zip.py`.
+
+### Follow-up (2026-10-11, daytime, user present)
+- User asked: bottom line? did models control for the gold price? clearer, plain-language walkthrough; final brief draft; what is blocked on them.
+- Added `code/peru_models.py` (model ladder M1–M4 with fake-date and fake-place checks) → `output/peru_models.csv`, `output/fig_peru_models.png`; 447 numbers. Decisions D19–D20.
+- Replaced REPORT.* with `docs/overnight/EXPLAINER.html/.md` (source `explainer_content.md`) and wrote `docs/brief/BRIEF_DRAFT.html/.md` (source `brief_content.md`; parts 1–4 print on 2 A4 pages). Ran the required part-4 AI prompt → `docs/brief/ai_part4_raw.md`.
+

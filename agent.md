@@ -200,11 +200,12 @@ Two exercises: (a) displacement, i.e. where did miners go; (b) DiD per enforceme
 - [x] Replace the example last row of `DOWNLOAD_LOG.csv` (overnight run).
 - [x] Describe → Compare (+ displacement, placebo, persistence) → event study (overnight run, `code/`; **team must review**).
 - [ ] Open and cite MAAP #130, #193, #208, #241 with page/figure (each team member opens what they cite). Quotes + locations drafted in `docs/overnight/notes/maap_citations.md`; raw HTML still needs a browser "Save as" (site blocks scripts).
-- [ ] Review `docs/overnight/REPORT.html` (draft) and decide the brief figure (`output/fig_brief_main.png` proposed).
+- [ ] Review `docs/overnight/EXPLAINER.html` (walkthrough) and `docs/brief/BRIEF_DRAFT.md` (2-page draft); agree the claim wording, esp. the one conditional causal sentence. Brief figure: `output/fig_brief_main.png`.
+- [ ] Decide whether the part-4 AI answer in `docs/brief/ai_part4_raw.md` (Claude, run 2026-10-11) is acceptable or must be re-run in the team's own tool.
 
 ## 14. Overnight run 2026-10-10/11 (branch `analysis/overnight-2026-10-10`; DRAFT, needs team review)
 
-Full story in `docs/overnight/LOG.md` (decisions D1–D11+) and `docs/overnight/REPORT.html`. Run: `uv run python code/main.py` → `output/` (+ `output/numbers.csv`, `output/checks.csv`).
+Full story in `docs/overnight/LOG.md` (decisions D1–D20) and `docs/overnight/EXPLAINER.html` (plain-language walkthrough). Brief draft: `docs/brief/BRIEF_DRAFT.md`. Run: `uv run python code/main.py` → `output/` (+ `output/numbers.csv`, `output/checks.csv`).
 
 **New data (all in `DOWNLOAD_LOG.csv`, raw files in `data_raw/<source>/`):**
 | Data | Collection / version | Check |
@@ -217,6 +218,8 @@ Full story in `docs/overnight/LOG.md` (decisions D1–D11+) and `docs/overnight/
 | Amazon Mining Watch patches (source.coop, 112 MB, git-ignored), SERNANP ANP/BZ, FUNAI TIs, INGEMMET D.L. 1100 corridor | current | prototype only |
 
 **Decisions made overnight (see LOG.md for alternatives):** buffer-zone units sum ALL department rows (reproduces the card; §10's 1,638/284 were MdD rows only); event-study pool A = Tambopata + Amarakaeri + Bahuaja-Sonene BZ, inference by placebo-in-space rank, not clustered SEs; event markers at Y − 0.5; Brazil DiD in ha AND % of 2022 stock; Kayapó = best Brazil control (Munduruku treated Aug 2023, Nov 2024).
+
+**Model ladder (added 2026-10-11, `code/peru_models.py`):** 15 Peruvian buffer zones with pre-2019 mining, zone + year effects (year effects absorb the gold price and COVID as shared shocks). Tambopata 2019–21 gap: M1 −1,454; M2 (+ pre-mining × ln gold) −1,605; M3 (+ zone trends) −1,859 ha/yr; M4 (scaled to own size) −1.45 normal years. Fake 2016 start: +255 / +187 / −337 / −0.33. Tambopata ranks 1 of 15 (1 of 7 scaled) in every model. 2022–25 gap −599 to +161 (faded). Each 2019–21 year (max 417 ha) is below every 2011–18 year (min 707 ha). **Correction:** the "pre-trends fail" reading came from one low year (2016 = 707 ha); averaged placebos pass. The brief now carries one *conditional* causal claim for 2019–21 (D19).
 
 **Headline descriptive results (numbers from `output/numbers.csv`):** Peru DiD −1,762 ha/yr (placebo +209; persistence −737 vs Amarakaeri, ≈0 vs all buffer zones); Tambopata ranks 1/15 in placebo-in-space; Madre de Dios total additions 3,610 → 4,640 → 12,049 ha/yr (2016–18 / 2019–21 / 2022–25), so no regional fall; Tambopata NR (inside) +241 ha in 2025; declared MdD gold production −88% 2018→2025 while mapped area 50,506 → 112,622 ha. Brazil: Yanomami additions 1,617 (2022) → 824 (2023) → 179 ha (2024), but Kayapó and Munduruku also fell, so the 2×2 is inconclusive (sign flips with scaling); IBAMA Legal Amazon autos 6,920/yr (2015–18) → 4,359/yr (2019–22) → 7,907 (2023).
 

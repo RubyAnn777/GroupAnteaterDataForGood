@@ -395,6 +395,35 @@ synth_ext_cum_pvalue_rank,0.9230769230769231,share,Synthetic control [ext_cum]: 
 synth_ext_cum_w1,0.5,weight,Synthetic control [ext_cum]: weight #1: Allpahuayo Mishana,description,register,peru_bufferzone_year.csv
 synth_ext_cum_w2,0.5,weight,Synthetic control [ext_cum]: weight #2: Amarakaeri,description,register,peru_bufferzone_year.csv
 synth_ext_cum_w3,0.0,weight,Synthetic control [ext_cum]: weight #3: Alto Mayo,description,register,peru_bufferzone_year.csv
+model_m1_during,-1453.635677901363,ha/yr,"Tambopata 2019-21 coefficient, M1 (Zone + year effects (gold price, COVID as common shocks); 15 zones, 2014-25). Description: one treated zone.",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m1_after,160.72966822273133,ha/yr,"Tambopata 2022-25 coefficient, M1 (Zone + year effects (gold price, COVID as common shocks); 15 zones, 2014-25). Description.",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m1_placebo,255.04114833038815,ha/yr,"Placebo in time: fake operation 2016-18, same model on 2011-18, M1 (Zone + year effects (gold price, COVID as common shocks); 15 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m1_rank,1.0,rank,"Tambopata's rank among 15 zones when each zone is treated in turn (1 = biggest fall 2019-21), M1 (Zone + year effects (gold price, COVID as common shocks); 15 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m1_n,15.0,count,"Zones in M1 (Zone + year effects (gold price, COVID as common shocks); 15 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m2_during,-1604.8173999587061,ha/yr,"Tambopata 2019-21 coefficient, M2 (M1 + bigger zones react more to the gold price; 15 zones, 2014-25). Description: one treated zone.",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m2_after,-174.5298463879529,ha/yr,"Tambopata 2022-25 coefficient, M2 (M1 + bigger zones react more to the gold price; 15 zones, 2014-25). Description.",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m2_placebo,187.47045695257964,ha/yr,"Placebo in time: fake operation 2016-18, same model on 2011-18, M2 (M1 + bigger zones react more to the gold price; 15 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m2_rank,1.0,rank,"Tambopata's rank among 15 zones when each zone is treated in turn (1 = biggest fall 2019-21), M2 (M1 + bigger zones react more to the gold price; 15 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m2_n,15.0,count,"Zones in M2 (M1 + bigger zones react more to the gold price; 15 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m3_during,-1858.9803986266618,ha/yr,"Tambopata 2019-21 coefficient, M3 (M1 + own linear trend per zone; 15 zones, 2014-25). Description: one treated zone.",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m3_after,-599.291683137203,ha/yr,"Tambopata 2022-25 coefficient, M3 (M1 + own linear trend per zone; 15 zones, 2014-25). Description.",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m3_placebo,-337.3846054903247,ha/yr,"Placebo in time: fake operation 2016-18, same model on 2011-18, M3 (M1 + own linear trend per zone; 15 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m3_rank,1.0,rank,"Tambopata's rank among 15 zones when each zone is treated in turn (1 = biggest fall 2019-21), M3 (M1 + own linear trend per zone; 15 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m3_n,15.0,count,"Zones in M3 (M1 + own linear trend per zone; 15 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m4_during,-1.449010385819254,share of own pre-2019 mean,"Tambopata 2019-21 coefficient, M4 (M1, scaled to each zone's own size; 7 zones, 2014-25). Description: one treated zone.",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m4_after,-0.20459501112535228,share of own pre-2019 mean,"Tambopata 2022-25 coefficient, M4 (M1, scaled to each zone's own size; 7 zones, 2014-25). Description.",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m4_placebo,-0.331239437337467,share of own pre-2019 mean,"Placebo in time: fake operation 2016-18, same model on 2011-18, M4 (M1, scaled to each zone's own size; 7 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m4_rank,1.0,rank,"Tambopata's rank among 7 zones when each zone is treated in turn (1 = biggest fall 2019-21), M4 (M1, scaled to each zone's own size; 7 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m4_n,7.0,count,"Zones in M4 (M1, scaled to each zone's own size; 7 zones, 2014-25)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+model_m2_gold_slope,0.34348823622260255,ha per (ha of pre mean x 1 log-point),"M2: extra annual addition per hectare of a zone's 2014-18 mean addition, per 1.0 rise in ln(gold price)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+tam_add_min_2011_2018,707.2966468452905,ha,"Lowest annual addition, Tambopata BZ, 2011-2018",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+tam_add_max_2019_2021,417.2099395744699,ha,"Highest annual addition, Tambopata BZ, 2019-2021",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+tam_add_2016,707.2966468452905,ha,"Annual addition, Tambopata BZ, 2016 (the low year behind the event-study pre-trend coefficient)",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+tam_add_2017,2454.7117233950303,ha,"Annual addition, Tambopata BZ, 2017",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+tam_add_2018,1756.928896119789,ha,"Annual addition, Tambopata BZ, 2018",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+tam_add_2019,417.2099395744699,ha,"Annual addition, Tambopata BZ, 2019",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+tam_add_2020,181.378632403741,ha,"Annual addition, Tambopata BZ, 2020",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
+tam_add_2021,-111.06974852197709,ha,"Annual addition, Tambopata BZ, 2021",description,run,"peru_bufferzone_year.csv, prices_annual.csv"
 spz_corridor_ha_2019_21,44715.7,ha,AMW new mining area in the DL 1100 corridor 2019-2021 (sum),description,run,data_intermediate/amw_zone_year.csv
 spz_total_ha_2019_21,67371.90000000001,ha,"AMW new mining area, all six zones 2019-2021 (sum)",description,run,data_intermediate/amw_zone_year.csv
 spz_corridor_share_2019_21,0.6637143972487044,share,Corridor share of AMW new area in the six zones 2019-2021,description,run,data_intermediate/amw_zone_year.csv
