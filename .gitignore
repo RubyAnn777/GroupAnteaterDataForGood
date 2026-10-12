@@ -32,3 +32,6 @@ data_raw/anm_cfem/
 data_raw/anm_sigmine/
 data_raw/minem_produccion/*.7z
 .DS_Store
+
+# Office lock files
+~$*
