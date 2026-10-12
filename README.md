@@ -123,12 +123,18 @@ Find out when gangs were active and when not, using relative prices of gold and 
 
 Introduction - two fun facts about giant anteaters.
 
+whats the difference between legal and illegal mining? 
+regulations, impact, taxing etc etc. 
+show the map and explain the zones (legal, illegal, buffer, protected, indigenous) and the enforcement operations.
+
 Different manners of protection - what do they do? Protected vs indigenous territories -> (intro to SERNANP and their data) Cooperation with FENAMAD
 How is illegality defined in data?
     Very High: Activity is occurring without a permit and within a protected area that doesn’t allow for any kind of resource exploitation
     High: Activity if occurring outside of any explicit concession for doing so
     Medium: Activity is happening within a concession, but active status could not be verified and/or concession doesn’t meet legal requirements
     Low: Activity is happening within active concession, but compliance with all requirements could not be verified
+
+FZS impact and role + the zones they cover
 
 Why illegality is an issue (social, environmental cost). Why it matters in other words.
 
@@ -149,4 +155,12 @@ Limitations and further research
 
 Key limitation is that the enforcement is actually happening always somewhere in some unsystematic way. We need to find for the control a zone that has comparable levels of enforcement. Luckily in Peru its well done
 
+Why was previous enforcement not effective? Even before 2017 there was a lot going on
+
 Recommendations
+local enforcement 
+legal zone enforcement 
+tracking systems
+evaluating mercury travel in water
+placement of enforcement operations as key measure
+social cost (livelihoods of miners)
