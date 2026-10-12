@@ -23,3 +23,12 @@ data_raw/glad_alerts/*.tif
 data_raw/enforcement_peru/*.zip
 data_raw/ingemmet/geologia_100k_mdd_tiles/
 data_raw/enforcement_peru/mininter_produccion_policial_*.csv
+
+# Personal data (names, tax IDs) or >50 MB: kept local, links in DOWNLOAD_LOG.csv
+data_raw/reinfo/
+data_raw/ingemmet/catastro_*/
+data_raw/amw_github/illegality_v2_areas_simplified.geojson
+data_raw/anm_cfem/
+data_raw/anm_sigmine/
+data_raw/minem_produccion/*.7z
+.DS_Store

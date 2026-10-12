@@ -30,7 +30,7 @@ Mining could stop (**deterrence**), move next door (**displacement**) or wait an
 
 **Mining crossed the road into the legal corridor; the region did not fall** **[description]**. Directly across the highway from La Pampa, first-time mining rose from 69 to 463 ha/yr; the corridor's share of Madre de Dios' new mining rose from 49% to 72% (MAAP #208: 74%), while the total kept growing (3,610 → 12,049 ha/yr). La Pampa had not run out: 21% of its gold-bearing land was mined by 2018. In 2023 most of its new mining was on old pits.
 
-**Miners now enter the reserve** **[description]**: +241 ha inside it in 2025. MAAP reports ~500 ha from late 2025 to Feb 2026, after river posts were withdrawn (Pacsi et al., 2026). **Brazil, same method, no clear effect** **[description]**: big territories fell after 2022–24, but a staggered DiD across 24 territories finds no significant effect of each territory's own operation (p = 0.38); Munduruku fell before its operation, and national gold rules changed in 2023. **Declared gold collapsed** **[description]**: Madre de Dios' declared output broke −1.16 log points below trend after 2019 (p < 0.01) while mapped mining grew.
+**Miners now enter the reserve** **[description]**: +241 ha inside it in 2025. MAAP reports ~500 ha from late 2025 to Feb 2026, after river posts were withdrawn (Pacsi et al., 2026). **Brazil, same method, no clear effect** **[description]**: big territories fell after 2022–24, but a staggered DiD across 24 territories finds no significant effect of each territory's own operation (p = 0.38); Munduruku fell before its operation, and national gold rules changed in 2023.
 
 ## 4. What FZS can do with this
 
@@ -79,4 +79,4 @@ See `DOWNLOAD_LOG.csv`: one row per raw file with URL, access date, collection, 
 
 
 ---
-*Built 2026-10-12 16:40 from git commit 4dc9bf2 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (952 rows).*
+*Built 2026-10-12 16:45 from git commit 5390175 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (969 rows).*

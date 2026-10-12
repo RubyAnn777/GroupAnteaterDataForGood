@@ -272,17 +272,18 @@ def e6(reg):
     d["ha_per_tonne_mapped"] = (d.corridor_new + d.outside_new) / d.tonnes
     fig, (a1, a2) = plt.subplots(2, 1, figsize=(10, 5.8), sharex=True)
     a1.bar(yrs, d.tonnes, color="#eda100", width=0.7); a1.set_ylabel("Declared gold\n(tonnes)"); style_axes(a1)
-    a1.set_title("Declared gold output fell while mapped mining, mostly in the legal corridor, kept growing", loc="left", fontsize=10.5, fontweight="bold")
+    a1.set_title("The official gold series breaks in 2020 because it dropped its artisanal estimate; mapped mining kept growing", loc="left", fontsize=10.5, fontweight="bold")
+    a1.axvline(2019.5, color="#b3261e", ls="--", lw=1.2); a1.text(2019.6, a1.get_ylim()[1] * 0.9, "artisanal estimate\ndropped from series", fontsize=7.5, color="#b3261e", va="top")
     a2.bar(yrs, d.corridor_new, color="#2a78d6", width=0.7, label="Inside the legal corridor")
     a2.bar(yrs, d.outside_new, bottom=d.corridor_new, color="#b9b8b2", width=0.7, label="Outside")
     a2.set_ylabel("Land mined for the\nfirst time (ha)"); style_axes(a2); a2.legend(fontsize=8, frameon=False)
     a2.set_xticks(yrs); a2.tick_params(axis="x", labelsize=8)
     finish_figure(fig, f"Sources: BCRP (source MINEM) declared gold production, Madre de Dios; {SRC_R}. Two panels, two units. "
-                       "A falling ratio of declared gold to mined land fits undeclared output, but also lower grades, gold "
-                       "declared in other regions, or reporting changes. Description.", OUT / "fig_v2_declared_vs_mapped.png", rect_bottom=0.1)
+                       "Until 2019 the official series includes MINEM's estimate of artisanal gold; from 2020 only declared output. The 2020 "
+                       "break is a definition change, not a production fall. Description.", OUT / "fig_v2_declared_vs_mapped.png", rect_bottom=0.1)
     X = sm.add_constant(pd.DataFrame({"post2019": (d.index >= 2019).astype(float), "trend": np.array(yrs) - 2010.0}, index=d.index))
     m = sm.OLS(np.log(d.tonnes), X).fit(cov_type="HAC", cov_kwds={"maxlags": 2})
-    reg.add("dec_log_tonnes_post2019", m.params["post2019"], "log points", "Declared gold, log tonnes: break after 2019 net of a linear trend (OLS, Newey-West SE, 2010-2025)", "description", "BCRP/MINEM")
+    reg.add("dec_log_tonnes_post2019", m.params["post2019"], "log points", "Official gold series, log tonnes: break after 2019 net of trend (OLS, Newey-West). ARTEFACT: series drops the artisanal estimate from 2020", "description", "BCRP/MINEM")
     reg.add("dec_log_tonnes_post2019_p", m.pvalues["post2019"], "p-value", "p-value of that break", "description", "BCRP/MINEM")
     for y in (2016, 2018, 2021, 2025):
         reg.add(f"dec_t_per_1000ha_new_{y}", 1000 * d.tonnes[y] / (d.corridor_new[y] + d.outside_new[y]), "t per 1000 ha",

@@ -10,7 +10,7 @@
 - **But not at once:** forest clearing on La Pampa's mining land went on through 2019 and collapsed in 2020–21. **[description]**
 - **Across the road:** first-time mining in the legal corridor directly north of the highway rose from 69 to 463 ha per year; the corridor's share of all new mining rose from 49% to 72%. **[description]**
 - **After (2022–25):** La Pampa came back to 1,829 ha per year, much of it on old pits. The gold wasn't gone: only 21% of its gold-bearing land had been mined by 2018. **[description]**
-- **Region:** first-time mining in Madre de Dios rose from 5,317 to 11,373 ha per year, while declared gold output collapsed. **[description]**
+- **Region:** first-time mining in Madre de Dios rose from 5,317 to 11,373 ha per year. Declared gold says little: the official series dropped its artisanal estimate in 2020. **[description]**
 - **Brazil:** the same pixel method shows falls from 2022–24, but not after each territory's own operation; the staggered test is not significant. **[description]**
 
 **Can we say Mercurio *caused* the fall?** Cautiously, for **net** new mining in 2019–21 only. Of three causal attempts, one works (other Peruvian zones), one half-works (rule-based twins abroad), one fails (synthetic control). We label it a **conditional causal claim**. **[causal]**
@@ -150,6 +150,15 @@
 
 ![Share of newly mined land inside the legal corridor](../../output/fig_v2_corridor_share.png)
 
+**Legality levels (MAAP #235, the same grades Amazon Mining Watch uses):** we crossed every pixel of first-time mining with the published legality layer (Low = active concession; Medium = concession not verified as active; High = outside any concession; Very high = strict protected area).
+
+![Legality of new mining in Madre de Dios over time](../../output/fig_v2_legality.png)
+
+- **Presumed illegal (High + Very high):** 41% → 25% → 21% of first-time mining. **[description]**
+- **The grey zone grew:** concessions not verified as active took 18% → 30% → 37%. **[description]**
+- **Inside the legal corridor**, 36% of all first-time mining since 1986 sits on land without a verified active concession. **[description]**
+- **Limit:** today's concessions are applied to all years.
+
 **Why it matters:** Mercurio moved new mining from illegal land to legal land. For the reserve that is a win. For the region it is not: total new mining kept growing, and corridor mining still uses mercury.
 
 **Can't show:** that the *same* people moved. New arrivals and the gold price fit the same picture.
@@ -286,31 +295,27 @@
 
 **Code:** `code/peru_anp.py`.
 
-## 11. Declared gold collapsed while mapped mining grew
+## 11. Declared gold: the official drop is a change in the series, not in output
 
-**Question:** Does official gold output tell the same story?
+**Bottom line:** the official Madre de Dios gold series fell 88% from 2018 to 2025, but that is mostly a definition change. Until 2019 it included an *estimate* of artisanal gold; from 2020 it counts only what producers declare. **[description]**
 
-**What we did:** We downloaded Madre de Dios gold production from Peru's central bank (source: Ministry of Energy and Mines).
+**What we found (correction):**
 
-![Declared gold production vs mapped mining area, Madre de Dios](../../output/fig_peru_production_vs_area.png)
+- **The series changed:** the Ministry of Energy and Mines' yearly files carry "PRODUCTORES ARTESANALES — cifras estimadas" for Madre de Dios until 2019 (about 15.7 t in 2016, 6.0 t in 2019). In 2016, that estimate plus declared output equals the central bank's figure exactly. From 2020 the estimate is gone.
+- **Declared output by producers rose,** from under 1 t (2018) to about 1.4 t (2025), per the ministry's producer files (being added to the code; not yet citable).
+- **So our earlier "collapse" and its break test measured the definition change.** We withdraw them.
 
-**What it shows:**
+![Official gold series vs mapped mining area, Madre de Dios](../../output/fig_peru_production_vs_area.png)
 
-- Declared production fell 88% from 2018 to 2025 (10.1 → 1.2 tonnes).
-- Over the same years, mapped mining area doubled (50,506 → 112,622 ha). **[description]**
+**Does the "mining in the corridor, declaring nothing" idea still fit?** Yes, in a weaker form:
 
-**New test:** declared output broke downward after 2019 by −1.16 log points net of its trend (p = 0.002). Declared tonnes per 1,000 ha of first-time mined land: 4.2 (2016) → 1.8 (2018) → 0.10 (2025). **[description]**
+- **For:** new mining moved into the grey zone: 37% of first-time mining in 2022–25 sat in concessions not verified as active (section 5); producers declare about 1 t a year while first-time mining covers over 11,373 ha a year; only 145 of 9,592 registered miners were fully formal (2021); the state presumes Madre de Dios gold is smuggled to Bolivia, whose gold exports jumped from 1.7 t (2012) to 35.7 t (2014); nationally at least 80 of ~180 t exported in 2024 had unknown origin.
+- **Against:** gold may be declared in other regions; mapped area includes re-mined pits; gold yield per hectare is unknown.
+- **Label:** plausible mechanism, not a finding.
 
-![Declared gold vs first-time mining inside and outside the corridor](../../output/fig_v2_declared_vs_mapped.png)
+**Why it matters:** official production says almost nothing about mining here, and its 2020 break is a trap. Don't cite "−88%".
 
-**Your hypothesis fits, but the evidence is indirect:** miners move into the legal corridor and mine there informally, without declaring. For it: the corridor holds most new mining, yet only 145 of 9,592 registered miners were fully formal (2021); the state itself presumes Madre de Dios gold is smuggled to Bolivia, whose gold exports jumped from 1.7 t (2012) to 35.7 t (2014); nationally at least 80 of ~180 t exported in 2024 had unknown origin. Against: La Pampa's real output fell; gold may be declared in other regions (Puno, Cusco rose); mapped area includes re-mined pits. Label: description plus a plausible mechanism.
-
-**Why it matters:**
-
-- More gold is leaving through informal channels, or the rules on reporting changed. We can't tell which.
-- Either way, official production is useless as a measure of mining here.
-
-**Code:** `code/peru_production.py`.
+**Code:** `code/peru_production.py`. **Source of the correction:** `docs/overnight/notes/legality_data.md`, section on MINEM production.
 
 ## 12. What else changed: COVID, politics, gangs, gold price, money
 
@@ -528,7 +533,7 @@
 | North of highway 10–20 km, 2022–25 | road-gradient DiD | +2.87 ha | 0.000 |
 | Move north of the road in 2019 | fake start dates 2008–22 | +0.41 share pts | 0.13 |
 | New mining hugged the road after 2019 | trend + break, Newey-West | −8.8 km | 0.000 |
-| Declared gold fell after 2019 | trend + break, Newey-West | −1.16 log | 0.002 |
+| Official gold series broke after 2019 | trend + break, Newey-West | −1.16 log (artefact: definition change) | 0.002 |
 | Tambopata below Amanã twin, 2019–21 | Welch t-test (3 years each) | −13.0 pts | 0.02 |
 | La Pampa pre-trends (cells) | joint F-test 2010–17 | — | 0.00 |
 | Brazil: falls after own operation | staggered DiD (did2s), clustered by territory | +0.29 log (not significant) | 0.38 |
@@ -605,7 +610,7 @@
 | New mining moved into the legal corridor, across the road, then deeper | **[description]** | Raster bands; depth break p < 0.01; AMW agrees; MAAP #208 (74%) | Can't show the same people moved; the road was crossed before (2008) |
 | Miners returned to old pits in 2023 | **[description]** | Raster accounting; MAAP #193 | Map flicker inflates old-pit counts |
 | La Pampa had not run out of gold | **[description]** | Geology: 21% mined by 2018 | Coarse map; no gold grade |
-| Declared gold collapsed while mapped mining grew | **[description]** | Break −1.16 log points, p < 0.01 | Gold may be declared elsewhere; mechanism indirect |
+| The official gold series fell 88% | **withdrawn** | — | The series dropped its artisanal estimate in 2020; producer-declared gold rose |
 | Corridor miners mine informally and don't declare | plausible mechanism, **not claimed** | Formalization rates, Bolivia exports, unknown-origin exports | No trace of where Madre de Dios gold is declared |
 | The region mined less | **rejected** | — | First-time mining rose 5,317 → 11,373 ha/yr |
 | Brazil: operations reduced mining | **not claimed** | Falls after 2022–24; AMW −63% Yanomami | Staggered DiD p = 0.38; national reforms in 2023 |
@@ -742,7 +747,7 @@ The full draft: [`docs/brief/BRIEF_DRAFT.md`](../brief/BRIEF_DRAFT.md).
 
 **Every number** (filterable; from `output/numbers.csv`)
 
-All 952 numbers, with unit, description, claim type and producing function: [`output/numbers.csv`](../../output/numbers.csv). Headline numbers used in section 1:
+All 969 numbers, with unit, description, claim type and producing function: [`output/numbers.csv`](../../output/numbers.csv). Headline numbers used in section 1:
 
 | id | value | unit | description |
 |---|---:|---|---|
@@ -758,4 +763,4 @@ All 952 numbers, with unit, description, claim type and producing function: [`ou
 | `v2_new_total_2022_25` | 11,373 | ha/yr | Land mined for the first time per year, all Madre de Dios, 2022-25 |
 
 ---
-*Built 2026-10-12 16:40 from git commit 4dc9bf2 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (952 rows).*
+*Built 2026-10-12 16:45 from git commit 5390175 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (969 rows).*
