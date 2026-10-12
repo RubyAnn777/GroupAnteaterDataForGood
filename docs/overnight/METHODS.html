@@ -70,7 +70,7 @@ footer{border-top:1px solid var(--rule);color:var(--ink-3);font-size:.8rem;paddi
 </style></head><body>
 <div class="draft"><span>DRAFT for the team — not reviewed</span><button id="theme" type="button">Light / dark</button></div>
 <header class="hero"><div class="in"><div class="kicker">Group Giant Anteater · Question 2 · Peru and Brazil</div><h1>How the analysis is built: data, measures, models</h1>
-<div class="draftbox"><b>Draft.</b> One page per method: what it answers, how it works, what it controls for, what it can't, where the code is. Every number on the walkthrough comes from one script, <code>code/main.py</code>. Version: plan v2 (12 Oct 2026); parts marked <em>v2</em> are being rebuilt now.</div></div></header>
+<div class="draftbox"><b>Draft.</b> One page per method: what it answers, how it works, what it controls for, what it can't, where the code is. Every number on the walkthrough comes from one script, <code>code/main.py</code>. Version: plan v2 (12 Oct 2026). Section 12 covers everything added after Ruby's review.</div></div></header>
 <div class="layout"><nav class="toc" aria-label="Contents">
 <a href="#s1">1. The bottom line</a>
 <a href="#s2">2. The data</a>
@@ -83,7 +83,7 @@ footer{border-top:1px solid var(--rule);color:var(--ink-3);font-size:.8rem;paddi
 <a href="#s9">9. Comparison 5: one real twin, by rules (Ruby&#x27;s design)</a>
 <a href="#s10">10. Brazil: staggered operations</a>
 <a href="#s11">11. How we label claims</a>
-<a href="#s12">12. What&#x27;s being rebuilt now (plan v2)</a>
+<a href="#s12">12. Plan v2 methods (built 12 Oct 2026)</a>
 </nav><main>
 <section id="s1"><h2>1. The bottom line</h2>
 <p><strong>Everything runs from one command.</strong> <code>uv run python code/main.py</code> checks the data against the publishers, builds every measure, fits every model, draws every figure and writes every number to <code>output/numbers.csv</code>.</p>
@@ -340,7 +340,20 @@ flowchart LR
 </tbody>
 </table>
 <p><strong>Why it matters:</strong> The grading puts 30% on honesty about the claim. A causal claim by accident is the main way to lose points.</p></section>
-<section id="s12"><h2>12. What&#x27;s being rebuilt now (plan v2)</h2>
+<section id="s12"><h2>12. Plan v2 methods (built 12 Oct 2026)</h2>
+<p><strong>Displacement layers</strong> (<code>code/raster_layers.py</code>):</p>
+<ul>
+<li><strong>Stream chart:</strong> land mined for the first time, per zone and year. First-time mining ignores year-to-year map flicker.</li>
+<li><strong>Sankey:</strong> per period, new mining split into new land vs old pits, flowing into zones. Flows are pixels, not people.</li>
+<li><strong>Road bands:</strong> 1-km strips north and south of the highway, inside the La Pampa longitudes.</li>
+<li><strong>Corridor share:</strong> first-time mined land inside the legal corridor, as a share of Madre de Dios.</li>
+</ul>
+<p><strong>Fake start dates for the road</strong> (<code>code/v2_tests.py</code>, T1): the north share's change, 3 years after minus 3 years before, for every start year 2008–2022. The 2019 move ranks 3 of 15; 2008 (Guacamayo boom) moved more.</p>
+<p><strong>Quarterly timing</strong> (<code>code/glad_alerts.py</code>): University of Maryland GLAD-L forest-loss alerts, each pixel dated to the day, 2017–2026. We keep alerts on land MapBiomas maps as mining. Compare the same quarter across years (clouds); data version break in 2021.</p>
+<p><strong>Gold left</strong> (<code>code/raster_gold.py</code>): gold-bearing land = INGEMMET geology units (river deposits plus Madre de Dios Formation terraces). Validation: 90% of all land ever mined lies on them. Depletion = share of a zone's gold-bearing land mined by a year.</p>
+<p><strong>Enforcement intensity</strong> (<code>code/v2_tests.py</code>, T8): Peru's anti-illegal-mining programme (PP 0128), executed spending booked in Madre de Dios, 2015–2025. Department level only; a lower bound.</p>
+<p><strong>Earlier wave</strong> (T3): model M1 with Tambopata × 2012–13 on 2008–16 data. Tambopata did not fall more than other zones.</p>
+<p><strong>Sensitivity and products</strong> (T4, T5): narrow and wide La Pampa windows give the same picture. Course table and raster give the same net numbers; first-time mining and old pits split them.</p>
 <table>
 <thead>
 <tr>
@@ -350,38 +363,46 @@ flowchart LR
 </thead>
 <tbody>
 <tr>
-<td>S1 zone map on the raster grid</td>
-<td>running</td>
+<td>S1 zone map</td>
+<td>done; waiting for team review</td>
 </tr>
 <tr>
-<td>S2 pixel accounting (new land, re-mined, stopped)</td>
-<td>running</td>
+<td>S2 pixel accounting</td>
+<td>done</td>
 </tr>
 <tr>
-<td>S3 descriptive layers: zones over time (stream chart), pixel flows (Sankey), crossing-the-road bands</td>
-<td>next</td>
+<td>S3 stream, Sankey, road bands, corridor share</td>
+<td>done</td>
 </tr>
 <tr>
-<td>S3b gold-left proxy: share of gold-bearing land already mined</td>
-<td>needs the geology map (being checked)</td>
+<td>S3b gold-left proxy</td>
+<td>done</td>
 </tr>
 <tr>
 <td>S4 comparisons on the new zones</td>
-<td>after the team reviews the map</td>
+<td>course-table models kept; v2 adds fake-date test for the road</td>
 </tr>
 <tr>
-<td>S5 earlier enforcement wave 2012–14</td>
-<td>after S4</td>
+<td>S5 2012–14 wave</td>
+<td>done (no Tambopata-specific dip)</td>
 </tr>
 <tr>
-<td>S6 monthly alerts, S7 enforcement intensity</td>
-<td>being checked</td>
+<td>S6 quarterly alerts</td>
+<td>done</td>
+</tr>
+<tr>
+<td>S7 enforcement intensity</td>
+<td>done (department spending only)</td>
+</tr>
+<tr>
+<td>S8 products table</td>
+<td>done</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Code map:</strong> see the walkthrough, section 16. <strong>Plan and decisions:</strong> <code>docs/PLAN_v2.md</code>, <code>docs/overnight/LOG.md</code>.</p></section>
+<p><strong>Code map:</strong> see the walkthrough, section 22. <strong>Plan and decisions:</strong> <code>docs/PLAN_v2.md</code>, <code>docs/overnight/LOG.md</code>.</p></section>
 </main></div>
-<footer>Built 2026-10-12 15:00 from git commit e90b82f (working tree may contain uncommitted changes). Numbers from output/numbers.csv (511 rows).</footer>
+<footer>Built 2026-10-12 15:33 from git commit 7e5892c (working tree may contain uncommitted changes). Numbers from output/numbers.csv (698 rows).</footer>
 <script>
 (function(){var r=document.documentElement,k='report-theme',s=localStorage.getItem(k);if(s)r.setAttribute('data-theme',s);
 document.getElementById('theme').addEventListener('click',function(){var dark=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme:dark)').matches;var n=dark?'light':'dark';r.setAttribute('data-theme',n);localStorage.setItem(k,n)});

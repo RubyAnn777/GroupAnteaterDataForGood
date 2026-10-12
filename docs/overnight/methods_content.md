@@ -5,7 +5,7 @@ Same placeholder and claim-tag rules as explainer_content.md. Written in smart-b
 
 # How the analysis is built: data, measures, models
 
-> One page per method: what it answers, how it works, what it controls for, what it can't, where the code is. Every number on the walkthrough comes from one script, `code/main.py`. Version: plan v2 (12 Oct 2026); parts marked *v2* are being rebuilt now.
+> One page per method: what it answers, how it works, what it controls for, what it can't, where the code is. Every number on the walkthrough comes from one script, `code/main.py`. Version: plan v2 (12 Oct 2026). Section 12 covers everything added after Ruby's review.
 
 ## 1. The bottom line
 
@@ -184,16 +184,36 @@ Each model also runs with a **fake 2016 date** on 2011–18 data. A trustworthy 
 
 **Why it matters:** The grading puts 30% on honesty about the claim. A causal claim by accident is the main way to lose points.
 
-## 12. What's being rebuilt now (plan v2)
+## 12. Plan v2 methods (built 12 Oct 2026)
+
+**Displacement layers** (`code/raster_layers.py`):
+- **Stream chart:** land mined for the first time, per zone and year. First-time mining ignores year-to-year map flicker.
+- **Sankey:** per period, new mining split into new land vs old pits, flowing into zones. Flows are pixels, not people.
+- **Road bands:** 1-km strips north and south of the highway, inside the La Pampa longitudes.
+- **Corridor share:** first-time mined land inside the legal corridor, as a share of Madre de Dios.
+
+**Fake start dates for the road** (`code/v2_tests.py`, T1): the north share's change, 3 years after minus 3 years before, for every start year 2008–2022. The 2019 move ranks 3 of 15; 2008 (Guacamayo boom) moved more.
+
+**Quarterly timing** (`code/glad_alerts.py`): University of Maryland GLAD-L forest-loss alerts, each pixel dated to the day, 2017–2026. We keep alerts on land MapBiomas maps as mining. Compare the same quarter across years (clouds); data version break in 2021.
+
+**Gold left** (`code/raster_gold.py`): gold-bearing land = INGEMMET geology units (river deposits plus Madre de Dios Formation terraces). Validation: 90% of all land ever mined lies on them. Depletion = share of a zone's gold-bearing land mined by a year.
+
+**Enforcement intensity** (`code/v2_tests.py`, T8): Peru's anti-illegal-mining programme (PP 0128), executed spending booked in Madre de Dios, 2015–2025. Department level only; a lower bound.
+
+**Earlier wave** (T3): model M1 with Tambopata × 2012–13 on 2008–16 data. Tambopata did not fall more than other zones.
+
+**Sensitivity and products** (T4, T5): narrow and wide La Pampa windows give the same picture. Course table and raster give the same net numbers; first-time mining and old pits split them.
 
 | Step | Status |
 |---|---|
-| S1 zone map on the raster grid | running |
-| S2 pixel accounting (new land, re-mined, stopped) | running |
-| S3 descriptive layers: zones over time (stream chart), pixel flows (Sankey), crossing-the-road bands | next |
-| S3b gold-left proxy: share of gold-bearing land already mined | needs the geology map (being checked) |
-| S4 comparisons on the new zones | after the team reviews the map |
-| S5 earlier enforcement wave 2012–14 | after S4 |
-| S6 monthly alerts, S7 enforcement intensity | being checked |
+| S1 zone map | done; waiting for team review |
+| S2 pixel accounting | done |
+| S3 stream, Sankey, road bands, corridor share | done |
+| S3b gold-left proxy | done |
+| S4 comparisons on the new zones | course-table models kept; v2 adds fake-date test for the road |
+| S5 2012–14 wave | done (no Tambopata-specific dip) |
+| S6 quarterly alerts | done |
+| S7 enforcement intensity | done (department spending only) |
+| S8 products table | done |
 
-**Code map:** see the walkthrough, section 16. **Plan and decisions:** `docs/PLAN_v2.md`, `docs/overnight/LOG.md`.
+**Code map:** see the walkthrough, section 22. **Plan and decisions:** `docs/PLAN_v2.md`, `docs/overnight/LOG.md`.

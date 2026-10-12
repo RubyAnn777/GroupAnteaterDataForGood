@@ -21,3 +21,4 @@ label,value,expected,ok
 "Raster v2: Tambopata buffer zone mining 2025, ha (course table 20,730)",20716.16145134373,20730.0,True
 "Raster v2: Tambopata reserve mining 2025, ha (platform 777)",776.187438813981,777.0,True
 "Raster v2: Madre de Dios mining 2025, ha (course table 112,622)",112536.612664519,112622.0,True
+"MEF PP 0128 devengado, Madre de Dios, 2019, soles (Consulta Amigable screen 31,120,611)",31120611.0,31120611.0,True

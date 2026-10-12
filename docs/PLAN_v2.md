@@ -1,7 +1,7 @@
 # Plan v2: from zone tables to one raster, layered zones (2026-10-12)
 
 Responds to Ruby's `review.md` and `readings.md`, MAAP #208, Asner & Tupayachi (2017) and Dethier et al. (2023).
-Status: agreed decisions below; analysis not yet rebuilt. Owner of this file: whole team.
+Status (12 Oct 2026, evening): S1-S3, S3b, S5-S8 built; zone map waiting for team review (walkthrough step 10). Owner of this file: whole team.
 
 ## Decisions (2026-10-12)
 
@@ -45,3 +45,22 @@ Status: agreed decisions below; analysis not yet rebuilt. Owner of this file: wh
 - **One branch per rebuild** (`analysis/v2-raster`); `main` only via pull request after team review.
 - **Checkpoints:** S1 map, then S3 descriptives, then S4 models. Ruby reviews each in `review.md`, citing the walkthrough step number.
 - **Rules unchanged:** every number from `code/main.py` → `output/numbers.csv`; one check per dataset; cite only opened sources; claims labelled.
+
+## Results so far (description; numbers in output/numbers.csv)
+
+- **Net vs gross:** Tambopata buffer zone net additions 1,640 -> 163 ha/yr (2016-18 -> 2019-21), but first-time mining 2,015 -> 1,061: it only halved. Forest clearing on La Pampa mining land (GLAD-L) was higher in 2019 than 2018 and collapsed in 2020-21.
+- **Across the road:** first-time mining in the corridor opposite La Pampa 69 -> 463 -> 538 ha/yr; north-of-road share 8% -> 51% (2016-18 -> 2019-21). Fake start dates: 2019 ranks 3 of 15; the road was crossed the other way around 2008-11 (Guacamayo).
+- **Corridor share** of Madre de Dios first-time mining 49% -> 68% -> 72% (MAAP #208: 74% for 2021-24).
+- **Old pits:** in 2023 most new mining in La Pampa was on old pits (MAAP #193 agrees).
+- **Gold not exhausted:** La Pampa had mined 21% of its gold-bearing land by 2018 (proxy validated: 90% of all mining lies on these units).
+- **Enforcement money** (PP 0128, Madre de Dios): 0.65 M soles (2018) -> 31.1 M (2019) -> 5.0 M (2025). No zone-level enforcement data exists publicly.
+- **2012-13 wave:** no Tambopata-specific dip in the course table.
+
+## Decisions added (12 Oct 2026, evening)
+
+| # | Decision | Why |
+|---|---|---|
+| D30 | Displacement charts use first-time mining (new land), not gross new mining. | Year-to-year map flicker inflates old-pit counts (~300 ha/yr before 2019). |
+| D31 | Gold-left proxy uses the broad geology definition (river deposits + Madre de Dios Fm upper member). | 90% of all mining lies on it vs 64% for the strict one; La Pampa mines terraces. |
+| D32 | Not used: GFW download links that embed GFW's own API key. | Not our credential. |
+| D33 | Causal claim narrowed to NET new mining 2019-21; brief says clearing fell from 2020. | GLAD-L and Sentinel-2 show clearing through 2019. |
