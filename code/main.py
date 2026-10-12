@@ -11,7 +11,7 @@ from common import Numbers, load_pack
 import checks, peru, peru_anp, brazil
 import peru_production, brazil_deter, spatial, brief_figure, peru_synth, spatial_zones, peru_models
 import control_amw, control_elevation, control_mb_amazonia, control_select, brazil_deter_all, brazil_stagger
-import raster_zones, raster_layers
+import raster_zones, raster_layers, raster_gold, glad_alerts
 
 def main():
     pack = load_pack()
@@ -35,6 +35,8 @@ def main():
     # Plan v2 (2026-10-12): one raster backbone, layered zones (rebuilds from rasters only if intermediates are missing)
     raster_zones.run()
     raster_layers.run(reg)           # zone map, stream, Sankey, road bands, corridor share
+    raster_gold.run(reg)             # gold-left proxy (geology x first-mined year)
+    glad_alerts.run(reg)             # quarterly forest-loss alerts on mining land
     brief_figure.run(pack)           # the ONE figure for the brief (needs peru + peru_anp modules only)
     reg.save()
 

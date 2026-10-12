@@ -68,6 +68,7 @@ OUT_BAND = INTER / "road_band_year_v2.csv"
 OUT_OFF = INTER / "official_unit_year_v2.csv"
 OUT_SENS = INTER / "zone_year_v2_lapampa_alt.csv"
 OUT_WIN = INTER / "zones_v2_lapampa_window.tif"
+OUT_FULL = INTER / "zones_v2_mdd_full.tif"        # full grid: band 1 zone code, band 2 first-mined year (git-ignored)
 
 
 def layers():
@@ -252,11 +253,15 @@ def build():
                 transform=rasterio.windows.transform(sub, t), compress="deflate")
     with rasterio.open(OUT_WIN, "w", **prof) as dst:
         dst.write(zz.astype(np.int16), 1); dst.write(ff, 2)
+    prof = dict(driver="GTiff", height=w.height, width=w.width, count=2, dtype="int16", crs="EPSG:4326", transform=t,
+                compress="deflate", tiled=True, blockxsize=512, blockysize=512)
+    with rasterio.open(OUT_FULL, "w", **prof) as dst:
+        dst.write(zones["main"].astype(np.int16), 1); dst.write(first, 2)
     print(f"raster_zones: done in {time.time()-t0:.0f}s")
 
 
 def run():
-    if all(p.exists() for p in (OUT_ZONE, OUT_BAND, OUT_OFF, OUT_SENS, OUT_WIN)):
+    if all(p.exists() for p in (OUT_ZONE, OUT_BAND, OUT_OFF, OUT_SENS, OUT_WIN, OUT_FULL)):
         return
     if not (RAW / "mapbiomas_peru_raster/peru_coverage-col4_2025.tif").exists():
         warnings.warn("raster_zones: rasters and intermediates missing; skipping"); return

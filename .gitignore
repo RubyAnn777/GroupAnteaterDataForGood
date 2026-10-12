@@ -18,3 +18,8 @@ data_raw/mapbiomas_amazonia/*.xlsx
 # MapBiomas Peru Col 4 national rasters (~90 MB/yr; URLs in DOWNLOAD_LOG.csv)
 data_raw/mapbiomas_peru_raster/*.tif
 data_raw/mapbiomas_amazonia/*.zip
+data_raw/glad_alerts/*S2*
+data_raw/glad_alerts/*.tif
+data_raw/enforcement_peru/*.zip
+data_raw/ingemmet/geologia_100k_mdd_tiles/
+data_raw/enforcement_peru/mininter_produccion_policial_*.csv
