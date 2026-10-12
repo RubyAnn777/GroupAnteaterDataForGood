@@ -22,6 +22,7 @@ import raster_zones as rz
 
 GEOL = ROOT / "data_raw" / "ingemmet" / "geologia_100k_mdd_tiles"
 OUT_CSV = ROOT / "data_intermediate" / "gold_depletion_v2.csv"
+OUT_CELL = ROOT / "data_intermediate" / "cell_gold_v2.csv"
 STRICT = {"Qh-al", "Q-al", "Q-alfl", "Q-fl"}
 BROAD_EXTRA = {"NQ-md/s"}
 SRC = ("INGEMMET GEOCATMIN geology 1:100k (layer 6) x MapBiomas Peru Col 4 rasters (first year mined), "
@@ -66,11 +67,23 @@ def build():
         d[f"gold_left_{y}_ha"] = d.gold_land_ha - d[f"gold_mined_by_{y}_ha"]
     d["mining_on_gold_share"] = d.mined_ever_on_gold_ha / d.mined_ever_ha
     d.to_csv(OUT_CSV, index=False)
+    # per 1-km cell: share of gold-bearing land (broad) and share already mined by 2018 (for the cell panel, v2_stats.py)
+    cell, sub = rz.cell_key(t, zone.shape, zone > 0)
+    k = cell.ravel(); n = int(cell.max()) + 1
+    w_ = pix.ravel()
+    gb = (geo >= 1).ravel()
+    area = np.bincount(k, weights=w_, minlength=n)
+    gold = np.bincount(k, weights=w_ * gb, minlength=n)
+    m18 = ((first > 0) & (first <= 2018)).ravel()
+    gold_m18 = np.bincount(k, weights=w_ * gb * m18, minlength=n)
+    cc = pd.DataFrame({"cell": np.arange(n), "gold_share": gold / np.where(area > 0, area, np.nan),
+                       "gold_depleted_2018": gold_m18 / np.where(gold > 0, gold, np.nan)})
+    cc[cc.cell > 0].round(4).to_csv(OUT_CELL, index=False)
 
 
 def run(reg):
     print("\n== v2 gold-left proxy ==")
-    if not OUT_CSV.exists():
+    if not (OUT_CSV.exists() and OUT_CELL.exists()):
         if not (rz.OUT_FULL.exists() and GEOL.exists()):
             warnings.warn("raster_gold: inputs missing; skipping"); return
         build()

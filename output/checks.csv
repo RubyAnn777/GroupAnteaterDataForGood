@@ -22,3 +22,5 @@ label,value,expected,ok
 "Raster v2: Tambopata reserve mining 2025, ha (platform 777)",776.187438813981,777.0,True
 "Raster v2: Madre de Dios mining 2025, ha (course table 112,622)",112536.612664519,112622.0,True
 "MEF PP 0128 devengado, Madre de Dios, 2019, soles (Consulta Amigable screen 31,120,611)",31120611.0,31120611.0,True
+"MapBiomas Brazil Col 11 raster: Kayapo mining 2024, ha (platform 17,632)",17627.71495528987,17632.0,True
+"MapBiomas Brazil Col 11 raster: Kayapo mining 2025, ha (platform 18,573)",18568.56368568074,18573.0,True

@@ -64,3 +64,15 @@ Status (12 Oct 2026, evening): S1-S3, S3b, S5-S8 built; zone map waiting for tea
 | D31 | Gold-left proxy uses the broad geology definition (river deposits + Madre de Dios Fm upper member). | 90% of all mining lies on it vs 64% for the strict one; La Pampa mines terraces. |
 | D32 | Not used: GFW download links that embed GFW's own API key. | Not our credential. |
 | D33 | Causal claim narrowed to NET new mining 2019-21; brief says clearing fell from 2020. | GLAD-L and Sentinel-2 show clearing through 2019. |
+
+## Decisions added (12 Oct 2026, night: meeting notes, Ruby, professor = econometrician)
+
+| # | Decision | Why |
+|---|---|---|
+| D34 | Walkthrough follows the meeting structure: background -> descriptives per zone -> qualitative overlays -> three causal attempts (1.5 successes) -> Brazil -> recommendations. | Team meeting 12 Oct |
+| D35 | Every movement gets a test: 1-km cell panel (cell + year FE, errors clustered by 10-km block), event studies with joint pre-trend tests, randomization over fake dates/places, Newey-West breaks for time series. | Professor is an econometrician |
+| D36 | Rule-based twins: use the three best (Amana, Munduruku, Tapajos), report each and the median; test pre-trends. Pre-trends are NOT parallel (Tambopata grew faster). | Ruby; honesty |
+| D37 | Extra buffer zone = Amarakaeri BZ (west of the corridor; Mercurio II from late 2019). Treated as "less treated", not control. | Meeting; MAAP #115; Plan Restauracion p.33 |
+| D38 | Brazil rebuilt with MapBiomas Col 11 rasters (Kayapo check matches the platform); staggered DiD not significant -> Brazil supports direction, not cause. | Same effort as Peru |
+| D39 | AMW used as robustness on the same zones (not as backbone: no pre-2019 period). | Ruby's suggestion, scoped |
+| D40 | Declared-gold hypothesis ("corridor miners don't declare") reported as plausible mechanism, not a finding. | Evidence indirect |

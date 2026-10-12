@@ -11,7 +11,8 @@ from common import Numbers, load_pack
 import checks, peru, peru_anp, brazil
 import peru_production, brazil_deter, spatial, brief_figure, peru_synth, spatial_zones, peru_models
 import control_amw, control_elevation, control_mb_amazonia, control_select, brazil_deter_all, brazil_stagger
-import raster_zones, raster_layers, raster_gold, glad_alerts, v2_tests
+import raster_zones, raster_layers, raster_gold, glad_alerts, v2_tests, v2_stats, v2_extra, control_top3
+import brazil_raster, brazil_v2
 
 def main():
     pack = load_pack()
@@ -38,6 +39,10 @@ def main():
     raster_gold.run(reg)             # gold-left proxy (geology x first-mined year)
     glad_alerts.run(reg)             # quarterly forest-loss alerts on mining land
     v2_tests.run(pack, reg)          # fake dates, 2012 wave, boundary sensitivity, products, illegal share, spending
+    v2_stats.run(reg)                # 1-km cell panel: zone x period DiD, event studies, road gradient (clustered SEs)
+    v2_extra.run(reg)                # AMW robustness, old pits by zone, zone profile, risk map, timeline, declared output
+    control_top3.run(reg)            # Ruby's three best twins + pre-trend and gap tests
+    brazil_raster.run(); brazil_v2.run(reg)   # Brazil, same pixel method (Col 11 rasters) + staggered DiD + RI
     brief_figure.run(pack)           # the ONE figure for the brief (needs peru + peru_anp modules only)
     reg.save()
 

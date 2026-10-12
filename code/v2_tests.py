@@ -52,6 +52,7 @@ def t1_t2(reg):
     reg.add("t1_road_shift_2019", s[2019], "share points", "Shift in north share, 3 yrs after minus 3 yrs before 2019", "description", SRC_R)
     reg.add("t1_road_shift_rank", rank, "rank", f"Rank of the 2019 shift among {n} possible start years 2008-2022 (1 = biggest move north)", "description", SRC_R)
     reg.add("t1_road_shift_n", n, "count", "Number of start years tested", "description", SRC_R)
+    reg.add("t1_road_shift_ri_p", rank / n, "p-value", "Randomization (fake start dates) p-value of the 2019 move north = rank / number of start years", "description", SRC_R)
     reg.add("t1_road_shift_max_other", s.drop(2019).max(), "share points", "Largest shift north for any other start year", "description", SRC_R)
     reg.add("t1_road_shift_max_other_year", s.drop(2019).idxmax(), "year", "Start year of that largest other shift", "description", SRC_R)
     reg.add("t1_road_shift_2008", s[2008], "share points", "Shift north for start year 2008 (the Guacamayo boom north of the road)", "description", SRC_R)
@@ -195,4 +196,40 @@ def run(pack, reg):
     print(t5(pack, reg).round(0).to_string(index=False))
     t6(reg); il = t7(reg); print("T7", il.loc[2014:].round(2).to_dict())
     print("T8", t8(reg))
+    print("T9 depth break", t9_depth(reg).params.round(2).to_dict())
     return s
+
+
+def t9_depth(reg):
+    """Meeting 12 Oct: how deep into the legal zone does new mining go? North side of the highway, La Pampa longitudes,
+    first-time mined land by depth band (0-10, 10-20, 20-30 km), and the mean depth per year; break after 2019 tested
+    with OLS + Newey-West errors (trend + post-2019 dummy, 2008-2025)."""
+    import statsmodels.api as sm
+    b = pd.read_csv(rz.OUT_BAND)
+    n = b[b.km_from_road >= 0].copy()
+    n["depth"] = pd.cut(n.km_from_road, [-1, 9, 19, 29], labels=["0-10 km", "10-20 km", "20-30 km"])
+    w = n.pivot_table(index="year", columns="depth", values="new_land_ha", aggfunc="sum", observed=False).loc[2008:2025]
+    mean_depth = (n.assign(x=(n.km_from_road + 0.5) * n.new_land_ha).groupby("year").x.sum()
+                  / n.groupby("year").new_land_ha.sum()).loc[2008:2025]
+    X = sm.add_constant(pd.DataFrame({"post2019": (mean_depth.index >= 2019).astype(float),
+                                      "trend": mean_depth.index - 2008.0}, index=mean_depth.index))
+    m = sm.OLS(mean_depth, X).fit(cov_type="HAC", cov_kwds={"maxlags": 2})
+    reg.add("t9_depth_post2019", m.params["post2019"], "km", "Mean depth north of the highway of first-time mined land: break after 2019 net of trend (Newey-West)", "description", SRC_R)
+    reg.add("t9_depth_post2019_p", m.pvalues["post2019"], "p-value", "p-value of that break", "description", SRC_R)
+    for y in (2016, 2018, 2020, 2022, 2025):
+        reg.add(f"t9_depth_{y}", mean_depth.loc[y], "km", f"Mean depth north of the highway of first-time mined land, {y}", "description", SRC_R)
+    sh = w.div(w.sum(axis=1), axis=0) * 100
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(12, 3.9))
+    cols = ["#9cc0ea", "#2a78d6", "#1b3f8f"]
+    a1.stackplot(w.index, w.T.values, colors=cols, labels=list(w.columns), edgecolor="white", linewidth=0.5)
+    a1.axvline(2018.5, color="black", lw=1.2); a1.legend(fontsize=8, frameon=False, loc="upper left", title="km north of the highway", title_fontsize=8)
+    a1.set_ylabel("First-time mined land (ha)"); style_axes(a1)
+    a2.plot(mean_depth.index, mean_depth.values, "o-", color="#2a78d6", lw=2)
+    a2.axvline(2018.5, color="black", lw=1.2); a2.set_ylabel("Mean depth (km north)"); style_axes(a2)
+    a2.set_title(f"Break after 2019: {m.params['post2019']:+.1f} km (p = {m.pvalues['post2019']:.2f})", loc="left", fontsize=9.5)
+    fig.suptitle("How deep into the legal corridor? New mining north of La Pampa, by distance from the highway",
+                 x=0.01, ha="left", fontsize=11, fontweight="bold")
+    finish_figure(fig, f"Source: {SRC_R}. La Pampa longitudes only; first-time mining (new land). Break test: OLS of mean depth "
+                       "on a trend and a post-2019 dummy, Newey-West errors, 2008-2025 (18 years). Description.",
+                  OUT / "fig_v2_depth.png", rect_bottom=0.12)
+    return m

@@ -84,6 +84,7 @@ footer{border-top:1px solid var(--rule);color:var(--ink-3);font-size:.8rem;paddi
 <a href="#s10">10. Brazil: staggered operations</a>
 <a href="#s11">11. How we label claims</a>
 <a href="#s12">12. Plan v2 methods (built 12 Oct 2026)</a>
+<a href="#s13">13. Statistics, twins, Brazil and predictions (added 12 Oct 2026, evening)</a>
 </nav><main>
 <section id="s1"><h2>1. The bottom line</h2>
 <p><strong>Everything runs from one command.</strong> <code>uv run python code/main.py</code> checks the data against the publishers, builds every measure, fits every model, draws every figure and writes every number to <code>output/numbers.csv</code>.</p>
@@ -401,8 +402,25 @@ flowchart LR
 </tbody>
 </table>
 <p><strong>Code map:</strong> see the walkthrough, section 22. <strong>Plan and decisions:</strong> <code>docs/PLAN_v2.md</code>, <code>docs/overnight/LOG.md</code>.</p></section>
+<section id="s13"><h2>13. Statistics, twins, Brazil and predictions (added 12 Oct 2026, evening)</h2>
+<p><strong>Cell panel with standard errors</strong> (<code>code/v2_stats.py</code>):</p>
+<ul>
+<li><strong>Units:</strong> every 1-km cell in the study window (lon 70.65–69.30 W, lat 13.30–12.40 S), 2010–2025. Cells never mined stay in, with zeros (dropping them would select on the outcome).</li>
+<li><strong>Model:</strong> <code>y_ct = a_c + g_t + Σ b_zp [zone = z][period = p]</code>, y = first-time mining (ha); cell and year fixed effects.</li>
+<li><strong>Errors:</strong> clustered by 10 × 10 km blocks (161 clusters), so nearby cells can share shocks.</li>
+<li><strong>Robustness:</strong> gold-bearing land × year effects; returns to old pits as outcome; Poisson (PPML) for zeros.</li>
+<li><strong>Event studies:</strong> year-by-year coefficients (2018 = 0) with a joint F-test of 2010–17 coefficients (pre-trends).</li>
+<li><strong>Road gradient:</strong> distance bands north/south of the highway × period, reference = 10–30 km south.</li>
+</ul>
+<p><strong>Depth into the corridor</strong> (<code>code/v2_tests.py</code>, T9): mean distance north of the highway of first-time mining per year; OLS on a trend and a post-2019 dummy with Newey-West errors (18 years).</p>
+<p><strong>Fake start dates</strong> (T1): randomization p = rank of the real 2019 shift among all start years / number of start years.</p>
+<p><strong>Three rule-based twins</strong> (<code>code/control_top3.py</code>): all areas passing the relaxed rules. Pre-trend test: yearly log-growth difference (Tambopata minus twin), 2010–18, regressed on a constant and on a trend, Newey-West errors. Gap test: Welch t-test on the three 2019–21 annual values (tiny n; read with care).</p>
+<p><strong>Brazil, same pixel method</strong> (<code>code/brazil_raster.py</code>, <code>brazil_v2.py</code>): MapBiomas Brazil Collection 11 rasters read remotely per territory (24 territories + Yanomami rings). Check: Kayapó 2024/2025 vs the platform. Staggered DiD (territory + year effects, treated from own first operation), Gardner's two-stage estimator (<code>did2s</code>) and randomization inference (2,000 shuffles of operation dates across territories).</p>
+<p><strong>Risk map</strong> (<code>code/v2_extra.py</code>, E4; prediction): logit on 1-km cells; features = distance to highway and rivers, north side, gold-bearing share, mined share, mining within ~3 km, zone. Trained on 2018 → 2019–21, tested out of sample on 2021 → 2022–25 (AUC), applied to 2025 → 2026–28.</p>
+<p><strong>Declared gold vs mapped mining</strong> (E6): log declared tonnes on a trend and a post-2019 dummy, Newey-West errors; tonnes per 1,000 ha of first-time mining.</p>
+<p><strong>Qualitative overlays:</strong> legality, enforcement history, taxes, politics, social and health costs come from opened sources in <code>docs/overnight/notes/qualitative_background.md</code> (each with link and quote) and 30 papers in <code>literature_v2.md</code>.</p></section>
 </main></div>
-<footer>Built 2026-10-12 15:33 from git commit 7e5892c (working tree may contain uncommitted changes). Numbers from output/numbers.csv (698 rows).</footer>
+<footer>Built 2026-10-12 16:40 from git commit 4dc9bf2 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (952 rows).</footer>
 <script>
 (function(){var r=document.documentElement,k='report-theme',s=localStorage.getItem(k);if(s)r.setAttribute('data-theme',s);
 document.getElementById('theme').addEventListener('click',function(){var dark=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme:dark)').matches;var n=dark?'light':'dark';r.setAttribute('data-theme',n);localStorage.setItem(k,n)});

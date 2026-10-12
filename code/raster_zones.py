@@ -59,6 +59,9 @@ LP_LON = (-70.15, -69.80)                           # La Pampa longitudes (main 
 LP_ALT = {"narrow": (-70.10, -69.85), "wide": (-70.20, -69.75)}
 ACROSS_KM = 10.0
 WINDOW = (-70.35, -13.12, -69.65, -12.72)           # map window for figures
+STUDY = (-70.65, -13.30, -69.30, -12.40)            # 1-km cell panel window (La Pampa, corridor, Amarakaeri edge, reserve)
+CELL_PX = 33                                        # 33 x 30 m ~ 1 km cells
+BAND_KM = 30                                        # road bands -30..+30 km
 ZONES = {1: "Tambopata reserve", 2: "Other reserves and parks", 3: "Kotsimba (native community)",
          4: "Other native communities", 5: "Corridor across the road", 6: "Rest of mining corridor",
          7: "La Pampa sector", 8: "Rest of Tambopata buffer zone", 9: "Amarakaeri buffer zone",
@@ -68,6 +71,8 @@ OUT_BAND = INTER / "road_band_year_v2.csv"
 OUT_OFF = INTER / "official_unit_year_v2.csv"
 OUT_SENS = INTER / "zone_year_v2_lapampa_alt.csv"
 OUT_WIN = INTER / "zones_v2_lapampa_window.tif"
+OUT_CELL = INTER / "cell_year_v2.csv.gz"            # 1-km cell x year accounting (study window)
+OUT_CELLATTR = INTER / "cell_attr_v2.csv"            # cell centre, majority zone, road and river distance
 OUT_FULL = INTER / "zones_v2_mdd_full.tif"        # full grid: band 1 zone code, band 2 first-mined year (git-ignored)
 
 
@@ -109,7 +114,7 @@ def signed_road_km(t, shape, ioh, lon_win):
     cols = np.arange(shape[1]); rows = np.arange(shape[0])
     lon = t.c + (cols + 0.5) * t.a; lat = t.f + (rows + 0.5) * t.e
     cmask = (lon >= lon_win[0]) & (lon <= lon_win[1])
-    rmask = (lat >= -13.25) & (lat <= -12.55)
+    rmask = (lat >= -13.45) & (lat <= -12.25)
     out = np.full(shape, np.nan, np.float32)
     # road latitude at each longitude (northern-most crossing is irrelevant here: the road runs W-E in this window)
     xs = lon[cmask]
@@ -141,7 +146,7 @@ def build_zones(L, w, t):
     abz = R(za[za.anp_codi == "RC03"].geometry)
     bbz = R(za[za.anp_codi == "PN08"].geometry)
     obz = R(za[~za.anp_codi.isin(["RN09", "RC03", "PN08"])].geometry)
-    dist = signed_road_km(t, shape, L["ioh"], LP_ALT["wide"])
+    dist = signed_road_km(t, shape, L["ioh"], (STUDY[0], STUDY[2]))
     lon = t.c + (np.arange(shape[1]) + 0.5) * t.a
     def lp_cols(win):
         m = np.zeros(shape, bool); m[:, (lon >= win[0]) & (lon <= win[1])] = True; return m
@@ -159,9 +164,9 @@ def build_zones(L, w, t):
                 "Madre de Dios": mdd}
     lpc = lp_cols(LP_LON)
     band = np.full(shape, -99, np.int16)
-    ok = lpc & mdd & ~np.isnan(dist) & (np.abs(dist) <= 15)
-    band[ok] = np.floor(dist[ok]).astype(np.int16)                         # -15..14: band k = [k, k+1) km
-    return zones, official, band
+    ok = lpc & mdd & ~np.isnan(dist) & (np.abs(dist) <= BAND_KM)
+    band[ok] = np.floor(dist[ok]).astype(np.int16)                         # -30..29: band k = [k, k+1) km
+    return zones, official, band, dist, mdd
 
 
 def account(keys: dict[str, np.ndarray], row_ha, w):
@@ -200,6 +205,51 @@ def account(keys: dict[str, np.ndarray], row_ha, w):
     return rows, first
 
 
+def cell_key(t, shape, mdd):
+    """1-km cells (CELL_PX x CELL_PX pixels) inside STUDY and Madre de Dios; id 1..n, 0 outside."""
+    from rasterio.windows import from_bounds
+    sub = from_bounds(*STUDY, t).round_offsets().round_lengths()
+    r0, c0, h, w_ = int(sub.row_off), int(sub.col_off), int(sub.height), int(sub.width)
+    nc = (w_ + CELL_PX - 1) // CELL_PX
+    rr, cc = np.mgrid[0:h, 0:w_]
+    k = np.zeros(shape, np.int32)
+    k[r0:r0 + h, c0:c0 + w_] = (rr // CELL_PX) * nc + cc // CELL_PX + 1
+    k[~mdd] = 0
+    return k, (r0, c0, h, w_, nc)
+
+
+def cell_attributes(cell, sub, t, zone, dist, row_ha):
+    """Per cell: centre lon/lat, majority zone, mean signed road distance (km, N > 0), mean distance to the nearest
+    river or lake pixel in 2018 (MapBiomas class 33, km), area (ha)."""
+    import rasterio
+    from scipy.ndimage import distance_transform_edt
+    r0, c0, h, w_, nc = sub
+    sl = (slice(r0, r0 + h), slice(c0, c0 + w_))
+    # read the 2018 class map for the study window
+    import rasterio.windows as rw
+    with rasterio.open(str(RASTER).format(y=2018)) as r:
+        full = rw.from_bounds(*BBOX, r.transform).round_offsets().round_lengths()
+        a = r.read(1, window=rw.Window(full.col_off + c0, full.row_off + r0, w_, h))
+    river = a == 33
+    dr_km = distance_transform_edt(~river) * 0.030
+    k = cell[sl].ravel(); n = int(cell.max()) + 1
+    pix = np.broadcast_to(row_ha[r0:r0 + h, None], (h, w_)).ravel()
+    cnt = np.bincount(k, minlength=n).astype(float); cnt[cnt == 0] = np.nan
+    d = dist[sl].ravel(); dd = np.where(np.isnan(d), 0, d)
+    road = np.bincount(k, weights=dd, minlength=n) / np.bincount(k, weights=(~np.isnan(d)).astype(float), minlength=n)
+    riv = np.bincount(k, weights=dr_km.ravel(), minlength=n) / cnt
+    area = np.bincount(k, weights=pix, minlength=n)
+    z = zone[sl].ravel().astype(np.int64)
+    zc = np.bincount(k * 16 + z, minlength=n * 16).reshape(n, 16); zc[:, 0] = 0
+    maj = zc.argmax(axis=1)
+    ids = np.arange(n)
+    rows_, cols_ = (ids - 1) // nc, (ids - 1) % nc
+    lon = t.c + (c0 + (cols_ + 0.5) * CELL_PX) * t.a
+    lat = t.f + (r0 + (rows_ + 0.5) * CELL_PX) * t.e
+    out = pd.DataFrame({"cell": ids, "lon": lon, "lat": lat, "zone": maj, "road_km": road, "river_km": riv, "area_ha": area})
+    return out[(out.cell > 0) & (out.area_ha > 0)].round(4)
+
+
 def tidy(rows, labels):
     out = []
     for rec in rows:
@@ -219,11 +269,13 @@ def build():
     t0 = time.time()
     L = layers()
     w, t, row_ha = grid()
-    zones, official, band = build_zones(L, w, t)
+    zones, official, band, dist, mdd = build_zones(L, w, t)
+    cell, sub = cell_key(t, band.shape, mdd)
     print(f"raster_zones: zones built ({time.time()-t0:.0f}s), grid {w.height}x{w.width}")
     off = np.zeros(band.shape, np.uint8)            # official units overlap -> account them one by one below
     keys = {"main": zones["main"], "narrow": zones["narrow"], "wide": zones["wide"],
-            "band": (band + 16).clip(0).astype(np.uint8)}         # band -15..14 -> 1..30, outside -> 0
+            "band": (band + BAND_KM + 1).clip(0).astype(np.uint8),   # band -30..29 -> 1..60, outside -> 0
+            "cell": cell}
     for i, (nm, m) in enumerate(official.items(), start=1):
         keys[f"off_{i}"] = m.astype(np.uint8)
     rows, first = account(keys, row_ha, w)
@@ -236,9 +288,13 @@ def build():
     z.to_csv(OUT_ZONE, index=False)
     sens = pd.concat([tidy(rows[k], ZONES).assign(definition=k) for k in ("narrow", "wide")])
     sens.to_csv(OUT_SENS, index=False)
-    b = tidy(rows["band"], {i + 16: f"{i}" for i in range(-15, 15)})
+    b = tidy(rows["band"], {i + BAND_KM + 1: f"{i}" for i in range(-BAND_KM, BAND_KM)})
     b["km_from_road"] = b.unit.astype(int)
     b.to_csv(OUT_BAND, index=False)
+    cells = tidy(rows["cell"], {i: i for i in range(1, int(cell.max()) + 1)}).rename(columns={"code": "cell"}).drop(columns="unit")
+    cells = cells[cells.groupby("cell").mining_ha.transform("max") > 0]           # keep cells that ever had mining
+    cells.round(3).to_csv(OUT_CELL, index=False, compression="gzip")
+    cell_attributes(cell, sub, t, zones["main"], dist, row_ha).to_csv(OUT_CELLATTR, index=False)
     offs = []
     for i, nm in enumerate(official, start=1):
         offs.append(tidy(rows[f"off_{i}"], {1: nm}))
@@ -261,7 +317,7 @@ def build():
 
 
 def run():
-    if all(p.exists() for p in (OUT_ZONE, OUT_BAND, OUT_OFF, OUT_SENS, OUT_WIN, OUT_FULL)):
+    if all(p.exists() for p in (OUT_ZONE, OUT_BAND, OUT_OFF, OUT_SENS, OUT_WIN, OUT_FULL, OUT_CELL, OUT_CELLATTR)):
         return
     if not (RAW / "mapbiomas_peru_raster/peru_coverage-col4_2025.tif").exists():
         warnings.warn("raster_zones: rasters and intermediates missing; skipping"); return

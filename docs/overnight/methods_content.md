@@ -217,3 +217,27 @@ Each model also runs with a **fake 2016 date** on 2011–18 data. A trustworthy 
 | S8 products table | done |
 
 **Code map:** see the walkthrough, section 22. **Plan and decisions:** `docs/PLAN_v2.md`, `docs/overnight/LOG.md`.
+
+## 13. Statistics, twins, Brazil and predictions (added 12 Oct 2026, evening)
+
+**Cell panel with standard errors** (`code/v2_stats.py`):
+- **Units:** every 1-km cell in the study window (lon 70.65–69.30 W, lat 13.30–12.40 S), 2010–2025. Cells never mined stay in, with zeros (dropping them would select on the outcome).
+- **Model:** `y_ct = a_c + g_t + Σ b_zp [zone = z][period = p]`, y = first-time mining (ha); cell and year fixed effects.
+- **Errors:** clustered by 10 × 10 km blocks (161 clusters), so nearby cells can share shocks.
+- **Robustness:** gold-bearing land × year effects; returns to old pits as outcome; Poisson (PPML) for zeros.
+- **Event studies:** year-by-year coefficients (2018 = 0) with a joint F-test of 2010–17 coefficients (pre-trends).
+- **Road gradient:** distance bands north/south of the highway × period, reference = 10–30 km south.
+
+**Depth into the corridor** (`code/v2_tests.py`, T9): mean distance north of the highway of first-time mining per year; OLS on a trend and a post-2019 dummy with Newey-West errors (18 years).
+
+**Fake start dates** (T1): randomization p = rank of the real 2019 shift among all start years / number of start years.
+
+**Three rule-based twins** (`code/control_top3.py`): all areas passing the relaxed rules. Pre-trend test: yearly log-growth difference (Tambopata minus twin), 2010–18, regressed on a constant and on a trend, Newey-West errors. Gap test: Welch t-test on the three 2019–21 annual values (tiny n; read with care).
+
+**Brazil, same pixel method** (`code/brazil_raster.py`, `brazil_v2.py`): MapBiomas Brazil Collection 11 rasters read remotely per territory (24 territories + Yanomami rings). Check: Kayapó 2024/2025 vs the platform. Staggered DiD (territory + year effects, treated from own first operation), Gardner's two-stage estimator (`did2s`) and randomization inference (2,000 shuffles of operation dates across territories).
+
+**Risk map** (`code/v2_extra.py`, E4; prediction): logit on 1-km cells; features = distance to highway and rivers, north side, gold-bearing share, mined share, mining within ~3 km, zone. Trained on 2018 → 2019–21, tested out of sample on 2021 → 2022–25 (AUC), applied to 2025 → 2026–28.
+
+**Declared gold vs mapped mining** (E6): log declared tonnes on a trend and a post-2019 dummy, Newey-West errors; tonnes per 1,000 ha of first-time mining.
+
+**Qualitative overlays:** legality, enforcement history, taxes, politics, social and health costs come from opened sources in `docs/overnight/notes/qualitative_background.md` (each with link and quote) and 30 papers in `literature_v2.md`.
