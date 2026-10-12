@@ -17,3 +17,4 @@ data_raw/mapbiomas_amazonia/*.xlsx
 
 # MapBiomas Peru Col 4 national rasters (~90 MB/yr; URLs in DOWNLOAD_LOG.csv)
 data_raw/mapbiomas_peru_raster/*.tif
+data_raw/mapbiomas_amazonia/*.zip

@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anteater Q2 methods</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#f3efeb;--card:#ffffff;--tint:#e8e2db;--rule:#d9d1c8;--teal:#1b3f44;--on-teal:#fff;--on-teal-2:#c9dcdc;
+--ink:#1b3f44;--ink-2:#4b5f61;--ink-3:#6f7f80;--rasp:#c2185b;--no:#b3261e;--no-soft:#f6dcd9;--maybe:#a86400;--maybe-soft:#f6e6c8;--yes:#2f7f32;--yes-soft:#e1eedd;--blue:#2a78d6;
+--sans:"Roboto",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--mono:"Roboto Mono",ui-monospace,"SF Mono",Menlo,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#11201f;--card:#1d3236;--tint:#24393d;--rule:#33494c;--teal:#0c2326;--on-teal-2:#a9c3c3;--ink:#eef4f3;--ink-2:#bccbcb;--ink-3:#8fa3a3;--rasp:#e0558f;--no:#ef8077;--no-soft:#3d2220;--maybe:#e9a845;--maybe-soft:#3a2e15;--yes:#7fc37c;--yes-soft:#1f3624;--blue:#4d94e8;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#11201f;--card:#1d3236;--tint:#24393d;--rule:#33494c;--teal:#0c2326;--on-teal-2:#a9c3c3;--ink:#eef4f3;--ink-2:#bccbcb;--ink-3:#8fa3a3;--rasp:#e0558f;--no:#ef8077;--no-soft:#3d2220;--maybe:#e9a845;--maybe-soft:#3a2e15;--yes:#7fc37c;--yes-soft:#1f3624;--blue:#4d94e8;color-scheme:dark}
+*{box-sizing:border-box}
+.paper{background:var(--card);border:1px solid var(--rule);box-shadow:0 2px 10px rgba(0,0,0,.08);padding:28px 34px;margin:12px 0 20px;max-width:820px;font-size:.95rem}
+.paper h3.papertitle{font-size:1.35rem;font-weight:900;margin:0 0 4px}.paper h4{font-size:1.05rem;margin:22px 0 6px;border-bottom:1px solid var(--rule);padding-bottom:3px}
+.paper figure{border:0;padding:0;text-align:center}.paper figure img{margin:0 auto}.paper p,.paper li{max-width:none}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.6;margin:0}
+.draft{position:sticky;top:0;z-index:50;background:#b3201a;color:#fff;font-weight:900;letter-spacing:.06em;text-transform:uppercase;font-size:.85rem;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.draft button{font:inherit;font-size:.75rem;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7);padding:3px 10px;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:500}
+.hero{background:var(--teal);color:var(--on-teal)}
+.hero .in{max-width:1200px;margin:0 auto;padding:36px 20px 30px}
+.hero .kicker{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#f48fb1}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:900;line-height:1.15;letter-spacing:-.01em;margin:8px 0 0;text-wrap:balance}
+.layout{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px}
+nav.toc{position:sticky;top:48px;align-self:start;max-height:calc(100vh - 60px);overflow:auto;padding:24px 0;font-size:.88rem}
+nav.toc a{display:block;color:var(--ink-2);text-decoration:none;padding:5px 10px;border-left:3px solid var(--rule)}
+nav.toc a:hover,nav.toc a.on{color:var(--rasp);border-left-color:var(--rasp)}
+main{padding-bottom:60px;min-width:0}
+section{padding-top:44px}
+h2{font-size:clamp(1.35rem,3vw,1.8rem);font-weight:900;margin:0 0 14px;line-height:1.2}
+p{margin:0 0 12px;max-width:74ch}
+ul,ol{margin:0 0 14px;padding-left:1.4em;max-width:80ch}
+li{margin-bottom:8px}
+a{color:var(--rasp)}
+code{font-family:var(--mono);font-size:.84em;background:var(--tint);padding:1px 5px;overflow-wrap:anywhere}
+em{color:var(--ink-2)}
+.num{font-variant-numeric:tabular-nums}.src{font-size:.8rem;color:var(--ink-3)}
+blockquote.callout,.callout{background:var(--maybe-soft);border-left:5px solid var(--maybe);margin:0 0 16px;padding:12px 16px;max-width:none}
+blockquote.callout p{margin:0}
+.draftbox{background:var(--no-soft);border:2px solid var(--no);border-left-width:8px;color:var(--ink);padding:14px 18px;margin:26px 0 0}
+.draftbox b{color:var(--no);text-transform:uppercase;letter-spacing:.06em}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 8px;vertical-align:1px;white-space:nowrap}
+.badge.d{background:var(--yes-soft);color:var(--yes)}.badge.p{background:var(--maybe-soft);color:var(--maybe)}.badge.c{background:var(--no-soft);color:var(--no)}
+figure{margin:18px 0 6px;background:var(--card);border:1px solid var(--rule);padding:12px}
+figure img{width:100%;height:auto;display:block;background:#fff}
+figcaption{font-size:.84rem;color:var(--ink-2);padding-top:8px}
+.tw{overflow-x:auto;margin:0 0 16px}
+table{border-collapse:collapse;font-size:.88rem;background:var(--card);border:1px solid var(--rule);width:100%}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+th{background:var(--tint);font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;position:sticky;top:0}
+td.r,th.r{text-align:right}
+section>table{display:block;overflow-x:auto}
+details.ng{margin:10px 0;border:1px solid var(--rule);background:var(--card)}
+details.ng>summary{cursor:pointer;font-weight:700;padding:8px 12px;background:var(--tint)}
+details.ng .tw{margin:0;max-height:520px;overflow:auto}
+table.nums td:first-child code{overflow-wrap:normal;white-space:nowrap;font-size:.78em}
+table.nums td:nth-child(4){min-width:240px}
+table.nums td:last-child code{overflow-wrap:normal;white-space:nowrap}
+#nfilter{width:100%;max-width:520px;font:inherit;padding:8px 12px;background:var(--card);color:var(--ink);border:1px solid var(--rule)}
+.figure{background:var(--card);border:1px solid var(--rule);padding:12px}.svgwrap{overflow-x:auto}
+svg.flow{width:100%;min-width:760px;height:auto;display:block;color:var(--ink-2);font-family:var(--sans)}
+svg.flow .lane{fill:var(--tint);fill-opacity:.55;stroke:var(--rule);stroke-width:1}
+svg.flow .lanelbl{fill:var(--rasp);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+svg.flow .box{fill:var(--card);stroke:var(--ink-3);stroke-width:1.2}svg.flow .box.opt{stroke-dasharray:5 3}
+svg.flow .t1{fill:var(--ink);font-size:12px;font-weight:700}svg.flow .t2{fill:var(--ink-2);font-size:11.5px}svg.flow .t3{fill:var(--yes);font-size:11.5px}
+svg.flow .arrow{stroke:currentColor;stroke-width:1.5}
+footer{border-top:1px solid var(--rule);color:var(--ink-3);font-size:.8rem;padding:20px;text-align:center}
+@media (max-width:900px){.layout{grid-template-columns:1fr;gap:0}nav.toc{position:static;max-height:none;padding:14px 0;display:flex;flex-wrap:wrap;gap:6px}nav.toc a{border:1px solid var(--rule);border-left:1px solid var(--rule)}}
+@media print{.draft button,nav.toc{display:none}.draft{position:static}.layout{display:block}body{background:#fff;color:#000;font-size:11pt}figure,table,.box{break-inside:avoid}details.ng .tw{max-height:none}details.ng:not([open])>*:not(summary){display:block}section{padding-top:20px}a{color:inherit}}
+</style></head><body>
+<div class="draft"><span>DRAFT for the team — not reviewed</span><button id="theme" type="button">Light / dark</button></div>
+<header class="hero"><div class="in"><div class="kicker">Group Giant Anteater · Question 2 · Peru and Brazil</div><h1>How the analysis is built: data, measures, models</h1>
+<div class="draftbox"><b>Draft.</b> One page per method: what it answers, how it works, what it controls for, what it can't, where the code is. Every number on the walkthrough comes from one script, <code>code/main.py</code>. Version: plan v2 (12 Oct 2026); parts marked <em>v2</em> are being rebuilt now.</div></div></header>
+<div class="layout"><nav class="toc" aria-label="Contents">
+<a href="#s1">1. The bottom line</a>
+<a href="#s2">2. The data</a>
+<a href="#s3">3. The main measure: new mining per year</a>
+<a href="#s4">4. The places (zones)</a>
+<a href="#s5">5. Comparison 1: before and after, against a neighbour (2×2)</a>
+<a href="#s6">6. Comparison 2: year by year, against many zones (event study)</a>
+<a href="#s7">7. Comparison 3: harder controls (model ladder)</a>
+<a href="#s8">8. Comparison 4: a synthetic twin (add-on)</a>
+<a href="#s9">9. Comparison 5: one real twin, by rules (Ruby&#x27;s design)</a>
+<a href="#s10">10. Brazil: staggered operations</a>
+<a href="#s11">11. How we label claims</a>
+<a href="#s12">12. What&#x27;s being rebuilt now (plan v2)</a>
+</nav><main>
+<section id="s1"><h2>1. The bottom line</h2>
+<p><strong>Everything runs from one command.</strong> <code>uv run python code/main.py</code> checks the data against the publishers, builds every measure, fits every model, draws every figure and writes every number to <code>output/numbers.csv</code>.</p>
+<p><strong>Three building blocks:</strong></p>
+<ul>
+<li><strong>Data:</strong> satellite maps of mining (MapBiomas, Amazon Mining Watch, INPE alerts), boundaries (parks, buffer zones, corridor, communities), and context (gold price, gold output, fines).</li>
+<li><strong>Measures:</strong> how much <em>new</em> mining appears each year, per area.</li>
+<li><strong>Comparisons:</strong> the targeted area against areas that tell us what might have happened without the operation.</li>
+</ul>
+<p><strong>Why it matters:</strong> Any number in the brief can be traced back: brief → <code>numbers.csv</code> → the function that made it → the raw file → the publisher.</p>
+<pre class="mermaid">
+flowchart LR
+  A[Raw files<br/>data_raw/] --> B[Checks against<br/>publisher numbers]
+  B --> C[Measures<br/>new mining per area-year]
+  C --> D[Comparisons<br/>DiD, event study,<br/>models, twin]
+  D --> E[Figures + tables<br/>output/]
+  D --> F[numbers.csv<br/>every cited number]
+  F --> G[Walkthrough<br/>+ brief]
+</pre></section>
+<section id="s2"><h2>2. The data</h2>
+<p><strong>One rule first:</strong> we never add or subtract numbers from different sources or collections. Different products measure different things.</p>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>What it measures</th>
+<th>Years</th>
+<th>Used for</th>
+<th>Check against publisher</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MapBiomas Peru, Collection 4</strong> (course tables + our raster download)</td>
+<td>Land class of every 30 m pixel each year; class 30 = mining (legal and illegal)</td>
+<td>1985–2025</td>
+<td>Main outcome, Peru</td>
+<td>Tambopata buffer zone 2025 = 20,730 ha ✔</td>
+</tr>
+<tr>
+<td><strong>MapBiomas Peru rasters</strong> <em>(v2)</em></td>
+<td>Same product, as maps, so we can use our own boundaries</td>
+<td>1985–2025</td>
+<td>All Peru zones in v2</td>
+<td>Raster gives 20,716 ha vs 20,730 ✔</td>
+</tr>
+<tr>
+<td><strong>Amazon Mining Watch (AMW)</strong></td>
+<td>Gold-mining scars found by a machine-learning model, in 480 m squares</td>
+<td>2018–2026</td>
+<td>Twin search, Brazil, robustness</td>
+<td>No published totals</td>
+</tr>
+<tr>
+<td><strong>MapBiomas Amazonía, Collection 6</strong></td>
+<td>Same idea as MapBiomas, all nine Amazon countries</td>
+<td>1985–2023</td>
+<td>Pre-2019 trend of candidate twins</td>
+<td>Amazon mining 2023 = 0.78 Mha ✔</td>
+</tr>
+<tr>
+<td><strong>MapBiomas Brazil, Collections 10.1 and 11</strong></td>
+<td>Mining per indigenous territory and per municipality</td>
+<td>1985–2025</td>
+<td>Brazil</td>
+<td>Garimpo 2025 = 445,987 ha ✔</td>
+</tr>
+<tr>
+<td><strong>INPE DETER alerts</strong></td>
+<td>Monthly alerts of new mining, Brazil</td>
+<td>2016–2026</td>
+<td>Brazil timing</td>
+<td>2019 total within 0.2% ✔</td>
+</tr>
+<tr>
+<td><strong>Boundaries</strong></td>
+<td>SERNANP parks and buffer zones; INGEMMET legal corridor; RAISG roads and protected areas; MapBiomas Amazonía native communities; FUNAI territories</td>
+<td>current</td>
+<td>Zones</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Context</strong></td>
+<td>World Bank gold price; Peru central bank gold output; IBAMA fines</td>
+<td>various</td>
+<td>Context only</td>
+<td>Gold Aug 2026 = $4,411/oz ✔</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why it matters:</strong> The instructor will trace one number back to the publisher. Each dataset has one check, logged in <code>output/checks.csv</code> and <code>DOWNLOAD_LOG.csv</code>.</p></section>
+<section id="s3"><h2>3. The main measure: new mining per year</h2>
+<p><strong>We count change, not stock.</strong> Total mining area only grows, like the gold price, so totals correlate with almost anything.</p>
+<ul>
+<li><strong>Addition</strong> (the course measure) = mining area this year − mining area last year, per area, in hectares.</li>
+<li><strong>Rule:</strong> add up all rows of an area <em>first</em>, then take the difference.</li>
+</ul>
+<p><strong>v2 splits the addition into its parts</strong> (pixel by pixel, from the rasters):</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>A pixel that is…</th>
+<th>Tells us</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>New land</strong></td>
+<td>mining now, never mining before</td>
+<td>expansion into forest or new ground</td>
+</tr>
+<tr>
+<td><strong>Re-mined</strong></td>
+<td>mining now, not last year, but mining in some earlier year</td>
+<td>miners returning to old pits</td>
+</tr>
+<tr>
+<td><strong>Stopped</strong></td>
+<td>mining last year, not now</td>
+<td>abandoned, regrowing, or reclassified</td>
+</tr>
+<tr>
+<td><strong>From forest</strong></td>
+<td>mining now, forest last year</td>
+<td>forest lost to mining</td>
+</tr>
+</tbody>
+</table>
+<p><code>addition = new land + re-mined − stopped</code> (checked in code for every area and year).</p>
+<p><strong>Why it matters:</strong> A small addition can hide a big return to old pits. Ruby's re-mining question needs the split.</p>
+<p><strong>What it can't see:</strong> river dredges, mercury, who mines, and whether a site is legal. Satellites see bare ground and ponds.</p></section>
+<section id="s4"><h2>4. The places (zones)</h2>
+<p><strong>v1 used whole buffer zones</strong> from the course tables (Tambopata, Amarakaeri and 13 others).</p>
+<p><strong>v2 draws one zone map on the raster grid.</strong> Each pixel belongs to exactly one zone, in this order (first match wins):</p>
+<ol>
+<li>Tambopata reserve</li>
+<li>Other reserves and parks</li>
+<li>Kotsimba (native community)</li>
+<li>Other native communities</li>
+<li><strong>Corridor across the road:</strong> the legal corridor directly north of the Interoceanic Highway, opposite La Pampa, within 10 km</li>
+<li>Rest of the legal corridor</li>
+<li><strong>La Pampa sector:</strong> the Tambopata buffer zone between longitudes 70.15° and 69.80° W</li>
+<li>Rest of the Tambopata buffer zone</li>
+<li>Amarakaeri buffer zone</li>
+<li>Bahuaja-Sonene buffer zone</li>
+<li>Other buffer zones</li>
+<li>Rest of Madre de Dios</li>
+</ol>
+<p><strong>Two zones have no official boundary:</strong> La Pampa and "across the road". We define them by longitude and test a narrower and a wider version.</p>
+<p><strong>Road bands:</strong> in the La Pampa longitudes, every pixel gets its distance to the highway (north = positive). That lets us ask directly: did new mining jump from the south side to the north side?</p>
+<p><strong>Why it matters:</strong> "Tambopata buffer zone" mixes La Pampa (shut down) with new fronts like Mangote. The zone map separates the stories.</p></section>
+<section id="s5"><h2>5. Comparison 1: before and after, against a neighbour (2×2)</h2>
+<p><strong>Question:</strong> Did the targeted zone change more than a comparison zone?</p>
+<p><strong>How:</strong> gap change = (targeted after − before) − (comparison after − before). Before = 2016–18, during = 2019–21, after = 2022–25.</p>
+<p><strong>Controls for:</strong> anything that moved both zones equally (gold price, COVID, national policy).</p>
+<p><strong>Can't control for:</strong> anything that hit only one zone. Spillovers into the comparison zone make the gap look bigger.</p>
+<p><strong>Code:</strong> <code>code/peru.py</code> (<code>describe_and_compare</code>). <strong>Result:</strong> −1,762 ha/yr against Amarakaeri.</p></section>
+<section id="s6"><h2>6. Comparison 2: year by year, against many zones (event study)</h2>
+<p><strong>Question:</strong> Is the fall bigger than normal year-to-year noise?</p>
+<p><strong>Model:</strong> new mining in zone <em>z</em>, year <em>t</em> = zone effect + year effect + one Tambopata term per year (2018 left out).
+<code>y_zt = α_z + γ_t + Σ_k β_k · [z = Tambopata] · [t = k] + ε_zt</code></p>
+<ul>
+<li><strong>Zone effect (α):</strong> each zone's normal level.</li>
+<li><strong>Year effect (γ):</strong> each year's shock shared by all zones: gold price, COVID.</li>
+<li><strong>β_k:</strong> how far Tambopata sits from the others in year <em>k</em>, relative to 2018.</li>
+</ul>
+<p><strong>Fake place test:</strong> give the "operation" to each other zone in turn. Tambopata should be the most extreme. It ranks 1 of 15.</p>
+<p><strong>Why no error bars:</strong> with one treated zone, standard errors are not trustworthy (Conley and Taber, 2011). The rank is our honest substitute.</p>
+<p><strong>Code:</strong> <code>code/peru.py</code> (<code>run_event_study</code>), estimated with <code>pyfixest</code>.</p></section>
+<section id="s7"><h2>7. Comparison 3: harder controls (model ladder)</h2>
+<p><strong>Question:</strong> Does the fall survive stronger controls?</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Adds</th>
+<th>What it rules out</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M1</strong></td>
+<td>zone + year effects</td>
+<td>shared shocks (gold price, COVID)</td>
+</tr>
+<tr>
+<td><strong>M2</strong></td>
+<td>+ each zone's pre-2019 size × log gold price</td>
+<td>big zones reacting more to a price rise</td>
+</tr>
+<tr>
+<td><strong>M3</strong></td>
+<td>+ a straight-line trend per zone</td>
+<td>zones that were already drifting apart</td>
+</tr>
+<tr>
+<td><strong>M4</strong></td>
+<td>outcome scaled to each zone's own 2014–18 average</td>
+<td>Tambopata's size driving the result</td>
+</tr>
+</tbody>
+</table>
+<p>Each model also runs with a <strong>fake 2016 date</strong> on 2011–18 data. A trustworthy model shows a big real effect and a small fake one.</p>
+<p><strong>Result:</strong> the 2019–21 gap is −1,454 to −1,859 ha/yr; fake dates are 4–9 times smaller; Tambopata ranks first every time.</p>
+<p><strong>Code:</strong> <code>code/peru_models.py</code>. The numpy fit is checked against <code>pyfixest</code>.</p></section>
+<section id="s8"><h2>8. Comparison 4: a synthetic twin (add-on)</h2>
+<p><strong>Question:</strong> Can a weighted mix of other zones copy Tambopata before 2019?</p>
+<p><strong>How:</strong> find weights (≥ 0, summing to 1) on other zones so the mix tracks Tambopata in 2010–18. After 2019, the gap between Tambopata and the mix is the estimated effect.</p>
+<p><strong>Why it fails here:</strong> Tambopata added more mining than any other zone. A weighted average of small numbers can't reach a big one. It only works after scaling each zone to its own size.</p>
+<p><strong>Code:</strong> <code>code/peru_synth.py</code>.</p></section>
+<section id="s9"><h2>9. Comparison 5: one real twin, by rules (Ruby&#x27;s design)</h2>
+<p><strong>Question:</strong> Is there one existing area that looks like La Pampa but had no operation?</p>
+<p><strong>Rules, applied to 1,174 areas across the Amazon:</strong></p>
+<ol>
+<li><strong>R1</strong> mining before 2019 (≥ 500 ha seen by AMW by 2018)</li>
+<li><strong>R2</strong> no operation reported 2017–25 (documented web search, every query logged)</li>
+<li><strong>R3</strong> outside Madre de Dios</li>
+<li><strong>R4</strong> lowland mining (&lt; 500 m) of similar scale (≥ ⅕ of Tambopata); the closest match wins</li>
+</ol>
+<p><strong>Result:</strong> no area passes. Relaxing R2 to "no operation in 2017–21" gives <strong>Amanã National Forest</strong> (Brazil).</p>
+<p><strong>Comparison:</strong> new mining per year as a share of each area's own 2018 mining, same product (AMW) for both. The pre-2019 trend comes from each area's own MapBiomas collection, shown side by side, never subtracted.</p>
+<p><strong>Code:</strong> <code>code/control_amw.py</code>, <code>control_elevation.py</code>, <code>control_mb_amazonia.py</code>, <code>control_select.py</code>.</p></section>
+<section id="s10"><h2>10. Brazil: staggered operations</h2>
+<p><strong>Question:</strong> Do territories fall after <em>their own</em> operation?</p>
+<p><strong>How:</strong> AMW new mining per territory, 2019–25. Each territory is compared with its own first operation date. A pool of territories with no operation found shows the background trend.</p>
+<p><strong>Logic:</strong> if operations cause falls, each territory should fall after its own date, not before. Munduruku fell before, so the timing alone can't credit the operations.</p>
+<p><strong>Code:</strong> <code>code/brazil_stagger.py</code>, <code>brazil_deter_all.py</code>.</p></section>
+<section id="s11"><h2>11. How we label claims</h2>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Means</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="badge d">description</span> description</td>
+<td>what happened</td>
+<td>"new mining fell from 1,640 to 163 ha/yr"</td>
+</tr>
+<tr>
+<td><span class="badge p">prediction</span> prediction</td>
+<td>what we expect next time</td>
+<td>"a rebound within ~3 years"</td>
+</tr>
+<tr>
+<td><span class="badge c">causal</span> causal</td>
+<td>what caused it</td>
+<td>used once, <em>conditional</em> on the comparison areas being a fair counterfactual</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why it matters:</strong> The grading puts 30% on honesty about the claim. A causal claim by accident is the main way to lose points.</p></section>
+<section id="s12"><h2>12. What&#x27;s being rebuilt now (plan v2)</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1 zone map on the raster grid</td>
+<td>running</td>
+</tr>
+<tr>
+<td>S2 pixel accounting (new land, re-mined, stopped)</td>
+<td>running</td>
+</tr>
+<tr>
+<td>S3 descriptive layers: zones over time (stream chart), pixel flows (Sankey), crossing-the-road bands</td>
+<td>next</td>
+</tr>
+<tr>
+<td>S3b gold-left proxy: share of gold-bearing land already mined</td>
+<td>needs the geology map (being checked)</td>
+</tr>
+<tr>
+<td>S4 comparisons on the new zones</td>
+<td>after the team reviews the map</td>
+</tr>
+<tr>
+<td>S5 earlier enforcement wave 2012–14</td>
+<td>after S4</td>
+</tr>
+<tr>
+<td>S6 monthly alerts, S7 enforcement intensity</td>
+<td>being checked</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Code map:</strong> see the walkthrough, section 16. <strong>Plan and decisions:</strong> <code>docs/PLAN_v2.md</code>, <code>docs/overnight/LOG.md</code>.</p></section>
+</main></div>
+<footer>Built 2026-10-12 15:00 from git commit e90b82f (working tree may contain uncommitted changes). Numbers from output/numbers.csv (511 rows).</footer>
+<script>
+(function(){var r=document.documentElement,k='report-theme',s=localStorage.getItem(k);if(s)r.setAttribute('data-theme',s);
+document.getElementById('theme').addEventListener('click',function(){var dark=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme:dark)').matches;var n=dark?'light':'dark';r.setAttribute('data-theme',n);localStorage.setItem(k,n)});
+var f=document.getElementById('nfilter');if(f){f.addEventListener('input',function(){var q=f.value.toLowerCase(),n=0;document.querySelectorAll('table.nums tbody tr').forEach(function(tr){var m=tr.textContent.toLowerCase().indexOf(q)>-1;tr.style.display=m?'':'none';if(m)n++});document.getElementById('ncount').textContent=n;document.querySelectorAll('details.ng').forEach(function(d){var any=d.querySelector('tbody tr:not([style*="none"])');d.style.display=any?'':'none';if(q&&any)d.open=true})})}
+var links=[].slice.call(document.querySelectorAll('nav.toc a'));var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('main section').forEach(function(s){io.observe(s)});
+window.addEventListener('beforeprint',function(){document.querySelectorAll('details.ng').forEach(function(d){d.open=true})});})();
+</script></body></html>

@@ -555,6 +555,11 @@ The full draft: [`docs/brief/BRIEF_DRAFT.md`](../brief/BRIEF_DRAFT.md).
 | D18 | Brief figure title made neutral/descriptive. | "fell where Mercurio hit…" | Reads as causal (review item 13) |
 | D19 | Brief makes ONE conditional causal claim: Mercurio cut new mining in the Tambopata buffer zone by ~1,450–1,860 ha/yr in 2019–21, if the other zones show the counterfactual. Everything else stays description/prediction. | Description only (previous version) | `peru_models.py`: fall survives gold-price sensitivity, zone trends and size scaling; fake-date effects 4–9× smaller; rank 1 of 15 everywhere. The earlier "pre-trends fail" rested on one noisy year (2016). Grading rewards a clearly labelled claim with its threats |
 | D20 | Replace the technical REPORT with a plain-language walkthrough (`EXPLAINER.html`) plus a 2-page brief draft (`docs/brief/`). | Keep REPORT.html | User found the report hard to follow (2026-10-11) |
+| D21 | Rule-based comparison area (Ruby's design, 2026-10-11): R1 >= 500 ha AMW mining by 2018; R2 no operation reported 2017-25 (documented web search; unclear/not searched fail); R3 outside Madre de Dios; R4 lowland (< 500 m median mining elevation) and >= 1/5 of Tambopata's 2018 mining; closest survivor (log distance on elevation + size) wins. | Synthetic control only; nearest-neighbour matching on MapBiomas | Ruby's chat: 'eine existierende control zone' by criteria; user chose Peru first + Amazon check, documented search, outside Madre de Dios |
+| D22 | Measure the candidate areas with Amazon Mining Watch (one product for 9 countries), compare shares of own 2018 stock; show MapBiomas pre-2019 stock index per area from its own collection side by side (Peru Col 4 / Amazonia Col 6), never subtracted. | MapBiomas Amazonia Col 6 for both (has no buffer zones) | Tambopata buffer zone exists only in MapBiomas Peru; rules 6-7 |
+| D23 | Strict rules leave no area; report that as a finding. Relaxed R2 (no operation 2017-21) gives Amana National Forest as the twin; use it for 2019-21 only (its own operation Mar 2023). Kayapo dropped after an Ibama operation found for Oct 2017. | Loosen R4 to keep small areas (Sawre Muybu); keep Kayapo | Small areas are not twins; Kayapo had an operation in the window |
+| D24 | Brazil: staggered design with AMW (to 2025): each territory vs its own first dated operation; no-operation pool = territories with mining and no operation dated 2022-25. | Yanomami vs Kayapo/Munduruku 2x2 (all treated) | Every big territory was treated 2023-25; Brazil TI searches cover 2021-25 only (caveat) |
+| D25 | Report draft embedded in the walkthrough (section 15) from the same brief source; new figures use the dataviz reference palette (validated). | Separate document only | User request 2026-10-11 |
 
 **Every number** (filterable; from `output/numbers.csv`)
 
@@ -574,4 +579,4 @@ All 511 numbers, with unit, description, claim type and producing function: [`ou
 | `tam_add_2017` | 2,455 | ha | Annual addition, Tambopata BZ, 2017 |
 
 ---
-*Built 2026-10-11 16:56 from git commit b25a491 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (511 rows).*
+*Built 2026-10-12 15:00 from git commit e90b82f (working tree may contain uncommitted changes). Numbers from output/numbers.csv (511 rows).*

@@ -218,7 +218,7 @@ def section_split(text: str):
     secs = [p for p in parts[1:]]
     return head, secs
 
-def build_html(text: str, nums: dict, decisions, build_info: str) -> str:
+def build_html(text: str, nums: dict, decisions, build_info: str, page_title: str = "Anteater Q2 walkthrough") -> str:
     used: list = []
     text, _ = prepare(text, nums)
     stash: dict[str, str] = {}
@@ -265,7 +265,7 @@ def build_html(text: str, nums: dict, decisions, build_info: str) -> str:
     page = page.replace("<blockquote>", '<blockquote class="callout">')
     banner_html = inline_md(re.sub(r"\[\[([DPC])\]\]", "", banner))
     assert "{{" not in page and "[[" not in page, "leftover placeholder"
-    return HTML_TEMPLATE.format(title=html.escape(title), css=CSS, js=JS, toc="\n".join(toc),
+    return HTML_TEMPLATE.format(page_title=page_title, title=html.escape(title), css=CSS, js=JS, toc="\n".join(toc),
                                 h1=html.escape(title), banner=banner_html, body=page, build=build_info)
 
 def build_md(text: str, nums: dict, decisions, build_info: str) -> str:
@@ -346,6 +346,8 @@ def main():
     m = build_md(text, nums, decisions, info)
     assert "{{" not in m, "leftover placeholder in md"
     (HERE / "EXPLAINER.md").write_text(m, encoding="utf-8")
+    mh = build_html((HERE / "methods_content.md").read_text(encoding="utf-8"), nums, decisions, info, "Anteater Q2 methods")
+    (HERE / "METHODS.html").write_text(mh, encoding="utf-8")
     bm, bh = build_brief(nums, info)
     (BRIEF_DIR / "BRIEF_DRAFT.md").write_text(bm, encoding="utf-8")
     (BRIEF_DIR / "BRIEF_DRAFT.html").write_text(bh, encoding="utf-8")
@@ -428,7 +430,7 @@ window.addEventListener('beforeprint',function(){document.querySelectorAll('deta
 
 HTML_TEMPLATE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anteater Q2 walkthrough</title>
+<title>{page_title}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap">
 <style>{css}</style></head><body>
