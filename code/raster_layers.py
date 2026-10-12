@@ -35,7 +35,7 @@ GROUPS = {
     "Rest of Madre de Dios": [12],
 }
 COL = {"La Pampa sector": "#eb6834", "Corridor across the road": "#2a78d6", "Rest of mining corridor": "#9cc0ea",
-       "Native communities": "#e87ba4", "Rest of Tambopata buffer zone": "#eda100", "Other buffer zones": "#1baf7a",
+       "Native communities": "#e87ba4", "Rest of Tambopata buffer zone": "#f4b393", "Other buffer zones": "#1baf7a",
        "Reserves and parks": "#008300", "Rest of Madre de Dios": "#b9b8b2"}
 PERIODS = {"2016-18": (2016, 2018), "2019-21": (2019, 2021), "2022-25": (2022, 2025)}
 

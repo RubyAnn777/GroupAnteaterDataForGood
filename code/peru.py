@@ -176,11 +176,13 @@ def run_event_study(adds, lv_w, pack, reg):
     seA = fitA.se(); pvA = fitA.pvalue()
 
     # placebo in space: give treatment to each non-Tambopata unit in pool B, same estimator
-    ph = {u: beta_by_formula(ad_all[poolB], u) for u in poolB if u != TU}
+    noTU = [v for v in poolB if v != TU]          # fixed 12 Oct 2026: Tambopata is not a control for the fake zones
+    ph = {u: beta_by_formula(ad_all[noTU], u) for u in noTU}
     ph_df = pd.DataFrame(ph)
     real = beta_by_formula(ad_all[poolB], TU)
     # summary statistic: mean beta over 2019-2021 (and 2019-2025), more negative = bigger relative drop
-    stat = {u: beta_by_formula(ad_all[poolB], u).loc[2019:2021].mean() for u in poolB}
+    stat = {u: beta_by_formula(ad_all[noTU], u).loc[2019:2021].mean() for u in noTU}
+    stat[TU] = real.loc[2019:2021].mean()
     stat_sc = {}      # scale-free version: divide by the unit's own mean addition 2014-18 (relative change vs controls)
     for u in poolB:
         base = ad_all[u].loc[2014:2018].mean()
@@ -222,22 +224,22 @@ def run_event_study(adds, lv_w, pack, reg):
     # ---- figure
     fig, (ax, ax2) = plt.subplots(2, 1, figsize=(8.5, 7), sharex=True, gridspec_kw={"height_ratios": [1.5, 1]})
     yrs = sorted(bA.index)
-    ax.fill_between(x_of(es.index), es["placebo_min"], es["placebo_max"], color="#CFD8DC", alpha=0.7,
+    ax.fill_between(x_of(es.index), es["placebo_min"], es["placebo_max"], color="#dfe3e5", alpha=0.9,
                     label="Range if treatment were given to each other buffer zone (pool B)", step=None)
-    ax.plot(x_of(yrs), bB.loc[yrs], color="#7a9cc6", marker="s", markersize=5, linewidth=1.2,
+    ax.plot(x_of(yrs), bB.loc[yrs], color="#9aa5a8", marker="s", markersize=5, linewidth=1.2,
             label="Tambopata vs all Peru buffer zones with mining (pool B)")
-    ax.plot(x_of(yrs), bA.loc[yrs], color="#B03A2E", marker="o", markersize=7, linewidth=2,
+    ax.plot(x_of(yrs), bA.loc[yrs], color="#eb6834", marker="o", markersize=7, linewidth=2,
             label="Tambopata vs MdD buffer zones (pool A, main)")
     ax.axhline(0, color="black", linewidth=0.8)
     ax.scatter([2018], [0], marker="o", facecolors="white", edgecolors="black", zorder=5, label="2018 = reference year (0 by construction)")
     ax.set_ylabel("Event-study coefficient\n(ha per year vs 2018)")
-    ax.set_title("Tambopata buffer zone vs comparison zones: additions relative to 2018", loc="left", pad=EVENT_TITLE_PAD)
+    ax.set_title("Tambopata fell below every placebo zone in 2019-22, then returned", loc="left", pad=EVENT_TITLE_PAD, fontweight="bold")
     ax.set_ylim(-3600, None)
     ax.legend(fontsize=7, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="lower left").set_zorder(10)
     add_event_markers(ax, label=True)
     # bottom: the raw additions of the treated unit and main control (what the coefficients are made of)
-    ax2.plot(x_of(range(Y0, Y1 + 1)), ad_all.loc[Y0:Y1, TU], color="#d9a441", marker="o", label="Tambopata")
-    ax2.plot(x_of(range(Y0, Y1 + 1)), ad_all.loc[Y0:Y1, "Amarakaeri|Reserva Comunal"], color="#7a9cc6", marker="o", label="Amarakaeri")
+    ax2.plot(x_of(range(Y0, Y1 + 1)), ad_all.loc[Y0:Y1, TU], color="#eb6834", marker="o", label="Tambopata")
+    ax2.plot(x_of(range(Y0, Y1 + 1)), ad_all.loc[Y0:Y1, "Amarakaeri|Reserva Comunal"], color="#1baf7a", marker="o", label="Amarakaeri")
     ax2.set_ylabel("Annual addition (ha)")
     ax2.legend(fontsize=7, frameon=False, loc="upper left")
     add_event_markers(ax2)
@@ -262,7 +264,8 @@ def placebo_restricted(pack, reg, thresh=10.0):
     pre = ad.loc[2014:2018].mean()
     pool = sorted(u for u in pre.index if pre[u] > thresh)
     assert TU in pool
-    stat = {u: peru_beta(ad[pool], u).loc[2019:2021].mean() for u in pool}
+    stat = {u: peru_beta(ad[[v for v in pool if v != TU]], u).loc[2019:2021].mean() for u in pool if u != TU}
+    stat[TU] = peru_beta(ad[pool], TU).loc[2019:2021].mean()
     st = pd.DataFrame({"mean_beta_2019_21_ha": stat, "mean_add_2014_18_ha": pre[pool]})
     st["rank_most_negative_first"] = st["mean_beta_2019_21_ha"].rank()
     st["role"] = np.where(st.index == TU, "treated (real)", "donor")
@@ -285,18 +288,18 @@ def fig_additions(adds, pack):
     yrs = list(range(Y0, Y1 + 1))
     fig, axes = plt.subplots(3, 1, figsize=(8.5, 8.5), sharex=True, gridspec_kw={"height_ratios": [1.4, 1.4, 1]})
     a1, a2, a3 = axes
-    for u, c in [(TAM, "#d9a441"), (AMA, "#7a9cc6"), (BAH, "#6aa84f")]:
+    for u, c in [(TAM, "#eb6834"), (AMA, "#1baf7a"), (BAH, "#6250d6")]:
         a1.plot(x_of(yrs), adds.loc[yrs, u], marker="o", color=c, linewidth=2, label=f"{u} buffer zone")
     a1.set_ylabel("New mining area\nin the year (ha)")
     a1.set_title("Madre de Dios: new mining area each year, by buffer zone, and the gold price", loc="left", pad=EVENT_TITLE_PAD)
     a1.set_ylim(None, 4800)
     a1.legend(fontsize=8, frameon=False, loc="upper left", ncol=3)
     a2.plot(x_of(yrs), adds.loc[yrs, "Madre de Dios total"], marker="o", color="black", linewidth=2, label="Madre de Dios total")
-    a2.plot(x_of(yrs), adds.loc[yrs, "Rest of Madre de Dios"], marker="o", color="#8E7CC3", linewidth=1.5,
+    a2.plot(x_of(yrs), adds.loc[yrs, "Rest of Madre de Dios"], marker="o", color="#2a78d6", linewidth=1.5,
             label="Rest of Madre de Dios (dept. minus buffer zones; incl. legal corridor)")
     a2.set_ylabel("New mining area\nin the year (ha)")
     a2.legend(fontsize=8, frameon=False, loc="upper left")
-    a3.plot(x_of(yrs), pr.loc[yrs], color="#234A76", linewidth=2, marker="o")
+    a3.plot(x_of(yrs), pr.loc[yrs], color="#b07a00", linewidth=2, marker="o")
     a3.set_ylabel("Gold price\n($ per troy oz)"); a3.set_ylim(0, None)
     for i, a in enumerate(axes):
         style_axes(a); add_event_markers(a, label=(i == 0))
@@ -308,7 +311,7 @@ def fig_displacement(adds):
     yrs = list(range(Y0, Y1 + 1))
     fig, (a1, a2) = plt.subplots(2, 1, figsize=(8.5, 6.5), sharex=True)
     bottom_pos = np.zeros(len(yrs)); bottom_neg = np.zeros(len(yrs))
-    for u, c in [(TAM, "#d9a441"), (AMA, "#7a9cc6"), (BAH, "#6aa84f")]:
+    for u, c in [(TAM, "#eb6834"), (AMA, "#1baf7a"), (BAH, "#6250d6")]:
         v = adds.loc[yrs, u].values
         pos, neg = np.where(v > 0, v, 0), np.where(v < 0, v, 0)
         a1.bar(x_of(yrs), pos, bottom=bottom_pos, color=c, width=0.8, label=u)
@@ -319,8 +322,8 @@ def fig_displacement(adds):
     a1.set_ylabel("New mining area (ha)")
     a1.set_title("Did the total fall, or did mining move? Three buffer zones vs all of Madre de Dios", loc="left", pad=EVENT_TITLE_PAD)
     a1.legend(fontsize=8, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="upper left").set_zorder(10)
-    a2.bar(x_of(yrs), adds.loc[yrs, "Madre de Dios total"], color="#B8B8B8", width=0.8, label="Madre de Dios total")
-    a2.plot(x_of(yrs), adds.loc[yrs, "Rest of Madre de Dios"], color="#8E7CC3", marker="o", linewidth=1.8,
+    a2.bar(x_of(yrs), adds.loc[yrs, "Madre de Dios total"], color="#3d3c39", width=0.8, label="Madre de Dios total")
+    a2.plot(x_of(yrs), adds.loc[yrs, "Rest of Madre de Dios"], color="#2a78d6", marker="o", linewidth=1.8,
             label="Rest of Madre de Dios (incl. legal mining corridor)")
     a2.set_ylabel("New mining area (ha)")
     a2.legend(fontsize=8, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="upper left").set_zorder(10)

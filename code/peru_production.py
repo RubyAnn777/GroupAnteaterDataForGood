@@ -77,7 +77,7 @@ def run(pack, reg):
     # ------------------------------------------------------------------ figure: 3 stacked panels, shared x, no dual axis
     yrs = t.index.to_numpy(float)
     fig, axs = plt.subplots(3, 1, figsize=(8, 8.6), sharex=True)
-    c1, c2, c3 = "#B8860B", "#1F6F8B", "#1F6F8B"
+    c1, c2, c3 = "#b07a00", "#3d3c39", "#3d3c39"   # gold, mapped mining (Madre de Dios total)
     axs[0].plot(yrs, t.tonnes, marker="o", color=c1, lw=1.8)
     axs[0].set_ylabel("t of fine gold")
     axs[0].set_title("Declared (formal) gold production, Madre de Dios", loc="left", fontsize=10, pad=EVENT_TITLE_PAD)

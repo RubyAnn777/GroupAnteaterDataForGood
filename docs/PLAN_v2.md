@@ -49,7 +49,7 @@ Status (12 Oct 2026, evening): S1-S3, S3b, S5-S8 built; zone map waiting for tea
 ## Results so far (description; numbers in output/numbers.csv)
 
 - **Net vs gross:** Tambopata buffer zone net additions 1,640 -> 163 ha/yr (2016-18 -> 2019-21), but first-time mining 2,015 -> 1,061: it only halved. Forest clearing on La Pampa mining land (GLAD-L) was higher in 2019 than 2018 and collapsed in 2020-21.
-- **Across the road:** first-time mining in the corridor opposite La Pampa 69 -> 463 -> 538 ha/yr; north-of-road share 8% -> 51% (2016-18 -> 2019-21). Fake start dates: 2019 ranks 3 of 15; the road was crossed the other way around 2008-11 (Guacamayo).
+- **Across the road:** first-time mining in the corridor opposite La Pampa 69 -> 463 -> 538 ha/yr; north-of-road share 8% -> 51% (2016-18 -> 2019-21). Fake start dates: 2019 ranks 2 of 15 (1 of 8 with non-overlapping windows, p = 0.125); the road was crossed the other way around 2008-11 (Guacamayo).
 - **Corridor share** of Madre de Dios first-time mining 49% -> 68% -> 72% (MAAP #208: 74% for 2021-24).
 - **Old pits:** in 2023 most new mining in La Pampa was on old pits (MAAP #193 agrees).
 - **Gold not exhausted:** La Pampa had mined 21% of its gold-bearing land by 2018 (proxy validated: 90% of all mining lies on these units).

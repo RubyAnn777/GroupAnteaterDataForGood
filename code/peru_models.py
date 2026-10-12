@@ -36,6 +36,13 @@ MODELS = {
     "M4": "M1, scaled to each zone's own size",
 }
 
+# Buffer zones whose mining lies in Amazon (lowland/forest) departments: drops coastal and high-Andean zones
+# (Lachay, Huascaran, Junin, Cotahuasi, Nor Yauyos, Calipuy, Rio Abiseo) from the Amazon-only placebo pool.
+AMAZON = {"Tambopata|Reserva Nacional", "Amarakaeri|Reserva Comunal", "Bahuaja-Sonene|Parque Nacional",
+          "Allpahuayo Mishana|Reserva Nacional", "Cordillera Azul|Parque Nacional", "Alto Mayo|Bosque de Protección",
+          "Pacaya-Samiria|Reserva Nacional", "El Sira|Reserva Comunal"}
+
+
 def _zone_adds(pack) -> pd.DataFrame:
     zb = pack["zb"].assign(unit=lambda d: d["buffer_zone"] + "|" + d["pa_category"])
     return zb.groupby(["unit", "year"])["mining_ha"].sum().unstack("unit").diff()   # aggregate first, then diff
@@ -91,12 +98,21 @@ def run(pack, reg):
         units = pool_big if m == "M4" else poolB
         real = fit(ad, units, TU, m, 2014, 2025, REAL, gold)
         fake = fit(ad, units, TU, m, 2011, 2018, FAKE, gold)
-        others = {u: fit(ad, units, u, m, 2014, 2025, REAL, gold)["post_during"] for u in units}
+        # placebo in space (fixed after the critical review, 12 Oct 2026): when a fake zone is "treated",
+        # Tambopata is REMOVED from the pool, so its real fall cannot make every placebo look positive.
+        others = {u: fit(ad, [v for v in units if v != TU], u, m, 2014, 2025, REAL, gold)["post_during"]
+                  for u in units if u != TU}
+        others[TU] = real["post_during"]
         rank = int(pd.Series(others).rank().loc[TU])
+        amz = [u for u in units if u in AMAZON]
+        oth_a = {u: fit(ad, [v for v in amz if v != TU], u, m, 2014, 2025, REAL, gold)["post_during"] for u in amz if u != TU}
+        oth_a[TU] = fit(ad, amz, TU, m, 2014, 2025, REAL, gold)["post_during"]
+        rank_amz = int(pd.Series(oth_a).rank().loc[TU])
         rows.append(dict(model=m, label=label, n_zones=len(units),
                          unit="share of own pre-2019 mean" if m == "M4" else "ha/yr",
                          during_2019_21=real["post_during"], after_2022_25=real["post_after"],
-                         placebo_fake_2016=fake["post_fake"], rank_in_space=rank,
+                         placebo_fake_2016=fake["post_fake"], rank_in_space=rank, rank_amazon=rank_amz, n_amazon=len(amz),
+                         placebo_min=min(v for k, v in others.items() if k != TU), placebo_max=max(v for k, v in others.items() if k != TU),
                          gold_slope=real.get("pre_x_lngold", np.nan)))
     res = pd.DataFrame(rows)
     res.round(3).to_csv(OUT / "peru_models.csv", index=False)
@@ -110,6 +126,11 @@ def run(pack, reg):
         reg.add(f"model_{k}_placebo", r["placebo_fake_2016"], u, f"Placebo in time: fake operation 2016-18, same model on 2011-18, {lab}", "description", SRC)
         reg.add(f"model_{k}_rank", r["rank_in_space"], "rank", f"Tambopata's rank among {r['n_zones']} zones when each zone is treated in turn (1 = biggest fall 2019-21), {lab}", "description", SRC)
         reg.add(f"model_{k}_n", r["n_zones"], "count", f"Zones in {lab}", "description", SRC)
+        reg.add(f"model_{k}_ri_p", r["rank_in_space"] / r["n_zones"], "p-value", f"Randomization p-value (rank / zones; best possible = 1/{r['n_zones']}), {lab}", "description", SRC)
+        reg.add(f"model_{k}_rank_amazon", r["rank_amazon"], "rank", f"Rank among Amazon-department zones only ({r['n_amazon']}), {lab}", "description", SRC)
+        reg.add(f"model_{k}_n_amazon", r["n_amazon"], "count", f"Amazon-department zones, {lab}", "description", SRC)
+        reg.add(f"model_{k}_placebo_min", r["placebo_min"], u, f"Smallest placebo-in-space effect (Tambopata removed from pool), {lab}", "description", SRC)
+        reg.add(f"model_{k}_placebo_max", r["placebo_max"], u, f"Largest placebo-in-space effect, {lab}", "description", SRC)
     reg.add("model_m2_gold_slope", rows[1]["gold_slope"], "ha per (ha of pre mean x 1 log-point)",
             "M2: extra annual addition per hectare of a zone's 2014-18 mean addition, per 1.0 rise in ln(gold price)", "description", SRC)
     t = ad[TU]
@@ -127,7 +148,7 @@ def _figure(res):
     from matplotlib.ticker import FuncFormatter
     fig, axes = plt.subplots(len(res), 1, figsize=(7.5, 7.2))
     for ax, (_, r) in zip(axes, res.iterrows()):
-        ax.barh([1], [r["during_2019_21"]], 0.7, color="#c98a12", label="Real operation (2019-21)")
+        ax.barh([1], [r["during_2019_21"]], 0.7, color="#eb6834", label="Real operation (2019-21)")
         ax.barh([0], [r["placebo_fake_2016"]], 0.7, color="#9aa5a8", label="Fake operation (2016-18): should be close to 0")
         for yy, v in [(1, r["during_2019_21"]), (0, r["placebo_fake_2016"])]:
             ax.annotate(f"{v:,.2f}" if r["model"] == "M4" else f"{v:,.0f}", (v, yy), xytext=(4 if v >= 0 else -4, 0),

@@ -193,6 +193,20 @@ def e4(reg):
         r = pd.Series(p).rank().values; n1 = y.sum(); n0 = len(y) - n1
         return (r[y.values == 1].sum() - n1 * (n1 + 1) / 2) / (n1 * n0)
     au = auc(y_test, p_test)
+    # critical review: spatial hold-out + a naive benchmark. Train on a random half of the 10-km blocks (2018 -> 2019-21),
+    # test on the OTHER blocks (2021 -> 2022-25); benchmark = mining within ~3 km only.
+    nc_ = int(np.ceil((rz.STUDY[2] - rz.STUDY[0]) / (rz.CELL_PX * 0.000269495)))
+    blk = ((a.index - 1) // nc_ // 10) * 1000 + ((a.index - 1) % nc_ // 10)
+    rng = np.random.default_rng(0); ub = np.unique(blk); tr_b = set(rng.choice(ub, size=len(ub) // 2, replace=False))
+    tr = np.isin(blk, list(tr_b)); te = ~tr
+    X18, X21 = feats(2018), feats(2021)
+    m_sp = sm.Logit(y_train[tr], X18[tr]).fit(disp=0)
+    au_sp = auc(y_test[te], m_sp.predict(X21[te]))
+    bcols = ["const", "neigh_mining_km2"]
+    m_b = sm.Logit(y_train[tr], X18.loc[tr, bcols]).fit(disp=0)
+    au_b = auc(y_test[te], m_b.predict(X21.loc[te, bcols]))
+    reg.add("risk_auc_spatial_holdout", au_sp, "AUC", "Out-of-sample AUC on held-out 10-km blocks (train on half the blocks, 2018 -> 2019-21; test on the others, 2021 -> 2022-25)", "prediction", SRC_R)
+    reg.add("risk_auc_benchmark", au_b, "AUC", "Same hold-out, benchmark model with only 'mining within ~3 km'", "prediction", SRC_R)
     risk = m.predict(feats(2025))
     a["risk_2026_28"] = risk.values
     reg.add("risk_auc_2022_25", au, "AUC", "Out-of-sample AUC: logit trained on 2018 features -> 2019-21 first-time mining, tested on 2021 features -> 2022-25", "prediction", SRC_R)
@@ -214,13 +228,13 @@ def e4(reg):
     L["za"].boundary.plot(ax=ax, color="#1baf7a", lw=0.8, ls="--")
     L["ioh"].plot(ax=ax, color="black", lw=1.5)
     ax.set_xlim(rz.STUDY[0], rz.STUDY[2]); ax.set_ylim(rz.STUDY[1], rz.STUDY[3]); ax.set_aspect(1 / np.cos(np.radians(-12.9)))
-    ax.set_title(f"Where new mining is most likely next (prediction; out-of-sample AUC {au:.2f})", loc="left", fontsize=10.5, fontweight="bold")
+    ax.set_title(f"Where new mining is most likely next (prediction; held-out-blocks AUC {au_sp:.2f} vs {au_b:.2f} for 'mining nearby' alone)", loc="left", fontsize=10, fontweight="bold")
     ax.legend(handles=[Patch(edgecolor="#2a78d6", facecolor="none", label="Legal mining corridor"),
                        Patch(edgecolor="#008300", facecolor="none", label="Reserves and parks"),
                        Patch(edgecolor="#1baf7a", facecolor="none", ls="--", label="Buffer zones")], fontsize=8, loc="lower left")
     finish_figure(fig, f"Source: {SRC_R}. Logit on 1-km cells: distance to highway and rivers, gold-bearing land, mining "
-                       "nearby, zone. Trained to predict 2019-21 from 2018, tested on 2022-25, applied to 2025 features. "
-                       "Prediction, not a causal map.", OUT / "fig_v2_risk_map.png", rect_bottom=0.08)
+                       "nearby, zone. Trained to predict 2019-21 from 2018, tested on 2022-25 in held-out 10-km blocks, applied to 2025 "
+                       "features. It misses the reserve incursion (river access, not captured). Prediction, not a causal map.", OUT / "fig_v2_risk_map.png", rect_bottom=0.08)
 
 
 # ------------------------------------------------------------------ E5 timeline
@@ -228,7 +242,7 @@ EVENTS = [(2009, "Interdictions begin", "enf"), (2011.6, "Humala takes office", 
           (2016.6, "Kuczynski takes office", "pol"), (2017, "Gang takeover\nof La Pampa", "ctx"), (2018.2, "Vizcarra takes office", "pol"),
           (2019.1, "Operation Mercurio", "enf"), (2020.2, "COVID-19", "ctx"), (2021.1, "Plan Restauracion", "enf"),
           (2021.6, "Castillo takes office", "pol"), (2023.3, "State of emergency", "enf"), (2025.5, "Navy posts withdrawn", "enf")]
-ECOL = {"enf": "#eb6834", "pol": "#6250d6", "law": "#2a78d6", "ctx": "#7d7c78"}
+ECOL = {"enf": "#0b0b0b", "pol": "#6250d6", "law": "#52514e", "ctx": "#9aa5a8"}
 
 
 def e5(reg):
@@ -241,9 +255,9 @@ def e5(reg):
         a0.axvline(x, color=ECOL[k], lw=1.2, alpha=0.8)
         a0.text(x + 0.05, 0.92 - 0.16 * (i % 5), lab, fontsize=7, color=ECOL[k], va="top")
     a0.set_yticks([]); [a0.spines[s].set_visible(False) for s in ("left", "top", "right")]
-    a0.set_title("Enforcement (orange), politics (purple), laws (blue), context (grey)", loc="left", fontsize=9.5)
+    a0.set_title("Enforcement (black), presidents (violet), laws (dark grey), context (light grey)", loc="left", fontsize=9.5)
     a1.bar(lp.index, lp.values, color="#eb6834", width=0.7, label="La Pampa sector")
-    a1.plot(tot.index, tot.values / 5, "o-", color="#52514e", lw=1.5, ms=3, label="All Madre de Dios ÷ 5")
+    a1.plot(tot.index, tot.values / 5, "o-", color="#3d3c39", lw=1.5, ms=3, label="All Madre de Dios ÷ 5")
     for x0, x1 in ((2012, 2013), (2019, 2021)):
         a1.axvspan(x0 - 0.5, x1 + 0.5, color="#f3e3c2", alpha=0.6, zorder=0)
     a1.set_ylabel("Land mined for the\nfirst time (ha)"); style_axes(a1); a1.legend(fontsize=8, frameon=False, loc="upper left")

@@ -84,10 +84,10 @@ class Numbers:
 # (State of emergency = DS 046-2023-PCM, 7 Apr 2023.)
 # An event is a dict: year, label (month + year), color, style ("solid" = emphasised, else dashed).
 PERU_EVENTS = [
-    dict(year=2019, label="Mercurio Feb 2019",                color="#B03A2E", style="solid"),
-    dict(year=2020, label="COVID-19 Mar 2020",                color="#6C7A7B", style="dashed"),
-    dict(year=2021, label="Plan Restauración 2021",           color="#6C7A7B", style="dashed"),
-    dict(year=2023, label="State of emergency Apr 2023", color="#6C7A7B", style="dashed"),
+    dict(year=2019, label="Mercurio Feb 2019",                color="#0b0b0b", style="solid"),
+    dict(year=2020, label="COVID-19 Mar 2020",                color="#9aa5a8", style="dashed"),
+    dict(year=2021, label="Plan Restauración 2021",           color="#9aa5a8", style="dashed"),
+    dict(year=2023, label="State of emergency Apr 2023", color="#9aa5a8", style="dashed"),
 ]
 EVENTS = PERU_EVENTS      # backwards-compatible alias
 EVENT_TITLE_PAD = 30      # points of space above an axes whose event labels are drawn (title pad)

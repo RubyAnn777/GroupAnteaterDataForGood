@@ -1,4 +1,4 @@
-"""Ruby's twin design, final version: the THREE best rule-based twins, pooled, with statistical tests.
+"""Ruby's twin design, final version: the best rule-based twins (two after the review; Munduruku dropped), pooled, with statistical tests.
 
 Twins = the areas that pass all rules when operations after 2021 are allowed (control_select.py, relaxed R2):
 Amana National Forest, Munduruku Indigenous Territory, Tapajos Environmental Protection Area (all Brazil).
@@ -20,9 +20,10 @@ from common import ROOT, OUT, style_axes, finish_figure
 
 INTER = ROOT / "data_intermediate"
 TU = "PE-BZ-RN09"
-TWINS = {"RAISG-434": ("Amana National Forest", 4443), "BR-TI-29801": ("Munduruku territory", 3770),
-         "RAISG-512": ("Tapajos protection area", 4442)}
-TCOL = {"Amana National Forest": "#6250d6", "Munduruku territory": "#1baf7a", "Tapajos protection area": "#eda100"}
+# Munduruku DROPPED after the critical review: our own search log records Op. Mundurukania in May 2021 (inside the
+# 2017-21 window of the relaxed rule; snippet, unverified), and its AMW 2018 "stock" is too small to normalise by.
+TWINS = {"RAISG-434": ("Amana National Forest", 4443), "RAISG-512": ("Tapajos protection area", 4442)}
+TCOL = {"Amana National Forest": "#6250d6", "Munduruku territory": "#9085e9", "Tapajos protection area": "#3d2f9e"}   # twins = violet family
 SRC = "MapBiomas Peru Col 4 (Tambopata) and MapBiomas Amazonia Col 6 (twins) before 2019; Amazon Mining Watch after 2019"
 
 
@@ -60,7 +61,7 @@ def run(reg):
     print(t.round(3).to_string(index=False))
     for _, r in t.iterrows():
         key = r.twin.split()[0].lower()
-        for c in ("pre_growth_diff", "pre_growth_p", "pre_trend_p", "twin_during", "during_gap", "during_p"):
+        for c in ("pre_growth_diff", "pre_growth_p", "pre_trend_p", "twin_during", "during_gap"):
             reg.add(f"top3_{key}_{c}", r[c], "p-value" if c.endswith("_p") else ("log points/yr" if "growth" in c else "% of 2018 stock"),
                     f"Twin {r.twin}: {c}", "description", SRC)
     reg.add("top3_tam_during", tam_d, "% of 2018 stock", "Tambopata BZ AMW new area per year 2019-21, % of 2018 stock", "description", SRC)
@@ -73,7 +74,7 @@ def run(reg):
     # figure
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(12, 4.3))
     a1.plot(I.index, I["Tambopata buffer zone"], color="#eb6834", lw=2.4, label="Tambopata buffer zone")
-    for nm in TCOL:
+    for nm in [v[0] for v in TWINS.values()]:
         a1.plot(I.index, I[nm], color=TCOL[nm], lw=1.6, label=nm)
     a1.axvline(2018.5, color="black", lw=1); a1.axhline(100, color="#888", lw=0.6); style_axes(a1)
     a1.set_ylabel("Mining area, 2018 = 100\n(MapBiomas, own collection)"); a1.legend(fontsize=7.5, frameon=False)
@@ -85,7 +86,7 @@ def run(reg):
     a2.axvspan(2018.5, 2021.5, color="#f3e3c2", alpha=0.5, zorder=0); style_axes(a2)
     a2.set_ylabel("New mining per year, % of 2018 stock\n(Amazon Mining Watch)")
     a2.set_title("After 2019: pace of new mining", loc="left", fontsize=9.5)
-    fig.suptitle("Three rule-based twins: similar growth before 2019, all faster than Tambopata in 2019-21",
+    fig.suptitle("Two rule-based twins: growth paths before 2019 differ; both added mining faster than Tambopata in 2019-21",
                  x=0.01, ha="left", fontsize=11, fontweight="bold")
     finish_figure(fig, f"Sources: {SRC}. Left: each line from its own collection, side by side, never subtracted. Twins pass "
                        "all rules if operations after 2021 are allowed. Description.", OUT / "fig_control_top3.png", rect_bottom=0.1)

@@ -192,7 +192,7 @@ Each model also runs with a **fake 2016 date** on 2011–18 data. A trustworthy 
 - **Road bands:** 1-km strips north and south of the highway, inside the La Pampa longitudes.
 - **Corridor share:** first-time mined land inside the legal corridor, as a share of Madre de Dios.
 
-**Fake start dates for the road** (`code/v2_tests.py`, T1): the north share's change, 3 years after minus 3 years before, for every start year 2008–2022. The 2019 move ranks 3 of 15; 2008 (Guacamayo boom) moved more.
+**Fake start dates for the road** (`code/v2_tests.py`, T1): the north share's change, 3 years after minus 3 years before, for every start year 2008–2022. Only start years whose 3-year windows don't overlap the event count as placebos; the 2019 move ranks first of 8 (p = 0.125, the smallest possible).
 
 **Quarterly timing** (`code/glad_alerts.py`): University of Maryland GLAD-L forest-loss alerts, each pixel dated to the day, 2017–2026. We keep alerts on land MapBiomas maps as mining. Compare the same quarter across years (clouds); data version break in 2021.
 
@@ -221,23 +221,38 @@ Each model also runs with a **fake 2016 date** on 2011–18 data. A trustworthy 
 ## 13. Statistics, twins, Brazil and predictions (added 12 Oct 2026, evening)
 
 **Cell panel with standard errors** (`code/v2_stats.py`):
-- **Units:** every 1-km cell in the study window (lon 70.65–69.30 W, lat 13.30–12.40 S), 2010–2025. Cells never mined stay in, with zeros (dropping them would select on the outcome).
+- **Units:** every 1-km cell in the study window (lon 70.65–69.30 W, lat 13.30–12.40 S), 2014–2025 for the DiD (baseline 2014–18), 2010–2025 for event studies.
+- **Comparison cells:** outside every named zone, the legal corridor and native communities (displacement targets are excluded). Cells never mined stay in, with zeros (dropping them would select on the outcome).
 - **Model:** `y_ct = a_c + g_t + Σ b_zp [zone = z][period = p]`, y = first-time mining (ha); cell and year fixed effects.
 - **Errors:** clustered by 10 × 10 km blocks (161 clusters), so nearby cells can share shocks.
 - **Robustness:** gold-bearing land × year effects; returns to old pits as outcome; Poisson (PPML) for zeros.
-- **Event studies:** year-by-year coefficients (2018 = 0) with a joint F-test of 2010–17 coefficients (pre-trends).
+- **Event studies:** year-by-year coefficients with the pooled 2014–18 period as reference, and a joint test that the 2010–13 leads are zero.
+- **Wild cluster bootstrap:** restricted (WCR), 999 Rademacher draws over 10-km blocks, after removing cell and year effects. Used because only 14 (La Pampa) and 10 (across the road) blocks contain the treated zones.
 - **Road gradient:** distance bands north/south of the highway × period, reference = 10–30 km south.
 
 **Depth into the corridor** (`code/v2_tests.py`, T9): mean distance north of the highway of first-time mining per year; OLS on a trend and a post-2019 dummy with Newey-West errors (18 years).
 
 **Fake start dates** (T1): randomization p = rank of the real 2019 shift among all start years / number of start years.
 
-**Three rule-based twins** (`code/control_top3.py`): all areas passing the relaxed rules. Pre-trend test: yearly log-growth difference (Tambopata minus twin), 2010–18, regressed on a constant and on a trend, Newey-West errors. Gap test: Welch t-test on the three 2019–21 annual values (tiny n; read with care).
+**Rule-based twins** (`code/control_top3.py`): all areas passing the relaxed rules, now two (Munduruku dropped: an operation in May 2021 falls inside the rule's window). Pre-trend test: yearly log-growth difference (Tambopata minus twin), 2010–18, regressed on a constant and on a trend, Newey-West errors. No significance test for the gap (three years per area); the gap is reported descriptively.
 
 **Brazil, same pixel method** (`code/brazil_raster.py`, `brazil_v2.py`): MapBiomas Brazil Collection 11 rasters read remotely per territory (24 territories + Yanomami rings). Check: Kayapó 2024/2025 vs the platform. Staggered DiD (territory + year effects, treated from own first operation), Gardner's two-stage estimator (`did2s`) and randomization inference (2,000 shuffles of operation dates across territories).
 
-**Risk map** (`code/v2_extra.py`, E4; prediction): logit on 1-km cells; features = distance to highway and rivers, north side, gold-bearing share, mined share, mining within ~3 km, zone. Trained on 2018 → 2019–21, tested out of sample on 2021 → 2022–25 (AUC), applied to 2025 → 2026–28.
+**Risk map** (`code/v2_extra.py`, E4; prediction): logit on 1-km cells, validated on held-out 10-km blocks against a "mining nearby" benchmark; features = distance to highway and rivers, north side, gold-bearing share, mined share, mining within ~3 km, zone. Trained on 2018 → 2019–21, tested out of sample on 2021 → 2022–25 (AUC), applied to 2025 → 2026–28.
 
 **Declared gold vs mapped mining** (E6): log declared tonnes on a trend and a post-2019 dummy, Newey-West errors; tonnes per 1,000 ha of first-time mining.
 
 **Qualitative overlays:** legality, enforcement history, taxes, politics, social and health costs come from opened sources in `docs/overnight/notes/qualitative_background.md` (each with link and quote) and 30 papers in `literature_v2.md`.
+
+## 14. Fixes after the critical review (12 Oct 2026)
+
+- **Fake places:** Tambopata is removed from each placebo's comparison pool (before, its own fall made every placebo positive). Amazon-only pool added.
+- **Causal number:** reworded to net mining; first-time mining reported alongside.
+- **Cell panel:** clean comparison cells, 2014–18 baseline, pooled reference in event studies, wild cluster bootstrap.
+- **Twins:** Munduruku dropped; no p-values on three annual values.
+- **Brazil:** first operation inside 2021–25 (Kayapó 2024-09; Munduruku 2021-05).
+- **Legality:** a concession counts only if filed by the mining year.
+- **Risk map:** spatial hold-out and benchmark.
+- **Gold proxy:** lift reported (share of mining vs share of land).
+- **Untraceable numbers** (Sentinel-2, producer-declared gold) now computed in code.
+Full review: `docs/overnight/notes/critical_review_v2.md`.

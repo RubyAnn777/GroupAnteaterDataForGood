@@ -114,3 +114,37 @@ Point 9 (Synthetic Twin / SCM): Validate whether the synthetic twin approach is 
 Point 10 (Where did the mining go?): Clearly outline the legal corridor and visualize the percentage of mining taking place in illegal territory over time.
 
 Qualitative Assessment: Back up the findings with qualitative observations such as water discoloration (yellowness), tents, drone footage, and interviews.
+
+---------------------------------------------------------------------------------------------------------------------------------------
+## Response (Claude, 12 Oct 2026): the two satellite products that disagreed
+---------------------------------------------------------------------------------------------------------------------------------------
+
+**Bottom line:** the disagreement is still there, we checked it, and it is mostly a measurement difference, not two opposite realities.
+
+**What disagreed at first (overnight run, 10-11 Oct):**
+- MapBiomas (course tables) showed new mining in "rest of Madre de Dios" **rising** after 2019.
+- Amazon Mining Watch (AMW) showed new mining in the legal corridor **falling** (2019-21 vs 2022-24).
+- We then refused to claim displacement into the corridor.
+
+**What we changed (plan v2):**
+1. **One backbone, one grid:** all zone numbers now come from the MapBiomas Peru Collection 4 *rasters*, cut to our own zones (La Pampa, corridor across the road, rest of corridor, communities, reserves...). The raster reproduces the published totals (Tambopata buffer zone 2025: 20,716 vs 20,730 ha).
+2. **AMW became a robustness check on the same zones** (`code/v2_extra.py`, E1), never subtracted from MapBiomas.
+3. **We split "new mining" into first-time mining and returns to old pits,** because the two products count different things.
+
+**Is the disagreement still there? Yes, in one place:**
+
+| ha/yr | MapBiomas 2019-21 -> 2022-25 | AMW 2019-21 -> 2022-25 |
+|---|---|---|
+| Rest of mining corridor | 4,038 -> 7,638 (up) | 14,848 -> 9,967 (down) |
+| Corridor across the road | 463 -> 538 | 1,009 -> 650 |
+| La Pampa sector | 722 -> 987 | 936 -> 1,043 (agree) |
+
+- Both agree on the *direction of the move across the road*: AMW's north-of-road share in the La Pampa longitudes went from 68% (2019) to 87% (2021).
+- Across all zone-years, the two series correlate at 0.83.
+
+**Have we checked why? Yes** (`code/v2_products_check.py`, numbers `pc_*`):
+- AMW flags a 480 m square **once**, in the year mining first appears, and never counts it again. MapBiomas counts every new 30 m pixel.
+- **Two-thirds of MapBiomas's first-time mining in the corridor in 2022-25 (68%) lies inside AMW squares flagged in an earlier year** (79% in the corridor across the road). AMW cannot count that infill as new.
+- So AMW "falls" in a maturing mining area while mining keeps filling in. The corridor's AMW-flagged share of land rose from 12% (2018) to 31% (2025): the squares are filling up.
+
+**What we claim now:** the move across the road (both products agree); the corridor's growth after 2021 (MapBiomas, with the AMW caveat stated). We do not use AMW hectares for trends inside already-mined areas.

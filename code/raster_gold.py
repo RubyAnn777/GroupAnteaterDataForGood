@@ -28,6 +28,7 @@ BROAD_EXTRA = {"NQ-md/s"}
 SRC = ("INGEMMET GEOCATMIN geology 1:100k (layer 6) x MapBiomas Peru Col 4 rasters (first year mined), "
        "zones v2")
 YEARS = (2018, 2025)
+AREA_MDD_HA = 8_500_000.0      # placeholder, replaced in run() by the raster area of Madre de Dios
 
 
 def geology_mask(transform, shape):
@@ -87,7 +88,13 @@ def run(reg):
         if not (rz.OUT_FULL.exists() and GEOL.exists()):
             warnings.warn("raster_gold: inputs missing; skipping"); return
         build()
+    global AREA_MDD_HA
     d = pd.read_csv(OUT_CSV)
+    import rasterio
+    with rasterio.open(rz.OUT_FULL) as r_:
+        z_ = r_.read(1); t_ = r_.transform
+    lat_ = t_.f + (np.arange(z_.shape[0]) + 0.5) * t_.e
+    AREA_MDD_HA = float(((z_ > 0) * (((abs(t_.a) * 111320 * np.cos(np.radians(lat_))) * (abs(t_.e) * 110574) / 1e4)[:, None])).sum())
     d.round(3).to_csv(OUT / "v2_gold_depletion.csv", index=False)
     print(d[["unit", "definition", "gold_land_ha", "depleted_share_2018", "gold_left_2018_ha", "depleted_share_2025",
              "mining_on_gold_share"]].round(2).to_string(index=False))
@@ -101,6 +108,11 @@ def run(reg):
             reg.add(f"gold_{r.definition}_{key}_depleted_2025", r.depleted_share_2025, "share",
                     f"Share of gold-bearing land ({r.definition}) mined by 2025, {r.unit}", "description", SRC)
         if r.zone_code == 0:
+            mdd_ha = d[(d.definition == r.definition) & (d.zone_code > 0)].gold_land_ha.sum() / r.gold_land_ha if False else None
+            reg.add(f"gold_{r.definition}_land_share_mdd", r.gold_land_ha / AREA_MDD_HA, "share",
+                    f"Share of Madre de Dios covered by {r.definition} gold-bearing units (validation baseline)", "description", SRC)
+            reg.add(f"gold_{r.definition}_lift", r.mining_on_gold_share / (r.gold_land_ha / AREA_MDD_HA), "ratio",
+                    f"Lift: share of mining on {r.definition} units divided by their share of the department (1 = no better than random)", "description", SRC)
             reg.add(f"gold_{r.definition}_validation", r.mining_on_gold_share, "share",
                     f"Validation: share of all land ever mined 1985-2025 in Madre de Dios that lies on {r.definition} gold-bearing units",
                     "description", SRC)

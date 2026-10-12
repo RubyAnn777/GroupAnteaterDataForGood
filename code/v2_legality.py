@@ -21,9 +21,11 @@ import raster_zones as rz
 
 LAYER = ROOT / "data_raw" / "amw_github" / "illegality_v2_areas_simplified.geojson"
 OUT_CSV = ROOT / "data_intermediate" / "legality_year_v2.csv"
+CADASTRE = sorted((ROOT / "data_raw" / "ingemmet" / "catastro_minero_wgs84_L0_mdd_bbox").glob("chunk_*.geojson"))
+OUT_TC = ROOT / "data_intermediate" / "legality_year_v2_timeconsistent.csv"
 LEVELS = {1: "Low (active concession)", 2: "Medium (concession not verified)", 3: "High (outside any concession)",
           4: "Very high (strict protected area)", 0: "Not classified"}
-COL = {1: "#1baf7a", 2: "#eda100", 3: "#eb6834", 4: "#b3261e", 0: "#b9b8b2"}
+COL = {1: "#f7d9cc", 2: "#ec9c7c", 3: "#c9472b", 4: "#6e1a0c", 0: "#dfe3e5"}   # one-hue ramp: low -> very high presumption of illegality
 SRC = "Amazon Mining Watch / MAAP #235 legality layer (GitHub earthrise-media/mining-detector) x MapBiomas Peru Col 4 first-mined year"
 
 
@@ -42,11 +44,24 @@ def build():
     df = pd.DataFrame({"year": first[m], "level": lev[m], "corridor": np.isin(zone[m], [5, 6]), "ha": pix[m]})
     out = df.groupby(["year", "level", "corridor"]).ha.sum().reset_index()
     out.to_csv(OUT_CSV, index=False)
+    # time-consistent version (critical review): a pixel counts as "inside a concession" only if a concession covering it
+    # had been FILED (FEC_DENU) by the year the pixel was first mined; otherwise Low/Medium -> High.
+    if CADASTRE:
+        c = pd.concat([gpd.read_file(f)[["FEC_DENU", "geometry"]] for f in CADASTRE])
+        c = c[c.FEC_DENU.notna()]
+        c["fy"] = pd.to_datetime(c.FEC_DENU, unit="ms").dt.year
+        c = c.sort_values("fy", ascending=False)                 # earliest filing burned last -> wins
+        fy = rasterize([(g_, int(y)) for g_, y in zip(c.geometry, c.fy)], out_shape=zone.shape, transform=t, fill=0, dtype="int16")
+        f_ = fy[m]; lv = lev[m].copy()
+        later = np.isin(lv, [1, 2]) & ((f_ == 0) | (f_ > first[m]))
+        lv[later] = 3
+        tc = pd.DataFrame({"year": first[m], "level": lv, "ha": pix[m]}).groupby(["year", "level"]).ha.sum().reset_index()
+        tc.to_csv(OUT_TC, index=False)
 
 
 def run(reg):
     print("\n== v2 legality levels ==")
-    if not OUT_CSV.exists():
+    if not (OUT_CSV.exists() and OUT_TC.exists()):
         if not (LAYER.exists() and rz.OUT_FULL.exists()):
             warnings.warn("v2_legality: inputs missing; skipping"); return
         build()
@@ -58,6 +73,12 @@ def run(reg):
         for k, nm in (("low", 1), ("medium", 2), ("high", 3), ("veryhigh", 4)):
             reg.add(f"leg_{k}_share_{p}", s[nm], "share", f"Share of first-time mining in Madre de Dios at legality level {LEVELS[nm]}, {p}", "description", SRC)
         reg.add(f"leg_illegal_share_{p}", s[3] + s[4], "share", f"Share of first-time mining at High or Very high presumption of illegality, {p}", "description", SRC)
+    if OUT_TC.exists():
+        tc = pd.read_csv(OUT_TC).groupby(["year", "level"]).ha.sum().unstack().fillna(0)
+        for p, (a, b) in {"2016_18": (2016, 2018), "2019_21": (2019, 2021), "2022_25": (2022, 2025)}.items():
+            s_ = tc.loc[a:b].sum(); s_ = s_ / s_.sum()
+            reg.add(f"leg_tc_illegal_share_{p}", s_.get(3, 0) + s_.get(4, 0), "share", f"Time-consistent: High + Very high share of first-time mining (concession filed by the mining year), {p}", "description", SRC)
+            reg.add(f"leg_tc_medium_share_{p}", s_.get(2, 0), "share", f"Time-consistent: Medium share, {p}", "description", SRC)
     c = d[d.corridor].groupby("level").ha.sum(); c = c / c.sum()
     reg.add("leg_corridor_low_share", c.get(1, 0), "share", "Inside the legal corridor: share of first-time mining (1986-2025) in active concessions (Low)", "description", SRC)
     reg.add("leg_corridor_highish_share", c.get(2, 0) + c.get(3, 0), "share", "Inside the legal corridor: share in Medium or High (no verified active concession)", "description", SRC)

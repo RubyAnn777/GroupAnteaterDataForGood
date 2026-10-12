@@ -34,7 +34,8 @@ SRC = "MapBiomas Peru Col 4 rasters, 1-km cells (raster_zones.py), zones v2; clu
 FOCAL = {7: "La Pampa sector", 5: "Corridor across the road", 9: "Amarakaeri BZ (extra buffer zone)",
          8: "Rest of Tambopata BZ", 3: "Kotsimba", 1: "Tambopata reserve"}
 PER = {"during": (2019, 2021), "after": (2022, 2025)}
-Y0, Y1 = 2010, 2025
+Y0, Y1 = 2010, 2025          # event studies use 2010-2025; the DiD uses 2014-2025 (baseline 2014-18 = labels)
+CLEAN_DROP = (4, 6)          # reference cells dropped in the clean spec: other native communities, rest of the legal corridor
 
 
 def panel():
@@ -56,7 +57,48 @@ def panel():
     return d
 
 
-def zone_did(d, outcome="new_land_ha", gold=False, poisson=False):
+def _demean2(M, a, b, iters=50):
+    """Two-way within transformation (cell and year) by alternating projections."""
+    M = M.astype(float).copy()
+    ia, ib = pd.factorize(a)[0], pd.factorize(b)[0]
+    na, nb = ia.max() + 1, ib.max() + 1
+    ca, cb = np.bincount(ia, minlength=na)[:, None], np.bincount(ib, minlength=nb)[:, None]
+    for _ in range(iters):
+        ma = np.zeros((na, M.shape[1])); np.add.at(ma, ia, M); M -= (ma / ca)[ia]
+        mb = np.zeros((nb, M.shape[1])); np.add.at(mb, ib, M); M -= (mb / cb)[ib]
+    return M
+
+
+def wild_cluster_bootstrap(d, outcome, rhs, term, cluster, reps=999, seed=1):
+    """Restricted wild cluster bootstrap (WCR, Rademacher), after removing cell and year fixed effects (FWL).
+    Returns the two-sided p-value for H0: coefficient on `term` = 0, with CRV1 t-statistics."""
+    Z = _demean2(np.column_stack([d[outcome].values] + [d[c].values for c in rhs]), d.cell.values, d.year.values)
+    y, X = Z[:, 0], Z[:, 1:]
+    k = rhs.index(term)
+    g = pd.factorize(d[cluster].values)[0]; G = g.max() + 1
+    def tstat(yv):
+        XtX_inv = np.linalg.pinv(X.T @ X); bhat = XtX_inv @ X.T @ yv; e = yv - X @ bhat
+        sc = np.zeros((G, X.shape[1])); np.add.at(sc, g, X * e[:, None])
+        V = XtX_inv @ (sc.T @ sc) @ XtX_inv * G / (G - 1)
+        return bhat[k] / np.sqrt(V[k, k])
+    t0 = tstat(y)
+    Xr = np.delete(X, k, axis=1)
+    br = np.linalg.lstsq(Xr, y, rcond=None)[0]; fit_r = Xr @ br; u_r = y - fit_r
+    rng = np.random.default_rng(seed); ts = np.empty(reps)
+    for i in range(reps):
+        w = rng.choice([-1.0, 1.0], size=G)
+        ts[i] = tstat(fit_r + w[g] * u_r)
+    return float(np.mean(np.abs(ts) >= abs(t0)))
+
+
+def zone_did(d, outcome="new_land_ha", gold=False, poisson=False, clean=True):
+    """Clean (main, after the critical review): reference = cells outside the named zones AND outside the legal corridor
+    and native communities (displacement targets), years 2014-2025 so the baseline is 2014-18. clean=False reproduces
+    the earlier, contaminated reference (rest of corridor + communities included)."""
+    d = d[d.year >= 2014]
+    if clean:
+        d = d[~((d.focal == "reference") & d.zone.isin(CLEAN_DROP))]
+    d = d.copy()
     rhs = []
     for z in FOCAL.values():
         key = "".join(ch for ch in z.lower() if ch.isalnum())[:14]
@@ -77,12 +119,20 @@ def tidy_coef(f, label):
 
 
 def event(d, zone_name, outcome="new_land_ha"):
-    dd = d[(d.focal == zone_name) | (d.focal == "reference")].copy()
+    """Event study with the POOLED 2014-18 period as reference (not the single high year 2018); clean reference cells;
+    joint pre-trend test on the 2010-13 leads."""
+    dd = d[(d.focal == zone_name) | ((d.focal == "reference") & ~d.zone.isin(CLEAN_DROP))].copy()
     dd["treat"] = (dd.focal == zone_name).astype(int)
-    f = pf.feols(f"{outcome} ~ i(year, treat, ref=2018) | cell + year", data=dd, vcov={"CRV1": "block"})
+    yrs = [y for y in range(Y0, Y1 + 1) if not 2014 <= y <= 2018]
+    for y in yrs:
+        dd[f"ev_{y}"] = ((dd.year == y) & (dd.treat == 1)).astype(int)
+    f = pf.feols(f"{outcome} ~ {' + '.join(f'ev_{y}' for y in yrs)} | cell + year", data=dd, vcov={"CRV1": "block"})
     t = f.tidy().reset_index()
     t["year"] = t.Coefficient.str.extract(r"(\d{4})").astype(int)
-    pre = [c for c in f.coef().index if any(str(y) in c for y in range(2010, 2018))]
+    base = pd.DataFrame({"Coefficient": [f"ref_{y}" for y in range(2014, 2019)], "Estimate": 0.0, "Std. Error": 0.0,
+                         "Pr(>|t|)": np.nan, "2.5%": 0.0, "97.5%": 0.0, "year": range(2014, 2019)})
+    t = pd.concat([t, base], ignore_index=True).sort_values("year")
+    pre = [c for c in f.coef().index if any(str(y) in c for y in range(2010, 2014))]
     R = np.zeros((len(pre), len(f.coef()))); names = list(f.coef().index)
     for i, c in enumerate(pre):
         R[i, names.index(c)] = 1
@@ -113,7 +163,7 @@ def fig_zone(t):
     m["zone"] = m.zone.map(names)
     fig, ax = plt.subplots(figsize=(9.5, 4.6))
     ys = np.arange(len(FOCAL))
-    for j, (p, col) in enumerate((("during", "#eb6834"), ("after", "#2a78d6"))):
+    for j, (p, col) in enumerate((("during", "#3d3c39"), ("after", "#9aa5a8"))):
         mm = m[m.per == p].set_index("zone").reindex(list(FOCAL.values()))
         ax.errorbar(mm.Estimate, ys + (j - 0.5) * 0.28, xerr=[mm.Estimate - mm["2.5%"], mm["97.5%"] - mm.Estimate],
                     fmt="o", color=col, ms=6, capsize=3, label={"during": "2019-21 vs 2014-18", "after": "2022-25 vs 2014-18"}[p])
@@ -121,25 +171,29 @@ def fig_zone(t):
     ax.set_yticks(ys); ax.set_yticklabels(list(FOCAL.values()), fontsize=9); ax.invert_yaxis()
     ax.set_xlabel("Change in land mined for the first time, ha per 1-km cell per year (95% CI)")
     style_axes(ax); ax.xaxis.grid(True, color="#E8EEF0"); ax.yaxis.grid(False)
+    ax.yaxis.set_major_formatter(plt.NullFormatter()); ax.set_yticks(ys); ax.set_yticklabels(list(FOCAL.values()), fontsize=9)
     ax.legend(fontsize=8, frameon=False, loc="lower right")
-    ax.set_title("Per-cell change by zone, relative to the rest of the study area", loc="left", fontsize=10.5, fontweight="bold")
+    ax.set_title("Per-cell change by zone, relative to clean comparison cells (no corridor, no communities)", loc="left", fontsize=10.5, fontweight="bold")
     finish_figure(fig, f"Source: {SRC}. OLS with cell and year fixed effects, errors clustered by 10-km block. "
-                       "Reference = cells outside the named zones. Description.", OUT / "fig_v2_stats_zones.png", rect_bottom=0.12)
+                       "Reference = cells outside the named zones, the corridor and native communities; baseline 2014-18. Description.", OUT / "fig_v2_stats_zones.png", rect_bottom=0.12)
 
 
 def fig_event(ev):
     fig, axes = plt.subplots(1, 2, figsize=(12, 4), sharey=False)
     for ax, (nm, (t, w)) in zip(axes, ev.items()):
-        ax.fill_between(t.year, t["2.5%"], t["97.5%"], color="#9cc0ea", alpha=0.6, lw=0)
-        ax.plot(t.year, t.Estimate, "o-", color="#2a78d6", ms=4)
+        c_ = "#eb6834" if nm.startswith("La Pampa") else "#2a78d6"
+        ax.fill_between(t.year, t["2.5%"], t["97.5%"], color=c_, alpha=0.18, lw=0)
+        ax.plot(t.year, t.Estimate, "o-", color=c_, ms=4, lw=2)
         ax.axhline(0, color="black", lw=0.8); ax.axvline(2018.5, color="#0b0b0b", lw=1.2)
-        ax.set_title(f"{nm}\npre-trend test 2010-17: p = {float(w['pvalue']):.2f}", loc="left", fontsize=9.5)
+        ax.axvspan(2013.5, 2018.5, color="#f3e3c2", alpha=0.5, zorder=0)
+        ax.set_title(f"{nm}\npre-trend test 2010-13: p = {float(w['pvalue']):.2f}", loc="left", fontsize=9.5)
         style_axes(ax)
-    axes[0].set_ylabel("ha per cell-year vs reference,\n2018 = 0 (95% CI)")
+    axes[0].set_ylabel("ha per cell-year vs clean reference,\n2014-18 mean = 0 (95% CI)")
     fig.suptitle("Year by year, per 1-km cell: La Pampa fell from 2020, the corridor across the road rose from 2019",
                  x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC}. Event study with cell and year fixed effects; joint F-test that all 2010-17 "
-                       "coefficients are zero. Description.", OUT / "fig_v2_stats_event.png", rect_bottom=0.12)
+    finish_figure(fig, f"Source: {SRC}. Event study with cell and year fixed effects; reference = the pooled 2014-18 period (shaded); "
+                       "comparison cells exclude the legal corridor and native communities; joint test that the 2010-13 leads are zero. "
+                       "Description.", OUT / "fig_v2_stats_event.png", rect_bottom=0.12)
 
 
 def run(reg):
@@ -150,7 +204,8 @@ def run(reg):
     print(f"panel: {d.cell.nunique():,} cells x {d.year.nunique()} years, {d.block.nunique()} clusters")
     specs = [("S1 main", zone_did(d)), ("S1 + gold x year FE", zone_did(d, gold=True)),
              ("S1 returns to old pits", zone_did(d, outcome="remined_ha")),
-             ("S1 Poisson (PPML)", zone_did(d, poisson=True))]
+             ("S1 Poisson (PPML)", zone_did(d, poisson=True)),
+             ("S1 contaminated reference", zone_did(d, clean=False))]
     t = pd.concat([tidy_coef(f, s) for s, f in specs])
     ev = {nm: event(d, nm) for nm in ("La Pampa sector", "Corridor across the road")}
     g, labels = gradient(d)
@@ -161,17 +216,42 @@ def run(reg):
     reg.add("st_n_cells", d.cell.nunique(), "count", "1-km cells in the statistical panel", "description", SRC)
     reg.add("st_n_clusters", d.block.nunique(), "count", "10-km clusters", "description", SRC)
     for s, f in specs:
-        tag = {"S1 main": "main", "S1 + gold x year FE": "gold", "S1 returns to old pits": "remine", "S1 Poisson (PPML)": "ppml"}[s]
+        tag = {"S1 main": "main", "S1 + gold x year FE": "gold", "S1 returns to old pits": "remine", "S1 Poisson (PPML)": "ppml",
+               "S1 contaminated reference": "contam"}[s]
         co, se, pv = f.coef(), f.se(), f.pvalue()
         for term in co.index:
             reg.add(f"st_{tag}_{term}", co[term], "ha/cell-yr" if tag != "ppml" else "log points",
                     f"{s}: {term}", "description", SRC)
             reg.add(f"st_{tag}_{term}_p", pv[term], "p-value", f"{s}: p-value of {term} (CRV1 by 10-km block)", "description", SRC)
+    # wild cluster bootstrap (Rademacher, 999 draws): few clusters contain the treated zones
+    main = specs[0][1]
+    cache = INTER / "wcb_cache_v2.csv"                    # slow (minutes): computed once, re-run by deleting the file
+    if cache.exists():
+        wcb = pd.read_csv(cache).set_index("term").p
+    else:
+        wcb = {}
+        dm = d[d.year >= 2014]
+        dm = dm[~((dm.focal == "reference") & dm.zone.isin(CLEAN_DROP))].copy()
+        rhs = []
+        for z in FOCAL.values():
+            key = "".join(ch for ch in z.lower() if ch.isalnum())[:14]
+            for p_ in PER:
+                dm[f"{key}_{p_}"] = ((dm.focal == z) & (dm[f"post_{p_}"] == 1)).astype(int); rhs.append(f"{key}_{p_}")
+        for term in ("lapampasector_during", "corridoracross_during"):
+            wcb[term] = wild_cluster_bootstrap(dm, "new_land_ha", rhs, term, "block", reps=999)
+        pd.Series(wcb, name="p").rename_axis("term").to_csv(cache)
+    for term, key in (("lapampasector_during", "lp"), ("corridoracross_during", "across")):
+        if term in wcb:
+            reg.add(f"st_wcb_{key}_p", float(wcb[term]), "p-value", f"Wild cluster bootstrap p-value (WCR, 999 Rademacher draws, 10-km blocks, after removing cell and year effects), {term}", "description", SRC)
+    dm = d[d.year >= 2014]
+    for z, key in (("La Pampa sector", "lp"), ("Corridor across the road", "across")):
+        reg.add(f"st_clusters_{key}", dm[dm.focal == z].block.nunique(), "count", f"10-km clusters containing {z} cells", "description", SRC)
+    reg.add("st_n_ref_cells_clean", d[(d.focal == "reference") & ~d.zone.isin(CLEAN_DROP)].cell.nunique(), "count", "Reference cells in the clean spec", "description", SRC)
     for nm, (tt, w) in ev.items():
         key = "lp" if nm.startswith("La Pampa") else "across"
-        reg.add(f"st_event_{key}_pretrend_p", float(w["pvalue"]), "p-value", f"Joint pre-trend test 2010-17, {nm}", "description", SRC)
+        reg.add(f"st_event_{key}_pretrend_p", float(w["pvalue"]), "p-value", f"Joint pre-trend test (2010-13 leads, 2014-18 pooled reference), {nm}", "description", SRC)
         for _, r in tt.iterrows():
-            if r.year in (2016, 2019, 2020, 2021, 2023):
+            if r.year in (2012, 2019, 2020, 2021, 2023):
                 reg.add(f"st_event_{key}_{r.year}", r.Estimate, "ha/cell-yr", f"Event study {nm}, {r.year} vs 2018", "description", SRC)
                 reg.add(f"st_event_{key}_{r.year}_p", r["Pr(>|t|)"], "p-value", f"Event study {nm}, {r.year}, p-value", "description", SRC)
     for term in g.coef().index:

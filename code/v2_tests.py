@@ -47,7 +47,14 @@ def t1_t2(reg):
     north = w[[c for c in w if c >= 0]].sum(axis=1); tot = w.sum(axis=1)
     share = (north / tot).loc[2005:2025]
     s, rank, n = shift_test(share)
-    reg.add("t1_road_north_share_2016_18", share.loc[2016:2018].mean(), "share", "North-of-road share of first-time mined land (La Pampa longitudes, +-15 km), 2016-18", "description", SRC_R)
+    # fix after review: windows of start years 2017-2021 overlap the real 2019 event (3 yrs either side), so the real
+    # effect leaks into them. Clean comparison = start years whose windows do not overlap 2016-2021.
+    clean = s[(s.index <= 2013) | (s.index >= 2022) | (s.index == 2019)]
+    rank_c, n_c = int(clean.rank(ascending=False)[2019]), len(clean)
+    reg.add("t1_road_shift_rank_clean", rank_c, "rank", "Rank of the 2019 move north among start years whose 3-year windows do not overlap the event (2008-13, 2022, and 2019)", "description", SRC_R)
+    reg.add("t1_road_shift_n_clean", n_c, "count", "Start years in the clean comparison", "description", SRC_R)
+    reg.add("t1_road_shift_ri_p_clean", rank_c / n_c, "p-value", "Randomization p-value with non-overlapping windows", "description", SRC_R)
+    reg.add("t1_road_north_share_2016_18", share.loc[2016:2018].mean(), "share", "North-of-road share of first-time mined land (La Pampa longitudes, +-30 km), 2016-18", "description", SRC_R)
     reg.add("t1_road_north_share_2019_21", share.loc[2019:2021].mean(), "share", "Same, 2019-21", "description", SRC_R)
     reg.add("t1_road_shift_2019", s[2019], "share points", "Shift in north share, 3 yrs after minus 3 yrs before 2019", "description", SRC_R)
     reg.add("t1_road_shift_rank", rank, "rank", f"Rank of the 2019 shift among {n} possible start years 2008-2022 (1 = biggest move north)", "description", SRC_R)
@@ -174,10 +181,10 @@ def t8(reg):
         reg.add(f"t8_pp0128_mdd_{y}", v, "soles", f"PP 0128 executed spending (devengado) booked in Madre de Dios, {y} (lower bound)", "description", SRC_MEF)
     z = pd.read_csv(rz.OUT_ZONE).groupby("year").new_land_ha.sum().loc[2015:2025]
     fig, (a1, a2) = plt.subplots(2, 1, figsize=(9, 5.4), sharex=True)
-    a1.bar(s.index, s.values / 1e6, color="#52514e", width=0.7)
+    a1.bar(s.index, s.values / 1e6, color="#0b0b0b", width=0.7)
     a1.set_ylabel("Anti-illegal-mining\nspending (million soles)"); style_axes(a1)
     a1.set_title("Enforcement money peaked in 2019 and faded; first-time mining kept growing", loc="left", fontsize=10.5, fontweight="bold")
-    a2.bar(z.index, z.values, color="#2a78d6", width=0.7)
+    a2.bar(z.index, z.values, color="#3d3c39", width=0.7)
     a2.set_ylabel("Land mined for the first\ntime, Madre de Dios (ha)"); style_axes(a2)
     a2.set_xticks(list(s.index))
     finish_figure(fig, f"Sources: {SRC_MEF} (lower bound: national units book spending under Lima); {SRC_R}. Two panels, two units: "
@@ -226,6 +233,8 @@ def t9_depth(reg):
     a1.set_ylabel("First-time mined land (ha)"); style_axes(a1)
     a2.plot(mean_depth.index, mean_depth.values, "o-", color="#2a78d6", lw=2)
     a2.axvline(2018.5, color="black", lw=1.2); a2.set_ylabel("Mean depth (km north)"); style_axes(a2)
+    for a_ in (a1, a2):
+        a_.set_xticks(range(2008, 2026, 2)); a_.tick_params(axis="x", labelsize=8)
     a2.set_title(f"Break after 2019: {m.params['post2019']:+.1f} km (p = {m.pvalues['post2019']:.2f})", loc="left", fontsize=9.5)
     fig.suptitle("How deep into the legal corridor? New mining north of La Pampa, by distance from the highway",
                  x=0.01, ha="left", fontsize=11, fontweight="bold")

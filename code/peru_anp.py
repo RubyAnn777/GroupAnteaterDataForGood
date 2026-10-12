@@ -34,7 +34,8 @@ RES = {  # label -> (ANP name, category, buffer-zone column name in peru.build_s
     "Bahuaja-Sonene NP": ("Bahuaja-Sonene", "Parque Nacional", "Bahuaja-Sonene"),
     "Amarakaeri RC": ("Amarakaeri", "Reserva Comunal", "Amarakaeri"),
 }
-COL = {"Tambopata NR": "#d9a441", "Bahuaja-Sonene NP": "#6aa84f", "Amarakaeri RC": "#7a9cc6"}
+COL = {"Tambopata NR": "#008300", "Bahuaja-Sonene NP": "#6250d6", "Amarakaeri RC": "#1baf7a"}
+BZCOL = {"Tambopata NR": "#eb6834", "Bahuaja-Sonene NP": "#6250d6", "Amarakaeri RC": "#1baf7a"}   # buffer zones: treated orange
 
 def load_anp() -> tuple[pd.DataFrame, pd.DataFrame]:
     """Return (raw COVERAGE_4 rows, panel of mining_ha: one row per ANP-year, zeros filled)."""
@@ -160,7 +161,7 @@ def run(pack, reg):
     fig, (a1, a2) = plt.subplots(2, 1, figsize=(8.5, 7.5), sharex=True)
     for k in RES:
         a1.plot(x_of(yrs), adds.loc[yrs, k], marker="o", markersize=4, color=COL[k], linewidth=2, label=k)
-        a2.plot(x_of(yrs), bz.loc[yrs, k], marker="o", markersize=4, color=COL[k], linewidth=2, label=k.split()[0] + " buffer zone")
+        a2.plot(x_of(yrs), bz.loc[yrs, k], marker="o", markersize=4, color=BZCOL[k], linewidth=2, label=k.split()[0] + " buffer zone")
     a1.set_ylabel("New mining area INSIDE\nthe reserve (ha)")
     a1.set_title("Mining inside the reserves (top) is small next to their buffer zones (bottom)", loc="left", pad=EVENT_TITLE_PAD)
     a1.annotate("2017: +534 ha in one year step\n(gross conversion of forest, flooded forest,\nagri. mosaic, beach; classes also swap that year)",
@@ -179,9 +180,9 @@ def run(pack, reg):
 
     yrs2 = list(range(2014, 2026))
     fig, ax = plt.subplots(figsize=(8.5, 4.6))
-    ax.bar(x_of(yrs2), comb.loc[yrs2, "Tambopata buffer zone"], color="#d9a441", width=0.8, label="Tambopata buffer zone")
+    ax.bar(x_of(yrs2), comb.loc[yrs2, "Tambopata buffer zone"], color="#eb6834", width=0.8, label="Tambopata buffer zone")
     ax.bar(x_of(yrs2), comb.loc[yrs2, "Tambopata NR (inside)"], bottom=comb.loc[yrs2, "Tambopata buffer zone"].clip(lower=0),
-           color="#B03A2E", width=0.8, label="Tambopata National Reserve (inside)")
+           color="#008300", width=0.8, label="Tambopata National Reserve (inside)")
     ax.plot(x_of(yrs2), comb.loc[yrs2, "Tambopata BZ + NR"], color="black", marker="o", markersize=4, linewidth=1.2,
             label="Sum: buffer zone + reserve")
     ax.set_ylabel("New mining area (ha)")

@@ -121,4 +121,26 @@ def run(reg):
             "La Pampa sector, mining-related GLAD-L alerts per quarter, 2017-2018 mean", "description", SRC)
     reg.add("glad_lapampa_2019q2_2020q4_mean", q.loc[(2019, 2):(2020, 4)].mean(), "ha/quarter",
             "La Pampa sector, mining-related GLAD-L alerts per quarter, 2019Q2-2020Q4 mean", "description", SRC)
+    s2_check(reg)
     print(ann.round(0).to_string())
+
+
+def s2_check(reg):
+    """Sentinel-2 alerts (GLAD-S2, 10 m, ~5-day revisit) in the western La Pampa sector (70.15-70.00 W; the only part
+    inside the downloaded tile): monthly hectares in 2019, to test whether 2019 Landsat alerts are just cloud delay."""
+    import rasterio
+    from rasterio.windows import from_bounds
+    f = RAW / "S2alert_alertDate_080W_20S_070W_10S.tif"
+    if not f.exists():
+        return
+    with rasterio.open(f) as r:
+        a = r.read(1, window=from_bounds(-70.15, -13.06, -70.0, -12.88, r.transform)); tr = r.transform
+    v = a[a > 0].astype(int)
+    lat = -12.97
+    pix_ha = (abs(tr.a) * 111320 * np.cos(np.radians(lat))) * (abs(tr.e) * 110574) / 1e4
+    d = pd.to_datetime("2018-12-31") + pd.to_timedelta(v, unit="D")
+    s = pd.Series(pix_ha, index=d).resample("MS").sum()
+    s19 = s.loc["2019-01":"2019-12"]
+    reg.add("s2_lp_west_2019_mar_sep_ha", s19.loc["2019-03":"2019-09"].sum(), "ha", "GLAD-S2 alerts, western La Pampa sector, Mar-Sep 2019", "description", "UMD GLAD-S2 alerts")
+    reg.add("s2_lp_west_2019_aug_ha", s19.loc["2019-08"].sum(), "ha", "GLAD-S2 alerts, western La Pampa sector, August 2019", "description", "UMD GLAD-S2 alerts")
+    reg.add("s2_lp_west_2020_mar_sep_ha", s.loc["2020-03":"2020-09"].sum(), "ha", "GLAD-S2 alerts, western La Pampa sector, Mar-Sep 2020", "description", "UMD GLAD-S2 alerts")

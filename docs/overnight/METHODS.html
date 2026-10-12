@@ -85,6 +85,7 @@ footer{border-top:1px solid var(--rule);color:var(--ink-3);font-size:.8rem;paddi
 <a href="#s11">11. How we label claims</a>
 <a href="#s12">12. Plan v2 methods (built 12 Oct 2026)</a>
 <a href="#s13">13. Statistics, twins, Brazil and predictions (added 12 Oct 2026, evening)</a>
+<a href="#s14">14. Fixes after the critical review (12 Oct 2026)</a>
 </nav><main>
 <section id="s1"><h2>1. The bottom line</h2>
 <p><strong>Everything runs from one command.</strong> <code>uv run python code/main.py</code> checks the data against the publishers, builds every measure, fits every model, draws every figure and writes every number to <code>output/numbers.csv</code>.</p>
@@ -349,7 +350,7 @@ flowchart LR
 <li><strong>Road bands:</strong> 1-km strips north and south of the highway, inside the La Pampa longitudes.</li>
 <li><strong>Corridor share:</strong> first-time mined land inside the legal corridor, as a share of Madre de Dios.</li>
 </ul>
-<p><strong>Fake start dates for the road</strong> (<code>code/v2_tests.py</code>, T1): the north share's change, 3 years after minus 3 years before, for every start year 2008–2022. The 2019 move ranks 3 of 15; 2008 (Guacamayo boom) moved more.</p>
+<p><strong>Fake start dates for the road</strong> (<code>code/v2_tests.py</code>, T1): the north share's change, 3 years after minus 3 years before, for every start year 2008–2022. Only start years whose 3-year windows don't overlap the event count as placebos; the 2019 move ranks first of 8 (p = 0.125, the smallest possible).</p>
 <p><strong>Quarterly timing</strong> (<code>code/glad_alerts.py</code>): University of Maryland GLAD-L forest-loss alerts, each pixel dated to the day, 2017–2026. We keep alerts on land MapBiomas maps as mining. Compare the same quarter across years (clouds); data version break in 2021.</p>
 <p><strong>Gold left</strong> (<code>code/raster_gold.py</code>): gold-bearing land = INGEMMET geology units (river deposits plus Madre de Dios Formation terraces). Validation: 90% of all land ever mined lies on them. Depletion = share of a zone's gold-bearing land mined by a year.</p>
 <p><strong>Enforcement intensity</strong> (<code>code/v2_tests.py</code>, T8): Peru's anti-illegal-mining programme (PP 0128), executed spending booked in Madre de Dios, 2015–2025. Department level only; a lower bound.</p>
@@ -405,22 +406,37 @@ flowchart LR
 <section id="s13"><h2>13. Statistics, twins, Brazil and predictions (added 12 Oct 2026, evening)</h2>
 <p><strong>Cell panel with standard errors</strong> (<code>code/v2_stats.py</code>):</p>
 <ul>
-<li><strong>Units:</strong> every 1-km cell in the study window (lon 70.65–69.30 W, lat 13.30–12.40 S), 2010–2025. Cells never mined stay in, with zeros (dropping them would select on the outcome).</li>
+<li><strong>Units:</strong> every 1-km cell in the study window (lon 70.65–69.30 W, lat 13.30–12.40 S), 2014–2025 for the DiD (baseline 2014–18), 2010–2025 for event studies.</li>
+<li><strong>Comparison cells:</strong> outside every named zone, the legal corridor and native communities (displacement targets are excluded). Cells never mined stay in, with zeros (dropping them would select on the outcome).</li>
 <li><strong>Model:</strong> <code>y_ct = a_c + g_t + Σ b_zp [zone = z][period = p]</code>, y = first-time mining (ha); cell and year fixed effects.</li>
 <li><strong>Errors:</strong> clustered by 10 × 10 km blocks (161 clusters), so nearby cells can share shocks.</li>
 <li><strong>Robustness:</strong> gold-bearing land × year effects; returns to old pits as outcome; Poisson (PPML) for zeros.</li>
-<li><strong>Event studies:</strong> year-by-year coefficients (2018 = 0) with a joint F-test of 2010–17 coefficients (pre-trends).</li>
+<li><strong>Event studies:</strong> year-by-year coefficients with the pooled 2014–18 period as reference, and a joint test that the 2010–13 leads are zero.</li>
+<li><strong>Wild cluster bootstrap:</strong> restricted (WCR), 999 Rademacher draws over 10-km blocks, after removing cell and year effects. Used because only 14 (La Pampa) and 10 (across the road) blocks contain the treated zones.</li>
 <li><strong>Road gradient:</strong> distance bands north/south of the highway × period, reference = 10–30 km south.</li>
 </ul>
 <p><strong>Depth into the corridor</strong> (<code>code/v2_tests.py</code>, T9): mean distance north of the highway of first-time mining per year; OLS on a trend and a post-2019 dummy with Newey-West errors (18 years).</p>
 <p><strong>Fake start dates</strong> (T1): randomization p = rank of the real 2019 shift among all start years / number of start years.</p>
-<p><strong>Three rule-based twins</strong> (<code>code/control_top3.py</code>): all areas passing the relaxed rules. Pre-trend test: yearly log-growth difference (Tambopata minus twin), 2010–18, regressed on a constant and on a trend, Newey-West errors. Gap test: Welch t-test on the three 2019–21 annual values (tiny n; read with care).</p>
+<p><strong>Rule-based twins</strong> (<code>code/control_top3.py</code>): all areas passing the relaxed rules, now two (Munduruku dropped: an operation in May 2021 falls inside the rule's window). Pre-trend test: yearly log-growth difference (Tambopata minus twin), 2010–18, regressed on a constant and on a trend, Newey-West errors. No significance test for the gap (three years per area); the gap is reported descriptively.</p>
 <p><strong>Brazil, same pixel method</strong> (<code>code/brazil_raster.py</code>, <code>brazil_v2.py</code>): MapBiomas Brazil Collection 11 rasters read remotely per territory (24 territories + Yanomami rings). Check: Kayapó 2024/2025 vs the platform. Staggered DiD (territory + year effects, treated from own first operation), Gardner's two-stage estimator (<code>did2s</code>) and randomization inference (2,000 shuffles of operation dates across territories).</p>
-<p><strong>Risk map</strong> (<code>code/v2_extra.py</code>, E4; prediction): logit on 1-km cells; features = distance to highway and rivers, north side, gold-bearing share, mined share, mining within ~3 km, zone. Trained on 2018 → 2019–21, tested out of sample on 2021 → 2022–25 (AUC), applied to 2025 → 2026–28.</p>
+<p><strong>Risk map</strong> (<code>code/v2_extra.py</code>, E4; prediction): logit on 1-km cells, validated on held-out 10-km blocks against a "mining nearby" benchmark; features = distance to highway and rivers, north side, gold-bearing share, mined share, mining within ~3 km, zone. Trained on 2018 → 2019–21, tested out of sample on 2021 → 2022–25 (AUC), applied to 2025 → 2026–28.</p>
 <p><strong>Declared gold vs mapped mining</strong> (E6): log declared tonnes on a trend and a post-2019 dummy, Newey-West errors; tonnes per 1,000 ha of first-time mining.</p>
 <p><strong>Qualitative overlays:</strong> legality, enforcement history, taxes, politics, social and health costs come from opened sources in <code>docs/overnight/notes/qualitative_background.md</code> (each with link and quote) and 30 papers in <code>literature_v2.md</code>.</p></section>
+<section id="s14"><h2>14. Fixes after the critical review (12 Oct 2026)</h2>
+<ul>
+<li><strong>Fake places:</strong> Tambopata is removed from each placebo's comparison pool (before, its own fall made every placebo positive). Amazon-only pool added.</li>
+<li><strong>Causal number:</strong> reworded to net mining; first-time mining reported alongside.</li>
+<li><strong>Cell panel:</strong> clean comparison cells, 2014–18 baseline, pooled reference in event studies, wild cluster bootstrap.</li>
+<li><strong>Twins:</strong> Munduruku dropped; no p-values on three annual values.</li>
+<li><strong>Brazil:</strong> first operation inside 2021–25 (Kayapó 2024-09; Munduruku 2021-05).</li>
+<li><strong>Legality:</strong> a concession counts only if filed by the mining year.</li>
+<li><strong>Risk map:</strong> spatial hold-out and benchmark.</li>
+<li><strong>Gold proxy:</strong> lift reported (share of mining vs share of land).</li>
+<li><strong>Untraceable numbers</strong> (Sentinel-2, producer-declared gold) now computed in code.
+Full review: <code>docs/overnight/notes/critical_review_v2.md</code>.</li>
+</ul></section>
 </main></div>
-<footer>Built 2026-10-12 16:45 from git commit 5390175 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (969 rows).</footer>
+<footer>Built 2026-10-12 17:46 from git commit 0b38edc (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1053 rows).</footer>
 <script>
 (function(){var r=document.documentElement,k='report-theme',s=localStorage.getItem(k);if(s)r.setAttribute('data-theme',s);
 document.getElementById('theme').addEventListener('click',function(){var dark=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme:dark)').matches;var n=dark?'light':'dark';r.setAttribute('data-theme',n);localStorage.setItem(k,n)});

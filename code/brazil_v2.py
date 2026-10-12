@@ -33,12 +33,10 @@ def load():
     first = {}
     for uid in d.unit_id.unique():
         if uid in ops.index and ops.loc[uid, "verdict_2017_2025"] == "yes":
-            fo = str(ops.loc[uid, "first_op_2017_2025"])
+            fo = str(ops.loc[uid, "first_op_2021_2025"])          # first operation INSIDE 2021-2025 (fix: Kayapo 2024-09)
             if fo[:4].isdigit() and int(fo[:4]) >= 2021:
                 first[uid] = int(fo[:4]) + (1 if int(fo[5:7]) >= 7 else 0)   # operation in H2 -> first treated year = next year
-    # Sai-Cinza follows Munduruku (same complex)
-    if "BR-TI-29801" in first:
-        first["BR-TI-40901"] = first["BR-TI-29801"]
+    # Sai-Cinza follows Munduruku (same complex; Op. Mundurukania 2021)
     d["first_treat"] = d.unit_id.map(first).fillna(0).astype(int)
     return d
 
@@ -96,11 +94,11 @@ def run(reg):
     # B2 figure: first-time mining and old pits, four treated territories + pool
     w = d.pivot_table(index="year", columns="unit", values="new_land_ha").loc[2010:2025]
     r = d.pivot_table(index="year", columns="unit", values="remined_ha").loc[2010:2025]
-    show = [("Yanomami", 2023 + 1 / 12), ("Munduruku", 2023 + 7 / 12), ("Kayapó", 2024 + 8 / 12), ("Sararé", 2024 + 8 / 12)]
+    show = [("Yanomami", 2023 + 1 / 12), ("Munduruku", 2021 + 4 / 12), ("Kayapó", 2024 + 8 / 12), ("Sararé", 2024 + 8 / 12)]
     fig, axes = plt.subplots(1, 4, figsize=(13, 3.8), sharex=True)
     for ax, (nm, op) in zip(axes, show):
-        ax.bar(w.index, w[nm], color="#2a78d6", width=0.75, label="First-time mining")
-        ax.bar(r.index, r[nm], bottom=w[nm], color="#9cc0ea", width=0.75, label="Return to old pits")
+        ax.bar(w.index, w[nm], color="#3d3c39", width=0.75, label="First-time mining")
+        ax.bar(r.index, r[nm], bottom=w[nm], color="#b9b8b2", width=0.75, label="Return to old pits")
         ax.axvline(op - 0.5, color="black", lw=1.4)
         ax.set_title(nm, loc="left", fontsize=9.5); style_axes(ax)
         ax.set_xticks(range(2010, 2026, 3)); ax.tick_params(axis="x", labelsize=7.5)
