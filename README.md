@@ -104,8 +104,10 @@ Here we can include the failed synthetic control approach and also use the uncle
 
 ### Limitations noted so far
 
-- Planes *(to clarify)*
+- Planes for transport?*(to clarify)*
 - What exactly counts as "enforcement"?
+- interoceanic highway (especially relevant for control group selection)
+- mine abandonment and re-use (we cannot measure whether all mines have been abandoned or not)
 
 ### Other idea
 
@@ -137,11 +139,14 @@ Descriptives
 -> how many of the areas are affected by mining today (indigenous + protected) (per country)
 -> overall development of mining in studied area over time
 -> comparison of mining activity before and after enforcement (also looking at buffer zone and close by areas)
+**make sure we add the "number check" thing she wants us to do**
 
 Trying to do causal analysis
 -> failed synthetic control
 -> looking for control 
 
 Limitations and further research
+
+Key limitation is that the enforcement is actually happening always somewhere in some unsystematic way. We need to find for the control a zone that has comparable levels of enforcement. Luckily in Peru its well done
 
 Recommendations
