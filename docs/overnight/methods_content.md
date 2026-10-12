@@ -1,77 +1,85 @@
 <!--
 Source of docs/overnight/METHODS.html (how everything is built). Build: `uv run python docs/overnight/build_report.py`.
-Same placeholder and claim-tag rules as explainer_content.md. Written in smart-brevity style for the team (Ruby first).
+Same placeholder, claim-tag and block syntax as explainer_content.md. Organised by the question each method answers.
 -->
 
-# How the analysis is built: data, measures, models
+# How the analysis is built: one command, every number traceable
 
-> One page per method: what it answers, how it works, what it controls for, what it can't, where the code is. Every number on the walkthrough comes from one script, `code/main.py`. Version: plan v2 (12 Oct 2026). Section 12 covers everything added after Ruby's review.
+> One chapter per method: the question it answers, how it works, what it controls for, what it can't, and where the code lives. Version: plan v2 after the critical review (12 Oct 2026).
 
-## 1. The bottom line
+@part Overview
 
-**Everything runs from one command.** `uv run python code/main.py` checks the data against the publishers, builds every measure, fits every model, draws every figure and writes every number to `output/numbers.csv`.
+## Pipeline | One command builds every number, figure and page
 
-**Three building blocks:**
-- **Data:** satellite maps of mining (MapBiomas, Amazon Mining Watch, INPE alerts), boundaries (parks, buffer zones, corridor, communities), and context (gold price, gold output, fines).
-- **Measures:** how much *new* mining appears each year, per area.
-- **Comparisons:** the targeted area against areas that tell us what might have happened without the operation.
-
-**Why it matters:** Any number in the brief can be traced back: brief → `numbers.csv` → the function that made it → the raw file → the publisher.
+**`uv run python code/main.py` checks the data against the publishers, builds every measure, fits every model, draws every figure and writes every number to `output/numbers.csv`.**
 
 <pre class="mermaid">
 flowchart LR
   A[Raw files<br/>data_raw/] --> B[Checks against<br/>publisher numbers]
   B --> C[Measures<br/>new mining per area-year]
-  C --> D[Comparisons<br/>DiD, event study,<br/>models, twin]
+  C --> D[Comparisons<br/>DiD, event study,<br/>models, twins]
   D --> E[Figures + tables<br/>output/]
   D --> F[numbers.csv<br/>every cited number]
-  F --> G[Walkthrough<br/>+ brief]
+  F --> G[Walkthrough, methods<br/>and brief pages]
 </pre>
 
-## 2. The data
+- **Data:** satellite maps of mining (MapBiomas, Amazon Mining Watch, INPE and GLAD alerts), boundaries (parks, buffer zones, corridor, communities), and context (gold price, gold output, spending, fines).
+- **Measures:** how much *new* mining appears each year, per area.
+- **Comparisons:** the targeted area against areas that show what might have happened without the operation.
 
-**One rule first:** we never add or subtract numbers from different sources or collections. Different products measure different things.
+**Why it matters:** any number in the brief can be traced: brief → `numbers.csv` → the function that made it → the raw file → the publisher.
+
+## Claim labels | Every claim says what kind of claim it is
+
+| Label | Means | Example |
+|---|---|---|
+| [[D]] | what happened | "net new mining fell from {{mean_add_tambopata_2016_18}} to {{mean_add_tambopata_2019_21}} ha/yr" |
+| [[P]] | what we expect next time | "a return within about three years" |
+| [[C]] | what caused it | used once, *conditional* on the comparison areas being a fair counterfactual |
+
+**Why it matters:** grading puts 30% on honesty about the claim. A causal claim by accident is the main way to lose points.
+
+@part Data and measures
+
+## Data | One check per dataset, and no mixing of sources
+
+**We never add or subtract numbers from different sources or collections.** Different products measure different things.
 
 | Data | What it measures | Years | Used for | Check against publisher |
 |---|---|---|---|---|
 | **MapBiomas Peru, Collection 4** (course tables + our raster download) | Land class of every 30 m pixel each year; class 30 = mining (legal and illegal) | 1985–2025 | Main outcome, Peru | Tambopata buffer zone 2025 = 20,730 ha ✔ |
-| **MapBiomas Peru rasters** *(v2)* | Same product, as maps, so we can use our own boundaries | 1985–2025 | All Peru zones in v2 | Raster gives 20,716 ha vs 20,730 ✔ |
+| **MapBiomas Peru rasters** | Same product, as maps, so we can use our own boundaries | 1985–2025 | All Peru zones | Raster gives {{v2_check_tambopatabufferzone_2025}} ha vs 20,730 ✔ |
 | **Amazon Mining Watch (AMW)** | Gold-mining scars found by a machine-learning model, in 480 m squares | 2018–2026 | Twin search, Brazil, robustness | No published totals |
 | **MapBiomas Amazonía, Collection 6** | Same idea as MapBiomas, all nine Amazon countries | 1985–2023 | Pre-2019 trend of candidate twins | Amazon mining 2023 = 0.78 Mha ✔ |
 | **MapBiomas Brazil, Collections 10.1 and 11** | Mining per indigenous territory and per municipality | 1985–2025 | Brazil | Garimpo 2025 = 445,987 ha ✔ |
 | **INPE DETER alerts** | Monthly alerts of new mining, Brazil | 2016–2026 | Brazil timing | 2019 total within 0.2% ✔ |
+| **GLAD-L alerts** (University of Maryland) | Forest loss, each Landsat pixel dated to the day | 2017–2026 | Timing within the year | — |
 | **Boundaries** | SERNANP parks and buffer zones; INGEMMET legal corridor; RAISG roads and protected areas; MapBiomas Amazonía native communities; FUNAI territories | current | Zones | — |
-| **Context** | World Bank gold price; Peru central bank gold output; IBAMA fines | various | Context only | Gold Aug 2026 = $4,411/oz ✔ |
+| **Context** | World Bank gold price; MINEM and central-bank gold output; MEF spending (PP 0128); IBAMA fines | various | Context only | Gold Aug 2026 = $4,411/oz ✔ |
 
-**Why it matters:** The instructor will trace one number back to the publisher. Each dataset has one check, logged in `output/checks.csv` and `DOWNLOAD_LOG.csv`.
+**Why it matters:** the instructor will trace one number back to the publisher. Each check is logged in `output/checks.csv` and `DOWNLOAD_LOG.csv`.
 
-## 3. The main measure: new mining per year
+## Measures | We count change, not stock, and split it into its parts
 
-**We count change, not stock.** Total mining area only grows, like the gold price, so totals correlate with almost anything.
+**Total mining area only grows, like the gold price, so totals correlate with almost anything. We count change.**
 
 - **Addition** (the course measure) = mining area this year − mining area last year, per area, in hectares.
 - **Rule:** add up all rows of an area *first*, then take the difference.
 
-**v2 splits the addition into its parts** (pixel by pixel, from the rasters):
-
 | Part | A pixel that is… | Tells us |
 |---|---|---|
-| **New land** | mining now, never mining before | expansion into forest or new ground |
-| **Re-mined** | mining now, not last year, but mining in some earlier year | miners returning to old pits |
+| **New land** (first-time mining) | mining now, never mining before | expansion into forest or new ground |
+| **Re-mined** (return to old pits) | mining now, not last year, but mining in some earlier year | miners returning to old pits |
 | **Stopped** | mining last year, not now | abandoned, regrowing, or reclassified |
 | **From forest** | mining now, forest last year | forest lost to mining |
 
-`addition = new land + re-mined − stopped` (checked in code for every area and year).
+`addition = new land + re-mined − stopped`, checked in code for every area and year.
 
-**Why it matters:** A small addition can hide a big return to old pits. Ruby's re-mining question needs the split.
+**Can't see:** river dredges, mercury, who mines, and whether a site is legal. Satellites see bare ground and ponds.
 
-**What it can't see:** river dredges, mercury, who mines, and whether a site is legal. Satellites see bare ground and ponds.
+## Zones | One zone map on the raster grid, first match wins
 
-## 4. The places (zones)
-
-**v1 used whole buffer zones** from the course tables (Tambopata, Amarakaeri and 13 others).
-
-**v2 draws one zone map on the raster grid.** Each pixel belongs to exactly one zone, in this order (first match wins):
+**Each pixel belongs to exactly one zone, in this order:**
 
 1. Tambopata reserve
 2. Other reserves and parks
@@ -86,44 +94,39 @@ flowchart LR
 11. Other buffer zones
 12. Rest of Madre de Dios
 
-**Two zones have no official boundary:** La Pampa and "across the road". We define them by longitude and test a narrower and a wider version.
+- **Two zones have no official boundary:** La Pampa and "across the road". We define them by longitude and test a narrower and a wider version.
+- **Road bands:** inside the La Pampa longitudes, every pixel gets its distance to the highway (north = positive).
 
-**Road bands:** in the La Pampa longitudes, every pixel gets its distance to the highway (north = positive). That lets us ask directly: did new mining jump from the south side to the north side?
+**Why it matters:** "Tambopata buffer zone" mixes La Pampa (shut down) with new fronts. The zone map separates the stories.
 
-**Why it matters:** "Tambopata buffer zone" mixes La Pampa (shut down) with new fronts like Mangote. The zone map separates the stories.
+**Code:** `code/raster_zones.py`.
 
-## 5. Comparison 1: before and after, against a neighbour (2×2)
+@part Did it fall?
 
-**Question:** Did the targeted zone change more than a comparison zone?
+## 2×2 | Before and after, against a neighbour
 
-**How:** gap change = (targeted after − before) − (comparison after − before). Before = 2016–18, during = 2019–21, after = 2022–25.
+**Question:** did the targeted zone change more than a comparison zone?
 
-**Controls for:** anything that moved both zones equally (gold price, COVID, national policy).
+- **How:** gap change = (targeted after − before) − (comparison after − before). Before = 2016–18, during = 2019–21, after = 2022–25.
+- **Controls for:** anything that moved both zones equally (gold price, COVID, national policy).
+- **Can't control for:** anything that hit only one zone. Spillovers into the comparison zone make the gap look bigger.
+- **Result:** {{did_main}} ha/yr against Amarakaeri, which was itself partly treated. [[D]]
 
-**Can't control for:** anything that hit only one zone. Spillovers into the comparison zone make the gap look bigger.
+**Code:** `code/peru.py` (`describe_and_compare`).
 
-**Code:** `code/peru.py` (`describe_and_compare`). **Result:** {{did_main}} ha/yr against Amarakaeri.
+## Event study | Year by year, against 14 zones, with fake places
 
-## 6. Comparison 2: year by year, against many zones (event study)
+**Question:** is the fall bigger than normal year-to-year noise?
 
-**Question:** Is the fall bigger than normal year-to-year noise?
+`y_zt = α_z + γ_t + Σ_k β_k · [z = Tambopata] · [t = k] + ε_zt`, with 2018 left out.
 
-**Model:** new mining in zone *z*, year *t* = zone effect + year effect + one Tambopata term per year (2018 left out).
-`y_zt = α_z + γ_t + Σ_k β_k · [z = Tambopata] · [t = k] + ε_zt`
-
-- **Zone effect (α):** each zone's normal level.
-- **Year effect (γ):** each year's shock shared by all zones: gold price, COVID.
-- **β_k:** how far Tambopata sits from the others in year *k*, relative to 2018.
-
-**Fake place test:** give the "operation" to each other zone in turn. Tambopata should be the most extreme. It ranks 1 of {{placebo_space_n_units}}.
-
-**Why no error bars:** with one treated zone, standard errors are not trustworthy (Conley and Taber, 2011). The rank is our honest substitute.
+- **Zone effect (α):** each zone's normal level. **Year effect (γ):** each year's shock shared by all zones (gold price, COVID). **β_k:** how far Tambopata sits from the others in year *k*, relative to 2018.
+- **Fake places:** each other zone gets the "operation" in turn, with Tambopata removed from its comparison pool. Tambopata ranks 1 of {{model_m1_n}} (p = {{model_m1_ri_p:.2f}}, the smallest possible).
+- **Why no error bars:** with one treated zone, standard errors are not trustworthy (Conley and Taber, 2011). The rank is the honest substitute.
 
 **Code:** `code/peru.py` (`run_event_study`), estimated with `pyfixest`.
 
-## 7. Comparison 3: harder controls (model ladder)
-
-**Question:** Does the fall survive stronger controls?
+## Model ladder | Does the fall survive harder controls?
 
 | Model | Adds | What it rules out |
 |---|---|---|
@@ -132,121 +135,112 @@ flowchart LR
 | **M3** | + a straight-line trend per zone | zones that were already drifting apart |
 | **M4** | outcome scaled to each zone's own 2014–18 average | Tambopata's size driving the result |
 
-Each model also runs with a **fake 2016 date** on 2011–18 data. A trustworthy model shows a big real effect and a small fake one.
-
-**Result:** the 2019–21 gap is {{model_m1_during}} to {{model_m3_during}} ha/yr; fake dates are 4–9 times smaller; Tambopata ranks first every time.
+- **Fake 2016 date:** each model also runs on 2011–18 data with a fake start. A trustworthy model shows a big real effect and a small fake one.
+- **Result:** the 2019–21 gap is {{model_m1_during}} to {{model_m3_during}} ha/yr (M1–M3, rank 1 of {{model_m1_n}}). Scaled to size (M4) it ranks {{model_m4_rank:.0f}} of {{model_m4_n:.0f}} (p = {{model_m4_ri_p:.2f}}). M3's fake date ({{model_m3_placebo}}) has the same sign as the real effect. [[D]]
 
 **Code:** `code/peru_models.py`. The numpy fit is checked against `pyfixest`.
 
-## 8. Comparison 4: a synthetic twin (add-on)
+## Cell panel | 1-km cells with clustered errors and a wild bootstrap
 
-**Question:** Can a weighted mix of other zones copy Tambopata before 2019?
+**Question:** does the fall hold per square kilometre, against cells that weren't displacement targets?
 
-**How:** find weights (≥ 0, summing to 1) on other zones so the mix tracks Tambopata in 2010–18. After 2019, the gap between Tambopata and the mix is the estimated effect.
+- **Units:** every 1-km cell in the study window (lon 70.65–69.30 W, lat 13.30–12.40 S); {{st_n_cells}} cells, 2014–2025 for the DiD (baseline 2014–18), 2010–2025 for event studies.
+- **Comparison cells:** outside every named zone, the legal corridor and native communities ({{st_n_ref_cells_clean:.0f}} cells). Cells never mined stay in, with zeros (dropping them would select on the outcome).
+- **Model:** `y_ct = a_c + g_t + Σ b_zp [zone = z][period = p]`, y = first-time mining (ha); cell and year fixed effects.
+- **Errors:** clustered by 10 × 10 km blocks ({{st_n_clusters:.0f}} clusters), so nearby cells can share shocks.
+- **Wild cluster bootstrap:** restricted (WCR), 999 Rademacher draws over 10-km blocks, after removing cell and year effects. Needed because only {{st_clusters_lp:.0f}} (La Pampa) and {{st_clusters_across:.0f}} (across the road) blocks contain the treated zones. Cached in `data_intermediate/wcb_cache_v2.csv` (delete to recompute, ~30 s).
+- **Event studies:** year-by-year coefficients against the pooled 2014–18 reference, plus a joint test that the 2010–13 leads are zero.
+- **Robustness:** gold-bearing land × year effects; returns to old pits as outcome; Poisson (PPML) for zeros.
+- **Road gradient:** distance bands north/south of the highway × period, reference = 10–30 km south.
 
-**Why it fails here:** Tambopata added more mining than any other zone. A weighted average of small numbers can't reach a big one. It only works after scaling each zone to its own size.
+**Result:** La Pampa {{st_main_lapampasector_during:+.2f}} ha per cell-year in 2019–21 (p = {{st_main_lapampasector_during_p:.2f}}; bootstrap p = {{st_wcb_lp_p:.2f}}), pre-trends fail (p = {{st_event_lp_pretrend_p:.3f}}). Corridor across the road {{st_main_corridoracross_during:+.2f}} (p = {{st_main_corridoracross_during_p:.2f}}), pre-trends pass. [[D]]
+
+**Code:** `code/v2_stats.py`.
+
+## Synthetic twin | A weighted mix of zones, fitted before 2019
+
+**Question:** can a weighted mix of other zones copy Tambopata before 2019?
+
+- **How:** weights (≥ 0, summing to 1) on other zones so the mix tracks Tambopata in 2010–18. After 2019, the gap is the estimate.
+- **Why it fails:** Tambopata added more mining than any other zone. A weighted average of small numbers can't reach a big one. It only fits after scaling each zone to its own size, and then only {{synth_core_addsc_n_units_ranked}} zones remain.
 
 **Code:** `code/peru_synth.py`.
 
-## 9. Comparison 5: one real twin, by rules (Ruby's design)
+## Rule-based twins | One real area that looks like La Pampa (Ruby's design)
 
-**Question:** Is there one existing area that looks like La Pampa but had no operation?
+**Question:** is there an existing area that looks like La Pampa but had no operation?
 
 **Rules, applied to {{ctl_n_areas}} areas across the Amazon:**
+
 1. **R1** mining before 2019 (≥ 500 ha seen by AMW by 2018)
 2. **R2** no operation reported 2017–25 (documented web search, every query logged)
 3. **R3** outside Madre de Dios
 4. **R4** lowland mining (< 500 m) of similar scale (≥ ⅕ of Tambopata); the closest match wins
 
-**Result:** no area passes. Relaxing R2 to "no operation in 2017–21" gives **Amanã National Forest** (Brazil).
+- **Result:** no area passes. Relaxing R2 to "no operation in 2017–21" leaves two: **Amanã National Forest** and the **Tapajós protection area** (Brazil). Munduruku was dropped (operation in May 2021).
+- **Comparison:** new mining per year as a share of each area's own 2018 mining, same product (AMW) for both. Pre-2019 trends come from each area's own MapBiomas collection, side by side, never subtracted.
+- **Pre-trend test:** yearly log-growth difference (Tambopata minus twin), 2010–18, on a constant and a trend, Newey-West errors. No significance test for the gap (three years per area).
 
-**Comparison:** new mining per year as a share of each area's own 2018 mining, same product (AMW) for both. The pre-2019 trend comes from each area's own MapBiomas collection, shown side by side, never subtracted.
+**Code:** `code/control_amw.py`, `control_elevation.py`, `control_mb_amazonia.py`, `control_select.py`, `control_top3.py`.
 
-**Code:** `code/control_amw.py`, `control_elevation.py`, `control_mb_amazonia.py`, `control_select.py`.
+@part Where did it go?
 
-## 10. Brazil: staggered operations
+## Displacement layers | Stream, Sankey, corridor share and legality
 
-**Question:** Do territories fall after *their own* operation?
-
-**How:** AMW new mining per territory, 2019–25. Each territory is compared with its own first operation date. A pool of territories with no operation found shows the background trend.
-
-**Logic:** if operations cause falls, each territory should fall after its own date, not before. Munduruku fell before, so the timing alone can't credit the operations.
-
-**Code:** `code/brazil_stagger.py`, `brazil_deter_all.py`.
-
-## 11. How we label claims
-
-| Label | Means | Example |
-|---|---|---|
-| [[D]] description | what happened | "new mining fell from 1,640 to 163 ha/yr" |
-| [[P]] prediction | what we expect next time | "a rebound within ~3 years" |
-| [[C]] causal | what caused it | used once, *conditional* on the comparison areas being a fair counterfactual |
-
-**Why it matters:** The grading puts 30% on honesty about the claim. A causal claim by accident is the main way to lose points.
-
-## 12. Plan v2 methods (built 12 Oct 2026)
-
-**Displacement layers** (`code/raster_layers.py`):
 - **Stream chart:** land mined for the first time, per zone and year. First-time mining ignores year-to-year map flicker.
 - **Sankey:** per period, new mining split into new land vs old pits, flowing into zones. Flows are pixels, not people.
-- **Road bands:** 1-km strips north and south of the highway, inside the La Pampa longitudes.
 - **Corridor share:** first-time mined land inside the legal corridor, as a share of Madre de Dios.
+- **Legality:** every pixel of first-time mining crossed with MAAP #235's legality layer (Low / Medium / High / Very high). Time-consistent version: a concession counts only if filed by the mining year.
+- **Second product:** Amazon Mining Watch on the same zones. It flags a 480 m square only once, so it misses infill.
 
-**Fake start dates for the road** (`code/v2_tests.py`, T1): the north share's change, 3 years after minus 3 years before, for every start year 2008–2022. Only start years whose 3-year windows don't overlap the event count as placebos; the 2019 move ranks first of 8 (p = 0.125, the smallest possible).
+**Code:** `code/raster_layers.py`, `code/v2_legality.py`, `code/v2_extra.py`, `code/v2_products_check.py`.
 
-**Quarterly timing** (`code/glad_alerts.py`): University of Maryland GLAD-L forest-loss alerts, each pixel dated to the day, 2017–2026. We keep alerts on land MapBiomas maps as mining. Compare the same quarter across years (clouds); data version break in 2021.
+## Road tests | Fake start dates and depth into the corridor
 
-**Gold left** (`code/raster_gold.py`): gold-bearing land = INGEMMET geology units (river deposits plus Madre de Dios Formation terraces). Validation: 90% of all land ever mined lies on them. Depletion = share of a zone's gold-bearing land mined by a year.
+- **Fake start dates (T1):** the north share's change, 3 years after minus 3 years before, for every start year 2008–2022. Only start years whose windows don't overlap the event count. Randomization p = rank of the real 2019 shift / number of start years: rank {{t1_road_shift_rank_clean:.0f}} of {{t1_road_shift_n_clean:.0f}} (p = {{t1_road_shift_ri_p_clean:.2f}}).
+- **Depth (T9):** mean distance north of the highway of first-time mining per year; OLS on a trend and a post-2019 dummy with Newey-West errors (18 years). Break {{t9_depth_post2019:+.1f}} km (p = {{t9_depth_post2019_p:.3f}}).
+- **Boundary sensitivity (T4):** narrow and wide La Pampa windows give the same picture.
 
-**Enforcement intensity** (`code/v2_tests.py`, T8): Peru's anti-illegal-mining programme (PP 0128), executed spending booked in Madre de Dios, 2015–2025. Department level only; a lower bound.
+**Code:** `code/v2_tests.py`.
 
-**Earlier wave** (T3): model M1 with Tambopata × 2012–13 on 2008–16 data. Tambopata did not fall more than other zones.
+@part When and why?
 
-**Sensitivity and products** (T4, T5): narrow and wide La Pampa windows give the same picture. Course table and raster give the same net numbers; first-time mining and old pits split them.
+## Timing and gold | Quarterly alerts, gold left, money and the earlier wave
 
-| Step | Status |
-|---|---|
-| S1 zone map | done; waiting for team review |
-| S2 pixel accounting | done |
-| S3 stream, Sankey, road bands, corridor share | done |
-| S3b gold-left proxy | done |
-| S4 comparisons on the new zones | course-table models kept; v2 adds fake-date test for the road |
-| S5 2012–14 wave | done (no Tambopata-specific dip) |
-| S6 quarterly alerts | done |
-| S7 enforcement intensity | done (department spending only) |
-| S8 products table | done |
+- **Quarterly timing:** GLAD-L alerts on land MapBiomas maps as mining. Compare the same quarter across years (clouds); data version break in 2021.
+- **Gold left:** gold-bearing land = INGEMMET geology units (river deposits plus Madre de Dios Formation terraces). Validation: {{gold_broad_validation:.0%}} of all land ever mined lies on them. Depletion = share of a zone's gold-bearing land mined by a year.
+- **Enforcement money (T8):** executed PP 0128 spending booked in Madre de Dios, 2015–2025. Department level only; a lower bound.
+- **Earlier wave (T3):** model M1 with Tambopata × 2012–13 on 2008–16 data. Tambopata did not fall more than other zones.
+- **Declared gold:** MINEM yearly files split into producer-declared gold and the artisanal estimate (until 2019); checked against the central bank for 2012 and 2019.
 
-**Code map:** see the walkthrough, section 22. **Plan and decisions:** `docs/PLAN_v2.md`, `docs/overnight/LOG.md`.
+**Code:** `code/glad_alerts.py`, `code/raster_gold.py`, `code/v2_tests.py`, `code/peru_gold_minem.py`.
 
-## 13. Statistics, twins, Brazil and predictions (added 12 Oct 2026, evening)
+@part Brazil and prediction
 
-**Cell panel with standard errors** (`code/v2_stats.py`):
-- **Units:** every 1-km cell in the study window (lon 70.65–69.30 W, lat 13.30–12.40 S), 2014–2025 for the DiD (baseline 2014–18), 2010–2025 for event studies.
-- **Comparison cells:** outside every named zone, the legal corridor and native communities (displacement targets are excluded). Cells never mined stay in, with zeros (dropping them would select on the outcome).
-- **Model:** `y_ct = a_c + g_t + Σ b_zp [zone = z][period = p]`, y = first-time mining (ha); cell and year fixed effects.
-- **Errors:** clustered by 10 × 10 km blocks (161 clusters), so nearby cells can share shocks.
-- **Robustness:** gold-bearing land × year effects; returns to old pits as outcome; Poisson (PPML) for zeros.
-- **Event studies:** year-by-year coefficients with the pooled 2014–18 period as reference, and a joint test that the 2010–13 leads are zero.
-- **Wild cluster bootstrap:** restricted (WCR), 999 Rademacher draws over 10-km blocks, after removing cell and year effects. Used because only 14 (La Pampa) and 10 (across the road) blocks contain the treated zones.
-- **Road gradient:** distance bands north/south of the highway × period, reference = 10–30 km south.
+## Brazil | Staggered operations, same pixel method
 
-**Depth into the corridor** (`code/v2_tests.py`, T9): mean distance north of the highway of first-time mining per year; OLS on a trend and a post-2019 dummy with Newey-West errors (18 years).
+**Question:** do territories fall after *their own* operation?
 
-**Fake start dates** (T1): randomization p = rank of the real 2019 shift among all start years / number of start years.
+- **Data:** MapBiomas Brazil Collection 11 rasters read remotely per territory (24 territories + Yanomami rings). Check: Kayapó 2024/2025 vs the platform.
+- **Model:** territory + year effects, treated from each territory's own first operation; Gardner's two-stage estimator (`did2s`); randomization inference (2,000 shuffles of operation dates across territories).
+- **Logic:** if operations cause falls, each territory should fall after its own date, not before.
+- **Result:** {{brv2_did2s_treat:+.2f}} log points (p = {{brv2_did2s_treat_p:.2f}}; randomization p = {{brv2_ri_p:.2f}}). Wrong sign, not significant. [[D]]
 
-**Rule-based twins** (`code/control_top3.py`): all areas passing the relaxed rules, now two (Munduruku dropped: an operation in May 2021 falls inside the rule's window). Pre-trend test: yearly log-growth difference (Tambopata minus twin), 2010–18, regressed on a constant and on a trend, Newey-West errors. No significance test for the gap (three years per area); the gap is reported descriptively.
+**Code:** `code/brazil_raster.py`, `brazil_v2.py`, `brazil_stagger.py` (AMW), `brazil_deter_all.py`.
 
-**Brazil, same pixel method** (`code/brazil_raster.py`, `brazil_v2.py`): MapBiomas Brazil Collection 11 rasters read remotely per territory (24 territories + Yanomami rings). Check: Kayapó 2024/2025 vs the platform. Staggered DiD (territory + year effects, treated from own first operation), Gardner's two-stage estimator (`did2s`) and randomization inference (2,000 shuffles of operation dates across territories).
+## Risk map | A prediction, tested out of sample
 
-**Risk map** (`code/v2_extra.py`, E4; prediction): logit on 1-km cells, validated on held-out 10-km blocks against a "mining nearby" benchmark; features = distance to highway and rivers, north side, gold-bearing share, mined share, mining within ~3 km, zone. Trained on 2018 → 2019–21, tested out of sample on 2021 → 2022–25 (AUC), applied to 2025 → 2026–28.
+- **Model:** logit on 1-km cells. Features: distance to highway and rivers, north side, gold-bearing share, mined share, mining within ~3 km, zone.
+- **Validation:** trained on 2018 → 2019–21, tested on 2021 → 2022–25 in held-out 10-km blocks, against a "mining nearby" benchmark. AUC {{risk_auc_spatial_holdout:.2f}} vs {{risk_auc_benchmark:.2f}}. [[P]]
+- **Use:** applied to 2025 → 2026–28. It misses river-borne incursions into the reserve.
 
-**Declared gold vs mapped mining** (E6): log declared tonnes on a trend and a post-2019 dummy, Newey-West errors; tonnes per 1,000 ha of first-time mining.
+**Code:** `code/v2_extra.py` (E4).
 
-**Qualitative overlays:** legality, enforcement history, taxes, politics, social and health costs come from opened sources in `docs/overnight/notes/qualitative_background.md` (each with link and quote) and 30 papers in `literature_v2.md`.
+@part Review
 
-## 14. Fixes after the critical review (12 Oct 2026)
+## Review fixes | What a critical referee found, and what changed
 
-- **Fake places:** Tambopata is removed from each placebo's comparison pool (before, its own fall made every placebo positive). Amazon-only pool added.
+- **Fake places:** Tambopata removed from each placebo's comparison pool (before, its own fall made every placebo positive). Amazon-only pool added.
 - **Causal number:** reworded to net mining; first-time mining reported alongside.
 - **Cell panel:** clean comparison cells, 2014–18 baseline, pooled reference in event studies, wild cluster bootstrap.
 - **Twins:** Munduruku dropped; no p-values on three annual values.
@@ -255,4 +249,10 @@ Each model also runs with a **fake 2016 date** on 2011–18 data. A trustworthy 
 - **Risk map:** spatial hold-out and benchmark.
 - **Gold proxy:** lift reported (share of mining vs share of land).
 - **Untraceable numbers** (Sentinel-2, producer-declared gold) now computed in code.
-Full review: `docs/overnight/notes/critical_review_v2.md`.
+
+:::more Where to find the rest
+- **Full review:** `docs/overnight/notes/critical_review_v2.md`.
+- **Plan and decisions:** `docs/PLAN_v2.md`, `docs/overnight/LOG.md`.
+- **Qualitative sources:** `docs/overnight/notes/qualitative_background.md` (each with link and quote) and 30 papers in `literature_v2.md`.
+- **Code map and every number:** the {{WALK_LINK}}, chapters Files and Appendix.
+:::

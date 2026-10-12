@@ -19,7 +19,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
 
-from common import ROOT, OUT, style_axes, finish_figure
+from common import (ROOT, OUT, style_axes, finish_figure, headline, label_end, callout, period_band,
+                    set_year_ticks, C, INK, INK2, MUTED, SURFACE)
 import raster_zones as rz
 
 SRC = "MapBiomas Peru Collection 4 rasters (class 30 mining), zones: SERNANP, INGEMMET D.L. 1100, RAISG roads, MapBiomas Amazonia native communities"
@@ -34,9 +35,13 @@ GROUPS = {
     "Reserves and parks": [1, 2],
     "Rest of Madre de Dios": [12],
 }
-COL = {"La Pampa sector": "#eb6834", "Corridor across the road": "#2a78d6", "Rest of mining corridor": "#9cc0ea",
-       "Native communities": "#e87ba4", "Rest of Tambopata buffer zone": "#f4b393", "Other buffer zones": "#1baf7a",
-       "Reserves and parks": "#008300", "Rest of Madre de Dios": "#b9b8b2"}
+COL = {"La Pampa sector": C["lapampa"], "Corridor across the road": C["corridor"], "Rest of mining corridor": C["corridor_rest"],
+       "Native communities": C["native"], "Rest of Tambopata buffer zone": C["lapampa_tint"], "Other buffer zones": C["buffer_tint"],
+       "Reserves and parks": C["reserve"], "Rest of Madre de Dios": C["other"]}
+SHORT = {"La Pampa sector": "La Pampa", "Corridor across the road": "Corridor across the road",
+         "Rest of mining corridor": "Rest of the legal corridor", "Native communities": "Native communities",
+         "Rest of Tambopata buffer zone": "Rest of Tambopata buffer zone", "Other buffer zones": "Other buffer zones",
+         "Reserves and parks": "Reserves and parks", "Rest of Madre de Dios": "Rest of Madre de Dios"}
 PERIODS = {"2016-18": (2016, 2018), "2019-21": (2019, 2021), "2022-25": (2022, 2025)}
 
 
@@ -50,141 +55,177 @@ def load():
 
 def fig_zone_map():
     import rasterio
-    import geopandas as gpd
     with rasterio.open(rz.OUT_WIN) as r:
         zone, first = r.read(1), r.read(2); b = r.bounds
     ext = (b.left, b.right, b.bottom, b.top)
     code_col = {c: COL[g] for g, cs in GROUPS.items() for c in cs}
-    rgb = np.ones(zone.shape + (3,))
+    bg = [int(SURFACE[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+    rgb = np.ones(zone.shape + (3,)) * bg
     for c, hx in code_col.items():
         m = zone == c
         rgb[m] = [int(hx[i:i + 2], 16) / 255 for i in (1, 3, 5)]
-    rgb = 1 - 0.55 * (1 - rgb)                              # pale zone fill
+    rgb = 1 - 0.5 * (1 - rgb)                               # pale zone fill
     mined = first > 0
-    rgb[mined] = [0.15, 0.15, 0.15]                         # every pixel ever mined, dark
-    fig, ax = plt.subplots(figsize=(11, 6.6))
+    rgb[mined] = [0.17, 0.2, 0.22]                          # every pixel ever mined, dark ink
+    fig, ax = plt.subplots(figsize=(9, 6.7))
+    headline(fig, "One mining belt, split by a road: La Pampa is illegal, the corridor across it is not",
+             "Our zones around La Pampa (dark = land ever mapped as mining, 1985–2025). Team check: are these boundaries right?")
     ax.imshow(rgb, extent=ext, interpolation="nearest")
     L = rz.layers()
-    L["ioh"].plot(ax=ax, color="black", lw=2.2)
-    ax.text(-69.72, -12.875, "Interoceanic\nHighway", fontsize=8, ha="center")
+    L["ioh"].plot(ax=ax, color=INK, lw=2.4)
     ax.set_xlim(b.left, b.right); ax.set_ylim(b.bottom, b.top); ax.set_aspect(1 / np.cos(np.radians(-12.9)))
     for x in rz.LP_LON:
-        ax.axvline(x, color="#52514e", ls=":", lw=1)
-    for nm, (x, y) in {"La Pampa sector": (-69.97, -13.02), "Corridor across\nthe road": (-69.97, -12.80),
-                       "Kotsimba": (-70.22, -13.07), "Tambopata reserve": (-69.80, -13.09)}.items():
-        ax.text(x, y, nm, fontsize=9, fontweight="bold", ha="center", color="#0b0b0b",
-                bbox=dict(facecolor="white", alpha=0.75, edgecolor="none", pad=1.5))
-    present = sorted(set(np.unique(zone)) - {0})
-    hs = [Patch(facecolor=COL[g], alpha=0.5, label=g) for g, cs in GROUPS.items() if set(cs) & set(present)]
-    hs += [Patch(facecolor="#262626", label="Ever mapped as mining (1985-2025)"),
-           Line2D([], [], color="#52514e", ls=":", label="La Pampa longitudes (70.15-69.80 W)")]
-    ax.legend(handles=hs, fontsize=7.5, loc="upper left", frameon=True, framealpha=0.92)
-    ax.set_title("Zone map v2 around La Pampa: please check these boundaries", loc="left", fontsize=11, fontweight="bold")
+        ax.axvline(x, color=INK2, ls=(0, (2, 2)), lw=0.9)
+    box = dict(facecolor="white", alpha=0.85, edgecolor="none", pad=2.0)
+    for nm, (x, y) in {"La Pampa sector": (-69.97, -13.025), "Corridor across\nthe road": (-69.97, -12.80),
+                       "Kotsimba\n(native community)": (-70.25, -13.075), "Tambopata reserve": (-69.80, -13.09)}.items():
+        ax.text(x, y, nm, fontsize=9, fontweight="medium", ha="center", va="center", color=INK, bbox=box)
+    ax.text(-69.70, -12.855, "Interoceanic\nHighway", fontsize=8.5, ha="center", va="center", color=INK, bbox=box)
+    ax.text(rz.LP_LON[0] + 0.005, b.top - 0.012, "← La Pampa window →", fontsize=7.5, color=INK2, va="top", ha="left",
+            bbox=dict(facecolor="white", alpha=0.7, edgecolor="none", pad=1))
     ax.tick_params(labelsize=8)
-    finish_figure(fig, f"Sources: {SRC}. La Pampa and 'across the road' have no official boundary: longitude window "
+    ax.set_xlabel("Longitude (°)"); ax.set_ylabel("Latitude (°)")
+    for sp in ax.spines.values():
+        sp.set_visible(True); sp.set_color("#c4c0b6")
+    present = sorted(set(np.unique(zone)) - {0})
+    hs = [Patch(facecolor=COL[g], alpha=0.5, label=SHORT[g]) for g, cs in GROUPS.items() if set(cs) & set(present)]
+    hs += [Patch(facecolor="#2b3338", label="Ever mapped as mining"),
+           Line2D([], [], color=INK, lw=2.4, label="Interoceanic Highway"),
+           Line2D([], [], color=INK2, ls=(0, (2, 2)), lw=0.9, label="La Pampa longitudes (70.15–69.80 W)")]
+    fig.legend(handles=hs, loc="lower center", ncol=4, bbox_to_anchor=(0.5, 0.075), fontsize=8, handlelength=1.4,
+               columnspacing=1.2)
+    finish_figure(fig, f"{SRC}. La Pampa and 'across the road' have no official boundary: longitude window "
                        f"{rz.LP_LON}, corridor within {rz.ACROSS_KM:.0f} km north of the road. Description.",
-                  OUT / "fig_v2_zone_map.png", rect_bottom=0.06)
+                  OUT / "fig_v2_zone_map.png", rect_bottom=0.20)
+
+
+def _gap_stack(ax, x, layers, colors):
+    """Stacked area with thin surface-coloured gaps between segments."""
+    ax.stackplot(x, layers, colors=colors, edgecolor=SURFACE, linewidth=0.9)
 
 
 def fig_stream(g):
     yrs = list(range(2010, 2026))
     w = g["new_land_ha"].unstack("group").reindex(index=yrs, columns=list(GROUPS)).fillna(0)
     tot = w.sum(axis=1)
-    fig, (a1, a2) = plt.subplots(2, 1, figsize=(11, 7.4), sharex=True, gridspec_kw={"height_ratios": [1.5, 1]})
-    a1.stackplot(yrs, w.T.values, colors=[COL[c] for c in w.columns], edgecolor="white", linewidth=0.6,
-                 labels=list(w.columns))
-    for y in yrs:
-        a1.text(y, tot[y] * 1.02, f"{tot[y] / 1000:.1f}k", ha="center", fontsize=7, color="#52514e")
-    a1.set_ylabel("Land mined for the first time (ha)")
-    a1.set_title("Land mined for the first time each year, Madre de Dios (stacked by zone; label = total)", loc="left", fontsize=10)
-    a1.axvline(2018.5, color="#0b0b0b", lw=1.2); a1.text(2018.6, a1.get_ylim()[1] * 0.96, "Mercurio", fontsize=8, va="top")
-    style_axes(a1)
-    a1.legend(fontsize=7.5, frameon=False, loc="upper left", ncol=2)
-    sh = w.div(tot, axis=0) * 100
-    a2.stackplot(yrs, sh.T.values, colors=[COL[c] for c in sh.columns], edgecolor="white", linewidth=0.6)
-    a2.set_ylim(0, 100); a2.set_ylabel("Share of the year's\nnewly mined land (%)")
-    a2.axvline(2018.5, color="#0b0b0b", lw=1.2)
-    style_axes(a2); a2.set_xticks(yrs); a2.set_xticklabels([f"'{str(y)[2:]}" for y in yrs], fontsize=8)
-    fig.suptitle("After 2019 newly mined land shifted from La Pampa to the legal corridor",
-                 x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC}. Newly mined land = pixels mapped as mining for the first time since 1985 "
+    fig, ax = plt.subplots(figsize=(9, 5.6))
+    headline(fig, "After 2019, new mining grew in the legal corridor, not in La Pampa",
+             "Land mined for the first time each year in Madre de Dios, hectares, stacked by zone. Numbers: yearly total.")
+    period_band(ax, 2018.5, 2021.5, "Operation years")
+    _gap_stack(ax, yrs, w.T.values, [COL[c] for c in w.columns])
+    ax.plot(yrs, tot, color=INK, lw=0.8, alpha=0.6)
+    for y in (2016, 2018, 2021, 2023, 2025):
+        ax.annotate(f"{tot[y]:,.0f}", xy=(y, tot[y]), xytext=(0, 5), textcoords="offset points", ha="center",
+                    va="bottom", fontsize=8, color=INK2, fontweight="medium")
+    # direct labels at the right edge for the big bands, legend for the thin ones
+    cum = w.loc[2025].cumsum(); prev = cum.shift(fill_value=0)
+    big = ["La Pampa sector", "Corridor across the road", "Rest of mining corridor", "Native communities"]
+    for grp in big:
+        label_end(ax, 2025.15, (cum[grp] + prev[grp]) / 2, SHORT[grp], COL[grp], dx=4)
+    small = [g_ for g_ in GROUPS if g_ not in big]
+    ax.legend(handles=[Patch(color=COL[g_], label=SHORT[g_]) for g_ in small], loc="upper left",
+              bbox_to_anchor=(0.0, 0.93), fontsize=8, title="Thin bands on top", title_fontsize=8, alignment="left")
+    ax.set_ylim(0, tot.max() * 1.18); ax.set_xlim(2009.6, 2025.4)
+    ax.set_ylabel("ha per year")
+    style_axes(ax); set_year_ticks(ax, yrs, short=True); ax.set_xticks(yrs)
+    ax.set_xticklabels([f"'{str(y)[2:]}" for y in yrs])
+    finish_figure(fig, f"{SRC}. Newly mined land = pixels mapped as mining for the first time since 1985 "
                        "(returns to old pits are in the Sankey). A shift in where newly mined land appears fits displacement but does "
-                       "not prove that the same miners moved. Description.", OUT / "fig_v2_stream.png", rect_bottom=0.08)
+                       "not prove that the same miners moved. Description.", OUT / "fig_v2_stream.png")
     return w
 
 
 def fig_sankey(g):
-    """Per period: two sources (new land, old pits) -> zone groups. Band widths = mean ha per year."""
+    """Per period: two sources (new land, old pits) -> zone groups. Band widths = mean ha per year (same scale)."""
     from matplotlib.path import Path as MPath
     from matplotlib.patches import PathPatch
-    fig, axes = plt.subplots(1, 3, figsize=(13, 5.6))
-    vmax = 0
-    data = {}
+    data = {}; vmax = 0
     for p, (a, b) in PERIODS.items():
         d = g.loc[a:b][["new_land_ha", "remined_ha"]].groupby("group").mean().reindex(list(GROUPS)).fillna(0)
         data[p] = d; vmax = max(vmax, d.values.sum())
-    scale = 0.78 / vmax
-    for ax, (p, d) in zip(axes, data.items()):
-        ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
+    hr = [d.values.sum() / vmax + 0.2 for d in data.values()]
+    fig, axes = plt.subplots(3, 1, figsize=(9, 9.6), gridspec_kw={"height_ratios": hr, "hspace": 0.25})
+    headline(fig, "New mining more than doubled by 2022–25, and more of it reused old pits",
+             "Mean hectares per year mined, by origin (left) and zone (right). Same scale in all three periods.")
+    unit = 1.0 / vmax            # data units per ha (x: 0..1 = node area, y in ha-scaled units)
+    for ax, (p, d), h_ax in zip(axes, data.items(), hr):
+        ax.set_xlim(0, 1); ax.set_ylim(-0.02, h_ax); ax.axis("off")
+        top = h_ax - 0.12
         src = {"New land": d.new_land_ha.sum(), "Return to old pits": d.remined_ha.sum()}
-        # left nodes
-        y = 0.86; left = {}
-        for s, v in src.items():
-            h = v * scale; left[s] = [y, y - h]; ax.add_patch(plt.Rectangle((0.02, y - h), 0.05, h, color="#52514e"))
-            ax.text(0.02, y + 0.005, f"{s}\n{v:,.0f} ha/yr", fontsize=7.5, va="bottom"); y -= h + 0.08
-        # right nodes
-        y = 0.90; right = {}
+        y = top; left = {}
+        for s_, v in src.items():
+            h = v * unit; left[s_] = [y, y - h]
+            ax.add_patch(plt.Rectangle((0.20, y - h), 0.018, h, color=INK2, lw=0))
+            ax.text(0.19, y - h / 2, f"{s_}\n{v:,.0f} ha/yr", fontsize=8.5, va="center", ha="right", color=INK)
+            y -= h + 0.035
+        gap = 0.008
+        right = {}; y = top
         for grp in GROUPS:
-            v = d.loc[grp].sum(); h = v * scale
+            v = d.loc[grp].sum(); h = v * unit
             right[grp] = [y, y - h]
-            ax.add_patch(plt.Rectangle((0.78, y - h), 0.05, h, color=COL[grp]))
-            if v > vmax * 0.03:
-                ax.text(0.85, y - h / 2, f"{grp}  {v:,.0f}", fontsize=7, va="center")
-            y -= h + 0.012
-        # flows
-        for s, col in (("New land", "new_land_ha"), ("Return to old pits", "remined_ha")):
+            ax.add_patch(plt.Rectangle((0.66, y - h), 0.018, h, color=COL[grp], lw=0))
+            y -= h + gap
+        # right labels: big groups individually (de-overlapped), small ones summed
+        small = ["Rest of Tambopata buffer zone", "Other buffer zones", "Reserves and parks", "Rest of Madre de Dios"]
+        last = None
+        for grp in GROUPS:
+            if grp in small: continue
+            v = d.loc[grp].sum(); yc = (right[grp][0] + right[grp][1]) / 2
+            if last is not None and last - yc < 0.05: yc = last - 0.05
+            ax.text(0.695, yc, f"{SHORT[grp]}  ", fontsize=8.5, va="center", ha="left", color=INK)
+            ax.text(0.99, yc, f"{v:,.0f}", fontsize=8.5, va="center", ha="right", color=INK, fontweight="medium")
+            last = yc
+        sv = sum(d.loc[g_].sum() for g_ in small)
+        ys = (right[small[0]][0] + right[small[-1]][1]) / 2 if small else 0
+        if last is not None and last - ys < 0.05: ys = last - 0.05
+        ax.text(0.695, ys, "Four small zones", fontsize=8, va="center", ha="left", color=INK2)
+        ax.text(0.99, ys, f"{sv:,.0f}", fontsize=8, va="center", ha="right", color=INK2)
+        for s_, col in (("New land", "new_land_ha"), ("Return to old pits", "remined_ha")):
             for grp in GROUPS:
-                v = d.loc[grp, col]; h = v * scale
+                v = d.loc[grp, col]; h = v * unit
                 if h <= 0: continue
-                y0a = left[s][0]; left[s][0] -= h
+                y0a = left[s_][0]; left[s_][0] -= h
                 y0b = right[grp][0]; right[grp][0] -= h
-                verts = [(0.07, y0a), (0.42, y0a), (0.43, y0b), (0.78, y0b), (0.78, y0b - h), (0.43, y0b - h),
-                         (0.42, y0a - h), (0.07, y0a - h), (0.07, y0a)]
+                x0, x1 = 0.218, 0.66; xm = (x0 + x1) / 2
+                verts = [(x0, y0a), (xm, y0a), (xm, y0b), (x1, y0b), (x1, y0b - h), (xm, y0b - h),
+                         (xm, y0a - h), (x0, y0a - h), (x0, y0a)]
                 codes = [MPath.MOVETO, MPath.CURVE4, MPath.CURVE4, MPath.CURVE4, MPath.LINETO, MPath.CURVE4,
                          MPath.CURVE4, MPath.CURVE4, MPath.CLOSEPOLY]
                 ax.add_patch(PathPatch(MPath(verts, codes), facecolor=COL[grp], alpha=0.45, lw=0))
-        ax.set_title(f"{p}: {d.values.sum():,.0f} ha/yr of new mining", loc="left", fontsize=9.5)
-    fig.suptitle("Where new mining came from (new land or old pits) and where it went, per period",
-                 x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC}. Widths = mean hectares per year in the period, same scale in all three panels. "
-                       "'Return to old pits' = mining on pixels that were mining in an earlier year but not the year before "
+        ax.text(0.0, h_ax - 0.02, p, fontsize=11, fontweight="medium", color=INK, va="top")
+        ax.text(0.0, h_ax - 0.075, f"{d.values.sum():,.0f} ha/yr in total", fontsize=8.5, color=INK2, va="top")
+        ax.text(0.99, h_ax - 0.02, "ha/yr", fontsize=8, color=INK2, va="top", ha="right")
+    finish_figure(fig, f"{SRC}. 'Return to old pits' = mining on pixels that were mining in an earlier year but not the year before "
                        "(includes some year-to-year map flicker, about 300 ha/yr in La Pampa before 2019). "
-                       "Flows are pixels changing class, not people moving. Description.", OUT / "fig_v2_sankey.png", rect_bottom=0.08)
+                       "Four small zones = rest of Tambopata buffer zone, other buffer zones, reserves and parks, rest of Madre de Dios. "
+                       "Flows are pixels changing class, not people moving. Description.", OUT / "fig_v2_sankey.png")
     return data
 
 
 def fig_road_bands():
     b = pd.read_csv(rz.OUT_BAND)
     b["new_ha"] = b.new_land_ha                     # first-ever mining (robust to year-to-year flicker)
-    fig, axes = plt.subplots(1, 3, figsize=(13, 4.2), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(9, 4.2), sharey=True)
+    headline(fig, "After 2019, new mining jumped from the south side of the highway to the north side",
+             "Land mined for the first time per year, ha, per 1-km band from the highway (La Pampa longitudes only)")
     res = {}
     for ax, (p, (a, c)) in zip(axes, PERIODS.items()):
         d = b[b.year.between(a, c)].groupby("km_from_road").new_ha.mean()
         res[p] = d
-        ax.bar(d.index + 0.5, d.values, width=0.92, color=["#2a78d6" if k >= 0 else "#eb6834" for k in d.index])
-        ax.axvline(0, color="black", lw=1.6)
-        n, s = d[d.index >= 0].sum(), d[d.index < 0].sum()
-        ax.set_title(f"{p}: south {s:,.0f} | north {n:,.0f} ha/yr", loc="left", fontsize=9.5)
-        ax.set_xlabel("km from the highway (south < 0 < north)")
+        ax.bar(d.index + 0.5, d.values, width=0.86, color=[C["corridor"] if k >= 0 else C["lapampa"] for k in d.index], lw=0)
+        ax.axvline(0, color=INK, lw=1.4)
+        n, s_ = d[d.index >= 0].sum(), d[d.index < 0].sum()
+        ax.set_title(p, pad=20)
+        ax.text(0, 1.02, f"south {s_:,.0f}  ·  north {n:,.0f} ha/yr", transform=ax.transAxes, fontsize=8, color=INK2,
+                va="bottom", ha="left")
+        ax.set_xlabel("km from the highway")
         style_axes(ax)
-    axes[0].set_ylabel("Land mined for the first time\nper year (ha), per 1-km band")
-    fig.legend(handles=[Patch(color="#eb6834", label="South of the road: buffer zone side (La Pampa)"),
-                        Patch(color="#2a78d6", label="North of the road: legal corridor side")],
-               loc="lower center", ncol=2, fontsize=8, frameon=False, bbox_to_anchor=(0.5, 0.12))
-    fig.suptitle("Crossing the road: after 2019 newly mined land shifted to the north side of the highway",
-                 x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC}. Only the La Pampa longitudes ({rz.LP_LON}); bands of 1 km measured north-south from "
-                       "the highway. Description.", OUT / "fig_v2_road_bands.png", rect_bottom=0.24)
+    ymax = axes[0].get_ylim()[1]
+    axes[0].text(-2, ymax * 0.97, "← south:\nLa Pampa side", fontsize=8, color=INK, ha="right", va="top")
+    axes[0].text(2, ymax * 0.97, "north: →\ncorridor side", fontsize=8, color=INK, ha="left", va="top")
+    axes[0].set_ylabel("ha per year, per 1-km band")
+    finish_figure(fig, f"{SRC}. Only the La Pampa longitudes ({rz.LP_LON}); bands of 1 km measured north-south from "
+                       "the highway. Description.", OUT / "fig_v2_road_bands.png")
     return res
 
 
@@ -193,16 +234,23 @@ def fig_corridor_share(g):
     w = g["new_land_ha"].unstack("group").reindex(index=yrs).fillna(0)
     cor = w["Corridor across the road"] + w["Rest of mining corridor"]
     share = cor / w.sum(axis=1) * 100
-    fig, ax = plt.subplots(figsize=(9, 3.8))
-    ax.plot(yrs, share, color="#2a78d6", lw=2, marker="o", ms=4)
-    ax.axvline(2018.5, color="#0b0b0b", lw=1.2); ax.text(2018.6, 95, "Mercurio", fontsize=8, va="top")
-    ax.set_ylim(0, 100); ax.set_ylabel("% of newly mined land\ninside the legal corridor")
+    fig, ax = plt.subplots(figsize=(9, 4.4))
+    headline(fig, "The legal corridor's share of new mining rose from about half to almost three quarters",
+             "Share of land mined for the first time in Madre de Dios that lies inside the legal corridor, % (communities excluded)")
+    period_band(ax, 2018.5, 2021.5)
+    ax.text(2020, 3, "Operation years", ha="center", fontsize=7.5, color=INK2)
+    ax.plot(yrs, share, color=C["corridor"], lw=2.2, zorder=3)
+    ax.plot(yrs, share, "o", color=C["corridor"], ms=4.5, mec="white", mew=1.0, zorder=4)
+    for p, (a, b) in PERIODS.items():
+        m = share.loc[a:b].mean()
+        ax.plot([a - 0.35, b + 0.35], [m] * 2, color=C["corridor"], lw=5, alpha=0.2, solid_capstyle="butt", zorder=2)
+        ax.text((a + b) / 2, 93, f"{p.replace('-', '–')} mean", ha="center", va="bottom", fontsize=8, color=INK2)
+        ax.text((a + b) / 2, 92, f"{m:.0f}%", ha="center", va="top", fontsize=11, color=INK, fontweight="medium")
+    ax.set_ylim(0, 105); ax.set_xlim(2004.5, 2025.5); ax.set_yticks(range(0, 101, 20)); ax.set_ylabel("% of first-time mining")
     style_axes(ax); ax.set_xticks(yrs[::2])
-    ax.set_title("Share of newly mined land in Madre de Dios inside the legal corridor (communities counted separately)",
-                 loc="left", fontsize=10)
-    finish_figure(fig, f"Source: {SRC}. Corridor = D.L. 1100 polygon (INGEMMET, referential) minus native communities. "
+    finish_figure(fig, f"{SRC}. Corridor = D.L. 1100 polygon (INGEMMET, referential) minus native communities. "
                        "Inside the corridor mining can be legal; outside it is presumed illegal. Description.",
-                  OUT / "fig_v2_corridor_share.png", rect_bottom=0.12)
+                  OUT / "fig_v2_corridor_share.png")
     return share
 
 

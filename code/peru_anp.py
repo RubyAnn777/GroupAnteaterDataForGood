@@ -19,7 +19,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from common import (ROOT, OUT, period_mean, x_of, style_axes, add_event_markers, set_year_ticks,
-                    finish_figure, EVENT_TITLE_PAD)
+                    finish_figure, EVENT_TITLE_PAD, headline, label_end, callout, C, INK, INK2)
 import checks
 
 ANP_FILE = ROOT / "data_raw" / "mapbiomas_peru" / "MAPBIOMAS-PERU-LULC-COL4-AREAS-PROTEGIDAS.xlsx"
@@ -34,8 +34,8 @@ RES = {  # label -> (ANP name, category, buffer-zone column name in peru.build_s
     "Bahuaja-Sonene NP": ("Bahuaja-Sonene", "Parque Nacional", "Bahuaja-Sonene"),
     "Amarakaeri RC": ("Amarakaeri", "Reserva Comunal", "Amarakaeri"),
 }
-COL = {"Tambopata NR": "#008300", "Bahuaja-Sonene NP": "#6250d6", "Amarakaeri RC": "#1baf7a"}
-BZCOL = {"Tambopata NR": "#eb6834", "Bahuaja-Sonene NP": "#6250d6", "Amarakaeri RC": "#1baf7a"}   # buffer zones: treated orange
+COL = {"Tambopata NR": C["reserve"], "Bahuaja-Sonene NP": C["other"], "Amarakaeri RC": C["buffer"]}
+BZCOL = {"Tambopata NR": C["lapampa"], "Bahuaja-Sonene NP": C["other"], "Amarakaeri RC": C["buffer"]}   # buffer zones: treated orange
 
 def load_anp() -> tuple[pd.DataFrame, pd.DataFrame]:
     """Return (raw COVERAGE_4 rows, panel of mining_ha: one row per ANP-year, zeros filled)."""
@@ -157,38 +157,63 @@ def run(pack, reg):
     investigate_2017(reg)
 
     # ---- figures
-    yrs = list(range(Y0 + 1, 2026))
-    fig, (a1, a2) = plt.subplots(2, 1, figsize=(8.5, 7.5), sharex=True)
+    yrs = list(range(Y0 + 1, 2026)); xs = x_of(yrs)
+    fig, (a1, a2) = plt.subplots(2, 1, figsize=(9, 7.8), sharex=True, gridspec_kw={"hspace": 0.38})
+    headline(fig, "Mining inside the reserves stays small next to their buffer zones",
+             "New mining area each year (annual addition, ha), 2011–2025. Note the different y-scales.")
     for k in RES:
-        a1.plot(x_of(yrs), adds.loc[yrs, k], marker="o", markersize=4, color=COL[k], linewidth=2, label=k)
-        a2.plot(x_of(yrs), bz.loc[yrs, k], marker="o", markersize=4, color=BZCOL[k], linewidth=2, label=k.split()[0] + " buffer zone")
-    a1.set_ylabel("New mining area INSIDE\nthe reserve (ha)")
-    a1.set_title("Mining inside the reserves (top) is small next to their buffer zones (bottom)", loc="left", pad=EVENT_TITLE_PAD)
-    a1.annotate("2017: +534 ha in one year step\n(gross conversion of forest, flooded forest,\nagri. mosaic, beach; classes also swap that year)",
-                xy=(2017, adds.loc[2017, "Tambopata NR"]), xytext=(2012.0, 330), fontsize=7, color="#555555",
-                arrowprops=dict(arrowstyle="-", color="#999999"))
-    a2.set_ylabel("New mining area in the\nbuffer zone (ha)")
-    for a in (a1, a2):
-        a.legend(fontsize=8, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="upper left").set_zorder(10)
-    a1.set_ylim(None, 560)
+        a1.plot(xs, adds.loc[yrs, k], marker="o", markersize=4, mec="white", mew=0.8, color=COL[k], linewidth=2)
+        a2.plot(xs, bz.loc[yrs, k], marker="o", markersize=4, mec="white", mew=0.8, color=BZCOL[k], linewidth=2)
+    # direct labels at the right end, nudged apart so they never collide
+    def _labels(ax, vals, names, cols, gap):
+        order = sorted(range(len(vals)), key=lambda i: vals[i])
+        ys, last = {}, -1e18
+        for i in order:
+            ys[i] = max(vals[i], last + gap); last = ys[i]
+        for i in range(len(vals)):
+            ax.annotate(names[i], xy=(2025, vals[i]), xytext=(2025.45, ys[i]), textcoords="data", va="center", ha="left",
+                        fontsize=8.5, color=INK, fontweight="semibold", annotation_clip=False)
+    _labels(a1, [adds.loc[2025, k] for k in RES], ["Tambopata", "Bahuaja-Sonene", "Amarakaeri"],
+            [COL[k] for k in RES], 62)
+    _labels(a2, [bz.loc[2025, k] for k in RES], ["Tambopata", "Bahuaja-Sonene", "Amarakaeri"],
+            [BZCOL[k] for k in RES], 330)
+    a1.set_ylabel("ha per year")
+    a1.set_title("Inside the reserves and park", pad=EVENT_TITLE_PAD)
+    callout(a1, 2017, adds.loc[2017, "Tambopata NR"], "2017: one-year step of +534 ha\n(map reclassification, see text)",
+            dx=-60, dy=-2, ha="right")
+    callout(a1, 2025, adds.loc[2025, "Tambopata NR"], f"2025: +{adds.loc[2025, 'Tambopata NR']:,.0f} ha\ninside Tambopata",
+            dx=-56, dy=8, ha="right")
+    a2.set_ylabel("ha per year")
+    a2.set_title("Their buffer zones")
+    a1.set_ylim(None, 600)
     for i, a in enumerate((a1, a2)):
         style_axes(a); add_event_markers(a, label=(i == 0))
+    a2.set_xlim(Y0 + 0.4, 2027.4)                       # room on the right for the direct labels
+    for a in (a1, a2):
+        a.spines["bottom"].set_bounds(Y0 + 0.6, 2025.4)
     set_year_ticks(a2, yrs)
-    finish_figure(fig, f"Source: {SRC_FIG}. Same collection, so the panels are comparable; note the different y-scales.\n"
-                       "Description only. Mining area = all mining (legal and illegal); river dredging and mercury are invisible.",
+    finish_figure(fig, f"{SRC_FIG}. Same collection, so the panels are comparable. Description only. Mining area = all "
+                       "mining (legal and illegal); river dredging and mercury are invisible.",
                   OUT / "fig_peru_inside_reserves.png", event_note=True)
 
-    yrs2 = list(range(2014, 2026))
-    fig, ax = plt.subplots(figsize=(8.5, 4.6))
-    ax.bar(x_of(yrs2), comb.loc[yrs2, "Tambopata buffer zone"], color="#eb6834", width=0.8, label="Tambopata buffer zone")
-    ax.bar(x_of(yrs2), comb.loc[yrs2, "Tambopata NR (inside)"], bottom=comb.loc[yrs2, "Tambopata buffer zone"].clip(lower=0),
-           color="#008300", width=0.8, label="Tambopata National Reserve (inside)")
-    ax.plot(x_of(yrs2), comb.loc[yrs2, "Tambopata BZ + NR"], color="black", marker="o", markersize=4, linewidth=1.2,
-            label="Sum: buffer zone + reserve")
-    ax.set_ylabel("New mining area (ha)")
-    ax.set_title("Tambopata: did mining move into the reserve? Buffer zone + reserve combined", loc="left", pad=EVENT_TITLE_PAD)
-    ax.legend(fontsize=8, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="upper left").set_zorder(10)
-    style_axes(ax); add_event_markers(ax, label=True); set_year_ticks(ax, yrs2)
-    finish_figure(fig, f"Source: {SRC_FIG}. Assumes the buffer zone excludes the reserve. Description only.",
+    yrs2 = list(range(2014, 2026)); x2 = x_of(yrs2)
+    fig, ax = plt.subplots(figsize=(9, 5.2))
+    headline(fig, "Little of Tambopata's mining moved into the reserve, until 2025",
+             "New mining area each year (annual addition, ha): Tambopata buffer zone and the reserve inside it, stacked")
+    ax.bar(x2, comb.loc[yrs2, "Tambopata buffer zone"], color=C["lapampa"], width=0.72)
+    ax.bar(x2, comb.loc[yrs2, "Tambopata NR (inside)"], bottom=comb.loc[yrs2, "Tambopata buffer zone"].clip(lower=0),
+           color=C["reserve"], width=0.72, edgecolor="white", linewidth=0.8)
+    ax.plot(x2, comb.loc[yrs2, "Tambopata BZ + NR"], color=INK, marker="o", markersize=4, mec="white", mew=0.8, linewidth=1.2)
+    from matplotlib.patches import Patch
+    from matplotlib.lines import Line2D
+    ax.legend(handles=[Patch(color=C["lapampa"], label="Buffer zone"), Patch(color=C["reserve"], label="Inside the reserve"),
+                       Line2D([], [], color=INK, marker="o", ms=4, lw=1.2, label="Sum")],
+              loc="upper left", ncol=3, fontsize=8.5, handlelength=1.2)
+    ax.set_ylim(None, ax.get_ylim()[1] * 1.12)
+    ax.set_ylabel("ha per year")
+    ax.set_title("Did mining move into the reserve?", pad=EVENT_TITLE_PAD)
+    style_axes(ax); add_event_markers(ax, label=True)
+    ax.set_xlim(2013.4, 2025.6); set_year_ticks(ax, yrs2)
+    finish_figure(fig, f"{SRC_FIG}. Assumes the buffer zone excludes the reserve. Description only.",
                   OUT / "fig_peru_displacement_into_reserve.png", event_note=True)
     return dict(levels=levels, adds=adds, bz=bz, combined=comb, period_means=pm)

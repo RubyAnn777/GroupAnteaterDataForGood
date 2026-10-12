@@ -22,7 +22,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-from common import ROOT, OUT, style_axes, finish_figure
+from common import (ROOT, OUT, style_axes, finish_figure, headline, label_end, callout, period_band, C, INK, INK2,
+                    MUTED, GRID, AXIS, SURFACE)
 
 INTER = ROOT / "data_intermediate"
 TU = "PE-BZ-RN09"                         # Tambopata buffer zone (treated)
@@ -77,99 +78,134 @@ def compare(w, ids, label):
 
 
 def fig_funnel(t, n_all):
-    steps = [("All areas with polygons", n_all),
-             ("R1  mining before 2019 (>= 500 ha)", int(t.r1_mining.sum())),
-             ("R2  + no operation found, 2017-25", int((t.r1_mining & t.r2_no_op).sum())),
+    steps = [("All protected areas, buffer zones and\nindigenous territories with polygons", n_all),
+             ("R1  had mining before 2019 (≥ 500 ha)", int(t.r1_mining.sum())),
+             ("R2  + no operation found, 2017–25", int((t.r1_mining & t.r2_no_op).sum())),
              ("R3  + outside Madre de Dios", int((t.r1_mining & t.r2_no_op & t.r3_outside_mdd).sum())),
              ("R4  + lowland and similar scale", int(t.pass_strict.sum()))]
-    fig, ax = plt.subplots(figsize=(8.5, 3.6))
-    for i, (lab, n) in enumerate(steps):
-        ax.barh(-i, n, color="#2a78d6" if i == len(steps) - 1 else "#9aa5a8", height=0.62)
-        ax.text(n * 1.08 if n else 0.3, -i, f"{n:,}", va="center", fontsize=9, fontweight="bold")
-    ax.set_yticks([-i for i in range(len(steps))]); ax.set_yticklabels([s[0] for s in steps], fontsize=9)
-    ax.set_xscale("symlog", linthresh=1); ax.set_xlim(0, n_all * 3)
-    ax.set_xticks([]); ax.tick_params(axis="x", length=0); ax.xaxis.set_minor_locator(plt.NullLocator())
-    for sp in ("top", "right", "bottom"): ax.spines[sp].set_visible(False)
     names = t[t.pass_strict].name.tolist()
     rel = t[t.pass_relaxed & ~t.pass_strict].name.tolist()
-    ax.set_title("Ruby's four rules leave " + (f"{len(names)} area(s)" if names else "no area") +
-                 " in the whole Amazon that fits", loc="left", fontsize=11, fontweight="bold")
-    note = ("Survivors: " + (", ".join(names) if names else "none") + ". If operations after 2021 are allowed (R2b): " +
-            (", ".join(rel[:6]) if rel else "none") + ".")
-    finish_figure(fig, note + f" Sources: {SRC}. Bars on a log scale. Description.", OUT / "fig_control_funnel.png",
-                  rect_bottom=0.2, event_note=False)
+    fig, ax = plt.subplots(figsize=(9, 4.0))
+    headline(fig, "No area in the Amazon passes all four rules" if not names else
+             f"Only {len(names)} area(s) in the Amazon pass all four rules",
+             "Areas left after each rule (log scale). Rules applied in order to find a fair ‘what if’ for La Pampa.")
+    for i, (lab, n) in enumerate(steps):
+        last = i == len(steps) - 1
+        ax.barh(-i, max(n, 0.0), color=C["twin"] if last else C["other"], height=0.6)
+        ax.annotate(f"{n:,}", xy=(max(n, 1) if n else 0.02, -i), xytext=(6, 0), textcoords="offset points",
+                    va="center", ha="left", fontsize=10, fontweight="bold", color=INK)
+    ax.set_yticks([-i for i in range(len(steps))]); ax.set_yticklabels([s_[0] for s_ in steps], fontsize=9, color=INK)
+    ax.set_xscale("symlog", linthresh=1); ax.set_xlim(0, n_all * 4)
+    ax.set_xticks([]); ax.tick_params(axis="both", length=0); ax.xaxis.set_minor_locator(plt.NullLocator())
+    for sp in ("top", "right", "bottom", "left"): ax.spines[sp].set_visible(False)
+    ax.text(0.99, 0.02, f"If operations after 2021 are allowed (R2b), {len(rel)} pass:\n" + ("\n".join(rel[:6]) if rel else "none"),
+            transform=ax.transAxes, ha="right", va="bottom", fontsize=8.5, color=INK2, linespacing=1.4)
+    note = "Survivors of all four rules: " + (", ".join(names) if names else "none") + "."
+    finish_figure(fig, f"Sources: {SRC}. {note} Description.", OUT / "fig_control_funnel.png")
 
 
 def fig_map(t, u, w, chosen):
     import geopandas as gpd
-    fig, ax = plt.subplots(figsize=(9, 6.6))
+    fig, ax = plt.subplots(figsize=(9, 7.6))
+    headline(fig, "The twin candidates sit far from La Pampa, in Brazil",
+             "Areas with ≥ 500 ha of mining by 2018 (dot area = hectares, Amazon Mining Watch), by operation status")
     base = ROOT / "data_raw" / "raisg"
     parts = sorted(base.glob("anp_nacionales_part*.geojson"))
     if parts:
         g = pd.concat([gpd.read_file(p)[["geometry"]] for p in parts])
-        gpd.GeoDataFrame(g, crs=4326).plot(ax=ax, color="#E3EDE0", edgecolor="#cfd8cc", lw=0.2, zorder=0)
-    pal = {"passes all rules": "#2a78d6", "passes if post-2021 operations allowed": "#6250d6",
-           "operation reported": "#eb6834", "unclear / not searched": "#9aa5a8"}
+        gpd.GeoDataFrame(g, crs=4326).plot(ax=ax, color="#dfeadb", edgecolor="#c9d6c4", lw=0.2, zorder=0)
+    pal = {"passes all rules": C["corridor"], "passes if post-2021 operations allowed": C["twin"],
+           "operation reported": C["lapampa_tint"], "unclear / not searched": C["other"]}
     def cls(r):
         if r.pass_strict: return "passes all rules"
         if r.pass_relaxed: return "passes if post-2021 operations allowed"
         if r.verdict == "yes": return "operation reported"
         return "unclear / not searched"
     m = t[t.r1_mining].copy(); m["cls"] = m.apply(cls, axis=1)
-    for c, col in pal.items():
+    order = ["unclear / not searched", "operation reported", "passes all rules", "passes if post-2021 operations allowed"]
+    for c in order:
         d = m[m.cls == c]
-        ax.scatter(d.lon, d.lat, s=np.sqrt(d.stock_2018) * 2.2, color=col, edgecolor="white", lw=0.6, zorder=3, label=c)
+        ax.scatter(d.lon, d.lat, s=np.sqrt(d.stock_2018) * 2.2, color=pal[c], edgecolor=SURFACE, lw=0.8,
+                   zorder=3 + order.index(c), alpha=0.95)
     tu = u.loc[TU]
-    ax.scatter(tu.lon, tu.lat, s=np.sqrt(w.loc[TU, 2018]) * 2.2, marker="*", color="black", zorder=4, label="Tambopata (treated)")
-    for uid in [TU] + chosen:
+    ax.scatter(tu.lon, tu.lat, s=np.sqrt(w.loc[TU, 2018]) * 2.2, color=C["lapampa"], edgecolor=INK, lw=1.0, zorder=8)
+    ax.annotate("Tambopata buffer zone\n(treated, La Pampa)", (tu.lon, tu.lat), xytext=(-14, -26), textcoords="offset points",
+                fontsize=8.5, fontweight="semibold", ha="right", color=INK,
+                arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.7))
+    twins = list(dict.fromkeys(list(chosen) + m[m.cls.isin(["passes all rules", "passes if post-2021 operations allowed"])].index.tolist()))
+    for k, uid in enumerate(twins):
         r = u.loc[uid]
-        ax.annotate(r["name"].split(" (")[0], (r.lon, r.lat), xytext=(6, 4), textcoords="offset points", fontsize=8,
-                    fontweight="bold" if uid in chosen else "normal")
+        ax.annotate(r["name"].split(" (")[0] + "\n(rule-based twin)", (r.lon, r.lat), xytext=(28, 34 - 80 * k),
+                    textcoords="offset points", fontsize=8.5, fontweight="semibold", color=INK,
+                    arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.7))
     ax.set_xlim(-80, -48); ax.set_ylim(-19, 9); ax.set_aspect(1)
-    ax.set_xlabel("Longitude"); ax.set_ylabel("Latitude")
-    for sp in ("top", "right"): ax.spines[sp].set_visible(False)
-    hs = [Line2D([], [], marker="o", ls="", color=c, ms=7, label=l) for l, c in pal.items()]
-    hs.append(Line2D([], [], marker="*", ls="", color="black", ms=10, label="Tambopata buffer zone (treated)"))
-    ax.legend(handles=hs, fontsize=7.5, frameon=True, framealpha=0.9, loc="lower left",
-              title="Areas with >= 500 ha mining by 2018 (dot size = ha)", title_fontsize=7.5)
-    ax.set_title("Candidate comparison areas across the Amazon", loc="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Sources: {SRC}; green shapes = RAISG national protected areas. Description.",
-                  OUT / "fig_control_map.png", rect_bottom=0.06, event_note=False)
+    ax.set_xticks([]); ax.set_yticks([]); ax.set_xlabel(""); ax.set_ylabel("")
+    for sp in ax.spines.values(): sp.set_visible(False)
+    hs = [Line2D([], [], marker="o", ls="", color=pal[l], ms=7, label=l) for l in
+          ["passes all rules", "passes if post-2021 operations allowed", "operation reported", "unclear / not searched"]
+          if (m.cls == l).any()]
+    hs.append(Line2D([], [], marker="o", ls="", color=C["lapampa"], mec=INK, ms=8, label="Tambopata buffer zone"))
+    hs.append(Line2D([], [], marker="s", ls="", color="#dfeadb", ms=9, label="National protected areas (RAISG)"))
+    ax.legend(handles=hs, fontsize=8, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.01), ncol=3,
+              handletextpad=0.3, columnspacing=1.2)
+    finish_figure(fig, f"{SRC}. Longitude −80 to −48, latitude −19 to 9. Description.", OUT / "fig_control_map.png")
 
 
 def fig_compare(w, u, chosen_strict, chosen_relaxed, mbpre):
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(12, 4.4), gridspec_kw={"width_ratios": [1.25, 1]})
-    lines = [([TU], "Tambopata buffer zone (treated)", "#eb6834", "-")]
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(9, 4.4), gridspec_kw={"width_ratios": [1.15, 1], "wspace": 0.55})
+    tam_d = shares(w, [TU]).loc[2019:2021].mean()
+    twin_id = chosen_strict or chosen_relaxed
+    twin_d = shares(w, [twin_id]).loc[2019:2021].mean() if twin_id else np.nan
+    headline(fig, "Tambopata added new mining far more slowly than its twin in 2019–21",
+             "Left: new mining per year, % of each area’s own 2018 mining (Amazon Mining Watch). "
+             "Right: mining area, index 2018 = 100 (MapBiomas).")
+    lines = [([TU], "Tambopata BZ\n(treated)", C["lapampa"], "-")]
     if chosen_strict:
-        lines.append(([chosen_strict], u.loc[chosen_strict, "name"].split(" (")[0] + " (passes all rules)", "#2a78d6", "-"))
+        lines.append(([chosen_strict], u.loc[chosen_strict, "name"].split(" (")[0], C["corridor"], "-"))
     if chosen_relaxed:
-        lines.append(([chosen_relaxed], u.loc[chosen_relaxed, "name"].split(" (")[0] + " (rule-based twin; first operation 2023)", "#6250d6", "--"))
-    lines.append(([AMARAKAERI], "Amarakaeri buffer zone (neighbour)", "#1baf7a", ":"))
+        lines.append(([chosen_relaxed], u.loc[chosen_relaxed, "name"].split(" (")[0] + "\n(twin; own op. 2023)", C["twin"], "-"))
+    lines.append(([AMARAKAERI], "Amarakaeri BZ\n(neighbour)", C["buffer"], "-"))
+    period_band(a1, 2018.5, 2021.5, "Mercurio years")
+    ends, ymax = [], 0.0
     for ids, lab, col, ls in lines:
         s = shares(w, ids)
-        a1.plot(YRS[:-1], s[YRS[:-1]], color=col, ls=ls, lw=2, marker="o", ms=4, label=lab)
-        a1.plot(YRS[-2:], s[YRS[-2:]], color=col, ls=":", lw=1.2)
-        a1.plot([2025], [s[2025]], marker="o", mfc="white", color=col, ms=5)
-    a1.axvspan(2018.5, 2021.5, color="#f3e3c2", alpha=0.5, zorder=0)
-    a1.text(2020, 0.5, "Mercurio years", ha="center", fontsize=8, va="bottom", color="#8a6d2b")
-    style_axes(a1); a1.set_ylim(0, None)
-    a1.set_ylabel("New mining per year,\n% of the area's 2018 mining (AMW)")
-    a1.set_title("Same satellite measure for both areas, 2019-2025", loc="left", fontsize=9.5)
-    a1.legend(fontsize=7.5, frameon=True, framealpha=0.9, loc="upper right")
-    a1.set_xticks(YRS)
-    for (lab, s, col, ls) in mbpre:
-        a2.plot(s.index, s.values, color=col, ls=ls, lw=1.8, label=lab)
-    a2.axvline(2018.5, color="#52514e", lw=1, ls="--")
-    a2.axhline(100, color="#888", lw=0.6)
+        a1.plot(YRS[:-1], s[YRS[:-1]], color=col, ls=ls, lw=2, zorder=3)
+        a1.plot(YRS[:-1], s[YRS[:-1]], "o", color=col, ms=4, mec="white", mew=0.8, zorder=4)
+        a1.plot(YRS[-2:], s[YRS[-2:]], color=col, ls=(0, (2, 2)), lw=1.2, zorder=3)
+        a1.plot([2025], [s[2025]], marker="o", mfc="white", color=col, ms=5, zorder=4)
+        ends.append([s[2025], lab]); ymax = max(ymax, float(s[YRS].max()))
+    # spread end labels so they do not collide (two-line labels: keep ~3.6 points of y per label)
+    style_axes(a1); a1.set_ylim(0, ymax * 1.07)
+    gap = 0.135 * a1.get_ylim()[1]
+    lab_of = {}
+    order = sorted(range(len(ends)), key=lambda i: ends[i][0])
+    ys = [ends[i][0] for i in order]
+    for j in range(1, len(ys)):
+        ys[j] = max(ys[j], ys[j - 1] + gap)
+    shift = max(0, ys[-1] - a1.get_ylim()[1] * 0.97)
+    for j, i in enumerate(order):
+        a1.annotate(ends[i][1], xy=(2025, ends[i][0]), xytext=(2025.35, ys[j] - shift), textcoords="data", va="center",
+                    fontsize=7.5, color=INK, fontweight="semibold", annotation_clip=False, linespacing=1.1,
+                    arrowprops=dict(arrowstyle="-", color=AXIS, lw=0.6, shrinkA=0, shrinkB=3))
+    a1.set_ylabel("% of own 2018 mining")
+    a1.set_title("Pace of new mining, 2019–2025", pad=8)
+    a1.set_xticks(YRS); a1.set_xticklabels([f"'{str(y)[2:]}" for y in YRS])
+    a1.set_xlim(2018.6, 2025.3)
+    if twin_id:
+        callout(a1, 2020, tam_d, f"2019–21 mean: {tam_d:.0f}%\n(twin {twin_d:.0f}%)", dy=-30, arrow=False, fontsize=7.5)
+    for (lab, s_, col, ls) in mbpre:
+        a2.plot(s_.index, s_.values, color=col if "Tambopata" in lab else C["twin"], ls="-", lw=2)
+        nm = lab.split(" (")[0].replace("Tambopata BZ", "Tambopata BZ")
+        label_end(a2, s_.index[-1], s_.values[-1], nm + "\n(" + lab.split("(")[-1], col, dx=6, fontsize=7.5)
+    a2.axvline(2018.5, color=INK, lw=1.0)
+    a2.axhline(100, color=AXIS, lw=0.8)
     style_axes(a2)
-    a2.set_ylabel("Total mining area,\nindex 2018 = 100 (MapBiomas)")
-    a2.set_title("Before 2019: MapBiomas, each area from its own collection", loc="left", fontsize=9.5)
-    a2.legend(fontsize=7.5, frameon=False, loc="upper left")
-    fig.suptitle("The twin grew like Tambopata until 2018; in 2019-21 Tambopata added mining at well under half the twin's pace",
-                 x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Sources: {SRC}; MapBiomas Peru Collection 4 (Tambopata) and MapBiomas Amazonía Collection 6 "
-                       "(control, to 2023). Left: 2025 provisional (hollow). Right: the two collections are only shown side "
-                       "by side, never subtracted. Description.", OUT / "fig_control_compare.png", rect_bottom=0.12)
+    a2.set_ylabel("Index, 2018 = 100")
+    a2.set_title("Before 2019: similar growth paths", pad=8)
+    a2.set_xticks(range(2010, 2024, 3))
+    finish_figure(fig, f"{SRC}; MapBiomas Peru Collection 4 (Tambopata) and MapBiomas Amazonía Collection 6 "
+                       "(twin, to 2023). Left: 2025 provisional (hollow dot, dashed). Right: the two collections are shown "
+                       "side by side, never subtracted. Description.", OUT / "fig_control_compare.png")
 
 
 def mb_pre(chosen_name, col="#6250d6"):

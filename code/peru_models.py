@@ -24,11 +24,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pyfixest as pf
 
-from common import OUT, style_axes, finish_figure, SRC_MAPBIOMAS, SRC_PRICE
+from common import OUT, style_axes, finish_figure, SRC_MAPBIOMAS, SRC_PRICE, headline, C, INK, INK2, GRID
 
 TU = "Tambopata|Reserva Nacional"
 SRC = "peru_bufferzone_year.csv, prices_annual.csv"
-TITLE = "With every set of controls, the real 2019-21 fall is several times the fake-date one"
+TITLE = "In hectares, every model shows a big 2019–21 fall; scaled to size, it ranks {rank} of {n}"
 MODELS = {
     "M1": "Zone + year effects (gold price, COVID as common shocks)",
     "M2": "M1 + bigger zones react more to the gold price",
@@ -146,28 +146,31 @@ def run(pack, reg):
 
 def _figure(res):
     from matplotlib.ticker import FuncFormatter
-    fig, axes = plt.subplots(len(res), 1, figsize=(7.5, 7.2))
+    fig, axes = plt.subplots(len(res), 1, figsize=(9, 7.6), gridspec_kw={"hspace": 0.95})
+    m4 = res[res["model"] == "M4"].iloc[0]
+    headline(fig, TITLE.format(rank=int(m4["rank_in_space"]), n=int(m4["n_zones"])), "Tambopata minus the other zones, after zone and year effects. Orange: real operation 2019–21. "
+                         "Grey: fake operation 2016–18 (should be near 0).")
     for ax, (_, r) in zip(axes, res.iterrows()):
-        ax.barh([1], [r["during_2019_21"]], 0.7, color="#eb6834", label="Real operation (2019-21)")
-        ax.barh([0], [r["placebo_fake_2016"]], 0.7, color="#9aa5a8", label="Fake operation (2016-18): should be close to 0")
-        for yy, v in [(1, r["during_2019_21"]), (0, r["placebo_fake_2016"])]:
-            ax.annotate(f"{v:,.2f}" if r["model"] == "M4" else f"{v:,.0f}", (v, yy), xytext=(4 if v >= 0 else -4, 0),
-                        textcoords="offset points", va="center", ha="left" if v >= 0 else "right", fontsize=7.5)
-        ax.axvline(0, color="black", lw=0.8)
-        lo = min(r["during_2019_21"], r["placebo_fake_2016"]) * 1.25
-        hi = max(0, r["placebo_fake_2016"]) + abs(lo) * 0.25
+        ax.barh([1], [r["during_2019_21"]], 0.62, color=C["lapampa"])
+        ax.barh([0], [r["placebo_fake_2016"]], 0.62, color=C["other"])
+        for yy, v, lab in [(1, r["during_2019_21"], "real"), (0, r["placebo_fake_2016"], "fake")]:
+            txt = (f"{v:,.2f}" if r["model"] == "M4" else f"{v:,.0f}").replace("-", "−")
+            ax.annotate(f"{txt}  {lab}", (v, yy), xytext=(5 if v >= 0 else -5, 0), textcoords="offset points",
+                        va="center", ha="left" if v >= 0 else "right", fontsize=8.5, color=INK,
+                        fontweight="semibold" if lab == "real" else "normal")
+        ax.axvline(0, color=INK2, lw=0.8)
+        lo = min(r["during_2019_21"], r["placebo_fake_2016"]) * 1.45
+        hi = max(0, r["placebo_fake_2016"]) + abs(lo) * 0.3
         ax.set_xlim(lo, hi)
         ax.set_yticks([])
         for sp in ("top", "right", "left"):
             ax.spines[sp].set_visible(False)
-        ax.xaxis.grid(True, color="#E8EEF0"); ax.set_axisbelow(True)
-        ax.xaxis.set_major_formatter(FuncFormatter(lambda v, p: "0" if v == 0 else (f"{v:,.1f}" if abs(v) < 5 else f"{v:,.0f}")))
-        ax.tick_params(axis="x", labelsize=7.5)
-        unit = "1 = normal pre-2019 year" if r["model"] == "M4" else "ha per year"
-        ax.set_title(f"{r['model']}: {r['label']}  |  {unit}  |  Tambopata ranks {int(r['rank_in_space'])} of {int(r['n_zones'])}",
-                     loc="left", fontsize=8.5)
-    axes[0].legend(fontsize=7.5, frameon=False, loc="upper left", bbox_to_anchor=(0, 1.75), ncol=2)
-    fig.suptitle(TITLE, x=0.01, ha="left", fontsize=10.5, fontweight="bold")
-    finish_figure(fig, f"Sources: {SRC_MAPBIOMAS}; {SRC_PRICE}. Bars = Tambopata minus the other zones, after zone and year effects; "
-                       "outcome = new mining area per year. Rank = Tambopata's place when each zone gets the operation in turn "
-                       "(1 = biggest fall). One treated zone: no confidence intervals. Description.", OUT / "fig_peru_models.png", rect_bottom=0.08)
+        ax.xaxis.grid(True, color=GRID, lw=0.6); ax.set_axisbelow(True)
+        ax.xaxis.set_major_formatter(FuncFormatter(lambda v, p: "0" if v == 0 else (f"{v:,.1f}" if abs(v) < 5 else f"{v:,.0f}").replace("-", "−")))
+        unit = "1 = one normal pre-2019 year" if r["model"] == "M4" else "ha per year"
+        ax.set_title(f"{r['model']}  {r['label']}", fontsize=9.5)
+        ax.text(1.0, 1.04, f"{unit}  ·  rank {int(r['rank_in_space'])} of {int(r['n_zones'])}", transform=ax.transAxes,
+                ha="right", va="bottom", fontsize=8, color=INK2)
+    finish_figure(fig, f"{SRC_MAPBIOMAS}; {SRC_PRICE}. Outcome = new mining area per year. Rank = Tambopata's place when "
+                       "each zone gets the operation in turn (1 = biggest fall). One treated zone: no confidence intervals. "
+                       "Description.", OUT / "fig_peru_models.png")

@@ -131,17 +131,25 @@ def run(reg):
 
 def figure(d):
     import matplotlib.pyplot as plt
-    from common import OUT, style_axes, finish_figure
+    from common import OUT, style_axes, finish_figure, headline, callout, period_band, C, INK, INK2
     yrs = list(range(2010, 2026)); d = d.loc[yrs]
-    fig, ax = plt.subplots(figsize=(10, 4.2))
-    ax.bar(yrs, d.declared_kg / 1000, color="#b07a00", width=0.72, label="Declared by producers")
-    ax.bar(yrs, d.estimate_kg / 1000, bottom=d.declared_kg / 1000, color="#ead7a8", width=0.72, label="Ministry estimate for artisanal miners")
-    for x, lab in ((2014.5, "2015: artisanal output\nmoves to an estimate"), (2019.5, "2020: estimate\ndropped")):
-        ax.axvline(x, color="#b3261e", ls="--", lw=1.2)
-        ax.text(x + 0.1, 24.8, lab, fontsize=7.5, color="#b3261e", va="top")
-    ax.set_ylim(0, 25.5); ax.set_ylabel("Gold, tonnes"); style_axes(ax); ax.set_xticks(yrs); ax.tick_params(axis="x", labelsize=8)
-    ax.legend(fontsize=8, frameon=False, loc="upper right")
-    ax.set_title("The official gold series for Madre de Dios changed definition twice; it is not a production series",
-                 loc="left", fontsize=10.5, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC}. Total of both parts = the central bank series (checked for 2012 and 2019). Description.",
-                  OUT / "fig_peru_gold_definition.png", rect_bottom=0.12)
+    dec, est = d.declared_kg / 1000, d.estimate_kg / 1000
+    fig, ax = plt.subplots(figsize=(9, 4.6))
+    headline(fig, "Official gold 'fell' in 2020 because the ministry stopped adding its artisanal estimate",
+             "Madre de Dios gold in the official series, tonnes per year: what producers declared plus MINEM's estimate")
+    period_band(ax, 2014.5, 2019.5, "2015–19: artisanal output\ncounted as an estimate")
+    ax.bar(yrs, dec, color=C["gold"], width=0.72)
+    ax.bar(yrs, est, bottom=dec, color="#ecd59a", width=0.72)
+    for x, lab in ((2014.5, "2015: artisanal output\nmoves to an estimate"), (2019.5, "2020: estimate no longer\nin the files")):
+        ax.axvline(x, color=INK, lw=1.1, zorder=0.5)
+    ax.text(2019.7, 24, "2020: estimate no longer in the files.\nWhat remains is declared output only:\n"
+            f"{dec[2018]:.1f} t (2018) → {dec[2025]:.1f} t (2025).", fontsize=8, color=INK, va="top", ha="left", linespacing=1.35)
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(color=C["gold"], label="Declared by producers"),
+                       Patch(color="#ecd59a", label="Ministry estimate for artisanal miners")],
+              loc="upper left", bbox_to_anchor=(0.0, 1.0), fontsize=8, handlelength=1.2, borderaxespad=0.2)
+    callout(ax, 2025, dec[2025], f"{dec[2025]:.1f} t", dy=4, arrow=False)
+    ax.set_ylim(0, 29); ax.set_ylabel("tonnes"); style_axes(ax)
+    ax.set_xticks(yrs); ax.set_xticklabels([f"'{str(y)[2:]}" for y in yrs])
+    finish_figure(fig, f"{SRC}. Total of both parts = the central bank series (checked for 2012 and 2019). Description.",
+                  OUT / "fig_peru_gold_definition.png")

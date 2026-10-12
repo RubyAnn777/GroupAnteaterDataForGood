@@ -26,7 +26,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pyfixest as pf
 
-from common import ROOT, OUT, style_axes, finish_figure
+from common import ROOT, OUT, style_axes, finish_figure, headline, callout, period_band, C, INK, INK2, MUTED, AXIS, GRID
 import raster_zones as rz
 
 INTER = ROOT / "data_intermediate"
@@ -156,44 +156,73 @@ def gradient(d):
     return f, labels
 
 
+def _p(v):
+    return "p < 0.01" if v < 0.005 else f"p = {v:.2f}"
+
+
+def _signed(v):
+    return "0.0" if abs(v) < 0.05 else f"{v:+.1f}".replace("-", "−")
+
+
+ZONE_COL = {"La Pampa sector": C["lapampa"], "Corridor across the road": C["corridor"],
+            "Amarakaeri BZ (extra buffer zone)": C["buffer"], "Rest of Tambopata BZ": C["lapampa_tint"],
+            "Kotsimba": C["native"], "Tambopata reserve": C["reserve"]}
+
+
 def fig_zone(t):
     m = t[t.spec == "S1 main"].copy()
     m["zone"] = m.term.str.rsplit("_", n=1).str[0]; m["per"] = m.term.str.rsplit("_", n=1).str[1]
     names = {"".join(ch for ch in z.lower() if ch.isalnum())[:14]: z for z in FOCAL.values()}
     m["zone"] = m.zone.map(names)
-    fig, ax = plt.subplots(figsize=(9.5, 4.6))
-    ys = np.arange(len(FOCAL))
-    for j, (p, col) in enumerate((("during", "#3d3c39"), ("after", "#9aa5a8"))):
-        mm = m[m.per == p].set_index("zone").reindex(list(FOCAL.values()))
-        ax.errorbar(mm.Estimate, ys + (j - 0.5) * 0.28, xerr=[mm.Estimate - mm["2.5%"], mm["97.5%"] - mm.Estimate],
-                    fmt="o", color=col, ms=6, capsize=3, label={"during": "2019-21 vs 2014-18", "after": "2022-25 vs 2014-18"}[p])
-    ax.axvline(0, color="black", lw=0.8)
-    ax.set_yticks(ys); ax.set_yticklabels(list(FOCAL.values()), fontsize=9); ax.invert_yaxis()
-    ax.set_xlabel("Change in land mined for the first time, ha per 1-km cell per year (95% CI)")
-    style_axes(ax); ax.xaxis.grid(True, color="#E8EEF0"); ax.yaxis.grid(False)
-    ax.yaxis.set_major_formatter(plt.NullFormatter()); ax.set_yticks(ys); ax.set_yticklabels(list(FOCAL.values()), fontsize=9)
-    ax.legend(fontsize=8, frameon=False, loc="lower right")
-    ax.set_title("Per-cell change by zone, relative to clean comparison cells (no corridor, no communities)", loc="left", fontsize=10.5, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC}. OLS with cell and year fixed effects, errors clustered by 10-km block. "
-                       "Reference = cells outside the named zones, the corridor and native communities; baseline 2014-18. Description.", OUT / "fig_v2_stats_zones.png", rect_bottom=0.12)
+    fig, ax = plt.subplots(figsize=(9, 5.2))
+    headline(fig, "Per 1-km cell, La Pampa fell and the corridor across the road rose",
+             "Change in first-time mining vs 2014–18, ha per cell per year, relative to clean comparison cells (95% CI)")
+    zones = list(FOCAL.values()); ys = np.arange(len(zones))
+    for j, p in enumerate(("during", "after")):
+        mm = m[m.per == p].set_index("zone").reindex(zones)
+        y = ys + (j - 0.5) * 0.34
+        cols = [ZONE_COL[z] for z in zones]
+        ax.hlines(y, mm["2.5%"], mm["97.5%"], colors=cols, lw=2.2 if p == "during" else 1.4, alpha=1 if p == "during" else 0.55)
+        ax.scatter(mm.Estimate, y, s=42, zorder=3, color=cols if p == "during" else "white", edgecolors=cols, linewidths=1.6)
+        for z, yy, e, hi, pv in zip(zones, y, mm.Estimate, mm["97.5%"], mm["Pr(>|t|)"]):
+            ax.annotate(f"{'2019–21' if p == 'during' else '2022–25'}  {_signed(e)}  ({_p(pv)})", xy=(hi, yy), xytext=(6, 0),
+                        textcoords="offset points", va="center", fontsize=7.5, color=INK if p == "during" else INK2)
+    ax.axvline(0, color=INK2, lw=0.9)
+    ax.set_yticks(ys); ax.set_yticklabels(zones); ax.invert_yaxis()
+    ax.tick_params(axis="y", length=0, labelsize=9, labelcolor=INK)
+    ax.spines[["top", "right", "left"]].set_visible(False)
+    ax.xaxis.grid(True, color=GRID, lw=0.6); ax.set_axisbelow(True)
+    lo, hi = m["2.5%"].min(), m["97.5%"].max()
+    ax.set_xlim(lo - 0.15, hi + 1.55)
+    ax.set_xlabel("← less first-time mining          ha per 1-km cell per year          more →")
+    ax.text(1.0, 1.02, "●  2019–21 (operation years)     ○  2022–25", transform=ax.transAxes, ha="right",
+            va="bottom", fontsize=8, color=INK2)
+    finish_figure(fig, f"{SRC}. OLS with cell and year fixed effects, errors clustered by 10-km block. "
+                       "Reference = cells outside the named zones, the corridor and native communities; baseline 2014–18. Description.",
+                  OUT / "fig_v2_stats_zones.png")
 
 
 def fig_event(ev):
-    fig, axes = plt.subplots(1, 2, figsize=(12, 4), sharey=False)
+    fig, axes = plt.subplots(1, 2, figsize=(9, 4.4), sharey=True, gridspec_kw={"wspace": 0.12})
+    headline(fig, "Year by year: La Pampa fell from 2020; the corridor across the road rose from 2019",
+             "Event study per 1-km cell: first-time mining vs the 2014–18 mean (= 0), ha per cell per year, 95% CI")
     for ax, (nm, (t, w)) in zip(axes, ev.items()):
-        c_ = "#eb6834" if nm.startswith("La Pampa") else "#2a78d6"
-        ax.fill_between(t.year, t["2.5%"], t["97.5%"], color=c_, alpha=0.18, lw=0)
-        ax.plot(t.year, t.Estimate, "o-", color=c_, ms=4, lw=2)
-        ax.axhline(0, color="black", lw=0.8); ax.axvline(2018.5, color="#0b0b0b", lw=1.2)
-        ax.axvspan(2013.5, 2018.5, color="#f3e3c2", alpha=0.5, zorder=0)
-        ax.set_title(f"{nm}\npre-trend test 2010-13: p = {float(w['pvalue']):.2f}", loc="left", fontsize=9.5)
-        style_axes(ax)
-    axes[0].set_ylabel("ha per cell-year vs clean reference,\n2014-18 mean = 0 (95% CI)")
-    fig.suptitle("Year by year, per 1-km cell: La Pampa fell from 2020, the corridor across the road rose from 2019",
-                 x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC}. Event study with cell and year fixed effects; reference = the pooled 2014-18 period (shaded); "
-                       "comparison cells exclude the legal corridor and native communities; joint test that the 2010-13 leads are zero. "
-                       "Description.", OUT / "fig_v2_stats_event.png", rect_bottom=0.12)
+        c_ = C["lapampa"] if nm.startswith("La Pampa") else C["corridor"]
+        period_band(ax, 2013.5, 2018.5, "reference\n2014–18 = 0")
+        ax.fill_between(t.year, t["2.5%"], t["97.5%"], color=c_, alpha=0.16, lw=0)
+        ax.plot(t.year, t.Estimate, "-", color=c_, lw=2.2)
+        ax.plot(t.year, t.Estimate, "o", color=c_, ms=4.5, mec="white", mew=1)
+        ax.axhline(0, color=INK2, lw=0.8); ax.axvline(2018.5, color=INK, lw=1.1, zorder=0.5)
+        ax.text(2018.6, 0.985, "Mercurio", transform=ax.get_xaxis_transform(), ha="left", va="top", fontsize=7.5, color=INK)
+        pv = float(w["pvalue"])
+        ax.text(0, 1.02, f"Pre-trend test 2010–13: {_p(pv)}" + (", fails" if pv < 0.05 else ", passes"),
+                transform=ax.transAxes, fontsize=8, color=INK2, va="bottom")
+        ax.set_title(nm, pad=20)
+        style_axes(ax, fmt=False)
+        ax.set_xticks(range(2010, 2026, 3))
+    finish_figure(fig, f"{SRC}. Event study with cell and year fixed effects; reference = the pooled 2014–18 period (shaded); "
+                       "comparison cells exclude the legal corridor and native communities; joint test that the 2010–13 leads are zero. "
+                       "Description.", OUT / "fig_v2_stats_event.png")
 
 
 def run(reg):

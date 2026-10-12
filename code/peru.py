@@ -21,7 +21,8 @@ import matplotlib.pyplot as plt
 import pyfixest as pf
 
 from common import (OUT, BZ_KEY, additions, period_mean, x_of, style_axes, add_event_markers,
-                    set_year_ticks, finish_figure, EVENT_TITLE_PAD, SRC_MAPBIOMAS, SRC_PRICE)
+                    set_year_ticks, finish_figure, EVENT_TITLE_PAD, SRC_MAPBIOMAS, SRC_PRICE,
+                    headline, label_end, callout, C, INK, INK2, MUTED, AXIS)
 
 TAM, AMA, BAH = "Tambopata", "Amarakaeri", "Bahuaja-Sonene"
 Y0, Y1 = 2014, 2025
@@ -222,33 +223,42 @@ def run_event_study(adds, lv_w, pack, reg):
     placebo_restricted(pack, reg)
 
     # ---- figure
-    fig, (ax, ax2) = plt.subplots(2, 1, figsize=(8.5, 7), sharex=True, gridspec_kw={"height_ratios": [1.5, 1]})
+    fig, (ax, ax2) = plt.subplots(2, 1, figsize=(9, 7.6), sharex=True, gridspec_kw={"height_ratios": [1.5, 1], "hspace": 0.35})
+    headline(fig, "Tambopata dropped below every placebo zone in 2019–22, then came back",
+             "Event-study coefficient: Tambopata's annual mining addition vs comparison zones, relative to 2018 (ha per year)")
     yrs = sorted(bA.index)
-    ax.fill_between(x_of(es.index), es["placebo_min"], es["placebo_max"], color="#dfe3e5", alpha=0.9,
-                    label="Range if treatment were given to each other buffer zone (pool B)", step=None)
-    ax.plot(x_of(yrs), bB.loc[yrs], color="#9aa5a8", marker="s", markersize=5, linewidth=1.2,
-            label="Tambopata vs all Peru buffer zones with mining (pool B)")
-    ax.plot(x_of(yrs), bA.loc[yrs], color="#eb6834", marker="o", markersize=7, linewidth=2,
-            label="Tambopata vs MdD buffer zones (pool A, main)")
-    ax.axhline(0, color="black", linewidth=0.8)
-    ax.scatter([2018], [0], marker="o", facecolors="white", edgecolors="black", zorder=5, label="2018 = reference year (0 by construction)")
-    ax.set_ylabel("Event-study coefficient\n(ha per year vs 2018)")
-    ax.set_title("Tambopata fell below every placebo zone in 2019-22, then returned", loc="left", pad=EVENT_TITLE_PAD, fontweight="bold")
+    ax.fill_between(x_of(es.index), es["placebo_min"], es["placebo_max"], color="#e6e3dc", lw=0, zorder=1)
+    ax.axhline(0, color=INK2, linewidth=0.9, zorder=2)
+    ax.plot(x_of(yrs), bB.loc[yrs], color=C["other"], marker="o", markersize=4, mec="white", mew=0.8, linewidth=1.4, zorder=3)
+    ax.plot(x_of(yrs), bA.loc[yrs], color=C["lapampa"], marker="o", markersize=6, mec="white", mew=1.0, linewidth=2.2, zorder=4)
+    ax.scatter([2018], [0], s=46, facecolors="white", edgecolors=INK, linewidths=1.2, zorder=5)
+    callout(ax, 2018, 0, "2018 = reference\n(0 by design)", dy=48, dx=-70, ha="center")
+    label_end(ax, yrs[-1], bA.loc[yrs[-1]], "Tambopata vs Madre\nde Dios zones (main)", C["lapampa"], dx=8, dy=-16)
+    label_end(ax, yrs[-1], bB.loc[yrs[-1]], "vs all Peru buffer\nzones with mining", C["other"], dx=8, dy=14, weight="normal")
+    lo = bA.loc[2019:2022].idxmin()
+    callout(ax, lo, bA[lo], f"Lowest: {bA[lo]:,.0f} ha in {lo}".replace("-", "−"), dy=-30, dx=0, ha="center")
+    ax.text(2013.8, -3400, "Grey band: coefficients if each other\nbuffer zone had been 'treated' instead",
+            fontsize=7.5, color=INK2, va="bottom")
+    ax.set_ylabel("ha per year vs 2018")
+    ax.set_title("Coefficients (one treated unit, so no confidence intervals: the band is the test)", pad=EVENT_TITLE_PAD)
     ax.set_ylim(-3600, None)
-    ax.legend(fontsize=7, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="lower left").set_zorder(10)
     add_event_markers(ax, label=True)
     # bottom: the raw additions of the treated unit and main control (what the coefficients are made of)
-    ax2.plot(x_of(range(Y0, Y1 + 1)), ad_all.loc[Y0:Y1, TU], color="#eb6834", marker="o", label="Tambopata")
-    ax2.plot(x_of(range(Y0, Y1 + 1)), ad_all.loc[Y0:Y1, "Amarakaeri|Reserva Comunal"], color="#1baf7a", marker="o", label="Amarakaeri")
-    ax2.set_ylabel("Annual addition (ha)")
-    ax2.legend(fontsize=7, frameon=False, loc="upper left")
+    xs = x_of(range(Y0, Y1 + 1))
+    ax2.plot(xs, ad_all.loc[Y0:Y1, TU], color=C["lapampa"], marker="o", mec="white", mew=0.8)
+    ax2.plot(xs, ad_all.loc[Y0:Y1, "Amarakaeri|Reserva Comunal"], color=C["buffer"], marker="o", mec="white", mew=0.8)
+    label_end(ax2, Y1, ad_all.loc[Y1, TU], "Tambopata", C["lapampa"], dx=8)
+    label_end(ax2, Y1, ad_all.loc[Y1, "Amarakaeri|Reserva Comunal"], "Amarakaeri", C["buffer"], dx=8)
+    ax2.set_ylabel("ha per year")
+    ax2.set_title("What the coefficients are made of: annual mining additions")
     add_event_markers(ax2)
     for a in (ax, ax2):
         style_axes(a)
+    ax2.set_xlim(Y0 - 0.6, Y1 + 0.6)
     set_year_ticks(ax2, range(Y0, Y1 + 1))
-    note = ("One treated unit: standard errors clustered by unit are not informative (inference needs many treated clusters; "
-            "Conley & Taber 2011), so no CIs are drawn.\nThe grey band is the placebo-in-space alternative. Descriptive; not causal.")
-    finish_figure(fig, f"{note}\nSource: {SRC_MAPBIOMAS}.", OUT / "fig_peru_event_study.png", rect_bottom=0.08, event_note=True)
+    note = ("One treated unit: clustered standard errors are not informative (Conley & Taber 2011), so no CIs are drawn; "
+            "the placebo band is the alternative. Description, not causal.")
+    finish_figure(fig, f"{SRC_MAPBIOMAS}. {note}", OUT / "fig_peru_event_study.png", event_note=True)
     return bA, bB, rank_raw, rank_sc, n
 
 def placebo_restricted(pack, reg, thresh=10.0):
@@ -285,52 +295,68 @@ def peru_beta(wide, treated):
 # ----------------------------------------------------------------------------- figures
 def fig_additions(adds, pack):
     pr = pack["prices"].set_index("year")["gold"]
-    yrs = list(range(Y0, Y1 + 1))
-    fig, axes = plt.subplots(3, 1, figsize=(8.5, 8.5), sharex=True, gridspec_kw={"height_ratios": [1.4, 1.4, 1]})
+    yrs = list(range(Y0, Y1 + 1)); xs = x_of(yrs)
+    fig, axes = plt.subplots(3, 1, figsize=(9, 8.6), sharex=True, gridspec_kw={"height_ratios": [1.4, 1.4, 0.9], "hspace": 0.35})
     a1, a2, a3 = axes
-    for u, c in [(TAM, "#eb6834"), (AMA, "#1baf7a"), (BAH, "#6250d6")]:
-        a1.plot(x_of(yrs), adds.loc[yrs, u], marker="o", color=c, linewidth=2, label=f"{u} buffer zone")
-    a1.set_ylabel("New mining area\nin the year (ha)")
-    a1.set_title("Madre de Dios: new mining area each year, by buffer zone, and the gold price", loc="left", pad=EVENT_TITLE_PAD)
+    headline(fig, "Tambopata fell after Mercurio; Madre de Dios as a whole did not",
+             "New mining area each year (annual addition, ha), 2014–2025, and the gold price")
+    for u, c in [(TAM, C["lapampa"]), (AMA, C["buffer"]), (BAH, C["twin"])]:
+        a1.plot(xs, adds.loc[yrs, u], marker="o", color=c, mec="white", mew=0.8)
+        label_end(a1, Y1, adds.loc[Y1, u], u, c, dx=8)
+    a1.set_ylabel("ha per year")
+    a1.set_title("Three buffer zones", pad=EVENT_TITLE_PAD)
     a1.set_ylim(None, 4800)
-    a1.legend(fontsize=8, frameon=False, loc="upper left", ncol=3)
-    a2.plot(x_of(yrs), adds.loc[yrs, "Madre de Dios total"], marker="o", color="black", linewidth=2, label="Madre de Dios total")
-    a2.plot(x_of(yrs), adds.loc[yrs, "Rest of Madre de Dios"], marker="o", color="#2a78d6", linewidth=1.5,
-            label="Rest of Madre de Dios (dept. minus buffer zones; incl. legal corridor)")
-    a2.set_ylabel("New mining area\nin the year (ha)")
-    a2.legend(fontsize=8, frameon=False, loc="upper left")
-    a3.plot(x_of(yrs), pr.loc[yrs], color="#b07a00", linewidth=2, marker="o")
-    a3.set_ylabel("Gold price\n($ per troy oz)"); a3.set_ylim(0, None)
+    a2.plot(xs, adds.loc[yrs, "Madre de Dios total"], marker="o", color=INK, mec="white", mew=0.8)
+    a2.plot(xs, adds.loc[yrs, "Rest of Madre de Dios"], marker="o", color=C["corridor"], mec="white", mew=0.8, lw=1.6)
+    label_end(a2, Y1, adds.loc[Y1, "Madre de Dios total"], "Madre de Dios\ntotal", INK, dx=8)
+    label_end(a2, Y1, adds.loc[Y1, "Rest of Madre de Dios"], "Rest of department\n(incl. legal corridor)", C["corridor"], dx=8)
+    a2.set_ylabel("ha per year"); a2.set_ylim(0, None)
+    a2.set_title("The whole department")
+    a3.plot(xs, pr.loc[yrs], color=C["gold"], marker="o", mec="white", mew=0.8)
+    label_end(a3, Y1, pr.loc[Y1], f"Gold\n${pr.loc[Y1]:,.0f}/oz", C["gold"], dx=8)
+    a3.set_ylabel("$ per troy oz"); a3.set_ylim(0, None)
+    a3.set_title("Gold price (nominal, annual mean)")
     for i, a in enumerate(axes):
         style_axes(a); add_event_markers(a, label=(i == 0))
+    a3.set_xlim(Y0 - 0.6, Y1 + 0.6)
     set_year_ticks(a3, yrs)
-    finish_figure(fig, f"Sources: {SRC_MAPBIOMAS}; {SRC_PRICE}.\nAdditions = change in area classified as mining; "
-                       "river dredging and mercury are invisible.", OUT / "fig_peru_additions.png", event_note=True)
+    finish_figure(fig, f"{SRC_MAPBIOMAS}; {SRC_PRICE}. Additions = change in area classified as mining; "
+                       "river dredging and mercury are invisible. Description.", OUT / "fig_peru_additions.png", event_note=True)
 
 def fig_displacement(adds):
-    yrs = list(range(Y0, Y1 + 1))
-    fig, (a1, a2) = plt.subplots(2, 1, figsize=(8.5, 6.5), sharex=True)
+    yrs = list(range(Y0, Y1 + 1)); xs = x_of(yrs)
+    fig, (a1, a2) = plt.subplots(2, 1, figsize=(9, 7.2), sharex=True, gridspec_kw={"hspace": 0.35})
+    headline(fig, "The three buffer zones fell in 2019–21; the department total kept rising",
+             "New mining area each year (annual addition, ha). Did mining stop, or move?")
     bottom_pos = np.zeros(len(yrs)); bottom_neg = np.zeros(len(yrs))
-    for u, c in [(TAM, "#eb6834"), (AMA, "#1baf7a"), (BAH, "#6250d6")]:
+    for u, c in [(TAM, C["lapampa"]), (AMA, C["buffer"]), (BAH, C["twin"])]:
         v = adds.loc[yrs, u].values
         pos, neg = np.where(v > 0, v, 0), np.where(v < 0, v, 0)
-        a1.bar(x_of(yrs), pos, bottom=bottom_pos, color=c, width=0.8, label=u)
-        a1.bar(x_of(yrs), neg, bottom=bottom_neg, color=c, width=0.8)
+        a1.bar(xs, pos, bottom=bottom_pos, color=c, width=0.72, edgecolor="white", linewidth=0.8)
+        a1.bar(xs, neg, bottom=bottom_neg, color=c, width=0.72, edgecolor="white", linewidth=0.8)
         bottom_pos += pos; bottom_neg += neg
-    a1.plot(x_of(yrs), adds.loc[yrs, "Three buffer zones (sum)"], color="black", marker="o", markersize=4, linewidth=1.2,
-            label="Sum of the three buffer zones")
-    a1.set_ylabel("New mining area (ha)")
-    a1.set_title("Did the total fall, or did mining move? Three buffer zones vs all of Madre de Dios", loc="left", pad=EVENT_TITLE_PAD)
-    a1.legend(fontsize=8, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="upper left").set_zorder(10)
-    a2.bar(x_of(yrs), adds.loc[yrs, "Madre de Dios total"], color="#3d3c39", width=0.8, label="Madre de Dios total")
-    a2.plot(x_of(yrs), adds.loc[yrs, "Rest of Madre de Dios"], color="#2a78d6", marker="o", linewidth=1.8,
-            label="Rest of Madre de Dios (incl. legal mining corridor)")
-    a2.set_ylabel("New mining area (ha)")
-    a2.legend(fontsize=8, frameon=True, facecolor="white", edgecolor="none", framealpha=0.95, loc="upper left").set_zorder(10)
+    a1.plot(xs, adds.loc[yrs, "Three buffer zones (sum)"], color=INK, marker="o", markersize=4, mec="white", mew=0.8, linewidth=1.2)
+    # direct labels: one legend row above the plot (stack labels would collide at the year ends)
+    from matplotlib.patches import Patch
+    from matplotlib.lines import Line2D
+    a1.legend(handles=[Patch(color=C["lapampa"], label=TAM), Patch(color=C["buffer"], label=AMA),
+                       Patch(color=C["twin"], label=BAH), Line2D([], [], color=INK, marker="o", ms=4, lw=1.2, label="Sum of the three")],
+              loc="upper left", ncol=4, fontsize=8, handlelength=1.2, columnspacing=1.2, frameon=True,
+              facecolor="#fbfaf7", edgecolor="none", framealpha=1).set_zorder(10)
+    a1.set_ylabel("ha per year")
+    a1.set_title("Three buffer zones (stacked)", pad=EVENT_TITLE_PAD)
+    a1.set_ylim(None, a1.get_ylim()[1] * 1.15)
+    a2.bar(xs, adds.loc[yrs, "Madre de Dios total"], color="#d9d6cf", width=0.72)
+    a2.plot(xs, adds.loc[yrs, "Rest of Madre de Dios"], color=C["corridor"], marker="o", mec="white", mew=0.8, linewidth=1.8)
+    callout(a2, 2023, adds.loc[2023, "Madre de Dios total"], "Department total (bars)", dx=-58, dy=-4, ha="right")
+    label_end(a2, Y1, adds.loc[Y1, "Rest of Madre de Dios"], "Rest of department\n(incl. legal corridor)", C["corridor"], dx=8, dy=-14)
+    a2.set_ylabel("ha per year")
+    a2.set_title("All of Madre de Dios")
     for i, a in enumerate((a1, a2)):
         style_axes(a); add_event_markers(a, label=(i == 0))
+    a2.set_xlim(Y0 - 0.6, Y1 + 0.6)
     set_year_ticks(a2, yrs)
-    finish_figure(fig, f"Source: {SRC_MAPBIOMAS}. Description only; MapBiomas cannot separate legal from illegal mining.",
+    finish_figure(fig, f"{SRC_MAPBIOMAS}. Description only; MapBiomas cannot separate legal from illegal mining.",
                   OUT / "fig_peru_displacement.png", event_note=True)
 
 # ----------------------------------------------------------------------------- entry point

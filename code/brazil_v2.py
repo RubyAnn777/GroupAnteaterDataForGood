@@ -19,7 +19,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pyfixest as pf
 
-from common import ROOT, OUT, style_axes, finish_figure
+from common import ROOT, OUT, style_axes, finish_figure, headline, label_end, C, INK, INK2, MUTED, AXIS
 import checks
 import brazil_raster as br
 
@@ -95,18 +95,26 @@ def run(reg):
     w = d.pivot_table(index="year", columns="unit", values="new_land_ha").loc[2010:2025]
     r = d.pivot_table(index="year", columns="unit", values="remined_ha").loc[2010:2025]
     show = [("Yanomami", 2023 + 1 / 12), ("Munduruku", 2021 + 4 / 12), ("Kayapó", 2024 + 8 / 12), ("Sararé", 2024 + 8 / 12)]
-    fig, axes = plt.subplots(1, 4, figsize=(13, 3.8), sharex=True)
-    for ax, (nm, op) in zip(axes, show):
-        ax.bar(w.index, w[nm], color="#3d3c39", width=0.75, label="First-time mining")
-        ax.bar(r.index, r[nm], bottom=w[nm], color="#b9b8b2", width=0.75, label="Return to old pits")
-        ax.axvline(op - 0.5, color="black", lw=1.4)
-        ax.set_title(nm, loc="left", fontsize=9.5); style_axes(ax)
-        ax.set_xticks(range(2010, 2026, 3)); ax.tick_params(axis="x", labelsize=7.5)
-    axes[0].set_ylabel("ha per year"); axes[0].legend(fontsize=7.5, frameon=False, loc="upper left")
-    fig.suptitle(f"Brazil, same pixel method as Peru: falls after operations (staggered DiD {twfe.coef()['treat']:+.2f} log points, "
-                 f"randomization p = {pval:.2f})", x=0.01, ha="left", fontsize=10.5, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC}. Black line = the territory's own first operation. Description.",
-                  OUT / "fig_brazil_v2_pixels.png", rect_bottom=0.12)
+    fig, axes = plt.subplots(2, 2, figsize=(9, 6.2), sharex=True, gridspec_kw={"hspace": 0.55, "wspace": 0.25})
+    axes = axes.ravel()
+    headline(fig, "Brazil: mining fell in 2022–24, but not right after each territory’s own operation",
+             f"Mined land per year, ha (first-time mining + returns to old pits). Two-stage DiD {g[0]:+.2f} log points "
+             f"(p = {g[2]:.2f}); randomization p = {pval:.2f}.")
+    for i, (ax, (nm, op)) in enumerate(zip(axes, show)):
+        ax.bar(w.index, w[nm], color=C["lapampa"], width=0.75)
+        ax.bar(r.index, r[nm], bottom=w[nm], color=C["lapampa_tint"], width=0.75)
+        ax.bar(w.index, [0] * len(w), bottom=w[nm], color="white", width=0.75, edgecolor="white", linewidth=1.0)
+        ax.axvline(op - 0.5, color=INK, lw=1.1)
+        ax.set_ylim(0, float((w[nm] + r[nm]).max()) * 1.22)
+        ax.annotate(f"operation\n{int(op)}", xy=(op - 0.5, 1), xycoords=("data", "axes fraction"), xytext=(-4, -3),
+                    textcoords="offset points", ha="right", va="top", fontsize=7.5, color=INK2, linespacing=1.1)
+        ax.set_title(nm, pad=6); style_axes(ax)
+        ax.set_xticks(range(2010, 2026, 3)); ax.set_xticklabels([f"'{str(y)[2:]}" for y in range(2010, 2026, 3)])
+    from matplotlib.patches import Patch
+    axes[1].legend(handles=[Patch(color=C["lapampa"], label="First-time mining"), Patch(color=C["lapampa_tint"], label="Return to old pits")],
+                   loc="upper left", fontsize=8, frameon=False, handlelength=1.0, handleheight=0.9)
+    axes[0].set_ylabel("ha per year"); axes[2].set_ylabel("ha per year")
+    finish_figure(fig, f"{SRC}. Black line = the territory’s own first operation. Description.", OUT / "fig_brazil_v2_pixels.png")
     # B5 rings
     ring = d[d.unit.str.startswith("Yanomami ring")].pivot_table(index="year", columns="unit", values="new_land_ha")
     pre, post = ring.loc[2019:2022].mean(), ring.loc[2023:2025].mean()

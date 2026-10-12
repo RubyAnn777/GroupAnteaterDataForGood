@@ -20,9 +20,31 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
-from common import ROOT, OUT, style_axes, finish_figure
+from common import (ROOT, OUT, style_axes, finish_figure, headline, label_end, callout, period_band,
+                    add_event_markers, PERU_EVENTS, C, INK, INK2, MUTED, AXIS, SURFACE)
 import raster_zones as rz
-from raster_layers import GROUPS, COL
+from raster_layers import GROUPS
+
+# zone colours by family (orange = Tambopata BZ, blue = corridor, green = protected, raspberry = native, grey = rest)
+ZC = {"La Pampa sector": C["lapampa"], "Corridor across the road": C["corridor"], "Rest of mining corridor": C["corridor_rest"],
+      "Native communities": C["native"], "Rest of Tambopata buffer zone": C["lapampa_tint"], "Other buffer zones": C["buffer_tint"],
+      "Reserves and parks": C["reserve"], "Rest of Madre de Dios": C["other"]}
+MERCURIO = [PERU_EVENTS[0]]
+
+
+def _dots(ax, x, y, color, ms=4.5):
+    ax.plot(x, y, "-", color=color, lw=2.2, zorder=3)
+    ax.plot(x, y, "o", color=color, ms=ms, mec=SURFACE, mew=1.0, zorder=4)
+
+
+def _stack_labels(ax, df, x, min_share=0.06, total=None):
+    """Direct labels at the right edge of a stack, at the middle of each band that is wide enough."""
+    v = df.loc[x]; tot = v.sum() if total is None else total
+    cum = 0.0
+    for g, val in v.items():
+        if val / tot >= min_share:
+            label_end(ax, x, cum + val / 2, g, ZC[g], dx=8, fontsize=8)
+        cum += val
 
 INTER = ROOT / "data_intermediate"
 SRC_R = "MapBiomas Peru Col 4 rasters, zones v2"
@@ -83,19 +105,27 @@ def e1(reg):
     nshare = b["north"] / b.sum(axis=1)
     for y in (2019, 2020, 2021, 2023):
         reg.add(f"amw_v2_north_share_{y}", nshare.loc[y], "share", f"AMW: north-of-road share of new area, La Pampa longitudes, {y}", "description", SRC_AMW)
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(12, 3.8))
     yrs = [y for y in a.index if 2019 <= y <= 2025]
-    for g in ("La Pampa sector", "Corridor across the road"):
-        a1.plot(yrs, a.loc[yrs, g], "o-", color=COL[g], label=g, lw=2)
-    a1.set_ylabel("AMW new area (ha)"); style_axes(a1); a1.legend(fontsize=8, frameon=False)
-    a1.set_title("AMW, same zones", loc="left", fontsize=9.5)
-    a2.plot(yrs, nshare.loc[yrs] * 100, "o-", color="#2a78d6", lw=2)
-    a2.set_ylim(0, 100); a2.set_ylabel("% of new area north of the road"); style_axes(a2)
-    a2.set_title("AMW, La Pampa longitudes: share north of the highway", loc="left", fontsize=9.5)
-    fig.suptitle("Robustness: a second satellite product (Amazon Mining Watch) on the same zones", x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC_AMW}. AMW = gold-mining scars in 480 m squares (hectares run large); 2018 is the "
-                       "starting stock, so no pre-2019 comparison; 2025 provisional. Description.", OUT / "fig_v2_amw_robustness.png", rect_bottom=0.12)
-
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(9, 4.0), gridspec_kw={"wspace": 0.45})
+    headline(fig, "A second satellite agrees: new mining moved north of the road",
+             "Amazon Mining Watch (AMW) gold-mining scars on the same zones, 2019–2025 (2025 provisional)")
+    for g, lab in (("La Pampa sector", "La Pampa"), ("Corridor across the road", "Across\nthe road")):
+        _dots(a1, yrs, a.loc[yrs, g], ZC[g])
+        label_end(a1, yrs[-1], a.loc[yrs[-1], g], lab, ZC[g], dx=7)
+    a1.set_ylim(bottom=0); style_axes(a1)
+    a1.set_title("New area per year (ha)")
+    sh = nshare.loc[yrs] * 100
+    _dots(a2, yrs, sh, C["corridor"])
+    a2.axhline(50, color=AXIS, lw=0.8, ls=(0, (3, 2)), zorder=1)
+    a2.text(yrs[0] - 0.3, 51, "half", fontsize=7.5, color=MUTED, va="bottom")
+    pk = sh.idxmax()
+    callout(a2, pk, sh[pk], f"{sh[pk]:.0f}% in {pk}", dy=-22)
+    a2.set_ylim(0, 100); style_axes(a2)
+    a2.set_title("Share north of the highway (%), La Pampa longitudes")
+    for ax in (a1, a2):
+        ax.set_xticks(yrs); ax.set_xticklabels([f"'{str(y)[2:]}" for y in yrs]); ax.set_xlim(yrs[0] - 0.4, yrs[-1] + 0.4)
+    finish_figure(fig, f"{SRC_AMW}. AMW = gold-mining scars in 480 m squares (hectares run large); 2018 is the "
+                       "starting stock, so no pre-2019 comparison; 2025 provisional. Description.", OUT / "fig_v2_amw_robustness.png")
 
 # ------------------------------------------------------------------ E2 returns to old pits by zone
 def e2(reg):
@@ -103,20 +133,36 @@ def e2(reg):
     z["group"] = z.code.map({c: g for g, cs in GROUPS.items() for c in cs})
     w = z.groupby(["year", "group"]).remined_ha.sum().unstack().reindex(columns=list(GROUPS)).fillna(0).loc[2010:2025]
     tot = w.sum(axis=1)
-    fig, (a1, a2) = plt.subplots(2, 1, figsize=(11, 6.8), sharex=True, gridspec_kw={"height_ratios": [1.4, 1]})
-    a1.stackplot(w.index, w.T.values, colors=[COL[c] for c in w.columns], edgecolor="white", linewidth=0.6, labels=list(w.columns))
-    for y in w.index:
-        a1.text(y, tot[y] * 1.02, f"{tot[y] / 1000:.1f}k", ha="center", fontsize=7, color="#52514e")
-    a1.axvline(2018.5, color="black", lw=1.2); style_axes(a1); a1.legend(fontsize=7.5, frameon=False, ncol=2, loc="upper left")
-    a1.set_ylabel("Old pits mined again (ha)")
+    p_ = {"2016_18": (2016, 2018), "2022_25": (2022, 2025)}
+    m0, m1 = (tot.loc[a:b].mean() for a, b in p_.values())
+    cs = ((w["Corridor across the road"] + w["Rest of mining corridor"]) / tot).loc[2022:2025].mean()
+    fig, (a1, a2) = plt.subplots(2, 1, figsize=(9, 7.0), sharex=True, gridspec_kw={"height_ratios": [1.4, 1], "hspace": 0.3})
+    headline(fig, f"Returns to old pits nearly tripled after 2019, mostly inside the corridor",
+             f"Old pits mined again each year, by zone, Madre de Dios. Mean {m0:,.0f} ha/yr (2016–18) → {m1:,.0f} ha/yr (2022–25); "
+             f"{cs:.0%} in the corridor 2022–25")
+    a1.stackplot(w.index, w.T.values, colors=[ZC[c] for c in w.columns], edgecolor=SURFACE, linewidth=0.8)
+    _stack_labels(a1, w, w.index[-1], min_share=0.1)
+    pk = tot.idxmax()
+    callout(a1, pk, tot[pk], f"{tot[pk]:,.0f} ha in {pk}", dy=8, arrow=False)
+    a1.set_ylim(0, tot.max() * 1.12); style_axes(a1)
+    a1.set_title("Hectares per year", pad=18)
     sh = w.div(tot, axis=0) * 100
-    a2.stackplot(sh.index, sh.T.values, colors=[COL[c] for c in sh.columns], edgecolor="white", linewidth=0.6)
-    a2.set_ylim(0, 100); a2.axvline(2018.5, color="black", lw=1.2); style_axes(a2)
-    a2.set_ylabel("Share of the year's\nreturns to old pits (%)"); a2.set_xticks(list(w.index))
-    a2.set_xticklabels([f"'{str(y)[2:]}" for y in w.index], fontsize=8)
-    fig.suptitle("Returns to old pits each year, by zone (same layout as the first-time mining chart)", x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC_R}. Return to old pits = mining on pixels mined in an earlier year but not the year before; "
-                       "includes some year-to-year map flicker. Description.", OUT / "fig_v2_stream_remined.png", rect_bottom=0.08)
+    a2.stackplot(sh.index, sh.T.values, colors=[ZC[c] for c in sh.columns], edgecolor=SURFACE, linewidth=0.8)
+    a2.set_ylim(0, 100); style_axes(a2)
+    a2.set_title("Share of the year's returns to old pits (%)")
+    _stack_labels(a2, sh, sh.index[-1], min_share=0.04, total=100)
+    mid = sh.loc[2021, "La Pampa sector"] + sh.loc[2021, "Corridor across the road"] / 2
+    callout(a2, 2021, mid, "Corridor across the road", dx=10, dy=34, ha="left")
+    a2.set_xticks(list(w.index)); a2.set_xticklabels([f"'{str(y)[2:]}" for y in w.index])
+    a1.set_xlim(w.index[0], w.index[-1] + 2.9)               # right gutter for the direct labels
+    for ax in (a1, a2):
+        ax.spines["bottom"].set_bounds(w.index[0], w.index[-1])
+    for ax in (a1, a2):
+        add_event_markers(ax, label=ax is a1, events=MERCURIO)
+        ax.lines[-1].set_zorder(3)                                 # draw the Mercurio line over the stack
+    finish_figure(fig, f"{SRC_R}. Return to old pits = mining on pixels mined in an earlier year but not the year before; "
+                       "includes some year-to-year map flicker. Labels at the right name the bands of 2025. Description.",
+                  OUT / "fig_v2_stream_remined.png")
     cor = (w["Corridor across the road"] + w["Rest of mining corridor"]) / tot
     for p, (a, b) in {"2016_18": (2016, 2018), "2019_21": (2019, 2021), "2022_25": (2022, 2025)}.items():
         reg.add(f"rm_corridor_share_{p}", cor.loc[a:b].mean(), "share", f"Share of returns to old pits inside the legal corridor, {p}", "description", SRC_R)
@@ -220,59 +266,93 @@ def e4(reg):
     # map
     import geopandas as gpd
     L = rz.layers()
-    fig, ax = plt.subplots(figsize=(10, 6.6))
-    sc = ax.scatter(a.lon, a.lat, c=a.risk_2026_28, cmap="OrRd", s=7, marker="s", vmin=0, vmax=1, linewidths=0)
-    plt.colorbar(sc, ax=ax, label="Predicted chance of first-time mining 2026-28")
-    gpd.GeoSeries([L["cor"]], crs=4326).boundary.plot(ax=ax, color="#2a78d6", lw=1)
-    L["anp"].boundary.plot(ax=ax, color="#008300", lw=1.2)
-    L["za"].boundary.plot(ax=ax, color="#1baf7a", lw=0.8, ls="--")
-    L["ioh"].plot(ax=ax, color="black", lw=1.5)
+    from matplotlib.colors import LinearSegmentedColormap
+    from matplotlib.lines import Line2D
+    cmap = LinearSegmentedColormap.from_list("risk", ["#f4f2ee", "#b8c3c5", "#5d7479", "#1f2d33"])
+    fig = plt.figure(figsize=(9, 6.9))
+    ax = fig.add_axes([0.02, 0.2, 0.96, 0.68])
+    headline(fig, "New mining is predicted where mining already is",
+             f"Chance of first-time mining in 2026–28 per 1-km cell. Held-out AUC {au_sp:.2f}, vs {au_b:.2f} for 'mining nearby' alone. Prediction.")
+    ax.text(0.985, 0.03, f"{len(hi)} cells outside the corridor\nabove 50% risk", transform=ax.transAxes, ha="right", va="bottom",
+            fontsize=9, color=INK, fontweight="medium", linespacing=1.3)
+    sc = ax.scatter(a.lon, a.lat, c=a.risk_2026_28, cmap=cmap, s=14, marker="s", vmin=0, vmax=1, linewidths=0)
+    gpd.GeoSeries([L["cor"]], crs=4326).boundary.plot(ax=ax, color=C["corridor"], lw=1.1)
+    L["anp"].boundary.plot(ax=ax, color=C["reserve"], lw=1.3)
+    L["za"].boundary.plot(ax=ax, color=C["buffer"], lw=0.9, ls="--")
+    L["ioh"].plot(ax=ax, color=INK, lw=1.6)
     ax.set_xlim(rz.STUDY[0], rz.STUDY[2]); ax.set_ylim(rz.STUDY[1], rz.STUDY[3]); ax.set_aspect(1 / np.cos(np.radians(-12.9)))
-    ax.set_title(f"Where new mining is most likely next (prediction; held-out-blocks AUC {au_sp:.2f} vs {au_b:.2f} for 'mining nearby' alone)", loc="left", fontsize=10, fontweight="bold")
-    ax.legend(handles=[Patch(edgecolor="#2a78d6", facecolor="none", label="Legal mining corridor"),
-                       Patch(edgecolor="#008300", facecolor="none", label="Reserves and parks"),
-                       Patch(edgecolor="#1baf7a", facecolor="none", ls="--", label="Buffer zones")], fontsize=8, loc="lower left")
-    finish_figure(fig, f"Source: {SRC_R}. Logit on 1-km cells: distance to highway and rivers, gold-bearing land, mining "
-                       "nearby, zone. Trained to predict 2019-21 from 2018, tested on 2022-25 in held-out 10-km blocks, applied to 2025 "
-                       "features. It misses the reserve incursion (river access, not captured). Prediction, not a causal map.", OUT / "fig_v2_risk_map.png", rect_bottom=0.08)
-
+    ax.set_xticks([]); ax.set_yticks([]); ax.set_xlabel(""); ax.set_ylabel("")
+    for sp in ax.spines.values():
+        sp.set_color(AXIS); sp.set_linewidth(0.6)
+    cax = fig.add_axes([0.06, 0.135, 0.34, 0.022])
+    cb = fig.colorbar(sc, cax=cax, orientation="horizontal")
+    cb.outline.set_visible(False); cb.set_ticks([0, 0.25, 0.5, 0.75, 1]); cb.set_ticklabels(["0%", "25%", "50%", "75%", "100%"])
+    cb.ax.tick_params(length=0, labelsize=8); cax.set_title("Predicted chance of first-time mining", fontsize=8.5, loc="left", color=INK2, pad=4)
+    fig.legend(handles=[Line2D([], [], color=C["corridor"], lw=1.4, label="Legal mining corridor"),
+                        Line2D([], [], color=C["reserve"], lw=1.4, label="Reserves and parks"),
+                        Line2D([], [], color=C["buffer"], lw=1.2, ls=(0, (4, 2)), label="Buffer zones"),
+                        Line2D([], [], color=INK, lw=1.6, label="Interoceanic Highway")],
+               loc="lower left", bbox_to_anchor=(0.47, 0.105), ncol=2, fontsize=8.5, handlelength=2.2, columnspacing=1.4)
+    fig.text(0.012, 0.008, "Source: " + SRC_R + ". Logit on 1-km cells: distance to highway and rivers, gold-bearing land, mining "
+             "nearby, zone. Trained on 2018 → 2019–21,\ntested on 2022–25 in held-out 10-km blocks, applied to 2025 features. "
+             "It misses the 2025 reserve incursion (river access, not in the model). Prediction, not a causal map.",
+             fontsize=7, color=MUTED, va="bottom", linespacing=1.35)
+    fig.savefig(OUT / "fig_v2_risk_map.png", dpi=170); plt.close(fig); print("Saved output/fig_v2_risk_map.png")
 
 # ------------------------------------------------------------------ E5 timeline
-EVENTS = [(2009, "Interdictions begin", "enf"), (2011.6, "Humala takes office", "pol"), (2012.2, "D.L. 1100/1105:\ncorridor, illegal mining defined", "law"),
-          (2016.6, "Kuczynski takes office", "pol"), (2017, "Gang takeover\nof La Pampa", "ctx"), (2018.2, "Vizcarra takes office", "pol"),
-          (2019.1, "Operation Mercurio", "enf"), (2020.2, "COVID-19", "ctx"), (2021.1, "Plan Restauracion", "enf"),
-          (2021.6, "Castillo takes office", "pol"), (2023.3, "State of emergency", "enf"), (2025.5, "Navy posts withdrawn", "enf")]
-ECOL = {"enf": "#0b0b0b", "pol": "#6250d6", "law": "#52514e", "ctx": "#9aa5a8"}
+LANES = ["Enforcement", "Presidents", "Laws", "Context"]
+# (x, label, lane, label above?, horizontal alignment)
+EVENTS = [(2009, "Interdictions begin", 0, True, "left"), (2019.1, "Operation Mercurio", 0, False, "left"),
+          (2021.1, "Plan Restauración", 0, True, "center"), (2023.3, "State of emergency", 0, False, "center"),
+          (2025.5, "Navy posts withdrawn", 0, True, "right"),
+          (2011.6, "Humala", 1, True, "center"), (2016.6, "Kuczynski", 1, True, "center"), (2018.2, "Vizcarra", 1, False, "center"),
+          (2021.6, "Castillo", 1, False, "center"),
+          (2012.2, "D.L. 1100 / 1105: corridor; illegal mining defined", 2, True, "left"),
+          (2017, "Gang takeover of La Pampa", 3, True, "center"), (2020.2, "COVID-19", 3, False, "center")]
 
 
 def e5(reg):
     z = pd.read_csv(rz.OUT_ZONE)
     lp = z[z.code == 7].set_index("year").new_land_ha.loc[2008:2025]
     tot = z.groupby("year").new_land_ha.sum().loc[2008:2025]
-    sp = pd.Series({int(k.split("_")[-1]): v for k, v in []})
-    fig, (a0, a1) = plt.subplots(2, 1, figsize=(11.5, 6.4), sharex=True, gridspec_kw={"height_ratios": [1, 1.4]})
-    for i, (x, lab, k) in enumerate(EVENTS):
-        a0.axvline(x, color=ECOL[k], lw=1.2, alpha=0.8)
-        a0.text(x + 0.05, 0.92 - 0.16 * (i % 5), lab, fontsize=7, color=ECOL[k], va="top")
-    a0.set_yticks([]); [a0.spines[s].set_visible(False) for s in ("left", "top", "right")]
-    a0.set_title("Enforcement (black), presidents (violet), laws (dark grey), context (light grey)", loc="left", fontsize=9.5)
-    a1.bar(lp.index, lp.values, color="#eb6834", width=0.7, label="La Pampa sector")
-    a1.plot(tot.index, tot.values / 5, "o-", color="#3d3c39", lw=1.5, ms=3, label="All Madre de Dios ÷ 5")
-    for x0, x1 in ((2012, 2013), (2019, 2021)):
-        a1.axvspan(x0 - 0.5, x1 + 0.5, color="#f3e3c2", alpha=0.6, zorder=0)
-    a1.set_ylabel("Land mined for the\nfirst time (ha)"); style_axes(a1); a1.legend(fontsize=8, frameon=False, loc="upper left")
-    a1.set_xticks(range(2008, 2026)); a1.tick_params(axis="x", labelsize=8)
-    fig.suptitle("One dip in La Pampa: 2020-21. The 2012-13 wave left no mark there", x=0.01, ha="left", fontsize=11, fontweight="bold")
+    fig, (a0, a1, a2) = plt.subplots(3, 1, figsize=(9, 7.6), sharex=True,
+                                     gridspec_kw={"height_ratios": [1.35, 1, 1], "hspace": 0.32})
+    headline(fig, "La Pampa dipped once, in 2020–21. The 2012 laws left no mark.",
+             "Events by type (top) against land mined for the first time each year (hectares). Shaded: 2012–13 and 2019–21.")
+    for i, lane in enumerate(LANES):
+        y = len(LANES) - 1 - i
+        a0.axhline(y, color=AXIS, lw=0.7, zorder=1)
+        a0.text(2007.35, y, lane, ha="right", va="center", fontsize=8.5, color=INK2, fontweight="medium")
+    for x, lab, lane, up, ha in EVENTS:
+        y = len(LANES) - 1 - lane
+        enf = lane == 0
+        a0.plot(x, y, "o", ms=6.5 if enf else 5.5, color=INK if enf else SURFACE, mec=INK if enf else INK2, mew=1.3, zorder=3)
+        a0.annotate(lab, xy=(x, y), xytext=(0, 7 if up else -7), textcoords="offset points", ha=ha,
+                    va="bottom" if up else "top", fontsize=7.5, color=INK if enf else INK2,
+                    fontweight="semibold" if enf else "normal")
+    a0.set_ylim(-0.75, len(LANES) - 0.35); a0.set_yticks([])
+    for sp in ("left", "top", "right", "bottom"):
+        a0.spines[sp].set_visible(False)
+    a0.tick_params(axis="x", length=0)
+    for ax, ser, col, title in ((a1, lp, C["lapampa"], "La Pampa sector"), (a2, tot, C["other"], "All of Madre de Dios")):
+        for x0, x1 in ((2012, 2013), (2019, 2021)):
+            period_band(ax, x0 - 0.5, x1 + 0.5)
+        ax.bar(ser.index, ser.values, color=col, width=0.72, zorder=2)
+        ax.set_ylim(0, ser.max() * 1.15); style_axes(ax); ax.set_title(title)
+    callout(a1, 2020.5, lp.loc[2020:2021].max(), f"{lp.loc[2020:2021].mean():,.0f} ha/yr\n2020–21", dy=26)
+    callout(a1, 2012.5, lp.loc[2012:2013].max(), f"{lp.loc[2012:2013].mean():,.0f} ha/yr\n2012–13", dy=14)
+    for ax in (a0, a1, a2):
+        ax.set_xlim(2007.4, 2025.8)
+    a2.set_xticks(range(2008, 2026)); a2.set_xticklabels([f"'{str(y)[2:]}" for y in range(2008, 2026)])
     finish_figure(fig, f"Sources: {SRC_R}; dates from MAAP #130/#241, Asner & Tupayachi (2017), D.L. 1100/1105 (2012), Forbidden "
-                       "Stories (2017 gang takeover), official government calendars. Shaded = the two dips. Total divided by 5 to share "
-                       "the axis with La Pampa. Description.", OUT / "fig_v2_timeline.png", rect_bottom=0.1)
+                       "Stories (2017 gang takeover), official government calendars. Filled dots = enforcement. Description.",
+                  OUT / "fig_v2_timeline.png")
     for y in (2011, 2012, 2013, 2014, 2018, 2019, 2020, 2021):
         reg.add(f"tl_lp_newland_{y}", lp.loc[y], "ha", f"La Pampa sector, land mined for the first time, {y}", "description", SRC_R)
     reg.add("tl_dip_2012_13", lp.loc[2012:2013].mean() / lp.loc[2010:2011].mean() - 1, "share",
             "La Pampa first-time mining 2012-13 vs 2010-11 (relative change)", "description", SRC_R)
     reg.add("tl_dip_2020_21", lp.loc[2020:2021].mean() / lp.loc[2017:2018].mean() - 1, "share",
             "La Pampa first-time mining 2020-21 vs 2017-18 (relative change)", "description", SRC_R)
-
 
 # ------------------------------------------------------------------ E6 declared output vs mapped mining
 def e6(reg):
@@ -284,17 +364,22 @@ def e6(reg):
     yrs = list(range(2010, 2026))
     d = pd.DataFrame({"tonnes": p.tonnes.reindex(yrs), "corridor_new": cor.reindex(yrs), "outside_new": out.reindex(yrs)})
     d["ha_per_tonne_mapped"] = (d.corridor_new + d.outside_new) / d.tonnes
-    fig, (a1, a2) = plt.subplots(2, 1, figsize=(10, 5.8), sharex=True)
-    a1.bar(yrs, d.tonnes, color="#eda100", width=0.7); a1.set_ylabel("Declared gold\n(tonnes)"); style_axes(a1)
-    a1.set_title("The official gold series breaks in 2020 because it dropped its artisanal estimate; mapped mining kept growing", loc="left", fontsize=10.5, fontweight="bold")
-    a1.axvline(2019.5, color="#b3261e", ls="--", lw=1.2); a1.text(2019.6, a1.get_ylim()[1] * 0.9, "artisanal estimate\ndropped from series", fontsize=7.5, color="#b3261e", va="top")
-    a2.bar(yrs, d.corridor_new, color="#2a78d6", width=0.7, label="Inside the legal corridor")
-    a2.bar(yrs, d.outside_new, bottom=d.corridor_new, color="#b9b8b2", width=0.7, label="Outside")
-    a2.set_ylabel("Land mined for the\nfirst time (ha)"); style_axes(a2); a2.legend(fontsize=8, frameon=False)
-    a2.set_xticks(yrs); a2.tick_params(axis="x", labelsize=8)
+    fig, (a1, a2) = plt.subplots(2, 1, figsize=(9, 6.0), sharex=True, gridspec_kw={"hspace": 0.35})
+    headline(fig, "Declared gold “fell” in 2020 because the series changed. Mapped mining kept growing.",
+             "Top: official gold output, Madre de Dios (tonnes). Bottom: land mined for the first time (hectares).")
+    a1.bar(yrs, d.tonnes, color=C["gold"], width=0.72); style_axes(a1); a1.set_title("Official gold series (tonnes)")
+    a1.axvline(2019.5, color=INK, ls=(0, (3, 2)), lw=1.0)
+    a1.text(2019.62, d.tonnes.max() * 0.95, "From 2020: artisanal\nestimate dropped", fontsize=8, color=INK, va="top")
+    a2.bar(yrs, d.corridor_new, color=C["corridor"], width=0.72)
+    a2.bar(yrs, d.outside_new, bottom=d.corridor_new, color=C["other"], width=0.72)
+    a2.bar(yrs, [0] * len(yrs), bottom=d.corridor_new, color=SURFACE, width=0.72, edgecolor=SURFACE, linewidth=1.2)
+    label_end(a2, yrs[-1] + 0.4, d.corridor_new.iloc[-1] / 2, "Inside the\ncorridor", C["corridor"], dx=6)
+    label_end(a2, yrs[-1] + 0.4, d.corridor_new.iloc[-1] + d.outside_new.iloc[-1] / 2, "Outside", C["other"], dx=6)
+    style_axes(a2); a2.set_title("Land mined for the first time (ha)")
+    a2.set_xticks(yrs); a2.set_xticklabels([f"'{str(y)[2:]}" for y in yrs])
     finish_figure(fig, f"Sources: BCRP (source MINEM) declared gold production, Madre de Dios; {SRC_R}. Two panels, two units. "
                        "Until 2019 the official series includes MINEM's estimate of artisanal gold; from 2020 only declared output. The 2020 "
-                       "break is a definition change, not a production fall. Description.", OUT / "fig_v2_declared_vs_mapped.png", rect_bottom=0.1)
+                       "break is a definition change, not a production fall. Description.", OUT / "fig_v2_declared_vs_mapped.png")
     X = sm.add_constant(pd.DataFrame({"post2019": (d.index >= 2019).astype(float), "trend": np.array(yrs) - 2010.0}, index=d.index))
     m = sm.OLS(np.log(d.tonnes), X).fit(cov_type="HAC", cov_kwds={"maxlags": 2})
     reg.add("dec_log_tonnes_post2019", m.params["post2019"], "log points", "Official gold series, log tonnes: break after 2019 net of trend (OLS, Newey-West). ARTEFACT: series drops the artisanal estimate from 2020", "description", "BCRP/MINEM")

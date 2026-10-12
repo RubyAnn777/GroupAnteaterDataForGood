@@ -16,14 +16,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from common import ROOT, OUT, style_axes, finish_figure
+from common import ROOT, OUT, style_axes, finish_figure, headline, label_end, callout, period_band, C, INK, INK2, AXIS
 
 INTER = ROOT / "data_intermediate"
 TU = "PE-BZ-RN09"
 # Munduruku DROPPED after the critical review: our own search log records Op. Mundurukania in May 2021 (inside the
 # 2017-21 window of the relaxed rule; snippet, unverified), and its AMW 2018 "stock" is too small to normalise by.
 TWINS = {"RAISG-434": ("Amana National Forest", 4443), "RAISG-512": ("Tapajos protection area", 4442)}
-TCOL = {"Amana National Forest": "#6250d6", "Munduruku territory": "#9085e9", "Tapajos protection area": "#3d2f9e"}   # twins = violet family
+TCOL = {"Amana National Forest": C["twin"], "Munduruku territory": "#a79ce6", "Tapajos protection area": "#3e3290"}   # twins = violet family
 SRC = "MapBiomas Peru Col 4 (Tambopata) and MapBiomas Amazonia Col 6 (twins) before 2019; Amazon Mining Watch after 2019"
 
 
@@ -72,22 +72,42 @@ def run(reg):
     reg.add("top3_median_ratio", tam_d / med, "ratio", "Tambopata's 2019-21 pace as a share of the median twin's pace", "description", SRC)
     reg.add("top3_below_all", float((t.during_gap < 0).all()), "flag", "1 = Tambopata below every one of the three twins in 2019-21", "description", SRC)
     # figure
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(12, 4.3))
-    a1.plot(I.index, I["Tambopata buffer zone"], color="#eb6834", lw=2.4, label="Tambopata buffer zone")
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(9, 4.5), gridspec_kw={"wspace": 0.6})
+    headline(fig, f"Both twins added new mining faster than Tambopata in 2019–21",
+             "Left: mining area, index 2018 = 100 (MapBiomas, own collection). "
+             "Right: new mining per year, % of own 2018 stock (Amazon Mining Watch).")
+    short = {"Tambopata buffer zone": "Tambopata BZ", "Amana National Forest": "Amanã NF", "Tapajos protection area": "Tapajós APA"}
+    def spread(ax, items, gap):
+        items = sorted(items, key=lambda e: e[1]); ys = [e[1] for e in items]
+        for j in range(1, len(ys)):
+            ys[j] = max(ys[j], ys[j - 1] + gap)
+        for (x, y, lab), yy in zip(items, ys):
+            ax.annotate(lab, xy=(x, y), xytext=(x + 0.35 * (ax.get_xlim()[1] - ax.get_xlim()[0]) / 12, yy), textcoords="data",
+                        va="center", fontsize=7.5, color=INK, fontweight="semibold", annotation_clip=False,
+                        arrowprops=dict(arrowstyle="-", color=AXIS, lw=0.6, shrinkA=0, shrinkB=3))
+    a1.plot(I.index, I["Tambopata buffer zone"], color=C["lapampa"], lw=2.4, zorder=4)
     for nm in [v[0] for v in TWINS.values()]:
-        a1.plot(I.index, I[nm], color=TCOL[nm], lw=1.6, label=nm)
-    a1.axvline(2018.5, color="black", lw=1); a1.axhline(100, color="#888", lw=0.6); style_axes(a1)
-    a1.set_ylabel("Mining area, 2018 = 100\n(MapBiomas, own collection)"); a1.legend(fontsize=7.5, frameon=False)
-    a1.set_title("Before 2019: growth paths", loc="left", fontsize=9.5)
+        a1.plot(I.index, I[nm], color=TCOL[nm], lw=1.8, zorder=3)
+    a1.axvline(2018.5, color=INK, lw=1); a1.axhline(100, color=AXIS, lw=0.8); style_axes(a1)
+    a1.set_xlim(2008.6, 2023.4); a1.set_ylim(0, I.max().max() * 1.08)
+    spread(a1, [(I.index[-1], I[c].iloc[-1], short[c]) for c in I.columns], 0.08 * a1.get_ylim()[1])
+    a1.set_ylabel("Index, 2018 = 100"); a1.set_xticks(range(2009, 2024, 3))
+    a1.set_title("Growth paths, 2009–2023", pad=8)
     yrs = list(range(2019, 2026))
-    a2.plot(yrs, 100 * w.loc[TU, yrs] / w.loc[TU, 2018], "o-", color="#eb6834", lw=2.4, label="Tambopata buffer zone")
+    period_band(a2, 2018.5, 2021.5, "Mercurio years")
+    sh = {"Tambopata buffer zone": 100 * w.loc[TU, yrs] / w.loc[TU, 2018]}
     for uid, (nm, _) in TWINS.items():
-        a2.plot(yrs, 100 * w.loc[uid, yrs] / w.loc[uid, 2018], "o-", color=TCOL[nm], lw=1.6, ms=3, label=nm)
-    a2.axvspan(2018.5, 2021.5, color="#f3e3c2", alpha=0.5, zorder=0); style_axes(a2)
-    a2.set_ylabel("New mining per year, % of 2018 stock\n(Amazon Mining Watch)")
-    a2.set_title("After 2019: pace of new mining", loc="left", fontsize=9.5)
-    fig.suptitle("Two rule-based twins: growth paths before 2019 differ; both added mining faster than Tambopata in 2019-21",
-                 x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Sources: {SRC}. Left: each line from its own collection, side by side, never subtracted. Twins pass "
-                       "all rules if operations after 2021 are allowed. Description.", OUT / "fig_control_top3.png", rect_bottom=0.1)
+        sh[nm] = 100 * w.loc[uid, yrs] / w.loc[uid, 2018]
+    for nm, ser in sh.items():
+        col = C["lapampa"] if nm.startswith("Tambopata") else TCOL[nm]
+        a2.plot(yrs, ser.values, "-", color=col, lw=2.4 if nm.startswith("Tambopata") else 1.8, zorder=3)
+        a2.plot(yrs, ser.values, "o", color=col, ms=4, mec="white", mew=0.8, zorder=4)
+    style_axes(a2); a2.set_xlim(2018.6, 2025.4)
+    a2.set_ylim(0, max(float(v.max()) for v in sh.values()) * 1.1)
+    spread(a2, [(2025, float(v.iloc[-1]), short[k]) for k, v in sh.items()], 0.08 * a2.get_ylim()[1])
+    callout(a2, 2020, tam_d, f"Tambopata 2019–21: {tam_d:.0f}%\ntwins’ mean: {pooled_c:.0f}%", dy=-34, arrow=False, fontsize=7.5)
+    a2.set_ylabel("% of own 2018 stock"); a2.set_xticks(yrs); a2.set_xticklabels([f"'{str(y)[2:]}" for y in yrs])
+    a2.set_title("After 2019: pace of new mining", pad=8)
+    finish_figure(fig, f"{SRC}. Left: each line from its own collection, side by side, never subtracted. Twins pass "
+                       "all rules if operations after 2021 are allowed. Description.", OUT / "fig_control_top3.png")
     return t

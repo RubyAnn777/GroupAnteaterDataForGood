@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from common import (ROOT, OUT, add_event_markers, style_axes, set_year_ticks, finish_figure,
-                    SRC_MAPBIOMAS, EVENT_TITLE_PAD)
+                    SRC_MAPBIOMAS, EVENT_TITLE_PAD, headline, callout, C, INK, INK2)
 
 RAW = ROOT / "data_raw" / "bcrp"
 ANNUAL_JSON = RAW / "bcrp_annual_gold_series_2001_2025.json"
@@ -76,26 +76,33 @@ def run(pack, reg):
 
     # ------------------------------------------------------------------ figure: 3 stacked panels, shared x, no dual axis
     yrs = t.index.to_numpy(float)
-    fig, axs = plt.subplots(3, 1, figsize=(8, 8.6), sharex=True)
-    c1, c2, c3 = "#b07a00", "#3d3c39", "#3d3c39"   # gold, mapped mining (Madre de Dios total)
-    axs[0].plot(yrs, t.tonnes, marker="o", color=c1, lw=1.8)
-    axs[0].set_ylabel("t of fine gold")
-    axs[0].set_title("Declared (formal) gold production, Madre de Dios", loc="left", fontsize=10, pad=EVENT_TITLE_PAD)
-    axs[1].plot(yrs, t.mapbiomas_mining_ha, marker="o", color=c2, lw=1.8)
-    axs[1].set_ylabel("hectares")
-    axs[1].set_title("Mapped mining area (level), Madre de Dios", loc="left", fontsize=10)
-    axs[2].bar(yrs, t.mapbiomas_addition_ha, color=c3, width=0.7)
-    axs[2].axhline(0, color="#888888", lw=0.6)
-    axs[2].set_ylabel("ha per year")
-    axs[2].set_title("Mapped mining area, annual additions", loc="left", fontsize=10)
+    fig, axs = plt.subplots(3, 1, figsize=(9, 8.4), sharex=True, gridspec_kw={"hspace": 0.55})
+    headline(fig, "The official gold series broke in 2020; mapped mining kept growing",
+             "Madre de Dios, 2010–2025. Two publishers measuring different things: shown side by side, never combined.")
+    c_gold, c_map = C["gold"], INK2
+    axs[0].plot(yrs, t.tonnes, "-", color=c_gold, lw=2.2)
+    axs[0].plot(yrs, t.tonnes, "o", color=c_gold, ms=4.5, mec="white", mew=1)
+    axs[0].set_title("Declared gold, tonnes of fine gold (BCRP, source MINEM)", pad=EVENT_TITLE_PAD)
+    callout(axs[0], 2020, t.tonnes[2020], "2020: a definition change, not a production fall\n(MINEM dropped its artisanal estimate)",
+            dx=30, dy=30, ha="left")
+    axs[1].plot(yrs, t.mapbiomas_mining_ha, "-", color=c_map, lw=2.2)
+    axs[1].plot(yrs, t.mapbiomas_mining_ha, "o", color=c_map, ms=4.5, mec="white", mew=1)
+    axs[1].set_title("Mapped mining area, hectares (stock)")
+    for y in (2018, 2025):
+        callout(axs[1], y, t.mapbiomas_mining_ha[y], f"{t.mapbiomas_mining_ha[y]:,.0f} ha", dx=-8,
+                dy=8 if y == 2025 else -10, ha="right", arrow=False)
+    axs[2].bar(yrs, t.mapbiomas_addition_ha, color=c_map, width=0.68)
+    axs[2].axhline(0, color=INK2, lw=0.6)
+    axs[2].set_title("Mapped mining area, net additions per year, hectares")
     for k, ax in enumerate(axs):
         style_axes(ax)
         ax.set_xlim(Y0 - 0.6, Y1 + 0.6)
         add_event_markers(ax, label=(k == 0))
-    set_year_ticks(axs[2], t.index)
+    axs[1].set_ylim(0, t.mapbiomas_mining_ha.max() * 1.15)
+    set_year_ticks(axs[2], t.index, short=True)
+    axs[2].set_xticks(list(t.index)); axs[2].set_xticklabels([f"'{str(y)[2:]}" for y in t.index])
     src_txt = ("Sources: BCRP series RD15556DA, 'Producción de productos mineros según departamentos: Oro - Madre de Dios (grs.f)', "
                "original source MINEM (grams of fine gold shown as tonnes); " + SRC_MAPBIOMAS + ", Amazonía biome. "
-               "Description only. Production is FORMAL (declared) output; a fall in it while mapped area rises is consistent with more "
-               "undeclared output, but also with changes in reporting or formalisation rules (e.g. the REINFO register). Two different "
-               "publishers measuring different things: no ratio or difference is computed across them.")
+               "Declared output is FORMAL output; the 2020 drop is a definition change (see the MINEM figure). No ratio or "
+               "difference is computed across the two publishers. Description.")
     finish_figure(fig, src_txt, OUT / "fig_peru_production_vs_area.png", event_note=True)

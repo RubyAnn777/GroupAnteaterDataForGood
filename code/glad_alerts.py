@@ -20,9 +20,12 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from common import ROOT, OUT, style_axes, finish_figure
+from common import ROOT, OUT, style_axes, finish_figure, headline, C, INK, INK2, MUTED, AXIS
 import raster_zones as rz
-from raster_layers import GROUPS, COL
+from raster_layers import GROUPS
+
+ZC = {"La Pampa sector": C["lapampa"], "Corridor across the road": C["corridor"], "Rest of mining corridor": C["corridor_rest"],
+      "Native communities": C["native"]}
 
 RAW = ROOT / "data_raw" / "glad_alerts"
 OUT_CSV = ROOT / "data_intermediate" / "glad_zone_quarter_v2.csv"
@@ -95,22 +98,30 @@ def run(reg):
     m.round(1).to_csv(OUT / "v2_glad_quarterly_mining.csv")
     x = np.array([y + (q - 0.5) / 4 for y, q in m.index])
     show = ["La Pampa sector", "Corridor across the road", "Rest of mining corridor", "Native communities"]
-    fig, axes = plt.subplots(len(show), 1, figsize=(11, 8), sharex=True)
-    for ax, gname in zip(axes, show):
-        ax.bar(x, m[gname], width=0.22, color=COL[gname])
-        ax.axvline(2019 + 1 / 12, color="black", lw=1.4)
-        ax.axvline(2021, color="#9aa5a8", ls="--", lw=1)
-        ax.set_title(gname, loc="left", fontsize=9.5)
+    q_ = m["La Pampa sector"]
+    pre, mid = q_.loc[pd.IndexSlice[2017:2018, :]].mean(), q_.loc[(2019, 2):(2020, 4)].mean()
+    fig, axes = plt.subplots(len(show), 1, figsize=(9, 8.2), sharex=True, gridspec_kw={"hspace": 0.55})
+    headline(fig, "La Pampa kept clearing forest through 2019. Across the road, clearing rose from mid-2019.",
+             "Forest-loss alerts (GLAD-L) on mapped mining land, hectares per quarter. Each panel has its own scale.")
+    for k, (ax, gname) in enumerate(zip(axes, show)):
+        ax.bar(x, m[gname], width=0.2, color=ZC[gname], zorder=2)
+        ax.axvline(2019 + 1 / 12, color=INK, lw=1.1, zorder=1)
+        ax.axvline(2021, color=AXIS, ls=(0, (3, 2)), lw=0.9, zorder=1)
+        ax.set_title(gname)
+        ax.set_ylim(0, m[gname].max() * 1.12)
         style_axes(ax)
-    axes[0].text(2019.12, axes[0].get_ylim()[1] * 0.9, "Mercurio (Feb 2019)", fontsize=8)
-    axes[0].text(2021.03, axes[0].get_ylim()[1] * 0.9, "data version break", fontsize=7.5, color="#52514e")
+        if k == 0:
+            ax.annotate("Mercurio, Feb 2019", xy=(2019 + 1 / 12, 1.0), xycoords=("data", "axes fraction"), xytext=(4, -2),
+                        textcoords="offset points", fontsize=8, color=INK, fontweight="semibold", va="top")
+            ax.annotate("data version break", xy=(2021, 1.0), xycoords=("data", "axes fraction"), xytext=(4, -2),
+                        textcoords="offset points", fontsize=7.5, color=INK2, va="top")
+            ax.text(1.0, 1.04, f"Mean per quarter: {pre:,.0f} ha (2017–18) vs {mid:,.0f} ha (Q2 2019–Q4 2020)",
+                    transform=ax.transAxes, ha="right", va="bottom", fontsize=8, color=INK2)
     axes[-1].set_xticks(range(2017, 2027))
-    fig.supylabel("Forest-loss alerts on mapped mining land (ha per quarter)", fontsize=9)
-    fig.suptitle("Quarterly timing: clearing on La Pampa mining land continued through 2019 and collapsed only in 2020-22; across the road it rose from mid-2019",
-                 x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC}. Alerts bunch in the dry season (Q3) because of clouds; compare the same quarter across "
+    axes[-1].set_xlim(2017, x.max() + 0.25)
+    finish_figure(fig, f"{SRC}. Alerts bunch in the dry season (Q3) because of clouds; compare the same quarter across "
                        "years. Alerts need standing forest, so returns to old pits never appear. Description.",
-                  OUT / "fig_v2_glad_quarterly.png", rect_bottom=0.08)
+                  OUT / "fig_v2_glad_quarterly.png")
     ann = m.groupby(level="year").sum()
     for gname in show:
         key = "".join(ch for ch in gname.lower() if ch.isalnum())[:18]

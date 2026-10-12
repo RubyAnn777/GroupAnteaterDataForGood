@@ -21,7 +21,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from common import ROOT, OUT, style_axes, finish_figure
+from common import (ROOT, OUT, style_axes, finish_figure, headline, label_end, callout, period_band,
+                    add_event_markers, PERU_EVENTS, C, INK, INK2, MUTED, AXIS)
 import raster_zones as rz
 import peru_models as pm
 import checks
@@ -70,16 +71,31 @@ def t1_t2(reg):
     s2, r2, n2 = shift_test(pair)
     reg.add("t2_pair_shift_2019", s2[2019], "share points", "Shift in the across-the-road share of the La Pampa / across-the-road pair, 2019", "description", SRC_R)
     reg.add("t2_pair_shift_rank", r2, "rank", f"Rank of that 2019 shift among {n2} start years", "description", SRC_R)
-    fig, ax = plt.subplots(figsize=(9, 3.6))
-    ax.bar(s.index, s.values * 100, color=["#2a78d6" if t == 2019 else "#b9b8b2" for t in s.index])
-    ax.axhline(0, color="black", lw=0.8)
-    ax.set_ylabel("Change in north-of-road share\n(percentage points)")
-    ax.set_xticks(list(s.index)); ax.tick_params(axis="x", labelsize=8)
+    fig, ax = plt.subplots(figsize=(9, 4.4))
+    ttl = (f"No clean fake start date moves mining across the road as much as 2019" if rank_c == 1 else
+           f"Fake start dates: 2019's move across the road ranks {rank_c} of {n_c}")
+    headline(fig, ttl,
+             "Change in the share of first-time mining north of the highway (La Pampa longitudes), 3 years after minus 3 before, % points")
+    overlap = [t for t in s.index if 2016 <= t <= 2021 and t != 2019]
+    cols = [C["corridor"] if t == 2019 else ("#d9d6cf" if t in overlap else C["other"]) for t in s.index]
+    ax.bar(s.index, s.values * 100, color=cols, width=0.72)
+    ax.axhline(0, color=INK2, lw=0.8)
+    period_band(ax, min(overlap) - 0.5, max(overlap) + 0.5, None, color="#f4f2ed")
+    ax.text(2018.5, 0.04, "Pale bars: windows overlap the real event", transform=ax.get_xaxis_transform(),
+            ha="center", va="bottom", fontsize=7.5, color=INK2)
+    callout(ax, 2019, s[2019] * 100, f"Real start 2019\n{s[2019] * 100:+.0f} pts", dx=-46, dy=10, ha="center")
+    callout(ax, 2008, s[2008] * 100, "2008: the Guacamayo\nboom north of the road", dx=40, dy=12, ha="left")
+    ax.text(0.01, 0.97, f"Clean start years (grey + 2019): rank {rank_c} of {n_c}, p = {rank_c / n_c:.2f}\n"
+            f"All start years: rank {rank} of {n}, p = {rank / n:.2f}", transform=ax.transAxes, ha="left", va="top",
+            fontsize=7.5, color=INK2, linespacing=1.4)
+    ax.set_ylabel("% points")
+    ax.set_xticks(list(s.index)); ax.set_xticklabels([f"'{str(t)[2:]}" for t in s.index])
+    ax.set_xlabel("Fake (or real) start year")
     style_axes(ax)
-    ax.set_title(f"Fake start dates: the 2019 move across the road ranks {rank} of {n}", loc="left", fontsize=10.5, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC_R}. Each bar: share of first-time mined land north of the highway (La Pampa longitudes, "
+    ax.set_ylim(min(s.min() * 100 * 1.15, -10), s.max() * 100 * 1.25)
+    finish_figure(fig, f"{SRC_R}. Each bar: share of first-time mined land north of the highway (La Pampa longitudes, "
                        "within 15 km), mean of the 3 years from the start year minus mean of the 3 years before. Description.",
-                  OUT / "fig_v2_road_placebo.png", rect_bottom=0.12)
+                  OUT / "fig_v2_road_placebo.png")
     return s, rank, n
 
 
@@ -180,15 +196,28 @@ def t8(reg):
     for y, v in s.items():
         reg.add(f"t8_pp0128_mdd_{y}", v, "soles", f"PP 0128 executed spending (devengado) booked in Madre de Dios, {y} (lower bound)", "description", SRC_MEF)
     z = pd.read_csv(rz.OUT_ZONE).groupby("year").new_land_ha.sum().loc[2015:2025]
-    fig, (a1, a2) = plt.subplots(2, 1, figsize=(9, 5.4), sharex=True)
-    a1.bar(s.index, s.values / 1e6, color="#0b0b0b", width=0.7)
-    a1.set_ylabel("Anti-illegal-mining\nspending (million soles)"); style_axes(a1)
-    a1.set_title("Enforcement money peaked in 2019 and faded; first-time mining kept growing", loc="left", fontsize=10.5, fontweight="bold")
-    a2.bar(z.index, z.values, color="#3d3c39", width=0.7)
-    a2.set_ylabel("Land mined for the first\ntime, Madre de Dios (ha)"); style_axes(a2)
+    fig, (a1, a2) = plt.subplots(2, 1, figsize=(9, 5.8), sharex=True, gridspec_kw={"hspace": 0.45})
+    headline(fig, "Enforcement money spiked in 2019 and faded; first-time mining kept growing",
+             "Madre de Dios, 2015–2025. Two measures, two units: side by side, never one as the cause of the other.")
+    sm = s / 1e6
+    a1.bar(s.index, sm.values, color=INK2, width=0.68)
+    a1.set_title("Anti-illegal-mining spending (PP 0128, executed), million soles")
+    pk = int(sm.idxmax())
+    callout(a1, pk, sm[pk], f"{sm[pk]:.1f} M", dy=4, arrow=False)
+    callout(a1, s.index[-1], sm.iloc[-1], f"{sm.iloc[-1]:.1f} M", dy=4, arrow=False)
+    a1.set_ylim(0, sm.max() * 1.22); style_axes(a1)
+    a2.bar(z.index, z.values, color=C["other"], width=0.68)
+    a2.set_title("Land mined for the first time, all of Madre de Dios, hectares")
+    pz = int(z.idxmax())
+    callout(a2, pz, z[pz], f"{z[pz]:,.0f} ha", dy=4, arrow=False)
+    callout(a2, 2019, z[2019], f"{z[2019]:,.0f} ha", dy=4, arrow=False)
+    a2.set_ylim(0, z.max() * 1.18); style_axes(a2)
     a2.set_xticks(list(s.index))
-    finish_figure(fig, f"Sources: {SRC_MEF} (lower bound: national units book spending under Lima); {SRC_R}. Two panels, two units: "
-                       "never read one as the cause of the other. Description.", OUT / "fig_v2_enforcement_spending.png", rect_bottom=0.1)
+    for ax in (a1, a2):
+        ax.axvline(2018.5, color=INK, lw=1.1, zorder=0.5)
+    a1.text(2018.4, a1.get_ylim()[1] * 0.98, "Mercurio\nFeb 2019", ha="right", va="top", fontsize=7.5, color=INK)
+    finish_figure(fig, f"Sources: {SRC_MEF} (lower bound: national units book spending under Lima); {SRC_R}. Description.",
+                  OUT / "fig_v2_enforcement_spending.png")
     return s
 
 
@@ -226,19 +255,31 @@ def t9_depth(reg):
     for y in (2016, 2018, 2020, 2022, 2025):
         reg.add(f"t9_depth_{y}", mean_depth.loc[y], "km", f"Mean depth north of the highway of first-time mined land, {y}", "description", SRC_R)
     sh = w.div(w.sum(axis=1), axis=0) * 100
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(12, 3.9))
-    cols = ["#9cc0ea", "#2a78d6", "#1b3f8f"]
-    a1.stackplot(w.index, w.T.values, colors=cols, labels=list(w.columns), edgecolor="white", linewidth=0.5)
-    a1.axvline(2018.5, color="black", lw=1.2); a1.legend(fontsize=8, frameon=False, loc="upper left", title="km north of the highway", title_fontsize=8)
-    a1.set_ylabel("First-time mined land (ha)"); style_axes(a1)
-    a2.plot(mean_depth.index, mean_depth.values, "o-", color="#2a78d6", lw=2)
-    a2.axvline(2018.5, color="black", lw=1.2); a2.set_ylabel("Mean depth (km north)"); style_axes(a2)
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(9, 4.4), gridspec_kw={"wspace": 0.42})
+    headline(fig, "After 2019 new mining north of La Pampa started nearer the road, then pushed deeper",
+             "First-time mining north of the highway, La Pampa longitudes, 2008–2025")
+    cols = [C["corridor_rest"], C["corridor"], "#184f95"]
+    a1.stackplot(w.index, w.T.values, colors=cols, edgecolor="white", linewidth=0.8)
+    cum = w.cumsum(axis=1).loc[2025]
+    for i, col in enumerate(w.columns):
+        lo = 0 if i == 0 else cum.iloc[i - 1]
+        label_end(a1, 2025, (lo + cum.iloc[i]) / 2, str(col), cols[i], dx=5, fontsize=8)
+    a1.set_title("Hectares per year, by distance band")
+    style_axes(a1); a1.set_xlim(2008, 2025)
+    a2.plot(mean_depth.index, mean_depth.values, "-", color=C["corridor"], lw=2.2)
+    a2.plot(mean_depth.index, mean_depth.values, "o", color=C["corridor"], ms=4.5, mec="white", mew=1)
+    a2.set_title("Mean distance north of the highway, km")
+    style_axes(a2, fmt=False)
+    y20 = mean_depth.loc[2020]
+    pv = m.pvalues['post2019']
+    callout(a2, 2020, y20, f"Break after 2019: {m.params['post2019']:+.1f} km\nnet of trend ({'p < 0.01' if pv < 0.01 else f'p = {pv:.2f}'})",
+            dx=8, dy=-26, ha="left")
+    a2.set_ylim(mean_depth.min() - 4.5, mean_depth.max() + 2)
     for a_ in (a1, a2):
-        a_.set_xticks(range(2008, 2026, 2)); a_.tick_params(axis="x", labelsize=8)
-    a2.set_title(f"Break after 2019: {m.params['post2019']:+.1f} km (p = {m.pvalues['post2019']:.2f})", loc="left", fontsize=9.5)
-    fig.suptitle("How deep into the legal corridor? New mining north of La Pampa, by distance from the highway",
-                 x=0.01, ha="left", fontsize=11, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC_R}. La Pampa longitudes only; first-time mining (new land). Break test: OLS of mean depth "
-                       "on a trend and a post-2019 dummy, Newey-West errors, 2008-2025 (18 years). Description.",
-                  OUT / "fig_v2_depth.png", rect_bottom=0.12)
+        a_.axvline(2018.5, color=INK, lw=1.1, zorder=0.5)
+        a_.text(2018.4, 0.985, "Mercurio", transform=a_.get_xaxis_transform(), ha="right", va="top", fontsize=7.5, color=INK)
+        a_.set_xticks(range(2008, 2026, 4)); a_.set_xticklabels([str(t) for t in range(2008, 2026, 4)])
+    finish_figure(fig, f"{SRC_R}. La Pampa longitudes only; first-time mining (new land). Break test: OLS of mean distance "
+                       "on a trend and a post-2019 dummy, Newey-West errors, 2008–2025 (18 years). Description.",
+                  OUT / "fig_v2_depth.png")
     return m

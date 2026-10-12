@@ -35,3 +35,4 @@ data_raw/minem_produccion/*.7z
 
 # Office lock files
 ~$*
+docs/overnight/_artifact/

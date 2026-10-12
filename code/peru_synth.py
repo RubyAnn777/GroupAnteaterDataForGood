@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 
 from common import (OUT, x_of, style_axes, add_event_markers, set_year_ticks, finish_figure,
-                    EVENT_TITLE_PAD, SRC_MAPBIOMAS)
+                    EVENT_TITLE_PAD, SRC_MAPBIOMAS, headline, label_end, C, INK, INK2, MUTED)
 import peru
 
 TAM_U, AMA_U, BAH_U = "Tambopata|Reserva Nacional", "Amarakaeri|Reserva Comunal", "Bahuaja-Sonene|Parque Nacional"
@@ -126,36 +126,41 @@ def register(reg, key, r):
 
 def fig(res):
     keyA, keyB = ("core", "add"), ("core", "addsc")
-    fig_, axes = plt.subplots(2, 2, figsize=(11, 7.5), sharex="col")
+    fig_, axes = plt.subplots(2, 2, figsize=(11, 8.2), sharex="col", gridspec_kw={"hspace": 0.32, "wspace": 0.42})
+    headline(fig_, "The synthetic twin cannot match Tambopata before 2019, so its gap proves nothing",
+             "Synthetic control on annual mining additions, core donors. Left: hectares. Right: scaled to each zone's 2014–18 mean.\nSolid vertical line: Mercurio (Feb 2019). Dashed: COVID-19 (2020), Plan Restauración (2021), state of emergency (2023).")
     for col, (key, ttl, ylab) in enumerate([
-            (keyA, "A. Annual additions (ha), core donors", "New mining area in the year (ha)"),
-            (keyB, "B. Additions / own 2014-18 mean (index), core donors", "Additions relative to own 2014-18 mean")]):
+            (keyA, "A. Annual additions", "ha per year"),
+            (keyB, "B. Additions relative to own 2014–18 mean", "index (1 = normal year)")]):
         r = res[key]; P = r["P"]; m = r["main"]
         yrs = list(P.index); x = x_of(yrs)
         a, b = axes[0, col], axes[1, col]
         for d, pr in r["plac"].items():
-            b.plot(x, pr["gap"], color="#c9cdd0", linewidth=0.8, zorder=1)
-        a.plot(x, P[TAM_U], color="#eb6834", marker="o", linewidth=2, label="Tambopata buffer zone")
-        a.plot(x, m["synth"], color="#2a78d6", marker="s", markersize=4, linewidth=2, linestyle="--", label="Synthetic Tambopata")
-        a.axvspan(min(r["fit"]) - 0.5, max(r["fit"]) + 0.5, color="#F2F2F2", zorder=0)
-        a.legend(fontsize=8, frameon=False, loc="upper left")
-        a.set_title(ttl, loc="left", fontsize=10, pad=EVENT_TITLE_PAD)
+            b.plot(x, pr["gap"], color="#d6d3cc", linewidth=0.8, zorder=1)
+        a.axvspan(min(r["fit"]) - 0.5, max(r["fit"]) + 0.5, color="#efece5", zorder=0, lw=0)
+        a.text((min(r["fit"]) + max(r["fit"])) / 2, 0.985, "fit window", transform=a.get_xaxis_transform(), ha="center",
+               va="top", fontsize=7.5, color=INK2)
+        a.plot(x, P[TAM_U], color=C["lapampa"], marker="o", markersize=4, mec="white", mew=0.8, linewidth=2)
+        a.plot(x, m["synth"], color=C["twin"], linewidth=2, linestyle=(0, (4, 2)))
+        label_end(a, yrs[-1], P[TAM_U].iloc[-1], "Tambopata", C["lapampa"], dx=6, dy=6)
+        label_end(a, yrs[-1], m["synth"].iloc[-1], "Synthetic", C["twin"], dx=6, dy=-6)
+        a.set_title(ttl)
         a.set_ylabel(ylab)
-        b.plot(x, m["gap"], color="#eb6834", linewidth=2.2, zorder=3, label="Tambopata gap")
-        b.plot([], [], color="#c9cdd0", linewidth=1, label=f"Placebo gaps ({len(r['plac'])} donors)")
-        b.axhline(0, color="black", linewidth=0.6)
-        b.set_ylabel("Gap: Tambopata minus synthetic" + (" (ha)" if col == 0 else " (index)"))
-        b.legend(fontsize=8, frameon=False, loc="upper left")
+        b.plot(x, m["gap"], color=C["lapampa"], linewidth=2.2, zorder=3)
+        b.axhline(0, color=INK2, linewidth=0.8)
+        label_end(b, yrs[-1], m["gap"].iloc[-1], "Tambopata gap", C["lapampa"], dx=6)
+        b.set_title(f"Gap: Tambopata minus synthetic (grey: {len(r['plac'])} placebo donors)", pad=20)
+        b.set_ylabel(ylab)
         if col == 1:
             lim = max(3.0, float(m["gap"].abs().max()) * 1.2); b.set_ylim(-lim, lim)
-        b.text(0.99, 0.02, f"pre-RMSPE {m['pre']:.2f}{' ha' if col == 0 else ''}; ratio rank {r['rank']} of {r['n']};\n"
-               f"Tambopata outside donor range in {r['outside']} of {r['n_fit']} fit years",
-               transform=b.transAxes, ha="right", va="bottom", fontsize=7.5, color="#333333",
-               bbox=dict(facecolor="white", edgecolor="none", alpha=0.85))
+        b.text(0.0, 1.02, f"Pre-fit error {m['pre']:.2f}{' ha' if col == 0 else ''} · ratio rank {r['rank']} of {r['n']} · "
+               f"outside donor range in {r['outside']} of {r['n_fit']} fit years",
+               transform=b.transAxes, ha="left", va="bottom", fontsize=7.5, color=INK2)
         for i, ax in enumerate((a, b)):
-            style_axes(ax); add_event_markers(ax, label=(i == 0 and True))
-        set_year_ticks(b, yrs)
-    finish_figure(fig_, f"Source: {SRC_MAPBIOMAS}, buffer-zone rows. Shaded = fit window (2010-18). Donors: buffer zones with non-zero "
+            style_axes(ax); add_event_markers(ax, label=False)
+        b.set_xlim(yrs[0] - 0.6, yrs[-1] + 0.6)
+        set_year_ticks(b, yrs, short=True)
+    finish_figure(fig_, f"{SRC_MAPBIOMAS}, buffer-zone rows. Shaded = fit window (2010-18). Donors: buffer zones with non-zero "
                         "pre-2019 additions, excluding Tambopata, Amarakaeri and Bahuaja-Sonene. Weights >= 0, sum to 1. "
                         "Tambopata's pre-2019 level exceeds every donor, so the fit is poor (convex-hull problem): the gap is a "
                         "description, not a causal estimate. River dredging and mercury are invisible.",

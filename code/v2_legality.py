@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from common import ROOT, OUT, style_axes, finish_figure
+from common import ROOT, OUT, style_axes, finish_figure, headline, label_end, add_event_markers, PERU_EVENTS, INK, INK2, SURFACE
 import raster_zones as rz
 
 LAYER = ROOT / "data_raw" / "amw_github" / "illegality_v2_areas_simplified.geojson"
@@ -25,7 +25,7 @@ CADASTRE = sorted((ROOT / "data_raw" / "ingemmet" / "catastro_minero_wgs84_L0_md
 OUT_TC = ROOT / "data_intermediate" / "legality_year_v2_timeconsistent.csv"
 LEVELS = {1: "Low (active concession)", 2: "Medium (concession not verified)", 3: "High (outside any concession)",
           4: "Very high (strict protected area)", 0: "Not classified"}
-COL = {1: "#f7d9cc", 2: "#ec9c7c", 3: "#c9472b", 4: "#6e1a0c", 0: "#dfe3e5"}   # one-hue ramp: low -> very high presumption of illegality
+COL = {1: "#e4e1da", 2: "#b3b9b6", 3: "#5d7479", 4: "#1f2d33", 0: "#f1efea"}   # one-hue ordinal ramp: low -> very high presumption of illegality
 SRC = "Amazon Mining Watch / MAAP #235 legality layer (GitHub earthrise-media/mining-detector) x MapBiomas Peru Col 4 first-mined year"
 
 
@@ -82,13 +82,27 @@ def run(reg):
     c = d[d.corridor].groupby("level").ha.sum(); c = c / c.sum()
     reg.add("leg_corridor_low_share", c.get(1, 0), "share", "Inside the legal corridor: share of first-time mining (1986-2025) in active concessions (Low)", "description", SRC)
     reg.add("leg_corridor_highish_share", c.get(2, 0) + c.get(3, 0), "share", "Inside the legal corridor: share in Medium or High (no verified active concession)", "description", SRC)
-    fig, ax = plt.subplots(figsize=(10, 4.2))
-    ax.stackplot(sh.index, (sh * 100).T.values, colors=[COL[c_] for c_ in sh.columns], labels=[LEVELS[c_] for c_ in sh.columns],
-                 edgecolor="white", linewidth=0.5)
-    ax.axvline(2018.5, color="black", lw=1.2); ax.set_ylim(0, 100); style_axes(ax)
-    ax.set_ylabel("% of first-time mining"); ax.set_xticks(list(sh.index)); ax.tick_params(axis="x", labelsize=8)
-    ax.legend(fontsize=7.5, frameon=False, loc="upper left", bbox_to_anchor=(1.0, 1.0))
-    ax.set_title("Legality of new mining in Madre de Dios: the presumed-illegal share fell after 2019", loc="left", fontsize=10.5, fontweight="bold")
-    finish_figure(fig, f"Source: {SRC}. Today's concessions applied to all years; 'not classified' = outside the layer. "
-                       "Description.", OUT / "fig_v2_legality.png", rect_bottom=0.1)
+    ill = {p: (lambda t: (t[3] + t[4]) / t.sum())(w.loc[a:b].sum()) for p, (a, b) in
+           {"2016–18": (2016, 2018), "2019–21": (2019, 2021), "2022–25": (2022, 2025)}.items()}
+    cols = [c_ for c_ in sh.columns if sh[c_].max() > 0]                  # "not classified" is empty here
+    fig, ax = plt.subplots(figsize=(9, 4.6))
+    headline(fig, f"Presumed-illegal new mining fell from {ill['2016–18']:.0%} to {ill['2022–25']:.0%} of the total",
+             "First-time mining in Madre de Dios by MAAP legality level, share of each year's hectares (%). "
+             f"High + Very high: {' → '.join(f'{v:.0%}' for v in ill.values())}")
+    ax.stackplot(sh.index, (sh[cols] * 100).T.values, colors=[COL[c_] for c_ in cols], edgecolor=SURFACE, linewidth=0.8)
+    ax.set_ylim(0, 100); ax.set_xlim(sh.index[0], sh.index[-1]); style_axes(ax)
+    last = sh.index[-1]; cum = 0.0
+    for c_ in cols:
+        v = sh.loc[last, c_] * 100
+        if v >= 4:
+            label_end(ax, last, cum + v / 2, LEVELS[c_], COL[c_], dx=8, fontsize=8)
+        elif c_ == 4:
+            label_end(ax, last, cum + v / 2 + 2, LEVELS[c_], COL[c_], dx=8, fontsize=8, va="bottom")
+        cum += v
+    add_event_markers(ax, label=True, events=[PERU_EVENTS[0]])
+    ax.lines[-1].set_zorder(3); ax.lines[-1].set_color(SURFACE); ax.lines[-1].set_linewidth(1.3)   # visible on the dark band
+    ax.set_title("Share of first-time mining (%)", pad=16)
+    ax.set_xticks(list(sh.index)); ax.set_xticklabels([f"'{str(y)[2:]}" for y in sh.index])
+    finish_figure(fig, f"{SRC}. Today's concessions applied to all years (a time-consistent version using filing dates gives the "
+                       "same fall). Description.", OUT / "fig_v2_legality.png")
     print((sh * 100).round(0).loc[2014:].to_string())
