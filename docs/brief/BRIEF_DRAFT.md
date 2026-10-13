@@ -76,4 +76,4 @@ See `DOWNLOAD_LOG.csv`: one row per raw file with URL, access date, collection, 
 
 
 ---
-*Built 2026-10-13 11:39 from git commit f67219d (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1399 rows).*
+*Built 2026-10-13 11:39 from git commit cb33a82 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1399 rows).*
