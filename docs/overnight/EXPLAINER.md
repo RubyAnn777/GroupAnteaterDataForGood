@@ -1171,4 +1171,4 @@ See [`output/numbers.csv`](../../output/numbers.csv).
 </details>
 
 ---
-*Built 2026-10-13 13:24 from git commit 4e9c6ce (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1431 rows).*
+*Built 2026-10-13 13:33 from git commit 8fb7db0 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1431 rows).*
