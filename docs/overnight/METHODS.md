@@ -342,4 +342,4 @@ flowchart LR
 </details>
 
 ---
-*Built 2026-10-13 11:10 from git commit d0b51a7 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1399 rows).*
+*Built 2026-10-13 11:10 from git commit ea03c6f (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1399 rows).*
