@@ -103,6 +103,18 @@ flowchart LR
 
 @part Did it fall?
 
+## Placebos | How a fake test replaces a standard error
+
+**Question:** is the real result bigger than what "nothing happened" looks like in these data?
+
+- **Fake place (placebo in space):** give the operation to each other unit in turn, re-run the identical analysis, rank the real result. Randomization p = rank / number of units (Abadie, Diamond & Hainmueller, 2010).
+- **Fake date (placebo in time):** pretend the operation started earlier (2016) and re-run on pre-2019 data only. A real effect should vanish.
+- **Fake border:** move the RD cut-off 2–4 km into one side. A real border effect shouldn't appear there.
+- **Floor:** p can't go below 1 / n (with 15 zones, {{model_m1_ri_p:.2f}}).
+- **What a pass proves:** the result is unusual. Not that Mercurio caused it: a shock that hit only Tambopata in 2019 also passes.
+
+**Code:** `code/placebo_explainer.py` (figure), and each estimator's own module.
+
 ## 2×2 | Before and after, against a neighbour
 
 **Question:** did the targeted zone change more than a comparison zone?
@@ -157,6 +169,29 @@ flowchart LR
 
 **Code:** `code/v2_stats.py`.
 
+## Context controls | COVID exposure and enforcement money
+
+**Question:** does the 2019–21 gap survive controls for what year effects can't remove?
+
+- **Base (K0):** model M2 on 2015–25 (spending data start in 2015).
+- **K1:** + each zone's 2014–18 mean addition × 1[2020–21] (COVID exposure).
+- **K2:** + Madre de Dios × ln(PP 0128 spending booked in Madre de Dios).
+- **K3:** both. Inference by fake places.
+- **Caveat:** money rose because of Mercurio, so K2 absorbs part of the effect itself.
+- **Result:** {{ctx_k0_during}} → {{ctx_k3_during}} ha/yr, rank {{ctx_k3_rank:.0f}} of {{ctx_n:.0f}} throughout. [[D]]
+
+**Code:** `code/peru_context_models.py`.
+
+## Synthetic DiD | Trend-matched weights plus a free intercept
+
+**Question:** does a method built for few treated units agree with the model ladder?
+
+- **How:** unit weights (≥ 0, sum 1, ridge-regularised) match the comparison zones' 2014–18 *trend* to Tambopata's; time weights pick the pre-years that best predict the post years; a free intercept absorbs the level gap (Arkhangelsky et al., 2021).
+- **Check:** with equal weights it reproduces M1 exactly.
+- **Result:** {{sdid_sdid_ha_during}} ha/yr in 2019–21 (rank 1 of {{sdid_sdid_ha_during_n:.0f}}); scaled, rank {{sdid_sdid_scaled_during_rank:.0f}} of {{sdid_sdid_scaled_during_n:.0f}}; 2022–25 {{sdid_sdid_ha_after:+,.0f}}. [[D]]
+
+**Code:** `code/peru_sdid.py` (own FISTA solver for the simplex weights).
+
 ## Synthetic twin | A weighted mix of zones, fitted before 2019
 
 **Question:** can a weighted mix of other zones copy Tambopata before 2019?
@@ -183,6 +218,19 @@ flowchart LR
 
 **Code:** `code/control_amw.py`, `control_elevation.py`, `control_mb_amazonia.py`, `control_select.py`, `control_top3.py`.
 
+## Matching | Seven ways to let an algorithm pick the twin
+
+**Question:** do formal matching estimators agree with Ruby's hand-set rules?
+
+- **Pool:** {{psm_n_pool:.0f}} areas with no operation in 2017–21, ≥ 100 ha of mining by 2018, outside Madre de Dios ({{psm_n_units:.0f}} areas with AMW data).
+- **Propensity score:** logit of "operation 2017–21" on log 2018 stock, median elevation of the mining, log area, country and type; {{psm_ps_n:.0f}} areas with known status.
+- **Estimators:** propensity nearest 1 and 5; Mahalanobis nearest 1 and 3; coarsened exact matching; entropy balancing; inverse-probability weighting.
+- **Outcome:** new mining per year as % of the 2018 stock (same as the twin). Inference by placebo in space.
+- **Limit:** with one treated unit, matching is a distance rule. Tambopata's score ({{psm_ps_tam:.2f}}) is above every pool area ({{psm_ps_pool_max:.2f}}): no common support.
+- **Result:** gaps {{psm_gap_during_min:+.1f}} to {{psm_gap_during_max:+.1f}} pp; placebo p {{psm_p_min:.2f}}–{{psm_p_max:.2f}}. [[D]]
+
+**Code:** `code/control_psm.py`.
+
 @part Where did it go?
 
 ## Displacement layers | Stream, Sankey, corridor share and legality
@@ -194,6 +242,19 @@ flowchart LR
 - **Second product:** Amazon Mining Watch on the same zones. It flags a 480 m square only once, so it misses infill.
 
 **Code:** `code/raster_layers.py`, `code/v2_legality.py`, `code/v2_extra.py`, `code/v2_products_check.py`.
+
+## Spatial RD | A difference in discontinuities at two borders
+
+**Question:** did land just across a legal line change differently after 2019?
+
+- **Borders:** the Interoceanic Highway in La Pampa's longitudes (south = La Pampa sector, north = corridor) and the Tambopata reserve edge (where outside is buffer zone). No new polygons: signed distances from the existing road line and the SERNANP reserve polygon.
+- **Units:** 250-m distance bins × 2-km segments. Outcome: first-time mined land, % of the unit per year.
+- **Estimator:** `rdrobust`, local linear, triangular kernel, MSE-optimal bandwidth, robust bias-corrected CI, clustered by segment. Main estimate on the change (2019–21 mean minus 2014–18 mean), so fixed border effects (the road's access, the river) cancel (Grembi, Nannicini & Troiano, 2016).
+- **Checks:** fixed bandwidths 1–5 km; 500-m donut; fake start years; fake borders ±2–4 km.
+- **Limit:** displacement across the border breaks the no-spillover assumption, so the road estimate is the swing (deterrence + displacement), an upper bound on either side.
+- **Result:** road {{rd_road_did:+.2f}} pts (p = {{rd_road_did_p:.2f}}; donut {{rd_road_sens_donut:+.2f}}, p = {{rd_road_sens_donut_p:.2f}}); reserve edge {{rd_reserve_did:+.2f}} (p = {{rd_reserve_did_p:.2f}}). [[D]]
+
+**Code:** `code/v2_rdd.py`.
 
 ## Road tests | Fake start dates and depth into the corridor
 
@@ -214,6 +275,18 @@ flowchart LR
 - **Declared gold:** MINEM yearly files split into producer-declared gold and the artisanal estimate (until 2019); checked against the central bank for 2012 and 2019.
 
 **Code:** `code/glad_alerts.py`, `code/raster_gold.py`, `code/v2_tests.py`, `code/peru_gold_minem.py`.
+
+## Economics | Cited parameters times our hectares, as ranges
+
+**Question:** what is the mining worth, what does it cost, and what is spent against it? *Informed speculation.*
+
+- **Chain:** hectares worked (first-time mining, low; + returns to old pits, high) × 1.7–1.9 kg gold per ha (CSF, 2023) × mean gold price → value. Declared share = MINEM producer-declared gold / that gold.
+- **Taxes:** 0% royalty for small producers (Ley 28258); income tax 29.5% × 11–37% margin on undeclared value.
+- **Costs:** 2.4–2.8 kg mercury per kg gold; social cost US$ 81,000–1.8 M per kg (CSF). Enforcement: PP 0128 Madre de Dios spending at 3.3–3.9 soles per US$.
+- **Cross-check:** MINEM's 2016–18 estimate implies {{eco_implied_kg_ha_2016_18:.1f}} kg per hectare we mapped.
+- **Result (2022–25, per year):** gold {{eco_gold_t_lo_2022_25:.0f}}–{{eco_gold_t_hi_2022_25:.0f}} t, declared {{eco_declared_share_lo:.0%}}–{{eco_declared_share_hi:.0%}}, untaxed income US$ {{eco_tax_musd_lo:,.0f}}–{{eco_tax_musd_hi:,.0f}} M, enforcement US$ {{eco_spend_musd_lo:,.1f}}–{{eco_spend_musd_hi:,.1f}} M. [[P]]
+
+**Code:** `code/v2_economics.py`; sources and quotes in `docs/overnight/notes/economics_sources.md`.
 
 @part Brazil and prediction
 

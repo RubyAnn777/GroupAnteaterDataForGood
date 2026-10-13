@@ -1,0 +1,9 @@
+,log mining stock 2018,log elevation of mining,log area,Brazil,indigenous territory
+"before (all pool, unweighted)",1.757,0.405,-1.017,-1.688,-0.715
+"Propensity score, nearest 1",1.183,1.332,-0.147,0.0,0.0
+"Propensity score, nearest 5",0.571,1.333,-0.613,-1.801,-0.409
+"Mahalanobis, nearest 1",1.183,1.332,-0.147,0.0,0.0
+"Mahalanobis, nearest 3",0.829,0.824,-0.953,-0.75,0.0
+Coarsened exact matching,-0.676,1.149,-1.235,-2.251,0.0
+Entropy balancing (closest),0.399,0.146,-0.739,-1.373,-0.22
+Inverse-probability weighting,1.1,0.72,-0.692,-1.331,-0.378

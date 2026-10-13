@@ -104,6 +104,18 @@ flowchart LR
 
 **Part: Did it fall?**
 
+## How a fake test replaces a standard error
+
+**Question:** is the real result bigger than what "nothing happened" looks like in these data?
+
+- **Fake place (placebo in space):** give the operation to each other unit in turn, re-run the identical analysis, rank the real result. Randomization p = rank / number of units (Abadie, Diamond & Hainmueller, 2010).
+- **Fake date (placebo in time):** pretend the operation started earlier (2016) and re-run on pre-2019 data only. A real effect should vanish.
+- **Fake border:** move the RD cut-off 2–4 km into one side. A real border effect shouldn't appear there.
+- **Floor:** p can't go below 1 / n (with 15 zones, 0.07).
+- **What a pass proves:** the result is unusual. Not that Mercurio caused it: a shock that hit only Tambopata in 2019 also passes.
+
+**Code:** `code/placebo_explainer.py` (figure), and each estimator's own module.
+
 ## Before and after, against a neighbour
 
 **Question:** did the targeted zone change more than a comparison zone?
@@ -158,6 +170,29 @@ flowchart LR
 
 **Code:** `code/v2_stats.py`.
 
+## COVID exposure and enforcement money
+
+**Question:** does the 2019–21 gap survive controls for what year effects can't remove?
+
+- **Base (K0):** model M2 on 2015–25 (spending data start in 2015).
+- **K1:** + each zone's 2014–18 mean addition × 1[2020–21] (COVID exposure).
+- **K2:** + Madre de Dios × ln(PP 0128 spending booked in Madre de Dios).
+- **K3:** both. Inference by fake places.
+- **Caveat:** money rose because of Mercurio, so K2 absorbs part of the effect itself.
+- **Result:** −1,608 → −1,567 ha/yr, rank 1 of 15 throughout. **[description]**
+
+**Code:** `code/peru_context_models.py`.
+
+## Trend-matched weights plus a free intercept
+
+**Question:** does a method built for few treated units agree with the model ladder?
+
+- **How:** unit weights (≥ 0, sum 1, ridge-regularised) match the comparison zones' 2014–18 *trend* to Tambopata's; time weights pick the pre-years that best predict the post years; a free intercept absorbs the level gap (Arkhangelsky et al., 2021).
+- **Check:** with equal weights it reproduces M1 exactly.
+- **Result:** −1,545 ha/yr in 2019–21 (rank 1 of 15); scaled, rank 3 of 7; 2022–25 +136. **[description]**
+
+**Code:** `code/peru_sdid.py` (own FISTA solver for the simplex weights).
+
 ## A weighted mix of zones, fitted before 2019
 
 **Question:** can a weighted mix of other zones copy Tambopata before 2019?
@@ -184,6 +219,19 @@ flowchart LR
 
 **Code:** `code/control_amw.py`, `control_elevation.py`, `control_mb_amazonia.py`, `control_select.py`, `control_top3.py`.
 
+## Seven ways to let an algorithm pick the twin
+
+**Question:** do formal matching estimators agree with Ruby's hand-set rules?
+
+- **Pool:** 20 areas with no operation in 2017–21, ≥ 100 ha of mining by 2018, outside Madre de Dios (108 areas with AMW data).
+- **Propensity score:** logit of "operation 2017–21" on log 2018 stock, median elevation of the mining, log area, country and type; 43 areas with known status.
+- **Estimators:** propensity nearest 1 and 5; Mahalanobis nearest 1 and 3; coarsened exact matching; entropy balancing; inverse-probability weighting.
+- **Outcome:** new mining per year as % of the 2018 stock (same as the twin). Inference by placebo in space.
+- **Limit:** with one treated unit, matching is a distance rule. Tambopata's score (0.85) is above every pool area (0.76): no common support.
+- **Result:** gaps −14.8 to −6.7 pp; placebo p 0.19–0.57. **[description]**
+
+**Code:** `code/control_psm.py`.
+
 ---
 
 **Part: Where did it go?**
@@ -197,6 +245,19 @@ flowchart LR
 - **Second product:** Amazon Mining Watch on the same zones. It flags a 480 m square only once, so it misses infill.
 
 **Code:** `code/raster_layers.py`, `code/v2_legality.py`, `code/v2_extra.py`, `code/v2_products_check.py`.
+
+## A difference in discontinuities at two borders
+
+**Question:** did land just across a legal line change differently after 2019?
+
+- **Borders:** the Interoceanic Highway in La Pampa's longitudes (south = La Pampa sector, north = corridor) and the Tambopata reserve edge (where outside is buffer zone). No new polygons: signed distances from the existing road line and the SERNANP reserve polygon.
+- **Units:** 250-m distance bins × 2-km segments. Outcome: first-time mined land, % of the unit per year.
+- **Estimator:** `rdrobust`, local linear, triangular kernel, MSE-optimal bandwidth, robust bias-corrected CI, clustered by segment. Main estimate on the change (2019–21 mean minus 2014–18 mean), so fixed border effects (the road's access, the river) cancel (Grembi, Nannicini & Troiano, 2016).
+- **Checks:** fixed bandwidths 1–5 km; 500-m donut; fake start years; fake borders ±2–4 km.
+- **Limit:** displacement across the border breaks the no-spillover assumption, so the road estimate is the swing (deterrence + displacement), an upper bound on either side.
+- **Result:** road +2.10 pts (p = 0.08; donut +3.29, p = 0.04); reserve edge +0.15 (p = 0.77). **[description]**
+
+**Code:** `code/v2_rdd.py`.
 
 ## Fake start dates and depth into the corridor
 
@@ -219,6 +280,18 @@ flowchart LR
 - **Declared gold:** MINEM yearly files split into producer-declared gold and the artisanal estimate (until 2019); checked against the central bank for 2012 and 2019.
 
 **Code:** `code/glad_alerts.py`, `code/raster_gold.py`, `code/v2_tests.py`, `code/peru_gold_minem.py`.
+
+## Cited parameters times our hectares, as ranges
+
+**Question:** what is the mining worth, what does it cost, and what is spent against it? *Informed speculation.*
+
+- **Chain:** hectares worked (first-time mining, low; + returns to old pits, high) × 1.7–1.9 kg gold per ha (CSF, 2023) × mean gold price → value. Declared share = MINEM producer-declared gold / that gold.
+- **Taxes:** 0% royalty for small producers (Ley 28258); income tax 29.5% × 11–37% margin on undeclared value.
+- **Costs:** 2.4–2.8 kg mercury per kg gold; social cost US$ 81,000–1.8 M per kg (CSF). Enforcement: PP 0128 Madre de Dios spending at 3.3–3.9 soles per US$.
+- **Cross-check:** MINEM's 2016–18 estimate implies 1.9 kg per hectare we mapped.
+- **Result (2022–25, per year):** gold 19–32 t, declared 4%–7%, untaxed income US$ 45–252 M, enforcement US$ 1.7–2.0 M. **[prediction]**
+
+**Code:** `code/v2_economics.py`; sources and quotes in `docs/overnight/notes/economics_sources.md`.
 
 ---
 
@@ -269,4 +342,4 @@ flowchart LR
 </details>
 
 ---
-*Built 2026-10-12 21:28 from git commit d3fc916 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1053 rows).*
+*Built 2026-10-13 11:10 from git commit d0b51a7 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1399 rows).*

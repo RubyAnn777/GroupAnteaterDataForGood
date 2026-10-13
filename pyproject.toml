@@ -14,6 +14,7 @@ dependencies = [
     "pyfixest>=0.60.0",
     "pyogrio>=0.13.0",
     "rasterio>=1.5.2",
+    "rdrobust>=2.1.1",
     "shapely>=2.2.0",
     "statsmodels>=0.15.0",
     "wildboottest>=0.3.2",
