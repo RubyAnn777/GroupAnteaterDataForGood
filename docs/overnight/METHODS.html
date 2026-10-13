@@ -173,6 +173,19 @@ svg.flow .box{fill:var(--surface);stroke:var(--rule-2);stroke-width:1.2}svg.flow
 svg.flow .t1{fill:var(--ink);font-size:12px;font-weight:500}svg.flow .t2{fill:var(--ink-2);font-size:11.5px}svg.flow .t3{fill:var(--d);font-size:11.5px}
 svg.flow .arrow{stroke:currentColor;stroke-width:1.5}
 
+/* pipeline flow (methods page): static boxes + arrows, wraps on narrow screens */
+ol.pipe{list-style:none;padding:0;margin:20px 0 22px;display:flex;flex-wrap:nowrap;align-items:stretch;gap:10px 18px;max-width:var(--wide)}
+ol.pipe li{position:relative;flex:1 1 0;min-width:0;max-width:100%;background:var(--surface);border:1px solid var(--rule-2);border-top:3px solid var(--eyebrow);padding:8px 7px;margin:0;font-size:.8rem;line-height:1.35}
+ol.pipe li b{display:block;font-weight:500;color:var(--ink)}
+ol.pipe li span{color:var(--ink-2);font-size:.76rem;overflow-wrap:break-word;hyphens:auto}
+ol.pipe li:not(:last-child)::after{content:"→";position:absolute;right:-15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1rem}
+
+/* never wider than the screen: grid/flex children may shrink, media and long tokens wrap */
+.hero .in>*,.main>*,.ch>*,.more-b>*,.stat,.beat,.fc,.pages,.top .in>*{min-width:0}
+.hero h1,.hero .lede,.stat-l,.beat-t,.ch h2,p.lede{overflow-wrap:break-word}
+img,svg,video{max-width:100%}
+.ch p,.ch li{overflow-wrap:break-word}
+
 footer.foot{background:var(--slate);color:var(--on-slate-2);font-size:.8rem;margin-top:40px}
 footer.foot .in{max-width:1280px;margin:0 auto;padding:28px 20px;display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between}
 
@@ -196,6 +209,9 @@ footer.foot .in{max-width:1280px;margin:0 auto;padding:28px 20px;display:flex;fl
   .plate{padding:4px}
   .more-b{padding-left:4px}
   ol.beats{grid-template-columns:1fr}
+  .pages{flex:0 1 auto;min-width:0;overflow-x:auto}.theme{flex:none;padding:5px 8px}
+  ol.pipe{flex-direction:column;gap:22px}ol.pipe li{flex:none}
+  ol.pipe li:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-21px;transform:none}
 }
 @media print{
   .top,nav.toc,details.mtoc,.fig-zoom,.toc-tools{display:none}.shell{display:block}
@@ -283,16 +299,7 @@ footer.foot .in{max-width:1280px;margin:0 auto;padding:28px 20px;display:flex;fl
 </ol></li></ol></nav></details>
 <div class="part" id="part-overview"><span class="part-k">Part 1</span><span class="part-n">Overview</span></div>
 <section class="ch" id="pipeline" aria-labelledby="pipeline-h"><header class="ch-head"><div class="ch-eb"><span class="ch-no">01</span>Pipeline</div><h2 id="pipeline-h">One command builds every number, figure and page</h2></header><p class="lede"><strong><code>uv run python code/main.py</code> checks the data against the publishers, builds every measure, fits every model, draws every figure and writes every number to <code>output/numbers.csv</code>.</strong></p>
-<pre class="mermaid">
-flowchart LR
-  A[Raw files<br/>data_raw/] --> B[Checks against<br/>publisher numbers]
-  B --> C[Measures<br/>new mining per area-year]
-  C --> D[Comparisons<br/>DiD, event study,<br/>models, twins]
-  D --> E[Figures + tables<br/>output/]
-  D --> F[numbers.csv<br/>every cited number]
-  F --> G[Walkthrough, methods<br/>and brief pages]
-</pre>
-
+<ol class="pipe" aria-label="Pipeline from raw files to pages"><li><b>Raw files</b><span>data_raw/</span></li><li><b>Checks</b><span>against publisher numbers</span></li><li><b>Measures</b><span>new mining per area-year</span></li><li><b>Models</b><span>DiD, event study, twins</span></li><li><b>Figures</b><span>and tables in output/</span></li><li><b>numbers.csv</b><span>every cited number</span></li><li><b>Pages</b><span>walk-through, methods, brief</span></li></ol>
 <ul>
 <li><strong>Data:</strong> satellite maps of mining (MapBiomas, Amazon Mining Watch, INPE and GLAD alerts), boundaries (parks, buffer zones, corridor, communities), and context (gold price, gold output, spending, fines).</li>
 <li><strong>Measures:</strong> how much <em>new</em> mining appears each year, per area.</li>
@@ -523,7 +530,7 @@ flowchart LR
 </table></div>
 <ul>
 <li><strong>Fake 2016 date:</strong> each model also runs on 2011–18 data with a fake start. A trustworthy model shows a big real effect and a small fake one.</li>
-<li><strong>Result:</strong> the 2019–21 gap is −1,454 to −1,859 ha/yr (M1–M3, rank 1 of 15). Scaled to size (M4) it ranks 3 of 7 (p = 0.43). M3's fake date (−337) has the same sign as the real effect. <span class="badge d">description</span></li>
+<li><strong>Result:</strong> the 2019–21 gap is −1,454 to −1,859 ha/yr (M1–M3, rank 1 of 15). Scaled to size (M4) it ranks 3 of 7 (p = 0.43). M3's fake date (−337) has the same sign as the real effect. A variant of M3 that fits Tambopata's trend on pre-years only gives −2,004 ha/yr (2022–25: −871). <span class="badge d">description</span></li>
 </ul>
 <p><strong>Code:</strong> <code>code/peru_models.py</code>. The numpy fit is checked against <code>pyfixest</code>.</p></section>
 <section class="ch" id="cell-panel" aria-labelledby="cell-panel-h"><header class="ch-head"><div class="ch-eb"><span class="ch-no">10</span>Cell panel</div><h2 id="cell-panel-h">1-km cells with clustered errors and a wild bootstrap</h2></header><p class="lede"><strong>Question:</strong> does the fall hold per square kilometre, against cells that weren't displacement targets?</p>
@@ -545,8 +552,8 @@ flowchart LR
 <li><strong>K1:</strong> + each zone's 2014–18 mean addition × 1[2020–21] (COVID exposure).</li>
 <li><strong>K2:</strong> + Madre de Dios × ln(PP 0128 spending booked in Madre de Dios).</li>
 <li><strong>K3:</strong> both. Inference by fake places.</li>
-<li><strong>Caveat:</strong> money rose because of Mercurio, so K2 absorbs part of the effect itself.</li>
-<li><strong>Result:</strong> −1,608 → −1,567 ha/yr, rank 1 of 15 throughout. <span class="badge d">description</span></li>
+<li><strong>Caveat:</strong> money rose with Mercurio, so it is partly the treatment itself (a bad control): K2 absorbs part of the effect.</li>
+<li><strong>Result:</strong> COVID exposure alone shrinks the gap to 1,322 of 1,608 ha/yr; both controls give −1,567 (97% of K0); rank 1 of 15 throughout. <span class="badge d">description</span></li>
 </ul>
 <p><strong>Code:</strong> <code>code/peru_context_models.py</code>.</p></section>
 <section class="ch" id="synthetic-did" aria-labelledby="synthetic-did-h"><header class="ch-head"><div class="ch-eb"><span class="ch-no">12</span>Synthetic DiD</div><h2 id="synthetic-did-h">Trend-matched weights plus a free intercept</h2></header><p class="lede"><strong>Question:</strong> does a method built for few treated units agree with the model ladder?</p>
@@ -571,9 +578,9 @@ flowchart LR
 <li><strong>R4</strong> lowland mining (&lt; 500 m) of similar scale (≥ ⅕ of Tambopata); the closest match wins</li>
 </ol>
 <ul>
-<li><strong>Result:</strong> no area passes. Relaxing R2 to "no operation in 2017–21" leaves two: <strong>Amanã National Forest</strong> and the <strong>Tapajós protection area</strong> (Brazil). Munduruku was dropped (operation in May 2021).</li>
+<li><strong>Result:</strong> no area passes. Relaxing R2 to "no operation in 2017–21" leaves two: <strong>Amanã National Forest</strong> and the <strong>Tapajós protection area</strong> (Brazil). Munduruku was dropped (an operation reported in May 2021, search snippets only).</li>
 <li><strong>Comparison:</strong> new mining per year as a share of each area's own 2018 mining, same product (AMW) for both. Pre-2019 trends come from each area's own MapBiomas collection, side by side, never subtracted.</li>
-<li><strong>Pre-trend test:</strong> yearly log-growth difference (Tambopata minus twin), 2010–18, on a constant and a trend, Newey-West errors. No significance test for the gap (three years per area).</li>
+<li><strong>Pre-trend test:</strong> yearly log-growth difference (Tambopata minus twin), 2010–18, on a constant and a trend, Newey-West errors. Tambopata grew faster than both twins before 2019 (p &lt; 0.01 Amanã, &lt; 0.01 Tapajós), so the twins are a weak check. No significance test for the gap (three years per area).</li>
 </ul>
 <p><strong>Code:</strong> <code>code/control_amw.py</code>, <code>control_elevation.py</code>, <code>control_mb_amazonia.py</code>, <code>control_select.py</code>, <code>control_top3.py</code>.</p></section>
 <section class="ch" id="matching" aria-labelledby="matching-h"><header class="ch-head"><div class="ch-eb"><span class="ch-no">15</span>Matching</div><h2 id="matching-h">Seven ways to let an algorithm pick the twin</h2></header><p class="lede"><strong>Question:</strong> do formal matching estimators agree with Ruby's hand-set rules?</p>
@@ -602,12 +609,12 @@ flowchart LR
 <li><strong>Estimator:</strong> <code>rdrobust</code>, local linear, triangular kernel, MSE-optimal bandwidth, robust bias-corrected CI, clustered by segment. Main estimate on the change (2019–21 mean minus 2014–18 mean), so fixed border effects (the road's access, the river) cancel (Grembi, Nannicini &amp; Troiano, 2016).</li>
 <li><strong>Checks:</strong> fixed bandwidths 1–5 km; 500-m donut; fake start years; fake borders ±2–4 km.</li>
 <li><strong>Limit:</strong> displacement across the border breaks the no-spillover assumption, so the road estimate is the swing (deterrence + displacement), an upper bound on either side.</li>
-<li><strong>Result:</strong> road +2.10 pts (p = 0.08; donut +3.29, p = 0.04); reserve edge +0.15 (p = 0.77). <span class="badge d">description</span></li>
+<li><strong>Result:</strong> road +2.10 pts (p = 0.08; across bandwidths and the donut p = 0.04–0.98; fake start years from 2008: rank 1 of 10, p = 0.10). Reserve edge +0.15 (p = 0.77; fake start years rank 10 of 20, p = 0.50). <span class="badge d">description</span></li>
 </ul>
 <p><strong>Code:</strong> <code>code/v2_rdd.py</code>.</p></section>
 <section class="ch" id="road-tests" aria-labelledby="road-tests-h"><header class="ch-head"><div class="ch-eb"><span class="ch-no">18</span>Road tests</div><h2 id="road-tests-h">Fake start dates and depth into the corridor</h2></header><ul>
 <li><strong>Fake start dates (T1):</strong> the north share's change, 3 years after minus 3 years before, for every start year 2008–2022. Only start years whose windows don't overlap the event count. Randomization p = rank of the real 2019 shift / number of start years: rank 1 of 8 (p = 0.12).</li>
-<li><strong>Depth (T9):</strong> mean distance north of the highway of first-time mining per year; OLS on a trend and a post-2019 dummy with Newey-West errors (18 years). Break −8.8 km (p = 0.000).</li>
+<li><strong>Depth (T9):</strong> mean distance north of the highway of first-time mining per year; OLS on a trend and a post-2019 dummy with Newey-West errors (18 years). Break −8.8 km (p &lt; 0.001).</li>
 <li><strong>Boundary sensitivity (T4):</strong> narrow and wide La Pampa windows give the same picture.</li>
 </ul>
 <p><strong>Code:</strong> <code>code/v2_tests.py</code>.</p></section>
@@ -616,26 +623,27 @@ flowchart LR
 <li><strong>Quarterly timing:</strong> GLAD-L alerts on land MapBiomas maps as mining. Compare the same quarter across years (clouds); data version break in 2021.</li>
 <li><strong>Gold left:</strong> gold-bearing land = INGEMMET geology units (river deposits plus Madre de Dios Formation terraces). Validation: 90% of all land ever mined lies on them. Depletion = share of a zone's gold-bearing land mined by a year.</li>
 <li><strong>Enforcement money (T8):</strong> executed PP 0128 spending booked in Madre de Dios, 2015–2025. Department level only; a lower bound.</li>
-<li><strong>Earlier wave (T3):</strong> model M1 with Tambopata × 2012–13 on 2008–16 data. Tambopata did not fall more than other zones.</li>
+<li><strong>Earlier wave (T3):</strong> model M1 with Tambopata × 2012–13 on 2008–16 data. Tambopata did not fall more than other zones (rank 14 of 14); La Pampa first-time mining changed by +36% in 2012–13 vs 2010–11. Asner &amp; Tupayachi (2017) report a dip on their own maps; ours show none.</li>
 <li><strong>Declared gold:</strong> MINEM yearly files split into producer-declared gold and the artisanal estimate (until 2019); checked against the central bank for 2012 and 2019.</li>
 </ul>
 <p><strong>Code:</strong> <code>code/glad_alerts.py</code>, <code>code/raster_gold.py</code>, <code>code/v2_tests.py</code>, <code>code/peru_gold_minem.py</code>.</p></section>
 <section class="ch" id="economics" aria-labelledby="economics-h"><header class="ch-head"><div class="ch-eb"><span class="ch-no">20</span>Economics</div><h2 id="economics-h">Cited parameters times our hectares, as ranges</h2></header><p class="lede"><strong>Question:</strong> what is the mining worth, what does it cost, and what is spent against it? <em>Informed speculation.</em></p>
 <ul>
-<li><strong>Chain:</strong> hectares worked (first-time mining, low; + returns to old pits, high) × 1.7–1.9 kg gold per ha (CSF, 2023) × mean gold price → value. Declared share = MINEM producer-declared gold / that gold.</li>
+<li><strong>Chain:</strong> land mined for the first time (returns to old pits get no gold: CSF has no yield for them, so both ends understate if old pits still pay) × 1.6–1.9 kg gold per ha (CSF, 2023) × mean gold price → value. Declared share = MINEM producer-declared gold / that gold.</li>
 <li><strong>Taxes:</strong> 0% royalty for small producers (Ley 28258); income tax 29.5% × 11–37% margin on undeclared value.</li>
-<li><strong>Costs:</strong> 2.4–2.8 kg mercury per kg gold; social cost US$ 81,000–1.8 M per kg (CSF). Enforcement: PP 0128 Madre de Dios spending at 3.3–3.9 soles per US$.</li>
+<li><strong>Costs:</strong> 2.4–2.8 kg mercury per kg gold; social cost per kg from two separate CSF estimates, never merged: US$ 81,000–364,000 (calculator) and US$ 1,200,000–1,800,000 (2023 report, p. 7). Enforcement: PP 0128 Madre de Dios spending, each year converted at its BCRP annual average (e.g. 3.34 soles per US$ in 2019, 3.57 in 2025).</li>
 <li><strong>Cross-check:</strong> MINEM's 2016–18 estimate implies 1.9 kg per hectare we mapped.</li>
-<li><strong>Result (2022–25, per year):</strong> gold 19–32 t, declared 4%–7%, untaxed income US$ 45–252 M, enforcement US$ 1.7–2.0 M. <span class="badge p">prediction</span></li>
+<li><strong>Result (2022–25, per year):</strong> gold 18–22 t, declared 6%–8%, untaxed income US$ 42–169 M, social cost US$ 1.5–7.9 bn (calculator) or 22–39 bn (report), enforcement US$ 1.7 M. <span class="badge p">prediction</span></li>
 </ul>
 <p><strong>Code:</strong> <code>code/v2_economics.py</code>; sources and quotes in <code>docs/overnight/notes/economics_sources.md</code>.</p></section>
 <div class="part" id="part-brazil-and-prediction"><span class="part-k">Part 6</span><span class="part-n">Brazil and prediction</span></div>
 <section class="ch" id="brazil" aria-labelledby="brazil-h"><header class="ch-head"><div class="ch-eb"><span class="ch-no">21</span>Brazil</div><h2 id="brazil-h">Staggered operations, same pixel method</h2></header><p class="lede"><strong>Question:</strong> do territories fall after <em>their own</em> operation?</p>
 <ul>
 <li><strong>Data:</strong> MapBiomas Brazil Collection 11 rasters read remotely per territory (24 territories + Yanomami rings). Check: Kayapó 2024/2025 vs the platform.</li>
-<li><strong>Model:</strong> territory + year effects, treated from each territory's own first operation; Gardner's two-stage estimator (<code>did2s</code>); randomization inference (2,000 shuffles of operation dates across territories).</li>
+<li><strong>Model:</strong> territory + year effects, treated from each territory's first <em>verified</em> operation in 2021–25 (Munduruku Aug 2023, Kayapó Sep 2024); Gardner's two-stage estimator (<code>did2s</code>, two-sided p); randomization inference (2,000 shuffles of operation dates, one-sided, on the two-way fixed-effects estimate).</li>
+<li><strong>Pool:</strong> 13 never-treated territories, of which 10 were never searched for operations.</li>
 <li><strong>Logic:</strong> if operations cause falls, each territory should fall after its own date, not before.</li>
-<li><strong>Result:</strong> +0.54 log points (p = 0.17; randomization p = 0.92). Wrong sign, not significant. <span class="badge d">description</span></li>
+<li><strong>Result:</strong> did2s +0.26 log points (two-sided p = 0.44); two-way fixed effects +0.29 (p = 0.39; one-sided randomization p = 0.73). Wrong sign, not significant. <span class="badge d">description</span></li>
 </ul>
 <p><strong>Code:</strong> <code>code/brazil_raster.py</code>, <code>brazil_v2.py</code>, <code>brazil_stagger.py</code> (AMW), <code>brazil_deter_all.py</code>.</p></section>
 <section class="ch" id="risk-map" aria-labelledby="risk-map-h"><header class="ch-head"><div class="ch-eb"><span class="ch-no">22</span>Risk map</div><h2 id="risk-map-h">A prediction, tested out of sample</h2></header><ul>
@@ -650,7 +658,7 @@ flowchart LR
 <li><strong>Causal number:</strong> reworded to net mining; first-time mining reported alongside.</li>
 <li><strong>Cell panel:</strong> clean comparison cells, 2014–18 baseline, pooled reference in event studies, wild cluster bootstrap.</li>
 <li><strong>Twins:</strong> Munduruku dropped; no p-values on three annual values.</li>
-<li><strong>Brazil:</strong> first operation inside 2021–25 (Kayapó 2024-09; Munduruku 2021-05).</li>
+<li><strong>Brazil:</strong> first operation inside 2021–25 (Kayapó 2024-09; Munduruku 2023-08, the first verified operation).</li>
 <li><strong>Legality:</strong> a concession counts only if filed by the mining year.</li>
 <li><strong>Risk map:</strong> spatial hold-out and benchmark.</li>
 <li><strong>Gold proxy:</strong> lift reported (share of mining vs share of land).</li>
@@ -663,7 +671,7 @@ flowchart LR
 <li><strong>Code map and every number:</strong> the <a href="EXPLAINER.html">Walkthrough</a>, chapters Files and Appendix.</li>
 </ul></div></details></section>
 </main></div>
-<footer class="foot"><div class="in"><span>Group Giant Anteater · Data for Good, October 2026 · 0 figures · satellites cannot see river dredges or mercury</span><span>Built 2026-10-13 11:39 from git commit cb33a82 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1399 rows).</span></div></footer>
+<footer class="foot"><div class="in"><span>Group Giant Anteater · Data for Good, October 2026 · 0 figures · satellites cannot see river dredges or mercury</span><span>Built 2026-10-13 13:24 from git commit 4e9c6ce (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1431 rows).</span></div></footer>
 <dialog id="lb" class="lb" aria-label="Enlarged figure"><button type="button">Close</button><img alt=""></dialog>
 <script>
 (function(){var r=document.documentElement,k='mercurio-theme',b=document.getElementById('theme');

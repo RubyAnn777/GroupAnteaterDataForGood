@@ -11,7 +11,7 @@ Compiled 2026-10-13 (access date for every web source below, unless marked other
   - **[PR21]** MINAM (2021), *Plan Restauración: Plan integral frente a la minería ilegal* (annex to DS 017-2021-MINAM). https://faolex.fao.org/docs/pdf/per206467anx.pdf
   - **[MINAM16]** MINAM (2016), *La lucha por la legalidad en la actividad minera (2011-2016)*. https://www.minam.gob.pe/informessectoriales/wp-content/uploads/sites/112/2016/02/12-La-lucha-por-la-legalidad-en-la-actividad-minera.pdf
   - **[DAR23]** Vásquez & Vara (2023), *Desafiando la legalidad y la justicia: minería ilegal en Madre de Dios*, DAR. https://dar.org.pe/wp-content/uploads/2024/08/Mineria-ilegal-en-Madre-de-Dios-version-final.pdf (printed page = PDF page − 2)
-- A fourth PDF was downloaded to the scratchpad and read. It is **not** in `data_raw/`; add it there and to `DOWNLOAD_LOG.csv` if the team uses it.
+- A fourth PDF is stored in `data_raw/literature/CSF_2023_Metodologia_Valorizacion_Mineria_Ilegal_Oro_Peru.pdf` and logged in `DOWNLOAD_LOG.csv` (pages re-checked 2026-10-13 against that copy):
   - **[CSF-PE]** Gasparinetti, Bakker, Araujo, Macedo & Caller (CSF, for the World Bank/GEF ASL programme), *Metodología de Valoración de Impactos de la Minería Ilegal de Oro en la Amazonía Peruana* (PDF modified 2023-06-29), https://www.conservation-strategy.org/sites/default/files/field-file/Metodologia_Valorizaci%C3%B3n_Impactos_Miner%C3%ADa_Ilegal_Oro_Amazonia_Peruana.pdf, sha256 `92767cee2a450cf1b324693a1a7e834c44520e883787c685e944cb13fd1cafbf`. Page = PDF page (printed = PDF − 1).
 
 **Scope warning.** Almost every economic number below is an **estimate** (IPE, CSF, CooperAcción, ministers' statements). The only **official statistics** are MINEM/BCRP declared production, SUNAT/MEF rules and budgets, and the MINEM REINFO register. Most numbers are **national**. Madre de Dios numbers are marked **MdD**.
@@ -22,10 +22,10 @@ Compiled 2026-10-13 (access date for every web source below, unless marked other
 
 | # | Parameter | Value | Range / alternatives | Source | Confidence |
 |---|---|---|---|---|---|
-| 1a | Gold recovered per hectare mined (alluvial, MdD) | **1.7–1.9 kg Au/ha** (2.5 m pit) | 0.7–8.3 kg/ha (CSF Brazil default); ~3.7 kg/ha per ha of net MapBiomas additions, MdD 2016-18 (derived); ~12.5 kg/ha in-situ (derived from an opinion piece's 0.25 g/m³ × 5 m) | CSF-PE (2023) p.22, Cuadro 3 | medium (model assumption built on AGC 2017 grades) |
+| 1a | Gold recovered per hectare mined (alluvial, MdD) | **1.6–1.9 kg Au/ha** (2.5 m pit; Cuadro 3 sites Puquiri 1.6, Malinowski 1.7, Huepetuhe 1.9; the text on p.23 says "1.7 a 1.9") | 0.7–8.3 kg/ha (CSF Brazil default); ~1.9 kg per ha worked / ~2.5 kg per first-time ha implied by MINEM output, MdD 2016-18 (derived, `eco_implied_kg_ha_*`, §1c); ~12.5 kg/ha in-situ (derived from an opinion piece's 0.25 g/m³ × 5 m) | CSF-PE (2023) PDF p.22, Cuadro 3 | medium (model assumption built on AGC 2017 grades; CSF found **no grades for suction-pump mining**, p.22) |
 | 1b | Grade of mined material | 0.37–0.45 g Au per tonne of ore; stripping ratio 7:1; 50% recovery loss | 0.25 g/m³ (opinion piece) | CSF-PE p.20–22; Lampadia 2014 | medium / low |
 | 1c | Gold per miner per year (MdD) | ~0.3 kg (official output / miners, derived) | ~1.8 kg using the AGC 2017 sector estimate (derived) | PR21 Tabla 17 + ACCA/USAID 2022 via DAR23 | low |
-| 1d | Value of 1 ha mined at Aug 2026 gold price | ~US$ 240,000–270,000 gross (derived: 1.7–1.9 kg × US$141.8/g) | ~US$ 69,000–77,000 at the 2016-18 price | CSF-PE yield × pack gold price US$4,411/oz | low (yield uncertain) |
+| 1d | Value of 1 ha mined at Aug 2026 gold price | ~US$ 227,000–269,000 gross (derived: 1.6–1.9 kg × US$141.8/g) | ~US$ 65,000–77,000 at the 2016-18 price | CSF-PE yield × pack gold price US$4,411/oz | low (yield uncertain) |
 | 2a | MdD declared gold production | 7.1 t (2019, incl. artisanal estimate); 1.2–1.5 t/yr declared by units 2021-25 | 19.1 t (2010) to 7.1 t (2019); series breaks in 2020 | PR21 p.57 Tabla 17; team MINEM/BCRP note | high (official) but definition breaks |
 | 2b | Estimated real MdD output | ~16 t/yr (IIAP & MINAM 2011) | 83 t/yr 23-carat (AGC 2017 sector table, implausibly high); MdD + Puno illegal 46.7 t (2019) | DAR23 p.60, p.47; PR21 p.91 | low |
 | 2c | Peru illegal gold exports, value | **US$ 7.4 bn (2024); > US$ 11.5 bn (2025)**; ≥ US$ 16 bn projected 2026 | 2024: US$ 6.8–7.4 bn depending on vintage; 2025: US$ 11.5–12 bn | IPE via El Comercio (5 May 2025), Energiminas (11 May 2026), ProActivo (17 Sep 2026) | medium (one method, one institute) |
@@ -46,8 +46,8 @@ Compiled 2026-10-13 (access date for every web source below, unless marked other
 | 5c | Profit margin of illegal/informal mining | 11%, 23.9% or 36.8% (three scenarios) | ~30% (CSF assumption) | Torres 2015 (CooperAcción) via MINAM16 p.74–75; CSF-PE p.7 | low–medium |
 | 6a | Illegal mining vs other crime | Illegal mining > 66% of Peru's illegal economies in 2025 (41% in 2023), above drug trafficking | UIF suspicious-operation reports: US$ 6,036 M (2025); 2010–Jul 2019: mining US$ 6,706 M vs drugs US$ 3,226 M | IPE via Canal N (undated) and Energiminas (11 May 2026); PR21 p.127 | medium |
 | 6b | Extortion in La Pampa | S/ 1,000 per balsa per week; S/ 20,000 from machine owners; S/ 200 per shop | 204 people reported missing in MdD in 2025 | Mongabay/Forbidden Stories, 3 Feb 2026 | medium (journalism) |
-| 7a | Mercury per gold | **Hg:Au ≈ 2.6:1** (Peru range 2.4–2.8) | 2.1–2.9 by sector (AGC 2017); 1.3–8 in the literature; "up to 3 kg Hg per kg Au" | CSF-PE p.47; DAR23 p.47 Tabla 9 | medium |
-| 7b | Social cost per kg of gold (Peru) | **US$ 1.2–1.8 M per kg** (mostly mercury health effects) | US$ 81,000–364,000 per kg (CSF calculator web page, team note) | CSF-PE p.7 | low–medium (model) |
+| 7a | Mercury per gold | **Hg:Au ≈ 2.6:1** (Peru range 2.4–2.8) | 2.1–2.9 by sector (AGC 2017); 1.3–8 in the literature; "up to 3 kg Hg per kg Au" | CSF-PE PDF p.43; DAR23 p.47 Tabla 9 | medium |
+| 7b | Social cost per kg of gold (Peru) | **two separate CSF estimates, never mixed into one range:** (i) CSF-PE report PDF p.7: US$ 1.2–1.8 M per kg (mostly mercury health effects); (ii) CSF Mining Impacts Calculator, Work Methodology page (opened 2026-10-13): "In the case of Peru, 1 kg of gold generates socio-environmental impacts worth between US$81,000 and US$364,000." https://miningcalculator.conservation-strategy.org/methodology/resume | – | CSF-PE p.7; CSF calculator | low–medium (model) |
 | 7c | Restoration cost | US$ 933/ha (natural regeneration) to US$ 2,536/ha (CINCIA), 2022 values; 1,100 seedlings/ha | – | CSF-PE p.24 | medium |
 | 7d | Carbon value of forest | 509 tCO2/ha × US$ 10/tCO2 = ~US$ 5,090/ha (derived) | – | CSF-PE p.27 (SERFOR 2020; World Bank 2020) | medium |
 | 8a | Operation Mercurio cost and staff | Plan budget ~S/ 200 M; 1,200 police + 300 army at launch; US$ 62.5 M commitment (Reuters 2019 via USAID) | FFAA in the zone 690 (2019), 672 (2020), 887 (2021) + ~840 navy | Actualidad Ambiental 19 Feb 2019; USAID 2020 p.5; PR21 p.36 | medium |
@@ -59,7 +59,7 @@ Compiled 2026-10-13 (access date for every web source below, unless marked other
 ## 1. Gold yield per hectare and per miner
 
 ### 1a. CSF Peru methodology (opened, best available)
-[CSF-PE], section 3.1.3, p.22 (printed 21), Cuadro 3 "Productividad (gramos de oro por tonelada de mineral)":
+[CSF-PE], section 3.1.3, PDF p.22 (printed 21), Cuadro 3 "Productividad (gramos de oro por tonelada de mineral)":
 
 | Site | g Au per t of ore | ha per kg Au (2.5 m pit) | kg Au per ha (2.5 m pit) |
 |---|---|---|---|
@@ -67,19 +67,20 @@ Compiled 2026-10-13 (access date for every web source below, unless marked other
 | Puquiri | 0.37 | 0.6 | 1.6 |
 | Malinowski | 0.4 | 0.6 | 1.7 |
 
-- Quote (p.23): "De la tabla anterior se pueden extraer de 1.7 a 1.9kg de oro por hectárea." (EN: "From the table above, 1.7 to 1.9 kg of gold can be extracted per hectare.")
+- Quote (PDF p.23): "De la tabla anterior se pueden extraer de 1.7 a 1.9kg de oro por hectárea." (EN: "From the table above, 1.7 to 1.9 kg of gold can be extracted per hectare.") The table itself includes Puquiri at 1.6 kg/ha, so the code uses the full table range **1.6–1.9**.
 - Assumptions (p.20, section 3.1.1): grades "0,37, 0,4 y 0,4 (Artisanal Gold Council, 2017; Alianza para la Minería Responsable, 2021) gramos de oro por tonelada de mineral"; stripping ratio "una relación de 7:1"; density "2,76 ton/m3"; and "hay una pérdida del 50% en la cantidad total de oro recolectado" (EN: grades of 0.37–0.4 g per tonne of ore; a 7:1 waste-to-ore ratio; a density of 2.76 t/m³; a 50% loss of the gold).
-- Caveat (p.22): "Las leyes de oro en la región Amazónica peruana para el método de extracción con bombas de succión no fueron identificadas" (EN: "Gold grades for the suction-pump method in the Peruvian Amazon were not identified"). La Pampa's method is exactly suction pumps, so the CSF figure comes from Huepetuhe/Puquiri/Malinowski. **Kg/ha scales linearly with pit depth**, so a 5 m pit would give ~3.4–3.8 kg/ha.
+- Caveat (PDF p.22): "Las leyes de oro en la región Amazónica peruana para el método de extracción con bombas de succión no fueron identificadas" (EN: "Gold grades for the suction-pump method in the Peruvian Amazon were not identified"). La Pampa's method is exactly suction pumps, so the CSF figure comes from Huepetuhe/Puquiri/Malinowski. **Kg/ha scales linearly with pit depth**, so a 5 m pit would give ~3.4–3.8 kg/ha.
 - Brazil version (team note, CSF Série Técnica 53, 2021): "podem ser extraídos de 0,7 a 8,3 kg de ouro por hectare" (EN: "0.7 to 8.3 kg of gold can be extracted per hectare").
 
 ### 1b. Other grade figures (low confidence)
 - Lampadia, Rafael Belaunde A., "Minería aluvial", opinion piece, 11 Nov 2014, https://www.lampadia.com/opiniones/rafael-belaunde/mineria-aluvial/ (opened via Firecrawl): "Las zonas auríferas de Madre de Dios contienen, en promedio, 0,25 gramos de oro por cada metro cúbico, lo que significa que en los primeros cinco metros de subsuelo, una hectárea mineralizada puede contener el equivalente a US$ 500.000 en oro" (EN: "MdD's gold zones contain on average 0.25 g of gold per m³, so in the top five metres one mineralized hectare can hold the equivalent of US$500,000 in gold"). **Derived:** 0.25 g/m³ × 50,000 m³ = 12.5 kg/ha *in situ*, before recovery losses. This is an opinion piece with no source given.
 - Geological papers in the search results (IRD colloquium PDF; SciELO RMCG 2025) were scans or could not be read. One snippet gave 200–500 mg/m³ for recent point bars and 2–4 g/m³ for older placers, and another gave 3–4 **mg**/m³ (unit conflict). **Snippet only, verify; do not use.**
 
-### 1c. Derived cross-check from official production and our mapped additions
-- Declared MdD production (PR21 p.57, Tabla 17, MINEM, includes MINEM's artisanal estimate up to 2019): "Madre de Dios (TMF) 19.1 22.6 12.3 16.1 8.0 12.7 17.6 12.8 10.2 7.1" for 2010–2019. Mean 2016–18 = 13.5 t.
-- Our MapBiomas MdD net additions, 2016–18 mean = 3,610 ha/yr (agent.md §14).
-- **Derived:** 13.5 t / 3,610 ha ≈ **3.7 kg per ha of net additions**. It is an upper-ish figure per *new* ha, because part of the gold comes from re-mined pits and river dredges that add no new mapped area. It is a lower-ish figure if official production misses illegal output. Use it only as an order-of-magnitude check: same order as CSF (1.7–1.9).
+### 1c. Derived cross-check from official production and our mapped hectares (as in `code/v2_economics.py`)
+- Official MdD production (MINEM yearly files, `data_intermediate/minem_mdd_gold.csv`, `total_kg` = declared + MINEM's artisanal estimate up to 2019; PR21 p.57 Tabla 17 gives the same series: "Madre de Dios (TMF) 19.1 22.6 12.3 16.1 8.0 12.7 17.6 12.8 10.2 7.1" for 2010–2019).
+- Hectares: our MapBiomas Col 4 raster accounting for MdD, 2016–18 mean, (a) first-time mined land + returns to old pits ("hectares worked") and (b) first-time mined land only.
+- **Derived (code):** `eco_implied_kg_ha_2016_18` = MINEM gold / hectares worked = **1.9 kg/ha** (run of 2026-10-13); `eco_implied_kg_ha_new_2016_18` = per first-time hectare = **2.5 kg/ha**. Per hectare worked this matches the top of CSF's 1.6–1.9 kg/ha; per first-time hectare it is above it. Upward biases: part of the gold comes from river dredges that map no land; downward: official production may miss illegal output. Use only as an order-of-magnitude check. **Implication for the gold range:** the code gives old pits no gold and uses CSF's fresh-pit yield on first-time land only, so its 2022–25 gold range is, if anything, low.
+- (The older figure in earlier drafts, 13.5 t / 3,610 ha of net MapBiomas additions ≈ 3.7 kg/ha, used the pack's NET additions (which subtract reclassified or abandoned land) instead of the raster accounting of land actually worked; it is superseded by the two code numbers above and should not be cited.)
 
 ### 1d. Gold per miner (derived, low confidence)
 - Miners: "existen al menos 46,605 mineros artesanales, dentro de los cuales 31,390 son mineros informales y 9,323 son mineros ilegales" (ACCA & USAID Prevenir 2022, quoted in DAR23 p.29, team note) (EN: "at least 46,605 artisanal miners, of whom 31,390 are informal and 9,323 illegal").
@@ -89,7 +90,7 @@ Compiled 2026-10-13 (access date for every web source below, unless marked other
 - A Rebelión/EFE piece says a concession yields "10 to 100 grams of gold in one working day" (**snippet only, verify**).
 
 ### 1e. Value per hectare (derived)
-Gold price in the data pack: US$ 4,411/oz (Aug 2026) = US$ 141.8/g. 1.7–1.9 kg/ha → **US$ 241,000–269,000 gross per hectare**. At the 2016–18 mean (~US$ 1,259/oz = US$ 40.5/g): US$ 69,000–77,000/ha. The gold price has roughly tripled the value of the same pit, which matters for the "re-mining old land" story (MAAP #193).
+Gold price in the data pack: US$ 4,411/oz (Aug 2026) = US$ 141.8/g. 1.6–1.9 kg/ha → **US$ 227,000–269,000 gross per hectare**. At the 2016–18 mean (~US$ 1,259/oz = US$ 40.5/g): US$ 65,000–77,000/ha. The gold price has roughly tripled the value of the same pit, which matters for the "re-mining old land" story (MAAP #193).
 
 ---
 
@@ -97,7 +98,7 @@ Gold price in the data pack: US$ 4,411/oz (Aug 2026) = US$ 141.8/g. 1.7–1.9 kg
 
 ### 2a. Official MdD series (opened / team note)
 - PR21 p.57 Tabla 17 (above): MdD fell from 22.6 t (2011) to 7.1 t (2019), while Puno rose from 2.8 to 9.1 t.
-- **Series break (team note `legality_data.md` §0 and §4):** MINEM's yearly files include "PRODUCTORES ARTESANALES 1/ … Cifras Estimadas" for MdD up to 2019 (about 15.7 t in 2016). From 2020 that estimate is dropped. Production declared by units: 944 kg (2018), 1,101 (2019), 2,152 (2020), 1,622 (2021), 1,472, 1,488, 1,220, 1,362 kg (2025). **Do not present the 2018→2025 fall as a production fall.**
+- **Series break (team note `legality_data.md` §0 and §4):** MINEM's yearly files include "PRODUCTORES ARTESANALES 1/ … Cifras Estimadas" for MdD up to 2019 (17.1 t in 2016 as read from the MINEM file by `code/peru_gold_minem.py`, id gold_minem_estimate_2016_kg; an earlier team note said 15.7 t, superseded). From 2020 that estimate is dropped. Production declared by units: 944 kg (2018), 1,101 (2019), 2,152 (2020), 1,622 (2021), 1,472, 1,488, 1,220, 1,362 kg (2025). **Do not present the 2018→2025 fall as a production fall.**
 - USAID (2020), *Case Study: Artisanal and Small-scale Mining in Madre de Dios*, https://www.planetgold.org/sites/default/files/2020-12/USAID.%202020.%20Case%20Study%20ASM%20and%20ASGM%20in%20Madre%20de%20Dios.pdf (opened), p.2: "In 2019, the ASGM sector generated 22 percent (27.7 metric tons) of gold production in Peru (MINEM 2020)". p.4: "In 2018, following efforts to reduce illegal gold production, Madre de Dios' GDP decreased by 9.8 percent (BCRP 2018)", and "Official reports already show a reduction of 30.5 percent in the gold produced from January through October 2019".
 
 ### 2b. Estimated real output (MdD)
@@ -266,7 +267,7 @@ Count: Caretas calls Ley 32213 the "sexta" extension (team note), and IPE says R
 ## 7. Social and environmental costs
 
 - **Mercury per gold (opened):**
-  - CSF-PE p.47: the ratio "puede variar considerablemente de 1,3 a 8 gramos de mercurio por cada gramo de oro extraído [...] Para Perú específicamente, este valor puede tener una relación promedio (Hg:Au) de 2.4 a 2.8 (Artisanal Gold Council, 2017; MINAM, 2011). De forma conservadora, se utiliza el valor medio de 2,6." (EN: "can vary from 1.3 to 8 g of mercury per g of gold [...] for Peru the average ratio is 2.4 to 2.8 [...] conservatively, the mean of 2.6 is used.")
+  - CSF-PE PDF p.43 (printed 42), section 3.3.4.1 a: the ratio "puede variar considerablemente de 1,3 a 8 gramos de mercurio por cada gramo de oro extraído [...] Para Perú específicamente, este valor puede tener una relación promedio (Hg:Au) de 2.4 a 2.8 (Artisanal Gold Council, 2017; MINAM, 2011). De forma conservadora, se utiliza el valor medio de 2,6." (EN: "can vary from 1.3 to 8 g of mercury per g of gold [...] for Peru the average ratio is 2.4 to 2.8 [...] conservatively, the mean of 2.6 is used.")
   - Release to water: "Para Perú se utiliza la referencia del 9% de pérdida en agua" (EN: "for Peru, a 9% loss to water is used") (UNEP 2018).
   - DAR23 p.47 Tabla 9 (AGC 2017): Hg:Au 2.1:1 (Huepetuhe shute) to 2.9:1; La Pampa traca 2.3:1; total "181.327" t Hg/yr, La Pampa "145.2" t. The text on p.46 misprints "181,327 toneladas".
   - El Comercio 2020: Ipenza, "each kilo of gold extracted requires up to three kilos of mercury".
@@ -276,12 +277,12 @@ Count: Caretas calls Ley 32213 the "sexta" extension (team note), and IPE says R
   - Reuben et al. 2020 (GeoHealth): 32.9% of 164 children above 2.0 µg/g, and "4.68 IQ points lower" (team note).
   - Diringer et al. 2015: ">one-third of carnivorous fish" above 0.5 mg/kg (team note).
 - **Monetised costs:**
-  - CSF-PE p.7 (opened): "1 kg de oro extraído genera impactos entre US$ 1,2 millón y 1,8 millón de dólares, en su mayoría relacionados con los impactos del mercurio en la salud humana" (EN: "1 kg of gold extracted generates impacts of US$1.2–1.8 million, mostly mercury effects on human health"), compared with a sale price of US$ 55,000/kg. The CSF calculator web page gives "between US$81,000 and US$364,000" per kg for Peru (team note). That is a different vintage or module; **report both and say which**.
+  - CSF-PE p.7 (opened): "1 kg de oro extraído genera impactos entre US$ 1,2 millón y 1,8 millón de dólares, en su mayoría relacionados con los impactos del mercurio en la salud humana" (EN: "1 kg of gold extracted generates impacts of US$1.2–1.8 million, mostly mercury effects on human health"), compared with a sale price of US$ 55,000/kg. The CSF calculator web page gives "between US$81,000 and US$364,000" per kg for Peru (team note). That is a different vintage or module; **report both separately and say which** (the code registers `eco_social_busd_calc_*` and `eco_social_busd_pdf_*`; it never mixes the two into one range).
   - Restoration, CSF-PE p.24 (opened): "costos de recuperación de US$ 933/ha para regeneración natural (en 2022)" (IIAP 2009a) and "US$ 2.536 por/ha (en 2022)" (CINCIA 2019); "1.100 plántulas" per ha (p.25–26) (EN: recovery cost of US$933/ha for natural regeneration and US$2,536/ha; 1,100 seedlings per ha).
   - Carbon, CSF-PE p.27 (opened): "US$ 10,00 por tonelada de CO2 (Banco Mundial, 2020), considerando que en cada hectárea de la Amazonía peruana hay un stock de 509 tCO2 (SERFOR, 2020)" (EN: "US$10 per tonne of CO2, with a stock of 509 tCO2 per ha of Peruvian Amazon"). **Derived:** US$ 5,090/ha at US$ 10/t, or ~US$ 25,000/ha at US$ 50/t.
   - Timber: 127 m³/ha × US$ 287/m³, and non-timber products US$ 2,344/ha (CSF-PE p.27).
   - Spillover: impacted area "puede ocurrir en hasta 12 veces más que el área de la minería (Sonter et al, 2017)" (EN: "can be up to 12 times the mining area") (p.23).
-- **Comparison (derived):** at Aug 2026 prices, 1 ha mined yields ~US$ 250k of gold (§1e). Restoration plus forest carbon is ~US$ 6–8k/ha, and the CSF health cost is US$ 2–3.4 M per ha (1.7–1.9 kg × US$ 1.2–1.8 M). The private gain is far below the social cost, but far above the cost of restoring the land.
+- **Comparison (derived):** at Aug 2026 prices, 1 ha mined yields ~US$ 250k of gold (§1e). Restoration plus forest carbon is ~US$ 6–8k/ha, and the CSF report's cost is US$ 1.9–3.4 M per ha (1.6–1.9 kg × US$ 1.2–1.8 M). The private gain is far below the social cost, but far above the cost of restoring the land.
 
 ---
 
@@ -300,6 +301,7 @@ Count: Caretas calls Ley 32213 the "sexta" extension (team note), and IPE says R
   - PCM via Energiminas, 5 May 2026 (opened): S/ 70 M in 2025.
   - MEF Consulta Amigable (team scrape, `enforcement_intensity.md`): national PIM 2019 S/ 97.8 M; MdD executed (devengado) S/ 31.1 M (2019) → 20.2 (2020) → 9.7 (2021) → 5.0 M (2025). Most national units book their spending under Lima, so the MdD figures are a lower bound.
   - The concepts differ (PIA, PIM, executed), so **use the MEF series in the brief**.
+- **Exchange rate (opened, 2026-10-13):** BCRP series PN01234PM, "Tipo de cambio de las principales monedas – promedio del período (S/ por UM) – Dólar Americano", monthly, via https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN01234PM/json/2015-1/2025-12. Annual value = mean of the 12 monthly averages (our arithmetic): 2015 3.184, 2016 3.375, 2017 3.261, 2018 3.287, 2019 3.337, 2020 3.495, 2021 3.881, 2022 3.835, 2023 3.744, 2024 3.754, 2025 3.568 soles per US$. Hard-coded in `code/v2_economics.py` (`PEN_PER_USD`); each year's spending is converted at its own rate.
 - **Interdictions (opened):** Energiminas, 5 May 2026: an average of "62 operativos al mes" (2024) → 86 (2025) → "supera las 130 acciones mensuales" (2026); seizures "valorados en más de S/ 7,000 millones" over two years (EN: 62 operations a month in 2024, 86 in 2025, over 130 in 2026; seizures worth more than S/7,000 million). 2024: "más de 720 operativos de interdicción", "más de S/ 2230 millones" (team note).
 - **Explosives cost:** not found.
 

@@ -15,7 +15,7 @@ Page syntax (parsed by build_report.py):
 Chapter ids are the slug of the eyebrow (e.g. "Where it went" -> #where-it-went).
 -->
 
-# Mercurio stopped La Pampa for two years. Then mining crossed the road.
+# Net new mining in La Pampa fell for two years. Then it grew across the road.
 
 > What Operation Mercurio did to illegal gold mining in Madre de Dios, Peru, and what FZS should expect when an operation ends. Team walkthrough: the story first, every analysis behind it, every number from `output/numbers.csv`.
 
@@ -28,21 +28,21 @@ Chapter ids are the slug of the eyebrow (e.g. "Where it went" -> #where-it-went)
 
 @part The story
 
-## The story in one minute | Enforcement worked where it landed, while it lasted
+## The story in one minute | Mining fell where enforcement landed, while it lasted
 
-**Mercurio cut mining in La Pampa for about two years. Miners answered across the nearest legal boundary and in old pits, and the region kept growing.**
+**After Mercurio began, net new mining in La Pampa fell for about two years. New mining grew across the nearest legal boundary and on old pits, and the region kept growing.** [[D]]
 
 :::beats
 Before || La Pampa was Peru's largest illegal mining area: {{mean_add_tambopata_2016_18}} ha of net new mining a year (2016–18). || #where-it-went
 During || Net new mining fell to {{mean_add_tambopata_2019_21}} ha/yr in 2019–21. Clearing went on through 2019 and collapsed in 2020. || #timing
 Next door || First-time mining directly across the highway, in the legal corridor, rose from {{v2_new_corridoracrosstheroa_2016_18}} to {{v2_new_corridoracrosstheroa_2019_21}} ha/yr. || #across-the-road
-After || La Pampa came back to {{mean_add_tambopata_2022_25}} ha/yr in 2022–25, much of it on old pits. In 2025 miners entered the reserve. || #old-pits
+After || La Pampa came back to {{mean_add_tambopata_2022_25}} ha/yr in 2022–25, much of it on old pits. Mining inside the reserve jumped in 2025 (+{{anp_tam_nr_addition_2025}} ha). || #old-pits
 Region || First-time mining in Madre de Dios doubled, from {{v2_new_total_2016_18}} to {{v2_new_total_2022_25}} ha/yr. || #where-it-went
 :::
 
-**Is it causal?** Only conditionally, and only for **net** new mining in 2019–21. In hectares, Tambopata's fall is the largest of 15 zones (p = {{model_m1_ri_p:.2f}}, the best this test allows) and sits below two rule-based twins. Relative to its size the fall is ordinary, and per 1-km cell the pre-trends fail. [[C]]
+**Is it causal?** Only conditionally, and only for **net** new mining in 2019–21. *If* the comparison zones show what Tambopata would otherwise have done, Mercurio and the operations that followed lowered net new mining in the target by roughly {{sdid_sc_ha_during:,.0f|abs}} to {{model_m3_during:,.0f|abs}} ha/yr, depending on how the comparison is weighted. [[C]] It holds in hectares, not relative to size; with one targeted zone the best attainable p is {{model_m1_ri_p:.2f}}; and the fall coincides with COVID: nothing falls in 2019 (La Pampa per 1-km cell {{st_event_lp_2019:+.2f}} ha vs 2014–18, p = {{st_event_lp_2019_p:.2f}}), and first-time mining stayed near its peak that year.
 
-**Why it matters:** an operation buys a pause, not an end. FZS should plan for what comes after the patrols leave: the legal side of the boundary, old pits, and the river posts.
+**Why it matters:** we expect an operation to buy a pause, not an end. [[P]] FZS should plan for what comes after the patrols leave: the legal side of the boundary, old pits, and the river posts.
 
 ## The brief | Four parts, one figure, one conditional causal sentence
 
@@ -52,7 +52,7 @@ Region || First-time mining in Madre de Dios doubled, from {{v2_new_total_2016_1
 |---|---|---|
 | **1. The question** | FZS pays for enforcement. What happens in the target, and around it, when an operation ends? | [The rules](#the-rules), [The places](#the-places) |
 | **2. Data** | MapBiomas Peru Collection 4, one check per dataset | [Appendix](#appendix) |
-| **3. Findings** | Fell for two years, crossed the road, came back; the region grew. One conditional causal claim. | [Where it went](#where-it-went) to [Tests](#tests) |
+| **3. Findings** | Net new mining fell for two years, grew across the road, came back; the region grew. One conditional causal claim. | [Where it went](#where-it-went) to [Claims](#claims) |
 | **4. What FZS can do** | Stay longer, guard the boundary, watch old pits, make the corridor a filter. Satellites miss dredges and mercury. | [For FZS](#for-fzs), [Claims](#claims) |
 
 :::fig output/fig_brief_main.png
@@ -94,7 +94,7 @@ take: La Pampa fell as the corridor across the road rose, and the department as 
 
 **Why it matters:** the operation raised the cost of mining in one place, while the legal corridor next door stayed cheap. That alone predicts displacement across the road.
 
-:::more The legal detail, who mines, and the enforcement timeline
+:::more The legal detail and who mines
 **The corridor (D.L. 1100, 2012):** about 4,983 km² where small-scale mining can be permitted. Outside it, no concessions are granted. La Pampa covers about 1,241 km² (MINAM 2016). Congress has extended REINFO again and again, now to 31 December 2026.
 
 **How MAAP grades illegality (MAAP #235):** Very high = inside a protected area; High = outside any concession; Medium = inside a concession not verified as active; Low = inside an active concession.
@@ -113,21 +113,7 @@ take: La Pampa fell as the corridor across the road rose, and the department as 
 
 **Fuel:** tax-exempt in the Amazon; 72% of that benefit went to illegal mining (IPE).
 
-**Who enforces, and when:**
-
-| When | What |
-|---|---|
-| 2009–2010 | First interdictions; dredges banned (DU 012-2010) |
-| Feb–Apr 2012 | D.L. 1100 (corridor, interdiction) and D.L. 1105 (formalization), under President Humala |
-| 2013–2016 | Interdictions fade: 49 (2013) → 1 (Jan–May 2016) in Madre de Dios |
-| Nov 2018 | La Pampa plan approved (later "Mercurio"), under President Vizcarra |
-| 19 Feb 2019 | **Operation Mercurio:** 1,272 police, 300 soldiers, 70 prosecutors; monthly rotation of garrisons and commanders against corruption (Dethier et al. 2023) |
-| 2019 | "Mercurio II" extends operations to all of Madre de Dios and border provinces of Cusco and Puno; Dec 2019 interdiction in the Amarakaeri buffer zone |
-| Spring 2020 | Forces pulled away for COVID; deep budget cuts |
-| Jul 2021 | Plan Restauración replaces Mercurio; adds Camanti and Ayapata |
-| 2021–2022 | President Castillo; ministerial churn; enforcement relaxes |
-| Apr 2023 → | State of emergency in six districts |
-| 2025 | Navy withdrawn from Malinowski river posts; mining enters the reserve |
+**Who enforces, and when:** the dated timeline is in [Context](#context).
 
 **FZS's role:** FZS supports SERNANP's law-enforcement operations, ranger control posts and patrols in the Tambopata–Bahuaja-Sonene landscape. So FZS is part of the enforcement we study.
 
@@ -165,7 +151,7 @@ take: The corridor across the road has the same gold and the same road as La Pam
 
 @part What happened
 
-## Where it went | New mining moved into the legal corridor
+## Where it went | The legal corridor's share of new mining rose
 
 **After 2019, land mined for the first time shifted from La Pampa to the legal corridor.** The corridor's share rose from {{v2_corridor_share_2016_18:.0f}}% to {{v2_corridor_share_2022_25:.0f}}%. [[D]]
 
@@ -184,7 +170,7 @@ read: Each point is one year's share of Madre de Dios first-time mining that lie
 take: The corridor's share stepped up after 2019 and stayed high.
 :::
 
-**Not all corridor growth is displaced La Pampa mining.** The rest of the corridor gained far more than La Pampa lost ({{v2_new_restofminingcorridor_2016_18}} → {{v2_new_restofminingcorridor_2022_25}} ha/yr), so new entrants and the gold price drive most of it.
+**Not all corridor growth can be La Pampa's mining moving.** The rest of the corridor gained far more than La Pampa lost ({{v2_new_restofminingcorridor_2016_18}} → {{v2_new_restofminingcorridor_2022_25}} ha/yr), so most of it cannot be La Pampa's mining moving; new entrants and the gold price fit better (not tested). [[D]]
 
 :::fig output/fig_v2_legality.png
 read: First-time mining in Madre de Dios split by MAAP's legality grade: Low = active concession, Medium = concession not verified as active, High = outside any concession, Very high = strict protected area.
@@ -199,7 +185,7 @@ read: The same zones measured with a second satellite product, Amazon Mining Wat
 take: A second product agrees on the move north of the road; it counts less infill after 2021.
 :::
 
-**Why it matters:** Mercurio moved new mining from illegal land to legal land. For the reserve that is a win. For the region it is not: total new mining kept growing, and corridor mining still uses mercury.
+**Why it matters:** after 2019, new mining shifted from illegal to legal land. [[D]] For the reserve that is good news. For the region it is not: total new mining kept growing, and corridor mining still uses mercury.
 
 :::more Legality details, the second product, the cell test, and what we can't show
 - **Presumed illegal share** (outside the corridor and outside communities, simple rule): {{t7_presumed_illegal_share_2016_18:.0%}} → {{t7_presumed_illegal_share_2019_21:.0%}} → {{t7_presumed_illegal_share_2022_25:.0%}}. [[D]]
@@ -214,7 +200,7 @@ take: A second product agrees on the move north of the road; it counts less infi
 **Code:** `code/raster_layers.py`, `code/v2_legality.py`, `code/v2_extra.py` (AMW).
 :::
 
-## Across the road | Miners crossed the highway, then pushed deeper
+## Across the road | New mining jumped across the highway, then spread deeper
 
 **Right after Mercurio, new mining piled up 0–2 km north of the highway, directly across from La Pampa.** The north side's share went from {{t1_road_north_share_2016_18:.0%}} (2016–18) to {{t1_road_north_share_2019_21:.0%}} (2019–21). [[D]]
 
@@ -230,13 +216,13 @@ take: No fake start year shows a bigger jump north than 2019, among windows that
 
 :::fig output/fig_v2_depth.png
 read: Mean distance north of the highway of each year's first-time mining, with the 0–10, 10–20 and 20–30 km bands.
-take: Right after Mercurio new mining hugged the road; then it pushed deeper into the corridor.
+take: Right after Mercurio new mining hugged the road; then it spread deeper into the corridor.
 :::
 
-- **The jump is unusual:** rank {{t1_road_shift_rank_clean:.0f}} of {{t1_road_shift_n_clean:.0f}} non-overlapping start years (p = {{t1_road_shift_ri_p_clean:.2f}}, the smallest possible). [[D]]
+- **The jump is unusual:** rank {{t1_road_shift_rank_clean:.0f}} of {{t1_road_shift_n_clean:.0f}} non-overlapping start years (p = {{t1_road_shift_ri_p_clean:.2f}}, the smallest possible with {{t1_road_shift_n_clean:.0f}} start years). [[D]]
 - **Hugging the road:** mean depth fell from {{t9_depth_2016:.0f}} km (2016) to {{t9_depth_2020:.0f}} km (2020), then reached {{t9_depth_2025:.0f}} km by 2025. [[D]]
 
-**Why it matters:** miners follow enforcement and gold across a two-lane road. Any operation south of the highway should expect a response north of it.
+**Why it matters:** a two-lane road is no barrier. After any operation south of the highway, expect a response north of it. [[P]]
 
 :::more The road has been crossed before, plus every test
 - **All start years:** the 2019 move north (+{{t1_road_shift_2019:.2f}} share points, within 30 km) ranks {{t1_road_shift_rank:.0f}} of {{t1_road_shift_n:.0f}} start years (p = {{t1_road_shift_ri_p:.2f}}); only 2020, whose window overlaps the event, is higher.
@@ -279,7 +265,7 @@ take: The corridor holds most returns too; La Pampa's own returns jump in 2023.
 
 - **The corridor's share of all returns:** {{rm_corridor_share_2016_18:.0%}} → {{rm_corridor_share_2019_21:.0%}} → {{rm_corridor_share_2022_25:.0%}}. [[D]]
 - **La Pampa's share of all returns:** {{rm_lapampa_share_2016_18:.0%}} → {{rm_lapampa_share_2019_21:.0%}} → {{rm_lapampa_share_2022_25:.0%}}. [[D]]
-- **Caveat:** the old-pit count includes year-to-year map flicker (about 300 ha/yr even before 2019). Trust the 2023 jump, not small changes.
+- **Caveat:** the old-pit count includes year-to-year map flicker: La Pampa already showed {{v2_lapampa_remined_2016_18}} ha/yr of "returns" in 2016–18. Trust the 2023 jump, not small changes.
 
 **Code:** `code/raster_layers.py` (Sankey), `code/v2_extra.py` (returns by zone).
 :::
@@ -316,7 +302,7 @@ take: La Pampa's alerts stayed high through 2019 and nearly stopped in 2021–23
 | Rest of mining corridor | {{gold_broad_restofminingcorrid_depleted_2018:.0%}} | {{gold_broad_restofminingcorrid_depleted_2025:.0%}} |
 | Kotsimba | {{gold_broad_kotsimbanativecomm_depleted_2018:.0%}} | {{gold_broad_kotsimbanativecomm_depleted_2025:.0%}} |
 
-**Why it matters:** enforcement, not exhaustion, is the better explanation for the move.
+**Why it matters:** exhaustion does not explain the move. [[D]]
 
 :::more How we measured gold in the ground
 - **The proxy:** no one publishes gold left in the ground. Gold here is alluvial, so we used the national geology map (INGEMMET, 1:100,000): river deposits plus the gold-bearing terraces of the Madre de Dios Formation.
@@ -326,7 +312,7 @@ take: La Pampa's alerts stayed high through 2019 and nearly stopped in 2021–23
 **Code:** `code/raster_gold.py`.
 :::
 
-## Inside the reserve | In 2025, miners entered the reserve
+## Inside the reserve | In 2025, mining inside the reserve jumped
 
 **The course data covers only buffer zones. Inside Tambopata National Reserve, mining reached {{anp_level_tam_nr_2025:,.0f}} ha in 2025, {{anp_tam_nr_addition_2025}} ha of it new that year.** [[D]]
 
@@ -350,7 +336,7 @@ take: Inside the reserves, mining stayed small for years; in 2025 it jumped insi
 
 ## Declared gold | The official gold drop is a definition change
 
-**The official Madre de Dios gold series fell {{pe_prod_fall_2018_2025_pct:.0f}}% from 2018 to 2025, but mostly because its definition changed.** Until 2019 it included an *estimate* of artisanal gold; from 2020 it counts only what producers declare. [[D]]
+**The official Madre de Dios gold series fell {{pe_prod_fall_2018_2025_pct:.0f}}% from 2018 to 2025, but that is entirely a definition change: declared output rose.** Until 2019 it included an *estimate* of artisanal gold; from 2020 it counts only what producers declare. [[D]]
 
 :::fig output/fig_peru_gold_definition.png
 read: Madre de Dios gold in the ministry's yearly files, split into what producers declared and the artisanal estimate the ministry added.
@@ -363,7 +349,7 @@ take: The "collapse" is the estimate disappearing in 2020; declared output rose.
 **Why it matters:** official production says almost nothing about mining here. Don't cite "−88%".
 
 :::more The 2015 break, and the "mining in the corridor, declaring nothing" idea
-- **The series:** the ministry's files carry "PRODUCTORES ARTESANALES — cifras estimadas" for Madre de Dios until 2019 (about 15.7 t in 2016, 6.0 t in 2019). In 2016, that estimate plus declared output equals the central bank's figure exactly.
+- **The series:** the ministry's files carry "PRODUCTORES ARTESANALES — cifras estimadas" for Madre de Dios until 2019 ({{gold_minem_estimate_2016_kg:,.0f}} kg in 2016, {{gold_minem_estimate_2019_kg:,.0f}} kg in 2019). In 2016, that estimate plus declared output equals the central bank's figure exactly.
 - **An earlier break in 2015:** until 2014, artisanal producers' own declarations were in the series ({{gold_minem_declared_2014_kg:,.0f}} kg in 2014); from 2015 producers declared only {{gold_minem_declared_2015_kg:,.0f}} kg and the ministry added an estimate.
 - **For the idea:** {{leg_medium_share_2022_25:.0%}} of first-time mining in 2022–25 sat in concessions not verified as active; producers declare about 1 t a year while first-time mining covers over {{v2_new_total_2022_25}} ha a year; only 145 of 9,592 registered miners were fully formal (2021); Bolivia's gold exports jumped from 1.7 t (2012) to 35.7 t (2014); nationally at least 80 of ~180 t exported in 2024 had unknown origin.
 - **Against:** gold may be declared in other regions; mapped area includes re-mined pits; gold yield per hectare is unknown.
@@ -377,7 +363,7 @@ take: The "collapse" is the estimate disappearing in 2020; declared output rose.
 **Other events line up with the mining curve.** Enforcement money peaked in 2019 and faded; COVID pulled forces away in 2020; a new government arrived in 2021. [[D]]
 
 :::fig output/fig_v2_timeline.png
-read: Top: events by type (enforcement, presidents, laws, context). Below: land mined for the first time each year in La Pampa and in all of Madre de Dios. Shaded: 2012–13 and 2019–21.
+read: Top: events by type (enforcement, presidents, laws, context). Below: land mined for the first time each year in La Pampa and in all of Madre de Dios. Shaded = operation years (2012–13 and 2019–21).
 take: Both enforcement waves started within a year of a new president and faded within about two.
 :::
 
@@ -394,44 +380,60 @@ take: Spending peaked in 2019 and fell as mining rebounded.
 
 :::fig output/fig_peru_context_models.png
 read: Left: Tambopata's 2019–21 gap (ha/yr, against 14 other buffer zones) as we add controls: K0 = gold price × size; K1 + COVID 2020–21 × size; K2 + Madre de Dios × enforcement money; K3 both. Right: each year's gap against the money spent that year.
-take: The gap barely moves and Tambopata stays first; years with more money had a slightly bigger fall.
+take: COVID exposure shrinks the gap, money barely moves it, and Tambopata stays first; years with more money had a weakly bigger fall.
 :::
 
-- **COVID:** controlling for how hard each zone was exposed shrinks the gap from {{ctx_k0_during}} to {{ctx_k1_during}} ha/yr. Still rank {{ctx_k1_rank:.0f}} of {{ctx_n:.0f}}. [[D]]
-- **Money:** adding Madre de Dios × spending gives {{ctx_k2_during}} ha/yr; both together {{ctx_k3_during}} ({{ctx_k3_vs_k0_share:.0%}} of the baseline). [[D]]
-- **Dose:** the yearly gap and spending correlate at r = {{ctx_dose_corr:.2f}} (11 years): a weak link. [[D]]
+- **COVID:** controlling for how hard each zone was exposed shrinks the gap to {{ctx_k1_during:,.0f|abs}} of {{ctx_k0_during:,.0f|abs}} ha/yr. Still rank {{ctx_k1_rank:.0f}} of {{ctx_n:.0f}}. [[D]]
+- **Money:** adding Madre de Dios × spending gives {{ctx_k2_during}} ha/yr; both together {{ctx_k3_during}} ({{ctx_k3_vs_k0_share:.0%}} of the baseline). But money is partly the treatment itself (a bad control), so "keeps {{ctx_k3_vs_k0_share:.0%}}" is not reassurance. [[D]]
+- **Dose:** the yearly gap and spending correlate at r = {{ctx_dose_corr:.2f}} (2015–25): a weak link. [[D]]
 - **Politics:** presidents and laws hit every zone at once, so year effects absorb them. They can't be tested separately with one region.
 
-**Why it matters:** FZS should plan for the gap after each wave. The fall isn't a COVID or money artefact, but money and the operation arrived together, so we can't say which did the work.
+**Why it matters:** COVID exposure explains part of the gap, not all of it. Money and the operation arrived together, so we can't say which did the work.
 
-:::more Politics, COVID, the 2017 spike and the earlier wave
+:::more The enforcement timeline, politics, COVID, the 2017 spike and the earlier wave
+**The enforcement timeline (dated):**
+
+| When | What |
+|---|---|
+| 2009–2010 | First interdictions; dredges banned (DU 012-2010) |
+| Feb–Apr 2012 | D.L. 1100 (corridor, interdiction) and D.L. 1105 (formalization), under President Humala |
+| 2013–2016 | Interdictions fade: 49 (2013) → 1 (Jan–May 2016) in Madre de Dios |
+| Nov 2018 | La Pampa plan approved (later "Mercurio"), under President Vizcarra |
+| 19 Feb 2019 | **Operation Mercurio:** 1,272 police, 300 soldiers, 70 prosecutors; monthly rotation of garrisons and commanders against corruption (Dethier et al. 2023) |
+| 2019 | "Mercurio II" extends operations to all of Madre de Dios and border provinces of Cusco and Puno; Dec 2019 interdiction in the Amarakaeri buffer zone |
+| Spring 2020 | Forces pulled away for COVID; deep budget cuts |
+| Jul 2021 | Plan Restauración replaces Mercurio; adds Camanti and Ayapata |
+| 2021–2022 | President Castillo; ministerial churn; enforcement relaxes |
+| Apr 2023 → | State of emergency in six districts |
+| 2025 | Navy withdrawn from Malinowski river posts; mining inside the reserve jumps |
+
 - **The political-cycle idea:** both enforcement waves started 7–11 months after a new president (Humala 2011 → decrees 2012; Vizcarra 2018 → Mercurio 2019). That's a pattern, not evidence; we found no study of Peruvian election effects (Brazilian studies find more deforestation in election years).
 - **Earlier wave in the course table:** Tambopata's gap in 2012–13 was +{{t3_wave_m1_2012_13}} ha/yr, rank {{t3_wave_rank:.0f}} of {{t3_wave_n:.0f}}: no Tambopata-specific dip. [[D]]
 - **COVID:** forces left La Pampa in spring 2020; budgets fell sharply in 2020–21 (Mongabay 2023). That fits the 2022–25 rebound.
 - **The 2017 spike:** 2017 was the record year for mining deforestation (Caballero Espejo et al. 2018). The gold price was flat (about $1,250/oz, 2016–18), so it doesn't explain it. Gangs ("Guardianes de la Trocha") ran extortion in La Pampa, but no source dates a 2017 takeover; part of the jump may be map reclassification. Mercury controls after Peru ratified the Minamata Convention (2016) made mercury a smuggling business; plausible, undocumented.
 
-- **Why controlling for money is tricky:** spending rose *because of* Mercurio. Controlling for it removes part of the effect we measure. A smaller gap would mean "money and the operation move together", not "the operation didn't matter". The gap didn't shrink, and the spending coefficient is positive ({{ctx_k2_spend_coef:+.0f}} ha/yr per log-point): money followed mining, not the other way round.
-- **Asner & Tupayachi (2017)** saw the same cycle after the 2012–13 interdictions: interdictions "said to have eradicated 90% of miners" in the buffer zone, a fast recovery by 2014, and losses inside the reserve up 37% after 2012. Their own maps showed the dip ("apparent in our mapping results"); our course table shows no Tambopata-specific dip in 2012–13 against other zones.
+- **Why controlling for money is tricky:** spending rose *because of* Mercurio. Controlling for it removes part of the effect we measure. A smaller gap would mean "money and the operation move together", not "the operation didn't matter". The gap didn't shrink, and the spending coefficient is positive ({{ctx_k2_spend_coef:+.0f}} ha/yr per log-point), consistent with money following mining; we cannot tell the direction.
+- **Asner & Tupayachi (2017)** report a brief dip after the 2012 interdictions ("said to have eradicated 90% of miners" in the buffer zone), then a near doubling, also inside the reserve (losses up 37% after 2012). Our MapBiomas data show no 2012–13 dip in La Pampa ({{tl_dip_2012_13:+.0%}} vs 2010–11), and in the course table Tambopata ranks {{t3_wave_rank:.0f}} of {{t3_wave_n:.0f}} for 2012–13. The first cycle is theirs, not ours.
 
 **Code:** `code/v2_extra.py` (timeline), `code/v2_tests.py` (spending, 2012 wave), `code/peru_context_models.py` (controls). **Sources:** `docs/overnight/notes/qualitative_background.md`, `enforcement_intensity.md`.
 :::
 
 @part Is it causal?
 
-## Six attempts | Six methods, one answer: a big fall in hectares, ordinary for its size
+## Six attempts | Six methods, mixed verdicts: the hectare fall is unusual, the scaled fall ordinary, and matching can't beat chance
 
-**We tried six ways to build "what would have happened without Mercurio". None is clean.** They agree on one thing: in hectares, Tambopata's 2019–21 net fall stands out; relative to its size, it doesn't. At the road, the swing north stands out.
+**We tried six ways to build "what would have happened without Mercurio". None is clean, and they don't all agree.** In hectares, Tambopata's 2019–21 net fall stands out against other Peruvian zones; relative to its size it doesn't; against matched areas abroad it can't be told from chance. At the road, the swing north is borderline.
 
-| Attempt | Compares | Result | Verdict |
-|---|---|---|---|
-| **1 Difference-in-differences** | Tambopata vs 14 Peruvian buffer zones; 1-km cells | Rank 1 of 15 in hectares (p = {{model_m1_ri_p:.2f}}); rank {{model_m4_rank:.0f}} of {{model_m4_n:.0f}} scaled; cell pre-trends fail | **Partly works** |
-| **2 Synthetic control** | weighted mix of Peruvian zones | La Pampa is too big to copy | Fails for levels |
-| **3 Rule-based twins** | Amanã and Tapajós (Brazil) | Tambopata at {{top3_median_ratio:.0%}} of their pace; pre-trends not parallel | **Half-works** |
-| **4 Spatial RD** | land just either side of the road and the reserve edge | Road step {{rd_road_did:+.1f}} pts (p = {{rd_road_did_p:.2f}}); reserve edge {{rd_reserve_did:+.1f}} (p = {{rd_reserve_did_p:.2f}}) | **Works for the swing**, not the net effect |
-| **5 Matching (PSM and six others)** | areas picked by algorithm across the Amazon | All 7 find Tambopata slower; placebo p ≥ {{psm_p_min:.2f}} | Can't decide |
-| **6 Synthetic DiD** | weighted zones, trend-matched | {{sdid_sdid_ha_during}} ha/yr, rank 1; scaled rank {{sdid_sdid_scaled_during_rank:.0f}} of {{sdid_sdid_scaled_during_n:.0f}} | Same as Attempt 1 |
+| Attempt | Compares | Result | Disagrees on | Verdict |
+|---|---|---|---|---|
+| **1 Difference-in-differences** | Tambopata vs 14 Peruvian buffer zones; 1-km cells | {{model_m1_during}} to {{model_m3_during}} ha/yr (M1–M3; {{model_m3pre_during}} with pre-year trends); rank 1 of 15 in hectares | Scaled to size rank {{model_m4_rank:.0f}} of {{model_m4_n:.0f}}; cell pre-trends fail and the comparison cells hold almost no mining, so the cell panel is close to a before/after | **Partly works** |
+| **2 Synthetic control** | weighted mix of Peruvian zones | {{sdid_sc_ha_during}} ha/yr, rank 1 | La Pampa is too big to copy: no pre-2019 fit in hectares | Weak check |
+| **3 Rule-based twins** | Amanã and Tapajós (Brazil) | Tambopata at {{top3_median_ratio:.0%}} of their pace | Tambopata grew faster than both before 2019; no p-value possible | Weak check |
+| **4 Spatial RD** | land just either side of the road and the reserve edge | Road step {{rd_road_did:+.1f}} pts (p = {{rd_road_did_p:.2f}}) | Road p across bandwidths {{rd_road_sens_p_min:.2f}}–{{rd_road_sens_p_max:.2f}}; fake-start rank {{rd_road_fake_rank:.0f}} of {{rd_road_fake_n:.0f}} from {{rd_road_fake_first_year:.0f}} (p = {{rd_road_fake_p:.2f}}); reserve edge null ({{rd_reserve_did:+.1f}}, p = {{rd_reserve_did_p:.2f}}) | Borderline, for the swing only |
+| **5 Matching (PSM and six others)** | areas picked by algorithm across the Amazon | All 7 find Tambopata slower | Placebo p {{psm_p_min:.2f}}–{{psm_p_max:.2f}}; no common support | Can't decide |
+| **6 Synthetic DiD** | weighted zones, trend-matched | {{sdid_sdid_ha_during}} ha/yr, rank 1 | From 2011 only {{sdid_sdid_ha_during_pre2011}} ha/yr; scaled rank {{sdid_sdid_scaled_during_rank:.0f}} of {{sdid_sdid_scaled_during_n:.0f}} | Same as Attempt 1 |
 
-**Why it matters:** six methods with different weak spots point the same way. That's what earns a *conditional* causal sentence for net mining in 2019–21, and no more.
+**Why it matters:** only the zone-level designs clear their placebo floor, and only in hectares. That supports one conditional sentence, not more.
 
 :::more Which attempt answers which question, and what we didn't try
 | Question | Best attempt | Why |
@@ -451,11 +453,11 @@ take: The gap barely moves and Tambopata stays first; years with more money had 
 
 ## Placebos | A fake test shows whether the real result stands out
 
-**A placebo runs the same analysis where nothing happened. If the fakes look as big as the real result, the real result means nothing.** We use placebos instead of standard errors, because one treated zone makes standard errors untrustworthy (Conley & Taber, 2011).
+**A placebo runs the same analysis where nothing happened. If the fakes look as big as the real result, the real result can't be told from noise.** We use placebos instead of standard errors, because one treated zone makes standard errors untrustworthy (Conley & Taber, 2011).
 
 :::fig output/fig_placebo_explainer.png
 read: Each row runs one analysis many times. Grey dots: the fakes (another zone gets the "operation", or the operation "starts" in another year). Orange: the real result. The real result's rank among all of them is the p-value.
-take: In hectares, Tambopata's fall is far outside every fake. Scaled to size, two fake zones fall as much. At the road, the 2019 jump north beats every fake start year.
+take: In hectares, Tambopata's fall is far outside every fake. Scaled to size, two fake zones fall as much. At the road, the 2019 jump north beats every fake start year, but there are only a few.
 :::
 
 - **What:** we pretend. **Fake place:** give "Mercurio" to another zone. **Fake date:** pretend it started in 2016. **Fake border:** move the border 2–4 km into one side.
@@ -479,12 +481,12 @@ take: In hectares, Tambopata's fall is far outside every fake. Scaled to size, t
 | Model ladder M4 (scaled) | fake places (6 zones) | {{model_m4_during:.2f}} normal years | rank {{model_m4_rank:.0f}} of {{model_m4_n:.0f}} (fail) |
 | Context models K0–K3 | fake places | {{ctx_k3_during}} ha/yr (K3) | rank {{ctx_k3_rank:.0f}} of {{ctx_n:.0f}} |
 | Road: share north of the highway | fake start years | +{{t1_road_shift_2019:.2f}} share points | rank {{t1_road_shift_rank_clean:.0f}} of {{t1_road_shift_n_clean:.0f}} |
-| Spatial RD at the road | fake start years | {{rd_road_did:+.1f}} pts | rank {{rd_road_fake_rank:.0f}} of {{rd_road_fake_n:.0f}} (p = {{rd_road_fake_p:.2f}}) |
+| Spatial RD at the road | fake start years {{rd_road_fake_first_year:.0f}} on | {{rd_road_did:+.1f}} pts | rank {{rd_road_fake_rank:.0f}} of {{rd_road_fake_n:.0f}} (p = {{rd_road_fake_p:.2f}}) |
 | Spatial RD at the road | fake borders ±2–4 km | {{rd_road_did:+.1f}} pts | largest {{rd_road_pb_max_abs:.1f}}; {{rd_road_pb_n_sig:.0f}} of 6 significant |
-| Spatial RD at the reserve edge | fake start years | {{rd_reserve_did:+.1f}} pts | rank {{rd_reserve_fake_rank:.0f}} of {{rd_reserve_fake_n:.0f}} |
+| Spatial RD at the reserve edge | fake start years | {{rd_reserve_did:+.1f}} pts | rank {{rd_reserve_fake_rank:.0f}} of {{rd_reserve_fake_n:.0f}} (p = {{rd_reserve_fake_p:.2f}}) |
 | Cell panel | pre-trend leads 2010–13 | {{st_main_lapampasector_during:+.2f}} ha/cell | joint p = {{st_event_lp_pretrend_p:.3f}} (fail for La Pampa) |
 | Synthetic control | each donor as the target | see [Attempt 2](#attempt-2) | rank {{synth_core_addsc_rank}} of {{synth_core_addsc_n_units_ranked}} |
-| Brazil staggered DiD | 2,000 shuffled operation dates | {{brv2_did2s_treat:+.2f}} log points | p = {{brv2_ri_p:.2f}} (fail) |
+| Brazil staggered DiD (TWFE) | 2,000 shuffled operation dates | {{brv2_twfe_treat:+.2f}} log points | one-sided p = {{brv2_ri_p:.2f}} (fail) |
 
 **Two kinds of placebo answer two questions.** Fake places ask "is Tambopata special?". Fake dates ask "is 2019 special?". A result that passes both is hard to explain by luck alone. It can still be explained by something else that happened in Tambopata in 2019, which is why the claim stays conditional.
 
@@ -548,6 +550,7 @@ take: The corridor's pre-trends pass; La Pampa's don't, which weakens its cell-l
 | **M3** | + each zone's own trend | {{model_m3_during}} | {{model_m3_after}} | {{model_m3_placebo}} | {{model_m3_rank}} of {{model_m3_n}} |
 | **M4** | Scaled to each zone's size | {{model_m4_during:.2f}} | {{model_m4_after:.2f}} | {{model_m4_placebo:.2f}} | {{model_m4_rank}} of {{model_m4_n}} |
 
+- **M3 with trends fitted on pre-years only:** {{model_m3pre_during}} ha/yr in 2019–21 ({{model_m3pre_after}} in 2022–25), the largest variant; the brief's range stops at M3.
 - **Fake dates:** M1 and M2 placebos have the opposite sign; M3's placebo ({{model_m3_placebo}}) has the same sign as the real effect, so not every model passes cleanly.
 
 **Level 3: per 1-km cell, with standard errors**
@@ -609,7 +612,7 @@ take: Peru outside Madre de Dios has no big mining area; the candidates cluster 
 
 :::fig output/fig_control_compare.png
 read: Left: new mining per year as a share of each area's 2018 mining (same product for both). Right: total mining area, 2018 = 100, each from its own MapBiomas collection (side by side, never subtracted).
-take: Tambopata and Amanã grew alike before 2019; in 2019–21 Tambopata went flat while Amanã kept growing.
+take: Tambopata and Amanã both stood at about half their 2018 size in 2014; in 2019–21 Tambopata went flat while Amanã kept growing.
 :::
 
 :::fig output/fig_control_top3.png
@@ -620,7 +623,7 @@ take: Tambopata ran below both twins in 2019–21, but it also grew faster than 
 - **Relaxed rule:** no operation in 2017–21 only. {{ctl_n_relaxed}} areas pass; best fit **Amanã National Forest**, then the Tapajós protection area. [[D]]
 - **2019–21:** Tambopata {{top3_tam_during:.1f}}% of its 2018 stock per year; Amanã {{top3_amana_twin_during:.1f}}%; Tapajós {{top3_tapajos_twin_during:.1f}}%. [[D]]
 
-**Why it matters:** a second, independent comparison agrees with Attempt 1: another country, another data source, picked by rules, not results.
+**Why it matters:** a second comparison, picked by rules, not results, points the same way as Attempt 1. But Tambopata grew faster than both twins before 2019 (pre-trend tests p = {{top3_amana_pre_trend_p:.2f}} Amanã, {{top3_tapajos_pre_trend_p:.2f}} Tapajós), so it is a weak check.
 
 :::more The funnel, the twin table, and what still threatens it
 - {{ctl_n_areas}} protected areas, buffer zones and indigenous territories screened. {{ctl_n_r1}} had real mining before 2019; only {{ctl_n_r2}} of those had no operation found, both small and unlike La Pampa; {{ctl_n_r1_unclear_or_unsearched}} more were unclear. [[D]]
@@ -643,8 +646,8 @@ take: Tambopata ran below both twins in 2019–21, but it also grew faster than 
 | Amanã National Forest | {{top3_amana_pre_growth_diff:+.2f}} ({{top3_amana_pre_growth_p:.2f}}) | {{top3_amana_twin_during:.1f}} | {{top3_amana_during_gap:+.1f}} |
 | Tapajós protection area | {{top3_tapajos_pre_growth_diff:+.2f}} ({{top3_tapajos_pre_growth_p:.2f}}) | {{top3_tapajos_twin_during:.1f}} | {{top3_tapajos_during_gap:+.1f}} |
 
-- **No p-values for the gap:** three years per area make a t-test meaningless.
-- **Pre-trends are not parallel:** Tambopata grew faster than both before 2019 (significant against Tapajós), and the two sides come from different MapBiomas collections.
+- **No p-values for the gap:** three years per area make a t-test unreliable.
+- **Pre-trends are not parallel:** Tambopata grew faster than both before 2019 (trend tests p = {{top3_amana_pre_trend_p:.2f}} and {{top3_tapajos_pre_trend_p:.2f}}), and the two sides come from different MapBiomas collections.
 - **Threats:** Brazil weakened enforcement in 2019–22, so the twins may have grown faster than "normal". "No operation found" is not proof of none. On Amazon Mining Watch, Tambopata's 2019 value is its highest after 2018; the fall shows from 2020.
 - **Ruby's caution holds:** "no intervention" is too strict (no area passes); "comparable enforcement" needs zone-level enforcement data that isn't public.
 
@@ -664,7 +667,7 @@ take: Before Mercurio the south side of the road (La Pampa) mined more; after, t
 - **The step changed by {{rd_road_did:+.1f}} points** (95% interval {{rd_road_did_lo:+.1f}} to {{rd_road_did_hi:+.1f}}; p = {{rd_road_did_p:.2f}}). Dropping the 500 m next to the road: {{rd_road_sens_donut:+.1f}} (p = {{rd_road_sens_donut_p:.2f}}). [[D]]
 - **The reserve edge:** the step changed by {{rd_reserve_did:+.1f}} points (p = {{rd_reserve_did_p:.2f}}). {{rd_reserve_inside_share_1km:.0%}} of all first-time mining inside the reserve since 2000 lies within 1 km of the edge. [[D]]
 
-**Why it matters:** a border only works if it's enforced on both sides. The road is a legal line miners crossed within a year. The reserve edge leaks about a kilometre along the river, and deeper inside the reserve has held.
+**Why it matters:** a border only works if it's enforced on both sides. New mining jumped across this legal line within a year. The reserve edge leaks about a kilometre along the river, and deeper inside the reserve has held.
 
 :::more How the RD works, why it's a "difference in discontinuities", and its limits
 **The idea.** Land 200 m north of the road and 200 m south of it has the same soil, rivers and gold, but a different legal status. Compare the two right at the line, and geography cancels out.
@@ -688,9 +691,9 @@ take: Before Mercurio the south side of the road (La Pampa) mined more; after, t
 | Fake start years (rank of 2019) | {{rd_road_fake_rank:.0f}} of {{rd_road_fake_n:.0f}} (p = {{rd_road_fake_p:.2f}}) | {{rd_reserve_fake_rank:.0f}} of {{rd_reserve_fake_n:.0f}} (p = {{rd_reserve_fake_p:.2f}}) |
 | Fake borders ±2–4 km, significant | {{rd_road_pb_n_sig:.0f}} of 6 | {{rd_reserve_pb_n_sig:.0f}} of 6 |
 
-**The big limit: displacement breaks the RD.** An RD assumes one side doesn't affect the other. Here miners moved *from* the south *to* the north, so the step opens from both sides at once. The road estimate is the **swing** (deterrence south + displacement north), not Mercurio's net effect. It is a description of the border, and an upper bound on what happened on either side alone.
+**The big limit: displacement breaks the RD.** An RD assumes one side doesn't affect the other. Here new mining fell south and rose north (plausibly some of the same miners moving), so the step opens from both sides at once. The road estimate is the **swing** (deterrence south + displacement north), not Mercurio's net effect. It is a description of the border, and an upper bound on what happened on either side alone.
 
-**Other limits.** Wide intervals: only ~19 road segments, and mining comes in clumps. The 1-km strip effect (p = {{rd_road_did_p:.2f}}) is borderline; the donut and 3-km bandwidth are stronger. The reserve result is a null: "no change" can't be told apart from "small change".
+**Other limits.** Wide intervals: only ~19 road segments, and mining comes in clumps. The main estimate (p = {{rd_road_did_p:.2f}}) is borderline; across bandwidths and the donut p runs {{rd_road_sens_p_min:.2f}}–{{rd_road_sens_p_max:.2f}}, and with fake start years from {{rd_road_fake_first_year:.0f}} the floor is {{rd_road_fake_p:.2f}}. The reserve result is a null: "no change" can't be told apart from "small change".
 
 **Code:** `code/v2_rdd.py` (cached intermediates `data_intermediate/rdd_units_v2.csv`, `rdd_unit_year_v2.csv`; table `output/table_rdd.csv`).
 :::
@@ -762,51 +765,6 @@ take: In hectares, Tambopata's 2019–21 fall is the biggest of 15 zones; scaled
 **Code:** `code/peru_sdid.py` (own implementation; results `output/peru_sdid.csv`).
 :::
 
-## Tests | The move across the road is clear; the fall in La Pampa is fragile
-
-**Every movement and comparison, tested.** A critical referee found errors in our first round; all are fixed. [[D]]
-
-| Movement or comparison | Test | Estimate | p |
-|---|---|---:|---:|
-| Tambopata's 2019–21 net fall vs 14 zones | fake places, Tambopata out of the pool | rank 1 of {{model_m1_n}} | {{model_m1_ri_p:.2f}} |
-| Same, scaled to each zone's size (M4) | fake places | rank {{model_m4_rank:.0f}} of {{model_m4_n:.0f}} | {{model_m4_ri_p:.2f}} |
-| La Pampa sector, per cell, 2019–21 | DiD, cell + year FE, clean comparison, clustered | {{st_main_lapampasector_during:+.2f}} ha | {{st_main_lapampasector_during_p:.2f}} |
-| Same | wild cluster bootstrap | — | {{st_wcb_lp_p:.2f}} |
-| La Pampa pre-trends (cells) | joint test of 2010–13 leads | — | {{st_event_lp_pretrend_p:.3f}} |
-| Corridor across the road, per cell, 2019–21 | DiD, clean comparison | {{st_main_corridoracross_during:+.2f}} ha | {{st_main_corridoracross_during_p:.2f}} |
-| Extra buffer zone (Amarakaeri), 2019–21 | same | {{st_main_amarakaeribzex_during:+.2f}} ha | {{st_main_amarakaeribzex_during_p:.3f}} |
-| North of highway 10–20 km, 2022–25 | road-gradient DiD | {{st_grad_b_N10_20_after:+.2f}} ha | {{st_grad_b_N10_20_after_p:.3f}} |
-| Move north of the road in 2019 | fake start dates, non-overlapping windows | rank {{t1_road_shift_rank_clean:.0f}} of {{t1_road_shift_n_clean:.0f}} | {{t1_road_shift_ri_p_clean:.2f}} |
-| New mining hugged the road after 2019 | trend + break, Newey-West | {{t9_depth_post2019:+.1f}} km | {{t9_depth_post2019_p:.3f}} |
-| Swing across the road, 2019–21 | spatial RD, change in the step | {{rd_road_did:+.1f}} pts | {{rd_road_did_p:.2f}} |
-| Same, fake start years | randomization | rank {{rd_road_fake_rank:.0f}} of {{rd_road_fake_n:.0f}} | {{rd_road_fake_p:.2f}} |
-| Reserve edge, 2019–21 | spatial RD, change in the step | {{rd_reserve_did:+.1f}} pts | {{rd_reserve_did_p:.2f}} |
-| Tambopata vs matched areas (7 methods) | placebo in space | gaps {{psm_gap_during_min:+.0f}} to {{psm_gap_during_max:+.0f}} pp | {{psm_p_min:.2f}}–{{psm_p_max:.2f}} |
-| Synthetic DiD, 2019–21 | fake places | {{sdid_sdid_ha_during}} ha/yr, rank 1 | {{sdid_sdid_ha_during_p:.2f}} |
-| Same, with COVID and money controls (K3) | fake places | {{ctx_k3_during}} ha/yr, rank {{ctx_k3_rank:.0f}} | {{ctx_k3_ri_p:.2f}} |
-| Brazil: falls after own operation | staggered DiD (did2s), clustered by territory | {{brv2_did2s_treat:+.2f}} log (wrong sign) | {{brv2_did2s_treat_p:.2f}} |
-| Brazil: same | randomization (2,000 shuffles) | — | {{brv2_ri_p:.2f}} |
-
-**How to read p:** below 0.05 = unlikely to be chance. With 15 zones the smallest possible randomization p is 0.07, so "rank 1 of 15" is as strong as that test gets.
-
-**Why it matters:** the instructor will ask "is this significant?" This table answers each claim, including the ones that fail.
-
-:::more What the referee found, and what we changed
-| Problem | Fix | Effect on the result |
-|---|---|---|
-| Fake-place test kept Tambopata as a control, so every placebo looked positive | Tambopata removed from each placebo's pool; Amazon-only pool added | Still rank 1 in hectares; **rank {{model_m4_rank:.0f}} of {{model_m4_n:.0f}} scaled** |
-| Causal number measured net change, called "new mining" | Claim reworded to net mining; first-time change reported | First-time mining fell less ({{t5_m2_2016_18}} → {{t5_m2_2019_21}} ha/yr) |
-| Cell comparison included the corridor (displacement target); baseline mislabelled; few treated clusters | Clean comparison cells; 2014–25 panel; pooled 2014–18 reference; wild cluster bootstrap | La Pampa {{st_main_lapampasector_during:+.2f}} (was {{st_contam_lapampasector_during:+.2f}}); pre-trends still fail |
-| One twin (Munduruku) had a 2021 operation; t-tests on 3 values | Two twins; no p-values | Tambopata still below both |
-| Brazil code skipped Kayapó's 2024 operation | First operation inside 2021–25 used | Estimate {{brv2_did2s_treat:+.2f}}, still not significant |
-| Road placebo windows overlapped the event | Non-overlapping start years only | Rank 1 of {{t1_road_shift_n_clean:.0f}} (p = {{t1_road_shift_ri_p_clean:.2f}}) |
-| Legality used today's concessions for past years | Concession must be filed by the mining year | Illegal share {{leg_tc_illegal_share_2016_18:.0%}} → {{leg_tc_illegal_share_2022_25:.0%}} (unchanged picture) |
-| Risk map tested on the same cells, no benchmark | Spatial hold-out + "mining nearby" benchmark | AUC {{risk_auc_spatial_holdout:.2f}} vs {{risk_auc_benchmark:.2f}}: adds little |
-| Untraceable numbers (Sentinel-2, producer gold) | Now computed in code | See [Timing](#timing) and [Declared gold](#declared-gold) |
-
-**Full review:** `docs/overnight/notes/critical_review_v2.md`.
-:::
-
 @part Brazil
 
 ## Brazil | Same method, weaker result: the direction, not the cause
@@ -819,16 +777,17 @@ take: Yanomami fell from 2024, a year after its operation; other territories don
 :::
 
 - **Yanomami:** {{brv2_yan_new_2019_22}} ha/yr of first-time mining in 2019–22, {{brv2_yan_new_2023_25}} in 2023–25. [[D]]
-- **Staggered DiD:** {{brv2_did2s_treat:+.2f}} log points (p = {{brv2_did2s_treat_p:.2f}}); randomization p = {{brv2_ri_p:.2f}}. Wrong sign, not significant. [[D]]
-- **No spill next door:** rings around Yanomami got almost no new mining (0–10 km: {{brv2_r0_10_post:.1f}} ha/yr after 2023). Miners went toward Venezuela and to territories like Sararé (ISA 2026; Greenpeace).
+- **Staggered DiD:** {{brv2_did2s_treat:+.2f}} log points (two-stage, two-sided p = {{brv2_did2s_treat_p:.2f}}); plain two-way fixed effects {{brv2_twfe_treat:+.2f}} (p = {{brv2_twfe_treat_p:.2f}}), randomization p = {{brv2_ri_p:.2f}} (one-sided, on the two-way estimate). Wrong sign, not significant. [[D]]
+- **No spill next door:** rings around Yanomami got almost no new mining (0–10 km: {{brv2_r0_10_post:.1f}} ha/yr after 2023). ISA (2026) and Greenpeace report miners moving toward Venezuela and to territories like Sararé.
 
-**Why it matters:** Brazil fits "enforcement plus tracing reduces mining", but national rules may matter as much as local operations. That's a lesson for Peru's corridor.
+**Why it matters:** Brazil is consistent with "enforcement plus gold tracing goes with less mining", but our test can't confirm it, and national rules may matter as much as local operations. [[D]]
 
 :::more Data, checks, the test, and why the null
 - **Data:** MapBiomas Brazil Collection 11 maps, 1985–2025, read only around each territory (24 territories with mining + two rings around Yanomami).
 - **Check:** Kayapó mining {{brv2_kayapo_check_2024}} ha (2024) and {{brv2_kayapo_check_2025}} ha (2025) vs 17,632 and 18,573 on the platform. This fixes the old Brazil mismatch (Collection 10.1 vs the platform's Collection 11).
-- **Test:** territory + year effects, each territory treated from its own first operation ({{brv2_n_treated:.0f}} of {{brv2_n_units:.0f}} territories); Gardner's two-stage estimator; randomization inference with 2,000 shuffles.
-- **Why the null:** after correcting the dates (Munduruku from May 2021; Kayapó from September 2024), territories still don't fall faster after their own operation. Sararé surged as its operation began, and the test has little power.
+- **Test:** territory + year effects, each territory treated from its own first *verified* operation in 2021–25 ({{brv2_n_treated:.0f}} of {{brv2_n_units:.0f}} territories); Gardner's two-stage estimator (two-sided p); randomization inference with 2,000 shuffles (one-sided, on the two-way fixed-effects estimate).
+- **The comparison pool is thin:** {{brv2_never_n:.0f}} territories count as never treated, but {{brv2_never_n_unsearched:.0f}} of them were never searched for operations, so "no operation found" is not "no operation".
+- **Why the null:** after correcting the dates (Munduruku from August 2023, its first verified operation; Kayapó from September 2024), territories still don't fall faster after their own operation. Sararé surged as its operation began, and the test has little power.
 - **Products disagree on Yanomami's timing:** MapBiomas shows the fall from 2024; Amazon Mining Watch from 2023 ({{bs_yan_new_ha_2022}} → {{bs_yan_new_ha_2023}} ha); MAAP #242 reports about 1,800 ha (2022) and 330 ha (2023).
 - **Support:** Amazon Mining Watch shows Yanomami −63% after its operation; IBAMA fines fell 2019–22 while mining tripled, then reversed in 2023.
 - **Challenge:** a national change in January 2023 (new government, end of the gold "good faith" rule, electronic gold invoices from August 2023) hit all territories at once, which a territory-level design can't separate.
@@ -840,14 +799,14 @@ take: Yanomami fell from 2024, a year after its operation; other territories don
 
 ## For FZS | To protect the reserve, hold its edge and its river after the operation ends
 
-**The reserve is breached when enforcement lapses, not while it's on.** It's happened twice. After the 2012–13 interdictions, miners recovered by 2014 and losses inside the reserve rose 37% (Asner & Tupayachi, 2017). After Mercurio, mining returned by 2022 and miners entered the reserve in 2025, after the navy left the river posts (MAAP #241). [[P]]
+**The reserve was breached after enforcement lapsed, not while it was on.** After Mercurio, mining returned by 2022, and mining inside the reserve jumped in 2025 (+{{anp_tam_nr_addition_2025}} ha), after the navy left the river posts (MAAP #241). [[D]] Asner & Tupayachi (2017) report a brief dip after the 2012 interdictions, then a near doubling, also inside the reserve; our MapBiomas data show no 2012–13 dip in La Pampa.
 
-**Where FZS's effort protects the protected area most:**
+**Where we expect FZS's effort to protect the protected area most** [[P]]:
 
-1. **Stay after the sweep.** Both waves faded within about two years, and both were followed by encroachment. Fund a permanent presence, not another one-off operation.
-2. **Hold the first kilometre and the river.** {{rd_reserve_inside_share_1km:.0%}} of all first-time mining inside the reserve since 2000 lies within 1 km of its edge. Deeper inside, it has held. Staffed river posts on the Malinowski are the cheapest shield.
-3. **Keep the buffer zone enforced: it shields the reserve.** In 2019–21 miners pushed out of La Pampa went north across the road, not south into the reserve: the step at the reserve edge didn't change ({{rd_reserve_did:+.1f}} pts, p = {{rd_reserve_did_p:.2f}}). [[D]]
-4. **Expect the response across the nearest legal boundary.** The corridor across the road absorbed the displaced miners within a year ([Attempt 4](#attempt-4)).
+1. **Stay after the sweep.** Mercurio's fall faded within about three years, and the reserve incursion followed a withdrawal. Fund a permanent presence, not another one-off operation.
+2. **Hold the first kilometre and the river.** {{rd_reserve_inside_share_1km:.0%}} of all first-time mining inside the reserve since 2000 lies within 1 km of its edge [[D]]. Staffed river posts on the Malinowski are a direct shield, given where the 2025 incursion came in. [[P]]
+3. **Don't count on the buffer zone as a shield, yet.** In 2019–21 the step at the reserve edge did not measurably change ({{rd_reserve_did:+.1f}}, p = {{rd_reserve_did_p:.2f}}); we cannot tell whether buffer-zone enforcement shielded the reserve. [[D]]
+4. **Expect a response across the nearest legal boundary.** First-time mining across the road rose within a year ([Attempt 4](#attempt-4)). [[D]]
 5. **Monitor old pits, not only forest edges.** In 2023 most new mining in La Pampa was on old pits. Forest-loss alerts never see this.
 6. **Make the legal corridor a real filter:** proof of gold origin, gold-buyer registers, real formalization deadlines, mercury checks. Brazil's 2023 reforms are a model.
 
@@ -859,10 +818,10 @@ take: Risk clusters next to old mining; the model adds little beyond "is there m
 - **Where to look next:** the model flags {{risk_hi_cells_outside_corridor:.0f}} high-risk cells outside the legal corridor: {{risk_hi_cells_lapampasector:.0f}} in the La Pampa sector and {{risk_hi_cells_nativecommunitie:.0f}} in native communities. [[P]]
 - **Honest score:** AUC {{risk_auc_spatial_holdout:.2f}} on held-out 10-km blocks, barely above {{risk_auc_benchmark:.2f}} for "mining nearby" alone. [[P]]
 
-**Why it matters:** enforcement works while it lasts and where it lands. For the reserve, the "while" matters most: FZS can fund the years after the operation, when the edge is most exposed.
+**Why it matters:** mining fell where enforcement landed, while it lasted. For the reserve, we expect the years after an operation to be the most exposed, and FZS can fund those years. [[P]]
 
 :::more The social cost, and what data would let us say more
-- **Damage:** each kg of gold mined in Peru costs US$81,000–364,000 (Conservation Strategy Fund calculator).
+- **Damage:** Conservation Strategy Fund gives two separate estimates per kg of gold mined in Peru: US$ {{eco_param_social_calc_usd_kg_lo:,.0f}}–{{eco_param_social_calc_usd_kg_hi:,.0f}} (calculator) and US$ {{eco_param_social_pdf_usd_kg_lo:,.0f}}–{{eco_param_social_pdf_usd_kg_hi:,.0f}} (2023 report, p. 7). Quote both, never one merged range.
 - **Mercury:** over a third of carnivorous fish exceed the limit hundreds of km downstream; exposed children score 4.68 IQ points lower.
 - **Exploitation:** about 4,500 women are sexually exploited near camps, 78% of them minors.
 - **Livelihoods:** about 46,600 people depend directly on mining. Enforcement without income alternatives invites return.
@@ -870,43 +829,47 @@ take: Risk clusters next to old mining; the model adds little beyond "is there m
 - **What would let us say more:** dated patrol and interdiction records per zone (SERNANP, FZS, police); concession and REINFO maps to grade legality pixel by pixel; pond-colour or dredge counts for activity on old pits and rivers.
 :::
 
-## Money | Illegal gold pays well, costs society far more, and outweighs enforcement money nearly a thousand to one
+## Money | Illegal gold pays well, costs society far more, and outweighs enforcement money hundreds of times
 
 **Informed speculation: mapped mining in Madre de Dios yields about {{eco_gold_t_lo_2022_25:.0f}}–{{eco_gold_t_hi_2022_25:.0f}} t of gold a year (2022–25), worth US$ {{eco_value_musd_lo_2022_25:,.0f}}–{{eco_value_musd_hi_2022_25:,.0f}} M. Producers declared {{eco_declared_t_2022_25:.1f}} t.** Every number here is our arithmetic on cited parameters, not a measurement. [[P]]
 
 :::fig output/fig_v2_economics.png
 read: Five yearly amounts for Madre de Dios, 2022–25, on a log scale (each tick = 10×). Bars span the low–high range our cited parameters allow; a dot means one value.
-take: The gold mined and its social cost are a thousand times the enforcement money booked in the region; the tax at stake is small next to both.
+take: The gold mined and its social cost are hundreds of times the enforcement money booked in the region; the tax at stake is small next to both.
 :::
 
-- **The gold:** {{eco_ha_low_2022_25:,.0f}}–{{eco_ha_high_2022_25:,.0f}} ha worked a year × 1.7–1.9 kg per ha (CSF, 2023). Cross-check: MINEM's own 2016–18 estimate implies {{eco_implied_kg_ha_2016_18:.1f}} kg per ha we mapped.
+- **Enforcement money is tiny next to the gold:** US$ {{eco_spend_musd:,.1f}} M a year booked in Madre de Dios (a lower bound), about {{eco_spend_share_of_value:.1%}} of the gold's value. [[P]]
+- **Tax is a weak reason to stay illegal:** small producers pay **0% royalty**; income tax is only {{eco_tax_share_value_lo:.0%}}–{{eco_tax_share_value_hi:.0%}} of the gold's value. Location is the strong reason: La Pampa can never be formalized. [[P]]
+- **Social cost dwarfs both:** two separate CSF estimates, US$ {{eco_social_busd_calc_lo:,.1f}}–{{eco_social_busd_calc_hi:,.1f}} bn a year (calculator) or US$ {{eco_social_busd_pdf_lo:,.0f}}–{{eco_social_busd_pdf_hi:,.0f}} bn (2023 report), mostly mercury's health damage. [[P]]
+
+**Why it matters:** the lever is the *sale*, not the tax rate: make laundered gold hard to sell and the discount on illegal gold grows. At 2025 prices one hectare holds about US$ {{eco_gold_usd_per_ha_2025_lo:,.0f}}–{{eco_gold_usd_per_ha_2025_hi:,.0f}} of gold, which is why old pits are worth re-mining.
+
+:::more The arithmetic, every parameter, and three ways to sell the same gold
+- **The gold:** {{eco_ha_low_2022_25:,.0f}}–{{eco_ha_high_2022_25:,.0f}} ha worked a year × {{eco_param_yield_kg_ha_lo:.1f}}–{{eco_param_yield_kg_ha_hi:.1f}} kg per ha (CSF, 2023). Cross-check: MINEM's own 2016–18 estimate implies {{eco_implied_kg_ha_2016_18:.1f}} kg per ha we mapped.
 - **Declared:** {{eco_declared_share_lo:.0%}}–{{eco_declared_share_hi:.0%}} of that gold shows up as declared Madre de Dios production. The rest leaves under someone else's paperwork or none.
-- **Taxes:** small producers pay **0% royalty**. Income tax (29.5% of an 11–37% margin) is only {{eco_tax_share_value_lo:.0%}}–{{eco_tax_share_value_hi:.0%}} of the gold's value: US$ {{eco_tax_musd_lo:,.0f}}–{{eco_tax_musd_hi:,.0f}} M a year not paid.
-- **Social cost:** US$ {{eco_social_busd_lo:,.1f}}–{{eco_social_busd_hi:,.0f}} bn a year, mostly mercury's health damage; {{eco_hg_t_lo:,.0f}}–{{eco_hg_t_hi:,.0f}} t of mercury a year.
-- **Enforcement money:** US$ {{eco_spend_musd_lo:,.1f}}–{{eco_spend_musd_hi:,.1f}} M a year booked in Madre de Dios (a lower bound), about {{eco_spend_share_of_value:.1%}} of the gold's value.
+- **Taxes not paid:** income tax (29.5% of an 11–37% margin): US$ {{eco_tax_musd_lo:,.0f}}–{{eco_tax_musd_hi:,.0f}} M a year.
+- **Mercury:** {{eco_hg_t_lo:,.0f}}–{{eco_hg_t_hi:,.0f}} t a year.
 
-**Legal, informal, illegal: three ways to sell the same gold.**
-- **Legal (formal):** a concession in the corridor, an environmental permit, taxes. Only 145 of 9,592 registered miners in Madre de Dios were fully formal (MINAM, 2021); nationally 2.4% (2024).
-- **Informal (REINFO):** registered "in formalization", shielded from prosecution (D.L. 1351) as long as they work outside banned zones. Nearly all Madre de Dios registrations sit inside the corridor (our overlay of MINEM's register).
-- **Illegal:** outside the corridor, like La Pampa: it can never be formalized. Its gold sells at a discount (S/ 80 instead of S/ 180 per gram during the 2020 lockdown) or travels on corridor paperwork.
-- **Crime:** extortion of S/ 1,000 per raft per week in La Pampa (Mongabay, 2026); illegal mining is now Peru's largest illegal economy, ahead of drugs (IPE, 2025).
-
-**Why it matters:** tax is a weak reason to stay illegal; location is the strong one. So the lever is the *sale*, not the tax rate: make laundered gold hard to sell and the discount on illegal gold grows. At 2025 prices one hectare holds about US$ {{eco_gold_usd_per_ha_2025_lo:,.0f}}–{{eco_gold_usd_per_ha_2025_hi:,.0f}} of gold, which is why old pits are worth re-mining.
-
-:::more Every parameter, the arithmetic, and why the ranges are wide
 | Parameter | Low | High | Source |
 |---|---:|---:|---|
 | Gold per hectare (kg) | {{eco_param_yield_kg_ha_lo:.1f}} | {{eco_param_yield_kg_ha_hi:.1f}} | CSF (2023), Cuadro 3, 2.5-m pits at Huepetuhe, Puquiri, Malinowski |
 | Profit margin | {{eco_param_margin_lo:.0%}} | {{eco_param_margin_hi:.0%}} | Torres (2015, CooperAcción) via MINAM (2016) |
 | Income tax | {{eco_param_income_tax_lo:.1%}} | {{eco_param_income_tax_hi:.1%}} | D.L. 1269 (general rate) |
-| Mercury per kg of gold (kg) | {{eco_param_hg_per_au_lo:.1f}} | {{eco_param_hg_per_au_hi:.1f}} | CSF (2023), p.47 |
-| Social cost per kg of gold (US$) | {{eco_param_social_usd_kg_lo:,.0f}} | {{eco_param_social_usd_kg_hi:,.0f}} | CSF calculator; CSF (2023), p.7 |
-| Soles per US$ | {{eco_param_pen_per_usd_lo:.1f}} | {{eco_param_pen_per_usd_hi:.1f}} | rough BCRP range 2019–25 (verify) |
+| Mercury per kg of gold (kg) | {{eco_param_hg_per_au_lo:.1f}} | {{eco_param_hg_per_au_hi:.1f}} | CSF (2023), p.43 |
+| Social cost per kg of gold, calculator (US$) | {{eco_param_social_calc_usd_kg_lo:,.0f}} | {{eco_param_social_calc_usd_kg_hi:,.0f}} | CSF calculator web page |
+| Social cost per kg of gold, report (US$) | {{eco_param_social_pdf_usd_kg_lo:,.0f}} | {{eco_param_social_pdf_usd_kg_hi:,.0f}} | CSF (2023), p.7 |
+| Soles per US$, 2022 / 2023 / 2024 / 2025 | {{eco_param_pen_per_usd_2022:.2f}} / {{eco_param_pen_per_usd_2023:.2f}} | {{eco_param_pen_per_usd_2024:.2f}} / {{eco_param_pen_per_usd_2025:.2f}} | BCRP annual averages, each year converted at its own rate |
 
 - **Low vs high:** low = first-time mining only × low yield; high = first-time mining + returns to old pits × high yield. River dredges add gold but no mapped hectares, so even "high" may be low.
 - **Yield is the weak link:** CSF found no grade for La Pampa's suction-pump method. Kg per hectare scales with pit depth: 5-m pits would double it.
-- **The social cost range spans 35×** because CSF's two versions value mercury's health damage very differently. Quote the low end unless you explain the model.
-- **Cost per hectare kept out of the target:** PP 0128 spending in Madre de Dios, 2019–21, was about S/ {{eco_soles_per_ha_kept:,.0f}} per hectare of net mining kept out of the Tambopata buffer zone (our upper-bound effect). One hectare held US$ {{eco_gold_usd_per_ha_1921_lo:,.0f}}–{{eco_gold_usd_per_ha_1921_hi:,.0f}} of gold at 2019–21 prices. Those hectares moved; the region didn't mine less.
+- **Two social-cost estimates, never merged:** CSF's calculator and its 2023 report value mercury's health damage very differently. Quote both, and say which.
+- **Cost per hectare kept out of the target:** PP 0128 spending in Madre de Dios, 2019–21, was about S/ {{eco_soles_per_ha_kept:,.0f}} per hectare of net mining kept out of the Tambopata buffer zone (using the zone-level gap, likely an upper bound). One hectare held US$ {{eco_gold_usd_per_ha_1921_lo:,.0f}}–{{eco_gold_usd_per_ha_1921_hi:,.0f}} of gold at 2019–21 prices. Those hectares moved; the region didn't mine less.
+
+**Legal, informal, illegal: three ways to sell the same gold.**
+- **Legal (formal):** a concession in the corridor, an environmental permit, taxes. Only 145 of 9,592 registered miners in Madre de Dios were fully formal (MINAM, 2021); nationally 2.4% (2024).
+- **Informal (REINFO):** registered "in formalization", protected from prosecution (D.L. 1351) as long as they work outside banned zones. Nearly all Madre de Dios registrations sit inside the corridor (our overlay of MINEM's register).
+- **Illegal:** outside the corridor, like La Pampa: it can never be formalized. Its gold sells at a discount (S/ 80 instead of S/ 180 per gram during the 2020 lockdown) or travels on corridor paperwork.
+- **Crime:** extortion of S/ 1,000 per raft per week in La Pampa (Mongabay, 2026); illegal mining is now Peru's largest illegal economy, ahead of drugs (IPE, 2025).
 - **National context (IPE, press reports):** illegal gold exports of about US$ 7.4 bn (2024) and over US$ 11.5 bn (2025), and 54% of Peru's export volume in early 2026. IPE's method (exports minus declared production) also catches stock changes and re-exports.
 - **Don't cite:** the "25% of GDP" figure (Canal N) and the "44% of exports" snippet (it's Peru's share of South American illegal exports).
 
@@ -915,50 +878,53 @@ take: The gold mined and its social cost are a thousand times the enforcement mo
 
 ## What next | Informed speculation: pressure on the reserve rises from 2027
 
-**Five forces point to more pressure on Tambopata, not less.** These are expectations from sources and our pattern, not findings. [[P]]
+**Several forces point to more pressure on Tambopata, not less.** These are expectations from sources and our pattern, not findings. [[P]]
 
+- **The window is the end of the next operation.** After a sweep we expect a local fall for about two years, new mining across the nearest legal boundary within a year, then a return to old pits and pressure on the reserve edge. [[P]]
+- **Record gold prices** (about US$ 4,500/oz in 2026) make old pits pay again. [[P]]
+- **The river is open:** the navy left the Malinowski posts in 2025, and mining inside the reserve jumped within months (MAAP #241). [[D]]
+
+**Why it matters:** FZS can plan its support for the months after the next operation now.
+
+:::more Five forces, the if–then table, what to watch, and how sure we are
 1. **REINFO ends on 31 December 2026, on paper.** A new small-mining law (Ley MAPE, bill due 15 October 2026) would give about 30,000 registrants a two-year regime from 2027. Every deadline since 2012 has been extended. Expect another, under a new name.
 2. **A new government.** The president elected in June 2026 campaigned on cracking down on illegal mining; Reuters judged that neither runoff candidate would dismantle REINFO quickly. Expect announcements and operations before budgets.
-3. **Record gold prices.** About US$ 4,500/oz in 2026. Old pits pay again; that's what drove the 2023 return in La Pampa.
+3. **Record gold prices.** Old pits pay again; the 2023 return in La Pampa coincided with rising prices.
 4. **More operations, less money each.** Interdictions rose from 62 a month (2024) to over 130 (2026), while the national PP 0128 budget fell from S/ 121 M (2019) to S/ 70 M (2025). In Madre de Dios, booked spending fell from {{t8_pp0128_mdd_2019:,.0f}} to {{t8_pp0128_mdd_2025:,.0f}} soles.
-5. **The river is open.** The navy left the Malinowski posts in 2025, and miners entered the reserve within months (MAAP #241). Organised crime now operates there: a safety issue for rangers, not only for the forest.
+5. **The river is open.** Organised crime now operates there: a safety issue for rangers, not only for the forest.
 
-**What our results say will happen after the next sweep** [[P]]:
-
-| If… | Then expect… | Based on |
+| If… | Then expect… [[P]] | Based on |
 |---|---|---|
-| A new operation hits La Pampa | A local fall for about two years | [Attempt 1](#attempt-1), Asner & Tupayachi (2017) |
-| … and the corridor across the road stays open | Miners cross the road within a year | [Attempt 4](#attempt-4) |
+| A new operation hits La Pampa | A local fall in net new mining for about two years | [Attempt 1](#attempt-1) |
+| … and the corridor across the road stays open | New mining across the road within a year | [Attempt 4](#attempt-4) |
 | … and enforcement then lapses | A return to old pits within about three years, then pressure on the reserve edge | [Old pits](#old-pits), [Inside the reserve](#inside-the-reserve) |
 | REINFO is extended again | La Pampa gold keeps travelling on corridor paperwork | [Money](#money) |
-| Gold sales are traced (origin proof, buyer checks) | A bigger discount on illegal gold: the one lever that works region-wide | Brazil 2023 ([Brazil](#brazil)) |
+| Gold sales are traced (origin proof, buyer checks) | A bigger discount on illegal gold, the one lever that could act region-wide | Brazil 2023 ([Brazil](#brazil)) |
 
-**Why it matters:** the window when the reserve is most exposed is the end of the next operation. FZS can plan its support for that window now.
-
-:::more What to watch, and how sure we are
 - **Watch:** GLAD alerts in the first kilometre inside the reserve; REINFO and Ley MAPE votes in December 2026; state-of-emergency renewals (the last we found: DS 093-2026-PCM, June 2026); river-post staffing; dredge counts.
-- **How sure:** the pattern (fall, move, return) has happened twice in the same place (2012–14 and 2019–23). The politics are press-based; the original IPE reports and the full law texts were not opened.
+- **How sure:** we see the pattern (fall, move, return) once, after 2019; Asner & Tupayachi (2017) report a similar cycle after 2012 that our data don't show. The politics are press-based; the original IPE reports and the full law texts were not opened.
 
 **Sources:** `docs/overnight/notes/economics_sources.md` (section "Political and context items"), `qualitative_background.md`, `maap_citations.md`.
 :::
 
 ## Limits | Every limitation, and which way it pushes the result
 
-**Most of our limitations make Mercurio's local fall look bigger than it was, and most make displacement look smaller.** So the honest reading is: the fall is an upper bound, the displacement a lower bound. [[D]]
+**Most of our limitations make Mercurio's local fall look bigger than it was, and most make displacement look smaller.** Most biases overstate the fall, so read it as likely an upper bound, and the displacement as likely a lower bound. [[D]]
 
 **How to read the arrows:** ▲ = makes the 2019–21 fall in Tambopata look **bigger** than the truth (overstates Mercurio). ▼ = makes it look **smaller** (understates). ? = could go either way.
 
 | Limitation | What happens | Fall in Tambopata | Displacement | How we checked |
 |---|---|:---:|:---:|---|
-| **Hectares, not people** | We count cleared land, a proxy for miners. After 2019 miners returned to old pits and rivers, which add few new hectares per person. | ▲ for 2022–25 (the return looks smaller than it was) | ▼ | Old-pit accounting; MAAP #193 dredge counts. No data on people. |
+| **Hectares, not people (2019–21)** | We count cleared land, a proxy for miners. Activity that moved to old pits and rivers adds few new hectares. | ▲ | ▼ | Old-pit accounting; MAAP #193 dredge counts. No data on people. |
+| **Hectares, not people (2022–25)** | The same proxy makes the return look smaller than it was. | — (return understated) | ▼ | Old-pit accounting. |
 | **Satellites miss river dredges and mercury** | Mining on the river doesn't show as land. Dredges in La Pampa rose from 148 to 598 (2021 → 2023, MAAP #193). | ▲ | ▼ | Named in part 4 of the brief; can't be fixed with these data. |
-| **Spillovers into comparison zones** | Displaced miners went to some comparison zones, raising them. | ▲ (gap too wide) | — | Clean comparison cells exclude the corridor ([Attempt 1](#attempt-1)). |
-| **Comparison zones were also treated** | Amarakaeri had its own operation (Dec 2019); Plan Restauración hit several zones. | ▼ (gap too narrow) | — | Tambopata ranks 1 of 15 against all zones, not only Amarakaeri. |
-| **Picked at its peak** | La Pampa was targeted *because* mining was at a record (2017). Records tend to fall back on their own. | ▲ | — | Fake-date tests; each 2019–21 year is below every 2011–18 year. |
-| **Size** | A bigger zone falls more in hectares just by being bigger. | ▲ in hectares | — | Scaled models: rank {{model_m4_rank:.0f}} of {{model_m4_n:.0f}} ([Placebos](#placebos)). |
-| **COVID (2020–21)** | Patrols left; if big mining zones reacted differently, part of the gap is COVID. | ▲ slightly | ? | Controlling for COVID exposure keeps {{ctx_k1_during}} of {{ctx_k0_during}} ha/yr ([Context](#context)). |
+| **Spillovers into comparison zones** | If miners moved into comparison zones, they raised them. | ▲ (gap too wide) | — | Clean comparison cells exclude the corridor ([Attempt 1](#attempt-1)). |
+| **Comparison zones were also treated** | Amarakaeri had its own operation (Dec 2019); Plan Restauración hit several zones. | ▼ (gap too narrow) | — | Compared against all 14 zones, not only Amarakaeri ([Attempt 1](#attempt-1)). |
+| **Picked at its peak** | La Pampa was targeted *because* mining was at a record (2017). Records tend to fall back on their own. | ▲ | — | Fake-date tests; each 2019–21 year (at most {{tam_add_max_2019_2021}} ha) is below every 2011–18 year (at least {{tam_add_min_2011_2018}}). |
+| **Size** | A bigger zone falls more in hectares just by being bigger. | ▲ in hectares | — | Scaled models: ordinary for its size ([Placebos](#placebos)). |
+| **COVID (2020–21)** | Patrols left; if big mining zones reacted differently, part of the gap is COVID. | ▲ slightly | ? | Controlling for COVID exposure shrinks the gap to {{ctx_k1_during:,.0f|abs}} of {{ctx_k0_during:,.0f|abs}} ha/yr ([Context](#context)). |
 | **Gold price** | Prices rose {{gold_price_ratio_2025_2018:.1f}}-fold 2018–25. Year effects remove the shared push. | ? (small) | ▼ for 2022–25 | M2 lets big zones react more: gap {{model_m2_during}} vs {{model_m1_during}} ha/yr. |
-| **Enforcement money moved with the operation** | Spending peaked in 2019; controlling for it absorbs part of the effect itself. | ? | — | K2/K3 keep the gap ({{ctx_k3_vs_k0_share:.0%}} of it). |
+| **Enforcement money moved with the operation** | Spending peaked in 2019; controlling for it absorbs part of the effect itself. | ? | — | K2/K3 keep {{ctx_k3_vs_k0_share:.0%}} of the gap, but money is partly the treatment itself (a bad control). |
 | **Map flicker and reclassification** | A pixel can switch class year to year; additions include re-mined scars. | ? (adds noise, not a direction) | ? | First-time mining as the main measure; identity check per pixel. |
 | **Annual maps, a February start** | The 2019 map includes clearing from January–February 2019 and late 2018. | ▼ (first year blurred) | ▼ | Quarterly GLAD alerts ([Timing](#timing)). |
 | **Legal or illegal?** | MapBiomas can't see legality; the corridor holds legal concessions and informal miners. | — | ? (illegal displacement could be over- or understated) | MAAP #235 legality layer, time-consistent ([Where it went](#where-it-went)). |
@@ -967,7 +933,7 @@ take: The gold mined and its social cost are a thousand times the enforcement mo
 | **Displacement inside the RD** | Miners moving south → north open the road gap from both sides. | — | ▲ at the road (swing, not net) | Labelled as an upper bound ([Attempt 4](#attempt-4)). |
 | **One treated zone** | No reliable standard errors. | ? (uncertainty, not a direction) | ? | Placebos instead ([Placebos](#placebos)). |
 
-**Why it matters:** FZS should read our fall as "at most this big, for two years" and our displacement as "at least this much". Both point the same way: enforcement in one spot buys a short pause, not a regional fall.
+**Why it matters:** FZS should read our fall as "likely at most this big, for two years" and our displacement as "likely at least this much". We expect enforcement in one spot to buy a short pause, not a regional fall. [[P]]
 
 :::more Hectares as a proxy for people
 **We measure land, not miners.** Every hectare in this report is mapped mining land: MapBiomas pixels, Amazon Mining Watch squares, GLAD alerts. None of them counts people, camps or machines.
@@ -975,26 +941,47 @@ take: The gold mined and its social cost are a thousand times the enforcement mo
 - **Why we can't do better:** no public, dated count of miners exists per zone. Censuses don't reach camps; REINFO lists registrants, not where they work; police reports count arrests, not people present.
 - **When the proxy works:** while miners clear new forest, hectares track effort fairly well.
 - **When it fails:** on old pits and rivers. One crew can work the same pit for years, adding no new hectares; a dredge adds none. After 2019 more of the activity moved to exactly these places ([Old pits](#old-pits)).
-- **The direction:** hectares understate activity after a crackdown, when miners return to old ground. So the "return" in 2022–25 is a lower bound, and the "fall" in 2019–21 is an upper bound for the fall in people.
+- **The direction:** hectares understate activity after a crackdown, when miners return to old ground. So the "return" in 2022–25 is likely a lower bound, and the "fall" in 2019–21 likely an upper bound for the fall in people.
 - **What would fix it:** dredge counts from high-resolution imagery (as MAAP does), night-time lights over camps, mercury sales, or field counts by SERNANP and FZS rangers.
 :::
 
-## Claims | What we can say, and how strongly
+## Claims | What we can say, how strongly, and the test behind it
 
-| Claim | Label | Evidence for | Evidence against |
+| Claim | Label | Key test | Evidence against |
 |---|---|---|---|
-| Net new mining in Tambopata fell sharply in 2019–21 | [[D]] | Course table = raster; rank 1 of 15 | First-time mining only halved; clearing continued through 2019 |
-| Mercurio caused the 2019–21 fall in net mining, roughly {{model_m1_during:,.0f}} to {{model_m3_during:,.0f}} ha/yr | [[C]] *conditional* | Rank 1 of 15 in hectares (p = {{model_m1_ri_p:.2f}}); below both twins | Ordinary relative to size; cell pre-trends fail; extra buffer zone also treated |
-| New mining moved into the legal corridor, across the road, then deeper | [[D]] | Raster bands; depth break p < 0.01; AMW agrees; MAAP #208 (74%) | Can't show the same people moved; the road was crossed before (2008) |
-| Miners returned to old pits in 2023 | [[D]] | Raster accounting; MAAP #193 | Map flicker inflates old-pit counts |
+| Net new mining in Tambopata fell sharply in 2019–21 | [[D]] | Course table = raster; {{mean_add_tambopata_2016_18}} → {{mean_add_tambopata_2019_21}} ha/yr | First-time mining only halved ({{t5_m2_2016_18}} → {{t5_m2_2019_21}}); clearing continued through 2019 |
+| *If* the comparison zones show what Tambopata would otherwise have done, Mercurio and the operations that followed lowered net new mining in the target by roughly {{sdid_sc_ha_during:,.0f|abs}} to {{model_m3_during:,.0f|abs}} ha/yr in 2019–21 | [[C]] *conditional* | Fake places, zone level: rank 1 of {{model_m1_n}} in hectares (p = {{model_m1_ri_p:.2f}}, the floor) | Ordinary relative to size; matching can't beat chance; coincides with COVID (nothing falls in 2019); Amarakaeri also treated |
+| New mining grew in the legal corridor, across the road, then deeper | [[D]] | Corridor cells {{st_main_corridoracross_during:+.2f}} ha/cell-yr (p = {{st_main_corridoracross_during_p:.2f}}, pre-trends pass); depth break p = {{t9_depth_post2019_p:.3f}}; MAAP #208 (74%) | Can't show the same people moved; road RD borderline; the road was crossed before (2008) |
+| New mining returned to old pits in 2023 | [[D]] | Raster accounting; MAAP #193 | Map flicker inflates old-pit counts |
 | La Pampa had not run out of gold | [[D]] | Geology: {{gold_broad_lapampasector_depleted_2018:.0%}} mined by 2018 | Coarse map; no gold grade |
+| Mining inside the reserve jumped in 2025 | [[D]] | +{{anp_tam_nr_addition_2025}} ha (MapBiomas); MAAP #241 agrees | 521 ha were already inside by 2016 (Asner & Tupayachi) |
+| Buffer-zone enforcement shielded the reserve | **not claimed** | Reserve-edge step {{rd_reserve_did:+.1f}} (p = {{rd_reserve_did_p:.2f}}) | A null can't tell "no change" from "small change" |
+| The fall-and-return cycle happened twice (2012 and 2019) | **not claimed** | Asner & Tupayachi (2017) report the 2012 dip | Our data show no 2012–13 dip in La Pampa ({{tl_dip_2012_13:+.0%}}) |
 | The official gold series fell 88% | **withdrawn** | — | The series dropped its artisanal estimate in 2020; producer-declared gold rose |
 | Corridor miners mine informally and don't declare | plausible, **not claimed** | Formalization rates, Bolivia exports, unknown-origin exports | No trace of where Madre de Dios gold is declared |
 | The region mined less | **rejected** | — | First-time mining rose {{v2_new_total_2016_18}} → {{v2_new_total_2022_25}} ha/yr |
-| Brazil: operations reduced mining | **not claimed** | Falls after 2022–24; AMW −63% Yanomami | Staggered DiD {{brv2_did2s_treat:+.2f}} (wrong sign, p = {{brv2_did2s_treat_p:.2f}}); national reforms in 2023 |
-| Next operation: local fall while present, a move across the nearest legal boundary, a return within ~3 years | [[P]] | Peru pattern | One operation, one region; risk model barely beats "mining nearby" |
+| Brazil: operations reduced mining | **not claimed** | Staggered DiD {{brv2_did2s_treat:+.2f}} (wrong sign, two-sided p = {{brv2_did2s_treat_p:.2f}}) | National reforms in 2023; low power |
+| Next operation: local fall while present, new mining across the nearest legal boundary, a return within ~3 years | [[P]] | Peru pattern | One operation, one region; risk model barely beats "mining nearby" |
+
+**How to read p:** below 0.05 = unlikely to be chance. With {{model_m1_n}} zones the smallest possible randomization p is {{model_m1_ri_p:.2f}}, so "rank 1" is as strong as that test gets. Every other test is in its chapter.
 
 **Why it matters:** one labelled, conditional causal claim, with its failed tests shown, beats a vague strong one.
+
+:::more What the referee found, and what we changed
+| Problem | Fix | Effect on the result |
+|---|---|---|
+| Fake-place test kept Tambopata as a control, so every placebo looked positive | Tambopata removed from each placebo's pool; Amazon-only pool added | Still rank 1 in hectares; **rank {{model_m4_rank:.0f}} of {{model_m4_n:.0f}} scaled** |
+| Causal number measured net change, called "new mining" | Claim reworded to net mining; first-time change reported | First-time mining fell less ({{t5_m2_2016_18}} → {{t5_m2_2019_21}} ha/yr) |
+| Cell comparison included the corridor (displacement target); baseline mislabelled; few treated clusters | Clean comparison cells; 2014–25 panel; pooled 2014–18 reference; wild cluster bootstrap | La Pampa {{st_main_lapampasector_during:+.2f}} (was {{st_contam_lapampasector_during:+.2f}}); pre-trends still fail |
+| One twin (Munduruku) had a 2021 operation; t-tests on 3 values | Two twins; no p-values | Tambopata still below both |
+| Brazil code skipped Kayapó's 2024 operation; Munduruku dated by an unverified 2021 snippet | First *verified* operation inside 2021–25 (Munduruku Aug 2023) | Estimate {{brv2_did2s_treat:+.2f}}, still not significant |
+| Road placebo windows overlapped the event | Non-overlapping start years only | Rank 1 of {{t1_road_shift_n_clean:.0f}} (p = {{t1_road_shift_ri_p_clean:.2f}}) |
+| Legality used today's concessions for past years | Concession must be filed by the mining year | Illegal share {{leg_tc_illegal_share_2016_18:.0%}} → {{leg_tc_illegal_share_2022_25:.0%}} (unchanged picture) |
+| Risk map tested on the same cells, no benchmark | Spatial hold-out + "mining nearby" benchmark | AUC {{risk_auc_spatial_holdout:.2f}} vs {{risk_auc_benchmark:.2f}}: adds little |
+| Untraceable numbers (Sentinel-2, producer gold) | Now computed in code | See [Timing](#timing) and [Declared gold](#declared-gold) |
+
+**Full review:** `docs/overnight/notes/critical_review_v2.md`.
+:::
 
 @part Team corner
 
@@ -1002,7 +989,7 @@ take: The gold mined and its social cost are a thousand times the enforcement mo
 
 **Only a human can do these:**
 
-1. **Agree on the claim wording,** especially the one conditional causal sentence ([Three attempts](#six-attempts)). It's a team call.
+1. **Agree on the claim wording,** especially the one conditional causal sentence ([Six attempts](#six-attempts)). It's a team call.
 2. **Ruby: check [The places](#the-places) and [Attempt 3](#attempt-3).** The zone map (we kept the middle La Pampa window) and her twin design. Should native communities inside the corridor count as legal?
 3. **Confirm Brazil's scope with Raji** (appendix-level, as discussed).
 4. **MAAP pages:** the site blocks scripts. Open each link in `docs/overnight/notes/maap_citations.md` and save it with File › Save Page As into `data_raw/maap/`.

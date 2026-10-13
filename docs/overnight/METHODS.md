@@ -10,15 +10,7 @@
 
 **`uv run python code/main.py` checks the data against the publishers, builds every measure, fits every model, draws every figure and writes every number to `output/numbers.csv`.**
 
-<pre class="mermaid">
-flowchart LR
-  A[Raw files<br/>data_raw/] --> B[Checks against<br/>publisher numbers]
-  B --> C[Measures<br/>new mining per area-year]
-  C --> D[Comparisons<br/>DiD, event study,<br/>models, twins]
-  D --> E[Figures + tables<br/>output/]
-  D --> F[numbers.csv<br/>every cited number]
-  F --> G[Walkthrough, methods<br/>and brief pages]
-</pre>
+**Raw files** (data_raw/) → **Checks** (against publisher numbers) → **Measures** (new mining per area-year) → **Models** (DiD, event study, twins) → **Figures** (and tables in output/) → **numbers.csv** (every cited number) → **Pages** (walk-through, methods, brief)
 
 - **Data:** satellite maps of mining (MapBiomas, Amazon Mining Watch, INPE and GLAD alerts), boundaries (parks, buffer zones, corridor, communities), and context (gold price, gold output, spending, fines).
 - **Measures:** how much *new* mining appears each year, per area.
@@ -149,7 +141,7 @@ flowchart LR
 | **M4** | outcome scaled to each zone's own 2014–18 average | Tambopata's size driving the result |
 
 - **Fake 2016 date:** each model also runs on 2011–18 data with a fake start. A trustworthy model shows a big real effect and a small fake one.
-- **Result:** the 2019–21 gap is −1,454 to −1,859 ha/yr (M1–M3, rank 1 of 15). Scaled to size (M4) it ranks 3 of 7 (p = 0.43). M3's fake date (−337) has the same sign as the real effect. **[description]**
+- **Result:** the 2019–21 gap is −1,454 to −1,859 ha/yr (M1–M3, rank 1 of 15). Scaled to size (M4) it ranks 3 of 7 (p = 0.43). M3's fake date (−337) has the same sign as the real effect. A variant of M3 that fits Tambopata's trend on pre-years only gives −2,004 ha/yr (2022–25: −871). **[description]**
 
 **Code:** `code/peru_models.py`. The numpy fit is checked against `pyfixest`.
 
@@ -178,8 +170,8 @@ flowchart LR
 - **K1:** + each zone's 2014–18 mean addition × 1[2020–21] (COVID exposure).
 - **K2:** + Madre de Dios × ln(PP 0128 spending booked in Madre de Dios).
 - **K3:** both. Inference by fake places.
-- **Caveat:** money rose because of Mercurio, so K2 absorbs part of the effect itself.
-- **Result:** −1,608 → −1,567 ha/yr, rank 1 of 15 throughout. **[description]**
+- **Caveat:** money rose with Mercurio, so it is partly the treatment itself (a bad control): K2 absorbs part of the effect.
+- **Result:** COVID exposure alone shrinks the gap to 1,322 of 1,608 ha/yr; both controls give −1,567 (97% of K0); rank 1 of 15 throughout. **[description]**
 
 **Code:** `code/peru_context_models.py`.
 
@@ -213,9 +205,9 @@ flowchart LR
 3. **R3** outside Madre de Dios
 4. **R4** lowland mining (< 500 m) of similar scale (≥ ⅕ of Tambopata); the closest match wins
 
-- **Result:** no area passes. Relaxing R2 to "no operation in 2017–21" leaves two: **Amanã National Forest** and the **Tapajós protection area** (Brazil). Munduruku was dropped (operation in May 2021).
+- **Result:** no area passes. Relaxing R2 to "no operation in 2017–21" leaves two: **Amanã National Forest** and the **Tapajós protection area** (Brazil). Munduruku was dropped (an operation reported in May 2021, search snippets only).
 - **Comparison:** new mining per year as a share of each area's own 2018 mining, same product (AMW) for both. Pre-2019 trends come from each area's own MapBiomas collection, side by side, never subtracted.
-- **Pre-trend test:** yearly log-growth difference (Tambopata minus twin), 2010–18, on a constant and a trend, Newey-West errors. No significance test for the gap (three years per area).
+- **Pre-trend test:** yearly log-growth difference (Tambopata minus twin), 2010–18, on a constant and a trend, Newey-West errors. Tambopata grew faster than both twins before 2019 (p < 0.01 Amanã, < 0.01 Tapajós), so the twins are a weak check. No significance test for the gap (three years per area).
 
 **Code:** `code/control_amw.py`, `control_elevation.py`, `control_mb_amazonia.py`, `control_select.py`, `control_top3.py`.
 
@@ -255,14 +247,14 @@ flowchart LR
 - **Estimator:** `rdrobust`, local linear, triangular kernel, MSE-optimal bandwidth, robust bias-corrected CI, clustered by segment. Main estimate on the change (2019–21 mean minus 2014–18 mean), so fixed border effects (the road's access, the river) cancel (Grembi, Nannicini & Troiano, 2016).
 - **Checks:** fixed bandwidths 1–5 km; 500-m donut; fake start years; fake borders ±2–4 km.
 - **Limit:** displacement across the border breaks the no-spillover assumption, so the road estimate is the swing (deterrence + displacement), an upper bound on either side.
-- **Result:** road +2.10 pts (p = 0.08; donut +3.29, p = 0.04); reserve edge +0.15 (p = 0.77). **[description]**
+- **Result:** road +2.10 pts (p = 0.08; across bandwidths and the donut p = 0.04–0.98; fake start years from 2008: rank 1 of 10, p = 0.10). Reserve edge +0.15 (p = 0.77; fake start years rank 10 of 20, p = 0.50). **[description]**
 
 **Code:** `code/v2_rdd.py`.
 
 ## Fake start dates and depth into the corridor
 
 - **Fake start dates (T1):** the north share's change, 3 years after minus 3 years before, for every start year 2008–2022. Only start years whose windows don't overlap the event count. Randomization p = rank of the real 2019 shift / number of start years: rank 1 of 8 (p = 0.12).
-- **Depth (T9):** mean distance north of the highway of first-time mining per year; OLS on a trend and a post-2019 dummy with Newey-West errors (18 years). Break −8.8 km (p = 0.000).
+- **Depth (T9):** mean distance north of the highway of first-time mining per year; OLS on a trend and a post-2019 dummy with Newey-West errors (18 years). Break −8.8 km (p < 0.001).
 - **Boundary sensitivity (T4):** narrow and wide La Pampa windows give the same picture.
 
 **Code:** `code/v2_tests.py`.
@@ -276,7 +268,7 @@ flowchart LR
 - **Quarterly timing:** GLAD-L alerts on land MapBiomas maps as mining. Compare the same quarter across years (clouds); data version break in 2021.
 - **Gold left:** gold-bearing land = INGEMMET geology units (river deposits plus Madre de Dios Formation terraces). Validation: 90% of all land ever mined lies on them. Depletion = share of a zone's gold-bearing land mined by a year.
 - **Enforcement money (T8):** executed PP 0128 spending booked in Madre de Dios, 2015–2025. Department level only; a lower bound.
-- **Earlier wave (T3):** model M1 with Tambopata × 2012–13 on 2008–16 data. Tambopata did not fall more than other zones.
+- **Earlier wave (T3):** model M1 with Tambopata × 2012–13 on 2008–16 data. Tambopata did not fall more than other zones (rank 14 of 14); La Pampa first-time mining changed by +36% in 2012–13 vs 2010–11. Asner & Tupayachi (2017) report a dip on their own maps; ours show none.
 - **Declared gold:** MINEM yearly files split into producer-declared gold and the artisanal estimate (until 2019); checked against the central bank for 2012 and 2019.
 
 **Code:** `code/glad_alerts.py`, `code/raster_gold.py`, `code/v2_tests.py`, `code/peru_gold_minem.py`.
@@ -285,11 +277,11 @@ flowchart LR
 
 **Question:** what is the mining worth, what does it cost, and what is spent against it? *Informed speculation.*
 
-- **Chain:** hectares worked (first-time mining, low; + returns to old pits, high) × 1.7–1.9 kg gold per ha (CSF, 2023) × mean gold price → value. Declared share = MINEM producer-declared gold / that gold.
+- **Chain:** land mined for the first time (returns to old pits get no gold: CSF has no yield for them, so both ends understate if old pits still pay) × 1.6–1.9 kg gold per ha (CSF, 2023) × mean gold price → value. Declared share = MINEM producer-declared gold / that gold.
 - **Taxes:** 0% royalty for small producers (Ley 28258); income tax 29.5% × 11–37% margin on undeclared value.
-- **Costs:** 2.4–2.8 kg mercury per kg gold; social cost US$ 81,000–1.8 M per kg (CSF). Enforcement: PP 0128 Madre de Dios spending at 3.3–3.9 soles per US$.
+- **Costs:** 2.4–2.8 kg mercury per kg gold; social cost per kg from two separate CSF estimates, never merged: US$ 81,000–364,000 (calculator) and US$ 1,200,000–1,800,000 (2023 report, p. 7). Enforcement: PP 0128 Madre de Dios spending, each year converted at its BCRP annual average (e.g. 3.34 soles per US$ in 2019, 3.57 in 2025).
 - **Cross-check:** MINEM's 2016–18 estimate implies 1.9 kg per hectare we mapped.
-- **Result (2022–25, per year):** gold 19–32 t, declared 4%–7%, untaxed income US$ 45–252 M, enforcement US$ 1.7–2.0 M. **[prediction]**
+- **Result (2022–25, per year):** gold 18–22 t, declared 6%–8%, untaxed income US$ 42–169 M, social cost US$ 1.5–7.9 bn (calculator) or 22–39 bn (report), enforcement US$ 1.7 M. **[prediction]**
 
 **Code:** `code/v2_economics.py`; sources and quotes in `docs/overnight/notes/economics_sources.md`.
 
@@ -302,9 +294,10 @@ flowchart LR
 **Question:** do territories fall after *their own* operation?
 
 - **Data:** MapBiomas Brazil Collection 11 rasters read remotely per territory (24 territories + Yanomami rings). Check: Kayapó 2024/2025 vs the platform.
-- **Model:** territory + year effects, treated from each territory's own first operation; Gardner's two-stage estimator (`did2s`); randomization inference (2,000 shuffles of operation dates across territories).
+- **Model:** territory + year effects, treated from each territory's first *verified* operation in 2021–25 (Munduruku Aug 2023, Kayapó Sep 2024); Gardner's two-stage estimator (`did2s`, two-sided p); randomization inference (2,000 shuffles of operation dates, one-sided, on the two-way fixed-effects estimate).
+- **Pool:** 13 never-treated territories, of which 10 were never searched for operations.
 - **Logic:** if operations cause falls, each territory should fall after its own date, not before.
-- **Result:** +0.54 log points (p = 0.17; randomization p = 0.92). Wrong sign, not significant. **[description]**
+- **Result:** did2s +0.26 log points (two-sided p = 0.44); two-way fixed effects +0.29 (p = 0.39; one-sided randomization p = 0.73). Wrong sign, not significant. **[description]**
 
 **Code:** `code/brazil_raster.py`, `brazil_v2.py`, `brazil_stagger.py` (AMW), `brazil_deter_all.py`.
 
@@ -326,7 +319,7 @@ flowchart LR
 - **Causal number:** reworded to net mining; first-time mining reported alongside.
 - **Cell panel:** clean comparison cells, 2014–18 baseline, pooled reference in event studies, wild cluster bootstrap.
 - **Twins:** Munduruku dropped; no p-values on three annual values.
-- **Brazil:** first operation inside 2021–25 (Kayapó 2024-09; Munduruku 2021-05).
+- **Brazil:** first operation inside 2021–25 (Kayapó 2024-09; Munduruku 2023-08, the first verified operation).
 - **Legality:** a concession counts only if filed by the mining year.
 - **Risk map:** spatial hold-out and benchmark.
 - **Gold proxy:** lift reported (share of mining vs share of land).
@@ -342,4 +335,4 @@ flowchart LR
 </details>
 
 ---
-*Built 2026-10-13 11:39 from git commit cb33a82 (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1399 rows).*
+*Built 2026-10-13 13:24 from git commit 4e9c6ce (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1431 rows).*

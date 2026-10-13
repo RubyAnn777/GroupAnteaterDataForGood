@@ -50,17 +50,27 @@ def fmt_val(v: float, fmt: str, minus: str = "−") -> str:
     return s.replace("-", minus) if s.startswith("-") else s
 
 def fill(text: str, nums: dict, used: list | None = None) -> str:
+    """{{id}}, {{id:fmt}}, {{id:fmt|abs}} (absolute value, for "fell by 1,454" instead of "by −1,454").
+    p-values that round to zero print as "< 0.01" / "< 0.001"; "p = < 0.01" is then tidied to "p < 0.01"."""
     def rep(m):
         key, _, fmt = m.group(1).partition(":")
         key = key.strip()
+        fmt, _, mod = fmt.partition("|")
         if key in TEXT:
             return TEXT[key]
         if key not in nums:
             raise KeyError(f"unknown placeholder id: {key}")
         if used is not None:
             used.append(key)
-        return fmt_val(float(nums[key]["value"]), fmt or ",.0f")
-    return re.sub(r"\{\{\s*([A-Za-z0-9_]+(?::[^}]*)?)\s*\}\}", rep, text)
+        v = float(nums[key]["value"])
+        if mod.strip() == "abs":
+            v = abs(v)
+        fmt = fmt or ",.0f"
+        if nums[key].get("unit") == "p-value" and float(format(v, fmt)) == 0:
+            return "< " + format(10 ** -int(fmt.strip(".f") or 2), f".{int(fmt.strip('.f') or 2)}f")
+        return fmt_val(v, fmt)
+    out = re.sub(r"\{\{\s*([A-Za-z0-9_]+(?::[^}]*)?)\s*\}\}", rep, text)
+    return re.sub(r"= < ", "< ", out)
 
 def nice(v: float) -> str:
     if float(v).is_integer() or abs(v) >= 1000:
@@ -151,6 +161,18 @@ def steps_svg() -> str:
     arrow(8, 9, True)  # optional steps are independent; a 2->7 arrow ran through step 5
     parts.append("</svg>")
     return "\n".join(parts)
+
+PIPELINE = [("Raw files", "data_raw/"), ("Checks", "against publisher numbers"), ("Measures", "new mining per area-year"),
+            ("Models", "DiD, event study, twins"), ("Figures", "and tables in output/"), ("numbers.csv", "every cited number"),
+            ("Pages", "walk-through, methods, brief")]
+
+def pipeline_html() -> str:
+    """Static flow diagram (no JS, no CDN): an ordered list styled as boxes with arrows; wraps on narrow screens."""
+    items = "".join(f'<li><b>{html.escape(a)}</b><span>{html.escape(b)}</span></li>' for a, b in PIPELINE)
+    return f'<ol class="pipe" aria-label="Pipeline from raw files to pages">{items}</ol>'
+
+def pipeline_md() -> str:
+    return " → ".join(f"**{a}** ({b})" for a, b in PIPELINE)
 
 def steps_md() -> str:
     rows = ["| Step | Lane | Owner (role) | Missing data |", "|---|---|---|---|"]
@@ -421,10 +443,11 @@ def main():
                            "".join("<tr>" + "".join(f"<td>{inline_md(c)}</td>" for c in r[:4]) + "</tr>" for r in decisions) + "</tbody></table></div>",
         "NUMBERS_TABLE": numbers_html(nums),
         "NEXT_STEPS_DIAGRAM": '<div class="svgwrap">' + steps_svg() + "</div>",
+        "PIPELINE_DIAGRAM": pipeline_html(),
         "BRIEF_LINK": link("brief", "Brief draft"), "METHODS_LINK": link("methods", "Methods page"), "WALK_LINK": link("walk", "Walkthrough"),
     }
     extra_md = {"DECISIONS_TABLE": "See `docs/overnight/LOG.md`.", "NUMBERS_TABLE": "See [`output/numbers.csv`](../../output/numbers.csv).",
-                "NEXT_STEPS_DIAGRAM": steps_md(), "BRIEF_LINK": "[the brief draft](../brief/BRIEF_DRAFT.md)",
+                "NEXT_STEPS_DIAGRAM": steps_md(), "PIPELINE_DIAGRAM": pipeline_md(), "BRIEF_LINK": "[the brief draft](../brief/BRIEF_DRAFT.md)",
                 "METHODS_LINK": "[METHODS.html](METHODS.html)", "WALK_LINK": "[EXPLAINER.html](EXPLAINER.html)"}
     ART.mkdir(exist_ok=True)
     out = {}
@@ -621,6 +644,19 @@ svg.flow .box{fill:var(--surface);stroke:var(--rule-2);stroke-width:1.2}svg.flow
 svg.flow .t1{fill:var(--ink);font-size:12px;font-weight:500}svg.flow .t2{fill:var(--ink-2);font-size:11.5px}svg.flow .t3{fill:var(--d);font-size:11.5px}
 svg.flow .arrow{stroke:currentColor;stroke-width:1.5}
 
+/* pipeline flow (methods page): static boxes + arrows, wraps on narrow screens */
+ol.pipe{list-style:none;padding:0;margin:20px 0 22px;display:flex;flex-wrap:nowrap;align-items:stretch;gap:10px 18px;max-width:var(--wide)}
+ol.pipe li{position:relative;flex:1 1 0;min-width:0;max-width:100%;background:var(--surface);border:1px solid var(--rule-2);border-top:3px solid var(--eyebrow);padding:8px 7px;margin:0;font-size:.8rem;line-height:1.35}
+ol.pipe li b{display:block;font-weight:500;color:var(--ink)}
+ol.pipe li span{color:var(--ink-2);font-size:.76rem;overflow-wrap:break-word;hyphens:auto}
+ol.pipe li:not(:last-child)::after{content:"→";position:absolute;right:-15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1rem}
+
+/* never wider than the screen: grid/flex children may shrink, media and long tokens wrap */
+.hero .in>*,.main>*,.ch>*,.more-b>*,.stat,.beat,.fc,.pages,.top .in>*{min-width:0}
+.hero h1,.hero .lede,.stat-l,.beat-t,.ch h2,p.lede{overflow-wrap:break-word}
+img,svg,video{max-width:100%}
+.ch p,.ch li{overflow-wrap:break-word}
+
 footer.foot{background:var(--slate);color:var(--on-slate-2);font-size:.8rem;margin-top:40px}
 footer.foot .in{max-width:1280px;margin:0 auto;padding:28px 20px;display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between}
 
@@ -644,6 +680,9 @@ footer.foot .in{max-width:1280px;margin:0 auto;padding:28px 20px;display:flex;fl
   .plate{padding:4px}
   .more-b{padding-left:4px}
   ol.beats{grid-template-columns:1fr}
+  .pages{flex:0 1 auto;min-width:0;overflow-x:auto}.theme{flex:none;padding:5px 8px}
+  ol.pipe{flex-direction:column;gap:22px}ol.pipe li{flex:none}
+  ol.pipe li:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-21px;transform:none}
 }
 @media print{
   .top,nav.toc,details.mtoc,.fig-zoom,.toc-tools{display:none}.shell{display:block}
@@ -722,7 +761,7 @@ body{background:var(--bg);margin:0;font-family:var(--sans)}
 .sheet p{margin:0 0 5px}.sheet ul{margin:0 0 5px;padding-left:1.2em}.sheet li{margin:0 0 2px}
 .sheet strong{font-weight:500}
 .sheet a{color:var(--accent);overflow-wrap:anywhere}
-.sheet figure{margin:4px 0 6px;text-align:center}.sheet figure img{width:60%;height:auto}
+.sheet figure{margin:4px 0 6px;text-align:center}.sheet figure img{width:72%;height:auto}
 .sheet figcaption{font-size:8pt;color:#5d6b70;text-align:left}
 .sheet code{font-size:8.5pt;font-family:"Roboto Mono",ui-monospace,monospace}
 .badge{font-size:6.6pt;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:0 5px;border:1px solid currentColor;border-radius:999px;white-space:nowrap}
