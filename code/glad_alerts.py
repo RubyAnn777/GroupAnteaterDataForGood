@@ -28,6 +28,7 @@ ZC = {"La Pampa sector": C["lapampa"], "Corridor across the road": C["corridor"]
       "Native communities": C["native"]}
 
 RAW = ROOT / "data_raw" / "glad_alerts"
+INTER = ROOT / "data_intermediate"
 OUT_CSV = ROOT / "data_intermediate" / "glad_zone_quarter_v2.csv"
 TILES = ("080W_20S_070W_10S", "070W_20S_060W_10S")
 SRC = "UMD GLAD-L forest-loss alerts (Landsat; C1 2017-20, C2 2021-26) x MapBiomas Peru Col 4 mining mask x zones v2"
@@ -142,7 +143,11 @@ def s2_check(reg):
     import rasterio
     from rasterio.windows import from_bounds
     f = RAW / "S2alert_alertDate_080W_20S_070W_10S.tif"
-    if not f.exists():
+    if not f.exists():                     # git-ignored tile: re-register the values saved on the last full run
+        cache = INTER / "raw_only_numbers.csv"
+        if cache.exists():
+            for r in pd.read_csv(cache).query("id.str.startswith('s2_lp_west_')").itertuples():
+                reg.add(r.id, r.value, r.unit, r.description + " (saved from the last run with the raw tile)", "description", r.source_data)
         return
     with rasterio.open(f) as r:
         a = r.read(1, window=from_bounds(-70.15, -13.06, -70.0, -12.88, r.transform)); tr = r.transform
@@ -155,3 +160,13 @@ def s2_check(reg):
     reg.add("s2_lp_west_2019_mar_sep_ha", s19.loc["2019-03":"2019-09"].sum(), "ha", "GLAD-S2 alerts, western La Pampa sector, Mar-Sep 2019", "description", "UMD GLAD-S2 alerts")
     reg.add("s2_lp_west_2019_aug_ha", s19.loc["2019-08"].sum(), "ha", "GLAD-S2 alerts, western La Pampa sector, August 2019", "description", "UMD GLAD-S2 alerts")
     reg.add("s2_lp_west_2020_mar_sep_ha", s.loc["2020-03":"2020-09"].sum(), "ha", "GLAD-S2 alerts, western La Pampa sector, Mar-Sep 2020", "description", "UMD GLAD-S2 alerts")
+    save_raw_only([r for k, r in reg.rows.items() if k.startswith("s2_lp_west_")])
+
+
+def save_raw_only(rows):
+    """Keep numbers that need git-ignored raw files in data_intermediate/raw_only_numbers.csv (committed), so a
+    fresh clone still registers them."""
+    f = INTER / "raw_only_numbers.csv"
+    new = pd.DataFrame(rows)[["id", "value", "unit", "description", "source_data"]]
+    old = pd.read_csv(f) if f.exists() else new.iloc[:0]
+    pd.concat([old[~old.id.isin(new.id)], new]).sort_values("id").to_csv(f, index=False)

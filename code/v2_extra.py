@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
 from common import (ROOT, OUT, style_axes, finish_figure, headline, label_end, callout, period_band,
-                    add_event_markers, PERU_EVENTS, C, INK, INK2, MUTED, AXIS, SURFACE)
+                    add_event_markers, PERU_EVENTS, EVENT_TITLE_PAD, C, INK, INK2, MUTED, AXIS, SURFACE)
 import raster_zones as rz
 from raster_layers import GROUPS
 
@@ -107,7 +107,7 @@ def e1(reg):
         reg.add(f"amw_v2_north_share_{y}", nshare.loc[y], "share", f"AMW: north-of-road share of new area, La Pampa longitudes, {y}", "description", SRC_AMW)
     yrs = [y for y in a.index if 2019 <= y <= 2025]
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(9, 4.0), gridspec_kw={"wspace": 0.45})
-    headline(fig, "A second satellite agrees: new mining moved north of the road",
+    headline(fig, "AMW: north of the road took most new mining in 2020–22, then La Pampa came back",
              "Amazon Mining Watch (AMW) gold-mining scars on the same zones, 2019–2025 (2025 provisional)")
     for g, lab in (("La Pampa sector", "La Pampa"), ("Corridor across the road", "Across\nthe road")):
         _dots(a1, yrs, a.loc[yrs, g], ZC[g])
@@ -145,7 +145,7 @@ def e2(reg):
     pk = tot.idxmax()
     callout(a1, pk, tot[pk], f"{tot[pk]:,.0f} ha in {pk}", dy=8, arrow=False)
     a1.set_ylim(0, tot.max() * 1.12); style_axes(a1)
-    a1.set_title("Hectares per year", pad=18)
+    a1.set_title("Hectares per year", pad=EVENT_TITLE_PAD)
     sh = w.div(tot, axis=0) * 100
     a2.stackplot(sh.index, sh.T.values, colors=[ZC[c] for c in sh.columns], edgecolor=SURFACE, linewidth=0.8)
     a2.set_ylim(0, 100); style_axes(a2)
@@ -158,11 +158,12 @@ def e2(reg):
     for ax in (a1, a2):
         ax.spines["bottom"].set_bounds(w.index[0], w.index[-1])
     for ax in (a1, a2):
-        add_event_markers(ax, label=ax is a1, events=MERCURIO)
-        ax.lines[-1].set_zorder(3)                                 # draw the Mercurio line over the stack
+        add_event_markers(ax, label=ax is a1)
+        for ln in ax.lines[-len(PERU_EVENTS):]:
+            ln.set_zorder(3)                                       # draw the event lines over the stack
     finish_figure(fig, f"{SRC_R}. Return to old pits = mining on pixels mined in an earlier year but not the year before; "
                        "includes some year-to-year map flicker. Labels at the right name the bands of 2025. Description.",
-                  OUT / "fig_v2_stream_remined.png")
+                  OUT / "fig_v2_stream_remined.png", event_note=True)
     cor = (w["Corridor across the road"] + w["Rest of mining corridor"]) / tot
     for p, (a, b) in {"2016_18": (2016, 2018), "2019_21": (2019, 2021), "2022_25": (2022, 2025)}.items():
         reg.add(f"rm_corridor_share_{p}", cor.loc[a:b].mean(), "share", f"Share of returns to old pits inside the legal corridor, {p}", "description", SRC_R)

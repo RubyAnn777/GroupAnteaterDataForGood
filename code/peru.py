@@ -22,7 +22,7 @@ import pyfixest as pf
 
 from common import (OUT, BZ_KEY, additions, period_mean, x_of, style_axes, add_event_markers,
                     set_year_ticks, finish_figure, EVENT_TITLE_PAD, SRC_MAPBIOMAS, SRC_PRICE,
-                    headline, label_end, callout, C, INK, INK2, MUTED, AXIS)
+                    headline, label_end, callout, placebo_rank, C, INK, INK2, MUTED, AXIS)
 
 TAM, AMA, BAH = "Tambopata", "Amarakaeri", "Bahuaja-Sonene"
 Y0, Y1 = 2014, 2025
@@ -193,8 +193,8 @@ def run_event_study(adds, lv_w, pack, reg):
     st["rank_scaled_most_negative_first"] = st["scaled_by_own_pre_mean"].rank()
     st.round(3).to_csv(OUT / "peru_placebo_in_space.csv")
     n = len(poolB)
-    rank_raw = int(st.loc[TU, "rank_raw_most_negative_first"])
-    rank_sc = int(st.loc[TU, "rank_scaled_most_negative_first"])
+    rank_raw = placebo_rank(stat[TU], [stat[u] for u in noTU])
+    rank_sc = placebo_rank(stat_sc[TU], [stat_sc[u] for u in noTU])     # NaN (no pre-mining) never counts
     print(f"Placebo-in-space (pool B, n={n}): Tambopata rank {rank_raw}/{n} raw (1 = most negative), "
           f"{rank_sc}/{n} scaled")
 
@@ -214,7 +214,10 @@ def run_event_study(adds, lv_w, pack, reg):
                 "description", SRC)
     reg.add("placebo_space_rank_raw", rank_raw, "rank", f"Rank of Tambopata among {n} buffer zones (1 = most negative) in mean "
             f"event-study beta 2019-21, each unit treated in turn", "description", SRC)
-    reg.add("placebo_space_rank_scaled", rank_sc, "rank", f"Same, scaled by each unit's own mean addition 2014-18", "description", SRC)
+    reg.add("placebo_space_rank_scaled", rank_sc, "rank", f"Rank of Tambopata among {n} buffer zones (1 = most negative) "
+            f"when each zone's mean event-study beta 2019-21 is divided by its own mean addition 2014-18 (full pool B, "
+            f"each unit treated in turn). Zones with tiny pre-2019 means get huge ratios, so this rank is noisy; the "
+            f"cleaner scale-free test is M4 (zones > 10 ha/yr only, model_m4_rank).", "description", SRC)
     reg.add("placebo_space_n_units", n, "count", "Number of units in the placebo-in-space donor pool B", "description", SRC)
 
     for yr in (2016, 2019, 2023, 2024, 2025):
@@ -236,7 +239,8 @@ def run_event_study(adds, lv_w, pack, reg):
     label_end(ax, yrs[-1], bA.loc[yrs[-1]], "Tambopata vs Madre\nde Dios zones (main)", C["lapampa"], dx=8, dy=-16)
     label_end(ax, yrs[-1], bB.loc[yrs[-1]], "vs all Peru buffer\nzones with mining", C["other"], dx=8, dy=14, weight="normal")
     lo = bA.loc[2019:2022].idxmin()
-    callout(ax, lo, bA[lo], f"Lowest: {bA[lo]:,.0f} ha in {lo}".replace("-", "−"), dy=-30, dx=0, ha="center")
+    callout(ax, lo, bA[lo], f"Lowest:\n{bA[lo]:,.0f} ha in {lo}".replace("-", "−"), dy=-12, dx=7, ha="left",
+            arrow=False)                                  # right of the point, clear of the Restauración line
     ax.text(2013.8, -3400, "Grey band: coefficients if each other\nbuffer zone had been 'treated' instead",
             fontsize=7.5, color=INK2, va="bottom")
     ax.set_ylabel("ha per year vs 2018")
@@ -281,7 +285,7 @@ def placebo_restricted(pack, reg, thresh=10.0):
     st["role"] = np.where(st.index == TU, "treated (real)", "donor")
     st.round(2).to_csv(OUT / "peru_placebo_in_space_restricted.csv")
     n = len(pool)
-    rk = int(st.loc[TU, "rank_most_negative_first"])
+    rk = placebo_rank(stat[TU], [stat[u] for u in pool if u != TU])
     donors = "; ".join(u.split("|")[0] for u in pool if u != TU)
     print(f"Placebo-in-space RESTRICTED (mean 2014-18 > {thresh:g} ha/yr, Amazon-biome departments): n={n}, Tambopata rank {rk}/{n}; donors: {donors}")
     reg.add("placebo_space_rank_restricted", rk, "rank",

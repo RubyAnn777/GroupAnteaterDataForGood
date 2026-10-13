@@ -1,7 +1,7 @@
-zone_a,zone_b,overlap_ha,smaller_zone_ha,overlap_pct_of_smaller,warning
-Bahuaja-Sonene,Tambopata,42309.86,231693.37,18.26,WARNING: overlap > 1% of the smaller zone; 'rest of MdD' (dept minus sum of buffer-zone rows) double-subtracts this area
-Amarakaeri,del Manu,25521.83,283475.47,9.0,WARNING: overlap > 1% of the smaller zone; 'rest of MdD' (dept minus sum of buffer-zone rows) double-subtracts this area
-Megantoni,del Manu,7100.86,205885.19,3.45,WARNING: overlap > 1% of the smaller zone; 'rest of MdD' (dept minus sum of buffer-zone rows) double-subtracts this area
+zone_a,zone_b,overlap_ha,smaller_zone_ha,overlap_pct_of_smaller,in_pack
+Bahuaja-Sonene,Tambopata,42309.86,231693.37,18.26,overlap pixels counted once in the pack (see bz_overlap_pack_*)
+Amarakaeri,del Manu,25521.83,283475.47,9.0,overlap pixels counted once in the pack (see bz_overlap_pack_*)
+Megantoni,del Manu,7100.86,205885.19,3.45,overlap pixels counted once in the pack (see bz_overlap_pack_*)
 Alto Purús,del Manu,710.67,664834.86,0.11,
 Bahuaja-Sonene,Megantoni,0.0,205885.19,0.0,
 Purús,del Manu,0.0,222356.01,0.0,

@@ -24,7 +24,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from common import OUT, style_axes, finish_figure, headline, label_end, C, INK, INK2, MUTED, GRID, AXIS
+from common import OUT, style_axes, finish_figure, headline, label_end, C, INK, INK2, MUTED, GRID, AXIS, placebo_rank
 import peru_models as pm
 import v2_tests
 
@@ -64,8 +64,7 @@ def run(pack, reg):
     for m, lab in MODELS.items():
         real = fit(ad, pool, pm.TU, m, gold, spend)
         others = {u: fit(ad, [v for v in pool if v != pm.TU], u, m, gold, spend)["post_during"] for u in pool if u != pm.TU}
-        others[pm.TU] = real["post_during"]
-        rank = int(pd.Series(others).rank().loc[pm.TU])
+        rank = placebo_rank(real["post_during"], others.values())
         rows.append(dict(model=m, label=lab, during=real["post_during"], after=real["post_after"], rank=rank, n=len(pool),
                          covid=real.get("pre_x_covid", np.nan), spend=real.get("mdd_x_lnspend", np.nan)))
     res = pd.DataFrame(rows)

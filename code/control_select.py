@@ -107,7 +107,13 @@ def fig_funnel(t, n_all):
 def fig_map(t, u, w, chosen):
     import geopandas as gpd
     fig, ax = plt.subplots(figsize=(9, 7.6))
-    headline(fig, "The twin candidates sit far from La Pampa, in Brazil",
+    m0 = t[t.r1_mining]
+    tw0 = list(dict.fromkeys(list(chosen) + m0.index[m0.pass_strict | m0.pass_relaxed].tolist()))
+    km = u.loc[tw0, "dist_la_pampa_km"].min() if tw0 else np.nan
+    ctry = sorted(set(u.loc[tw0, "country"])) if tw0 else []
+    # no country borders in the local data, so the country is named in the labels, not left to the map
+    headline(fig, f"The twin candidates sit far from La Pampa: at least {km // 100 * 100:,.0f} km away"
+                  + (f", all in {ctry[0]}" if len(ctry) == 1 else ""),
              "Areas with ≥ 500 ha of mining by 2018 (dot area = hectares, Amazon Mining Watch), by operation status")
     base = ROOT / "data_raw" / "raisg"
     parts = sorted(base.glob("anp_nacionales_part*.geojson"))
@@ -129,13 +135,13 @@ def fig_map(t, u, w, chosen):
                    zorder=3 + order.index(c), alpha=0.95)
     tu = u.loc[TU]
     ax.scatter(tu.lon, tu.lat, s=np.sqrt(w.loc[TU, 2018]) * 2.2, color=C["lapampa"], edgecolor=INK, lw=1.0, zorder=8)
-    ax.annotate("Tambopata buffer zone\n(treated, La Pampa)", (tu.lon, tu.lat), xytext=(-14, -26), textcoords="offset points",
+    ax.annotate("Tambopata buffer zone\n(Peru; treated, La Pampa)", (tu.lon, tu.lat), xytext=(-14, -26), textcoords="offset points",
                 fontsize=8.5, fontweight="semibold", ha="right", color=INK,
                 arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.7))
     twins = list(dict.fromkeys(list(chosen) + m[m.cls.isin(["passes all rules", "passes if post-2021 operations allowed"])].index.tolist()))
     for k, uid in enumerate(twins):
         r = u.loc[uid]
-        ax.annotate(r["name"].split(" (")[0] + "\n(rule-based twin)", (r.lon, r.lat), xytext=(28, 34 - 80 * k),
+        ax.annotate(r["name"].split(" (")[0] + f"\n({r['country']}; rule-based twin)", (r.lon, r.lat), xytext=(28, 34 - 80 * k),
                     textcoords="offset points", fontsize=8.5, fontweight="semibold", color=INK,
                     arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.7))
     ax.set_xlim(-80, -48); ax.set_ylim(-19, 9); ax.set_aspect(1)
@@ -148,7 +154,8 @@ def fig_map(t, u, w, chosen):
     hs.append(Line2D([], [], marker="s", ls="", color="#dfeadb", ms=9, label="National protected areas (RAISG)"))
     ax.legend(handles=hs, fontsize=8, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.01), ncol=3,
               handletextpad=0.3, columnspacing=1.2)
-    finish_figure(fig, f"{SRC}. Longitude −80 to −48, latitude −19 to 9. Description.", OUT / "fig_control_map.png")
+    finish_figure(fig, f"{SRC}. Longitude −80 to −48, latitude −19 to 9; no country borders drawn (none in the local data), "
+                       "countries named from the area records. Description.", OUT / "fig_control_map.png")
 
 
 def fig_compare(w, u, chosen_strict, chosen_relaxed, mbpre):
@@ -165,7 +172,7 @@ def fig_compare(w, u, chosen_strict, chosen_relaxed, mbpre):
     if chosen_relaxed:
         lines.append(([chosen_relaxed], u.loc[chosen_relaxed, "name"].split(" (")[0] + "\n(twin; own op. 2023)", C["twin"], "-"))
     lines.append(([AMARAKAERI], "Amarakaeri BZ\n(neighbour)", C["buffer"], "-"))
-    period_band(a1, 2018.5, 2021.5, "Mercurio years")
+    period_band(a1, 2018.5, 2021.5, "Operation years")
     ends, ymax = [], 0.0
     for ids, lab, col, ls in lines:
         s = shares(w, ids)

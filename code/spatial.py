@@ -358,6 +358,9 @@ def register(reg, z, r, rb, lp_info):
                 f"AMW new area 0-50 km outside the Yanomami territory, onset {y0}-{y1}", "description", src)
 
 
+LP_INFO_IDS = ["sp_lp_lon", "sp_lp_lat", "sp_lp_dist_to_tambopata_bz_km", "sp_lp_dist_to_tambopata_nr_km"]
+
+
 # --------------------------------------------------------------------------- entry point
 def run(reg):
     t0 = time.time()
@@ -390,7 +393,12 @@ def run(reg):
         rtab, btab = allr[allr.region == "La Pampa ring"], allr[allr.region != "La Pampa ring"]
     allr = pd.concat([rtab, btab]) if have_raw else pd.concat([rtab, btab])
     fig_rings(rtab, ztab)
-    if not have_raw:
-        lp_info = {}
+    from glad_alerts import save_raw_only
+    cache = ROOT / "data_intermediate" / "raw_only_numbers.csv"
+    if not have_raw:                      # La Pampa location needs the AMW polygons: reuse the values of the last full run
+        c = pd.read_csv(cache) if cache.exists() else pd.DataFrame(columns=["id", "value"])
+        lp_info = dict(c[c.id.isin(LP_INFO_IDS)][["id", "value"]].values)
     register(reg, ztab, allr, allr, lp_info)
+    if have_raw:
+        save_raw_only([reg.rows[k] for k in lp_info])
     print(f"spatial: done in {time.time()-t0:.0f}s")

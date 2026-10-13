@@ -55,7 +55,7 @@ def run(reg):
                loc="lower center", fontsize=8, frameon=False, ncol=2, bbox_to_anchor=(0.5, 0.085))
     finish_figure(fig, "Source: Amazon Mining Watch (AMW) mining patches by onset year, summed by zone. 2018 = pre-existing stock, excluded. "
                        "AMW is detected mining on land, not MapBiomas class 4.2: the two series are never added or subtracted. "
-                       "Y-axes differ by panel. Red solid line = Operation Mercurio (Feb 2019); dashed = COVID-19 (2020), Plan Restauracion (2021), state of emergency (Apr 2023). Description only; no river dredging or mercury.",
+                       "Y-axes differ by panel. Solid line = Operation Mercurio (Feb 2019); dashed = COVID-19 (2020), Plan Restauracion (2021), state of emergency (Apr 2023), navy leaves the Malinowski posts (2025). Description only; no river dredging or mercury.",
                   OUT / "fig_spatial_zones.png", rect_bottom=0.16, event_note=False)
 
     # numbers

@@ -26,7 +26,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 
-from common import OUT, style_axes, finish_figure, headline, label_end, period_band, SRC_MAPBIOMAS, C, INK, INK2, GRID, AXIS, MUTED
+from common import OUT, style_axes, finish_figure, headline, label_end, period_band, SRC_MAPBIOMAS, C, INK, INK2, GRID, AXIS, MUTED, \
+    placebo_rank, add_event_markers, EVENT_TITLE_PAD
 from peru_models import _zone_adds, fit as m_fit, TU
 
 SRC = "peru_bufferzone_year.csv (MapBiomas Peru Collection 4)"
@@ -83,8 +84,7 @@ def placebo(Y, method, pre, post, real):
     others = [u for u in Y.columns if u != TU]
     Yp = Y[others]
     est = np.array([sdid(Yp, u, pre, post, method)["tau"] for u in others])
-    allv = np.append(est, real)
-    return int((allv <= real).sum()), len(allv), est
+    return placebo_rank(real, est), len(est) + 1, est
 
 
 def run(pack, reg):
@@ -158,7 +158,7 @@ def _figure(Y, keep, res):
     headline(fig, f"Synthetic DiD: {s_d['tau']:+,.0f} ha/yr in 2019–21, the {first}; scaled to size, rank {int(s_s['rank'])} of {int(s_s['n'])}".replace("-", "−").replace("the rank", "rank"),
              "Left: annual additions to mining area, Tambopata BZ vs the weighted comparison zones (shifted to Tambopata’s level).\n"
              "Right: the same estimate when each other zone is ‘treated’ instead.")
-    period_band(a1, 2018.5, 2021.5, "Mercurio years")
+    period_band(a1, 2018.5, 2021.5, "Operation years")
     a1.bar(lam.index, lam.values * 0.18 * max(tam.max(), 1), bottom=0, width=0.6, color=GRID, zorder=1)
     a1.plot(years, synth + shift, color=C["twin"], lw=2, ls=(0, (4, 2)), zorder=3)
     a1.plot(years, tam, color=C["lapampa"], lw=2.2, zorder=4)
@@ -170,8 +170,9 @@ def _figure(Y, keep, res):
     a1.annotate("grey bars: time weights", (lam.idxmax(), lam.max() * 0.18 * tam.max()), xytext=(0, 6),
                 textcoords="offset points", ha="center", fontsize=7, color=MUTED)
     style_axes(a1); a1.set_xlim(2013.5, 2025.5); a1.set_xticks(years[::2])
+    add_event_markers(a1, label=True)
     a1.set_ylabel("ha per year")
-    a1.set_title("Tambopata vs its synthetic-DiD comparison", fontsize=9.5)
+    a1.set_title("Tambopata vs its synthetic-DiD comparison", fontsize=9.5, pad=EVENT_TITLE_PAD)
     # right: placebo strip
     yy = np.random.default_rng(1).uniform(-0.25, 0.25, len(est))
     a2.scatter(est, yy, s=28, color=C["other"], edgecolor="white", lw=0.6, zorder=2)
@@ -183,10 +184,11 @@ def _figure(Y, keep, res):
     for sp in ("top", "right", "left"): a2.spines[sp].set_visible(False)
     a2.xaxis.grid(True, color=GRID, lw=0.6)
     a2.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, p: f"{v:+,.0f}".replace("-", "−") if v else "0"))
-    a2.set_title("Placebo zones (grey)", fontsize=9.5)
+    a2.set_title("Placebo zones (grey)", fontsize=9.5, pad=EVENT_TITLE_PAD)
     a2.set_xlabel("2019–21 estimate, ha/yr")
     a2.text(0.5, 0.04, f"rank {int(s_d['rank'])} of {int(s_d['n'])}, p = {s_d['p']:.2f}", ha="center", fontsize=8,
             color=INK2, transform=a2.transAxes)
     finish_figure(fig, f"{SRC_MAPBIOMAS}. Synthetic DiD (Arkhangelsky et al. 2021): unit weights match the comparison zones’ "
                        "pre-2019 trend (2014–18), a free intercept absorbs the level gap, time weights pick the pre-years. "
-                       "One treated zone: placebo ranks, no confidence interval. Description.", OUT / "fig_sdid.png")
+                       "One treated zone: placebo ranks, no confidence interval. Description.", OUT / "fig_sdid.png",
+                  event_note=True)

@@ -33,7 +33,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 
-from common import ROOT, OUT, style_axes, finish_figure, headline, C, INK, INK2, MUTED, GRID, AXIS
+from common import ROOT, OUT, style_axes, finish_figure, headline, C, INK, INK2, MUTED, GRID, AXIS, placebo_rank
 
 INTER = ROOT / "data_intermediate"
 TU = "PE-BZ-RN09"
@@ -201,9 +201,7 @@ def placebo(method, t, P, score, bins, real_gap, col="gap_during"):
         r = estimate(method, t, j, P.drop(j), score, bins)
         if r is not None:
             gaps.append(r[col])
-    allg = np.array(gaps + [real_gap])
-    rank = int((allg <= real_gap).sum())
-    return rank, len(allg), np.array(gaps)
+    return placebo_rank(real_gap, gaps), len(gaps) + 1, np.array(gaps)
 
 
 def smd(t, P, w):
@@ -318,18 +316,19 @@ def run(reg):
     reg.add("psm_ratio_max", ok.ratio_during.max(), "ratio", "Highest Tambopata/controls pace ratio across matching estimators", "description", SRC)
     reg.add("psm_p_min", ok.p.min(), "p-value", "Smallest placebo p across matching estimators", "description", SRC)
     reg.add("psm_p_max", ok.p.max(), "p-value", "Largest placebo p across matching estimators", "description", SRC)
-    _figure(res, tam)
+    _figure(res, tam, reg.get("psm_p_min"), reg.get("psm_p_max"))
     return res
 
 
-def _figure(res, tam):
+def _figure(res, tam, p_min, p_max):
     r = res.dropna(subset=["gap_during"]).reset_index(drop=True)
     est = r[r.method != "twin"]
     neg, n = int((est.gap_during < 0).sum()), len(est)
     sig = int((est.p <= 0.10).sum())
-    title = ("Every match mined faster than Tambopata in 2019–21" if neg == n else
+    title = ("All matches mined faster than Tambopata in 2019–21" if neg == n else
              f"{neg} of {n} matches mined faster than Tambopata in 2019–21")
-    title += "; the placebo test still fails" if sig == 0 else f"; {sig} of {n} pass the placebo test"
+    title += (f"; the gap is not unusual (placebo p {p_min:.2f}–{p_max:.2f})" if sig == 0
+              else f"; {sig} of {n} pass the placebo test (p {p_min:.2f}–{p_max:.2f})")
     fig = plt.figure(figsize=(9, 4.9))
     # explicit axes: row labels on the left and rank notes on the right need fixed room (tight_layout ignores them)
     a1 = fig.add_axes([0.255, 0.2, 0.33, 0.6]); a2 = fig.add_axes([0.61, 0.2, 0.24, 0.6], sharey=a1)

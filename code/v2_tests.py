@@ -22,7 +22,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from common import (ROOT, OUT, style_axes, finish_figure, headline, label_end, callout, period_band,
-                    add_event_markers, PERU_EVENTS, C, INK, INK2, MUTED, AXIS)
+                    add_event_markers, PERU_EVENTS, EVENT_TITLE_PAD, C, INK, INK2, MUTED, AXIS)
 import raster_zones as rz
 import peru_models as pm
 import checks
@@ -201,7 +201,6 @@ def t8(reg):
              "Madre de Dios, 2015–2025. Two measures, two units: side by side, never one as the cause of the other.")
     sm = s / 1e6
     a1.bar(s.index, sm.values, color=INK2, width=0.68)
-    a1.set_title("Anti-illegal-mining spending (PP 0128, executed), million soles")
     pk = int(sm.idxmax())
     callout(a1, pk, sm[pk], f"{sm[pk]:.1f} M", dy=4, arrow=False)
     callout(a1, s.index[-1], sm.iloc[-1], f"{sm.iloc[-1]:.1f} M", dy=4, arrow=False)
@@ -214,10 +213,10 @@ def t8(reg):
     a2.set_ylim(0, z.max() * 1.18); style_axes(a2)
     a2.set_xticks(list(s.index))
     for ax in (a1, a2):
-        ax.axvline(2018.5, color=INK, lw=1.1, zorder=0.5)
-    a1.text(2018.4, a1.get_ylim()[1] * 0.98, "Mercurio\nFeb 2019", ha="right", va="top", fontsize=7.5, color=INK)
+        add_event_markers(ax, label=ax is a1)
+    a1.set_title("Anti-illegal-mining spending (PP 0128, executed), million soles", pad=EVENT_TITLE_PAD)
     finish_figure(fig, f"Sources: {SRC_MEF} (lower bound: national units book spending under Lima); {SRC_R}. Description.",
-                  OUT / "fig_v2_enforcement_spending.png")
+                  OUT / "fig_v2_enforcement_spending.png", event_note=True)
     return s
 
 
@@ -264,22 +263,20 @@ def t9_depth(reg):
     for i, col in enumerate(w.columns):
         lo = 0 if i == 0 else cum.iloc[i - 1]
         label_end(a1, 2025, (lo + cum.iloc[i]) / 2, str(col), cols[i], dx=5, fontsize=8)
-    a1.set_title("Hectares per year, by distance band")
     style_axes(a1); a1.set_xlim(2008, 2025)
     a2.plot(mean_depth.index, mean_depth.values, "-", color=C["corridor"], lw=2.2)
     a2.plot(mean_depth.index, mean_depth.values, "o", color=C["corridor"], ms=4.5, mec="white", mew=1)
-    a2.set_title("Mean distance north of the highway, km")
     style_axes(a2, fmt=False)
     y20 = mean_depth.loc[2020]
     pv = m.pvalues['post2019']
     callout(a2, 2020, y20, f"Break after 2019: {m.params['post2019']:+.1f} km\nnet of trend ({'p < 0.01' if pv < 0.01 else f'p = {pv:.2f}'})",
             dx=8, dy=-26, ha="left")
     a2.set_ylim(mean_depth.min() - 4.5, mean_depth.max() + 2)
-    for a_ in (a1, a2):
-        a_.axvline(2018.5, color=INK, lw=1.1, zorder=0.5)
-        a_.text(2018.4, 0.985, "Mercurio", transform=a_.get_xaxis_transform(), ha="right", va="top", fontsize=7.5, color=INK)
+    a2.set_xlim(2007.5, 2025.5)
+    for a_, t_ in ((a1, "Hectares per year, by distance band"), (a2, "Mean distance north of the highway, km")):
         a_.set_xticks(range(2008, 2026, 4)); a_.set_xticklabels([str(t) for t in range(2008, 2026, 4)])
+        a_.set_title(t_, pad=add_event_markers(a_, label=True))
     finish_figure(fig, f"{SRC_R}. La Pampa longitudes only; first-time mining (new land). Break test: OLS of mean distance "
                        "on a trend and a post-2019 dummy, Newey-West errors, 2008–2025 (18 years). Description.",
-                  OUT / "fig_v2_depth.png")
+                  OUT / "fig_v2_depth.png", event_note=True)
     return m

@@ -13,7 +13,8 @@ border after Mercurio minus the gap before. What's left is what changed at the b
 Unit = a 250-m distance bin within a ~2-km segment along the border (segment = cluster). Outcome = land mined for the
 first time, % of the unit's area per year (MapBiomas Peru Col 4, first-mined year from raster_zones). Estimation:
 rdrobust (Calonico, Cattaneo & Titiunik) on the period-mean outcome (levels) and on its change (post minus pre),
-local linear, triangular kernel, MSE-optimal bandwidth, robust bias-corrected CI, errors clustered by segment.
+local linear, triangular kernel, MSE-optimal bandwidth, robust bias-corrected CI, errors clustered by segment
+(vce="hc1" with cluster= is CR1 in rdrobust).
 Checks: placebo start years (the same diff-in-disc for every fake start, fixed bandwidth), placebo borders (fake
 cut-offs inside one side only), bandwidth and donut sensitivity.
 
@@ -28,7 +29,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from common import (ROOT, OUT, style_axes, finish_figure, headline, label_end, callout, period_band, C, INK, INK2,
-                    MUTED, GRID, AXIS)
+                    MUTED, GRID, AXIS, placebo_rank)
 import raster_zones as rz
 
 INTER = ROOT / "data_intermediate"
@@ -110,7 +111,7 @@ def rd(y, x, cl, w, h=None, c=0.0):
     with warnings.catch_warnings(), contextlib.redirect_stdout(io.StringIO()):
         warnings.simplefilter("ignore")
         r = rdrobust(y=np.asarray(y, float), x=np.asarray(x, float), c=c, h=h, cluster=np.asarray(cl),
-                     weights=np.asarray(w, float), vce="hc1")
+                     weights=np.asarray(w, float), vce="hc1")       # hc1 + cluster = CR1 cluster-robust
     return dict(est=float(r.coef.iloc[0, 0]), ci_lo=float(r.ci.iloc[2, 0]), ci_hi=float(r.ci.iloc[2, 1]),
                 p=float(r.pv.iloc[2, 0]), h=float(r.bws.iloc[0, 0]), n_l=int(r.N_h[0]), n_r=int(r.N_h[1]))
 
@@ -134,14 +135,19 @@ def analyse(border, reg):
     sens = {f"h{int(hh)}": rd(post - pre, x, cl, w, h=hh) for hh in (1.0, 2.0, 3.0, 5.0)}
     don = np.abs(x) >= 0.5
     sens["donut"] = rd((post - pre)[don], x[don], cl[don], w[don], h=h)
-    # placebo start years: the same change in the gap (3 years after minus 3 before), fixed bandwidth h
-    fake = {}
-    for s in range(1995, 2023):
-        a, b = per(rate, s - 3, s - 1), per(rate, s, min(s + 2, 2025))
-        fake[s] = rd(b - a, x, cl, w, h=h)["est"]
-    fake = pd.Series(fake)
-    clean = fake[(fake.index <= 2013) | (fake.index >= 2022) | (fake.index == 2019)]   # windows not touching 2016-21
-    rank = int(clean.abs().rank(ascending=False)[2019]); n = len(clean)
+    # placebo start years (fixed after referee Q4, 13 Oct 2026): the SAME statistic as the headline (mean of 3 years
+    # from the start minus mean of the 5 years before, bandwidth h; start 2019 = rd_*_did exactly), shifted to fake
+    # start years. Candidates: the fake start year has first-time mining near the border (within h), and the whole
+    # fake window (s-5 .. s+2) ends by 2018, so it never touches the treated years 2019-21.
+    npre, npost = PRE[1] - PRE[0] + 1, POST[1] - POST[0] + 1
+    near_h = np.abs(x) <= h
+    mined = rate.loc[near_h].mul(w[near_h], axis=0).sum()
+    first_yr = int(mined[mined > 0].index.min())
+    fake = pd.Series({s_: rd(per(rate, s_, s_ + npost - 1) - per(rate, s_ - npre, s_ - 1), x, cl, w, h=h)["est"]
+                      for s_ in range(first_yr, PRE[1] - npost + 2)})          # last start: s + 2 = 2018
+    real = out["did"]["est"]
+    rank = placebo_rank(-abs(real), -fake.abs()); n = len(fake) + 1          # two-sided: rank by absolute size
+    clean = fake
     # placebo borders: fake cut-offs inside one side only (data from that side)
     pb = {}
     for c in (-4.0, -3.0, -2.0, 2.0, 3.0, 4.0):
@@ -172,22 +178,29 @@ def analyse(border, reg):
         add(f"{k}", r_["est"], "% of land per year", f"Gap at {lab} ({BORDERS[border]['right']} minus {BORDERS[border]['left']}), first-time mined land, {nm}, local linear RD")
         add(f"{k}_lo", r_["ci_lo"], "% of land per year", f"95% robust CI low, {nm}")
         add(f"{k}_hi", r_["ci_hi"], "% of land per year", f"95% robust CI high, {nm}")
-        add(f"{k}_p", r_["p"], "p-value", f"Robust p-value, {nm}")
+        add(f"{k}_p", r_["p"], "p-value", f"Robust bias-corrected p-value (CR1, clustered by 2-km segment), {nm}")
     for k, nm in (("did", "2019-21 vs 2014-18"), ("did_late", "2022-25 vs 2014-18")):
         r_ = out[k]
         add(k, r_["est"], "% of land per year", f"Difference in discontinuities at {lab}: change in the gap, {nm}")
         add(f"{k}_lo", r_["ci_lo"], "% of land per year", f"95% robust CI low, {nm}")
         add(f"{k}_hi", r_["ci_hi"], "% of land per year", f"95% robust CI high, {nm}")
-        add(f"{k}_p", r_["p"], "p-value", f"Robust p-value (errors clustered by 2-km segment), {nm}")
+        add(f"{k}_p", r_["p"], "p-value", f"Robust bias-corrected p-value (CR1 errors clustered by 2-km segment), {nm}")
         add(f"{k}_h", r_["h"], "km", f"MSE-optimal bandwidth, {nm}")
         add(f"{k}_n", r_["n_l"] + r_["n_r"], "count", f"Units (250-m bins x 2-km segments) inside the bandwidth, {nm}")
     for k, r_ in sens.items():
         add(f"sens_{k}", r_["est"], "% of land per year", f"Diff-in-disc 2019-21, sensitivity {k}")
-        add(f"sens_{k}_p", r_["p"], "p-value", f"Robust p-value, sensitivity {k}")
-    add("fake_rank", rank, "rank", "Rank of the real 2019 change in the gap (absolute size) among start years whose windows don't overlap 2016-21")
-    add("fake_n", n, "count", "Start years in the placebo comparison")
-    add("fake_p", rank / n, "p-value", "Randomization p-value, placebo start years")
-    add("fake_max_abs", clean.drop(2019).abs().max(), "% of land per year", "Largest placebo change in the gap (absolute)")
+        add(f"sens_{k}_p", r_["p"], "p-value", f"Robust bias-corrected p-value (CR1, clustered by segment), sensitivity {k}")
+    fk = (f"same statistic as rd_{border}_did (3 years from the start minus the 5 before, bandwidth {h:.2f} km), "
+          f"fake start years {fake.index.min()}-{fake.index.max()} (first year with first-time mining near the border "
+          f"to the last whose window ends by 2018, so no fake window touches 2019-21), plus the real 2019")
+    add("fake_rank", rank, "rank", f"Rank of the real change in the gap (absolute size; 1 = largest) among the {fk}")
+    add("fake_n", n, "count", f"Start years in the placebo comparison (fakes + the real 2019): {fk}")
+    add("fake_p", rank / n, "p-value", f"Randomization p-value = rank / n, two-sided (absolute size), {fk}")
+    add("fake_max_abs", clean.abs().max(), "% of land per year", f"Largest placebo change in the gap (absolute), {fk}")
+    add("fake_first_year", fake.index.min(), "year", "First fake start year in the placebo comparison (first year with first-time mining within the bandwidth)")
+    sp = [v["p"] for v in sens.values()]
+    add("sens_p_min", min(sp), "p-value", "Smallest robust p-value across the sensitivity runs (fixed bandwidth 1, 2, 3, 5 km and 0.5-km donut; errors clustered by segment, CR1)")
+    add("sens_p_max", max(sp), "p-value", "Largest robust p-value across the same sensitivity runs (h1, h2, h3, h5, donut)")
     add("pb_max_abs", max(abs(v["est"]) for v in pb.values()), "% of land per year", "Largest estimate at a fake border inside one side")
     add("pb_n_sig", sum(v["p"] < 0.05 for v in pb.values()), "count", "Fake borders with p < 0.05 (of 6)")
     for k, v in sm.items():
@@ -235,7 +248,7 @@ def figure(res, reg):
                 bb = b[b.index < 0] if side == "l" else b[b.index >= 0]
                 ax.scatter(bb.index, bb.values, s=16 if alpha == 1 else 12, color=col, alpha=alpha, lw=0, zorder=3)
                 xs, ys = local_fit(s, u, min(h, lim), side)
-                ax.plot(xs, ys, color=col, alpha=alpha, lw=lw, ls=ls, zorder=4)
+                ax.plot(xs, ys, color=col, alpha=max(alpha, 0.85), lw=lw, ls=ls, zorder=4)   # dashed pre fit stays legible
         ax.axvline(0, color=INK, lw=1)
         ax.set_xlim(-lim, lim + 1.3)
         ax.set_ylim(bottom=0)
@@ -260,7 +273,7 @@ def figure(res, reg):
                      fontsize=10)
     finish_figure(fig, f"{SRC}. Units: 250-m bins in 2-km segments along each border; local linear fits, triangular kernel, "
                        f"bandwidth chosen by rdrobust (road {road['h']:.1f} km, reserve {resv['h']:.1f} km); 95% robust "
-                       "bias-corrected intervals, clustered by segment. Road: La Pampa longitudes only. Description: "
+                       "bias-corrected intervals, CR1 errors clustered by segment. Road: La Pampa longitudes only. Description: "
                        "displacement opens the road gap from both sides, so it measures the swing, not the net effect.",
                   OUT / "fig_v2_rdd.png")
 

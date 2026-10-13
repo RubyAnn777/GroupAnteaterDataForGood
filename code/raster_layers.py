@@ -20,7 +20,7 @@ from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
 
 from common import (ROOT, OUT, style_axes, finish_figure, headline, label_end, callout, period_band,
-                    set_year_ticks, C, INK, INK2, MUTED, SURFACE)
+                    set_year_ticks, add_event_markers, EVENT_TITLE_PAD, C, INK, INK2, MUTED, SURFACE)
 import raster_zones as rz
 
 SRC = "MapBiomas Peru Collection 4 rasters (class 30 mining), zones: SERNANP, INGEMMET D.L. 1100, RAISG roads, MapBiomas Amazonia native communities"
@@ -68,7 +68,7 @@ def fig_zone_map():
     mined = first > 0
     rgb[mined] = [0.17, 0.2, 0.22]                          # every pixel ever mined, dark ink
     fig, ax = plt.subplots(figsize=(9, 6.7))
-    headline(fig, "One mining belt, split by a road: La Pampa is illegal, the corridor across it is not",
+    headline(fig, "One mining belt split by a road: La Pampa outside the legal corridor, the land across it inside",
              "Our zones around La Pampa (dark = land ever mapped as mining, 1985–2025). Team check: are these boundaries right?")
     ax.imshow(rgb, extent=ext, interpolation="nearest")
     L = rz.layers()
@@ -129,9 +129,10 @@ def fig_stream(g):
     ax.set_ylabel("ha per year")
     style_axes(ax); set_year_ticks(ax, yrs, short=True); ax.set_xticks(yrs)
     ax.set_xticklabels([f"'{str(y)[2:]}" for y in yrs])
+    add_event_markers(ax, label=True); ax.set_title(" ", pad=EVENT_TITLE_PAD)
     finish_figure(fig, f"{SRC}. Newly mined land = pixels mapped as mining for the first time since 1985 "
                        "(returns to old pits are in the Sankey). A shift in where newly mined land appears fits displacement but does "
-                       "not prove that the same miners moved. Description.", OUT / "fig_v2_stream.png")
+                       "not prove that the same miners moved. Description.", OUT / "fig_v2_stream.png", event_note=True)
     return w
 
 
@@ -206,14 +207,17 @@ def fig_road_bands():
     b = pd.read_csv(rz.OUT_BAND)
     b["new_ha"] = b.new_land_ha                     # first-ever mining (robust to year-to-year flicker)
     fig, axes = plt.subplots(1, 3, figsize=(9, 4.2), sharey=True)
-    headline(fig, "After 2019, new mining jumped from the south side of the highway to the north side",
-             "Land mined for the first time per year, ha, per 1-km band from the highway (La Pampa longitudes only)")
+    headline(fig, "After 2019, first-time mining shifted from the south side of the highway to the north side",
+             "Land mined for the first time per year, ha, per 1-km band from the highway (La Pampa longitudes only). "
+             "Beyond 10 km north = deeper in the corridor")
     res = {}
     for ax, (p, (a, c)) in zip(axes, PERIODS.items()):
         d = b[b.year.between(a, c)].groupby("km_from_road").new_ha.mean()
         res[p] = d
         ax.bar(d.index + 0.5, d.values, width=0.86, color=[C["corridor"] if k >= 0 else C["lapampa"] for k in d.index], lw=0)
         ax.axvline(0, color=INK, lw=1.4)
+        ax.axvspan(10, 30, color="#efece5", zorder=-1, lw=0)          # > 10 km north: the rest of the corridor, not "across the road"
+        ax.set_xlim(-20, 30)                                         # nothing was mined more than 20 km south
         n, s_ = d[d.index >= 0].sum(), d[d.index < 0].sum()
         ax.set_title(p, pad=20)
         ax.text(0, 1.02, f"south {s_:,.0f}  ·  north {n:,.0f} ha/yr", transform=ax.transAxes, fontsize=8, color=INK2,
@@ -224,8 +228,9 @@ def fig_road_bands():
     axes[0].text(-2, ymax * 0.97, "← south:\nLa Pampa side", fontsize=8, color=INK, ha="right", va="top")
     axes[0].text(2, ymax * 0.97, "north: →\ncorridor side", fontsize=8, color=INK, ha="left", va="top")
     axes[0].set_ylabel("ha per year, per 1-km band")
+    axes[0].text(20, ymax * 0.97, "> 10 km north:\ndeeper in the\ncorridor", fontsize=7.5, color=INK2, ha="center", va="top")
     finish_figure(fig, f"{SRC}. Only the La Pampa longitudes ({rz.LP_LON}); bands of 1 km measured north-south from "
-                       "the highway. Description.", OUT / "fig_v2_road_bands.png")
+                       "the highway; the shaded part (more than 10 km north) lies beyond the 'corridor across the road' zone. Description.", OUT / "fig_v2_road_bands.png")
     return res
 
 
@@ -235,8 +240,11 @@ def fig_corridor_share(g):
     cor = w["Corridor across the road"] + w["Rest of mining corridor"]
     share = cor / w.sum(axis=1) * 100
     fig, ax = plt.subplots(figsize=(9, 4.4))
-    headline(fig, "The legal corridor's share of new mining rose from about half to almost three quarters",
-             "Share of land mined for the first time in Madre de Dios that lies inside the legal corridor, % (communities excluded)")
+    early, low = share.loc[2005:2009].mean(), share.loc[2014:2018].mean()
+    late = share.loc[2022:2025].mean()
+    headline(fig, f"The corridor's share of new mining dipped to {low:.0f}% in 2014–18, then returned to its 2005–09 level",
+             "Share of land mined for the first time in Madre de Dios that lies inside the legal corridor, % (communities "
+             f"excluded). Means: 2005–09 {early:.0f}%, 2022–25 {late:.0f}%")
     period_band(ax, 2018.5, 2021.5)
     ax.text(2020, 3, "Operation years", ha="center", fontsize=7.5, color=INK2)
     ax.plot(yrs, share, color=C["corridor"], lw=2.2, zorder=3)
@@ -283,8 +291,8 @@ def run(reg):
         reg.add(f"v2_lapampa_remined_{k}", sk[p].loc["La Pampa sector", "remined_ha"], "ha/yr", f"Return to old pits per year, La Pampa sector, {p}", "description", SRC)
         reg.add(f"v2_lapampa_newland_{k}", sk[p].loc["La Pampa sector", "new_land_ha"], "ha/yr", f"New land mined per year, La Pampa sector, {p}", "description", SRC)
         d = rb[p]
-        reg.add(f"v2_road_north_{k}", d[d.index >= 0].sum(), "ha/yr", f"First-time mined land per year 0-15 km NORTH of the highway (La Pampa longitudes), {p}", "description", SRC)
-        reg.add(f"v2_road_south_{k}", d[d.index < 0].sum(), "ha/yr", f"First-time mined land per year 0-15 km SOUTH of the highway (La Pampa longitudes), {p}", "description", SRC)
+        reg.add(f"v2_road_north_{k}", d[d.index >= 0].sum(), "ha/yr", f"First-time mined land per year 0-30 km NORTH of the highway (all 1-km bands; La Pampa longitudes), {p}", "description", SRC)
+        reg.add(f"v2_road_south_{k}", d[d.index < 0].sum(), "ha/yr", f"First-time mined land per year 0-30 km SOUTH of the highway (all 1-km bands; La Pampa longitudes), {p}", "description", SRC)
         reg.add(f"v2_corridor_share_{k}", sh.loc[a:b].mean(), "percent", f"Share of first-time mined land inside the legal corridor (excl. communities), {p}", "description", SRC)
     for nm, v in o25.items():
         reg.add("v2_check_" + "".join(ch for ch in nm.lower() if ch.isalnum()) + "_2025", v, "ha",

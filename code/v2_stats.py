@@ -14,7 +14,7 @@ Periods: pre 2014-18 (reference), during 2019-21, after 2022-25. Reference cells
 so coefficients are RELATIVE movements.
 
   S1 zone x period DiD:  y_ct = a_c + g_t + sum_z sum_p b_zp [zone = z][period = p] (+ gold_share x year FE)
-  S2 event study for La Pampa and the corridor across the road (year coefficients, 2018 = 0) + joint pre-trend test
+  S2 event study for La Pampa and the corridor across the road (year coefficients, pooled 2014-18 = 0) + joint pre-trend test
   S3 distance-to-highway gradient (bands south/north x period), La Pampa longitudes
   S4 the "extra buffer zone" (Amarakaeri BZ, west of the corridor; Mercurio extension in 2020): 2020-21 vs pre
 All coefficients are DESCRIPTION of relative changes; the one causal sentence stays conditional (see the brief).
@@ -26,7 +26,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pyfixest as pf
 
-from common import ROOT, OUT, style_axes, finish_figure, headline, callout, period_band, C, INK, INK2, MUTED, AXIS, GRID
+from common import (ROOT, OUT, style_axes, finish_figure, headline, callout, period_band, add_event_markers, EVENT_TITLE_PAD,
+                    C, INK, INK2, MUTED, AXIS, GRID)
 import raster_zones as rz
 
 INTER = ROOT / "data_intermediate"
@@ -175,7 +176,8 @@ def fig_zone(t):
     names = {"".join(ch for ch in z.lower() if ch.isalnum())[:14]: z for z in FOCAL.values()}
     m["zone"] = m.zone.map(names)
     fig, ax = plt.subplots(figsize=(9, 5.2))
-    headline(fig, "Per 1-km cell, La Pampa fell and the corridor across the road rose",
+    lp_p = float(m[(m.zone == "La Pampa sector") & (m.per == "during")]["Pr(>|t|)"].iloc[0])
+    headline(fig, "La Pampa fell" + (" (CI includes zero)" if lp_p >= 0.05 else "") + "; the corridor across the road rose",
              "Change in first-time mining vs 2014–18, ha per cell per year, relative to clean comparison cells (95% CI)")
     zones = list(FOCAL.values()); ys = np.arange(len(zones))
     for j, p in enumerate(("during", "after")):
@@ -212,17 +214,16 @@ def fig_event(ev):
         ax.fill_between(t.year, t["2.5%"], t["97.5%"], color=c_, alpha=0.16, lw=0)
         ax.plot(t.year, t.Estimate, "-", color=c_, lw=2.2)
         ax.plot(t.year, t.Estimate, "o", color=c_, ms=4.5, mec="white", mew=1)
-        ax.axhline(0, color=INK2, lw=0.8); ax.axvline(2018.5, color=INK, lw=1.1, zorder=0.5)
-        ax.text(2018.6, 0.985, "Mercurio", transform=ax.get_xaxis_transform(), ha="left", va="top", fontsize=7.5, color=INK)
+        ax.axhline(0, color=INK2, lw=0.8)
         pv = float(w["pvalue"])
-        ax.text(0, 1.02, f"Pre-trend test 2010–13: {_p(pv)}" + (", fails" if pv < 0.05 else ", passes"),
-                transform=ax.transAxes, fontsize=8, color=INK2, va="bottom")
-        ax.set_title(nm, pad=20)
         style_axes(ax, fmt=False)
-        ax.set_xticks(range(2010, 2026, 3))
+        ax.set_xlim(2009.5, 2025.5); ax.set_xticks(range(2010, 2026, 3))
+        pad = add_event_markers(ax, label=True)
+        ax.set_title(f"{nm}\nPre-trend test 2010–13: {_p(pv)}" + (", fails" if pv < 0.05 else ", passes"),
+                     pad=pad, fontsize=9.5)
     finish_figure(fig, f"{SRC}. Event study with cell and year fixed effects; reference = the pooled 2014–18 period (shaded); "
                        "comparison cells exclude the legal corridor and native communities; joint test that the 2010–13 leads are zero. "
-                       "Description.", OUT / "fig_v2_stats_event.png")
+                       "Description.", OUT / "fig_v2_stats_event.png", event_note=True)
 
 
 def run(reg):
@@ -254,21 +255,29 @@ def run(reg):
             reg.add(f"st_{tag}_{term}_p", pv[term], "p-value", f"{s}: p-value of {term} (CRV1 by 10-km block)", "description", SRC)
     # wild cluster bootstrap (Rademacher, 999 draws): few clusters contain the treated zones
     main = specs[0][1]
-    cache = INTER / "wcb_cache_v2.csv"                    # slow (minutes): computed once, re-run by deleting the file
-    if cache.exists():
-        wcb = pd.read_csv(cache).set_index("term").p
+    # cache keyed by a hash of its inputs (the bootstrap panel, draws, seed): any change in the inputs recomputes it
+    import hashlib
+    WCB_REPS, WCB_SEED = 999, 1
+    cache = INTER / "wcb_cache_v2.csv"
+    dm = d[d.year >= 2014]
+    dm = dm[~((dm.focal == "reference") & dm.zone.isin(CLEAN_DROP))].copy()
+    rhs = []
+    for z in FOCAL.values():
+        key = "".join(ch for ch in z.lower() if ch.isalnum())[:14]
+        for p_ in PER:
+            dm[f"{key}_{p_}"] = ((dm.focal == z) & (dm[f"post_{p_}"] == 1)).astype(int); rhs.append(f"{key}_{p_}")
+    cols = ["cell", "year", "block", "new_land_ha"] + rhs
+    h = hashlib.sha256(pd.util.hash_pandas_object(dm[cols].sort_values(["cell", "year"]), index=False).values.tobytes()
+                       + f"|{WCB_REPS}|{WCB_SEED}".encode()).hexdigest()[:16]
+    c_ = pd.read_csv(cache) if cache.exists() else None
+    if c_ is not None and "input_hash" in c_ and (c_.input_hash.astype(str) == h).all():
+        wcb = c_.set_index("term").p
     else:
-        wcb = {}
-        dm = d[d.year >= 2014]
-        dm = dm[~((dm.focal == "reference") & dm.zone.isin(CLEAN_DROP))].copy()
-        rhs = []
-        for z in FOCAL.values():
-            key = "".join(ch for ch in z.lower() if ch.isalnum())[:14]
-            for p_ in PER:
-                dm[f"{key}_{p_}"] = ((dm.focal == z) & (dm[f"post_{p_}"] == 1)).astype(int); rhs.append(f"{key}_{p_}")
-        for term in ("lapampasector_during", "corridoracross_during"):
-            wcb[term] = wild_cluster_bootstrap(dm, "new_land_ha", rhs, term, "block", reps=999)
-        pd.Series(wcb, name="p").rename_axis("term").to_csv(cache)
+        print("wild cluster bootstrap: inputs changed or no cache, recomputing (~30 s)")
+        wcb = {term: wild_cluster_bootstrap(dm, "new_land_ha", rhs, term, "block", reps=WCB_REPS, seed=WCB_SEED)
+               for term in ("lapampasector_during", "corridoracross_during")}
+        pd.DataFrame({"term": list(wcb), "p": list(wcb.values()), "input_hash": h}).to_csv(cache, index=False)
+        wcb = pd.Series(wcb)
     for term, key in (("lapampasector_during", "lp"), ("corridoracross_during", "across")):
         if term in wcb:
             reg.add(f"st_wcb_{key}_p", float(wcb[term]), "p-value", f"Wild cluster bootstrap p-value (WCR, 999 Rademacher draws, 10-km blocks, after removing cell and year effects), {term}", "description", SRC)
@@ -281,7 +290,7 @@ def run(reg):
         reg.add(f"st_event_{key}_pretrend_p", float(w["pvalue"]), "p-value", f"Joint pre-trend test (2010-13 leads, 2014-18 pooled reference), {nm}", "description", SRC)
         for _, r in tt.iterrows():
             if r.year in (2012, 2019, 2020, 2021, 2023):
-                reg.add(f"st_event_{key}_{r.year}", r.Estimate, "ha/cell-yr", f"Event study {nm}, {r.year} vs 2018", "description", SRC)
+                reg.add(f"st_event_{key}_{r.year}", r.Estimate, "ha/cell-yr", f"Event study {nm}, {r.year} vs the pooled 2014-18 mean", "description", SRC)
                 reg.add(f"st_event_{key}_{r.year}_p", r["Pr(>|t|)"], "p-value", f"Event study {nm}, {r.year}, p-value", "description", SRC)
     for term in g.coef().index:
         reg.add(f"st_grad_{term}", g.coef()[term], "ha/cell-yr", f"Road gradient: {term} (ref: south 10-30 km)", "description", SRC)

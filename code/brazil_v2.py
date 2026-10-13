@@ -10,7 +10,7 @@
      dates to random territories) 2,000 times; p = share of shuffles with an effect at least as negative.
   B5 Displacement next door: Yanomami rings 0-10 km and 10-25 km outside the border, before vs after Feb 2023,
      relative to the no-operation pool.
-DESCRIPTION; few treated territories; operation searches cover 2021-2025 only.
+DESCRIPTION; few treated territories; operation searches cover 2021-2025 only. One date per territory: first_operations().
 """
 from __future__ import annotations
 import warnings
@@ -27,16 +27,44 @@ INTER = ROOT / "data_intermediate"
 SRC = "MapBiomas Brazil Collection 11 rasters (class 30 mining) x FUNAI territories; operations: data_intermediate/operations_coded.csv"
 
 
+# ONE treatment date per territory for the whole package (brazil_v2 and brazil_stagger), referee C9, 13 Oct 2026.
+# RULE: the first VERIFIED operation inside the systematic search window 2021-2025 (operations_coded.csv, column
+# first_op_2021_2025, verdict "yes"). Earlier operations (Kayapo Oct 2017, a 3-day Ibama raid) are listed but not
+# coded as treatment: before 2021 no territory was searched, so coding the one we stumbled on would be asymmetric.
+# Operations known only from search snippets do not count; the next verified one does:
+UNVERIFIED = {   # unit_id: (unverified first operation, first verified operation in the window, reason)
+    "BR-TI-29801": ("2021-05", "2023-08", "Op. Mundurukania May 2021 from search snippets only; Ibama from 2023-08-10"),
+    "BR-TI-40901": ("2021-05", "2023-08", "Sai-Cinza: same Munduruku complex, May 2021 snippet only; dated with Munduruku"),
+}
+OTHER_OPS = {"BR-TI-23001": ("2017-10", "Ibama 3-day raid, before the 2021-25 search window")}   # shown, not coded
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def first_operations() -> pd.Series:
+    """unit_id -> 'YYYY-MM' of the first verified operation 2021-2025 (the package-wide rule above)."""
+    ops = pd.read_csv(INTER / "operations_coded.csv").set_index("unit_id")
+    out = {}
+    for uid, r in ops.iterrows():
+        fo = str(r["first_op_2021_2025"])
+        if r["verdict_2017_2025"] != "yes" or not fo[:4].isdigit() or int(fo[:4]) < 2021:
+            continue
+        out[uid] = UNVERIFIED[uid][1] if uid in UNVERIFIED else fo[:7]
+    return pd.Series(out)
+
+
+def month_label(ym: str) -> str:
+    return f"{MONTHS[int(ym[5:7]) - 1]} {ym[:4]}"
+
+
+def first_treat_year(ym: str) -> int:
+    """Annual panel: an operation in Jan-Jun treats that year; Jul-Dec treats the next year (first full exposure)."""
+    return int(ym[:4]) + (1 if int(ym[5:7]) >= 7 else 0)
+
+
 def load():
     d = pd.read_csv(br.OUT_CSV)
-    ops = pd.read_csv(INTER / "operations_coded.csv").set_index("unit_id")
-    first = {}
-    for uid in d.unit_id.unique():
-        if uid in ops.index and ops.loc[uid, "verdict_2017_2025"] == "yes":
-            fo = str(ops.loc[uid, "first_op_2021_2025"])          # first operation INSIDE 2021-2025 (fix: Kayapo 2024-09)
-            if fo[:4].isdigit() and int(fo[:4]) >= 2021:
-                first[uid] = int(fo[:4]) + (1 if int(fo[5:7]) >= 7 else 0)   # operation in H2 -> first treated year = next year
-    # Sai-Cinza follows Munduruku (same complex; Op. Mundurukania 2021)
+    fo = first_operations()
+    first = {uid: first_treat_year(fo[uid]) for uid in d.unit_id.unique() if uid in fo.index}
     d["first_treat"] = d.unit_id.map(first).fillna(0).astype(int)
     return d
 
@@ -84,37 +112,64 @@ def run(reg):
     p, twfe, g = did(d)
     real, pval, sims = ri(p)
     reg.add("brv2_twfe_treat", twfe.coef()["treat"], "log points", "Staggered DiD (TWFE), log(1+first-time mining), territory+year FE, 2014-2025", "description", SRC)
-    reg.add("brv2_twfe_treat_p", twfe.pvalue()["treat"], "p-value", "TWFE p-value (clustered by territory)", "description", SRC)
+    reg.add("brv2_twfe_treat_p", twfe.pvalue()["treat"], "p-value", "TWFE p-value, two-sided (clustered by territory)", "description", SRC)
     reg.add("brv2_did2s_treat", g[0], "log points", "Two-stage DiD (Gardner), same outcome", "description", SRC)
-    reg.add("brv2_did2s_treat_p", g[2], "p-value", "did2s p-value", "description", SRC)
-    reg.add("brv2_ri_p", pval, "p-value", "Randomization inference: share of 2,000 shuffles of operation dates/territories with an effect <= the real one", "description", SRC)
+    reg.add("brv2_did2s_treat_p", g[2], "p-value", "did2s p-value, TWO-SIDED, cluster-robust by territory", "description", SRC)
+    reg.add("brv2_ri_p", pval, "p-value", "Randomization inference, ONE-SIDED, on the TWFE estimate (not did2s): share of 2,000 shuffles of operation dates/territories with a TWFE effect <= the real one (a large p = no sign of a fall)", "description", SRC)
     reg.add("brv2_n_units", p.unit_id.nunique(), "count", "Territories in the Brazil panel", "description", SRC)
-    reg.add("brv2_n_treated", int((p.groupby("unit_id").first_treat.first() > 0).sum()), "count", "Territories with an operation 2021-2025", "description", SRC)
+    ft = p.groupby("unit_id").first_treat.first()
+    reg.add("brv2_n_treated", int((ft > 0).sum()), "count", "Territories with a first verified operation 2021-2025 (package-wide rule, brazil_v2.first_operations)", "description", SRC)
+    ops = pd.read_csv(INTER / "operations_coded.csv").set_index("unit_id")["verdict_2017_2025"]
+    never = ft.index[ft == 0]
+    v = ops.reindex(never)
+    reg.add("brv2_never_n", len(never), "count", "'Never-treated' territories in the Brazil panel (no verified operation 2021-2025)", "description", SRC)
+    reg.add("brv2_never_n_searched", int(v.eq("none").sum()), "count", "... of which searched for operations (2022-2025) with none found", "description", SRC)
+    reg.add("brv2_never_n_unclear", int(v.eq("unclear").sum()), "count", "... of which searched, status unclear (undated operation)", "description", SRC)
+    reg.add("brv2_never_n_unsearched", int(v.isna().sum()), "count", "... of which never searched (not in operations_coded.csv): 'no operation found' is NOT 'no operation'", "description", SRC)
+    reg.add("brv2_n_treated_2025", int((ft == 2025).sum()), "count", "Treated territories whose first treated year is 2025 (one post year only)", "description", SRC)
+    # sensitivity: Kayapo coded from its Oct 2017 raid (first treated 2018) instead of the 2021-25 rule
+    pk = p.assign(first_treat=np.where(p.unit_id == "BR-TI-23001", 2018, p.first_treat))
+    pk["treat"] = ((pk.first_treat > 0) & (pk.year >= pk.first_treat)).astype(int)
+    tk = pf.feols("ln_new ~ treat | unit_id + year", data=pk, vcov={"CRV1": "unit_id"})
+    reg.add("brv2_twfe_treat_kay2017", tk.coef()["treat"], "log points", "Sensitivity: TWFE with Kayapo treated from 2018 (its Oct 2017 raid) instead of 2025", "description", SRC)
+    reg.add("brv2_twfe_treat_kay2017_p", tk.pvalue()["treat"], "p-value", "Sensitivity TWFE p-value, two-sided (clustered by territory)", "description", SRC)
     print(f"TWFE {twfe.coef()['treat']:.3f} (p {twfe.pvalue()['treat']:.3f}); did2s {g[0]:.3f} (p {g[2]:.3f}); RI p {pval:.3f}")
     # B2 figure: first-time mining and old pits, four treated territories + pool
     w = d.pivot_table(index="year", columns="unit", values="new_land_ha").loc[2010:2025]
     r = d.pivot_table(index="year", columns="unit", values="remined_ha").loc[2010:2025]
-    show = [("Yanomami", 2023 + 1 / 12), ("Munduruku", 2021 + 4 / 12), ("Kayapó", 2024 + 8 / 12), ("Sararé", 2024 + 8 / 12)]
+    fo = first_operations()
+    uid = d.drop_duplicates("unit").set_index("unit").unit_id
+    show = ["Yanomami", "Munduruku", "Kayapó", "Sararé"]
     fig, axes = plt.subplots(2, 2, figsize=(9, 6.2), sharex=True, gridspec_kw={"hspace": 0.55, "wspace": 0.25})
     axes = axes.ravel()
-    headline(fig, "Brazil: mining fell in 2022–24, but not right after each territory’s own operation",
+    headline(fig, "Brazil: mining did not fall right after each territory’s own operation",
              f"Mined land per year, ha (first-time mining + returns to old pits). Two-stage DiD {g[0]:+.2f} log points "
-             f"(p = {g[2]:.2f}); randomization p = {pval:.2f}.")
-    for i, (ax, (nm, op)) in enumerate(zip(axes, show)):
+             f"(p = {g[2]:.2f}, two-sided); randomization p = {pval:.2f} (one-sided).")
+    for i, (ax, nm) in enumerate(zip(axes, show)):
         ax.bar(w.index, w[nm], color=C["lapampa"], width=0.75)
         ax.bar(r.index, r[nm], bottom=w[nm], color=C["lapampa_tint"], width=0.75)
         ax.bar(w.index, [0] * len(w), bottom=w[nm], color="white", width=0.75, edgecolor="white", linewidth=1.0)
-        ax.axvline(op - 0.5, color=INK, lw=1.1)
         ax.set_ylim(0, float((w[nm] + r[nm]).max()) * 1.22)
-        ax.annotate(f"operation\n{int(op)}", xy=(op - 0.5, 1), xycoords=("data", "axes fraction"), xytext=(-4, -3),
-                    textcoords="offset points", ha="right", va="top", fontsize=7.5, color=INK2, linespacing=1.1)
+        u_ = uid[nm]
+        lines = [(first_treat_year(fo[u_]) - 0.5, month_label(fo[u_]), True)]          # the coded treatment
+        if u_ in UNVERIFIED:
+            lines.append((first_treat_year(UNVERIFIED[u_][0]) - 0.5, month_label(UNVERIFIED[u_][0]) + "\n(unverified)", False))
+        if u_ in OTHER_OPS:
+            lines.append((first_treat_year(OTHER_OPS[u_][0]) - 0.5, month_label(OTHER_OPS[u_][0]) + "\n(3-day raid)", False))
+        for x_, lab, coded in lines:
+            ax.axvline(x_, color=INK if coded else AXIS, lw=1.1 if coded else 0.9, ls="-" if coded else (0, (3, 2)))
+            ax.annotate(lab, xy=(x_, 1), xycoords=("data", "axes fraction"), xytext=(-4, -3),
+                        textcoords="offset points", ha="right", va="top", fontsize=7.5, color=INK2 if coded else MUTED,
+                        linespacing=1.1)
         ax.set_title(nm, pad=6); style_axes(ax)
         ax.set_xticks(range(2010, 2026, 3)); ax.set_xticklabels([f"'{str(y)[2:]}" for y in range(2010, 2026, 3)])
     from matplotlib.patches import Patch
     axes[1].legend(handles=[Patch(color=C["lapampa"], label="First-time mining"), Patch(color=C["lapampa_tint"], label="Return to old pits")],
                    loc="upper left", fontsize=8, frameon=False, handlelength=1.0, handleheight=0.9)
     axes[0].set_ylabel("ha per year"); axes[2].set_ylabel("ha per year")
-    finish_figure(fig, f"{SRC}. Black line = the territory’s own first operation. Description.", OUT / "fig_brazil_v2_pixels.png")
+    finish_figure(fig, f"{SRC}. Black line = the territory’s own first verified operation 2021–25, drawn before its first treated "
+                       "year (Jan–Jun: that year; Jul–Dec: the next year). Dashed grey = earlier operations not coded as treatment. "
+                       "Description.", OUT / "fig_brazil_v2_pixels.png")
     # B5 rings
     ring = d[d.unit.str.startswith("Yanomami ring")].pivot_table(index="year", columns="unit", values="new_land_ha")
     pre, post = ring.loc[2019:2022].mean(), ring.loc[2023:2025].mean()

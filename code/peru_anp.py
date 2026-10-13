@@ -171,8 +171,10 @@ def run(pack, reg):
         for i in order:
             ys[i] = max(vals[i], last + gap); last = ys[i]
         for i in range(len(vals)):
-            ax.annotate(names[i], xy=(2025, vals[i]), xytext=(2025.45, ys[i]), textcoords="data", va="center", ha="left",
-                        fontsize=8.5, color=INK, fontweight="semibold", annotation_clip=False)
+            moved = abs(ys[i] - vals[i]) > 0.15 * gap      # nudged away from its line end: draw a leader line to it
+            ax.annotate(names[i], xy=(2025.1, vals[i]), xytext=(2025.45, ys[i]), textcoords="data", va="center", ha="left",
+                        fontsize=8.5, color=INK, fontweight="semibold", annotation_clip=False,
+                        arrowprops=dict(arrowstyle="-", color=cols[i], lw=0.9, shrinkA=0, shrinkB=1) if moved else None)
     _labels(a1, [adds.loc[2025, k] for k in RES], ["Tambopata", "Bahuaja-Sonene", "Amarakaeri"],
             [COL[k] for k in RES], 62)
     _labels(a2, [bz.loc[2025, k] for k in RES], ["Tambopata", "Bahuaja-Sonene", "Amarakaeri"],

@@ -85,20 +85,36 @@ def bz_overlap_check(zb, pe, reg):
                              overlap_pct_of_smaller=100 * inter / amin if amin else np.nan))
     ov = pd.DataFrame(rows).sort_values("overlap_ha", ascending=False)
     top = ov.iloc[0]
-    material = bool((ov["overlap_pct_of_smaller"] > 1).any())
-    ov["warning"] = np.where(ov["overlap_pct_of_smaller"] > 1,
-                             "WARNING: overlap > 1% of the smaller zone; 'rest of MdD' (dept minus sum of buffer-zone rows) double-subtracts this area", "")
+    # Is the overlap double-counted in the PACK? (referee C10) MapBiomas assigns each pixel to one buffer zone: if a
+    # zone's pack total_ha (all departments, 2025) falls short of its polygon area by the overlap, the overlap went to
+    # the other zone only, and the pack series are overlap-free.
+    poly = dict(zip(names, sel.geometry.area / 1e4))
+    pack = zb[zb["year"] == 2025].groupby("buffer_zone")["total_ha"].sum()
+    def pack_ha(nm):                                     # SERNANP anp_nomb = pack buffer_zone name
+        return float(pack[nm]) if nm in pack.index else np.nan
+    short = {nm: poly[nm] - pack_ha(nm) for nm in (top.zone_a, top.zone_b)}
+    owner_less = max(short, key=lambda k: short[k])                       # the zone that lost the overlap in the pack
+    gap = short[owner_less] - float(top.overlap_ha)
+    free = abs(gap) <= 0.01 * float(top.overlap_ha)
+    ov["in_pack"] = np.where(ov["overlap_pct_of_smaller"] > 1, "overlap pixels counted once in the pack (see bz_overlap_pack_*)", "")
     ov.round(2).to_csv(OUT / "peru_bz_overlap.csv", index=False)
     print(ov.round(1).head(6).to_string(index=False))
-    warn = (" WARNING: overlap is material (> 1% of the smaller zone), so 'rest of MdD' is understated by about this area "
-            "(upper bound: only the mining share of it)." if material else " Not material (<= 1% of the smaller zone).")
+    print(f"pack vs polygon: {owner_less} polygon - pack = {short[owner_less]:,.0f} ha vs overlap {top.overlap_ha:,.0f} ha -> "
+          + ("overlap-free" if free else "CHECK: overlap may be double-counted"))
+    note = (f" The pack's {owner_less} total_ha is smaller than its polygon by about the overlap (bz_overlap_pack_*), so "
+            "MapBiomas assigned the overlap to one zone only: the pack series are overlap-free and 'rest of MdD' is not "
+            "double-subtracted." if free else " CHECK: the pack areas do not absorb the overlap; 'rest of MdD' may be understated.")
+    gsrc = "data_raw/sernanp/zonas_amortiguamiento.geojson; peru_bufferzone_year.csv"
     reg.add("bz_overlap_max_ha", float(top.overlap_ha), "ha",
             f"Largest pairwise geographic overlap among Madre de Dios buffer zones (SERNANP polygons, ESRI:102033): "
-            f"{top.zone_a} x {top.zone_b} ({top.overlap_pct_of_smaller:.2f}% of the smaller zone).{warn} Pair table: output/peru_bz_overlap.csv",
-            "description", "data_raw/sernanp/zonas_amortiguamiento.geojson")
+            f"{top.zone_a} x {top.zone_b} ({top.overlap_pct_of_smaller:.2f}% of the smaller zone).{note} Pair table: output/peru_bz_overlap.csv",
+            "description", gsrc)
     reg.add("bz_overlap_max_pct_of_smaller", float(top.overlap_pct_of_smaller), "%",
-            f"Same pair ({top.zone_a} x {top.zone_b}), overlap as % of the smaller zone.{warn}", "description",
-            "data_raw/sernanp/zonas_amortiguamiento.geojson")
+            f"Same pair ({top.zone_a} x {top.zone_b}), overlap as % of the smaller zone (SERNANP polygons).{note}", "description", gsrc)
+    reg.add("bz_overlap_pack_polygon_ha", poly[owner_less], "ha", f"{owner_less} buffer zone, SERNANP polygon area (ESRI:102033)", "description", gsrc)
+    reg.add("bz_overlap_pack_total_ha", pack_ha(owner_less), "ha", f"{owner_less} buffer zone, pack total_ha 2025, all departments (MapBiomas Peru Col 4)", "description", gsrc)
+    reg.add("bz_overlap_pack_shortfall_ha", short[owner_less], "ha", f"{owner_less}: polygon area minus pack total_ha; equals the overlap if MapBiomas assigned it to the other zone", "description", gsrc)
+    reg.add("bz_overlap_pack_free", float(free), "0/1", "1 if the polygon-minus-pack shortfall equals the overlap within 1% (pack series overlap-free)", "description", gsrc)
 
 def run(pack, reg, series=None):
     print("\n== Peru robustness (Phase 5) ==")

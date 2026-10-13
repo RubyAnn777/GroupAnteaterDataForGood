@@ -24,7 +24,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pyfixest as pf
 
-from common import OUT, style_axes, finish_figure, SRC_MAPBIOMAS, SRC_PRICE, headline, C, INK, INK2, GRID
+from common import OUT, style_axes, finish_figure, SRC_MAPBIOMAS, SRC_PRICE, headline, C, INK, INK2, GRID, placebo_rank
 
 TU = "Tambopata|Reserva Nacional"
 SRC = "peru_bufferzone_year.csv, prices_annual.csv"
@@ -102,12 +102,11 @@ def run(pack, reg):
         # Tambopata is REMOVED from the pool, so its real fall cannot make every placebo look positive.
         others = {u: fit(ad, [v for v in units if v != TU], u, m, 2014, 2025, REAL, gold)["post_during"]
                   for u in units if u != TU}
+        rank = placebo_rank(real["post_during"], others.values())
         others[TU] = real["post_during"]
-        rank = int(pd.Series(others).rank().loc[TU])
         amz = [u for u in units if u in AMAZON]
         oth_a = {u: fit(ad, [v for v in amz if v != TU], u, m, 2014, 2025, REAL, gold)["post_during"] for u in amz if u != TU}
-        oth_a[TU] = fit(ad, amz, TU, m, 2014, 2025, REAL, gold)["post_during"]
-        rank_amz = int(pd.Series(oth_a).rank().loc[TU])
+        rank_amz = placebo_rank(fit(ad, amz, TU, m, 2014, 2025, REAL, gold)["post_during"], oth_a.values())
         rows.append(dict(model=m, label=label, n_zones=len(units),
                          unit="share of own pre-2019 mean" if m == "M4" else "ha/yr",
                          during_2019_21=real["post_during"], after_2022_25=real["post_after"],
@@ -131,6 +130,15 @@ def run(pack, reg):
         reg.add(f"model_{k}_n_amazon", r["n_amazon"], "count", f"Amazon-department zones, {lab}", "description", SRC)
         reg.add(f"model_{k}_placebo_min", r["placebo_min"], u, f"Smallest placebo-in-space effect (Tambopata removed from pool), {lab}", "description", SRC)
         reg.add(f"model_{k}_placebo_max", r["placebo_max"], u, f"Largest placebo-in-space effect, {lab}", "description", SRC)
+    # M3 variant: Tambopata's post years saturated (one dummy per year 2019-25), so its own trend is fitted on
+    # 2014-18 only and post-period variation cannot feed it (referee C5). Gap = mean of the 2019-21 dummies.
+    sat = fit(ad, poolB, TU, "M3", 2014, 2025, {f"y{y}": (y, y) for y in range(2019, 2026)}, gold)
+    m3pre = np.mean([sat[f"post_y{y}"] for y in (2019, 2020, 2021)])
+    print(f"M3, Tambopata trend from pre-years only: 2019-21 gap {m3pre:,.0f} ha/yr")
+    reg.add("model_m3pre_during", m3pre, "ha/yr", "Tambopata 2019-21 gap, M3 with Tambopata's trend fitted on 2014-18 only "
+            "(one dummy per post year 2019-25, gap = mean of 2019-21 dummies; 15 zones, 2014-25). Description.", "description", SRC)
+    reg.add("model_m3pre_after", np.mean([sat[f"post_y{y}"] for y in range(2022, 2026)]), "ha/yr",
+            "Tambopata 2022-25 gap, same M3 variant (trend from pre-years only). Description.", "description", SRC)
     reg.add("model_m2_gold_slope", rows[1]["gold_slope"], "ha per (ha of pre mean x 1 log-point)",
             "M2: extra annual addition per hectare of a zone's 2014-18 mean addition, per 1.0 rise in ln(gold price)", "description", SRC)
     t = ad[TU]
@@ -150,6 +158,9 @@ def _figure(res):
     m4 = res[res["model"] == "M4"].iloc[0]
     headline(fig, TITLE.format(rank=int(m4["rank_in_space"]), n=int(m4["n_zones"])), "Tambopata minus the other zones, after zone and year effects. Orange: real operation 2019–21. "
                          "Grey: fake operation 2016–18 (should be near 0).")
+    ha_rows = res[res["model"] != "M4"]                      # M1-M3 share one hectare axis, so bars compare
+    ha_lo = min(ha_rows["during_2019_21"].min(), ha_rows["placebo_fake_2016"].min()) * 1.45
+    ha_hi = max(0, ha_rows["placebo_fake_2016"].max()) + abs(ha_lo) * 0.3
     for ax, (_, r) in zip(axes, res.iterrows()):
         ax.barh([1], [r["during_2019_21"]], 0.62, color=C["lapampa"])
         ax.barh([0], [r["placebo_fake_2016"]], 0.62, color=C["other"])
@@ -159,8 +170,11 @@ def _figure(res):
                         va="center", ha="left" if v >= 0 else "right", fontsize=8.5, color=INK,
                         fontweight="semibold" if lab == "real" else "normal")
         ax.axvline(0, color=INK2, lw=0.8)
-        lo = min(r["during_2019_21"], r["placebo_fake_2016"]) * 1.45
-        hi = max(0, r["placebo_fake_2016"]) + abs(lo) * 0.3
+        if r["model"] == "M4":
+            lo = min(r["during_2019_21"], r["placebo_fake_2016"]) * 1.45
+            hi = max(0, r["placebo_fake_2016"]) + abs(lo) * 0.3
+        else:
+            lo, hi = ha_lo, ha_hi
         ax.set_xlim(lo, hi)
         ax.set_yticks([])
         for sp in ("top", "right", "left"):

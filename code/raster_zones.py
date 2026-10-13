@@ -84,10 +84,15 @@ def layers():
     cor = gpd.read_file(RAW / "ingemmet/corredor_minero_madre_de_dios_DL1100.geojson").to_crs(4326)
     roads = gpd.read_file(RAW / "raisg/vias_nacionales_mdd_box.geojson")
     ioh = roads[roads.sigla == "PE-30C"].to_crs(4326)                     # Interoceanic Highway (IIRSA Sur)
-    ti = gpd.read_file("zip://" + str(RAW / "mapbiomas_amazonia/INDIGENOUS_TERRITORIES.zip")).to_crs(4326)
     dep = gpd.read_file(RAW / "geoboundaries/geoBoundaries-PER-ADM1.geojson").to_crs(4326)
     mdd = dep[dep.shapeName == "Madre de Dios"].geometry.union_all()
-    ti = ti[ti.geometry.intersects(mdd) & ti.LEVEL_1.eq("Comunidad Nativa")]
+    ti_zip, ti_mdd = RAW / "mapbiomas_amazonia/INDIGENOUS_TERRITORIES.zip", INTER / "native_communities_mdd.geojson"
+    if ti_zip.exists():                    # 59 MB, git-ignored; the Madre de Dios subset is committed as ti_mdd
+        ti = gpd.read_file("zip://" + str(ti_zip)).to_crs(4326)
+        ti = ti[ti.geometry.intersects(mdd) & ti.LEVEL_1.eq("Comunidad Nativa")]
+        ti.to_file(ti_mdd, driver="GeoJSON")
+    else:
+        ti = gpd.read_file(ti_mdd)
     return dict(anp=anp, za=za, cor=cor.geometry.union_all(), ioh=ioh, ti=ti, mdd=mdd)
 
 

@@ -94,7 +94,7 @@ def run(reg):
     a1.set_ylabel("Index, 2018 = 100"); a1.set_xticks(range(2009, 2024, 3))
     a1.set_title("Growth paths, 2009–2023", pad=8)
     yrs = list(range(2019, 2026))
-    period_band(a2, 2018.5, 2021.5, "Mercurio years")
+    period_band(a2, 2018.5, 2021.5, "Operation years")
     sh = {"Tambopata buffer zone": 100 * w.loc[TU, yrs] / w.loc[TU, 2018]}
     for uid, (nm, _) in TWINS.items():
         sh[nm] = 100 * w.loc[uid, yrs] / w.loc[uid, 2018]

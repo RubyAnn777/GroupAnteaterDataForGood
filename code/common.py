@@ -52,6 +52,14 @@ def period_mean(adds: pd.Series, y0: int, y1: int) -> float:
     assert len(s) == y1 - y0 + 1 and s.notna().all(), f"missing years in {y0}-{y1}"
     return float(s.mean())
 
+def placebo_rank(real: float, placebos) -> int:
+    """Placebo-in-space / in-time rank, ONE convention for the whole package: 1 + number of placebos with an
+    effect at least as negative as the real one (ties count against us). 1 = the real effect is the most negative.
+    For a two-sided test on absolute size pass -abs(real), -abs(placebos)."""
+    import numpy as np
+    p = np.asarray(list(placebos), float)
+    return 1 + int((p <= real).sum())
+
 # --------------------------------------------------------------------------- numbers registry
 class Numbers:
     """Every number we might cite goes through add(). Written to output/numbers.csv.
@@ -98,6 +106,7 @@ C = dict(
     reserve="#2f6e2a",        # reserves and parks (inside protected areas)
     twin="#6a5acd",           # rule-based / synthetic twins
     gold="#d4a12a",           # gold price, gold-bearing land
+    gold_tint="#ebcf86",      # a part of the gold (e.g. declared gold), same family, always labelled
     other="#a9a8a2",          # rest / other / pools (deliberately grey: folds, not a series)
     brazil="#d0692f",         # Brazil treated territory (Yanomami): treated = orange, as in Peru
 )
@@ -125,13 +134,15 @@ _apply_style()
 # Event markers. CONVENTION (all time-series figures): the value for year t is plotted at x = t
 # (addition(t) = map(t) - map(t-1)), and an event in calendar year Y is drawn as a vertical line at
 # x = Y - 0.5, i.e. between the Y-1 and Y points: just before the first annual addition that can reflect it.
-# (State of emergency = DS 046-2023-PCM, 7 Apr 2023.)
-# An event is a dict: year, label (month + year), color, style ("solid" = emphasised, else dashed).
+# (State of emergency = DS 046-2023-PCM, 7 Apr 2023. Navy units withdrawn from the Malinowski River control posts
+# in 2025 for lack of funds, MAAP #241, Pacsi et al. 2026.)
+# An event is a dict: year, label (month + year), short (for narrow axes), color, style ("solid" = emphasised, else dashed).
 PERU_EVENTS = [
-    dict(year=2019, label="Mercurio Feb 2019",           color=INK,   style="solid"),
-    dict(year=2020, label="COVID-19 Mar 2020",           color=MUTED, style="dashed"),
-    dict(year=2021, label="Plan Restauración 2021",      color=MUTED, style="dashed"),
-    dict(year=2023, label="State of emergency Apr 2023", color=MUTED, style="dashed"),
+    dict(year=2019, label="Mercurio Feb 2019",           short="Mercurio",     color=INK,   style="solid"),
+    dict(year=2020, label="COVID-19 Mar 2020",           short="COVID",        color=MUTED, style="dashed"),
+    dict(year=2021, label="Plan Restauración 2021",      short="Restauración", color=MUTED, style="dashed"),
+    dict(year=2023, label="State of emergency Apr 2023", short="Emergency",    color=MUTED, style="dashed"),
+    dict(year=2025, label="Navy leaves Malinowski 2025", short="Navy out",     color=MUTED, style="dashed"),   # MAAP #241 (2026)
 ]
 EVENTS = PERU_EVENTS      # backwards-compatible alias
 EVENT_TITLE_PAD = 30      # points of space above an axes whose event labels are drawn (title pad)
@@ -181,32 +192,45 @@ def period_band(ax, x0, x1, label: str | None = None, color: str = "#efece5"):
 
 def add_event_markers(ax, label: bool = False, events=None):
     """Vertical lines at x = year - 0.5 for each event (default: PERU_EVENTS; Brazil passes its own list).
-    label=True writes the labels in a strip ABOVE the axes, alternating two rows so neighbours never
-    overlap; leave room with ax.set_title(..., pad=EVENT_TITLE_PAD)."""
+    label=True writes the labels in a strip ABOVE the axes, in at most two rows so neighbours never overlap
+    (narrow axes fall back to each event's "short" label); leave room with ax.set_title(..., pad=EVENT_TITLE_PAD),
+    or with the pad it returns (more than EVENT_TITLE_PAD when even the short labels need a third row)."""
     events = PERU_EVENTS if events is None else events
     xmin, xmax = ax.get_xlim()
-    fig_w = ax.figure.get_size_inches()[0]
-    in_per_x = 0.86 * fig_w / (xmax - xmin)            # rough inches per x-unit (axes ~86% of figure width)
-    placed: list[list[tuple[float, float]]] = []        # per row: occupied [x0, x1] intervals (data units)
-    for ev in sorted(events, key=lambda e: e["year"]):
+    w_in = ax.get_position().width * ax.figure.get_size_inches()[0]
+    in_per_x = w_in / (xmax - xmin)                      # inches per x-unit of THIS axes
+    evs = [e for e in sorted(events, key=lambda e: e["year"]) if xmin <= e["year"] - 0.5 <= xmax]
+
+    def place(key):
+        placed, rows = [], []                            # per row: occupied [x0, x1] intervals (data units)
+        for ev in evs:
+            x = ev["year"] - 0.5
+            half = 0.5 * len(ev.get(key, ev["label"])) * 0.056 / in_per_x + 0.1   # half text width + gap
+            row = 0
+            while row < len(placed) and any(x - half < b and x + half > a for a, b in placed[row]):
+                row += 1
+            if row == len(placed):
+                placed.append([])
+            placed[row].append((x - half, x + half)); rows.append(row)
+        return rows
+
+    key = "label"
+    rows = place(key)
+    if rows and max(rows) > 1:                           # more than two rows: use the short labels
+        key = "short"; rows = place(key)
+    for ev, row in zip(evs, rows if label else [0] * len(evs)):
         x = ev["year"] - 0.5
         solid = ev["style"] == "solid"
         ax.axvline(x, color=ev["color"] if solid else AXIS, linestyle="-" if solid else (0, (3, 2)),
                    linewidth=1.1 if solid else 0.8, zorder=0.5)
         if not label:
             continue
-        half = 0.5 * len(ev["label"]) * 0.056 / in_per_x + 0.1   # half text width in data units, + gap
-        row = 0
-        while row < len(placed) and any(x - half < b and x + half > a for a, b in placed[row]):
-            row += 1
-        if row == len(placed):
-            placed.append([])
-        placed[row].append((x - half, x + half))
-        ax.annotate(ev["label"], xy=(x, 1.0), xycoords=("data", "axes fraction"),
+        ax.annotate(ev.get(key, ev["label"]), xy=(x, 1.0), xycoords=("data", "axes fraction"),
                     xytext=(0, 3 + 9 * row), textcoords="offset points", fontsize=7,
                     color=INK if solid else INK2, va="bottom", ha="center", annotation_clip=False,
                     fontweight="semibold" if solid else "normal")
     ax.set_xlim(xmin, xmax)
+    return max(EVENT_TITLE_PAD, 12 + 9 * (max(rows) + 1)) if (label and rows) else EVENT_TITLE_PAD   # title pad needed
 
 def set_year_ticks(ax, years, short: bool = False):
     years = list(years)

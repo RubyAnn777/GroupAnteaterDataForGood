@@ -27,7 +27,14 @@ SRC = ("Amazon Mining Watch (Earth Genome) patches x FUNAI territories (data_int
        "operations: data_intermediate/operations_coded.csv")
 GROUPS = {"Yanomami": ["BR-TI-50901"], "Munduruku + Sai-Cinza": ["BR-TI-29801", "BR-TI-40901"],
           "Kayapó": ["BR-TI-23001"], "Sararé": ["BR-TI-42101"]}
-OP = {"Yanomami": 2023 + 1 / 12, "Munduruku + Sai-Cinza": 2023 + 7 / 12, "Kayapó": 2024 + 8 / 12, "Sararé": 2024 + 8 / 12}
+# Operation dates: the package-wide rule in brazil_v2.first_operations() (first VERIFIED operation 2021-2025; a group
+# takes the date of its first unit). Munduruku: Aug 2023 (the May 2021 operation is snippets only); Kayapo: Sep 2024
+# (its Oct 2017 raid lies before the search window). Year mapping differs on purpose: AMW counts detections within the
+# calendar year, so here the operation year itself is the first "after" year; brazil_v2's annual panel treats from the
+# next year when the operation falls in Jul-Dec.
+from brazil_v2 import first_operations
+_FO = first_operations()
+OP = {k: int(_FO[v[0]][:4]) + (int(_FO[v[0]][5:7]) - 1) / 12 for k, v in GROUPS.items()}
 OP_YEAR = {k: int(v) for k, v in OP.items()}
 POOL = "No operation found (pool)"
 COL = {"Yanomami": "#eb6834", "Munduruku + Sai-Cinza": "#2a78d6", "Kayapó": "#1baf7a", "Sararé": "#6250d6", POOL: "#7d7c78"}   # dataviz reference palette, validated
@@ -37,11 +44,9 @@ YRS = list(range(2019, 2026))
 def load():
     u = pd.read_csv(INTER / "amw_candidates_units.csv").set_index("unit_id")
     w = pd.read_csv(INTER / "amw_candidates_year.csv").pivot(index="year", columns="unit_id", values="new_ha")
-    ops = pd.read_csv(INTER / "operations_coded.csv").set_index("unit_id")
     br = [c for c in w if c.startswith("BR-TI-")]
     in_groups = {c for v in GROUPS.values() for c in v}
-    dated = {c for c in br if c in ops.index and ops.loc[c, "verdict_2017_2025"] == "yes"
-             and str(ops.loc[c, "first_op_2017_2025"]) >= "2022"}
+    dated = {c for c in br if c in _FO.index and _FO[c] >= "2022"}         # same dates as brazil_v2
     pool = sorted(c for c in br if c not in in_groups and c not in dated)
     g = pd.DataFrame({k: w[v].sum(axis=1) for k, v in GROUPS.items()})
     g[POOL] = w[pool].sum(axis=1)
