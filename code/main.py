@@ -13,15 +13,15 @@ import peru_production, brazil_deter, spatial, brief_figure, peru_synth, spatial
 import control_amw, control_elevation, control_mb_amazonia, control_select, brazil_deter_all, brazil_stagger
 import raster_zones, raster_layers, raster_gold, glad_alerts, v2_tests, v2_stats, v2_extra, control_top3
 import brazil_raster, brazil_v2, v2_legality, peru_gold_minem, v2_products_check
-import v2_rdd, peru_context_models, placebo_explainer, control_psm, peru_sdid, v2_economics
+import v2_rdd, peru_context_models, placebo_explainer, control_psm, peru_sdid, v2_economics, slides_figures
 
 def main():
     pack = load_pack()
     checks.run_checks(pack)          # raises if any check fails
     reg = Numbers()
     peru.run(pack, reg)
-    peru_anp.run(pack, reg)          # TODO hook: runs when the ANP data is added
-    brazil.run(pack, reg)            # TODO hook: runs when the Brazil data is added
+    peru_anp.run(pack, reg)          # Peru protected areas (our ANP download)
+    brazil.run(pack, reg)            # Brazil course tables + indigenous territories
     peru_production.run(pack, reg)
     peru_gold_minem.run(reg)          # correction: official series = declared + artisanal estimate until 2019
     brazil_deter.run(pack, reg)
@@ -54,6 +54,7 @@ def main():
     v2_products_check.run(reg)       # why MapBiomas and AMW disagree in the corridor (densification)
     brazil_raster.run(); brazil_v2.run(reg)   # Brazil, same pixel method (Col 11 rasters) + staggered DiD + RI
     brief_figure.run(pack)           # the ONE figure for the brief (needs peru + peru_anp modules only)
+    slides_figures.run(pack, reg)    # 16:9 slide figures + slide_titles.json for the FZS talk (output/slides/)
     reg.save()
 
 if __name__ == "__main__":

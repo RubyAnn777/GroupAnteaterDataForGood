@@ -1,0 +1,213 @@
+{
+ "extent": [
+  -70.89175870141992,
+  -69.06824129858009,
+  -13.36,
+  -12.36
+ ],
+ "size": [
+  1920,
+  1080
+ ],
+ "years": [
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025
+ ],
+ "labels": {
+  "lapampa": {
+   "text": "La Pampa sector",
+   "pos": [
+    965.5,
+    638.1
+   ]
+  },
+  "across": {
+   "text": "Corridor across the road",
+   "pos": [
+    944.1,
+    528.8
+   ]
+  },
+  "reserve": {
+   "text": "Tambopata National Reserve",
+   "pos": [
+    1679.3,
+    608.3
+   ]
+  },
+  "tambopata_bz": {
+   "text": "Tambopata buffer zone",
+   "pos": [
+    1462.0,
+    520.3
+   ]
+  },
+  "amarakaeri_bz": {
+   "text": "Amarakaeri buffer zone",
+   "pos": [
+    200.7,
+    437.2
+   ]
+  },
+  "corridor": {
+   "text": "Legal mining corridor (D.L. 1100)",
+   "pos": [
+    817.4,
+    466.8
+   ]
+  },
+  "highway": {
+   "text": "Interoceanic Highway",
+   "pos": [
+    535.1,
+    820.9
+   ]
+  }
+ },
+ "events": [
+  {
+   "year": 2012,
+   "label": "Legal corridor, D.L. 1100 (Feb 2012)"
+  },
+  {
+   "year": 2019,
+   "label": "Mercurio Feb 2019"
+  },
+  {
+   "year": 2020,
+   "label": "COVID-19 Mar 2020"
+  },
+  {
+   "year": 2021,
+   "label": "Plan Restauraci\u00f3n 2021"
+  },
+  {
+   "year": 2023,
+   "label": "State of emergency Apr 2023"
+  },
+  {
+   "year": 2025,
+   "label": "Navy leaves Malinowski 2025"
+  }
+ ],
+ "lapampa_bbox": [
+  781.0,
+  555.7,
+  1149.6,
+  753.6
+ ],
+ "lapampa_lon": [
+  781.0,
+  1149.5
+ ],
+ "first_time_ha": {
+  "2008": {
+   "lapampa": 57,
+   "across": 471,
+   "mdd": 2658
+  },
+  "2009": {
+   "lapampa": 115,
+   "across": 938,
+   "mdd": 3814
+  },
+  "2010": {
+   "lapampa": 215,
+   "across": 624,
+   "mdd": 4301
+  },
+  "2011": {
+   "lapampa": 1479,
+   "across": 276,
+   "mdd": 5899
+  },
+  "2012": {
+   "lapampa": 842,
+   "across": 109,
+   "mdd": 4955
+  },
+  "2013": {
+   "lapampa": 1461,
+   "across": 273,
+   "mdd": 6530
+  },
+  "2014": {
+   "lapampa": 1709,
+   "across": 130,
+   "mdd": 6072
+  },
+  "2015": {
+   "lapampa": 1208,
+   "across": 40,
+   "mdd": 4492
+  },
+  "2016": {
+   "lapampa": 582,
+   "across": 18,
+   "mdd": 3859
+  },
+  "2017": {
+   "lapampa": 1821,
+   "across": 96,
+   "mdd": 6459
+  },
+  "2018": {
+   "lapampa": 1782,
+   "across": 93,
+   "mdd": 5634
+  },
+  "2019": {
+   "lapampa": 1494,
+   "across": 308,
+   "mdd": 6305
+  },
+  "2020": {
+   "lapampa": 315,
+   "across": 405,
+   "mdd": 5877
+  },
+  "2021": {
+   "lapampa": 358,
+   "across": 675,
+   "mdd": 7530
+  },
+  "2022": {
+   "lapampa": 505,
+   "across": 779,
+   "mdd": 10263
+  },
+  "2023": {
+   "lapampa": 1121,
+   "across": 728,
+   "mdd": 14381
+  },
+  "2024": {
+   "lapampa": 916,
+   "across": 357,
+   "mdd": 8295
+  },
+  "2025": {
+   "lapampa": 1406,
+   "across": 288,
+   "mdd": 12554
+  }
+ },
+ "reserve_addition_2025_ha": 241,
+ "source": "MapBiomas Peru Collection 4 (30 m); SERNANP; INGEMMET; RAISG"
+}

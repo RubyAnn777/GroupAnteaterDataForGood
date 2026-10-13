@@ -4,7 +4,7 @@ REPLICATION FILES: Group Giant Anteater, Question 2 ("How does mining move with 
 Software:      Python 3.13 with pandas 3.0, matplotlib 3.11, pyfixest 0.60, geopandas, rasterio, rdrobust, statsmodels;
                exact versions pinned in uv.lock. Install: `uv sync` in the project folder.
 To reproduce:  uv run python code/main.py   (from the project folder or anywhere; paths are relative to the repo).
-               Run time: about 2 minutes on a laptop. Random draws (bootstrap, placebos) use fixed seeds.
+               Run time: about 3 minutes on a laptop. Random draws (bootstrap, placebos) use fixed seeds.
 Output:        output/fig_brief_main.png   the one figure in the brief (code/brief_figure.py)
                output/numbers.csv          every number in the brief: id, value, unit, description, claim type
                                            (description / prediction / causal), producing function, source data.

@@ -14,11 +14,23 @@ BIG = {  # not included (> 50 MB); linked in DOWNLOAD_LOG.csv
 SKIP_NAMES = {".DS_Store"}
 
 
+def _ignored():
+    """Git-ignored files (> 50 MB or personal data, see .gitignore): never shipped; linked in DOWNLOAD_LOG.csv."""
+    import subprocess
+    out = subprocess.run(["git", "ls-files", "--others", "--ignored", "--exclude-standard"], cwd=ROOT,
+                         capture_output=True, text=True, check=True).stdout
+    return {l for l in out.splitlines() if l.startswith(("data_raw/", "data_intermediate/"))}
+
+
+IGNORED = _ignored()
+
+
 def files(sub):
     for p in sorted((ROOT / sub).rglob("*")):
         rel = p.relative_to(ROOT).as_posix()
         if (not p.is_file() or p.name in SKIP_NAMES or "__pycache__" in p.parts
-                or rel in BIG or p.suffix == ".pyc"):
+                or rel in BIG or rel in IGNORED or p.suffix == ".pyc"
+                or p.stat().st_size > 50 * 1024 * 1024):    # course rule: files over 50 MB stay out (linked in DOWNLOAD_LOG.csv)
             continue
         yield p, rel
 
