@@ -24,7 +24,7 @@ Mining could stop (**deterrence**), move next door (**displacement**) or wait an
 
 **Therefore** **[causal]**, *if the comparison zones show what Tambopata would otherwise have done*, Mercurio cut **net** new mining in its target by roughly −1,454 to −1,859 ha/yr in 2019–21. This is fragile: with one targeted zone the best attainable p is 0.07, the fall is not unusual for La Pampa's size, and local shocks remain possible.
 
-**It did not last, and mining crossed the road** **[description]**. In 2022–25 Tambopata averaged 1,829 ha/yr, much of it on old pits. The three Madre de Dios buffer zones together went 1,941 → 778 → 3,127 ha/yr. Directly across the highway, in the legal corridor, first-time mining rose from 69 to 463 ha/yr; the corridor's share of the department's new mining rose from 49% to 72% (MAAP #208: 74%), while the total kept growing (5,317 → 11,373 ha/yr). Most corridor growth is not displaced La Pampa mining; it outgrew La Pampa's fall. La Pampa had not run out of gold (21% of its gold-bearing land mined by 2018).
+**It did not last, and mining crossed the road** **[description]**. In 2022–25 Tambopata averaged 1,829 ha/yr, much of it on old pits. The three Madre de Dios buffer zones together went 1,941 → 778 → 3,127 ha/yr. Directly across the highway, in the legal corridor, first-time mining rose from 69 to 463 ha/yr. Right at the road, a spatial regression discontinuity (land just north vs just south, before vs after) shows the step flipping north: +2.1 points of land mined a year (p = 0.08; 0.04 without the 500 m beside the road), a swing that counts both the fall south and the gain north. The corridor's share of the department's new mining rose from 49% to 72% (MAAP #208: 74%), while the total kept growing (5,317 → 11,373 ha/yr). Most corridor growth is not displaced La Pampa mining; it outgrew La Pampa's fall. La Pampa had not run out of gold (21% of its gold-bearing land mined by 2018).
 
 **Miners now enter the reserve** **[description]**: +241 ha inside it in 2025. MAAP reports ~500 ha from late 2025 to Feb 2026, after river posts were withdrawn (Pacsi et al., 2026). **Brazil, same method, no evidence** **[description]**: big territories fell after 2022–24, but a staggered DiD across 24 territories gives the wrong sign (+0.54 log points, p = 0.17); national gold rules changed in 2023 and the test has little power.
 
@@ -76,4 +76,4 @@ See `DOWNLOAD_LOG.csv`: one row per raw file with URL, access date, collection, 
 
 
 ---
-*Built 2026-10-13 11:10 from git commit ea03c6f (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1399 rows).*
+*Built 2026-10-13 11:39 from git commit f67219d (working tree may contain uncommitted changes). Numbers from output/numbers.csv (1399 rows).*
