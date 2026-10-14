@@ -261,3 +261,7 @@ Storyline and the challenges to the team's draft: `docs/presentation/STORYLINE.m
 - **Opening facts** (cited on slide 2): tongue ~60 cm, 150 flicks/min, up to 35,000 ants a day (Smithsonian's National Zoo; National Geographic); feeds ~1 min per mound, never destroys a nest, returns later (National Geographic).
 - **Brief PDF:** headless Chrome print of `docs/brief/BRIEF_DRAFT.html` → `docs/brief/BRIEF_DRAFT.pdf` (parts 1–4 on 2 pages).
 - **Replication zip** now skips git-ignored files (> 50 MB or personal data such as the INGEMMET cadastre) and anything > 50 MB: 145 MB, 308 files; a fresh unzip + `uv run python code/main.py` reproduces all 1,480 numbers exactly (checked 2026-10-13).
+
+## 16. Causal methods review (from 2026-10-14, branch `ruby/causal-methods-review-1ogcxj`)
+
+Ruby reviews every causal attempt, one method per session, using `docs/causal_review_plan.md` (inventory A1-A15, session order S0-S14, audit leads with `file:line`, cross-cutting issues X1-X11, progress tracker). Each session starts with a method card in `docs/methods/NN_<method>.md` (simple to PhD level, then our example), then trace → reproduce → stress → decide. The audit leads in the plan are unverified until reproduced in their session.
