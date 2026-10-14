@@ -440,7 +440,7 @@ These three measure different things. Net additions drop when re-mined land stay
 | Session | Card written | Tests run | Decisions logged | Fixes merged |
 |---|---|---|---|---|
 | S0 Potential outcomes | ☑ | n/a | ☑ | n/a |
-| S1 Data and outcomes | ☐ | ☐ | ☐ | ☐ |
+| S1 Data and outcomes | ☑ | ☑ | ☐ | ☐ |
 | S2 2×2 DiD | ☐ | ☐ | ☐ | ☐ |
 | S3 Event study, placebos | ☐ | ☐ | ☐ | ☐ |
 | S4 TWFE ladder | ☐ | ☐ | ☐ | ☐ |
