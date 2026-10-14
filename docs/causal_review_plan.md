@@ -434,6 +434,7 @@ These three measure different things. Net additions drop when re-mined land stay
 | X9 | Clustering level below the shock level | A7, A8 | Medium |
 | X10 | Text and docstrings out of sync with code | many | Low-Medium |
 | X11 | Several raw inputs are git-ignored, so some steps verify only from intermediates | S1, S8-S12 | Process |
+| X12 | Amarakaeri BZ's mined land is 58% legal corridor and 41% native communities (found in S2): the main comparison is a mostly legal mining area and the likely destination of displaced miners | A1-A6 | High |
 
 ## 4. Progress tracker
 
@@ -441,7 +442,7 @@ These three measure different things. Net additions drop when re-mined land stay
 |---|---|---|---|---|
 | S0 Potential outcomes | ☑ | n/a | ☑ | n/a |
 | S1 Data and outcomes | ☑ | ☑ | ☐ | ☐ |
-| S2 2×2 DiD | ☐ | ☐ | ☐ | ☐ |
+| S2 2×2 DiD | ☑ | ☑ | ☐ | ☐ |
 | S3 Event study, placebos | ☐ | ☐ | ☐ | ☐ |
 | S4 TWFE ladder | ☐ | ☐ | ☐ | ☐ |
 | S5 Context controls | ☐ | ☐ | ☐ | ☐ |
