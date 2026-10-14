@@ -33,7 +33,7 @@ Each method gets one session. A session produces one card in `docs/methods/NN_<m
 1. **Trace:** follow each variable from raw file → intermediate → model input, and print a few rows at each step.
 2. **Reproduce:** recompute the headline numbers independently (small script) and match `output/numbers.csv`.
 3. **Stress:** run the session's list of tests (below).
-4. **Decide:** fix code, fix wording, or accept and document. Log the decision in the card and in `docs/overnight/LOG.md`.
+4. **Decide:** fix code, fix wording, or accept and document. Log the decision in the card, in this plan and in `agent.md` §16.
 
 ### 0.3 Ground rules
 
@@ -117,7 +117,9 @@ These three measure different things. Net additions drop when re-mined land stay
 
 **Card:** potential outcomes Y(1), Y(0); ATT; the fundamental problem; what "counterfactual" means for one treated zone; description vs prediction vs causal; selection on observables vs design-based identification; SUTVA (no interference, one version of treatment). Project example: Y(0) = mining in the Tambopata buffer zone in 2019-21 if Mercurio had not happened.
 
-**Key question to settle with Ruby:** what is "the treatment"? The code always treats **2019** as the first treated year (Feb 2019). But enforcement is a sequence: 2017-18 operations (pre-period is not clean), Mercurio 2019, COVID 2020, Plan Restauración 2021, Mercurio II (all of Madre de Dios, incl. Amarakaeri), state of emergency from April 2023, navy withdrawal 2025. Every design below actually estimates "Mercurio + whatever followed, relative to a comparison that was itself partly treated".
+**Decided 2026-10-14 (Ruby):** the treatment is the **start of Operation Mercurio (Feb 2019, first treated year 2019)**. Later events are context, shown in figures but not modelled. Card: `docs/methods/00_potential_outcomes.md`.
+
+**Background to that decision:** what is "the treatment"? The code always treats **2019** as the first treated year (Feb 2019). But enforcement is a sequence: 2017-18 operations (pre-period is not clean), Mercurio 2019, COVID 2020, Plan Restauración 2021, Mercurio II (all of Madre de Dios, incl. Amarakaeri), state of emergency from April 2023, navy withdrawal 2025. Every design below actually estimates "Mercurio + whatever followed, relative to a comparison that was itself partly treated".
 
 ---
 
@@ -437,7 +439,7 @@ These three measure different things. Net additions drop when re-mined land stay
 
 | Session | Card written | Tests run | Decisions logged | Fixes merged |
 |---|---|---|---|---|
-| S0 Potential outcomes | ☐ | n/a | ☐ | n/a |
+| S0 Potential outcomes | ☑ | n/a | ☑ | n/a |
 | S1 Data and outcomes | ☐ | ☐ | ☐ | ☐ |
 | S2 2×2 DiD | ☐ | ☐ | ☐ | ☐ |
 | S3 Event study, placebos | ☐ | ☐ | ☐ | ☐ |
