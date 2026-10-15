@@ -20,8 +20,8 @@ Start with **00** (vocabulary and the treatment decision) and **14** (what it al
 | [11](11_matching.md) | Matching estimators | A11 | `s11_matching_checks.py` | D; no common support |
 | [12](12_brazil.md) | Brazil: 2×2, staggered DiD, RI | A12-A14 | `s12_brazil_checks.py` | D; cannot separate operations from the end of the boom |
 | [13](13_descriptive_predictive.md) | Displacement accounting, prediction, informed speculation | blocks, A15 | `s13_descriptive_checks.py` | D, P, speculation |
-| [14](14_synthesis.md) | Synthesis: triangulation, the claim, the range, the fix list | all | cross-checks | One conditional [C] sentence proposed |
+| [14](14_synthesis.md) | Synthesis: triangulation, the claim, the range, the fix list | all | cross-checks | One conditional [C] sentence (decided) |
 
 All test scripts are read-only (they read `data/`, `data_intermediate/`, `output/`, `data_raw/` and write nothing). Run them from the repo root with `uv run python code/review/<script>.py`. S6, S8, S9 and S12 take 3-10 minutes; S8 and S9 read the committed raster `data_intermediate/zones_v2_mdd_full.tif`. Tests that need git-ignored raw files are listed in each card under "Tests not possible here".
 
-Status: cards and tests done; decisions are **proposed** and wait for Ruby; no pipeline code (`code/*.py`) or brief text has been changed yet.
+Status: cards and tests done. Decided 2026-10-15: the brief keeps one narrowed conditional [C] sentence (D-S14-1/2/3), now in `brief_content.md`. Other decisions are **proposed** and wait for Ruby; no pipeline code (`code/*.py`) has been changed.

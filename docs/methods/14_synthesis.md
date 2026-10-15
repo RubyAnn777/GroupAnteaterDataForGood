@@ -160,7 +160,7 @@ Each card now uses these with their definition. The brief must too.
 | # | Decision | Recommendation |
 |---|---|---|
 | D-S14-1 | Measure for each claim | Zone designs: **net additions, always with the split** (new / re-mined / stopped). Pixel designs and the brief figure: **first-time mining**. Never compare the two in one sentence without naming both. (This answers the open question on the measure.) |
-| D-S14-2 | Does a causal sentence stay in the brief? | **Keep one conditional sentence, narrowed** (wording in §11). The alternative is description only; see the decision put to Ruby. |
+| D-S14-2 | Does a causal sentence stay in the brief? | **Decided 2026-10-15 (Ruby): keep one conditional sentence, narrowed** (wording in §11). Applied in `docs/brief/brief_content.md` together with D-S14-1 and D-S14-3. |
 | D-S14-3 | The range | **About 1,450 to 1,660 ha/yr of net additions**, from the two registered specifications that use a pooled 2014-18 baseline and no extrapolated slope or trend: M1 against all 14 zones (−1,454, `model_m1_during`) and the 2×2 against Amarakaeri (−1,663, `did_main_base_2014_18`). Drop −411 (SC misfit), −1,859 (binned M3), −2,508 (Amarakaeri's slope) and all SDID values as range ends. No design passes its own pre-check (02, 04), so the criterion is this one, not "passes a pre-check"; the conditional "if" carries the parallel-trends assumption openly. |
 | D-S14-4 | What sits next to the range | (a) about half is land stopping; (b) new clearing fell from 2020, with COVID; (c) relative to its size the fall ranks 3 of 7 (`model_m4_rank`); (d) a pre-2019 drift half as large as Tambopata's largest pre-2019 swing would explain it; (e) read it as an upper bound. |
 | D-S14-5 | Inference language | Lead with placebo **in time** ("every 2019-21 year below every 2011-18 year"). Report placebo in space only next to its pre-year ranks and the size-relative rank, never as "p = 0.07". |
@@ -210,7 +210,7 @@ Each card now uses these with their definition. The brief must too.
 
 **Priority 3: clean-up** (docstrings `v2_stats.py:12-19`, `raster_zones.py:113-114`; `control_top3.py` "three twins"; `glad_lapampa_q1_2017_2019_mean` id; SLSQP → FISTA in `peru_synth.py`; GLAD look-ahead mask `glad_alerts.py:71`; true road distance for the risk model; AMW box clipped to the department; IBAMA regex word boundary).
 
-None of these code changes has been made. `code/*.py` is unchanged on this branch; only `code/review/` was added.
+Done 2026-10-15 in the brief's findings (`brief_content.md:27, 29`): the [C] range, the SC/SDID "both rank 1" sentence and "absorbing the gold price and COVID". Still open: the same sentences in the walkthrough and methods page, and part 4(b) (`brief_content.md:39`). None of these code changes has been made. `code/*.py` is unchanged on this branch; only `code/review/` was added.
 
 ## 11. Verdict
 
@@ -218,7 +218,7 @@ None of these code changes has been made. `code/*.py` is unchanged on this branc
 
 **What it supports only conditionally [C]:** that Mercurio and the operations that followed caused part of the 2019-21 fall. The identifying assumption (the other zones show Tambopata's path without Mercurio) cannot be checked well: Tambopata is unlike every comparison zone, its pre-2019 path was not parallel, and COVID arrived in the second treated year.
 
-**Wording the brief may use** (if D-S14-2 is accepted):
+**Wording the brief may use** (D-S14-2 accepted 2026-10-15; the brief uses a shortened version that fits 2 pages):
 
 > *If* the other Peruvian buffer zones show what the Tambopata buffer zone would otherwise have done, Mercurio and the operations that followed lowered its net mining additions by about 1,450 to 1,660 ha/yr in 2019-21 [C]. About half of that is mined land going out of use rather than less new clearing, new clearing fell only from 2020 (the COVID years), and relative to its size the fall is not unusual among buffer zones. Most biases we can name make this number too large, so read it as an upper bound.
 

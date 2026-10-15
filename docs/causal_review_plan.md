@@ -417,7 +417,7 @@ These three measure different things. Net additions drop when re-mined land stay
 4. Re-check the one brief figure against the agreed measure and wording.
 5. Update `agent.md`, the walkthrough and the brief.
 
-**Done 2026-10-15:** card `docs/methods/14_synthesis.md`. Result: every attempt is description (A15 prediction); the Peru zone designs are one piece of evidence (Tambopata's own before/after is 86-98% of each); four partly independent views agree that the target's mining fell in 2019-21, and nearly every named bias makes the fall look larger. Proposed: net additions + split for zone claims, first-time mining for pixel claims and the figure; one conditional [C] sentence with **about 1,450-1,660 ha/yr** (M1 −1,454 and the 2×2 with a 2014-18 base −1,663), read as an upper bound; prioritised text and code fix list in its §10.1. Steps 4-5 (brief, walkthrough, code) wait for Ruby's decisions.
+**Done 2026-10-15:** card `docs/methods/14_synthesis.md`. Result: every attempt is description (A15 prediction); the Peru zone designs are one piece of evidence (Tambopata's own before/after is 86-98% of each); four partly independent views agree that the target's mining fell in 2019-21, and nearly every named bias makes the fall look larger. Proposed: net additions + split for zone claims, first-time mining for pixel claims and the figure; one conditional [C] sentence with **about 1,450-1,660 ha/yr** (M1 −1,454 and the 2×2 with a 2014-18 base −1,663), read as an upper bound; prioritised text and code fix list in its §10.1. **Decided 2026-10-15 (Ruby):** keep the narrowed conditional [C] sentence (D-S14-2), with D-S14-1 (measure) and D-S14-3 (range); applied in `brief_content.md`, brief still 2 pages. The rest of step 3-5 (walkthrough, methods page, code fixes in 14 §10.1) is still open.
 
 ---
 
@@ -462,4 +462,4 @@ Updated 2026-10-15 with the results of S3-S14 (card numbers in brackets).
 | S11 Matching | ☑ | ☑ | ☑ proposed | ☐ |
 | S12 Brazil | ☑ | ☑ | ☑ proposed | ☐ |
 | S13 Descriptive blocks | ☑ | ☑ | ☑ proposed | ☐ |
-| S14 Synthesis | ☑ | cross-checks | ☑ proposed | ☐ |
+| S14 Synthesis | ☑ | cross-checks | ☑ D-S14-1/2/3 decided | brief [C] sentence |
