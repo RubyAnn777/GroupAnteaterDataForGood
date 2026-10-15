@@ -40,7 +40,7 @@ DELIVERABLES = {   # source -> name in deliverables/
 
 def keep(p: Path) -> bool:
     rel = p.relative_to(ROOT).as_posix()
-    return (p.is_file() and p.name not in SKIP_NAMES and not (SKIP_PARTS & set(p.parts))
+    return (p.is_file() and p.name not in SKIP_NAMES and not p.name.startswith("~$") and not (SKIP_PARTS & set(p.parts))
             and not rel.startswith(PERSONAL) and p.stat().st_size <= MAX and p.suffix != ".pyc"
             and not rel.startswith("replication/"))
 
