@@ -1,0 +1,903 @@
+year,zone,zone_name,group,tenure,in_mdd,mining_ha,new_ha,remined_ha,stopped_ha,from_forest_ha,stopped_to_water_ha,stopped_to_forest_ha,stopped_to_natural_ha,stopped_to_other_ha,stopped_back_1y_ha,stopped_back_2y_ha,net_ha
+1985,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,,,,,,,,,,,
+1985,other_anp,Other protected areas,protected,none,1,0.0,,,,,,,,,,,
+1985,other_anp,Other protected areas,protected,corridor,1,0.0,,,,,,,,,,,
+1985,other_anp,Other protected areas,protected,community,1,0.0,,,,,,,,,,,
+1985,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,,,,,,,,,,,
+1985,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,,,,,,,,,,,
+1985,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,,,,,,,,,,,
+1985,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,,,,,,,,,,,
+1985,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,,,,,,,,,,,
+1985,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,,,,,,,,,,,
+1985,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,,,,,,,,,,,
+1985,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,,,,,,,,,,,
+1985,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,,,,,,,,,,,
+1985,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,,,,,,,,,,,
+1985,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,,,,,,,,,,,
+1985,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,,,,,,,,,,,
+1985,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,,,,,,,,,,,
+1985,corridor_across,Corridor across the road,outside,corridor,1,0.0,,,,,,,,,,,
+1985,corridor_rest,Rest of the mining corridor,outside,corridor,1,440.7311,,,,,,,,,,,
+1985,corridor_rest,Rest of the mining corridor,outside,community,1,0.0,,,,,,,,,,,
+1985,communities,Native communities,outside,community,1,0.0,,,,,,,,,,,
+1985,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,,,,,,,,,,,
+1986,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,corridor_rest,Rest of the mining corridor,outside,corridor,1,457.6281,18.552,0.0,1.655,5.7485,0.0,0.0871,0.0,1.5679,0.2613,0.2613,16.897
+1986,corridor_rest,Rest of the mining corridor,outside,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,communities,Native communities,outside,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1986,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,corridor_rest,Rest of the mining corridor,outside,corridor,1,940.8607,523.6474,0.2613,40.6761,124.815,0.0,4.0067,0.0,36.6694,0.0,1.3936,483.2326
+1987,corridor_rest,Rest of the mining corridor,outside,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,communities,Native communities,outside,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1987,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,corridor_rest,Rest of the mining corridor,outside,corridor,1,918.4744,1.829,0.0,24.2152,0.958,0.0,4.7905,0.0,19.4248,0.5226,0.6097,-22.3862
+1988,corridor_rest,Rest of the mining corridor,outside,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,communities,Native communities,outside,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1988,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,corridor_rest,Rest of the mining corridor,outside,corridor,1,1037.2809,217.6663,1.9162,100.7761,51.9997,0.0,54.4385,0.0,46.3376,2.526,6.4455,118.8065
+1989,corridor_rest,Rest of the mining corridor,outside,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,communities,Native communities,outside,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1989,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.3483,0.3483,0.0,0.0,0.3483,0.0,0.0,0.0,0.0,0.0,0.0,0.3483
+1990,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,corridor_rest,Rest of the mining corridor,outside,corridor,1,1036.3437,82.5053,2.8744,86.3168,28.6729,0.2613,12.8036,0.0,73.2519,4.1809,5.8358,-0.9372
+1990,corridor_rest,Rest of the mining corridor,outside,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1990,communities,Native communities,outside,community,1,1.1345,1.1345,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.1345
+1990,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.3483,0.0,0.0,0.3483,0.0,0.0,0.0,0.0,-0.3483
+1991,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1991,corridor_rest,Rest of the mining corridor,outside,corridor,1,1262.8797,301.548,16.4624,91.4744,38.5016,0.1745,9.239,0.0,82.0608,4.7906,7.752,226.536
+1991,corridor_rest,Rest of the mining corridor,outside,community,1,0.0873,0.0873,0.0,0.0,0.0873,0.0,0.0,0.0,0.0,0.0,0.0,0.0873
+1991,communities,Native communities,outside,community,1,1.8326,1.309,0.0,0.6109,0.6982,0.0873,0.0,0.0,0.5236,0.0,0.0,0.6982
+1991,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1992,corridor_rest,Rest of the mining corridor,outside,corridor,1,1505.5416,312.6963,15.1557,85.1902,38.1509,0.5226,14.7207,0.0,69.9468,3.0487,3.7455,242.6619
+1992,corridor_rest,Rest of the mining corridor,outside,community,1,0.0,0.0,0.0,0.0873,0.0,0.0,0.0,0.0,0.0873,0.0,0.0,-0.0873
+1992,communities,Native communities,outside,community,1,0.0,0.0,0.0,1.8326,0.0,0.0,0.3491,0.0,1.4836,0.0,0.0,-1.8326
+1992,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.4354,0.4354,0.0,0.0,0.4354,0.0,0.0,0.0,0.0,0.0,0.0,0.4354
+1993,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1993,corridor_rest,Rest of the mining corridor,outside,corridor,1,1693.8726,287.802,20.9916,120.4625,72.4729,0.0871,24.3015,0.0,96.074,2.6131,6.5325,188.331
+1993,corridor_rest,Rest of the mining corridor,outside,community,1,0.3491,0.3491,0.0,0.0,0.0873,0.0,0.0,0.0,0.0,0.0,0.0,0.3491
+1993,communities,Native communities,outside,community,1,1.4836,1.4836,0.0,0.0,0.6109,0.0,0.0,0.0,0.0,0.0,0.0,1.4836
+1993,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0873,0.0873,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0873
+1994,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,1.8286,1.3932,0.0,0.0,1.3061,0.0,0.0,0.0,0.0,0.0,0.0,1.3932
+1994,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1994,corridor_rest,Rest of the mining corridor,outside,corridor,1,1951.4162,280.1127,24.7367,47.3057,93.2001,3.8375,11.6726,0.0,31.7956,6.881,16.1143,257.5436
+1994,corridor_rest,Rest of the mining corridor,outside,community,1,0.0,0.0,0.0,0.3491,0.0,0.0873,0.0873,0.0,0.1745,0.0,0.0,-0.3491
+1994,communities,Native communities,outside,community,1,0.0,0.0,0.0,1.4836,0.0,0.1745,0.4364,0.0,0.8727,0.0,0.0,-1.4836
+1994,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,0.0,0.0,0.0873,0.0,0.0873,0.0,0.0,0.0,0.0,0.0,-0.0873
+1995,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,1.8286,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,corridor_rest,Rest of the mining corridor,outside,corridor,1,2390.7614,388.6533,63.4089,12.717,194.246,0.1742,2.2646,0.0,10.2782,1.8291,3.3098,439.3452
+1995,corridor_rest,Rest of the mining corridor,outside,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1995,communities,Native communities,outside,community,1,1.3952,1.3952,0.0,0.0,0.1744,0.0,0.0,0.0,0.0,0.0,0.0,1.3952
+1995,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,6.0952,4.8762,0.0,0.6095,4.7891,0.0,0.6095,0.0,0.0,0.0,0.1741,4.2667
+1996,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1996,corridor_rest,Rest of the mining corridor,outside,corridor,1,4102.9756,1619.3759,141.2812,48.4429,829.4212,3.6588,6.8835,0.0,37.9007,8.9715,11.3232,1712.2142
+1996,corridor_rest,Rest of the mining corridor,outside,community,1,0.698,0.698,0.0,0.0,0.0873,0.0,0.0,0.0,0.0,0.0,0.0,0.698
+1996,communities,Native communities,outside,community,1,33.9362,33.5002,0.0,0.9592,7.6768,0.5232,0.3488,0.0,0.0872,0.0,0.0,32.541
+1996,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,lapampa,La Pampa sector,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,5.7469,1.7415,0.0,2.0898,1.7415,0.0,2.0898,0.0,0.0,0.0871,1.0449,-0.3483
+1997,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,9.7574,9.7574,0.0,0.0,6.9696,0.0,0.0,0.0,0.0,0.0,0.0,9.7574
+1997,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,1.3071,1.3071,0.0,0.0,0.6971,0.0,0.0,0.0,0.0,0.0,0.0,1.3071
+1997,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1997,corridor_rest,Rest of the mining corridor,outside,corridor,1,5506.7744,1426.6823,148.5096,171.3931,610.746,26.2342,20.6558,0.0,124.5032,9.1466,16.9,1403.7988
+1997,corridor_rest,Rest of the mining corridor,outside,community,1,0.6979,0.4362,0.0,0.4362,0.3489,0.0,0.0,0.0,0.4362,0.0,0.0,-0.0001
+1997,communities,Native communities,outside,community,1,22.0735,13.5236,0.0,25.3862,4.188,7.503,2.6172,0.0,15.266,0.1745,0.349,-11.8627
+1997,rest_mdd,Rest of Madre de Dios,outside,none,1,0.2617,0.2617,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2617
+1998,tambopata_nr,Tambopata National Reserve,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,lapampa,La Pampa sector,tambopata_bz,none,1,5.2262,5.2262,0.0,0.0,3.7454,0.0,0.0,0.0,0.0,0.0,0.0,5.2262
+1998,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,7.4884,1.4803,0.2612,0.0,1.5674,0.0,0.0,0.0,0.0,0.0,0.0,1.7415
+1998,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,0.0,0.0,0.0,9.7574,0.0,0.3485,1.8295,0.0,7.5794,0.0,0.0,-9.7574
+1998,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.0,0.0,0.0,1.3071,0.0,0.0,0.0871,0.0,1.2199,0.0,0.0,-1.3071
+1998,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1998,corridor_rest,Rest of the mining corridor,outside,corridor,1,6014.1422,666.7926,59.1414,218.5662,130.9715,31.2987,21.6161,0.0,165.6515,14.3744,25.7919,507.3678
+1998,corridor_rest,Rest of the mining corridor,outside,community,1,0.698,0.349,0.0,0.3489,0.2617,0.1745,0.0,0.0,0.1745,0.0,0.0,0.0
+1998,communities,Native communities,outside,community,1,39.8719,26.9594,0.1745,9.3355,13.4359,1.9194,0.698,0.0,6.7181,1.047,1.4832,17.7984
+1998,rest_mdd,Rest of Madre de Dios,outside,none,1,0.2617,0.2617,0.0,0.2617,0.1745,0.0,0.0872,0.0,0.1745,0.0,0.0,-0.0
+1999,tambopata_nr,Tambopata National Reserve,protected,none,1,2.5258,2.5258,0.0,0.0,1.1323,0.0,0.0,0.0,0.0,0.0,0.0,2.5258
+1999,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,lapampa,La Pampa sector,tambopata_bz,none,1,8.449,4.0938,0.0,0.871,2.2647,0.0,0.3484,0.0,0.5226,0.0,0.0871,3.2228
+1999,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,5.6599,1.8286,0.9578,4.6149,2.6993,0.0,4.3537,0.0,0.2612,0.3483,0.3483,-1.8285
+1999,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0871,0.0871,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0871
+1999,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,17.4245,17.4245,0.0,0.0,0.1742,0.0,0.0,0.0,0.0,0.0,0.0,17.4245
+1999,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,7.4936,7.4936,0.0,0.0,1.5684,0.0,0.0,0.0,0.0,0.0,0.0,7.4936
+1999,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+1999,corridor_rest,Rest of the mining corridor,outside,corridor,1,7004.625,1001.2346,69.4235,80.1754,235.996,4.7918,6.6244,0.0,68.7592,6.7089,10.8029,990.4828
+1999,corridor_rest,Rest of the mining corridor,outside,community,1,0.8724,0.3489,0.0,0.1745,0.0871,0.0,0.0,0.0,0.1745,0.0,0.0,0.1744
+1999,communities,Native communities,outside,community,1,103.3391,71.0579,1.2214,8.8122,29.0306,0.4362,1.5704,0.0,6.8055,0.5235,0.698,63.4672
+1999,rest_mdd,Rest of Madre de Dios,outside,none,1,0.2617,0.0872,0.0,0.0873,0.0872,0.0,0.0,0.0,0.0873,0.0,0.0,-0.0
+2000,tambopata_nr,Tambopata National Reserve,protected,none,1,4.8776,3.3969,0.0,1.0452,0.6097,0.4355,0.0,0.0,0.6097,0.0,0.0,2.3517
+2000,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,lapampa,La Pampa sector,tambopata_bz,none,1,12.804,6.2713,0.0,1.9162,3.6582,0.0871,0.3484,0.0,1.4807,0.0,0.0871,4.355
+2000,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,7.0531,1.6544,0.6966,0.9578,2.351,0.0,0.9578,0.0,0.0,0.0,0.1742,1.3932
+2000,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0871,0.0,0.0,0.0,0.0,0.0871,0.0,0.0,-0.0871
+2000,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,9.6702,2.8748,0.0,10.6292,0.8711,0.3485,0.3485,0.0,9.9321,0.0,0.0,-7.7543
+2000,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,4.0953,0.1743,0.0,3.5726,0.0,0.5228,2.1784,0.0,0.8714,0.0,0.0,-3.3983
+2000,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2000,corridor_rest,Rest of the mining corridor,outside,corridor,1,7220.1645,481.46,31.8894,297.8098,214.6474,21.5284,67.7827,0.0,208.4987,16.2041,22.8256,215.5395
+2000,corridor_rest,Rest of the mining corridor,outside,community,1,0.698,0.0,0.0,0.1744,0.0,0.0,0.0,0.0,0.1744,0.0,0.0,-0.1744
+2000,communities,Native communities,outside,community,1,125.3315,57.9144,1.2213,37.1433,31.9218,3.14,4.3603,0.0,29.6431,0.349,1.2214,21.9924
+2000,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0872,0.0872,0.0,0.2617,0.0,0.0872,0.0,0.0,0.1745,0.0,0.0,-0.1745
+2001,tambopata_nr,Tambopata National Reserve,protected,none,1,4.1809,0.7839,0.0,1.4806,0.0,0.8709,0.0871,0.0,0.5226,0.0,0.0,-0.6967
+2001,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,lapampa,La Pampa sector,tambopata_bz,none,1,9.2328,1.742,0.0871,5.4003,0.0871,0.2613,0.3484,0.0,4.7906,0.2613,0.2613,-3.5712
+2001,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,13.3228,13.3228,0.0,0.0,10.1009,0.0,0.0,0.0,0.0,0.0,0.0,13.3228
+2001,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,6.1823,0.1742,0.0,1.0449,0.1742,0.0,0.9578,0.0,0.0871,0.0,0.0,-0.8707
+2001,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,27.278,21.7896,0.0,4.1819,15.8629,0.0,0.0871,0.0,4.0947,0.0871,0.5227,17.6078
+2001,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,0.6971,0.6971,0.0,4.0953,0.2614,0.0,0.0,0.0,4.0953,0.0,0.0,-3.3982
+2001,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2001,corridor_rest,Rest of the mining corridor,outside,corridor,1,7409.1703,435.6455,39.2918,285.9315,258.0183,43.5172,31.2137,0.0,211.2005,12.7234,36.2481,189.0058
+2001,corridor_rest,Rest of the mining corridor,outside,community,1,0.698,0.0873,0.0,0.0872,0.0,0.0,0.0,0.0,0.0872,0.0,0.0,0.0
+2001,communities,Native communities,outside,community,1,70.6613,16.313,0.5235,71.5067,7.7639,11.948,6.9776,0.0,52.5811,2.2681,3.3149,-54.6703
+2001,rest_mdd,Rest of Madre de Dios,outside,none,1,0.0872,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,tambopata_nr,Tambopata National Reserve,protected,none,1,4.6164,0.5226,0.0,0.0871,0.1742,0.0,0.0871,0.0,0.0,0.0,0.0,0.4355
+2002,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,lapampa,La Pampa sector,tambopata_bz,none,1,12.1072,2.7002,0.3484,0.1742,2.1776,0.0,0.0,0.0,0.1742,0.0,0.0,2.8744
+2002,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,46.3247,35.0046,0.0,2.0028,12.539,0.0,0.1742,0.0,1.8286,0.0,0.0,33.0019
+2002,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,4.7892,1.3061,0.1742,2.8735,1.3932,0.0,2.351,0.0,0.5224,0.0,0.0,-1.3932
+2002,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,19.7823,5.143,0.0871,12.7257,1.9178,0.0872,1.2203,0.0,11.4183,0.0,0.0871,-7.4956
+2002,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,3.6599,3.0499,0.0,0.0871,0.0,0.0,0.0,0.0,0.0871,0.0,0.0,2.9628
+2002,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2002,corridor_rest,Rest of the mining corridor,outside,corridor,1,7514.19,280.2694,34.6804,209.93,76.025,10.8902,26.0583,0.0,172.9816,15.0739,23.0027,105.0198
+2002,corridor_rest,Rest of the mining corridor,outside,community,1,0.6108,0.0,0.0872,0.1745,0.0,0.0,0.0,0.0,0.1745,0.0,0.0872,-0.0872
+2002,communities,Native communities,outside,community,1,202.0928,139.1952,4.2745,12.0382,80.5011,0.6101,3.2278,0.0,8.2002,0.8722,1.0467,131.4316
+2002,rest_mdd,Rest of Madre de Dios,outside,none,1,4.7116,4.6244,0.0,0.0,0.5232,0.0,0.0,0.0,0.0,0.0,0.0,4.6244
+2003,tambopata_nr,Tambopata National Reserve,protected,none,1,3.484,0.0,0.0,1.1323,0.0,0.0,0.4355,0.0,0.6968,0.1742,0.1742,-1.1323
+2003,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,lapampa,La Pampa sector,tambopata_bz,none,1,12.2814,3.397,0.0,3.2228,3.397,0.0,1.4808,0.0,1.742,0.2613,0.2613,0.1742
+2003,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,126.1752,84.3785,0.0,4.5279,30.1292,0.0,1.6544,0.0,2.8735,0.0,0.0,79.8505
+2003,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,3.3089,0.0871,0.0,1.5674,0.0,0.0,0.9578,0.0,0.6095,0.0,0.0,-1.4803
+2003,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,5.2272,5.2272,0.0,0.0,4.8787,0.0,0.0,0.0,0.0,0.0,0.0,5.2272
+2003,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,59.6852,48.2707,0.7841,9.1518,15.2515,0.0,1.8307,0.0,7.3212,0.3486,0.4357,39.9029
+2003,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,26.5073,23.5445,0.0,0.6971,11.3366,0.0,0.0871,0.0,0.61,0.2614,0.2614,22.8474
+2003,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2003,corridor_rest,Rest of the mining corridor,outside,corridor,1,8241.3196,992.27,151.839,416.9794,400.622,40.2807,45.2549,0.0,331.4438,21.964,30.4168,727.1296
+2003,corridor_rest,Rest of the mining corridor,outside,community,1,0.9593,0.523,0.0,0.1745,0.1743,0.0,0.0,0.0,0.1745,0.0,0.0,0.3485
+2003,communities,Native communities,outside,community,1,206.3411,96.081,2.3552,94.1879,51.7838,9.4191,13.4339,0.0,71.335,2.7915,3.4022,4.2483
+2003,rest_mdd,Rest of Madre de Dios,outside,none,1,8.7167,4.965,0.0873,1.0471,0.2616,0.2618,0.1745,0.0,0.6108,0.0,0.0,4.0051
+2004,tambopata_nr,Tambopata National Reserve,protected,none,1,10.8003,7.6647,0.1742,0.5226,2.3517,0.0,0.4355,0.0,0.0871,0.0871,0.0871,7.3163
+2004,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,lapampa,La Pampa sector,tambopata_bz,none,1,13.8493,6.3585,0.3484,5.139,3.3099,0.0,2.1776,0.0,2.9614,0.0871,0.1742,1.5679
+2004,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,104.9286,3.9185,0.0,25.1651,2.0028,0.1742,6.1825,0.0,18.8084,0.1742,0.8708,-21.2466
+2004,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,2.4381,0.0,0.0,0.8708,0.0,0.0,0.8708,0.0,0.0,0.0,0.0,-0.8708
+2004,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,4.0076,0.0872,0.0,1.3068,0.0,0.0,0.8712,0.0,0.4356,0.0871,0.0871,-1.2196
+2004,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,103.1949,55.2713,0.7841,12.5457,41.5843,0.0871,2.2651,0.0,10.1935,0.4359,0.4359,43.5097
+2004,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,59.1224,36.0157,0.2614,3.662,14.4762,0.3488,1.1337,0.0,2.1795,0.2616,0.5232,32.6152
+2004,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2004,corridor_rest,Rest of the mining corridor,outside,corridor,1,8474.2264,635.5361,122.927,525.5564,267.9595,53.2465,64.4897,0.0,407.8201,17.1683,33.9853,232.9068
+2004,corridor_rest,Rest of the mining corridor,outside,community,1,1.0471,0.4363,0.0872,0.4358,0.1745,0.0872,0.0,0.0,0.3486,0.0,0.0,0.0878
+2004,communities,Native communities,outside,community,1,216.6817,82.6101,7.6774,79.9469,43.0938,5.5792,4.7972,0.0,69.5706,1.5704,2.7916,10.3406
+2004,rest_mdd,Rest of Madre de Dios,outside,none,1,10.1997,2.7038,0.0,1.2209,1.5706,0.1743,0.0873,0.0,0.9593,0.0,0.0873,1.483
+2005,tambopata_nr,Tambopata National Reserve,protected,none,1,3.3098,0.0871,0.0871,7.6647,0.0,0.2613,2.1775,0.0,5.2259,0.3484,0.3484,-7.4905
+2005,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,lapampa,La Pampa sector,tambopata_bz,none,1,14.0236,5.9231,0.0871,5.8359,5.4876,0.9581,1.9163,0.0,2.9615,0.0871,0.0871,0.1743
+2005,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,138.8899,46.5004,0.1742,12.7132,8.7079,0.0,2.6123,0.0,10.1009,0.4354,0.7837,33.9613
+2005,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,2.4381,0.0,0.0,1.6544,0.0,0.7837,0.0,0.0,-2.4381
+2005,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,6.0988,3.398,0.0871,1.3939,1.9169,0.0,0.0,0.0,1.3939,0.0,0.0,2.0912
+2005,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,284.0558,208.4871,3.6594,31.2856,128.7636,0.9583,9.851,0.0,20.4763,0.7847,1.4821,180.8609
+2005,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,139.5983,100.7944,0.2616,20.5801,91.0294,0.0872,12.2089,0.0,8.284,0.6976,1.3081,80.4759
+2005,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2005,corridor_rest,Rest of the mining corridor,outside,corridor,1,8556.93,521.9432,70.2321,509.4716,271.7186,53.4345,116.1297,0.0,339.9074,34.513,53.6826,82.7036
+2005,corridor_rest,Rest of the mining corridor,outside,community,1,1.5705,0.6979,0.0,0.1745,0.3489,0.0872,0.0,0.0,0.0872,0.0872,0.0872,0.5234
+2005,communities,Native communities,outside,community,1,290.2033,122.0164,9.5973,58.0921,57.3855,4.1877,15.0885,0.0,38.8159,5.7578,8.1131,73.5216
+2005,rest_mdd,Rest of Madre de Dios,outside,none,1,47.1223,39.0167,0.0873,2.1814,6.4468,1.2216,0.4363,0.0,0.5235,0.0873,0.1745,36.9226
+2006,tambopata_nr,Tambopata National Reserve,protected,none,1,10.8875,7.839,0.3484,0.6097,4.1808,0.0,0.1742,0.0,0.4355,0.0,0.0,7.5777
+2006,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,lapampa,La Pampa sector,tambopata_bz,none,1,24.6504,13.9366,1.0452,4.3551,12.3688,0.0,2.3518,0.0,2.0033,0.0,0.0871,10.6267
+2006,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,169.1066,34.3094,1.132,5.2247,16.8936,0.2612,0.6095,0.0,4.3539,0.4354,0.6096,30.2167
+2006,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.9591,0.5231,0.0,5.6628,0.3488,0.0,1.3939,0.0,4.2689,0.0,0.0,-5.1397
+2006,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,686.3746,415.5646,2.6144,15.8602,312.4547,0.6107,5.4033,0.0,9.8462,1.7433,2.3536,402.3187
+2006,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,416.9599,281.6323,0.9593,5.23,195.6637,0.523,2.7897,0.0,1.9174,0.3488,0.6976,277.3616
+2006,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,corridor_across,Corridor across the road,outside,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2006,corridor_rest,Rest of the mining corridor,outside,corridor,1,9071.236,670.5879,135.8634,292.1453,316.9559,37.7423,75.3949,0.0,179.0081,25.7101,41.7445,514.306
+2006,corridor_rest,Rest of the mining corridor,outside,community,1,1.9194,0.4362,0.349,0.4362,0.0,0.0873,0.0,0.0,0.349,0.0873,0.1745,0.349
+2006,communities,Native communities,outside,community,1,495.0408,202.7393,28.0051,25.9069,104.7728,5.5833,9.5072,0.0,10.8165,4.1003,6.2811,204.8375
+2006,rest_mdd,Rest of Madre de Dios,outside,none,1,61.2322,15.7658,0.4363,2.0921,6.0981,0.2614,1.1337,0.0,0.697,0.0871,0.2612,14.11
+2007,tambopata_nr,Tambopata National Reserve,protected,none,1,4.5291,2.0903,0.0,8.4487,2.0903,0.0,1.742,0.0,6.7067,0.0,0.871,-6.3584
+2007,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,lapampa,La Pampa sector,tambopata_bz,none,1,48.6908,34.7542,0.4355,11.1493,31.8798,0.4355,4.2681,0.0,6.4457,0.2613,0.2613,24.0404
+2007,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,244.5297,82.2152,1.4803,8.2725,57.2217,0.3483,1.045,0.0,6.8792,0.1742,0.4354,75.4231
+2007,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,0.9591,0.0872,0.0,0.0872,0.0872,0.0872,0.0,0.0,0.0,0.0,0.0,-0.0
+2007,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,1362.9752,747.0123,5.8391,76.2508,663.596,6.2763,16.2133,0.0,53.7612,6.7977,8.5407,676.6006
+2007,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,777.3464,379.3053,0.9592,19.878,311.9948,4.883,7.9345,0.0,7.0606,3.4878,4.6215,360.3865
+2007,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2007,corridor_across,Corridor across the road,outside,corridor,1,4.7942,4.7942,0.0,0.0,4.7942,0.0,0.0,0.0,0.0,0.0,0.0,4.7942
+2007,corridor_rest,Rest of the mining corridor,outside,corridor,1,9778.2267,1068.6713,171.2176,532.8981,537.6943,43.5093,154.9327,0.0,334.4562,36.5249,55.523,706.9907
+2007,corridor_rest,Rest of the mining corridor,outside,community,1,3.6639,1.3082,0.5235,0.0873,0.8721,0.0,0.0,0.0,0.0873,0.0,0.0,1.7444
+2007,communities,Native communities,outside,community,1,834.1101,377.6225,31.4953,70.0485,251.7683,10.7307,22.6802,0.0,36.6376,9.6835,12.7368,339.0693
+2007,rest_mdd,Rest of Madre de Dios,outside,none,1,65.4087,8.2755,0.1743,4.2735,6.3583,0.3488,1.5705,0.0,2.3542,0.0871,0.3483,4.1764
+2008,tambopata_nr,Tambopata National Reserve,protected,none,1,2.4388,0.0,0.0,2.0903,0.0,0.0,0.958,0.0,1.1322,0.0,0.0,-2.0903
+2008,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,lapampa,La Pampa sector,tambopata_bz,none,1,95.9881,56.9657,0.871,10.5394,48.5165,2.0904,6.4457,0.0,2.0033,0.0871,0.4355,47.2974
+2008,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,360.4059,131.7291,7.3144,23.1673,77.7,0.6099,9.494,0.0,13.0634,1.5677,2.4387,115.8762
+2008,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,1.1334,0.2615,0.0,0.0872,0.0,0.0,0.0872,0.0,0.0,0.0,0.0,0.1743
+2008,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,1554.2026,245.0074,8.5406,62.3205,152.0153,8.9793,27.98,0.0,25.3612,12.7262,16.823,191.2274
+2008,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,820.9429,84.4916,4.447,45.3421,63.4818,13.8645,24.6776,0.0,6.8001,6.1909,8.894,43.5965
+2008,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2008,corridor_across,Corridor across the road,outside,corridor,1,475.128,470.8568,0.0,0.523,455.9511,0.523,0.0,0.0,0.0,0.523,0.523,470.3338
+2008,corridor_rest,Rest of the mining corridor,outside,corridor,1,10693.9657,1237.2965,208.1921,529.7497,703.4012,59.7218,149.9416,0.0,320.0862,37.0446,57.0916,915.739
+2008,corridor_rest,Rest of the mining corridor,outside,community,1,5.6703,1.9192,0.2618,0.1745,1.3087,0.0,0.0873,0.0,0.0872,0.0,0.0,2.0064
+2008,communities,Native communities,outside,community,1,1182.4105,421.2199,34.9795,107.8989,269.3839,23.0298,42.3033,0.0,42.5659,13.6061,19.6248,348.3004
+2008,rest_mdd,Rest of Madre de Dios,outside,none,1,70.9015,8.0196,0.4357,2.9625,4.5337,0.349,1.2198,0.0,1.3937,0.3487,0.5228,5.4928
+2009,tambopata_nr,Tambopata National Reserve,protected,none,1,5.0518,1.8291,0.9581,0.1742,0.4355,0.0,0.0,0.0,0.1742,0.0,0.0871,2.613
+2009,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,lapampa,La Pampa sector,tambopata_bz,none,1,185.2703,115.2392,2.7873,28.7443,69.6826,2.0034,20.5566,0.0,6.1843,0.6968,1.1323,89.2821
+2009,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,15.0691,15.0691,0.0,0.0,8.536,0.0,0.0,0.0,0.0,0.0,0.0,15.0691
+2009,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,347.5313,43.1266,3.8318,59.833,26.3107,3.3978,19.508,0.0,36.9271,4.8777,6.0099,-12.8746
+2009,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,1.1334,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,2031.9166,600.9743,15.2536,138.5139,201.0177,18.1318,88.9168,0.0,31.4653,11.1578,18.0442,477.714
+2009,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,1220.4634,472.9454,12.9923,86.4173,285.7473,17.3526,56.8562,0.0,12.2085,9.243,15.3468,399.5204
+2009,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2009,corridor_across,Corridor across the road,outside,corridor,1,1407.5293,937.9799,0.523,6.1017,739.6898,3.0507,1.1332,0.0,1.9178,3.6609,3.9224,932.4012
+2009,corridor_rest,Rest of the mining corridor,outside,corridor,1,11176.7965,1145.0658,185.6255,847.8605,531.6663,76.9856,310.1146,0.0,460.7603,65.9111,105.4878,482.8309
+2009,corridor_rest,Rest of the mining corridor,outside,community,1,4.9722,0.3489,0.0,1.047,0.0872,0.0873,0.2617,0.0,0.698,0.0,0.0,-0.698
+2009,communities,Native communities,outside,community,1,1435.9832,453.9587,46.4825,246.8686,271.0236,20.4123,72.2203,0.0,154.2361,17.447,26.6058,253.5727
+2009,rest_mdd,Rest of Madre de Dios,outside,none,1,95.1609,27.8339,1.1333,4.7078,4.884,0.2617,1.7432,0.0,2.7029,0.2616,0.6101,24.2594
+2010,tambopata_nr,Tambopata National Reserve,protected,none,1,13.5002,10.2775,0.3484,2.1775,6.8806,0.0,0.2613,0.0,1.9162,0.3484,0.4355,8.4484
+2010,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2010,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2010,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2010,lapampa,La Pampa sector,tambopata_bz,none,1,363.5818,214.808,2.0033,38.4998,137.6319,3.7454,17.0721,0.0,17.6823,4.8778,7.2296,178.3115
+2010,lapampa,La Pampa sector,tambopata_bz,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2010,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,35.3653,27.1772,0.0,6.881,16.2017,0.5226,2.8743,0.0,3.4841,0.4355,1.1324,20.2962
+2010,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,578.1871,255.5703,10.9732,35.8878,173.433,4.879,8.9721,0.0,22.0368,3.1363,4.0945,230.6558
+2010,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.6971,0.6971,0.0,0.0,0.1743,0.0,0.0,0.0,0.0,0.0,0.0,0.6971
+2010,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2010,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,30.648,30.648,0.0,0.0,21.4187,0.0,0.0,0.0,0.0,0.0,0.0,30.648
+2010,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2010,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,1.3949,0.2615,0.0,0.0,0.0872,0.0,0.0,0.0,0.0,0.0,0.0,0.2615
+2010,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,2242.4627,348.7949,22.9227,161.1715,236.1155,23.3599,64.9461,0.0,72.8656,22.4879,35.7363,210.5461
+2010,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,1661.8332,564.9407,25.8918,149.4626,417.0186,22.9335,82.2317,0.0,44.2975,18.7475,28.426,441.3698
+2010,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2010,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2010,corridor_across,Corridor across the road,outside,corridor,1,1986.7663,624.3839,3.6609,48.8077,415.6465,28.7613,2.8763,0.0,17.1702,9.2385,11.6789,579.237
+2010,corridor_rest,Rest of the mining corridor,outside,corridor,1,12386.3541,1695.0569,295.3542,780.8536,943.8082,67.1283,167.7604,0.0,545.9649,74.6257,120.9027,1209.5575
+2010,corridor_rest,Rest of the mining corridor,outside,community,1,6.6293,1.9188,0.0,0.2617,0.8722,0.0872,0.0872,0.0,0.0872,0.0872,0.0872,1.6571
+2010,communities,Native communities,outside,community,1,1796.9743,510.0997,52.4147,201.5232,342.6994,28.5077,51.5398,0.0,121.4757,31.7408,52.1398,360.9911
+2010,rest_mdd,Rest of Madre de Dios,outside,none,1,105.3527,16.1198,0.8714,6.7994,8.536,0.0872,0.8715,0.0,5.8407,0.7844,0.7844,10.1918
+2011,tambopata_nr,Tambopata National Reserve,protected,none,1,51.039,38.8452,1.3936,2.7,14.0229,0.3484,0.1742,0.0,2.1774,0.9581,1.3064,37.5388
+2011,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2011,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2011,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2011,lapampa,La Pampa sector,tambopata_bz,none,1,1794.0626,1479.0855,7.578,56.1827,1188.97,10.0172,10.104,0.0,36.0614,14.0242,19.512,1430.4809
+2011,lapampa,La Pampa sector,tambopata_bz,corridor,1,5.2286,5.2286,0.0,0.0,1.7429,0.0,0.0,0.0,0.0,0.0,0.0,5.2286
+2011,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,65.5898,39.7191,0.4355,9.9301,31.1827,0.6098,1.5678,0.0,7.7525,1.1324,2.0906,30.2245
+2011,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,630.3579,149.2778,7.3165,104.4234,75.1566,9.0603,26.9116,0.0,68.4515,5.2267,9.3203,52.1708
+2011,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,2.1777,1.6549,0.0,0.1743,0.3485,0.1743,0.0,0.0,0.0,0.0,0.0,1.4806
+2011,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2011,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,72.964,47.3659,0.0,5.05,16.8914,0.0,2.9603,0.0,2.0896,0.0871,1.0448,42.3159
+2011,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2011,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,7.7548,6.4471,0.0,0.0872,1.1326,0.0872,0.0,0.0,0.0,0.0872,0.0872,6.3599
+2011,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,2661.8006,533.3545,61.0046,175.0212,371.2786,27.1095,57.3585,0.0,90.5531,28.5007,40.2675,419.3379
+2011,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,2117.1012,530.8542,36.2724,111.8586,381.1765,20.8384,57.8074,0.0,33.2128,13.2521,22.756,455.268
+2011,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.9577,0.9577,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.9577
+2011,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.1741,0.1741,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.1741
+2011,corridor_across,Corridor across the road,outside,corridor,1,2183.6477,271.0529,9.5,83.6716,123.4148,52.5555,15.5144,0.0,15.6017,10.3719,29.4589,196.8814
+2011,corridor_rest,Rest of the mining corridor,outside,corridor,1,13879.7405,2006.6063,393.7568,906.9766,1152.0638,125.9908,236.371,0.0,544.6148,91.5219,148.0885,1493.3865
+2011,corridor_rest,Rest of the mining corridor,outside,community,1,8.8958,2.9642,0.1745,0.8722,1.6568,0.4362,0.1743,0.0,0.2617,0.0872,0.0872,2.2665
+2011,communities,Native communities,outside,community,1,2370.4059,771.0341,82.0501,279.6527,491.3343,58.2574,70.203,0.0,151.1922,44.6312,69.219,573.4316
+2011,rest_mdd,Rest of Madre de Dios,outside,none,1,68.8195,14.5489,2.0919,53.1739,8.885,1.5695,5.7494,0.0,45.855,0.1742,0.6971,-36.5331
+2012,tambopata_nr,Tambopata National Reserve,protected,none,1,53.4772,19.3354,1.0452,17.9423,0.9581,1.5678,6.6195,0.0,9.755,0.0871,0.5226,2.4382
+2012,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2012,other_anp,Other protected areas,protected,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2012,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2012,lapampa,La Pampa sector,tambopata_bz,none,1,2412.4825,841.5349,16.7245,239.8396,693.6135,116.1364,57.8438,0.0,65.8593,74.3183,89.39,618.4198
+2012,lapampa,La Pampa sector,tambopata_bz,corridor,1,4.9672,0.3486,0.0,0.61,0.0,0.0,0.0,0.0,0.61,0.0871,0.0871,-0.2615
+2012,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,76.2176,30.8354,1.8293,22.0369,19.5987,0.7839,13.0651,0.0,8.1879,1.1324,1.2195,10.6278
+2012,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,721.8495,183.2204,8.014,99.7427,43.9115,6.4467,40.1523,0.0,53.1437,5.7491,7.7525,91.4916
+2012,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.8707,0.0,0.0,1.3071,0.0,0.0,0.5228,0.0,0.7842,0.0,0.0,-1.3071
+2012,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2012,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,96.0378,29.7782,0.0871,6.7914,11.1453,0.0,2.1767,0.0,4.6146,0.8707,2.1767,23.0739
+2012,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2012,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,10.5425,4.3557,0.1744,1.7423,3.136,0.0871,0.784,0.0,0.8711,0.0871,0.0871,2.7877
+2012,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,3006.5301,483.0752,64.3227,202.6685,344.3541,38.9623,93.4429,0.0,70.2633,30.4196,42.0124,344.7294
+2012,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,2356.626,465.7012,34.7007,260.8771,342.1096,73.3307,113.9595,0.0,73.587,41.4153,62.255,239.5248
+2012,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.6965,0.0,0.0,0.2612,0.0,0.0,0.0,0.0,0.2612,0.0,0.0,-0.2612
+2012,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.1741,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2012,corridor_across,Corridor across the road,outside,corridor,1,2182.1672,108.7727,12.8995,123.1526,69.727,38.4346,30.8553,0.0,53.8627,15.0774,24.577,-1.4805
+2012,corridor_rest,Rest of the mining corridor,outside,corridor,1,15133.1899,2090.6256,406.59,1243.7661,1186.9687,155.6891,414.1204,0.0,673.9566,112.6341,164.4114,1253.4494
+2012,corridor_rest,Rest of the mining corridor,outside,community,1,11.4237,4.0104,0.5231,2.0056,0.8721,0.3489,0.785,0.0,0.8717,0.1745,0.2617,2.5279
+2012,communities,Native communities,outside,community,1,2746.0576,667.1088,115.5257,406.9827,357.0167,65.0391,141.0059,0.0,200.9378,47.1765,64.7896,375.6517
+2012,rest_mdd,Rest of Madre de Dios,outside,none,1,85.2392,25.8318,0.3486,9.7607,18.0673,0.8725,2.9624,0.0,5.9259,0.436,0.5232,16.4197
+2013,tambopata_nr,Tambopata National Reserve,protected,none,1,47.6415,9.4063,0.871,16.113,2.7871,2.1774,2.9612,0.0,10.9743,0.5226,3.7451,-5.8357
+2013,other_anp,Other protected areas,protected,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2013,other_anp,Other protected areas,protected,corridor,1,0.4357,0.4357,0.0,0.0,0.4357,0.0,0.0,0.0,0.0,0.0,0.0,0.4357
+2013,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2013,lapampa,La Pampa sector,tambopata_bz,none,1,3759.1019,1461.0842,87.6454,202.1102,779.4737,62.7263,64.7275,0.0,74.6564,20.6468,33.6264,1346.6194
+2013,lapampa,La Pampa sector,tambopata_bz,corridor,1,10.9801,5.9258,0.0871,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.013
+2013,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,93.8116,47.1224,2.2648,31.7931,29.5276,3.5714,13.3266,0.0,14.8951,1.3066,1.655,17.594
+2013,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,764.9359,180.9957,14.1101,152.0194,71.8592,12.7195,34.5798,0.0,104.7201,9.9288,18.3765,43.0864
+2013,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.8713,0.8713,0.0,0.8707,0.0,0.0,0.0871,0.0,0.7836,0.0,0.0,0.0006
+2013,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2013,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,320.78,237.8026,1.8284,14.889,146.8934,0.0871,0.9578,0.0,13.8441,1.7414,4.5276,224.7421
+2013,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2013,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,17.3423,10.3714,0.1743,3.746,7.1475,0.0,0.5228,0.0,3.2233,0.0,0.0,6.7997
+2013,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,3244.3652,413.2996,79.5765,255.0409,278.9123,47.9381,112.1891,0.0,94.9137,28.2383,45.3203,237.8351
+2013,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,2534.7475,341.6801,86.3216,249.8802,247.2771,44.3787,129.9178,0.0,75.5838,31.6496,47.6049,178.1216
+2013,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.6965,0.0,0.0,0.0,0.0,0.6965,0.0,0.0,-0.6965
+2013,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.1741,0.0,0.0,0.0,0.0,0.1741,0.0,0.0,-0.1741
+2013,corridor_across,Corridor across the road,outside,corridor,1,2387.416,267.3923,37.3892,99.5328,120.5388,44.6239,26.2347,0.0,28.6741,16.0368,22.5733,205.2487
+2013,corridor_rest,Rest of the mining corridor,outside,corridor,1,16907.4563,2751.2076,549.614,1526.5552,1699.0679,173.3099,396.7645,0.0,956.4807,115.9422,187.6802,1774.2664
+2013,corridor_rest,Rest of the mining corridor,outside,community,1,11.7736,2.6159,0.4362,2.7022,1.1333,0.5229,0.6101,0.0,1.5693,0.0872,0.4358,0.3499
+2013,communities,Native communities,outside,community,1,3232.9277,766.2073,159.4074,438.7447,496.0862,86.8327,108.6516,0.0,243.2603,53.795,87.8814,486.87
+2013,rest_mdd,Rest of Madre de Dios,outside,none,1,96.5273,33.1517,1.7434,23.6069,22.5129,1.3066,5.9263,0.0,16.374,0.6096,0.9581,11.2881
+2014,tambopata_nr,Tambopata National Reserve,protected,none,1,38.5835,6.2708,0.9581,16.2869,2.2645,2.9612,1.0451,0.0,12.2805,6.2709,6.7935,-9.058
+2014,other_anp,Other protected areas,protected,none,1,0.2614,0.2614,0.0,0.0,0.2614,0.0,0.0,0.0,0.0,0.0,0.0,0.2614
+2014,other_anp,Other protected areas,protected,corridor,1,4.2701,3.8343,0.0,0.0,3.3986,0.0,0.0,0.0,0.0,0.0,0.0,3.8343
+2014,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2014,lapampa,La Pampa sector,tambopata_bz,none,1,5182.6089,1709.2633,45.0387,330.7949,1440.4836,155.2544,41.6396,0.0,133.9009,54.3566,85.8948,1423.5071
+2014,lapampa,La Pampa sector,tambopata_bz,corridor,1,10.1958,0.8714,0.0,1.6558,0.0,0.6971,0.0871,0.0,0.8715,0.0871,0.0871,-0.7843
+2014,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,100.4335,45.731,1.3937,40.5028,43.4663,2.7003,14.4587,0.0,23.3438,1.3937,1.3937,6.6219
+2014,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,831.6587,161.4019,23.1683,117.8475,97.9082,16.8144,17.0755,0.0,83.9576,14.9808,19.5963,66.7227
+2014,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,1.1327,1.1327,0.0,0.8713,0.6099,0.0,0.0,0.0,0.8713,0.0,0.0,0.2614
+2014,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2014,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,413.3312,168.2198,3.0474,78.716,104.9199,7.3144,19.9408,0.0,51.4608,14.541,21.4198,92.5513
+2014,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,1.4801,1.4801,0.0,0.0,1.4801,0.0,0.0,0.0,0.0,0.0,0.0,1.4801
+2014,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,33.3929,19.3634,0.0,3.3128,17.1839,0.5229,1.7432,0.0,1.0467,0.1743,0.8712,16.0506
+2014,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,3537.7324,479.2987,83.8476,269.779,357.3215,102.7725,58.2326,0.0,108.7739,59.2655,102.9357,293.3672
+2014,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,2765.8041,312.128,110.9122,191.9836,279.6274,79.4249,49.9627,0.0,62.596,45.1635,70.9717,231.0566
+2014,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2014,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.3483,0.3483,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.3483
+2014,corridor_across,Corridor across the road,outside,corridor,1,2383.9341,129.606,34.1647,167.2526,93.3495,80.0974,32.1607,0.0,54.9945,15.5145,27.7165,-3.4819
+2014,corridor_rest,Rest of the mining corridor,outside,corridor,1,17996.8371,2440.199,514.0047,1864.8229,1674.8241,331.0991,385.8445,0.0,1147.8792,240.3507,341.201,1089.3808
+2014,corridor_rest,Rest of the mining corridor,outside,community,1,12.7322,2.5288,0.2614,1.8315,1.0467,0.1744,0.0872,0.0,1.5699,0.1744,0.2615,0.9587
+2014,communities,Native communities,outside,community,1,3346.169,575.2277,136.3787,598.365,411.6599,140.0407,126.8856,0.0,331.4387,126.6852,170.4556,113.2413
+2014,rest_mdd,Rest of Madre de Dios,outside,none,1,88.9558,16.2339,0.9585,24.7639,14.751,1.8322,4.1014,0.0,18.8303,0.8726,0.9597,-7.5715
+2015,tambopata_nr,Tambopata National Reserve,protected,none,1,58.8769,13.0645,10.974,3.7451,1.3065,0.3484,0.2613,0.0,3.1354,0.7839,1.3064,20.2934
+2015,other_anp,Other protected areas,protected,none,1,1.7429,1.5686,0.0,0.0871,1.22,0.0,0.0871,0.0,0.0,0.0,0.0,1.4815
+2015,other_anp,Other protected areas,protected,corridor,1,5.8387,1.83,0.0,0.2614,1.83,0.0,0.2614,0.0,0.0,0.0,0.0,1.5686
+2015,other_anp,Other protected areas,protected,community,1,1.5687,1.5687,0.0,0.0,1.5687,0.0,0.0,0.0,0.0,0.0,0.0,1.5687
+2015,lapampa,La Pampa sector,tambopata_bz,none,1,6100.3255,1207.9247,78.573,368.7811,892.914,189.4952,54.4467,0.0,124.8393,50.182,174.5103,917.7166
+2015,lapampa,La Pampa sector,tambopata_bz,corridor,1,7.2329,0.0871,0.0871,3.1372,0.0,0.7843,0.3486,0.0,2.0043,0.1743,0.4357,-2.9629
+2015,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,98.8651,29.7892,1.9164,33.274,25.4339,3.1359,14.9821,0.0,15.156,1.2195,1.9164,-1.5684
+2015,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,900.533,85.7805,30.4834,47.3897,30.8332,7.2315,20.5611,0.0,19.5971,5.662,9.8432,68.8743
+2015,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.697,0.0,0.0,0.4357,0.0,0.0,0.0,0.0,0.4357,0.0,0.0,-0.4357
+2015,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2015,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,893.6522,502.7888,18.5462,41.0141,316.298,4.2666,12.8887,0.0,23.8588,5.7468,10.536,480.321
+2015,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,5.3978,4.0048,0.0,0.0871,3.1342,0.0,0.0,0.0,0.0871,0.0871,0.0871,3.9178
+2015,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,33.8255,6.3649,0.2614,6.1937,3.5754,0.6979,1.8318,0.0,3.6641,0.2616,0.6105,0.4326
+2015,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,3753.9909,347.2946,145.801,276.8371,229.574,108.2621,68.6018,0.0,99.9732,66.7712,103.8168,216.2586
+2015,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,2846.2557,159.0097,100.6167,179.1749,135.3888,62.8665,66.7026,0.0,49.6058,49.9631,78.1266,80.4515
+2015,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2015,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.3483,0.0,0.0,0.0,0.0,0.3483,0.0,0.0,-0.3483
+2015,corridor_across,Corridor across the road,outside,corridor,1,2323.4512,40.2704,32.2482,133.0015,31.5545,61.5317,40.8778,0.0,30.5919,13.1608,29.7203,-60.4829
+2015,corridor_rest,Rest of the mining corridor,outside,corridor,1,18966.9556,1712.3492,606.6965,1348.9272,1102.4037,211.8615,353.8885,0.0,783.1772,152.8429,226.5941,970.1185
+2015,corridor_rest,Rest of the mining corridor,outside,community,1,14.1275,1.7441,0.8719,1.2208,0.8724,0.1743,0.0872,0.0,0.9592,0.2615,0.3488,1.3953
+2015,communities,Native communities,outside,community,1,3543.8067,363.0871,247.7088,413.1581,230.1227,69.4042,126.5331,0.0,217.2208,60.6912,88.5942,197.6378
+2015,rest_mdd,Rest of Madre de Dios,outside,none,1,99.0793,17.107,2.0061,8.9896,9.2523,0.2617,3.1423,0.0,5.5856,0.4363,0.6105,10.1235
+2016,tambopata_nr,Tambopata National Reserve,protected,none,1,54.348,3.9193,1.6548,10.1031,0.4355,0.6097,0.4355,0.0,9.058,3.3096,4.7032,-4.5289
+2016,other_anp,Other protected areas,protected,none,1,1.22,0.0,0.0,0.5229,0.0,0.0,0.5229,0.0,0.0,0.0,0.0,-0.5229
+2016,other_anp,Other protected areas,protected,corridor,1,5.3158,0.0871,0.0,0.61,0.0,0.0,0.61,0.0,0.0,0.0,0.0,-0.5229
+2016,other_anp,Other protected areas,protected,community,1,1.2201,0.0,0.0,0.3486,0.0,0.0,0.3486,0.0,0.0,0.0,0.0,-0.3486
+2016,lapampa,La Pampa sector,tambopata_bz,none,1,6438.5939,581.7425,101.9318,345.4059,454.2917,224.668,43.2944,0.0,77.4435,105.4108,178.6757,338.2684
+2016,lapampa,La Pampa sector,tambopata_bz,corridor,1,7.1458,0.0,0.1743,0.2614,0.0,0.1743,0.0871,0.0,0.0,0.1743,0.2614,-0.0871
+2016,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,120.8091,43.9815,1.8292,23.8667,38.3204,1.2195,11.0622,0.0,11.585,1.8293,1.8293,21.9439
+2016,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,917.7648,66.1005,24.3856,73.2543,30.3094,6.7086,24.2189,0.0,42.3268,9.0593,13.4145,17.2318
+2016,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.6969,0.0,0.1741,0.1743,0.0,0.0,0.0,0.0,0.1743,0.0,0.0,-0.0001
+2016,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2016,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,1223.1108,357.8416,17.0662,45.4493,226.6335,11.6667,10.6218,0.0,23.1607,9.4035,15.4983,329.4586
+2016,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,7.3132,1.8283,0.0871,0.0,0.3482,0.0,0.0,0.0,0.0,0.0,0.0,1.9154
+2016,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,31.9039,1.3071,0.9585,4.1873,1.3942,0.0872,2.53,0.0,1.57,0.0871,0.1743,-1.9217
+2016,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,4049.9008,323.083,203.7094,230.8825,267.4942,72.1752,74.0021,0.0,84.7051,35.6482,54.3005,295.9099
+2016,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,2912.1004,115.527,141.9528,191.6351,108.0356,50.1341,78.9047,0.0,62.5962,38.888,59.1167,65.8447
+2016,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2016,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2016,corridor_across,Corridor across the road,outside,corridor,1,2313.6025,17.8675,40.9636,68.6798,10.7209,42.2704,15.3405,0.0,11.0689,9.5002,31.55,-9.8487
+2016,corridor_rest,Rest of the mining corridor,outside,corridor,1,20163.688,1927.1957,799.6398,1530.1031,1338.1658,199.3706,412.7902,0.0,917.9423,156.2188,237.5503,1196.7324
+2016,corridor_rest,Rest of the mining corridor,outside,community,1,14.4765,0.6977,0.7847,1.1334,0.3489,0.1744,0.0,0.0,0.959,0.1744,0.5231,0.349
+2016,communities,Native communities,outside,community,1,3701.1352,412.2714,222.1861,477.1291,307.1167,66.8791,144.1461,0.0,266.1039,59.2883,91.2005,157.3284
+2016,rest_mdd,Rest of Madre de Dios,outside,none,1,89.3977,6.8898,1.917,18.4885,5.9312,1.0475,3.927,0.0,13.5139,0.8727,1.5702,-9.6816
+2017,tambopata_nr,Tambopata National Reserve,protected,none,1,587.5422,524.8327,15.7648,7.4033,191.7821,1.9162,0.1742,0.0,5.3129,1.1323,1.7419,533.1943
+2017,other_anp,Other protected areas,protected,none,1,1.0458,0.0,0.0,0.1743,0.0,0.0,0.1743,0.0,0.0,0.0,0.0,-0.1743
+2017,other_anp,Other protected areas,protected,corridor,1,3.7472,0.0,0.0,1.5686,0.0,0.0871,1.4815,0.0,0.0,0.0,0.0,-1.5686
+2017,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,1.2201,0.0,0.0,0.3486,0.0,0.8715,0.0,0.0,-1.2201
+2017,lapampa,La Pampa sector,tambopata_bz,none,1,8249.3987,1821.0619,377.5741,387.8311,1252.5441,238.9589,42.5125,0.0,106.3597,76.4014,116.473,1810.8049
+2017,lapampa,La Pampa sector,tambopata_bz,corridor,1,7.3201,0.8714,0.4357,1.1329,0.5229,0.1743,0.0,0.0,0.9586,0.1743,0.1743,0.1743
+2017,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,112.4463,41.6323,4.6167,54.6118,23.864,4.6163,19.9458,0.0,30.0498,3.1353,5.5742,-8.3628
+2017,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,1141.435,241.0969,56.6132,74.0398,86.843,14.637,14.9846,0.0,44.4182,14.0236,19.25,223.6702
+2017,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.6969,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2017,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2017,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,1650.0537,524.9827,22.8126,120.8523,387.3188,13.3218,22.1146,0.0,85.416,27.6016,35.1769,426.9429
+2017,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,9.4898,2.6119,0.0,0.4353,0.8707,0.0,0.0,0.0,0.4353,0.3482,0.3482,2.1766
+2017,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,38.6975,11.1542,0.6103,4.9708,9.5855,0.959,1.3951,0.0,2.6167,0.4356,0.5228,6.7936
+2017,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,4294.273,385.9113,216.7681,358.3072,335.0259,151.1342,87.252,0.0,119.921,59.2677,89.5981,244.3722
+2017,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,3110.1535,219.3816,186.5913,207.9197,243.6242,68.2686,51.8715,0.0,87.7797,43.6822,64.7826,198.0532
+2017,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2017,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2017,corridor_across,Corridor across the road,outside,corridor,1,2386.7307,95.2661,57.9596,80.0975,50.118,49.0692,19.0879,0.0,11.9405,15.7752,32.6838,73.1282
+2017,corridor_rest,Rest of the mining corridor,outside,corridor,1,21589.7452,2227.3814,821.5962,1622.9204,1649.0478,356.3143,337.3972,0.0,929.2089,212.6459,319.0934,1426.0572
+2017,corridor_rest,Rest of the mining corridor,outside,community,1,14.302,1.0462,0.6976,1.9183,0.4359,0.2617,0.2617,0.0,1.3949,0.6103,0.6103,-0.1745
+2017,communities,Native communities,outside,community,1,3801.6308,359.6856,225.7473,484.9373,280.5978,124.2652,105.45,0.0,255.2221,91.2937,128.178,100.4956
+2017,rest_mdd,Rest of Madre de Dios,outside,none,1,87.5585,4.3577,2.0929,8.2898,2.7025,1.2212,2.8802,0.0,4.1884,1.0475,1.2221,-1.8392
+2018,tambopata_nr,Tambopata National Reserve,protected,none,1,560.718,77.6902,5.5743,110.0886,20.2933,29.5249,29.8737,0.0,50.69,11.8451,18.8128,-26.8242
+2018,other_anp,Other protected areas,protected,none,1,0.8715,0.0,0.0,0.1743,0.0,0.0,0.1743,0.0,0.0,0.0,0.0,-0.1743
+2018,other_anp,Other protected areas,protected,corridor,1,3.4858,0.0,0.0,0.2614,0.0,0.0,0.2614,0.0,0.0,0.0,0.0,-0.2614
+2018,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2018,lapampa,La Pampa sector,tambopata_bz,none,1,9680.7517,1781.8661,277.9148,628.4278,1237.2782,384.9655,71.5157,0.0,171.9466,56.7104,145.5685,1431.353
+2018,lapampa,La Pampa sector,tambopata_bz,corridor,1,9.9344,0.7843,1.83,0.0,0.0871,0.0,0.0,0.0,0.0,0.0,0.0,2.6143
+2018,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,138.8347,51.0377,5.4001,30.0494,39.8024,5.1389,9.9293,0.0,14.9812,4.0937,4.5292,26.3884
+2018,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,1260.2473,161.7528,93.0996,136.0401,108.1008,18.9041,18.1185,0.0,99.0176,15.7664,26.5673,118.8123
+2018,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.6098,0.0,0.0,0.0871,0.0,0.0,0.0871,0.0,0.0,0.0,0.0,-0.0871
+2018,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,3.6563,3.6563,0.0,0.0,3.6563,0.0,0.0,0.0,0.0,0.0,0.0,3.6563
+2018,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,1823.0641,367.9764,44.9287,239.8946,247.7245,27.6921,55.641,0.0,156.5616,23.4245,36.3121,173.0104
+2018,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,21.5047,12.2761,0.6095,0.8706,4.7887,0.0871,0.0871,0.0,0.6965,0.0,0.2612,12.015
+2018,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,46.5373,12.8967,0.697,5.7538,7.843,0.6975,2.0926,0.0,2.9638,0.436,0.5231,7.8398
+2018,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,4292.1119,245.3521,157.2325,404.7457,184.519,147.4768,104.5869,0.0,152.682,55.6048,111.0396,-2.1611
+2018,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,3146.5214,119.2736,132.7925,215.6982,114.6639,85.707,65.2158,0.0,64.7754,40.1085,78.1249,36.3678
+2018,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2018,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2018,corridor_across,Corridor across the road,outside,corridor,1,2503.1685,92.8241,95.5205,71.9068,62.7545,46.1937,10.1109,0.0,15.6022,20.7441,36.258,116.4378
+2018,corridor_rest,Rest of the mining corridor,outside,corridor,1,22810.663,2239.5877,767.2444,1785.9143,1419.7252,364.6724,358.6964,0.0,1062.5455,215.7918,395.985,1220.9178
+2018,corridor_rest,Rest of the mining corridor,outside,community,1,17.0056,1.657,2.616,1.5695,1.1339,0.6976,0.3489,0.0,0.5231,0.3489,0.436,2.7035
+2018,communities,Native communities,outside,community,1,4069.2897,468.0026,302.3243,502.6681,317.7745,144.9222,83.7971,0.0,273.9487,92.5204,160.3593,267.6589
+2018,rest_mdd,Rest of Madre de Dios,outside,none,1,108.4821,13.6092,17.5129,10.1986,9.069,1.6572,0.5239,0.0,8.0175,0.4361,1.8312,20.9236
+2019,tambopata_nr,Tambopata National Reserve,protected,none,1,534.2414,47.6418,14.2838,88.4022,10.7126,20.0318,15.0675,0.0,53.3028,15.5904,19.7709,-26.4766
+2019,other_anp,Other protected areas,protected,none,1,0.8715,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2019,other_anp,Other protected areas,protected,corridor,1,2.6143,0.0,0.0,0.8714,0.0,0.0,0.8714,0.0,0.0,0.0,0.0,-0.8714
+2019,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2019,lapampa,La Pampa sector,tambopata_bz,none,1,9914.7649,1493.665,193.833,1453.4848,885.5558,1165.2168,92.5146,0.0,195.7534,387.5904,461.2062,234.0132
+2019,lapampa,La Pampa sector,tambopata_bz,corridor,1,10.0215,0.4357,0.4357,0.7843,0.0,0.1743,0.0,0.0,0.61,0.1743,0.3486,0.0871
+2019,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,147.8962,37.8017,10.8881,39.6283,28.3081,4.877,15.6774,0.0,19.0738,1.742,2.9613,9.0615
+2019,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,1310.0901,100.0092,52.2659,102.4322,58.1954,20.8207,23.434,0.0,58.1775,23.9536,31.1828,49.8429
+2019,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,0.9584,0.5228,0.0,0.1741,0.3485,0.0,0.0,0.0,0.1741,0.0,0.0,0.3487
+2019,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,3.6563,0.0871,0.0,0.0871,0.0871,0.0,0.0871,0.0,0.0,0.0,0.0,0.0
+2019,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,1946.5528,292.2383,40.0551,208.8048,197.8426,42.4087,52.1572,0.0,114.2389,31.2602,41.0997,123.4886
+2019,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,71.0491,44.929,7.5755,2.9602,23.9447,0.0,0.0871,0.0,2.8731,0.2612,1.2189,49.5443
+2019,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,49.4117,5.227,1.0461,3.3988,3.4846,0.3489,1.5687,0.0,1.4812,0.8722,1.308,2.8744
+2019,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,4428.8729,282.3067,180.3402,325.886,239.1825,141.9109,48.0264,0.0,135.9487,123.9439,166.2147,136.7609
+2019,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,3248.3587,190.4124,158.5181,247.0932,205.8581,84.7406,37.0574,0.0,125.2952,119.9781,151.8011,101.8374
+2019,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2019,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2019,corridor_across,Corridor across the road,outside,corridor,1,2894.3197,307.829,148.253,64.9308,241.5933,39.3065,7.06,0.0,18.5643,20.918,38.0003,391.1512
+2019,corridor_rest,Rest of the mining corridor,outside,corridor,1,25338.4372,3067.2412,1260.7893,1800.2563,2254.3214,408.2907,335.3613,0.0,1056.6042,486.8871,633.2629,2527.7742
+2019,corridor_rest,Rest of the mining corridor,outside,community,1,15.6114,0.9595,0.6978,3.0515,0.6979,0.436,0.4361,0.0,2.1794,1.308,1.3952,-1.3942
+2019,communities,Native communities,outside,community,1,4291.7411,458.8648,351.6837,588.0971,383.0102,174.6487,86.2451,0.0,327.2033,211.6255,254.8725,222.4514
+2019,rest_mdd,Rest of Madre de Dios,outside,none,1,141.1735,19.9777,18.7323,6.0186,17.2751,0.6105,1.3967,0.0,4.0114,1.2212,1.7449,32.6914
+2020,tambopata_nr,Tambopata National Reserve,protected,none,1,507.7665,53.4781,25.4323,105.3853,1.3935,25.9536,36.8413,0.0,42.5904,17.6799,21.2507,-26.4749
+2020,other_anp,Other protected areas,protected,none,1,0.8715,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2020,other_anp,Other protected areas,protected,corridor,1,2.2657,0.0,0.0,0.3486,0.0,0.0,0.1743,0.0,0.1743,0.0,0.0,-0.3486
+2020,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2020,lapampa,La Pampa sector,tambopata_bz,none,1,10043.645,314.5147,563.3046,748.9392,114.5669,361.2931,192.7764,0.0,194.8696,223.0272,294.4711,128.8801
+2020,lapampa,La Pampa sector,tambopata_bz,corridor,1,12.8973,2.7015,2.0914,1.9172,0.2614,1.83,0.0,0.0,0.0871,1.1329,1.3072,2.8758
+2020,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,140.405,22.0353,5.6618,35.1883,16.8096,2.2647,21.5137,0.0,11.4099,4.5294,5.5746,-7.4912
+2020,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,1367.3318,116.7286,88.9278,148.4148,59.6817,27.0925,30.8364,0.0,90.486,24.8265,34.6702,57.2416
+2020,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,1.2198,0.2614,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2614
+2020,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,2.0893,0.0,0.0,1.567,0.0,0.0,0.7835,0.0,0.7835,0.0871,0.0871,-1.567
+2020,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,1947.7844,177.5544,58.6012,234.924,89.0813,16.3711,77.41,0.0,141.143,23.2489,32.3918,1.2316
+2020,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,109.0991,39.0076,2.5251,3.4827,10.274,0.3483,0.8706,0.0,2.2638,1.132,1.4802,38.05
+2020,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,57.1648,9.1472,1.0465,2.4406,3.7459,0.6106,1.3072,0.0,0.5228,0.7851,0.8723,7.7531
+2020,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,4800.2834,323.4536,336.8873,288.9304,226.4645,133.1933,73.4724,0.0,82.2647,96.7515,131.5305,371.4106
+2020,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,3602.4498,227.4621,269.5204,142.8915,186.2449,50.4779,46.554,0.0,45.8596,53.8794,74.1943,354.0911
+2020,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2020,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2020,corridor_across,Corridor across the road,outside,corridor,1,3079.8556,403.1653,91.4276,309.057,289.5186,256.0644,12.8125,0.0,40.1801,208.9131,256.2394,185.5359
+2020,corridor_rest,Rest of the mining corridor,outside,corridor,1,28566.1336,3512.7625,1556.9055,1841.9715,2045.3216,574.415,527.3388,0.0,740.2177,504.0937,694.1589,3227.6964
+2020,corridor_rest,Rest of the mining corridor,outside,community,1,23.8053,7.7587,2.0926,1.6573,3.3999,0.6106,0.349,0.0,0.6978,0.4362,0.6106,8.1939
+2020,communities,Native communities,outside,community,1,5092.3396,647.1422,559.9028,406.4466,445.9728,138.6449,94.0989,0.0,173.7028,109.4338,161.1465,800.5985
+2020,rest_mdd,Rest of Madre de Dios,outside,none,1,198.066,58.892,9.2451,11.2447,36.7394,0.9597,3.2283,0.0,7.0566,1.2213,1.832,56.8924
+2021,tambopata_nr,Tambopata National Reserve,protected,none,1,461.1693,26.3039,28.1313,101.0323,2.5258,11.2355,23.0804,0.0,66.7165,8.5355,15.7644,-46.5972
+2021,other_anp,Other protected areas,protected,none,1,0.8715,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2021,other_anp,Other protected areas,protected,corridor,1,2.2657,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2021,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2021,lapampa,La Pampa sector,tambopata_bz,none,1,9916.7598,357.9054,379.3143,864.1048,157.252,431.1584,178.8379,0.0,254.1086,253.1801,569.6833,-126.8852
+2021,lapampa,La Pampa sector,tambopata_bz,corridor,1,10.0216,0.0871,1.3072,4.27,0.0,2.5272,0.0,0.0,1.7429,2.2657,4.27,-2.8757
+2021,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,157.3891,34.4908,9.9297,27.4364,18.5525,2.6132,13.5002,0.0,11.323,3.3099,6.9682,16.9841
+2021,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,1405.6799,101.2316,78.3073,141.1908,51.2288,20.5589,45.9927,0.0,74.6392,25.5233,48.5186,38.3481
+2021,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,2.7882,1.3941,0.2614,0.0871,0.3485,0.0,0.0,0.0,0.0871,0.0,0.0871,1.5683
+2021,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,1.9152,0.0,0.0871,0.2612,0.0,0.0,0.2612,0.0,0.0,0.0,0.0,-0.1741
+2021,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,1909.7388,128.0965,55.8149,221.957,73.1486,18.1991,98.3952,0.0,105.3627,23.8581,52.5933,-38.0456
+2021,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,123.5529,20.1132,2.6992,8.3586,5.8335,0.0,1.0448,0.0,7.3138,3.3086,3.9181,14.4538
+2021,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,98.9927,41.2149,3.1393,2.5263,37.6431,0.697,1.0453,0.0,0.784,0.697,1.0455,41.8279
+2021,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,5133.8453,443.2712,359.744,469.4533,429.4306,229.5129,77.2196,0.0,162.7208,205.6243,369.3237,333.5619
+2021,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,3870.6545,286.1634,235.6727,253.6313,319.9164,108.8143,34.0896,0.0,110.7274,144.9129,210.1279,268.2047
+2021,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2021,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,0.6964,0.6964,0.0,0.0,0.0871,0.0,0.0,0.0,0.0,0.0,0.0,0.6964
+2021,corridor_across,Corridor across the road,outside,corridor,1,3687.2382,675.3693,335.2012,403.1878,570.0919,289.6206,15.0782,0.0,98.489,228.1777,386.9767,607.3826
+2021,corridor_rest,Rest of the mining corridor,outside,corridor,1,31852.8806,4480.8464,1543.3503,2737.4497,3666.6339,964.3977,731.6131,0.0,1041.4388,802.5768,1490.3573,3286.747
+2021,corridor_rest,Rest of the mining corridor,outside,community,1,19.9703,1.3955,0.785,6.0155,0.9594,1.744,3.1382,0.0,1.1333,1.4823,2.2672,-3.835
+2021,communities,Native communities,outside,community,1,5555.8913,851.2376,417.9323,805.6181,743.1046,379.9647,123.6577,0.0,301.9957,336.596,589.3943,463.5517
+2021,rest_mdd,Rest of Madre de Dios,outside,none,1,292.6474,99.9006,8.0223,13.3415,77.1472,2.6159,4.1867,0.0,6.5389,3.1418,5.6705,94.5814
+2022,tambopata_nr,Tambopata National Reserve,protected,none,1,462.8263,13.2403,18.1159,29.6992,2.1779,13.4124,8.5352,0.0,7.7516,15.5898,15.6769,1.6569
+2022,other_anp,Other protected areas,protected,none,1,0.8715,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2022,other_anp,Other protected areas,protected,corridor,1,2.2657,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2022,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2022,lapampa,La Pampa sector,tambopata_bz,none,1,10277.3178,504.56,512.9807,656.9827,367.1563,429.5135,106.1905,0.0,121.2788,546.5262,564.8214,360.558
+2022,lapampa,La Pampa sector,tambopata_bz,corridor,1,13.1587,0.8714,2.7015,0.4357,0.0871,0.3486,0.0871,0.0,0.0,0.3486,0.3486,3.1372
+2022,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,214.6155,51.9122,16.1144,10.8003,46.8612,2.7872,4.7905,0.0,3.2226,4.4421,5.226,57.2264
+2022,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,1527.6453,106.9834,75.6125,60.6305,65.8635,24.1329,18.9911,0.0,17.5065,34.3239,39.2877,121.9654
+2022,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,2.4397,0.3485,0.0,0.697,0.1743,0.4357,0.2614,0.0,0.0,0.6099,0.6099,-0.3485
+2022,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,1.9152,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2022,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,1947.0054,71.8412,54.7696,89.3441,51.1163,23.8595,35.7035,0.0,29.7811,40.4044,48.5899,37.2667
+2022,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,141.3143,22.0282,3.831,8.0979,9.4904,2.6993,0.4354,0.0,4.9632,2.1769,5.2245,17.7613
+2022,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,140.8325,42.3589,6.7127,7.2319,33.2106,1.1327,3.7472,0.0,2.352,2.7886,2.8757,41.8398
+2022,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,5731.7719,569.2215,433.8432,405.1381,473.5028,203.1718,106.2515,0.0,95.7148,282.4187,303.9483,597.9266
+2022,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,4298.6796,372.6133,293.5817,238.1699,356.9221,120.5647,66.1703,0.0,51.435,168.4268,178.453,428.0251
+2022,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2022,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,1.567,0.8705,0.0,0.0,0.0871,0.0,0.0,0.0,0.0,0.0,0.0,0.8705
+2022,corridor_across,Corridor across the road,outside,corridor,1,4523.8012,777.9924,359.6976,301.127,548.1559,251.8835,27.1926,0.0,22.0509,270.9717,271.6689,836.563
+2022,corridor_rest,Rest of the mining corridor,outside,corridor,1,38487.8715,6621.6097,2186.9738,2173.5926,5041.328,830.3309,617.3882,0.0,725.8735,1340.1755,1469.9132,6634.9909
+2022,corridor_rest,Rest of the mining corridor,outside,community,1,27.6425,6.1898,2.4415,0.9592,3.8356,0.1744,0.2616,0.0,0.5232,0.6976,0.7848,7.6722
+2022,communities,Native communities,outside,community,1,6865.5721,1027.4975,757.7912,475.6079,827.8008,222.8319,108.8989,0.0,143.8772,311.0864,342.4726,1309.6808
+2022,rest_mdd,Rest of Madre de Dios,outside,none,1,385.6074,94.7065,9.247,10.9935,61.2805,3.5777,4.1001,0.0,3.3157,6.0207,6.6312,92.9601
+2023,tambopata_nr,Tambopata National Reserve,protected,none,1,522.4951,90.1553,49.2952,79.7816,31.3599,5.3999,14.2841,0.0,60.0976,1.9161,9.1454,59.6688
+2023,other_anp,Other protected areas,protected,none,1,2.6997,1.8282,0.0,0.0,0.6965,0.0,0.0,0.0,0.0,0.0,0.0,1.8282
+2023,other_anp,Other protected areas,protected,corridor,1,2.3529,0.0,0.0871,0.0,0.0871,0.0,0.0,0.0,0.0,0.0,0.0,0.0871
+2023,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2023,lapampa,La Pampa sector,tambopata_bz,none,1,13346.497,1120.6419,2308.3275,359.7902,853.965,33.3643,68.6462,0.0,257.7797,114.8311,225.7278,3069.1792
+2023,lapampa,La Pampa sector,tambopata_bz,corridor,1,19.8687,3.8342,3.1372,0.2614,0.0,0.0,0.0,0.0,0.2614,0.0871,0.0871,6.71
+2023,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,318.5267,105.1292,50.8676,52.0856,71.5983,1.1322,20.5561,0.0,30.3974,4.9648,11.4104,103.9112
+2023,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,1731.4827,181.546,170.7225,148.4311,103.9268,2.8745,37.5445,0.0,108.0121,12.5407,28.5667,203.8374
+2023,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,3.1367,0.697,0.697,0.6971,0.697,0.0,0.0,0.0,0.6971,0.0,0.0,0.697
+2023,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,1.9152,0.0,0.0,0.6094,0.0,1.3058,0.0,1.3058,-1.9152
+2023,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,2127.347,197.8418,170.8427,188.3429,120.3356,2.8737,57.56,0.0,127.9093,20.7243,47.8014,180.3416
+2023,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,143.7523,7.3138,3.2217,8.0974,3.918,0.7836,1.3931,0.0,5.9207,3.5698,5.1371,2.438
+2023,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,220.0996,86.5873,8.8903,16.2105,77.6109,0.5232,6.101,0.0,9.5864,0.6099,0.9585,79.2671
+2023,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,6964.5166,593.4097,891.5223,252.1873,452.3614,6.5386,79.3259,0.0,166.3228,38.7925,80.8067,1232.7447
+2023,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,5081.5823,500.9708,447.847,165.9151,441.2439,2.7031,56.0719,0.0,107.1401,7.3236,26.9364,782.9027
+2023,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2023,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,1.4799,0.0,0.0,0.0871,0.0,0.0,0.0,0.0,0.0871,0.0,0.0,-0.0871
+2023,corridor_across,Corridor across the road,outside,corridor,1,5604.069,727.2827,546.4745,193.4893,421.7845,6.0138,79.1408,0.0,108.3347,28.1517,36.1704,1080.2679
+2023,corridor_rest,Rest of the mining corridor,outside,corridor,1,48765.9676,9190.5135,4266.2923,3178.7098,6362.2555,139.4589,980.0179,0.0,2059.2329,319.5675,746.4999,10278.0961
+2023,corridor_rest,Rest of the mining corridor,outside,community,1,27.1227,3.5757,3.75,7.8454,2.1801,0.0872,2.615,0.0,5.1432,0.3486,2.3534,-0.5198
+2023,communities,Native communities,outside,community,1,8963.071,1421.6925,1256.0914,580.2849,948.7469,19.1829,149.6271,0.0,411.4748,85.2699,192.8585,2097.4989
+2023,rest_mdd,Rest of Madre de Dios,outside,none,1,536.8702,155.4806,32.2448,36.4627,86.727,1.5714,15.3651,0.0,19.5262,2.0064,4.1844,151.2628
+2024,tambopata_nr,Tambopata National Reserve,protected,none,1,535.1392,54.3623,5.8354,47.5536,37.375,26.7372,12.5416,0.0,8.2748,30.9184,,12.6441
+2024,other_anp,Other protected areas,protected,none,1,2.6997,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,0.0
+2024,other_anp,Other protected areas,protected,corridor,1,2.0915,0.0,0.0,0.2614,0.0,0.0,0.2614,0.0,0.0,0.0,,-0.2614
+2024,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,0.0
+2024,lapampa,La Pampa sector,tambopata_bz,none,1,14469.3017,915.7172,285.0502,77.9628,899.1588,8.2753,31.8823,0.0,37.8051,30.3137,,1122.8047
+2024,lapampa,La Pampa sector,tambopata_bz,corridor,1,22.9186,2.9628,0.1743,0.0871,0.0,0.0,0.0871,0.0,0.0,0.0,,3.0499
+2024,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,390.4737,67.7656,25.2595,21.078,56.1826,0.0871,6.0097,0.0,14.9812,5.4874,,71.947
+2024,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,1781.057,85.1956,68.7145,104.3358,66.6453,5.1397,23.521,0.0,75.6751,18.0282,,49.5743
+2024,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,3.2237,0.1741,0.0,0.0871,0.0871,0.0,0.0871,0.0,0.0,0.0,,0.087
+2024,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,0.0
+2024,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,2154.9663,85.3416,75.3225,133.0448,74.8888,1.0449,22.2916,0.0,109.7084,28.4713,,27.6193
+2024,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,163.3427,22.6378,7.7493,10.7967,5.6592,1.4802,0.6094,0.0,8.7071,6.8785,,19.5904
+2024,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,304.0995,84.4342,2.6158,3.0501,81.9067,0.0,0.9589,0.0,2.0912,0.7845,,83.9999
+2024,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,7291.1899,317.0847,149.2179,139.6294,271.9177,12.0278,55.5255,0.0,72.0761,51.2459,,326.6733
+2024,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,5390.8262,335.322,61.639,87.7171,326.2509,3.8371,37.2322,0.0,46.6479,24.7626,,309.2439
+2024,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,0.0
+2024,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,3.7436,2.2637,0.0,0.0,0.4353,0.0,0.0,0.0,0.0,0.0,,2.2637
+2024,corridor_across,Corridor across the road,outside,corridor,1,5956.9921,357.2815,32.684,37.0424,328.6915,6.537,21.2668,0.0,9.2386,8.4547,,352.9231
+2024,corridor_rest,Rest of the mining corridor,outside,corridor,1,53214.8768,5190.6395,1145.0201,1886.7504,4353.2839,142.777,489.8414,0.0,1254.132,700.7517,,4448.9092
+2024,corridor_rest,Rest of the mining corridor,outside,community,1,31.4818,3.7492,1.4818,0.8719,2.3539,0.0,0.2615,0.0,0.6104,0.2616,,4.3591
+2024,communities,Native communities,outside,community,1,9678.4354,731.6979,357.1041,373.4376,589.9714,28.1646,85.802,0.0,259.471,127.9173,,715.3644
+2024,rest_mdd,Rest of Madre de Dios,outside,none,1,574.6878,61.1586,9.1556,32.4966,41.7922,0.7857,3.3153,0.0,28.3956,4.9664,,37.8176
+2025,tambopata_nr,Tambopata National Reserve,protected,none,1,776.1874,238.0032,55.1319,52.0869,173.2733,4.2678,11.9319,0.0,35.8871,,,241.0482
+2025,other_anp,Other protected areas,protected,none,1,3.3095,0.8712,0.0,0.2614,0.8712,0.0,0.2614,0.0,0.0,,,0.6098
+2025,other_anp,Other protected areas,protected,corridor,1,1.6557,0.0,0.0,0.4357,0.0,0.0,0.4357,0.0,0.0,,,-0.4357
+2025,other_anp,Other protected areas,protected,community,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,0.0
+2025,lapampa,La Pampa sector,tambopata_bz,none,1,16106.6957,1405.7761,463.7733,232.1554,1464.1263,11.323,67.9482,0.0,152.8841,,,1637.394
+2025,lapampa,La Pampa sector,tambopata_bz,corridor,1,19.9558,0.8714,0.0,3.8342,0.0,0.0,0.2614,0.0,3.5728,,,-2.9628
+2025,lapampa,La Pampa sector,tambopata_bz,kotsimba,1,472.096,89.1081,58.0993,65.5851,105.7455,0.3484,13.0651,0.0,52.1717,,,81.6223
+2025,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,none,1,2000.4219,296.0156,99.2007,175.8514,210.9022,1.3937,33.4504,0.0,141.0072,,,219.3649
+2025,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,corridor,1,3.0496,0.1743,0.0,0.3484,0.0,0.0,0.0871,0.0,0.2613,,,-0.1741
+2025,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,0,1.3929,0.0,1.3929,0.0,0.0871,0.0,0.0,0.0,0.0,,,1.3929
+2025,tambopata_bz_rest,Rest of Tambopata buffer zone,tambopata_bz,kotsimba,1,2112.5496,81.6817,111.014,235.1124,84.7253,7.1411,86.3835,0.0,141.5879,,,-42.4167
+2025,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,0,189.8988,28.7327,9.6648,11.8413,11.2315,2.2639,6.0076,0.0,3.5698,,,26.5562
+2025,amarakaeri_bz,Amarakaeri buffer zone,buffer,none,1,363.6824,70.8266,2.0049,13.2486,67.2525,0.1742,8.1958,0.0,4.8786,,,59.5829
+2025,amarakaeri_bz,Amarakaeri buffer zone,buffer,corridor,1,7604.6147,412.9502,205.0707,304.5961,386.1922,9.3273,142.07,0.0,153.1989,,,313.4248
+2025,amarakaeri_bz,Amarakaeri buffer zone,buffer,community,1,5928.6148,622.2067,99.5618,183.9799,601.1945,4.3612,95.125,0.0,84.4937,,,537.7885
+2025,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,none,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,0.0
+2025,bahuaja_bz,Bahuaja-Sonene buffer zone,buffer,corridor,1,1.4799,0.0,0.0,2.2637,0.0,0.0,0.6095,0.0,1.6543,,,-2.2637
+2025,corridor_across,Corridor across the road,outside,corridor,1,6093.5019,288.1594,25.0155,176.6652,254.7764,5.3166,71.2081,0.0,100.1404,,,136.5098
+2025,corridor_rest,Rest of the mining corridor,outside,corridor,1,59580.7954,7645.2848,2272.8009,3552.167,5842.3047,336.1576,1293.203,0.0,1922.8064,,,6365.9187
+2025,corridor_rest,Rest of the mining corridor,outside,community,1,37.8467,5.5812,3.5744,2.7907,4.0979,0.2617,0.7849,0.0,1.744,,,6.3649
+2025,communities,Native communities,outside,community,1,10694.6475,1207.9906,489.5988,681.3773,971.0979,24.7749,225.4823,0.0,431.1201,,,1016.2121
+2025,rest_mdd,Rest of Madre de Dios,outside,none,1,735.5082,188.2283,18.5594,45.9673,131.3439,6.2856,10.4695,0.0,29.2121,,,160.8204

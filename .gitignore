@@ -42,3 +42,4 @@ docs/overnight/_artifact/
 # Presentation build deps
 presentation/**/node_modules/
 presentation/deck/qa/
+data_intermediate/zones_mdd.tif

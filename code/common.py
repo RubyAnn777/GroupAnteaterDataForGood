@@ -64,19 +64,23 @@ def placebo_rank(real: float, placebos) -> int:
 class Numbers:
     """Every number we might cite goes through add(). Written to output/numbers.csv.
     produced_by is the name of the calling function (taken automatically)."""
-    COLS = ["id", "value", "unit", "description", "claim_type", "produced_by", "source_data"]
+    COLS = ["id", "value", "unit", "measure", "zone", "period", "description", "claim_type", "produced_by",
+            "source_data"]
     CLAIMS = {"description", "prediction", "causal"}
+    # measure: one of definitions.MEASURE_NAME keys (net/new/remined/stopped/stock) or a named other quantity
+    # (e.g. "amw_new_area", "glad_alerts", "gold_kg", "price", "rank", "share", "count"). Plan v3: every number in
+    # hectares must name its measure, zone and period (tests/test_definitions.py).
 
     def __init__(self):
         self.rows: dict[str, dict] = {}
 
     def add(self, id: str, value: float, unit: str, description: str,
-            claim_type: str, source_data: str):
+            claim_type: str, source_data: str, measure: str = "", zone: str = "", period: str = ""):
         assert claim_type in self.CLAIMS, claim_type
         assert id not in self.rows, f"duplicate number id {id}"
-        self.rows[id] = dict(id=id, value=float(value), unit=unit, description=description,
-                             claim_type=claim_type, produced_by=inspect.stack()[1].function,
-                             source_data=source_data)
+        self.rows[id] = dict(id=id, value=float(value), unit=unit, measure=measure, zone=zone, period=period,
+                             description=description, claim_type=claim_type,
+                             produced_by=inspect.stack()[1].function, source_data=source_data)
 
     def get(self, id: str) -> float:
         return self.rows[id]["value"]
