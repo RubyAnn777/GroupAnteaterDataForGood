@@ -76,7 +76,7 @@ def build():
         zr, zc, doy, lat = zr[ok], zc[ok], doy[ok], lat[ok]
         z = zone[zr, zc]; fy = first[zr, zc].astype(int)
         keep = (z > 0) & mdd[zr, zc]
-        ha = (abs(wt.a) * 111320 * np.cos(np.radians(lat))) * (abs(wt.e) * 110574) / 1e4
+        ha = rz.pixel_ha(lat, wt.a, wt.e)
         date = pd.to_datetime(f"{y}-01-01") + pd.to_timedelta(doy[keep] - 1, unit="D")
         lag = np.where(fy[keep] > 0, np.clip(fy[keep] - date.year.values, -2, 3), 99)
         df = pd.DataFrame({"year": date.year, "quarter": date.quarter, "zone": [D.CODE_ZONE[c] for c in z[keep]],
@@ -171,7 +171,7 @@ def s2_check(reg):
         a = r.read(1, window=from_bounds(-70.15, -13.06, -70.0, -12.88, r.transform)); tr = r.transform
     v = a[a > 0].astype(int)
     lat = -12.97
-    pix_ha = (abs(tr.a) * 111320 * np.cos(np.radians(lat))) * (abs(tr.e) * 110574) / 1e4
+    pix_ha = float(rz.pixel_ha(lat, tr.a, tr.e))
     d = pd.to_datetime("2018-12-31") + pd.to_timedelta(v, unit="D")
     s = pd.Series(pix_ha, index=d).resample("MS").sum()
     s19 = s.loc["2019-01":"2019-12"]

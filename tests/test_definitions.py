@@ -46,7 +46,7 @@ def test_no_private_windows(p):
     if p.name in {"definitions.py", "checks.py"}:
         return
     s = src(p)
-    bad = re.findall(r"\(\s*2019\s*,\s*2021\s*\)|\(\s*2016\s*,\s*2018\s*\)|\(\s*2022\s*,\s*2025\s*\)|loc\[2019:2021\]|!= 2018", s)
+    bad = re.findall(r"between\(\s*2019\s*,\s*2021\s*\)|range\(\s*2019\s*,\s*2022\s*\)|\(\s*2019\s*,\s*2021\s*\)|\(\s*2016\s*,\s*2018\s*\)|\(\s*2022\s*,\s*2025\s*\)|loc\[2019:2021\]|!= 2018", s)
     assert not bad, f"{p.name} hard-codes treatment windows {sorted(set(bad))}; use definitions.PERIODS / REF_YEAR"
 
 
@@ -71,3 +71,25 @@ def test_numbers_in_ha_name_measure_zone_period():
     ha = n[n.unit.str.startswith("ha") & n.produced_by.ne("")]
     missing = ha[(ha.measure == "") | (ha.zone == "") | (ha.period == "")]
     assert missing.empty, f"{len(missing)} numbers in ha lack measure/zone/period, e.g. {missing.id.head(10).tolist()}"
+
+
+@pytest.mark.parametrize("page", ["docs/brief/brief_content.md", "docs/overnight/explainer_content.md",
+                                  "docs/overnight/methods_content.md"])
+def test_page_placeholders_exist(page):
+    """Every {{id}} in a page source exists in output/numbers.csv (referee 2: pages could not be built)."""
+    ids = set(pd.read_csv(ROOT / "output/numbers.csv").id)
+    text = re.sub(r"<!--.*?-->", "", (ROOT / page).read_text(encoding="utf-8"), flags=re.S)   # header comments
+    used = set(re.findall(r"\{\{\s*([A-Za-z0-9_]+)(?::[^}]*)?\s*\}\}", text)) - {"TEXT"}
+    used = {u for u in used if not u.isupper()}                     # page-level TEXT blocks (e.g. DECISIONS_TABLE)
+    missing = sorted(used - ids)
+    assert not missing, f"{page}: {len(missing)} unknown ids, e.g. {missing[:10]}"
+
+
+def test_deck_ids_exist():
+    js = ROOT / "presentation/deck/build_deck.js"
+    if not js.exists():
+        pytest.skip("no deck")
+    ids = set(pd.read_csv(ROOT / "output/numbers.csv").id)
+    used = set(re.findall(r"""need\(\s*['"`]([a-z0-9_]+)['"`]""", js.read_text(encoding="utf-8")))
+    missing = sorted(used - ids)
+    assert not missing, f"build_deck.js uses unknown ids: {missing[:10]}"

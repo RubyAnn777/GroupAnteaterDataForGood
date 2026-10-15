@@ -71,11 +71,12 @@ def describe(reg):
             stopped = s.stopped_ha.sum()
             rec = dict(unit=u, period=D.period_label(p), stopped_ha_yr=s.stopped_ha.mean(),
                        to_water=s.stopped_to_water_ha.sum() / stopped, to_forest=s.stopped_to_forest_ha.sum() / stopped,
-                       to_natural=s.stopped_to_natural_ha.sum() / stopped, to_other=s.stopped_to_other_ha.sum() / stopped)
+                       to_natural=s.stopped_to_natural_ha.sum() / stopped, to_bare=s.stopped_to_bare_ha.sum() / stopped,
+                       to_other=s.stopped_to_other_ha.sum() / stopped)
             ok = s.stopped_back_2y_ha.notna()
             rec["back_within_2y"] = s.stopped_back_2y_ha[ok].sum() / s.stopped_ha[ok].sum() if ok.any() else np.nan
             srows.append(rec)
-            for k in ("to_water", "to_forest", "back_within_2y"):
+            for k in ("to_water", "to_forest", "to_bare", "back_within_2y"):
                 reg.add(f"{u}_{p}_stopped_share_{k}", rec[k], "share",
                         f"Share of stopped land (left the mining class), {D.UNIT_NAME[u]}, {D.period_label(p)}: "
                         f"{'is mining again within 2 years' if k.startswith('back') else 'land became ' + k[3:]}",
@@ -127,6 +128,43 @@ def compare(ru, reg):
                 f"Share of the fall in net additions, Tambopata buffer zone, 2016–18 to 2019–21, that comes from "
                 f"{D.MEASURE_NAME[m].lower()} (shares add to 1)", "description", SRC, measure=m, zone=T,
                 period="2016–18 vs 2019–21")
+    # How much of the fall is stopping? A RANGE, not one number (referee 2, 2026-10-15): (a) raw change in stopped land;
+    # (b) without stopped land that is mining again within two years (flicker or brief pauses); (c) only stopping in
+    # excess of the 2016-18 stopping rate per hectare of existing mining; (d) the stopped part of the DiD.
+    for u in (T, "lapampa"):
+        d = ru[ru.unit == u].set_index("year")
+        pre, dur = D.PERIODS["pre"], D.PERIODS["during"]
+        fall = Z.period_mean(d.net_ha, pre) - Z.period_mean(d.net_ha, dur)
+        rate = d.stopped_ha / d.mining_ha.shift(1)
+        perm = d.stopped_ha - d.stopped_back_2y_ha
+        excess = (d.stopped_ha - Z.period_mean(rate, pre) * d.mining_ha.shift(1))
+        variants = {
+            "raw": (Z.period_mean(d.stopped_ha, dur) - Z.period_mean(d.stopped_ha, pre)) / fall,
+            "excl_back2y": (Z.period_mean(perm, dur) - Z.period_mean(perm, pre)) / fall,
+            "excess_rate": Z.period_mean(excess, dur) / fall,
+        }
+        if u == T:
+            variants["did"] = did(ru, T, A, pre, dur, "stopped")[2] / -did(ru, T, A, pre, dur, "net")[2]
+        for k, v in variants.items():
+            reg.add(f"{u}_stopped_share_of_fall_{k}", v, "share", f"Share of the fall in net additions, "
+                    f"{D.UNIT_NAME[u]}, 2016–18 to 2019–21, attributable to stopped land, variant '{k}' (raw change; "
+                    "excluding land mined again within 2 years; excess over the 2016–18 stopping rate per ha of "
+                    "existing mining; stopped part of the DiD vs Amarakaeri)", "description", SRC, measure="stopped",
+                    zone=u, period="2016–18 vs 2019–21")
+        vals = list(variants.values())
+        reg.add(f"{u}_stopped_share_of_fall_min", min(vals), "share", f"Smallest of the stopped-share variants, "
+                f"{D.UNIT_NAME[u]}", "description", SRC, measure="stopped", zone=u, period="2016–18 vs 2019–21")
+        reg.add(f"{u}_stopped_share_of_fall_max", max(vals), "share", f"Largest of the stopped-share variants, "
+                f"{D.UNIT_NAME[u]}", "description", SRC, measure="stopped", zone=u, period="2016–18 vs 2019–21")
+        ex = excess.loc[dur[0]:dur[1]]
+        reg.add(f"{u}_excess_stopped_share_in_2019", ex.loc[dur[0]] / ex.sum(), "share", f"Share of 2019–21 excess "
+                f"stopping (over the 2016–18 rate) that falls in 2019, {D.UNIT_NAME[u]}", "description", SRC,
+                measure="stopped", zone=u, period="2019–21")
+        reg.add(f"{u}_stopping_rate_pre", Z.period_mean(rate, pre), "share", f"Stopped land as a share of the previous "
+                f"year's mining area, mean 2016–18, {D.UNIT_NAME[u]}", "description", SRC, measure="stopped", zone=u,
+                period="2016–18")
+        reg.add(f"{u}_stopping_rate_2019", rate.loc[dur[0]], "share", f"Stopped land as a share of the previous year's "
+                f"mining area, 2019, {D.UNIT_NAME[u]}", "description", SRC, measure="stopped", zone=u, period="2019")
     # placebo in time on Tambopata alone: every 2019-21 year below every 2011-18 year?
     w = _w(ru, "net")[T]
     a, b = D.PERIODS["during"]

@@ -112,8 +112,8 @@ def yearly_new_ha_in(patches, geom) -> dict[int, float]:
 
 
 def _row_ha(t, h, r0=0):
-    lat = t.f + (np.arange(r0, r0 + h) + 0.5) * t.e
-    return (abs(t.a) * 111320 * np.cos(np.radians(lat))) * (abs(t.e) * 110574) / 1e4
+    import raster_zones as rz                       # one pixel-area formula for the package (geodesic, WGS84)
+    return rz.row_area(t, h, r0)
 
 
 # --------------------------------------------------------------------------- v2 zones (crosswalk only)

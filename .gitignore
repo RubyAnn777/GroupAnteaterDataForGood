@@ -43,3 +43,4 @@ docs/overnight/_artifact/
 presentation/**/node_modules/
 presentation/deck/qa/
 data_intermediate/zones_mdd.tif
+docs/brief/docx_build/node_modules/

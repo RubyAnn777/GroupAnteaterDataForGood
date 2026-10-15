@@ -1,4 +1,4 @@
 id,value,unit,description,source_data
-s2_lp_west_2019_aug_ha,167.52307046811046,ha,"GLAD-S2 alerts, western La Pampa sector, August 2019",UMD GLAD-S2 alerts
-s2_lp_west_2019_mar_sep_ha,532.0050996277843,ha,"GLAD-S2 alerts, western La Pampa sector, Mar-Sep 2019",UMD GLAD-S2 alerts
-s2_lp_west_2020_mar_sep_ha,361.67518407235184,ha,"GLAD-S2 alerts, western La Pampa sector, Mar-Sep 2020",UMD GLAD-S2 alerts
+s2_lp_west_2019_aug_ha,167.6357634661947,ha,"GLAD-S2 alerts, western La Pampa sector, August 2019",UMD GLAD-S2 alerts
+s2_lp_west_2019_mar_sep_ha,532.3629801842094,ha,"GLAD-S2 alerts, western La Pampa sector, Mar-Sep 2019",UMD GLAD-S2 alerts
+s2_lp_west_2020_mar_sep_ha,361.9184834621726,ha,"GLAD-S2 alerts, western La Pampa sector, Mar-Sep 2020",UMD GLAD-S2 alerts

@@ -29,7 +29,7 @@ PIXEL ACCOUNTING per key and year t (mining = class 30):
   new_ha      mining at t, never mining before                         (first-time mining)
   remined_ha  mining at t, not at t-1, mining in some year before t-1  (return to old scars)
   stopped_ha  mining at t-1, not at t, split by what the land is at t: water (33), forest (3-6),
-              other natural (non-forest vegetation), farming/urban/bare, and whether it is mining again
+              non-forest vegetation, natural bare land (23 sand banks), other (farming, urban, anthropic bare), and whether it is mining again
               in t+1 or t+2 (classifier flicker or re-entry; censored for the last two years)
   net_ha      = new + remined - stopped = stock(t) - stock(t-1)     (identity asserted)
   from_forest_ha  mining at t, forest at t-1
@@ -53,8 +53,11 @@ RAW = ROOT / "data_raw"
 INTER = ROOT / "data_intermediate"
 RASTER = RAW / "mapbiomas_peru_raster" / "peru_coverage-col4_{y}.tif"
 YEARS = list(range(1985, 2026))
-MINING, FOREST, WATER = 30, (3, 4, 5, 6), (33, 31, 34)
-NATURAL = (10, 11, 12, 13, 29, 32)                  # non-forest natural formations (wetland, grassland, ...)
+# MapBiomas Peru Col 4 legend (LEGEND_CODE sheet of the publisher's statistics workbook):
+MINING, FOREST, WATER = 30, (3, 4, 5, 6), (33, 31, 34)                 # 4.2 mining; 1.x forest; 5.x water bodies
+NATURAL = (11, 12, 13, 29, 32, 50, 51, 66, 70, 82)  # 2.x non-forest natural vegetation (incl. 51 flooded grassland)
+BARE = (22, 23, 52, 61, 68, 92)                     # 4.x natural bare land: 23 beach / sand bank, 68 other, rock, salt
+# everything else ("other"): farming (9, 15, 18, 21, 40), urban (24), other anthropic bare (25), not observed (27)
 BBOX = (-72.45, -13.40, -68.60, -9.85)            # Madre de Dios envelope; contains both focal buffer zones whole
 WINDOW = (-70.35, -13.12, -69.65, -12.72)           # map window for figures
 STUDY = (-70.65, -13.30, -69.30, -12.40)            # 1-km cell panel window
@@ -73,7 +76,7 @@ OUT_WIN = INTER / "zones_window.tif"                # small: zone, first-mined y
 OUT_FULL = INTER / "zones_mdd.tif"                  # big, git-ignored: zone, first-mined year, tenure (region)
 OUTPUTS = (OUT_ZONE, OUT_ALT, OUT_BAND, OUT_BZ, OUT_REC, OUT_CELL, OUT_CELLATTR, OUT_WIN)
 CATS = ["mining_ha", "new_ha", "remined_ha", "stopped_ha", "from_forest_ha", "stopped_to_water_ha",
-        "stopped_to_forest_ha", "stopped_to_natural_ha", "stopped_to_other_ha"]
+        "stopped_to_forest_ha", "stopped_to_natural_ha", "stopped_to_bare_ha", "stopped_to_other_ha"]
 LOOK = ["stopped_back_1y_ha", "stopped_back_2y_ha"]
 
 
@@ -105,9 +108,23 @@ def window_for(bounds, r):
     return w.intersection(Window(0, 0, r.width, r.height))
 
 
-def row_area(t, h):
-    lat = t.f + (np.arange(h) + 0.5) * t.e
-    return (abs(t.a) * 111320 * np.cos(np.radians(lat))) * (abs(t.e) * 110574) / 1e4   # ha per pixel, by row
+def pixel_ha(lat, dlon_deg, dlat_deg):
+    """Area (ha) of a small lon/lat cell centred at `lat` on the WGS84 ellipsoid: M(lat) N(lat) cos(lat) dlon dlat,
+    with M, N the meridional and prime-vertical radii. Exact to < 1e-6 for 30-m pixels (checked against
+    pyproj.Geod). A spherical formula was 0.065% low (referee 2, 2026-10-15); with this, the publisher's Tambopata
+    buffer zone 2025 (20,730.0 ha) is matched."""
+    a, e2 = 6378137.0, 6.69437999014e-3
+    phi = np.radians(np.asarray(lat, float))
+    w = 1 - e2 * np.sin(phi) ** 2
+    M = a * (1 - e2) / w ** 1.5
+    N = a / np.sqrt(w)
+    return M * N * np.cos(phi) * np.radians(abs(dlon_deg)) * np.radians(abs(dlat_deg)) / 1e4
+
+
+def row_area(t, h, r0=0):
+    """ha per pixel for each row of a raster window with transform t (rows r0 .. r0+h-1)."""
+    lat = t.f + (np.arange(r0, r0 + h) + 0.5) * t.e
+    return pixel_ha(lat, t.a, t.e)
 
 
 def rasterizer(shape, t):
@@ -220,10 +237,12 @@ class Accountant:
                 self.add(y, "stopped_ha", stopped)
                 self.add(y, "from_forest_ha", mine & prev_forest)
                 water = np.isin(a, WATER); forest = np.isin(a, FOREST); nat = np.isin(a, NATURAL)
+                bare = np.isin(a, BARE)
                 self.add(y, "stopped_to_water_ha", stopped & water)
                 self.add(y, "stopped_to_forest_ha", stopped & forest)
                 self.add(y, "stopped_to_natural_ha", stopped & nat)
-                self.add(y, "stopped_to_other_ha", stopped & ~water & ~forest & ~nat)
+                self.add(y, "stopped_to_bare_ha", stopped & bare)
+                self.add(y, "stopped_to_other_ha", stopped & ~water & ~forest & ~nat & ~bare)
                 if stop1 is not None:
                     self.add(y - 1, "stopped_back_1y_ha", stop1 & mine)
                 if stop2 is not None:
@@ -261,7 +280,8 @@ def check_identity(df: pd.DataFrame, by: list[str]):
     diff = d.groupby(by).mining_ha.diff()
     resid = (diff - d.net_ha).abs().max()
     assert resid < 1e-6, f"accounting identity fails: {resid}"
-    parts = d[["stopped_to_water_ha", "stopped_to_forest_ha", "stopped_to_natural_ha", "stopped_to_other_ha"]].sum(axis=1)
+    parts = d[["stopped_to_water_ha", "stopped_to_forest_ha", "stopped_to_natural_ha", "stopped_to_bare_ha",
+               "stopped_to_other_ha"]].sum(axis=1)
     assert ((parts - d.stopped_ha).abs().fillna(0) < 1e-6).all(), "stopped split does not add up"
 
 

@@ -20,7 +20,7 @@ import definitions as D
 
 INTER = ROOT / "data_intermediate"
 FLOWS = ["net_ha", "new_ha", "remined_ha", "stopped_ha", "from_forest_ha", "stopped_to_water_ha",
-         "stopped_to_forest_ha", "stopped_to_natural_ha", "stopped_to_other_ha", "stopped_back_1y_ha",
+         "stopped_to_forest_ha", "stopped_to_natural_ha", "stopped_to_bare_ha", "stopped_to_other_ha", "stopped_back_1y_ha",
          "stopped_back_2y_ha"]
 COLS = ["mining_ha"] + FLOWS
 

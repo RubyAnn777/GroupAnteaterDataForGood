@@ -10,18 +10,18 @@ label,value,expected,ok
 "REPRODUCTION (course card, workbook): Amarakaeri mean annual addition 2016-18, ha/yr",289.1708096027872,289.0,True
 "REPRODUCTION (course card, workbook): Amarakaeri mean annual addition 2019-21, ha/yr",573.8330493285642,574.0,True
 "REPRODUCTION (starter, workbook): hand-computed DiD (Tambopata minus Amarakaeri), ha/yr",-1761.8017206937357,-1762.0,True
-"RECONCILIATION: Tambopata BZ raster stock vs workbook, worst year 2004 of 23, rel. diff <= 1% (value = max rel. diff x 100)",0.14124056294452944,0.0,True
-"RECONCILIATION: Amarakaeri BZ raster stock vs workbook, worst year 2011 of 22, rel. diff <= 1% (value = max rel. diff x 100)",0.0709595044400316,0.0,True
-"RECONCILIATION: Tambopata BZ mining 2025, raster registry vs workbook (20,730 ha), ha",20716.161,20730.03,True
-"RECONCILIATION: tambopata_bz net additions pre mean, raster registry vs card 1640 ha/yr (tol 2)",1638.5975333333336,1640.0,True
-"RECONCILIATION: tambopata_bz net additions during mean, raster registry vs card 163 ha/yr (tol 2)",162.39806666666667,163.0,True
-"RECONCILIATION: amarakaeri_bz net additions pre mean, raster registry vs card 289 ha/yr (tol 2)",289.06846666666667,289.0,True
-"RECONCILIATION: amarakaeri_bz net additions during mean, raster registry vs card 574 ha/yr (tol 2)",573.4567,574.0,True
-"RECONCILIATION: Madre de Dios mining 2025, raster registry vs department table (112,622 ha), ha",112536.6127,112622.0,True
+"RECONCILIATION: Tambopata BZ raster stock vs workbook, worst year 2004 of 23, rel. diff <= 1% (value = max rel. diff x 100)",0.07314243438198846,0.0,True
+"RECONCILIATION: Amarakaeri BZ raster stock vs workbook, worst year 2011 of 22, rel. diff <= 1% (value = max rel. diff x 100)",0.005469664655277517,0.0,True
+"RECONCILIATION: Tambopata BZ mining 2025, raster registry vs workbook (20,730 ha), ha",20730.117,20730.03,True
+"RECONCILIATION: tambopata_bz net additions pre mean, raster registry vs card 1640 ha/yr (tol 2)",1639.7038333333333,1640.0,True
+"RECONCILIATION: tambopata_bz net additions during mean, raster registry vs card 163 ha/yr (tol 2)",162.50629999999998,163.0,True
+"RECONCILIATION: amarakaeri_bz net additions pre mean, raster registry vs card 289 ha/yr (tol 2)",289.2581333333333,289.0,True
+"RECONCILIATION: amarakaeri_bz net additions during mean, raster registry vs card 574 ha/yr (tol 2)",573.8329666666666,574.0,True
+"RECONCILIATION: Madre de Dios mining 2025, raster registry vs department table (112,622 ha), ha",112610.64809999999,112622.0,True
 "ANP file: Tambopata NR mining 2025 (class 4.2), ha, rounded to 0.1",776.9,776.9,True
 "ANP file: Tambopata total area constant 2000 vs 2025 (diff, ha)",6.693881005048752e-09,0.0,True
 "Publisher check (MapBiomas Peru platform, Col 4, read 2026-10-10; data_raw/mapbiomas_peru/platform_check_tambopata_reserve_2026-10-10.jpg): Tambopata NR mining 2025, ha",777.0,777.0,True
-"Raster registry vs publisher file: Tambopata NR mining 2025, ha (tolerance 1%)",776.1874,776.8867359313983,True
+"Raster registry vs publisher file: Tambopata NR mining 2025, ha (tolerance 1%)",776.7124,776.8867359313983,True
 "Kayapo 2024 mining, ha: file Col 10.1 vs platform Col 11 (2026-10-10), collection difference, not asserted",18175.85096720563,17632.0,MISMATCH-documented
 "MINEM Madre de Dios gold 2001, declared + estimate vs BCRP, kg (within 2%?)",10821.966768398,0.0,MISMATCH
 "MINEM Madre de Dios gold 2002, declared + estimate vs BCRP, kg (within 2%?)",12506.483621479,0.0,MISMATCH
@@ -52,11 +52,11 @@ label,value,expected,ok
 "MINEM Madre de Dios gold 2012, all declared, kg (BCRP 2012 series)",12271.637180818998,12271.637180819,True
 "MapBiomas Amazonia Col 6, mining area whole region 2023, ha (factsheet p.3: 0.78 Mha)",775745.8721407066,780000.0,True
 "MapBiomas Brazil Col 11 mining module, garimpo, all Brazil 2025, ha (platform 445,987)",445986.54254546907,445987.0,True
-"AMW Tambopata BZ 2018 stock: polygon clip vs registry raster, ha (within 2%)",21107.7,21112.7,True
-"AMW Tambopata BZ 2019-21 sum: polygon clip vs registry raster, ha (within 2%)",5006.8,4984.85,True
-"Raster v3: Tambopata buffer zone mining 2025, ha (course table 20,730)",20716.161500000002,20730.0,True
-"Raster v3: Tambopata reserve mining 2025, ha (platform 777)",776.1874,777.0,True
-"Raster v3: Madre de Dios mining 2025, ha (course table 112,622)",112536.6127,112622.0,True
+"AMW Tambopata BZ 2018 stock: polygon clip vs registry raster, ha (within 2%)",21107.7,21126.93,True
+"AMW Tambopata BZ 2019-21 sum: polygon clip vs registry raster, ha (within 2%)",5006.8,4988.18,True
+"Raster v3: Tambopata buffer zone mining 2025, ha (course table 20,730)",20730.1169,20730.0,True
+"Raster v3: Tambopata reserve mining 2025, ha (platform 777)",776.7124,777.0,True
+"Raster v3: Madre de Dios mining 2025, ha (course table 112,622)",112610.64809999999,112622.0,True
 "MEF PP 0128 devengado, Madre de Dios, 2019, soles (Consulta Amigable screen 31,120,611)",31120611.0,31120611.0,True
 "MapBiomas Brazil Col 11 raster: Kayapo mining 2024, ha (platform 17,632)",17627.71495528987,17632.0,True
 "MapBiomas Brazil Col 11 raster: Kayapo mining 2025, ha (platform 18,573)",18568.56368568074,18573.0,True

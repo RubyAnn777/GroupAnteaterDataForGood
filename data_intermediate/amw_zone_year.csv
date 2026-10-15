@@ -1,23 +1,23 @@
 zone,zone_name,tenure,in_mdd,year,new_ha,is_stock,provisional
-tambopata_nr,Tambopata National Reserve,none,1,2018,1351.11,True,False
-tambopata_nr,Tambopata National Reserve,none,1,2019,59.57,False,False
-tambopata_nr,Tambopata National Reserve,none,1,2020,47.21,False,False
-tambopata_nr,Tambopata National Reserve,none,1,2021,51.31,False,False
-tambopata_nr,Tambopata National Reserve,none,1,2022,5.57,False,False
-tambopata_nr,Tambopata National Reserve,none,1,2023,11.15,False,False
-tambopata_nr,Tambopata National Reserve,none,1,2024,30.58,False,False
-tambopata_nr,Tambopata National Reserve,none,1,2025,535.56,False,True
-tambopata_nr,Tambopata National Reserve,none,1,2026,1332.0,False,True
+tambopata_nr,Tambopata National Reserve,none,1,2018,1352.03,True,False
+tambopata_nr,Tambopata National Reserve,none,1,2019,59.61,False,False
+tambopata_nr,Tambopata National Reserve,none,1,2020,47.25,False,False
+tambopata_nr,Tambopata National Reserve,none,1,2021,51.35,False,False
+tambopata_nr,Tambopata National Reserve,none,1,2022,5.58,False,False
+tambopata_nr,Tambopata National Reserve,none,1,2023,11.16,False,False
+tambopata_nr,Tambopata National Reserve,none,1,2024,30.6,False,False
+tambopata_nr,Tambopata National Reserve,none,1,2025,535.92,False,True
+tambopata_nr,Tambopata National Reserve,none,1,2026,1332.9,False,True
 other_anp,Other protected areas,none,1,2018,2.35,True,False
 other_anp,Other protected areas,none,1,2019,0.0,False,False
 other_anp,Other protected areas,none,1,2020,0.0,False,False
 other_anp,Other protected areas,none,1,2021,0.0,False,False
 other_anp,Other protected areas,none,1,2022,0.0,False,False
-other_anp,Other protected areas,none,1,2023,5.23,False,False
+other_anp,Other protected areas,none,1,2023,5.24,False,False
 other_anp,Other protected areas,none,1,2024,0.0,False,False
 other_anp,Other protected areas,none,1,2025,0.52,False,True
 other_anp,Other protected areas,none,1,2026,1.66,False,True
-other_anp,Other protected areas,corridor,1,2018,15.77,True,False
+other_anp,Other protected areas,corridor,1,2018,15.78,True,False
 other_anp,Other protected areas,corridor,1,2019,4.88,False,False
 other_anp,Other protected areas,corridor,1,2020,0.0,False,False
 other_anp,Other protected areas,corridor,1,2021,0.0,False,False
@@ -26,16 +26,16 @@ other_anp,Other protected areas,corridor,1,2023,0.0,False,False
 other_anp,Other protected areas,corridor,1,2024,0.0,False,False
 other_anp,Other protected areas,corridor,1,2025,1.31,False,True
 other_anp,Other protected areas,corridor,1,2026,0.0,False,True
-lapampa,La Pampa sector,none,1,2018,16426.99,True,False
-lapampa,La Pampa sector,none,1,2019,1343.17,False,False
-lapampa,La Pampa sector,none,1,2020,915.39,False,False
-lapampa,La Pampa sector,none,1,2021,485.64,False,False
-lapampa,La Pampa sector,none,1,2022,413.74,False,False
-lapampa,La Pampa sector,none,1,2023,793.42,False,False
-lapampa,La Pampa sector,none,1,2024,1128.42,False,False
-lapampa,La Pampa sector,none,1,2025,1627.76,False,True
-lapampa,La Pampa sector,none,1,2026,2179.22,False,True
-lapampa,La Pampa sector,corridor,1,2018,36.16,True,False
+lapampa,La Pampa sector,none,1,2018,16438.03,True,False
+lapampa,La Pampa sector,none,1,2019,1344.08,False,False
+lapampa,La Pampa sector,none,1,2020,916.0,False,False
+lapampa,La Pampa sector,none,1,2021,485.96,False,False
+lapampa,La Pampa sector,none,1,2022,414.01,False,False
+lapampa,La Pampa sector,none,1,2023,793.96,False,False
+lapampa,La Pampa sector,none,1,2024,1129.18,False,False
+lapampa,La Pampa sector,none,1,2025,1628.86,False,True
+lapampa,La Pampa sector,none,1,2026,2180.69,False,True
+lapampa,La Pampa sector,corridor,1,2018,36.19,True,False
 lapampa,La Pampa sector,corridor,1,2019,1.83,False,False
 lapampa,La Pampa sector,corridor,1,2020,3.05,False,False
 lapampa,La Pampa sector,corridor,1,2021,0.52,False,False
@@ -44,25 +44,25 @@ lapampa,La Pampa sector,corridor,1,2023,0.35,False,False
 lapampa,La Pampa sector,corridor,1,2024,0.0,False,False
 lapampa,La Pampa sector,corridor,1,2025,0.0,False,True
 lapampa,La Pampa sector,corridor,1,2026,0.96,False,True
-lapampa,La Pampa sector,kotsimba,1,2018,506.49,True,False
-lapampa,La Pampa sector,kotsimba,1,2019,115.85,False,False
-lapampa,La Pampa sector,kotsimba,1,2020,64.55,False,False
-lapampa,La Pampa sector,kotsimba,1,2021,152.25,False,False
-lapampa,La Pampa sector,kotsimba,1,2022,145.72,False,False
-lapampa,La Pampa sector,kotsimba,1,2023,115.32,False,False
-lapampa,La Pampa sector,kotsimba,1,2024,183.09,False,False
-lapampa,La Pampa sector,kotsimba,1,2025,88.76,False,True
-lapampa,La Pampa sector,kotsimba,1,2026,145.73,False,True
-tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2018,2255.24,True,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2019,292.99,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2020,302.33,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2021,214.58,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2022,109.44,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2023,40.34,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2024,189.22,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2025,248.83,False,True
-tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2026,650.34,False,True
-tambopata_bz_rest,Rest of Tambopata buffer zone,corridor,1,2018,6.62,True,False
+lapampa,La Pampa sector,kotsimba,1,2018,506.83,True,False
+lapampa,La Pampa sector,kotsimba,1,2019,115.93,False,False
+lapampa,La Pampa sector,kotsimba,1,2020,64.59,False,False
+lapampa,La Pampa sector,kotsimba,1,2021,152.35,False,False
+lapampa,La Pampa sector,kotsimba,1,2022,145.82,False,False
+lapampa,La Pampa sector,kotsimba,1,2023,115.4,False,False
+lapampa,La Pampa sector,kotsimba,1,2024,183.21,False,False
+lapampa,La Pampa sector,kotsimba,1,2025,88.82,False,True
+lapampa,La Pampa sector,kotsimba,1,2026,145.82,False,True
+tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2018,2256.76,True,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2019,293.18,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2020,302.53,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2021,214.72,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2022,109.51,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2023,40.36,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2024,189.35,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2025,248.99,False,True
+tambopata_bz_rest,Rest of Tambopata buffer zone,none,1,2026,650.78,False,True
+tambopata_bz_rest,Rest of Tambopata buffer zone,corridor,1,2018,6.63,True,False
 tambopata_bz_rest,Rest of Tambopata buffer zone,corridor,1,2019,1.22,False,False
 tambopata_bz_rest,Rest of Tambopata buffer zone,corridor,1,2020,0.0,False,False
 tambopata_bz_rest,Rest of Tambopata buffer zone,corridor,1,2021,0.0,False,False
@@ -71,93 +71,93 @@ tambopata_bz_rest,Rest of Tambopata buffer zone,corridor,1,2023,0.0,False,False
 tambopata_bz_rest,Rest of Tambopata buffer zone,corridor,1,2024,3.92,False,False
 tambopata_bz_rest,Rest of Tambopata buffer zone,corridor,1,2025,0.0,False,True
 tambopata_bz_rest,Rest of Tambopata buffer zone,corridor,1,2026,0.0,False,True
-tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2018,1881.2,True,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2019,575.25,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2020,397.18,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2021,119.05,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2022,5.57,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2023,195.65,False,False
-tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2024,194.12,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2018,1882.49,True,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2019,575.64,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2020,397.45,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2021,119.13,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2022,5.58,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2023,195.79,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2024,194.25,False,False
 tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2025,0.0,False,True
-tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2026,136.4,False,True
-amarakaeri_bz,Amarakaeri buffer zone,none,0,2018,26.03,True,False
-amarakaeri_bz,Amarakaeri buffer zone,none,0,2019,227.6,False,False
-amarakaeri_bz,Amarakaeri buffer zone,none,0,2020,56.42,False,False
+tambopata_bz_rest,Rest of Tambopata buffer zone,kotsimba,1,2026,136.49,False,True
+amarakaeri_bz,Amarakaeri buffer zone,none,0,2018,26.05,True,False
+amarakaeri_bz,Amarakaeri buffer zone,none,0,2019,227.76,False,False
+amarakaeri_bz,Amarakaeri buffer zone,none,0,2020,56.46,False,False
 amarakaeri_bz,Amarakaeri buffer zone,none,0,2021,8.97,False,False
-amarakaeri_bz,Amarakaeri buffer zone,none,0,2022,23.07,False,False
+amarakaeri_bz,Amarakaeri buffer zone,none,0,2022,23.08,False,False
 amarakaeri_bz,Amarakaeri buffer zone,none,0,2023,0.0,False,False
-amarakaeri_bz,Amarakaeri buffer zone,none,0,2024,23.68,False,False
-amarakaeri_bz,Amarakaeri buffer zone,none,0,2025,176.13,False,True
+amarakaeri_bz,Amarakaeri buffer zone,none,0,2024,23.7,False,False
+amarakaeri_bz,Amarakaeri buffer zone,none,0,2025,176.26,False,True
 amarakaeri_bz,Amarakaeri buffer zone,none,0,2026,11.15,False,True
-amarakaeri_bz,Amarakaeri buffer zone,none,1,2018,163.9,True,False
-amarakaeri_bz,Amarakaeri buffer zone,none,1,2019,83.96,False,False
-amarakaeri_bz,Amarakaeri buffer zone,none,1,2020,22.3,False,False
-amarakaeri_bz,Amarakaeri buffer zone,none,1,2021,118.59,False,False
-amarakaeri_bz,Amarakaeri buffer zone,none,1,2022,72.37,False,False
-amarakaeri_bz,Amarakaeri buffer zone,none,1,2023,236.64,False,False
-amarakaeri_bz,Amarakaeri buffer zone,none,1,2024,79.39,False,False
-amarakaeri_bz,Amarakaeri buffer zone,none,1,2025,82.51,False,True
-amarakaeri_bz,Amarakaeri buffer zone,none,1,2026,13.26,False,True
-amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2018,6488.61,True,False
-amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2019,1049.0,False,False
-amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2020,832.44,False,False
-amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2021,1040.47,False,False
-amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2022,526.75,False,False
-amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2023,383.19,False,False
-amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2024,221.55,False,False
-amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2025,259.74,False,True
-amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2026,264.61,False,True
-amarakaeri_bz,Amarakaeri buffer zone,community,1,2018,4603.9,True,False
-amarakaeri_bz,Amarakaeri buffer zone,community,1,2019,568.73,False,False
-amarakaeri_bz,Amarakaeri buffer zone,community,1,2020,661.26,False,False
-amarakaeri_bz,Amarakaeri buffer zone,community,1,2021,446.8,False,False
-amarakaeri_bz,Amarakaeri buffer zone,community,1,2022,551.87,False,False
-amarakaeri_bz,Amarakaeri buffer zone,community,1,2023,755.07,False,False
-amarakaeri_bz,Amarakaeri buffer zone,community,1,2024,932.72,False,False
-amarakaeri_bz,Amarakaeri buffer zone,community,1,2025,281.12,False,True
-amarakaeri_bz,Amarakaeri buffer zone,community,1,2026,676.74,False,True
-corridor_across,Corridor across the road,corridor,1,2018,4785.92,True,False
-corridor_across,Corridor across the road,corridor,1,2019,651.48,False,False
-corridor_across,Corridor across the road,corridor,1,2020,1449.54,False,False
-corridor_across,Corridor across the road,corridor,1,2021,837.18,False,False
-corridor_across,Corridor across the road,corridor,1,2022,928.46,False,False
-corridor_across,Corridor across the road,corridor,1,2023,847.75,False,False
-corridor_across,Corridor across the road,corridor,1,2024,566.46,False,False
-corridor_across,Corridor across the road,corridor,1,2025,159.84,False,True
-corridor_across,Corridor across the road,corridor,1,2026,106.34,False,True
-corridor_rest,Rest of the mining corridor,corridor,1,2018,47138.75,True,False
-corridor_rest,Rest of the mining corridor,corridor,1,2019,13670.19,False,False
-corridor_rest,Rest of the mining corridor,corridor,1,2020,14763.33,False,False
-corridor_rest,Rest of the mining corridor,corridor,1,2021,12394.39,False,False
-corridor_rest,Rest of the mining corridor,corridor,1,2022,10254.6,False,False
-corridor_rest,Rest of the mining corridor,corridor,1,2023,10088.03,False,False
-corridor_rest,Rest of the mining corridor,corridor,1,2024,9011.83,False,False
-corridor_rest,Rest of the mining corridor,corridor,1,2025,8273.29,False,True
-corridor_rest,Rest of the mining corridor,corridor,1,2026,6097.44,False,True
-corridor_rest,Rest of the mining corridor,community,1,2018,35.67,True,False
+amarakaeri_bz,Amarakaeri buffer zone,none,1,2018,164.0,True,False
+amarakaeri_bz,Amarakaeri buffer zone,none,1,2019,84.02,False,False
+amarakaeri_bz,Amarakaeri buffer zone,none,1,2020,22.32,False,False
+amarakaeri_bz,Amarakaeri buffer zone,none,1,2021,118.67,False,False
+amarakaeri_bz,Amarakaeri buffer zone,none,1,2022,72.42,False,False
+amarakaeri_bz,Amarakaeri buffer zone,none,1,2023,236.8,False,False
+amarakaeri_bz,Amarakaeri buffer zone,none,1,2024,79.44,False,False
+amarakaeri_bz,Amarakaeri buffer zone,none,1,2025,82.56,False,True
+amarakaeri_bz,Amarakaeri buffer zone,none,1,2026,13.27,False,True
+amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2018,6492.89,True,False
+amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2019,1049.69,False,False
+amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2020,832.98,False,False
+amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2021,1041.15,False,False
+amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2022,527.1,False,False
+amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2023,383.45,False,False
+amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2024,221.7,False,False
+amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2025,259.91,False,True
+amarakaeri_bz,Amarakaeri buffer zone,corridor,1,2026,264.78,False,True
+amarakaeri_bz,Amarakaeri buffer zone,community,1,2018,4606.89,True,False
+amarakaeri_bz,Amarakaeri buffer zone,community,1,2019,569.1,False,False
+amarakaeri_bz,Amarakaeri buffer zone,community,1,2020,661.7,False,False
+amarakaeri_bz,Amarakaeri buffer zone,community,1,2021,447.09,False,False
+amarakaeri_bz,Amarakaeri buffer zone,community,1,2022,552.23,False,False
+amarakaeri_bz,Amarakaeri buffer zone,community,1,2023,755.56,False,False
+amarakaeri_bz,Amarakaeri buffer zone,community,1,2024,933.32,False,False
+amarakaeri_bz,Amarakaeri buffer zone,community,1,2025,281.3,False,True
+amarakaeri_bz,Amarakaeri buffer zone,community,1,2026,677.18,False,True
+corridor_across,Corridor across the road,corridor,1,2018,4789.09,True,False
+corridor_across,Corridor across the road,corridor,1,2019,651.91,False,False
+corridor_across,Corridor across the road,corridor,1,2020,1450.49,False,False
+corridor_across,Corridor across the road,corridor,1,2021,837.73,False,False
+corridor_across,Corridor across the road,corridor,1,2022,929.07,False,False
+corridor_across,Corridor across the road,corridor,1,2023,848.31,False,False
+corridor_across,Corridor across the road,corridor,1,2024,566.83,False,False
+corridor_across,Corridor across the road,corridor,1,2025,159.95,False,True
+corridor_across,Corridor across the road,corridor,1,2026,106.41,False,True
+corridor_rest,Rest of the mining corridor,corridor,1,2018,47169.56,True,False
+corridor_rest,Rest of the mining corridor,corridor,1,2019,13679.09,False,False
+corridor_rest,Rest of the mining corridor,corridor,1,2020,14772.9,False,False
+corridor_rest,Rest of the mining corridor,corridor,1,2021,12402.43,False,False
+corridor_rest,Rest of the mining corridor,corridor,1,2022,10261.24,False,False
+corridor_rest,Rest of the mining corridor,corridor,1,2023,10094.57,False,False
+corridor_rest,Rest of the mining corridor,corridor,1,2024,9017.65,False,False
+corridor_rest,Rest of the mining corridor,corridor,1,2025,8278.64,False,True
+corridor_rest,Rest of the mining corridor,corridor,1,2026,6101.38,False,True
+corridor_rest,Rest of the mining corridor,community,1,2018,35.69,True,False
 corridor_rest,Rest of the mining corridor,community,1,2019,4.97,False,False
-corridor_rest,Rest of the mining corridor,community,1,2020,29.99,False,False
-corridor_rest,Rest of the mining corridor,community,1,2021,4.62,False,False
+corridor_rest,Rest of the mining corridor,community,1,2020,30.01,False,False
+corridor_rest,Rest of the mining corridor,community,1,2021,4.63,False,False
 corridor_rest,Rest of the mining corridor,community,1,2022,2.09,False,False
-corridor_rest,Rest of the mining corridor,community,1,2023,37.4,False,False
+corridor_rest,Rest of the mining corridor,community,1,2023,37.42,False,False
 corridor_rest,Rest of the mining corridor,community,1,2024,2.27,False,False
-corridor_rest,Rest of the mining corridor,community,1,2025,4.01,False,True
-corridor_rest,Rest of the mining corridor,community,1,2026,3.05,False,True
-communities,Native communities,community,1,2018,10340.52,True,False
-communities,Native communities,community,1,2019,2096.91,False,False
-communities,Native communities,community,1,2020,2766.89,False,False
-communities,Native communities,community,1,2021,2267.39,False,False
-communities,Native communities,community,1,2022,1267.69,False,False
-communities,Native communities,community,1,2023,1113.92,False,False
-communities,Native communities,community,1,2024,1249.53,False,False
-communities,Native communities,community,1,2025,1223.5,False,True
-communities,Native communities,community,1,2026,1304.49,False,True
-rest_mdd,Rest of Madre de Dios,none,1,2018,705.87,True,False
-rest_mdd,Rest of Madre de Dios,none,1,2019,235.07,False,False
-rest_mdd,Rest of Madre de Dios,none,1,2020,293.11,False,False
-rest_mdd,Rest of Madre de Dios,none,1,2021,356.33,False,False
-rest_mdd,Rest of Madre de Dios,none,1,2022,469.3,False,False
-rest_mdd,Rest of Madre de Dios,none,1,2023,272.66,False,False
-rest_mdd,Rest of Madre de Dios,none,1,2024,91.78,False,False
-rest_mdd,Rest of Madre de Dios,none,1,2025,134.25,False,True
-rest_mdd,Rest of Madre de Dios,none,1,2026,269.4,False,True
+corridor_rest,Rest of the mining corridor,community,1,2025,4.02,False,True
+corridor_rest,Rest of the mining corridor,community,1,2026,3.06,False,True
+communities,Native communities,community,1,2018,10347.19,True,False
+communities,Native communities,community,1,2019,2098.27,False,False
+communities,Native communities,community,1,2020,2768.68,False,False
+communities,Native communities,community,1,2021,2268.86,False,False
+communities,Native communities,community,1,2022,1268.51,False,False
+communities,Native communities,community,1,2023,1114.63,False,False
+communities,Native communities,community,1,2024,1250.34,False,False
+communities,Native communities,community,1,2025,1224.29,False,True
+communities,Native communities,community,1,2026,1305.32,False,True
+rest_mdd,Rest of Madre de Dios,none,1,2018,706.32,True,False
+rest_mdd,Rest of Madre de Dios,none,1,2019,235.22,False,False
+rest_mdd,Rest of Madre de Dios,none,1,2020,293.29,False,False
+rest_mdd,Rest of Madre de Dios,none,1,2021,356.55,False,False
+rest_mdd,Rest of Madre de Dios,none,1,2022,469.59,False,False
+rest_mdd,Rest of Madre de Dios,none,1,2023,272.83,False,False
+rest_mdd,Rest of Madre de Dios,none,1,2024,91.84,False,False
+rest_mdd,Rest of Madre de Dios,none,1,2025,134.33,False,True
+rest_mdd,Rest of Madre de Dios,none,1,2026,269.57,False,True

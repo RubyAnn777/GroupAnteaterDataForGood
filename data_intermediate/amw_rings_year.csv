@@ -1,40 +1,40 @@
 region,unit,year,new_ha,land_km2,is_stock,provisional
-La Pampa sector band,La Pampa sector,2018,16969.64,613.14,True,False
-La Pampa sector band,La Pampa sector,2019,1460.85,613.14,False,False
-La Pampa sector band,La Pampa sector,2020,982.98,613.14,False,False
-La Pampa sector band,La Pampa sector,2021,638.41,613.14,False,False
-La Pampa sector band,La Pampa sector,2022,559.46,613.14,False,False
-La Pampa sector band,La Pampa sector,2023,909.1,613.14,False,False
-La Pampa sector band,La Pampa sector,2024,1311.51,613.14,False,False
-La Pampa sector band,La Pampa sector,2025,1716.52,613.14,False,True
-La Pampa sector band,La Pampa sector,2026,2325.91,613.14,False,True
-La Pampa sector band,0-10 km,2018,8533.25,1576.03,True,False
-La Pampa sector band,0-10 km,2019,1345.75,1576.03,False,False
-La Pampa sector band,0-10 km,2020,1877.58,1576.03,False,False
-La Pampa sector band,0-10 km,2021,1003.64,1576.03,False,False
-La Pampa sector band,0-10 km,2022,1083.93,1576.03,False,False
-La Pampa sector band,0-10 km,2023,1069.22,1576.03,False,False
-La Pampa sector band,0-10 km,2024,980.71,1576.03,False,False
-La Pampa sector band,0-10 km,2025,632.35,1576.03,False,True
-La Pampa sector band,0-10 km,2026,1656.79,1576.03,False,True
-La Pampa sector band,10-25 km,2018,12925.22,2894.91,True,False
-La Pampa sector band,10-25 km,2019,4309.68,2894.91,False,False
-La Pampa sector band,10-25 km,2020,5847.01,2894.91,False,False
-La Pampa sector band,10-25 km,2021,5125.07,2894.91,False,False
-La Pampa sector band,10-25 km,2022,4698.35,2894.91,False,False
-La Pampa sector band,10-25 km,2023,5096.46,2894.91,False,False
-La Pampa sector band,10-25 km,2024,4199.21,2894.91,False,False
-La Pampa sector band,10-25 km,2025,6432.97,2894.91,False,True
-La Pampa sector band,10-25 km,2026,4614.37,2894.91,False,True
-La Pampa sector band,25-50 km,2018,48656.34,6054.95,True,False
-La Pampa sector band,25-50 km,2019,11409.52,6054.95,False,False
-La Pampa sector band,25-50 km,2020,12306.16,6054.95,False,False
-La Pampa sector band,25-50 km,2021,10289.41,6054.95,False,False
-La Pampa sector band,25-50 km,2022,6935.69,6054.95,False,False
-La Pampa sector band,25-50 km,2023,6405.95,6054.95,False,False
-La Pampa sector band,25-50 km,2024,6499.72,6054.95,False,False
-La Pampa sector band,25-50 km,2025,3231.4,6054.95,False,True
-La Pampa sector band,25-50 km,2026,3383.83,6054.95,False,True
+La Pampa sector band,La Pampa sector,2018,16981.05,613.55,True,False
+La Pampa sector band,La Pampa sector,2019,1461.83,613.55,False,False
+La Pampa sector band,La Pampa sector,2020,983.64,613.55,False,False
+La Pampa sector band,La Pampa sector,2021,638.84,613.55,False,False
+La Pampa sector band,La Pampa sector,2022,559.83,613.55,False,False
+La Pampa sector band,La Pampa sector,2023,909.71,613.55,False,False
+La Pampa sector band,La Pampa sector,2024,1312.39,613.55,False,False
+La Pampa sector band,La Pampa sector,2025,1717.68,613.55,False,True
+La Pampa sector band,La Pampa sector,2026,2327.48,613.55,False,True
+La Pampa sector band,0-10 km,2018,8538.94,1577.1,True,False
+La Pampa sector band,0-10 km,2019,1346.65,1577.1,False,False
+La Pampa sector band,0-10 km,2020,1878.83,1577.1,False,False
+La Pampa sector band,0-10 km,2021,1004.31,1577.1,False,False
+La Pampa sector band,0-10 km,2022,1084.65,1577.1,False,False
+La Pampa sector band,0-10 km,2023,1069.92,1577.1,False,False
+La Pampa sector band,0-10 km,2024,981.36,1577.1,False,False
+La Pampa sector band,0-10 km,2025,632.78,1577.1,False,True
+La Pampa sector band,0-10 km,2026,1657.91,1577.1,False,True
+La Pampa sector band,10-25 km,2018,12933.7,2896.84,True,False
+La Pampa sector band,10-25 km,2019,4312.5,2896.84,False,False
+La Pampa sector band,10-25 km,2020,5850.82,2896.84,False,False
+La Pampa sector band,10-25 km,2021,5128.4,2896.84,False,False
+La Pampa sector band,10-25 km,2022,4701.4,2896.84,False,False
+La Pampa sector band,10-25 km,2023,5099.77,2896.84,False,False
+La Pampa sector band,10-25 km,2024,4201.94,2896.84,False,False
+La Pampa sector band,10-25 km,2025,6437.14,2896.84,False,True
+La Pampa sector band,10-25 km,2026,4617.38,2896.84,False,True
+La Pampa sector band,25-50 km,2018,48688.13,6058.92,True,False
+La Pampa sector band,25-50 km,2019,11416.93,6058.92,False,False
+La Pampa sector band,25-50 km,2020,12314.13,6058.92,False,False
+La Pampa sector band,25-50 km,2021,10296.07,6058.92,False,False
+La Pampa sector band,25-50 km,2022,6940.18,6058.92,False,False
+La Pampa sector band,25-50 km,2023,6410.1,6058.92,False,False
+La Pampa sector band,25-50 km,2024,6503.9,6058.92,False,False
+La Pampa sector band,25-50 km,2025,3233.49,6058.92,False,True
+La Pampa sector band,25-50 km,2026,3386.01,6058.92,False,True
 Yanomami TI ring,inside,2018,1506.75,94941.9,True,False
 Yanomami TI ring,inside,2019,2295.13,94941.9,False,False
 Yanomami TI ring,inside,2020,1066.25,94941.9,False,False

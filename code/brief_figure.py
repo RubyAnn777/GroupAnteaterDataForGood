@@ -51,7 +51,7 @@ def run(pack=None, reg=None):
     headline(fig, f"La Pampa's net mining fell from {lp_pre:,.0f} to {lp_dur:,.0f} ha/yr in 2019–21;\n"
                   f"across the road it rose from {x_pre:,.0f} to {x_dur:,.0f}",
              f"Net additions (black line) = new land + re-mined − stopped (bars), ha/yr. In La Pampa, new land {word} "
-             f"and stopped land\nrose {stop_ratio:.1f}-fold: about half the fall is pits leaving the mining class. "
+             f"and stopped land\nrose {stop_ratio:.1f}-fold (most of it in 2019): pits leaving the mining class explain part of the fall. "
              "Description, not a causal estimate.")
     for ax, u, title in ((a1, "lapampa", "La Pampa sector (the target)"),
                          (a2, "corridor_across", "Corridor across the road (legal)")):
