@@ -1,31 +1,31 @@
 zone,zone_name,period,net,new,remined,stopped
-amarakaeri_bz,Amarakaeri buffer zone,2016–18,283.7,478.0,347.1,541.4
-amarakaeri_bz,Amarakaeri buffer zone,2019–21,539.4,602.9,515.3,578.8
-amarakaeri_bz,Amarakaeri buffer zone,2022–25,1198.4,1002.0,650.6,454.3
+amarakaeri_bz,Amarakaeri buffer zone,2016–18,283.9,478.3,347.3,541.7
+amarakaeri_bz,Amarakaeri buffer zone,2019–21,539.8,603.3,515.6,579.1
+amarakaeri_bz,Amarakaeri buffer zone,2022–25,1199.1,1002.6,651.1,454.6
 bahuaja_bz,Bahuaja-Sonene buffer zone,2016–18,0.0,0.0,0.0,0.0
 bahuaja_bz,Bahuaja-Sonene buffer zone,2019–21,0.2,0.2,0.0,0.0
 bahuaja_bz,Bahuaja-Sonene buffer zone,2022–25,0.2,0.8,0.0,0.6
-communities,Native communities,2016–18,175.2,413.3,250.1,488.2
-communities,Native communities,2019–21,495.5,652.4,443.2,600.1
-communities,Native communities,2022–25,1284.7,1097.2,715.1,527.7
-corridor_across,Corridor across the road,2016–18,59.9,68.7,64.8,73.6
-corridor_across,Corridor across the road,2019–21,394.7,462.1,191.6,259.1
-corridor_across,Corridor across the road,2022–25,601.6,537.7,241.0,177.1
-corridor_rest,Rest of the mining corridor,2016–18,1282.2,2132.5,797.5,1647.9
-corridor_rest,Rest of the mining corridor,2019–21,3015.1,3690.3,1454.9,2130.1
-corridor_rest,Rest of the mining corridor,2022–25,6936.4,7166.8,2470.6,2700.9
-lapampa,La Pampa sector,2016–18,1207.7,1441.0,257.2,490.5
-lapampa,La Pampa sector,2019–21,84.9,754.5,388.9,1058.6
-lapampa,La Pampa sector,2022–25,1628.6,1067.3,931.6,370.3
+communities,Native communities,2016–18,175.3,413.6,250.2,488.6
+communities,Native communities,2019–21,495.9,652.8,443.5,600.4
+communities,Native communities,2022–25,1285.5,1097.9,715.6,528.0
+corridor_across,Corridor across the road,2016–18,59.9,68.7,64.9,73.6
+corridor_across,Corridor across the road,2019–21,395.0,462.4,191.8,259.2
+corridor_across,Corridor across the road,2022–25,602.0,538.0,241.1,177.2
+corridor_rest,Rest of the mining corridor,2016–18,1283.0,2133.9,798.1,1648.9
+corridor_rest,Rest of the mining corridor,2019–21,3017.0,3692.7,1455.8,2131.5
+corridor_rest,Rest of the mining corridor,2022–25,6941.0,7171.4,2472.2,2702.7
+lapampa,La Pampa sector,2016–18,1208.5,1442.0,257.4,490.9
+lapampa,La Pampa sector,2019–21,84.9,755.1,389.2,1059.3
+lapampa,La Pampa sector,2022–25,1629.7,1068.0,932.2,370.5
 other_anp,Other protected areas,2016–18,-1.6,0.0,0.0,1.6
 other_anp,Other protected areas,2019–21,-0.4,0.0,0.0,0.4
 other_anp,Other protected areas,2022–25,0.5,0.7,0.0,0.2
 rest_mdd,Rest of Madre de Dios,2016–18,3.1,8.3,7.2,12.3
 rest_mdd,Rest of Madre de Dios,2019–21,61.4,59.6,12.0,10.2
-rest_mdd,Rest of Madre de Dios,2022–25,110.7,124.9,17.3,31.5
-tambopata_bz_rest,Rest of Tambopata buffer zone,2016–18,429.7,573.3,86.4,229.9
-tambopata_bz_rest,Rest of Tambopata buffer zone,2019–21,78.1,306.0,124.7,352.7
-tambopata_bz_rest,Rest of Tambopata buffer zone,2022–25,199.5,277.0,206.7,284.2
-tambopata_nr,Tambopata National Reserve,2016–18,167.3,202.1,7.7,42.5
+rest_mdd,Rest of Madre de Dios,2022–25,110.8,125.0,17.3,31.5
+tambopata_bz_rest,Rest of Tambopata buffer zone,2016–18,430.0,573.6,86.4,230.1
+tambopata_bz_rest,Rest of Tambopata buffer zone,2019–21,78.1,306.2,124.8,352.9
+tambopata_bz_rest,Rest of Tambopata buffer zone,2022–25,199.6,277.1,206.9,284.4
+tambopata_nr,Tambopata National Reserve,2016–18,167.4,202.3,7.7,42.6
 tambopata_nr,Tambopata National Reserve,2019–21,-33.2,42.5,22.6,98.3
-tambopata_nr,Tambopata National Reserve,2022–25,78.8,98.9,32.1,52.3
+tambopata_nr,Tambopata National Reserve,2022–25,78.8,99.0,32.1,52.3

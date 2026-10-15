@@ -1,36 +1,36 @@
 spec,window,note,did_net,did_new,did_remined,did_stopped
-(a) main: control = Amarakaeri buffer zone (main),2016–18 vs 2019–21,Main control; partly treated too (Mercurio II covered all of Madre de Dios),-1760.6,-1108.9,-2.1,649.5
-(a) placebo: control = Amarakaeri buffer zone (main),2013–15 vs 2016–18,Main control; partly treated too (Mercurio II covered all of Madre de Dios),208.5,281.1,96.0,168.6
-(a) persistence: control = Amarakaeri buffer zone (main),2016–18 vs 2022–25,Main control; partly treated too (Mercurio II covered all of Madre de Dios),-736.5,-1209.9,485.7,12.3
-(a) main: control = Bahuaja-Sonene buffer zone,2016–18 vs 2019–21,Tiny pre-period mining: a weak counterfactual,-1505.2,-984.5,168.5,689.2
-(a) placebo: control = Bahuaja-Sonene buffer zone,2013–15 vs 2016–18,Tiny pre-period mining: a weak counterfactual,72.2,63.4,239.4,230.6
-(a) persistence: control = Bahuaja-Sonene buffer zone,2016–18 vs 2022–25,Tiny pre-period mining: a weak counterfactual,120.1,-746.4,784.7,-81.8
-"(a) main: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",2016–18 vs 2019–21,,-1632.9,-1046.7,83.2,669.4
-"(a) placebo: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",2013–15 vs 2016–18,,140.4,172.3,167.7,199.6
-"(a) persistence: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",2016–18 vs 2022–25,,-308.2,-978.1,635.2,-34.7
-"(a) main: control = Amarakaeri + Bahuaja-Sonene, summed",2016–18 vs 2019–21,Scale mismatch; do not cite,-1789.6,-1138.5,-3.7,647.4
-"(a) placebo: control = Amarakaeri + Bahuaja-Sonene, summed",2013–15 vs 2016–18,Scale mismatch; do not cite,205.1,278.0,94.6,167.5
-"(a) persistence: control = Amarakaeri + Bahuaja-Sonene, summed",2016–18 vs 2022–25,Scale mismatch; do not cite,-805.8,-1285.0,475.3,-4.0
-(a) main: control = Mining corridor outside buffer zones (Madre de Dios),2016–18 vs 2019–21,"Legal corridor: a likely destination of displaced miners, so spillovers bias the DiD away from zero",-3543.8,-2906.1,-614.1,23.6
-(a) placebo: control = Mining corridor outside buffer zones (Madre de Dios),2013–15 vs 2016–18,"Legal corridor: a likely destination of displaced miners, so spillovers bias the DiD away from zero",59.5,314.7,-29.6,225.6
-(a) persistence: control = Mining corridor outside buffer zones (Madre de Dios),2016–18 vs 2022–25,"Legal corridor: a likely destination of displaced miners, so spillovers bias the DiD away from zero",-6006.5,-6174.5,-1054.1,-1222.1
-"(a) main: control = Native communities (Madre de Dios, outside buffer zones)",2016–18 vs 2019–21,,-1796.6,-1194.0,-23.0,579.6
-"(a) placebo: control = Native communities (Madre de Dios, outside buffer zones)",2013–15 vs 2016–18,,166.4,221.4,171.9,226.9
-"(a) persistence: control = Native communities (Madre de Dios, outside buffer zones)",2016–18 vs 2022–25,,-920.2,-1355.1,330.0,-104.9
-(a) main: control = Rest of Madre de Dios (outside every other zone),2016–18 vs 2019–21,Little mining,-1534.5,-1006.2,165.3,693.5
-(a) placebo: control = Rest of Madre de Dios (outside every other zone),2013–15 vs 2016–18,Little mining,77.1,80.4,235.3,238.6
-(a) persistence: control = Rest of Madre de Dios (outside every other zone),2016–18 vs 2022–25,Little mining,81.8,-787.8,785.0,-84.6
-"(a) main: control = Other Amazon buffer zones with 2014-18 mining (n=7), mean",2016–18 vs 2019–21,definitions.AMAZON_BZ,-1524.4,-990.7,145.1,678.8
-"(a) placebo: control = Other Amazon buffer zones with 2014-18 mining (n=7), mean",2013–15 vs 2016–18,definitions.AMAZON_BZ,96.9,97.0,220.6,220.7
-"(a) persistence: control = Other Amazon buffer zones with 2014-18 mining (n=7), mean",2016–18 vs 2022–25,definitions.AMAZON_BZ,28.8,-828.8,741.3,-116.3
-"(a) main: control = All other Peruvian buffer zones with 2014-18 mining (n=14), mean",2016–18 vs 2019–21,Event-study pool B; includes non-Amazon zones,-1500.7,-973.7,158.1,685.1
-"(a) placebo: control = All other Peruvian buffer zones with 2014-18 mining (n=14), mean",2013–15 vs 2016–18,Event-study pool B; includes non-Amazon zones,84.8,83.2,229.5,227.9
-"(a) persistence: control = All other Peruvian buffer zones with 2014-18 mining (n=14), mean",2016–18 vs 2022–25,Event-study pool B; includes non-Amazon zones,112.7,-751.3,769.0,-95.0
-"(b) event study (ref 2018), pool B without Amarakaeri buffer zone",2019–21,13 zones,-1593.8,-1313.4,92.9,373.3
-"(b) event study (ref 2018), pool B without Amarakaeri buffer zone",2022–25,13 zones,64.8,-1066.1,713.3,-417.7
-"(b) event study (ref 2018), pool A without Amarakaeri buffer zone",2019–21,1 zones,-1609.9,-1325.3,90.1,374.7
-"(b) event study (ref 2018), pool A without Amarakaeri buffer zone",2022–25,1 zones,15.4,-1087.2,706.2,-396.3
-"(b) event study (ref 2018), pool B full",2019–21,14 zones,-1630.9,-1330.6,76.4,376.7
-"(b) event study (ref 2018), pool B full",2022–25,14 zones,-17.5,-1108.2,687.3,-403.3
-"(b) displacement: Amarakaeri + Bahuaja-Sonene summed, change in mean",2016–18 vs 2019–21,not a DiD,313.4,183.6,173.8,44.1
-"(b) displacement: Amarakaeri + Bahuaja-Sonene summed, change in mean",2016–18 vs 2022–25,not a DiD,995.1,613.8,319.8,-61.5
+(a) main: control = Amarakaeri buffer zone (main),2016–18 vs 2019–21,Main control; partly treated too (Mercurio II covered all of Madre de Dios),-1761.8,-1109.7,-2.1,650.0
+(a) placebo: control = Amarakaeri buffer zone (main),2013–15 vs 2016–18,Main control; partly treated too (Mercurio II covered all of Madre de Dios),208.6,281.3,96.1,168.8
+(a) persistence: control = Amarakaeri buffer zone (main),2016–18 vs 2022–25,Main control; partly treated too (Mercurio II covered all of Madre de Dios),-737.0,-1210.7,486.0,12.3
+(a) main: control = Bahuaja-Sonene buffer zone,2016–18 vs 2019–21,Tiny pre-period mining: a weak counterfactual,-1506.2,-985.1,168.6,689.7
+(a) placebo: control = Bahuaja-Sonene buffer zone,2013–15 vs 2016–18,Tiny pre-period mining: a weak counterfactual,72.3,63.5,239.6,230.8
+(a) persistence: control = Bahuaja-Sonene buffer zone,2016–18 vs 2022–25,Tiny pre-period mining: a weak counterfactual,120.2,-746.9,785.2,-81.9
+"(a) main: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",2016–18 vs 2019–21,,-1634.0,-1047.4,83.3,669.8
+"(a) placebo: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",2013–15 vs 2016–18,,140.4,172.4,167.8,199.8
+"(a) persistence: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",2016–18 vs 2022–25,,-308.4,-978.8,635.6,-34.8
+"(a) main: control = Amarakaeri + Bahuaja-Sonene, summed",2016–18 vs 2019–21,Scale mismatch; do not cite,-1790.8,-1139.3,-3.7,647.8
+"(a) placebo: control = Amarakaeri + Bahuaja-Sonene, summed",2013–15 vs 2016–18,Scale mismatch; do not cite,205.2,278.2,94.7,167.6
+"(a) persistence: control = Amarakaeri + Bahuaja-Sonene, summed",2016–18 vs 2022–25,Scale mismatch; do not cite,-806.3,-1285.9,475.6,-4.0
+(a) main: control = Mining corridor outside buffer zones (Madre de Dios),2016–18 vs 2019–21,"Legal corridor: a likely destination of displaced miners, so spillovers bias the DiD away from zero",-3546.2,-2908.1,-614.5,23.7
+(a) placebo: control = Mining corridor outside buffer zones (Madre de Dios),2013–15 vs 2016–18,"Legal corridor: a likely destination of displaced miners, so spillovers bias the DiD away from zero",59.5,314.9,-29.6,225.8
+(a) persistence: control = Mining corridor outside buffer zones (Madre de Dios),2016–18 vs 2022–25,"Legal corridor: a likely destination of displaced miners, so spillovers bias the DiD away from zero",-6010.4,-6178.5,-1054.8,-1222.9
+"(a) main: control = Native communities (Madre de Dios, outside buffer zones)",2016–18 vs 2019–21,,-1797.8,-1194.8,-23.0,580.0
+"(a) placebo: control = Native communities (Madre de Dios, outside buffer zones)",2013–15 vs 2016–18,,166.5,221.5,172.1,227.1
+"(a) persistence: control = Native communities (Madre de Dios, outside buffer zones)",2016–18 vs 2022–25,,-920.8,-1356.0,330.3,-105.0
+(a) main: control = Rest of Madre de Dios (outside every other zone),2016–18 vs 2019–21,Little mining,-1535.5,-1006.9,165.4,694.0
+(a) placebo: control = Rest of Madre de Dios (outside every other zone),2013–15 vs 2016–18,Little mining,77.2,80.5,235.4,238.7
+(a) persistence: control = Rest of Madre de Dios (outside every other zone),2016–18 vs 2022–25,Little mining,81.8,-788.4,785.5,-84.7
+"(a) main: control = Other Amazon buffer zones with 2014-18 mining (n=7), mean",2016–18 vs 2019–21,definitions.AMAZON_BZ,-1525.5,-991.4,145.2,679.3
+"(a) placebo: control = Other Amazon buffer zones with 2014-18 mining (n=7), mean",2013–15 vs 2016–18,definitions.AMAZON_BZ,97.0,97.1,220.8,220.9
+"(a) persistence: control = Other Amazon buffer zones with 2014-18 mining (n=7), mean",2016–18 vs 2022–25,definitions.AMAZON_BZ,28.8,-829.3,741.8,-116.4
+"(a) main: control = All other Peruvian buffer zones with 2014-18 mining (n=14), mean",2016–18 vs 2019–21,Event-study pool B; includes non-Amazon zones,-1501.7,-974.4,158.2,685.5
+"(a) placebo: control = All other Peruvian buffer zones with 2014-18 mining (n=14), mean",2013–15 vs 2016–18,Event-study pool B; includes non-Amazon zones,84.8,83.3,229.6,228.1
+"(a) persistence: control = All other Peruvian buffer zones with 2014-18 mining (n=14), mean",2016–18 vs 2022–25,Event-study pool B; includes non-Amazon zones,112.8,-751.8,769.5,-95.0
+"(b) event study (ref 2018), pool B without Amarakaeri buffer zone",2019–21,13 zones,-1594.9,-1314.3,93.0,373.6
+"(b) event study (ref 2018), pool B without Amarakaeri buffer zone",2022–25,13 zones,64.9,-1066.8,713.8,-417.9
+"(b) event study (ref 2018), pool A without Amarakaeri buffer zone",2019–21,1 zones,-1611.0,-1326.2,90.2,375.0
+"(b) event study (ref 2018), pool A without Amarakaeri buffer zone",2022–25,1 zones,15.4,-1087.9,706.7,-396.6
+"(b) event study (ref 2018), pool B full",2019–21,14 zones,-1632.0,-1331.5,76.5,377.0
+"(b) event study (ref 2018), pool B full",2022–25,14 zones,-17.6,-1108.9,687.8,-403.6
+"(b) displacement: Amarakaeri + Bahuaja-Sonene summed, change in mean",2016–18 vs 2019–21,not a DiD,313.6,183.7,173.9,44.1
+"(b) displacement: Amarakaeri + Bahuaja-Sonene summed, change in mean",2016–18 vs 2022–25,not a DiD,995.8,614.2,320.1,-61.5

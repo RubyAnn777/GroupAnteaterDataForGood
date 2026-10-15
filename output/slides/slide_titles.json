@@ -1,78 +1,71 @@
 {
-  "slide_01_tambopata_net": {
-    "title": "Net new mining in the Tambopata buffer zone fell 90% in 2019–21, then came back",
-    "subtitle": "Net annual addition to mapped mining area (this year minus last year), ha per year. Shaded: 2019–21.",
-    "source": "Source: MapBiomas Peru, Collection 4 (class 4.2 Minería), course table peru_bufferzone_year.csv (all department rows summed). Net additions can hide returns to old pits. Satellites cannot see river dredges or mercury.",
+  "slide_01_net_two_zones": {
+    "title": "Net additions in the Tambopata buffer zone fell 90% in 2019–21",
+    "subtitle": "Net mining additions, ha/yr · Tambopata buffer zone (orange) vs Amarakaeri buffer zone (green) · 2010–2025 · Tambopata 1,640 → 163, Amarakaeri 289 → 574 (2016–18 → 2019–21). Thick bars and numbers at the top: period means.",
+    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), our pixel accounting on one zone registry (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; corridor = D.L. 1100). Both buffer zones whole (official SERNANP polygons). Satellites cannot see river dredges or mercury.",
     "w_in": 13.0,
     "h_in": 5.0
   },
-  "slide_02a_zones": {
-    "title": "La Pampa: land mined for the first time halved in 2019–21",
-    "subtitle": "Land mined for the first time, ha per year (a new measure: not net additions). La Pampa sector: 1,395 → 722 → 987 ha/yr (2016–18 → 2019–21 → 2022–25).",
-    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), cut to our zones (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; legal corridor = D.L. 1100, INGEMMET). First-time mining = pixels mapped as mining for the first time since 1985. Legality is by location; the map class can't tell legal from illegal mining. Satellites cannot see river dredges or mercury.",
+  "slide_02_parts_two_zones": {
+    "title": "Pits going out of use made 25%–47% of the fall, most of it in 2019",
+    "subtitle": "Net mining additions and their parts, ha/yr, period means · Tambopata buffer zone vs Amarakaeri buffer zone · Tambopata 2016–18 → 2019–21: new land 2,017 → 1,061, stopped 721 → 1,413 (2.0×). Stopped land makes 25%–47% of the fall (four ways of counting map flicker); 68% of the extra stopping is in 2019.",
+    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), our pixel accounting on one zone registry (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; corridor = D.L. 1100). New land = mined for the first time since 1985; re-mined = mined again after a gap; stopped = left the mining class. Net = new + re-mined − stopped. Satellites cannot see river dredges or mercury.",
     "w_in": 13.0,
     "h_in": 5.0
   },
-  "slide_02b_zones": {
-    "title": "Madre de Dios as a whole didn't fall: new mining grew in the legal corridor",
-    "subtitle": "Land mined for the first time, ha per year. All Madre de Dios: 5,317 → 6,571 → 11,373 ha/yr; legal corridor share 49% → 68% → 72% (mean of yearly shares).",
-    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), cut to our zones (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; legal corridor = D.L. 1100, INGEMMET). First-time mining = pixels mapped as mining for the first time since 1985. Legality is by location; the map class can't tell legal from illegal mining. Satellites cannot see river dredges or mercury.",
+  "slide_03_lapampa_parts": {
+    "title": "New pits kept opening in 2019; pits stopped where the patrols were",
+    "subtitle": "Net mining additions and their parts, ha/yr · La Pampa sector (the target) · 2016–2022 · 2019: new land 1,533 (2018: 1,835), stopped 1,495, net 243. Shaded: 2019–21.",
+    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), our pixel accounting on one zone registry (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; corridor = D.L. 1100). New land = mined for the first time since 1985; re-mined = mined again after a gap; stopped = left the mining class. Satellites cannot see river dredges or mercury.",
     "w_in": 13.0,
     "h_in": 5.0
   },
-  "slide_03_road_share": {
-    "title": "New mining near La Pampa moved north of the highway: 23% → 65% of first-time mining",
-    "subtitle": "Share of land mined for the first time that lies north of the Interoceanic Highway, within La Pampa's longitudes (±30 km). The road had been crossed before: most new mining was north of it in 2008–10.",
-    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), cut to our zones (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; legal corridor = D.L. 1100, INGEMMET). First-time mining = pixels mapped as mining for the first time since 1985. North = legal corridor side; south = Tambopata buffer zone. Satellites cannot see river dredges or mercury.",
+  "slide_04_moved": {
+    "title": "Mining moved across the road; the department never fell",
+    "subtitle": "Net mining additions (and parts), ha/yr · left: corridor across the road, 2010–2025, 60 → 395 (2016–18 → 2019–21) · right: Madre de Dios 3,610 → 4,639 → 12,047 (2016–18 → 2019–21 → 2022–25).",
+    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), our pixel accounting on one zone registry (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; corridor = D.L. 1100). Right: zones inside the department; they sum to the total. Legality is by location; the map class can't tell legal from illegal. Satellites cannot see river dredges or mercury.",
     "w_in": 13.0,
     "h_in": 5.0
   },
-  "slide_03b_road_bands": {
-    "title": "In 2019–21 new mining near La Pampa piled up just north of the road",
-    "subtitle": "Land mined for the first time per year, by 1-km band from the Interoceanic Highway within La Pampa's longitudes. North share 23% → 65%.",
-    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), cut to our zones (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; legal corridor = D.L. 1100, INGEMMET). First-time mining = pixels mapped as mining for the first time since 1985. Bands shown to ±15 km; shares use all bands to ±30 km. Satellites cannot see river dredges or mercury.",
-    "w_in": 13.0,
-    "h_in": 5.0
-  },
-  "slide_04_context": {
-    "title": "Enforcement money peaked in 2019 and faded, while gold rose 2.7-fold (2018–25)",
-    "subtitle": "Same years in each panel. Solid line: Mercurio (Feb 2019); shaded: 2019–21; dashed: COVID, Restauración, emergency, navy out. Spending is a lower bound.",
-    "source": "Source: MEF Consulta Amigable, PP 0128 executed spending (devengado), Madre de Dios; World Bank Pink Sheet (nominal); MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), cut to our zones (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; legal corridor = D.L. 1100, INGEMMET). First-time mining = pixels mapped as mining for the first time since 1985. Correlation is not shown: 11 years, and money follows mining.",
-    "w_in": 13.0,
-    "h_in": 5.0
-  },
-  "slide_05_old_pits": {
-    "title": "In 2023, 67% of new mining in La Pampa was on old pits",
-    "subtitle": "La Pampa sector, ha per year: land mined for the first time vs land mined before (not last year) and mined again. Forest-loss alerts and net additions miss most of this.",
-    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), cut to our zones (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; legal corridor = D.L. 1100, INGEMMET). First-time mining = pixels mapped as mining for the first time since 1985. Old-pit counts include some year-to-year map flicker (252 ha/yr already in 2016–18): trust the 2023 jump, not small changes. MAAP #193 (2023) reports miners back on degraded land. Satellites cannot see river dredges or mercury.",
+  "slide_05_later_old_pits": {
+    "title": "It came back on old pits: 46% of added land was re-mined",
+    "subtitle": "Net mining additions and their parts, ha/yr · Tambopata buffer zone · 2010–2025 · later years (2022–25): re-mined 1,139/yr, new land 1,345/yr; without the 2023 spike year re-mined 617/yr (33%).",
+    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), our pixel accounting on one zone registry (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; corridor = D.L. 1100). New land = mined for the first time since 1985; re-mined = mined again after a gap; stopped = left the mining class. 2023 is a MapBiomas-only spike (GLAD alerts and Amazon Mining Watch are flat): read 2022–25 with and without it. MAAP #193 (2023) reports miners back on degraded land. Satellites cannot see river dredges or mercury.",
     "w_in": 13.0,
     "h_in": 5.0
   },
   "slide_06_reserve": {
-    "title": "In 2025, mining inside Tambopata National Reserve jumped by 241 ha",
-    "subtitle": "Net annual addition to mapped mining area inside the reserve itself (not the buffer zone), ha. Total inside in 2025: 777 ha. The 2025 jump follows the navy's withdrawal from the Malinowski River posts (MAAP #241, 2026).",
-    "source": "Source: MapBiomas Peru Collection 4, protected-area statistics (class 4.2 Minería; platform check 777 ha, 2025). MAAP #241 (Pacsi et al., 2026) reports ~500 ha inside the reserve, late 2025 to Feb 2026. Satellites cannot see river dredges or mercury.",
+    "title": "2025: mining inside the reserve jumped 241 ha after the navy left",
+    "subtitle": "Net mining additions, ha/yr · Tambopata National Reserve (inside the reserve, not the buffer zone) · 2011–2025 · 2019–21 mean −33/yr; mining area 2025: 777 ha. Navy left the Malinowski River posts in 2025 (MAAP #241, 2026).",
+    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), our pixel accounting on one zone registry (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; corridor = D.L. 1100). Platform check: 777 ha of mining inside the reserve in 2025 (protected-area statistics). MAAP #241 (Pacsi et al., 2026) reports ~500 ha inside the reserve, late 2025 to Feb 2026. Satellites cannot see river dredges or mercury.",
     "w_in": 13.0,
     "h_in": 5.0
   },
   "slide_07_causal": {
-    "title": "In hectares, Tambopata's 2019–21 fall is the largest of 15 Peruvian buffer zones",
-    "subtitle": "Each dot: one buffer zone's 2019–21 change after zone and year effects. Left = bigger fall.",
-    "source": "Source: MapBiomas Peru Collection 4, peru_bufferzone_year.csv; 15 Peruvian buffer zones with mining before 2019 (scaled: 7 with > 10 ha/yr). Tambopata removed from each fake zone's comparison pool. Placebo p = rank / n.",
+    "title": "Did Mercurio cause the fall? Only conditionally, in hectares only",
+    "subtitle": "Estimated change in net mining additions and its parts, ha/yr · Tambopata buffer zone · 2019–21 vs before · causal only if the comparison zones show what Tambopata would have done; upper bound (spillovers, peak at targeting); coincides with COVID. Right: placebo ranks.",
+    "source": "Source: MapBiomas Peru Collection 4 rasters, national buffer-zone panel on the v3 registry (15 zones with pre-2019 mining; scaled ranks: 7 zones above 10 ha/yr). 2×2 = Tambopata minus Amarakaeri, 2019–21 vs 2014–18; M1 = zone + year effects 2014–25; synthetic DiD = own weights (peru_sdid.py, net only). Parts add up to net for the linear estimators.",
     "w_in": 13.0,
     "h_in": 5.0
   },
-  "slide_07b_estimates": {
-    "title": "The estimates range from about 400 to 1,900 ha a year less net new mining",
-    "subtitle": "Causal only if the other Peruvian buffer zones show what Tambopata would otherwise have done. In hectares only; coincides with COVID.",
-    "source": "Source: MapBiomas Peru Collection 4, peru_bufferzone_year.csv; zone + year effects (M1–M3), synthetic control and synthetic DiD on the same 15-zone panel (peru_models.py, peru_sdid.py).",
+  "slide_b1_stopped_split": {
+    "title": "Stopped land: often water, often mined again within 2 years",
+    "subtitle": "Stopped land (left the mining class), share by what it became and share mining again within 2 years, period means · four zones · 2016–18, 2019–21, 2022–25 (small numbers under the bars: stopped ha/yr). Numbers on top: share mining again within 2 years.",
+    "source": "Source: MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), our pixel accounting on one zone registry (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; corridor = D.L. 1100). Back within 2 years = classifier flicker or re-entry; the last two years cannot be followed up. No image validation sample (plan v3, V3-5).",
     "w_in": 13.0,
     "h_in": 5.0
   },
-  "slide_08_brazil_twins": {
-    "title": "Tambopata grew faster than its Brazilian twins before 2019, so they can't show the counterfactual",
-    "subtitle": "Left: parallel pre-trends are rejected for both twins (p < 0.001). Right: in 2019–21 Tambopata grew more slowly than both. A second check only, never the main comparison. Brazil 2019–22 also had weak federal enforcement.",
-    "source": "Source: MapBiomas Peru Col 4 (Tambopata) and MapBiomas Amazonía Col 6 (twins) before 2019; Amazon Mining Watch (480 m) for 2019–21. Different collections: compared as indices, never subtracted. Twins chosen by fixed rules (control_select.py).",
+  "slide_b2_twins": {
+    "title": "Twins: Tambopata at 16%–41% of their pace; trends differed before",
+    "subtitle": "Left: mining area (stock), index 2018 = 100, 2010–18 (pre-trends rejected, p < 0.001). Right: Amazon Mining Watch new area 2019–21 per year, % of own 2018 area: a different measure, not net additions.",
+    "source": "Source: MapBiomas Peru Col 4 rasters, v3 registry (Tambopata) / MapBiomas Amazonía Col 6 (twins); Amazon Mining Watch new area, area-weighted (comparable to first-time mining, not net). Twins chosen by fixed rules (rule R*, control_select.py). Different collections: compared as indices, never subtracted.",
+    "w_in": 13.0,
+    "h_in": 5.0
+  },
+  "slide_b3_context": {
+    "title": "Enforcement money peaked in 2019 and faded; gold rose 2.7-fold",
+    "subtitle": "Same years in each panel · PP 0128 executed spending, Madre de Dios (lower bound) · gold price, nominal · net mining additions, La Pampa sector, ha/yr · 2012–2025. Shaded: 2019–21. Context, not a test.",
+    "source": "Source: MEF Consulta Amigable, PP 0128 devengado, Madre de Dios; World Bank Pink Sheet (nominal gold price, annual mean); MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), our pixel accounting on one zone registry (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; corridor = D.L. 1100). Correlation not shown: 11 years, and money follows mining.",
     "w_in": 13.0,
     "h_in": 5.0
   }

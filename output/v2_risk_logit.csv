@@ -1,10 +1,10 @@
 term,coef,p
 const,-2.3081,0.0
-road_km,0.0001,0.9863
+road_km,0.0001,0.9864
 north,-0.0427,0.9373
 river_km,-1.3841,0.0
 gold_share,0.5657,0.0
-mined_share,0.2971,0.2353
+mined_share,0.2971,0.2352
 neigh_mining_km2,0.0808,0.0
 z_protected,-1.6005,0.0067
 z_communities,2.1612,0.0
