@@ -1,6 +1,6 @@
 # S5 · Context controls and bad controls: K0-K3 (attempt A4)
 
-*Method card 5 of the causal review (plan: `docs/causal_review_plan.md`). Code under review: `code/peru_context_models.py`, the spending series `code/v2_tests.py:175-186` (`mef_series`), and the ladder it builds on, `code/peru_models.py` (card S4). Test script: `code/review/s5_context_checks.py` (read-only, about 3 s).*
+*Method card 5 of the causal review (plan: `docs/methods/causal_review_plan.md`). Code under review: `code/peru_context_models.py`, the spending series `code/v2_tests.py:175-186` (`mef_series`), and the ladder it builds on, `code/peru_models.py` (card S4). Test script: `code/review/s5_context_checks.py` (read-only, about 3 s).*
 
 ---
 

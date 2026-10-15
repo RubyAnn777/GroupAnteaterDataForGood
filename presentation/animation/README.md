@@ -1,32 +1,39 @@
-# Map animation (slides 3–4)
+# Map animation (storyline v3, slides 3–5)
 
-Two Remotion compositions, 1920×1080, 30 fps. Description only: "first-time mining" = 30 m pixels mapped as
-mining for the first time since 1985 (MapBiomas Peru Collection 4); the class cannot tell legal from illegal.
+Two Remotion compositions, 1920×1080, 30 fps. Description only. One measure (plan v3): **net mining additions =
+new land + re-mined − stopped**, MapBiomas Peru Collection 4 (30 m, class 4.2 mining, legal and illegal alike).
 
 | Composition | Length | Shows |
 |---|---|---|
-| `MapLayers` | 26 s (780 frames) | 5 steps × 5 s: 1 protected areas + native communities → 2 Interoceanic Highway → 3 rivers + land mapped as mining by 2018 → 4 D.L. 1100 legal corridor (legality by location) → 5 La Pampa sector (our boundary) + corridor across the road |
-| `MiningTimeline` | 45.6 s (1,368 frames) | 2008→2025: each year's first-time mining glows yellow, then fades to grey; timeline with event pins (D.L. 1100 2012, Mercurio Feb 2019, COVID-19 Mar 2020, Restauración 2021, emergency Apr 2023, navy out 2025); counter of first-time ha in La Pampa vs across the road; closing "Satellites can't see river dredges or mercury" |
+| `MapLayers` | 21 s (630 frames) | 4 steps × 5 s: 1 protected areas (buffer zones whole; Tambopata's incl. Kotsimba) + native communities → 2 Interoceanic Highway (+ rivers) → 3 D.L. 1100 legal corridor (legality by location) → 4 La Pampa sector (Tambopata buffer zone, 70.15–69.80° W) + corridor across the road + land mined by 2018 |
+| `MiningTimeline` | 49.5 s (1,485 frames) | 2010→2025: each year's three flows on the map (new land brown, re-mined amber, stopped teal; grey = mining that year); event pins (Mercurio Feb 2019, COVID-19, Restauración, emergency Apr 2023, navy out 2025); counter of net additions and parts per year for La Pampa sector and the corridor across the road; closing "Satellites can't see river dredges or mercury" |
 
-Layout (both videos): the map sits in a box on the left (scaled 0.745), captions and the counter in a side panel
-on the right, the timeline in a band below; nothing is drawn over the map except its own labels.
+Flow colours on the dark map are the same hue families as `code/common.py` C, stepped lighter for the slate surface
+(`code/slides_map_export.py` FLOW; checked with the dataviz palette validator). La Pampa and the corridor across the
+road are drawn as white / light-blue dashed outlines in the timeline, so no orange sits next to the flows.
 
-Outputs: `out/MapLayers.mp4`, `out/MiningTimeline.mp4`, stills in `out/stills/`:
-`map_step1–5.png` (with side panel), `map_step1–5_clean.png` (full-bleed map, no captions: for the flippable
-"Where we are" slides; render with `--props='{"clean":true}'`), `timeline_2018/2020/2025.png` (frames 570, 723, 1173).
+Outputs: `out/MapLayers.mp4`, `out/MiningTimeline.mp4`, stills in `out/stills/`: `map_step1–4.png` (with side panel),
+`map_step1–4_clean.png` (full-bleed map; render with `--props='{"clean":true}'`), `map_zones_clean.png` (= step 4
+clean, the zone map on the definition slide), `timeline_2019/2023/2025.png` (frames 660, 1080, 1290).
 
 ## Rebuild
 
 ```bash
-uv run python code/slides_map_export.py      # from the repo root: layers + map_data.json -> public/ (needs git-ignored rasters)
+uv run python code/slides_map_export.py      # from the repo root (~1 min): layers + flows + map_data.json -> public/
 cd presentation/animation && npm i
 npx remotion studio                          # preview
 npx remotion render MapLayers out/MapLayers.mp4
 npx remotion render MiningTimeline out/MiningTimeline.mp4
-npx remotion still MapLayers out/stills/map_step1.png --frame=125   # steps at 125, 275, 425, 575, 770
-npx remotion still MapLayers out/stills/map_step1_clean.png --frame=125 --props='{"clean":true}'
+for k in 1 2 3 4; do f=$(( (k-1)*150 + 140 )); npx remotion still MapLayers out/stills/map_step$k.png --frame=$f; \
+  npx remotion still MapLayers out/stills/map_step${k}_clean.png --frame=$f --props='{"clean":true}'; done
+cp out/stills/map_step4_clean.png out/stills/map_zones_clean.png
+npx remotion still MiningTimeline out/stills/timeline_2019.png --frame=660   # also 1080 (2023), 1290 (2025)
 ```
 
-All numbers on screen come from `public/map_data.json`, written by `code/slides_map_export.py` from
-`data_intermediate/zone_year_v2.csv` (first-time ha) and `output/numbers.csv` (`anp_tam_nr_addition_2025`).
-Map label positions are set by hand in `src/*.tsx` (checked against the SERNANP polygons).
+`slides_map_export.py` needs git-ignored inputs: `data_intermediate/zones_mdd.tif` (band 1 zone code per
+`definitions.ZONES`, band 2 first-mined year, band 3 tenure), the yearly MapBiomas rasters
+`data_raw/mapbiomas_peru_raster/peru_coverage-col4_{y}.tif` (streamed 1985–2025 over the map window to derive the
+flows with the definitions of `code/raster_zones.py`), and the SERNANP / INGEMMET / RAISG vectors. All numbers on
+screen come from `public/map_data.json`, written from `zonedata.region_units()` (the same table as
+`output/numbers.csv`; the streamed pixel counts are asserted to match within 2%) and `output/numbers.csv`
+(`tambopata_nr_2025_net`). Map label positions are set by hand in `src/*.tsx`.

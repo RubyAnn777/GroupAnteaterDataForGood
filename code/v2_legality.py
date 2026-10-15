@@ -7,7 +7,7 @@ need the yearly maps restreamed with the level as a key; these are shares (not a
 Layer: Amazon Mining Watch GitHub repo (earthrise-media/mining-detector), illegality_v2_areas_simplified.geojson,
 field illegality: 1 Low (inside an active concession), 2 Medium (concession not verified as active), 3 High
 (outside any concession), 4 Very high (protected area without any resource use). MAAP #235 defines the levels.
-The layer reproduces the INGEMMET cadastre (docs/overnight/notes/legality_data.md): Low = titled rights, Medium =
+The layer reproduces the INGEMMET cadastre (docs/walkthrough/notes/legality_data.md): Low = titled rights, Medium =
 blocked/extinct/in process, High = outside every right.
 Method: rasterize the levels onto the MapBiomas grid (data_intermediate/zones_mdd.tif, Madre de Dios part) and cross them with the
 year each pixel was first mapped as mining (1985-2025). Output: first-time mining by level and year.

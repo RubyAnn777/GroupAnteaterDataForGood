@@ -166,11 +166,13 @@ def fig_stream(g):
     yrs = list(range(2010, 2026))
     w = g["net_ha"].unstack("grp").reindex(index=yrs, columns=list(GROUPS)).fillna(0)
     tot = w.sum(axis=1)
-    share = {p: w.loc[slice(*D.PERIODS[p]), ["Corridor across the road", "Rest of mining corridor"]].sum().sum()
-             / w.loc[slice(*D.PERIODS[p])].sum().sum() for p in PER}
+    # the ONE corridor-share definition (as fig_corridor_share and v2_corridor_share_*_net): corridor-tenure land, any zone
+    zz = Z._zone_year(); zz = zz[zz.in_mdd == 1]
+    cor = zz[zz.tenure == "corridor"].groupby("year").net_ha.sum(); tt = zz.groupby("year").net_ha.sum()
+    share = {p: cor.loc[slice(*D.PERIODS[p])].sum() / tt.loc[slice(*D.PERIODS[p])].sum() for p in PER}
     fig, ax = plt.subplots(figsize=(9, 5.6))
-    headline(fig, f"After 2019 most net additions landed in the corridor outside the buffer zones "
-                  f"({share['pre']:.0%} → {share['during']:.0%})",
+    headline(fig, f"After 2019 most net additions landed on legal-corridor land "
+                  f"({share['pre']:.0%} → {share['during']:.0%} of the department's)",
              "Net mining additions (new land + re-mined − stopped), Madre de Dios, ha/yr, stacked by zone, 2010–2025.\n"
              "Shaded: Mercurio and what followed (2019–21). Numbers: yearly total.")
     period_band(ax, D.PERIODS["during"][0] - 0.5, D.PERIODS["during"][1] + 0.5)

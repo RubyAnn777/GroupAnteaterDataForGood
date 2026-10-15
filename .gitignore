@@ -37,7 +37,7 @@ data_raw/minem_produccion/*.7z
 
 # Office lock files
 ~$*
-docs/overnight/_artifact/
+docs/walkthrough/_artifact/
 
 # Presentation build deps
 presentation/**/node_modules/

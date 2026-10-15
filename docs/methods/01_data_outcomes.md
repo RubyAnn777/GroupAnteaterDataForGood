@@ -1,6 +1,6 @@
 # S1 · Measurement: stocks, flows, zones and source checks
 
-*Method card 1 of the causal review (plan: `docs/causal_review_plan.md`). Every later method inherits what this card defines. Test script: `code/review/s1_data_checks.py` (read-only; run from the repo root).*
+*Method card 1 of the causal review (plan: `docs/methods/causal_review_plan.md`). Every later method inherits what this card defines. Test script: `code/review/s1_data_checks.py` (read-only; run from the repo root).*
 
 ---
 
@@ -271,4 +271,4 @@ Any claim about "less mining" must name its measure. Where the measure is net ad
 - Bound, J., Brown, C. and Mathiowetz, N. (2001). Measurement error in survey data. *Handbook of Econometrics* 5, ch. 59.
 - Openshaw, S. (1984). *The Modifiable Areal Unit Problem*. Geo Books.
 - Olofsson, P. et al. (2014). Good practices for estimating area and assessing accuracy of land change. *Remote Sensing of Environment* 148.
-- MAAP #193 (2023), maapprogram.org: dredges in La Pampa 2021-23 (see `docs/overnight/notes/maap_citations.md`).
+- MAAP #193 (2023), maapprogram.org: dredges in La Pampa 2021-23 (see `docs/walkthrough/notes/maap_citations.md`).

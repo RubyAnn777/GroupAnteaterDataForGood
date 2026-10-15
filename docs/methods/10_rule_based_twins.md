@@ -1,6 +1,6 @@
 # S10 · Rule-based twins (attempt A10, Ruby's design)
 
-*Method card 10 of the causal review (plan: `docs/causal_review_plan.md`). Code under review: `code/control_amw.py`, `control_elevation.py`, `control_mb_amazonia.py`, `control_select.py`, `control_top3.py`, and the AMW accounting in `code/spatial.py:72-82`. Data: `data_intermediate/operations_coded.csv`, `amw_candidates_*.csv`, `mb_amazonia_col6_mining.csv`; search log `docs/overnight/notes/control_interventions.*`. Test script: `code/review/s10_twin_checks.py` (read-only).*
+*Method card 10 of the causal review (plan: `docs/methods/causal_review_plan.md`). Code under review: `code/control_amw.py`, `control_elevation.py`, `control_mb_amazonia.py`, `control_select.py`, `control_top3.py`, and the AMW accounting in `code/spatial.py:72-82`. Data: `data_intermediate/operations_coded.csv`, `amw_candidates_*.csv`, `mb_amazonia_col6_mining.csv`; search log `docs/walkthrough/notes/control_interventions.*`. Test script: `code/review/s10_twin_checks.py` (read-only).*
 
 ---
 
@@ -252,7 +252,7 @@ On AMW, Tambopata's 2019 pace is its highest after 2018, and its fall deepens th
 
 ### T14 · Text checks (lead 8, reproduced; by grep, not in the script)
 
-- `docs/overnight/methods_content.md:209` and `explainer_content.md:626` say "Tambopata grew faster than both twins before 2019 (p = `top3_*_pre_trend_p`)". That is the **slope** test (p 1.1e-5, 4.3e-4). It tests whether the gap was *changing*, not whether Tambopata grew *faster*. The level test gives p 0.081 and 0.017, and on 2014-18 p 0.80 and < 0.01 (T6).
+- `docs/walkthrough/methods_content.md:209` and `explainer_content.md:626` say "Tambopata grew faster than both twins before 2019 (p = `top3_*_pre_trend_p`)". That is the **slope** test (p 1.1e-5, 4.3e-4). It tests whether the gap was *changing*, not whether Tambopata grew *faster*. The level test gives p 0.081 and 0.017, and on 2014-18 p 0.80 and < 0.01 (T6).
 - `control_top3.py` still calls the twins "three" (docstring, print header, `top3_pooled_during` description "Mean of the three twins", `top3_median_during` "Munduruku's pace is extreme, so the median is the headline"). With two twins the median equals the mean (both 19.64), so `top3_median_*` is redundant.
 - `control_psm.py:18` says "the twin: 38%" while the walkthrough uses 40%.
 

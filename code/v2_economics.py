@@ -1,6 +1,6 @@
 """The economics of mining in Madre de Dios: gold, taxes, social cost and enforcement money. INFORMED SPECULATION.
 
-Every outside parameter below is cited (full quotes, pages and URLs: docs/overnight/notes/economics_sources.md, accessed
+Every outside parameter below is cited (full quotes, pages and URLs: docs/walkthrough/notes/economics_sources.md, accessed
 2026-10-13); every result is our arithmetic on those parameters and on our own mapped hectares, given as a LOW-HIGH range.
 None of it is a measured quantity: the brief must not present it as one. Numbers carry claim_type "prediction" only where
 they are forward-looking; the rest are "description" of a calculation, and every description says "informed speculation".
@@ -37,7 +37,7 @@ from common import ROOT, OUT, finish_figure, headline, C, INK, INK2, MUTED, GRID
 import raster_zones as rz
 import definitions as D
 
-SRC = "docs/overnight/notes/economics_sources.md (cited parameters) x MapBiomas Peru Col 4 rasters, MINEM, MEF PP 0128, prices_annual.csv"
+SRC = "docs/walkthrough/notes/economics_sources.md (cited parameters) x MapBiomas Peru Col 4 rasters, MINEM, MEF PP 0128, prices_annual.csv"
 OZ_G = 31.1034768
 P = dict(   # parameter: (low, high, source)
     yield_kg_ha=(1.6, 1.9, "CSF-PE (Gasparinetti et al., CSF 2023) PDF p.22, Cuadro 3: Puquiri 1.6, Malinowski 1.7, Huepetuhe 1.9 kg Au/ha, 2.5 m pit; no grades found for suction-pump mining (p.22)"),
@@ -170,7 +170,7 @@ def figure(o, decl, tax, soc, spu):
     finish_figure(fig, "Sources: our new land, first-time mined hectares (MapBiomas Peru Col 4; old pits given no gold; not net additions) x CSF (2023) 1.6–1.9 kg gold/ha; "
                        "World Bank gold price; MINEM declared gold; income tax 29.5% x 11–37% margin (D.L. 1269; Torres 2015); social "
                        "cost: two CSF estimates shown separately; MEF PP 0128 at BCRP annual exchange rates. Full citations: "
-                       "docs/overnight/notes/economics_sources.md.",
+                       "docs/walkthrough/notes/economics_sources.md.",
                   OUT / "fig_v2_economics.png")
 
 

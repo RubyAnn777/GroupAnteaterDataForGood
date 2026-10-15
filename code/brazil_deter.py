@@ -20,7 +20,7 @@ from common import ROOT, OUT, style_axes, finish_figure, INK, MUTED, headline
 from brazil_v2 import BRAZIL, br_events
 
 RAW = ROOT / "data_raw" / "inpe_deter"
-SCOUT_ANNUAL = ROOT / "docs" / "overnight" / "notes" / "deter_mining_ti_annual_km2.csv"
+SCOUT_ANNUAL = ROOT / "data_intermediate" / "deter_mining_ti_annual_km2.csv"
 MUN = "Munduruku (incl. Sai-Cinza)"
 MUN_SCOUT = "Munduruku (incl. Sai-Cinza, Taquara)"
 TERR = ["Yanomami", MUN, "Kayapó"]

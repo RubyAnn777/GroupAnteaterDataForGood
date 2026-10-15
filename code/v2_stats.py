@@ -264,8 +264,10 @@ def fig_event(ev, ev10):
         style_axes(ax, fmt=False)
         ax.set_xlim(Y0 - 0.5, Y1 + 0.5); ax.set_xticks(range(Y0, Y1 + 1, 2))
         pad = add_event_markers(ax, label=True)
-        ax.set_title(f"{FOCAL[z]}\nLeads 2011–13 jointly zero: {_p(pv)}" + (", rejected" if pv < 0.05 else ", not rejected"),
-                     pad=pad, fontsize=9.5)
+        p10 = float(ev10[z]["net"]["pvalue"])
+        verdict = lambda q: "rejected" if q < 0.05 else "not rejected"
+        ax.set_title(f"{FOCAL[z]}\nPre-trend test, leads 2011–13: {_p(pv)} ({verdict(pv)})\nwith 2010 added: {_p(p10)} ({verdict(p10)})",
+                     pad=pad, fontsize=9)
     finish_figure(fig, f"{SRC}. Event study with cell and year fixed effects; reference = the pooled 2014–18 period "
                        "(shaded); comparison cells with little mining (no corridor or community tenure); joint test that "
                        "the 2011–13 leads are zero. With the 2010 lead added (the v2 window) the test gives p = "

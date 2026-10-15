@@ -9,7 +9,7 @@ Legal Amazon = autos whose UF is AC AP AM MA MT PA RO RR TO. All types of autos 
 Mining flag = NOISY regex on the accent-stripped lower-case text of DES_INFRACAO + DES_AUTO_INFRACAO
 (see MIN below). It will include some non-mining autos and miss autos with generic text. Description only.
 Review card 12 (D-S12-7, 2026-10-15): bare `lavra` also matched "lavrado"/"lavratura" (the verbs for ISSUING an auto);
-it is now a whole word (\blavra\b). The reference table in docs/overnight/notes/ibama_annual.csv used the old regex,
+it is now a whole word (\blavra\b). The reference table in docs/walkthrough/notes/ibama_annual.csv used the old regex,
 so only the columns that do not depend on the mining regex are compared with it.
 Do not read the all-autos counts as evidence of weaker MINING enforcement in 2019-22 (card 12, T9).
 """
@@ -20,7 +20,7 @@ from common import ROOT
 
 ZIP = ROOT / "data_raw" / "ibama" / "auto_infracao_csv.zip"
 INTERMEDIATE = ROOT / "data_intermediate" / "ibama_autos_annual.csv"
-NOTES_REF = ROOT / "docs" / "overnight" / "notes" / "ibama_annual.csv"
+NOTES_REF = ROOT / "data_intermediate" / "ibama_annual_reference.csv"
 YEARS = range(2014, 2026)
 COLS = ["SIT_CANCELADO", "DAT_HORA_AUTO_INFRACAO", "UF", "DES_INFRACAO", "DES_AUTO_INFRACAO",
         "DES_LOCAL_INFRACAO", "DS_BIOMAS_ATINGIDOS", "OPERACAO"]
@@ -65,7 +65,7 @@ def load() -> tuple[pd.DataFrame, str]:
             ref = pd.read_csv(NOTES_REF)
             same = [c for c in t.columns if "mining" not in c]              # mining columns use the new regex
             pd.testing.assert_frame_equal(t[same].reset_index(drop=True), ref[same].reset_index(drop=True), check_dtype=False)
-            print("OK   IBAMA rebuilt table equals docs/overnight/notes/ibama_annual.csv on all non-mining columns")
+            print("OK   IBAMA rebuilt table equals docs/walkthrough/notes/ibama_annual.csv on all non-mining columns")
         return t, "rebuilt"
     print(f"WARNING: {ZIP.relative_to(ROOT)} not found; using committed intermediate "
           f"{INTERMEDIATE.relative_to(ROOT)} (not rebuilt from raw).")

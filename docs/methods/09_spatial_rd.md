@@ -1,6 +1,6 @@
 # S9 · Spatial regression discontinuity and the road tests (attempts A8, A9)
 
-*Method card 9 of the causal review (plan: `docs/causal_review_plan.md`, section S9). Code under review: `code/v2_rdd.py` (A8), `code/v2_tests.py:35-60` and `code/placebo_explainer.py:35-41` (A9), `code/raster_zones.py:112-134` (`signed_road_km`). Test script: `code/review/s9_rd_checks.py` (read-only).*
+*Method card 9 of the causal review (plan: `docs/methods/causal_review_plan.md`, section S9). Code under review: `code/v2_rdd.py` (A8), `code/v2_tests.py:35-60` and `code/placebo_explainer.py:35-41` (A9), `code/raster_zones.py:112-134` (`signed_road_km`). Test script: `code/review/s9_rd_checks.py` (read-only).*
 
 ---
 

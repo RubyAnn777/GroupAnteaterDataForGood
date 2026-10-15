@@ -24,7 +24,7 @@ Promise.all(
 ).then(() => continueRender(fontHandle));
 
 export const data = mapData;
-export type YearKey = keyof typeof mapData.first_time_ha;
+export type YearKey = keyof typeof mapData.flows;
 
 // Palette (code/common.py C + the pages' FZS-like tokens)
 export const T = {
@@ -40,8 +40,11 @@ export const T = {
   corridorBright: "#6fb3e6",
   reserve: "#4e9a3a",
   native: "#e26a9c",
-  hot: "#ffd23f",
   grey: "#b9c2bf",
+  // the three parts of net additions, stepped for the dark map (code/slides_map_export.py FLOW)
+  new: "#b5683a",
+  remined: "#dba21a",
+  stopped: "#1fa595",
 };
 
 export const FONT = "Roboto, Helvetica Neue, Arial, sans-serif";

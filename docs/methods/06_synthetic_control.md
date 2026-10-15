@@ -1,6 +1,6 @@
 # S6 · Synthetic control (attempt A5)
 
-*Method card 6 of the causal review (plan: `docs/causal_review_plan.md`). Code under review: `code/peru_synth.py` (six specifications) and the `"sc"` branch of `code/peru_sdid.py:72-73` (the source of the −411 in the brief). Test script: `code/review/s6_synth_checks.py` (read-only, own solver, about 5 minutes).*
+*Method card 6 of the causal review (plan: `docs/methods/causal_review_plan.md`). Code under review: `code/peru_synth.py` (six specifications) and the `"sc"` branch of `code/peru_sdid.py:72-73` (the source of the −411 in the brief). Test script: `code/review/s6_synth_checks.py` (read-only, own solver, about 5 minutes).*
 
 ---
 

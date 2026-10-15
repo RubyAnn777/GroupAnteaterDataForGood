@@ -1,6 +1,6 @@
 # S11 · Matching estimators (attempt A11)
 
-*Method card 11 of the causal review (plan: `docs/causal_review_plan.md`). Code under review: `code/control_psm.py` (seven estimators: propensity-score nearest 1 and 5, Mahalanobis nearest 1 and 3, coarsened exact matching, entropy balancing, inverse-probability weighting). Inputs are shared with S10 (`amw_candidates_*.csv`, `operations_coded.csv`). Test script: `code/review/s11_matching_checks.py` (read-only).*
+*Method card 11 of the causal review (plan: `docs/methods/causal_review_plan.md`). Code under review: `code/control_psm.py` (seven estimators: propensity-score nearest 1 and 5, Mahalanobis nearest 1 and 3, coarsened exact matching, entropy balancing, inverse-probability weighting). Inputs are shared with S10 (`amw_candidates_*.csv`, `operations_coded.csv`). Test script: `code/review/s11_matching_checks.py` (read-only).*
 
 ---
 

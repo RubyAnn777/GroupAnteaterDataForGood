@@ -1,6 +1,6 @@
 # S13 · Descriptive and predictive building blocks
 
-*Method card 13 of the causal review (plan: `docs/causal_review_plan.md`, session S13). Code under review: `code/peru.py:115-125`, `code/peru_robust.py:197-208`, `code/raster_layers.py`, `code/peru_anp.py`, `code/spatial.py`, `code/spatial_zones.py`, `code/v2_extra.py` (E1, E3, E4), `code/v2_legality.py`, `code/v2_products_check.py`, `code/raster_gold.py`, `code/glad_alerts.py`, `code/peru_production.py`, `code/peru_gold_minem.py`, `code/v2_economics.py`. Test script: `code/review/s13_descriptive_checks.py` (read-only, about 20 seconds). Test numbers below are "T1" to "T10" of that script.*
+*Method card 13 of the causal review (plan: `docs/methods/causal_review_plan.md`, session S13). Code under review: `code/peru.py:115-125`, `code/peru_robust.py:197-208`, `code/raster_layers.py`, `code/peru_anp.py`, `code/spatial.py`, `code/spatial_zones.py`, `code/v2_extra.py` (E1, E3, E4), `code/v2_legality.py`, `code/v2_products_check.py`, `code/raster_gold.py`, `code/glad_alerts.py`, `code/peru_production.py`, `code/peru_gold_minem.py`, `code/v2_economics.py`. Test script: `code/review/s13_descriptive_checks.py` (read-only, about 20 seconds). Test numbers below are "T1" to "T10" of that script.*
 
 This card is different from S1-S12. It covers no single estimator but the blocks that the story around the causal claim is built from. They make three different kinds of claim, so the card has three parts:
 
@@ -536,4 +536,4 @@ What it must not say: "the total did not fall, so mining was displaced"; "mining
 - Manski, C. F. (2015). Communicating uncertainty in official economic statistics. *Journal of Economic Literature* 53(3), 631-653.
 - Asner, G. P. and Tupayachi, R. (2017). Accelerated losses of protected forests from gold mining in the Peruvian Amazon. *Environmental Research Letters* 12, 094004 (PDF in `data_raw/literature/`; quote on the 521 ha).
 - Pacsi, R. et al. (2026). MAAP #241, Rapid expansion of illegal gold mining in Tambopata National Reserve.
-- CSF (Conservation Strategy Fund) (2023). Metodología de valorización de la minería ilegal de oro en Perú (PDF in `data_raw/literature/`; parameters in `docs/overnight/notes/economics_sources.md`).
+- CSF (Conservation Strategy Fund) (2023). Metodología de valorización de la minería ilegal de oro en Perú (PDF in `data_raw/literature/`; parameters in `docs/walkthrough/notes/economics_sources.md`).

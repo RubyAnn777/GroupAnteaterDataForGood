@@ -73,8 +73,8 @@ def test_numbers_in_ha_name_measure_zone_period():
     assert missing.empty, f"{len(missing)} numbers in ha lack measure/zone/period, e.g. {missing.id.head(10).tolist()}"
 
 
-@pytest.mark.parametrize("page", ["docs/brief/brief_content.md", "docs/overnight/explainer_content.md",
-                                  "docs/overnight/methods_content.md"])
+@pytest.mark.parametrize("page", ["docs/brief/brief_content.md", "docs/walkthrough/explainer_content.md",
+                                  "docs/walkthrough/methods_content.md"])
 def test_page_placeholders_exist(page):
     """Every {{id}} in a page source exists in output/numbers.csv (referee 2: pages could not be built)."""
     ids = set(pd.read_csv(ROOT / "output/numbers.csv").id)

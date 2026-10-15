@@ -1,5 +1,5 @@
 <!--
-Source of docs/brief/BRIEF_DRAFT.md / .html / .pdf / .docx. Build: `uv run python docs/overnight/build_report.py`.
+Source of docs/brief/BRIEF.md / .html / .pdf / .docx. Build: `uv run python docs/walkthrough/build_report.py`.
 Placeholders {{id}} / {{id:fmt}} come from output/numbers.csv; the build also writes output/brief_numbers.csv (every
 number in order of appearance). Claim tags: [[D]] description, [[P]] prediction, [[C]] causal.
 Plan v3 (docs/PLAN_v3.md): ONE measure, net mining additions = new land + re-mined − stopped (ha/yr);
@@ -30,7 +30,7 @@ Group Giant Anteater · Data for Good · Question 2 · October 2026 · Team: [na
 
 **Mining moved across the road, and the department never fell** [[D]]. In the legal corridor across the highway net additions rose from {{corridor_across_pre_net}} to {{corridor_across_during_net}} ha/yr; the corridor's share of the department's net additions rose from {{v2_corridor_share_pre_net:.0%}} to {{v2_corridor_share_during_net:.0%}}. Madre de Dios went {{mdd_pre_net}} → {{mdd_during_net}} → {{mdd_later_net}} ha/yr. Rises elsewhere add up to {{mdd_rise_elsewhere_vs_tambopata_fall:.1f}} times the target's fall: not all of it can be miners who moved.
 
-**Therefore** [[C]], *if the other Peruvian buffer zones show what the Tambopata buffer zone would otherwise have done*, Mercurio and the operations that followed lowered its net mining additions by about {{model_m1_during_net:,.0f|abs}} to {{did_base2014_net:,.0f|abs}} ha/yr in 2019–21 (all 14 zones, or Amarakaeri alone, 2014–18 baseline). A quarter to a half of it is land stopping (in this model {{model_m1_during_stopped:,.0f}} of {{model_m1_during_net:,.0f|abs}}), not less new clearing; the fall is large in hectares but ordinary relative to the zone's size ({{model_m4_rank:.0f}}th–{{placebo_space_rank_scaled:.0f}}th of 7 by scaling; in hectares it also ranks first in 2014–16, before Mercurio). Read it as an upper bound (4b).
+**Therefore** [[C]], *if the other Peruvian buffer zones show what the Tambopata buffer zone would otherwise have done*, Mercurio and the operations that followed lowered its net mining additions by about {{model_m1_during_net:,.0f|abs}} to {{did_base2014_net:,.0f|abs}} ha/yr in 2019–21 (all 14 zones, or Amarakaeri alone, 2014–18 baseline). A quarter to a half of it is land stopping (in this model {{model_m1_during_stopped:,.0f}} of {{model_m1_during_net:,.0f|abs}}); the rest is less new clearing; the fall is large in hectares but ordinary relative to the zone's size ({{model_m4_rank:.0f}}th–{{placebo_space_rank_scaled:.0f}}th of 7 by scaling; in hectares it also ranks first in 2014–16, before Mercurio). Read it as an upper bound (4b).
 
 **It came back, on old pits; then mining entered the reserve** [[D]]. In 2022–25 the target averaged {{tambopata_bz_later_net}} ha/yr ({{tambopata_bz_later_ex2023_net}} without 2023, a spike only MapBiomas shows), {{tambopata_bz_later_remined}} of it re-mined. Inside the reserve net additions were +{{tambopata_nr_2025_net}} ha in 2025; MAAP reports ~500 ha from late 2025 to Feb 2026, after the navy left the river posts (Pacsi et al., 2026).
 

@@ -10,8 +10,6 @@
   1080
  ],
  "years": [
-  2008,
-  2009,
   2010,
   2011,
   2012,
@@ -33,8 +31,8 @@
   "lapampa": {
    "text": "La Pampa sector",
    "pos": [
-    965.5,
-    638.1
+    965.2,
+    651.0
    ]
   },
   "across": {
@@ -50,41 +48,9 @@
     1679.3,
     608.3
    ]
-  },
-  "tambopata_bz": {
-   "text": "Tambopata buffer zone",
-   "pos": [
-    1462.0,
-    520.3
-   ]
-  },
-  "amarakaeri_bz": {
-   "text": "Amarakaeri buffer zone",
-   "pos": [
-    200.7,
-    437.2
-   ]
-  },
-  "corridor": {
-   "text": "Legal mining corridor (D.L. 1100)",
-   "pos": [
-    817.4,
-    466.8
-   ]
-  },
-  "highway": {
-   "text": "Interoceanic Highway",
-   "pos": [
-    535.1,
-    820.9
-   ]
   }
  },
  "events": [
-  {
-   "year": 2012,
-   "label": "Legal corridor, D.L. 1100 (Feb 2012)"
-  },
   {
    "year": 2019,
    "label": "Mercurio Feb 2019"
@@ -95,7 +61,7 @@
   },
   {
    "year": 2021,
-   "label": "Plan Restauraci\u00f3n 2021"
+   "label": "Plan Restauración 2021"
   },
   {
    "year": 2023,
@@ -106,108 +72,238 @@
    "label": "Navy leaves Malinowski 2025"
   }
  ],
- "lapampa_bbox": [
-  781.0,
-  555.7,
-  1149.6,
-  753.6
- ],
- "lapampa_lon": [
-  781.0,
-  1149.5
- ],
- "first_time_ha": {
-  "2008": {
-   "lapampa": 57,
-   "across": 471,
-   "mdd": 2658
-  },
-  "2009": {
-   "lapampa": 115,
-   "across": 938,
-   "mdd": 3814
-  },
+ "flows": {
   "2010": {
-   "lapampa": 215,
-   "across": 624,
-   "mdd": 4301
+   "lapampa": {
+    "net": 199,
+    "new": 242,
+    "remined": 2,
+    "stopped": 45
+   },
+   "corridor_across": {
+    "net": 580,
+    "new": 625,
+    "remined": 4,
+    "stopped": 49
+   }
   },
   "2011": {
-   "lapampa": 1479,
-   "across": 276,
-   "mdd": 5899
+   "lapampa": {
+    "net": 1467,
+    "new": 1525,
+    "remined": 8,
+    "stopped": 66
+   },
+   "corridor_across": {
+    "net": 197,
+    "new": 271,
+    "remined": 10,
+    "stopped": 84
+   }
   },
   "2012": {
-   "lapampa": 842,
-   "across": 109,
-   "mdd": 4955
+   "lapampa": {
+    "net": 629,
+    "new": 873,
+    "remined": 19,
+    "stopped": 263
+   },
+   "corridor_across": {
+    "net": -1,
+    "new": 109,
+    "remined": 13,
+    "stopped": 123
+   }
   },
   "2013": {
-   "lapampa": 1461,
-   "across": 273,
-   "mdd": 6530
+   "lapampa": {
+    "net": 1371,
+    "new": 1515,
+    "remined": 90,
+    "stopped": 234
+   },
+   "corridor_across": {
+    "net": 205,
+    "new": 268,
+    "remined": 37,
+    "stopped": 100
+   }
   },
   "2014": {
-   "lapampa": 1709,
-   "across": 130,
-   "mdd": 6072
+   "lapampa": {
+    "net": 1430,
+    "new": 1757,
+    "remined": 46,
+    "stopped": 373
+   },
+   "corridor_across": {
+    "net": -3,
+    "new": 130,
+    "remined": 34,
+    "stopped": 167
+   }
   },
   "2015": {
-   "lapampa": 1208,
-   "across": 40,
-   "mdd": 4492
+   "lapampa": {
+    "net": 914,
+    "new": 1239,
+    "remined": 81,
+    "stopped": 405
+   },
+   "corridor_across": {
+    "net": -61,
+    "new": 40,
+    "remined": 32,
+    "stopped": 133
+   }
   },
   "2016": {
-   "lapampa": 582,
-   "across": 18,
-   "mdd": 3859
+   "lapampa": {
+    "net": 360,
+    "new": 626,
+    "remined": 104,
+    "stopped": 370
+   },
+   "corridor_across": {
+    "net": -10,
+    "new": 18,
+    "remined": 41,
+    "stopped": 69
+   }
   },
   "2017": {
-   "lapampa": 1821,
-   "across": 96,
-   "mdd": 6459
+   "lapampa": {
+    "net": 1804,
+    "new": 1865,
+    "remined": 383,
+    "stopped": 444
+   },
+   "corridor_across": {
+    "net": 73,
+    "new": 95,
+    "remined": 58,
+    "stopped": 80
+   }
   },
   "2018": {
-   "lapampa": 1782,
-   "across": 93,
-   "mdd": 5634
+   "lapampa": {
+    "net": 1461,
+    "new": 1835,
+    "remined": 285,
+    "stopped": 659
+   },
+   "corridor_across": {
+    "net": 117,
+    "new": 93,
+    "remined": 96,
+    "stopped": 72
+   }
   },
   "2019": {
-   "lapampa": 1494,
-   "across": 308,
-   "mdd": 6305
+   "lapampa": {
+    "net": 243,
+    "new": 1533,
+    "remined": 205,
+    "stopped": 1495
+   },
+   "corridor_across": {
+    "net": 391,
+    "new": 308,
+    "remined": 148,
+    "stopped": 65
+   }
   },
   "2020": {
-   "lapampa": 315,
-   "across": 405,
-   "mdd": 5877
+   "lapampa": {
+    "net": 124,
+    "new": 339,
+    "remined": 571,
+    "stopped": 787
+   },
+   "corridor_across": {
+    "net": 186,
+    "new": 403,
+    "remined": 91,
+    "stopped": 309
+   }
   },
   "2021": {
-   "lapampa": 358,
-   "across": 675,
-   "mdd": 7530
+   "lapampa": {
+    "net": -113,
+    "new": 393,
+    "remined": 391,
+    "stopped": 896
+   },
+   "corridor_across": {
+    "net": 608,
+    "new": 676,
+    "remined": 335,
+    "stopped": 403
+   }
   },
   "2022": {
-   "lapampa": 505,
-   "across": 779,
-   "mdd": 10263
+   "lapampa": {
+    "net": 421,
+    "new": 558,
+    "remined": 532,
+    "stopped": 669
+   },
+   "corridor_across": {
+    "net": 837,
+    "new": 779,
+    "remined": 360,
+    "stopped": 301
+   }
   },
   "2023": {
-   "lapampa": 1121,
-   "across": 728,
-   "mdd": 14381
+   "lapampa": {
+    "net": 3182,
+    "new": 1230,
+    "remined": 2364,
+    "stopped": 412
+   },
+   "corridor_across": {
+    "net": 1081,
+    "new": 728,
+    "remined": 547,
+    "stopped": 194
+   }
   },
   "2024": {
-   "lapampa": 916,
-   "across": 357,
-   "mdd": 8295
+   "lapampa": {
+    "net": 1199,
+    "new": 987,
+    "remined": 311,
+    "stopped": 99
+   },
+   "corridor_across": {
+    "net": 353,
+    "new": 358,
+    "remined": 33,
+    "stopped": 37
+   }
   },
   "2025": {
-   "lapampa": 1406,
-   "across": 288,
-   "mdd": 12554
+   "lapampa": {
+    "net": 1717,
+    "new": 1497,
+    "remined": 522,
+    "stopped": 302
+   },
+   "corridor_across": {
+    "net": 137,
+    "new": 288,
+    "remined": 25,
+    "stopped": 177
+   }
   }
  },
- "reserve_addition_2025_ha": 241,
- "source": "MapBiomas Peru Collection 4 (30 m); SERNANP; INGEMMET; RAISG"
+ "flow_colors": {
+  "new": "#b5683a",
+  "remined": "#dba21a",
+  "stopped": "#1fa595"
+ },
+ "reserve_net_2025_ha": 241,
+ "measure": "Net mining additions, ha/yr (new land + re-mined − stopped)",
+ "source": "MapBiomas Peru Collection 4 (30 m, class 4.2 mining); SERNANP; INGEMMET; RAISG"
 }

@@ -554,12 +554,14 @@ def b1_stopped_split(reg):
     units = [(D.TREATED_ZONE, "Tambopata buffer zone"), ("lapampa", "La Pampa sector"),
              ("corridor_across", "Corridor across the road"), ("amarakaeri_bz", "Amarakaeri buffer zone")]
     dest = [("stopped_to_water_ha", "became water", "#6f9fb6"), ("stopped_to_forest_ha", "became forest", C["reserve"]),
-            ("stopped_to_natural_ha", "other natural", C["buffer_tint"]), ("stopped_to_other_ha", "other (bare,\nfarm, urban)", C["other"])]
+            ("stopped_to_natural_ha", "other natural", C["buffer_tint"]), ("stopped_to_bare_ha", "bare ground", "#d9c7a7"),
+            ("stopped_to_other_ha", "other (farm,\nurban, ...)", C["other"])]
     fig, axes = _fig(1, 4, sharey=True, gridspec_kw={"wspace": 0.1})
     for ax, (u, ttl) in zip(axes, units):
         d = ru[ru.unit == u].set_index("year")
         x = np.arange(3); bot = np.zeros(3)
         tot = np.array([Z.period_mean(d["stopped_ha"], p) for p in (PRE, DUR, LATER)])
+        assert np.allclose(sum(np.array([Z.period_mean(d[c], p) for p in (PRE, DUR, LATER)]) for c, _, _ in dest), tot, rtol=1e-6)
         for col, lab, c in dest:
             v = np.array([Z.period_mean(d[col], p) for p in (PRE, DUR, LATER)]) / tot
             ax.bar(x, v, bottom=bot, width=0.62, color=c, lw=0, zorder=2, label=lab)

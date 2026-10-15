@@ -288,6 +288,10 @@ def event_study(reg):
                 f"zone's {y} coefficient (before Mercurio): rank 1 here shows the raw rank measures size",
                 "description", SRC, measure="net", zone=T, period=str(y))
     print(f"Placebo in space (net): rank {rank_raw}/{n} raw, {rank_sc}/{len(big)} scaled")
+    a_, b_ = D.PERIODS["during"]
+    reg.add("es_poolB_min_during_net", bB["net"].loc[a_:b_].min(), "ha/yr", "Lowest yearly event-study coefficient "
+            f"2019–21 (ref {D.REF_YEAR}), Tambopata buffer zone vs {n-1} buffer zones, net additions (figure title)",
+            "description", SRC, measure="net", zone=T, period="2019–21")
     fig_event_study(bB, bA, W, poolB, n)
     return bB
 

@@ -1,6 +1,6 @@
 # S7 · Synthetic difference in differences (attempt A6)
 
-*Method card 7 of the causal review (plan: `docs/causal_review_plan.md`). Code under review: `code/peru_sdid.py` (own implementation of Arkhangelsky et al. 2021), compared with `code/peru_models.py` (ladder) and `code/peru_synth.py` (S6). Test script: `code/review/s7_sdid_checks.py` (read-only, about 1 minute).*
+*Method card 7 of the causal review (plan: `docs/methods/causal_review_plan.md`). Code under review: `code/peru_sdid.py` (own implementation of Arkhangelsky et al. 2021), compared with `code/peru_models.py` (ladder) and `code/peru_synth.py` (S6). Test script: `code/review/s7_sdid_checks.py` (read-only, about 1 minute).*
 
 ---
 

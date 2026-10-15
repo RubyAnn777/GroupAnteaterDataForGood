@@ -1,6 +1,6 @@
 # S4 · Two-way fixed effects: the model ladder M1-M4 (attempt A3)
 
-*Method card 4 of the causal review (plan: `docs/causal_review_plan.md`). Code under review: `code/peru_models.py` (with `code/common.py:55-61`, `placebo_rank`). Test script: `code/review/s4_twfe_checks.py` (read-only, about 6 s).*
+*Method card 4 of the causal review (plan: `docs/methods/causal_review_plan.md`). Code under review: `code/peru_models.py` (with `code/common.py:55-61`, `placebo_rank`). Test script: `code/review/s4_twfe_checks.py` (read-only, about 6 s).*
 
 ---
 

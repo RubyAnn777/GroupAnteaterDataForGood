@@ -1,6 +1,6 @@
 # S0 · Potential outcomes, the treatment, and claim labels
 
-*Method card 0 of the causal review (plan: `docs/causal_review_plan.md`). Card only: no estimator is tested here, but every later card builds on these definitions.*
+*Method card 0 of the causal review (plan: `docs/methods/causal_review_plan.md`). Card only: no estimator is tested here, but every later card builds on these definitions.*
 
 **Decision recorded in this session (Ruby, 2026-10-14):** the treatment is **the start of Operation Mercurio** (February 2019; first treated year 2019). Everything that happened afterwards (COVID-19, Plan Restauración, Mercurio II, the 2023 state of emergency, the 2025 navy withdrawal) is **context**: we show it in the figures and the text, but we do not model it as separate treatments. This is a deliberate simplification, and the brief must say so.
 

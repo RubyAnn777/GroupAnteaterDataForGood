@@ -1,6 +1,6 @@
 # S8 · Raster backbone and the 1-km cell panel (attempt A7)
 
-*Method card 8 of the causal review (plan: `docs/causal_review_plan.md`). Code under review: `code/raster_zones.py` (zones, pixel accounting, cells), `code/v2_stats.py` (cell DiD, event studies, road gradient, wild bootstrap), `code/v2_tests.py` (T4 boundary, T7 presumed-illegal share, T9 depth), `code/glad_alerts.py`, `code/raster_gold.py`. Test script: `code/review/s8_cell_panel_checks.py` (read-only, ~10 min because of the bootstraps and Conley errors).*
+*Method card 8 of the causal review (plan: `docs/methods/causal_review_plan.md`). Code under review: `code/raster_zones.py` (zones, pixel accounting, cells), `code/v2_stats.py` (cell DiD, event studies, road gradient, wild bootstrap), `code/v2_tests.py` (T4 boundary, T7 presumed-illegal share, T9 depth), `code/glad_alerts.py`, `code/raster_gold.py`. Test script: `code/review/s8_cell_panel_checks.py` (read-only, ~10 min because of the bootstraps and Conley errors).*
 
 ---
 

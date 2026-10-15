@@ -1,6 +1,6 @@
-// Word version of the brief, for editing: docs/brief/BRIEF_DRAFT.md -> docs/brief/BRIEF.docx
+// Word version of the brief, for editing: docs/brief/BRIEF.md -> docs/brief/BRIEF.docx
 // Run: cd docs/brief/docx_build && npm install && node make_docx.js
-// BRIEF_DRAFT.md is written by docs/overnight/build_report.py (numbers already filled in from output/numbers.csv).
+// BRIEF.md is written by docs/walkthrough/build_report.py (numbers already filled in from output/numbers.csv).
 // A4, 2 cm margins, Calibri 10 pt; References start on a new page (parts 1-4 = the two graded pages).
 const fs = require("fs");
 const path = require("path");
@@ -11,7 +11,7 @@ const {
 } = require("docx");
 
 const BRIEF = path.resolve(__dirname, "..");
-const SRC = path.join(BRIEF, "BRIEF_DRAFT.md");
+const SRC = path.join(BRIEF, "BRIEF.md");
 const OUT = path.join(BRIEF, "BRIEF.docx");
 const INK = "1F2D33", INK2 = "4F5B60", GREEN = "3C7D2C";
 const LABEL = { Description: "2B6A8A", Prediction: "8A5F00", Causal: "A42C58" };

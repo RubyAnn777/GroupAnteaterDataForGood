@@ -8,7 +8,7 @@ Zones: registry (definitions.ZONES; zone_year.csv, zones_mdd.tif, cell_attr.csv)
      (stock), so only 2019+ comparisons.
   E2 Re-mined land by zone (one of the three parts of net additions), and its corridor share.
   E3 Zone profile: what each zone offers a miner: legality, distance to the highway and to rivers, gold-bearing land,
-     depletion by 2018, cost type (tax vs enforcement risk; qualitative, from docs/overnight/notes/qualitative_background.md).
+     depletion by 2018, cost type (tax vs enforcement risk; qualitative, from docs/walkthrough/notes/qualitative_background.md).
   E4 Where new land is likely to be mined (PREDICTION): a logit on 1-km cells, outcome = more than 1 ha of NEW LAND
      (first-time mining) in the window (a logit needs an event; net additions cannot be one), trained on features of
      2018 -> 2019-21, tested out of sample on 2022-25 (features of 2021), then risk for 2026-28 (features of 2025).

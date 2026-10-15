@@ -1,6 +1,6 @@
 # S12 · Brazil: 2×2, before/after vs pool, staggered DiD and randomization inference (attempts A12, A13, A14)
 
-*Method card 12 of the causal review (plan: `docs/causal_review_plan.md`). Code under review: `code/brazil.py` (A12, 2×2 on MapBiomas Col 10.1), `code/brazil_stagger.py` (A13, AMW before/after vs pool), `code/brazil_v2.py` + `code/brazil_raster.py` (A14, staggered DiD on MapBiomas Col 11 rasters), `code/brazil_deter.py`, `code/brazil_deter_all.py`, `code/brazil_ibama.py` (context). Test script: `code/review/s12_brazil_checks.py` (read-only, about 2.5 minutes).*
+*Method card 12 of the causal review (plan: `docs/methods/causal_review_plan.md`). Code under review: `code/brazil.py` (A12, 2×2 on MapBiomas Col 10.1), `code/brazil_stagger.py` (A13, AMW before/after vs pool), `code/brazil_v2.py` + `code/brazil_raster.py` (A14, staggered DiD on MapBiomas Col 11 rasters), `code/brazil_deter.py`, `code/brazil_deter_all.py`, `code/brazil_ibama.py` (context). Test script: `code/review/s12_brazil_checks.py` (read-only, about 2.5 minutes).*
 
 ---
 
@@ -212,7 +212,7 @@ No negative weights: all cohorts start late (2023-25) and 13 of 24 units are nev
 Across the ten multi-unit variants and both samples: **−0.49 to +0.62**, with every p-value above 0.12. The sign depends on the sample more than on the dates: positive with the 13 zero units, mostly negative without them. Yanomami alone is strongly positive because its 2023-25 first-time mining (922, 279, 173 ha) stays above its 2014-18 level, which is the boom problem again.
 
 Two inconsistencies confirmed:
-- **Kayapó.** The package rule is "first verified operation 2021-25". The Jun 2023 PF action is verified (page opened, `docs/overnight/notes/enforcement_timeline.md:28`) and inside the window, so the rule itself gives 2023-06, not 2024-09. `operations_coded.csv` does not list it.
+- **Kayapó.** The package rule is "first verified operation 2021-25". The Jun 2023 PF action is verified (page opened, `docs/walkthrough/notes/enforcement_timeline.md:28`) and inside the window, so the rule itself gives 2023-06, not 2024-09. `operations_coded.csv` does not list it.
 - **Munduruku.** The May 2021 snippet is enough to *exclude* Munduruku as a Peru twin (`control_top3.py:23-25`, S10) but not enough to *date* it here (`brazil_v2.py:35-38`). Each use, on its own, errs on the cautious side; together they treat the same evidence two ways.
 
 Year mapping also differs: `brazil_v2.py:59-61` maps Jul-Dec to the next year, `brazil_stagger.py:30-38` uses the calendar year, and `brazil.py:42-47` and `brazil_deter.py:107-113` hard-code their own event lines.

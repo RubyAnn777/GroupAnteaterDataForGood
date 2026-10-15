@@ -1,6 +1,6 @@
 # S3 · Event study and placebo inference (attempt A2)
 
-*Method card 3 of the causal review (plan: `docs/causal_review_plan.md`). Code under review: `code/peru.py:129-297` (event study, placebo in space, restricted placebo, figure), `code/common.py:55-61` (`placebo_rank`), `code/peru_robust.py:124-149` (Amazon pool). Test script: `code/review/s3_event_study_checks.py` (read-only).*
+*Method card 3 of the causal review (plan: `docs/methods/causal_review_plan.md`). Code under review: `code/peru.py:129-297` (event study, placebo in space, restricted placebo, figure), `code/common.py:55-61` (`placebo_rank`), `code/peru_robust.py:124-149` (Amazon pool). Test script: `code/review/s3_event_study_checks.py` (read-only).*
 
 ---
 
@@ -252,7 +252,7 @@ Simpler version of the same point: the largest absolute pre-period coefficient (
 ### T9 · The figure (audit lead 6, confirmed)
 
 - The orange line is pool A (3 zones); the grey band is pool B's placebos (`peru.py:233-236`). A pool-A band would have only 2 placebo lines (Amarakaeri +503, Bahuaja −503 for mean 2019-21), so the code borrows pool B's band. The line and the band therefore come from different comparisons.
-- The headline is "Tambopata dropped below every placebo zone in 2019–22, then came back" (`peru.py:230`), and the walkthrough caption says "Tambopata drops below the whole band in 2019–22" (`docs/overnight/explainer_content.md:502`). In fact the pool-A line is below the band minimum in **2014, 2015, 2016, 2019, 2020, 2021, 2022, 2024 and 2025**: 9 of 11 non-reference years, including three of the four pre-years. The figure itself shows that being below the band is normal for Tambopata.
+- The headline is "Tambopata dropped below every placebo zone in 2019–22, then came back" (`peru.py:230`), and the walkthrough caption says "Tambopata drops below the whole band in 2019–22" (`docs/walkthrough/explainer_content.md:502`). In fact the pool-A line is below the band minimum in **2014, 2015, 2016, 2019, 2020, 2021, 2022, 2024 and 2025**: 9 of 11 non-reference years, including three of the four pre-years. The figure itself shows that being below the band is normal for Tambopata.
 - "Then came back" invites the reading "enforcement ended and mining returned". Under decision S0, 2022-25 are "later years", not "after enforcement".
 
 ### T10 · Placebo in time on the event-study statistic

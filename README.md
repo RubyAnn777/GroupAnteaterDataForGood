@@ -6,23 +6,39 @@ Two cases, both described on our question card:
 - **Brazil:** weaker enforcement in indigenous territories (2019–2022), then the operation in the **Yanomami** territory (from February 2023).
 Practice partner: **Frankfurt Zoological Society (FZS)**. We present to Christof Schenck (Executive Director) in Lesson 5.
 
-> **New here?** Start with [`docs/basics.html`](docs/basics.html): where the places are, where mining is legal, what a buffer zone is, and what the enforcement was (5 min). Then read [`agent.md`](agent.md), the shared project reference (assignment, data rules, check numbers, decisions), and the strategy page `docs/strategy.html`.
+> **New here?** Start with [`docs/basics.html`](docs/basics.html) (places, legality, buffer zones, the operations; 5 min), then the walkthrough [`docs/walkthrough/EXPLAINER.html`](docs/walkthrough/EXPLAINER.html). The shared project reference is [`agent.md`](agent.md); the current definitions are in [`docs/PLAN_v3.md`](docs/PLAN_v3.md).
 
 ---
 
-## Quick start
+## What to hand in (Lesson 5)
 
-```bash
-git clone https://github.com/RubyAnn777/GroupAnteaterDataForGood.git
-cd GroupAnteaterDataForGood
-uv sync                                   # creates .venv with pandas, matplotlib, pyfixest, openpyxl
-cd starter && uv run python gold_starter.py
-```
+| Deliverable | File |
+|---|---|
+| Brief (PDF, 2 pages + references + appendix) | `deliverables/GroupAnteater_Q2_brief.pdf` (Word version for editing: `..._brief.docx`) |
+| Slides | `deliverables/GroupAnteater_Q2_slides.pptx` (+ PDF, two map videos) |
+| Replication zip | `replication/GroupAnteater_Q2_replication.zip` (course structure; its README is [`README.txt`](README.txt)) |
+| Everything we made | `replication/GroupAnteater_Q2_all_materials.zip` |
 
-You should see **six lines starting with `OK`** and a figure in `starter/output/starter_figure.png`.
+Rebuild all of it: `uv sync` · `uv run python code/main.py` (~3 min) · `uv run python docs/walkthrough/build_report.py` (pages + brief) · brief PDF: headless Chrome print of `docs/brief/BRIEF.html` · Word: `cd docs/brief/docx_build && npm install && node make_docx.js` · deck: `cd presentation/deck && npm install && node build_deck.js` · `uv run python tools/make_delivery.py`. Check: `uv run pytest tests -q`.
 
-**Full analysis (overnight branch):** from the repo root run `uv run python code/main.py` (about 1 minute). It re-runs every check, fails loudly if one fails, and writes all figures, tables and `output/numbers.csv` (every citable number with the function that produced it) to `output/`. Then `uv run python docs/overnight/build_report.py` rebuilds the team walkthrough `docs/overnight/EXPLAINER.html` (start here) and the brief draft `docs/brief/BRIEF_DRAFT.html`/`.md` from those numbers. Three large raw files are not in git (see `DOWNLOAD_LOG.csv`); without them `main.py` falls back to the small committed intermediates in `data_intermediate/` and skips the two maps.
-No `uv`? Install it with `curl -LsSf https://astral.sh/uv/install.sh | sh`. The R starter (`starter/gold_starter.R`) needs base R only.
+## One outcome, one zone set, one treatment (plan v3)
+
+Every number is **net mining additions** (ha/yr) = new land + re-mined − stopped, from the MapBiomas Peru Collection 4 rasters, on **one zone registry** (official buffer zones kept whole), with **one treatment** (start of Operation Mercurio, first treated year 2019). Defined once in [`code/definitions.py`](code/definitions.py); `tests/` fail if a module deviates.
+
+## Repository map
+
+| Folder | What |
+|---|---|
+| `README.txt`, `DOWNLOAD_LOG.csv`, `data/`, `data_raw/`, `data_intermediate/`, `code/`, `output/`, `tests/` | the replication files (course structure) |
+| `deliverables/` | final brief, slides, videos (copied by `tools/make_delivery.py`) |
+| `docs/brief/` | brief source (`brief_content.md`), AI prompt and answer, Word builder |
+| `docs/walkthrough/` | team walkthrough and methods page (sources + builder), decision log `LOG.md`, source notes |
+| `docs/methods/` | Ruby's causal review: method cards S0–S14, review plan |
+| `docs/review/` | Ruby's review v2, referee reports |
+| `docs/presentation/` | talk storyline |
+| `presentation/` | deck and map-animation sources |
+| `course/` | the course's own files (assignment, question cards, data dictionary, starter, templates) |
+| `archive/` | superseded drafts |
 
 ## The question
 
@@ -34,34 +50,9 @@ FZS supports Peru's protected-area authority (SERNANP) in enforcement against il
 
 | When | What |
 |---|---|
-| Day 1, end of day | Team plan, half a page ([`templates/TEAM_PLAN.docx`](templates/TEAM_PLAN.docx)) |
+| Day 1, end of day | Team plan, half a page ([`docs/team_plan/`](docs/team_plan/)) |
 | Before Lesson 4 | Our added data downloaded, logged and checked; first descriptive statistics |
 | Lesson 5 | Brief (2-page PDF), slides, replication zip. Presentation: 10 min + 5 min Q&A, opening with two fun facts about giant anteaters |
-
-## Repository layout
-
-| Path | What it is |
-|---|---|
-| `agent.md` | Shared project reference for humans and AI assistants |
-| `CLAUDE.md` | Tells Claude Code to load `agent.md` automatically |
-| `README.txt` | The course's original "start here" note |
-| `gold_assignment_brief.pdf` | Assignment: deliverables, grading, data notes |
-| `gold_question_cards.pdf` | Question cards; **page 3 is ours** |
-| `docs/basics.html` | Start here: plain-language primer (map, legal zones, buffer zones, enforcement timeline) |
-| `docs/strategy.html` | Strategy page: context, design, method, team plan, Claude Code how-to |
-| `DATA_DICTIONARY.pdf` | Every variable in every table |
-| `DOWNLOAD_LOG.csv` | Provenance log: one row per raw file, with URL, date, collection, sha256 and check number |
-| `data_raw/` | Our own downloads, exactly as downloaded, one folder per source (MapBiomas Peru/Brazil, IBAMA, INPE DETER, BCRP, AMW, SERNANP, FUNAI, INGEMMET, MAAP) |
-| `data_intermediate/` | Small derived tables rebuilt by `code/` from git-ignored raw files (IBAMA, AMW) |
-| `code/` | Analysis: `main.py` is the single entry point; one module per part (Peru, Peru ANP, robustness, production, Brazil, IBAMA, DETER, spatial, brief figure) |
-| `output/` | Everything `code/main.py` writes: figures, tables, `numbers.csv`, `checks.csv` |
-| `docs/overnight/` | Overnight run of 10/11 Oct 2026: `LOG.md` (what happened, decisions), `EXPLAINER.html` (plain-language walkthrough of every step, figure and model), `notes/` (per-source notes and quotes) |
-| `docs/brief/` | Brief draft (`brief_content.md` → `BRIEF_DRAFT.html`/`.md`, 2 pages) and the raw AI answer for part 4 |
-| `data/` | The six data-pack tables (MapBiomas, World Bank Pink Sheet) |
-| `starter/` | Starter code (Python, notebook, R): checks, levels vs additions, first DiD table |
-| `how_the_panels_were_built/` | Scripts that built `data/` from raw files (reference only) |
-| `templates/` | Team plan and replication README templates |
-| `pyproject.toml`, `uv.lock` | Python environment |
 
 ## Ground rules (from the assignment)
 
@@ -75,7 +66,7 @@ FZS supports Peru's protected-area authority (SERNANP) in enforcement against il
 
 ## Conceptual draft (team brainstorm, 8 Oct)
 
-*Working ideas, not final decisions. See the strategy page and `agent.md` for the open questions.*
+*Working ideas from 8 Oct, kept for the record; superseded where `docs/PLAN_v3.md` differs.*
 
 ### Two exercises
 

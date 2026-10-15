@@ -1,7 +1,7 @@
 # Plan v3: one outcome, one zone registry, one treatment (from 2026-10-15)
 
 Branch `analysis/v3-definitions` (from `origin/main` after Ruby's review PR #1). Trigger: Ruby's review v2 (`review.md`,
-`docs/causal_review_plan.md` X1-X14, `docs/methods/01` T1/T5/T6, `14_synthesis.md` §10.1) and the team chat of
+`docs/methods/causal_review_plan.md` X1-X14, `docs/methods/01` T1/T5/T6, `14_synthesis.md` §10.1) and the team chat of
 14-15 Oct 2026.
 
 ## Decisions (team, 2026-10-15)

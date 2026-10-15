@@ -4,7 +4,7 @@ GLAD alerts, declared gold, risk map E4, economics).
 
 Run from the repo root:  uv run python code/review/s13_descriptive_checks.py   (writes nothing; ~1 min)
 Reads data/, data_intermediate/ (incl. the git-ignored zones_v2_mdd_full.tif if present), data_raw/ (ANP workbook,
-SERNANP / INGEMMET / RAISG / geoBoundaries layers, BCRP), output/numbers.csv, docs/overnight/notes/economics_sources.md.
+SERNANP / INGEMMET / RAISG / geoBoundaries layers, BCRP), output/numbers.csv, docs/walkthrough/notes/economics_sources.md.
 T1 displacement sums (workbook): reproduce, partition check, counterfactual trend, leakage ratio
 T2 raster displacement: first-time mining by group, corridor share (mean of shares vs share of sums, 2005-09 level)
 T3 inside the reserve: ANP series, 2017 transitions, raster first-time 2017, share metric
@@ -319,7 +319,7 @@ print("  ids gold_t:", round(N["eco_gold_t_lo_2022_25"], 2), round(N["eco_gold_t
 dec_b = bc.loc[2022:2025].mean()
 print(f"  declared, BCRP 2022-25 mean {dec_b:,.0f} kg vs MINEM {mn.loc[2022:2025, 'declared_kg'].mean():,.0f} kg -> share {dec_b / (N['eco_gold_t_hi_2022_25'] * 1000):.3f}-{dec_b / (N['eco_gold_t_lo_2022_25'] * 1000):.3f}")
 print("  enforcement share of gold value:", round(N["eco_spend_share_of_value"], 5), "| tax wedge", N["eco_tax_share_value_lo"], N["eco_tax_share_value_hi"])
-src = open("docs/overnight/notes/economics_sources.md", encoding="utf-8").read()
+src = open("docs/walkthrough/notes/economics_sources.md", encoding="utf-8").read()
 for k, pat in {"yield 1.6-1.9 (Cuadro 3)": r"Cuadro 3", "margin 11/23.9/36.8": r"36\.8", "income tax 29.5": r"29[.,]5", "Hg 2.4-2.8": r"2\.4 a 2\.8",
                "social 81,000-364,000": r"81,000 and US\$364,000", "social 1.2-1.8 M": r"1,2 mill"}.items():
     print(f"  source for {k:28s} present in economics_sources.md: {bool(re.search(pat, src))}")
