@@ -1,7 +1,7 @@
-"""Build the team walkthrough and the brief draft from markdown sources + output/numbers.csv.
+"""Build the team walkthrough and the brief from markdown sources + output/numbers.csv.
 
   docs/walkthrough/explainer_content.md -> docs/walkthrough/EXPLAINER.html + EXPLAINER.md  (guided walkthrough)
-  docs/brief/brief_content.md         -> docs/brief/BRIEF.html + BRIEF.md   (2-page brief draft)
+  docs/brief/brief_content.md         -> docs/brief/BRIEF.html + BRIEF.md   (2-page brief)
 
 Run:  uv run python docs/walkthrough/build_report.py
 Placeholders {{id}} / {{id:fmt}} come from output/numbers.csv (default fmt ",.0f"); unknown ids raise.
@@ -471,7 +471,7 @@ def main(only_brief: bool = False):
         commit = "unknown"
     stamp = dt.datetime.now().strftime("%Y-%m-%d %H:%M")
     info = f"Built {stamp} from git commit {commit} (working tree may contain uncommitted changes). Numbers from output/numbers.csv ({len(nums)} rows)."
-    links = {"walk": ("Walkthrough", URLS["walk"]), "methods": ("Methods", URLS["methods"]), "brief": ("Brief draft", URLS["brief"])}
+    links = {"walk": ("Walkthrough", URLS["walk"]), "methods": ("Methods", URLS["methods"]), "brief": ("Brief", URLS["brief"])}
     def link(k, label): return f'<a href="{html.escape(URLS[k])}">{html.escape(label)}</a>'
     extra = {
         "DECISIONS_TABLE": '<div class="tw"><table class="dec"><thead><tr><th>#</th><th>Decision</th><th>Alternatives</th><th>Why</th></tr></thead><tbody>' +
@@ -479,10 +479,10 @@ def main(only_brief: bool = False):
         "NUMBERS_TABLE": numbers_html(nums),
         "NEXT_STEPS_DIAGRAM": '<div class="svgwrap">' + steps_svg() + "</div>",
         "PIPELINE_DIAGRAM": pipeline_html(),
-        "BRIEF_LINK": link("brief", "Brief draft"), "METHODS_LINK": link("methods", "Methods page"), "WALK_LINK": link("walk", "Walkthrough"),
+        "BRIEF_LINK": link("brief", "Brief"), "METHODS_LINK": link("methods", "Methods page"), "WALK_LINK": link("walk", "Walkthrough"),
     }
     extra_md = {"DECISIONS_TABLE": "See `docs/walkthrough/LOG.md`.", "NUMBERS_TABLE": "See [`output/numbers.csv`](../../output/numbers.csv).",
-                "NEXT_STEPS_DIAGRAM": steps_md(), "PIPELINE_DIAGRAM": pipeline_md(), "BRIEF_LINK": "[the brief draft](../brief/BRIEF.md)",
+                "NEXT_STEPS_DIAGRAM": steps_md(), "PIPELINE_DIAGRAM": pipeline_md(), "BRIEF_LINK": "[the brief](../brief/BRIEF.md)",
                 "METHODS_LINK": "[METHODS.html](METHODS.html)", "WALK_LINK": "[EXPLAINER.html](EXPLAINER.html)"}
     ART.mkdir(exist_ok=True)
     out = {}
@@ -757,7 +757,7 @@ PAGE = """<title>{title}</title>
 {fonts}
 <style>{css}</style>
 <a class="skip" href="#main">Skip to content</a>
-<div class="top"><div class="in"><span class="brand"><b>Giant Anteater</b> · Question 2</span><nav class="pages" aria-label="Pages">{nav}</nav><span class="pill">Team draft</span><button id="theme" class="theme" type="button">Dark mode</button></div></div>
+<div class="top"><div class="in"><span class="brand"><b>Giant Anteater</b> · Question 2</span><nav class="pages" aria-label="Pages">{nav}</nav><span class="pill">Final</span><button id="theme" class="theme" type="button">Dark mode</button></div></div>
 <header class="hero"><div class="in"><div class="kicker">{kicker}</div><h1>{h1}</h1><p class="lede">{lede}</p>{stats}</div></header>
 <div class="shell">
 <nav class="toc" aria-label="Contents"><ol>{toc}</ol><div class="toc-tools"><button type="button" data-all="open">Expand all</button><button type="button" data-all="close">Collapse all</button></div></nav>
@@ -808,11 +808,11 @@ body{background:var(--bg);margin:0;font-family:var(--sans)}
 @media print{body{background:#fff}.top,.note,.foot{display:none}.sheet{box-shadow:none;margin:0;padding:0;max-width:none}}
 """
 
-BRIEF_PAGE = """<title>Mercurio Brief Draft</title>
+BRIEF_PAGE = """<title>Mercurio Brief</title>
 {fonts}
 <style>{css}</style>
 <div class="top"><div class="in"><span class="brand"><b>Giant Anteater</b> · Question 2</span><nav class="pages" aria-label="Pages">{nav}</nav><button id="theme" class="theme" type="button">Dark mode</button></div></div>
-<p class="note">Draft for the team. Parts 1–4 fit on two A4 pages; references and appendix follow. Every number comes from <code>output/numbers.csv</code>; edit the text in <code>docs/brief/brief_content.md</code>.</p>
+<p class="note">Parts 1–4 fit on two A4 pages; references and appendix follow. Every number comes from <code>output/numbers.csv</code>; edit the text in <code>docs/brief/brief_content.md</code>.</p>
 <article class="sheet">{body}</article>
 <p class="foot">{build}</p>
 <script>{js}</script>

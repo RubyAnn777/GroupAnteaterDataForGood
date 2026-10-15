@@ -1,17 +1,17 @@
-"""Slide figures for the FZS talk, storyline v3 (docs/presentation/STORYLINE.md): output/slides/*.png + slide_titles.json.
+"""Slide figures for the FZS talk, storyline v3.1 (docs/presentation/STORYLINE.md): output/slides/*.png + slide_titles.json.
 
 Plan v3 (docs/PLAN_v3.md): ONE measure on every chart, net mining additions (ha/yr) = new land + re-mined − stopped,
-from the MapBiomas Peru Collection 4 rasters on one zone registry, read ONLY through zonedata.py. Where the parts are
-shown they use the fixed colours of common.C (new brown, re-mined amber, stopped teal below zero) and net is drawn in
-INK; parts are shown as small multiples, one panel per zone (zone named in the panel title), never next to an orange
-La Pampa / Tambopata line. Periods come from definitions.PERIODS ("Mercurio and what followed (2019–21)", "later
-years (2022–25)").
+from the MapBiomas Peru Collection 4 rasters on one zone registry, read ONLY through zonedata.py. Parts use the fixed
+colours of common.C (new brown, re-mined amber, stopped teal below zero) and net is drawn in INK.
 
-Same visual system as every other figure (common.py palette, direct labels, source line), scaled for projection:
-13 x 5 in at 200 dpi, body text >= 13 pt. The takeaway title and the measure/unit/zone/period subtitle go to
-slide_titles.json (the deck draws them); both are computed from the data. Every number written on a slide is
-registered as `sl_*` with measure/zone/period, and asserted equal to the canonical number where one exists.
-All DESCRIPTION except slide_07 (the tests behind the one CONDITIONAL causal claim).
+Lean by rule (STORYLINE v3.1): one message per chart, years 2014–2025 unless the slide needs otherwise (2016–2022 for
+the 2019 zoom), on-chart event labels only for Mercurio and the April 2023 emergency, one callout per chart, fonts sized
+for a projector (figure 12.2 x 5.0 in = the deck's plate, so 1 pt here is 1 pt on the slide). The Tambopata buffer zone
+is the zone of every time series; La Pampa appears only on "across the road".
+
+The takeaway title and the measure/unit/zone/period subtitle go to slide_titles.json (the deck draws them). Every
+number written on a slide is registered as `sl_*` with measure/zone/period, and asserted equal to the canonical number
+where one exists. All DESCRIPTION except s18_placebo and b_estimates (the tests behind the one CONDITIONAL claim).
 """
 from __future__ import annotations
 import json
@@ -24,26 +24,25 @@ from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
 from matplotlib.ticker import FuncFormatter
 
-from common import OUT, C, INK, INK2, MUTED, AXIS, GRID, SURFACE, style_axes, PERU_EVENTS, SRC_PRICE
+from common import OUT, C, INK, INK2, MUTED, AXIS, GRID, SURFACE, style_axes, PERU_EVENTS, SRC_PRICE, placebo_rank
 import definitions as D
 import zonedata as Z
 
 SL = OUT / "slides"
-W, H, DPI = 13.0, 5.0, 200          # full content width under the slide title (deck reads w_in/h_in)
+W, H, DPI = 12.2, 5.0, 200          # = the deck's figure plate (12.23 x 5.05 in)
 TITLES: dict = {}                   # slide name -> title / subtitle / source (the PPT slide carries the title)
-FS = dict(body=15, tick=14, label=15, small=13, source=11)
+FS = dict(body=17, tick=16, label=17, small=15, source=11.5)
 RC = {"font.size": FS["body"], "xtick.labelsize": FS["tick"], "ytick.labelsize": FS["tick"],
       "axes.titlesize": FS["label"], "axes.labelsize": FS["label"], "xtick.major.size": 4}
 PRE, DUR, LATER = "pre", "during", "later"
-PNAME = {PRE: "Before (2016–18)", DUR: "Mercurio and what\nfollowed (2019–21)", LATER: "Later years\n(2022–25)"}
 PSHORT = {p: D.period_label(p) for p in (PRE, DUR, LATER)}
+TB = D.TREATED_ZONE
+Y0, Y1 = D.YEARS                    # 2014–2025
 BAND = "#ebe6dc"
-SRC = ("MapBiomas Peru Collection 4 annual maps (30 m, class 4.2 mining, legal and illegal), our pixel accounting on "
-       "one zone registry (La Pampa sector = Tambopata buffer zone 70.15–69.80° W; corridor = D.L. 1100).")
+SRC = "MapBiomas Peru Collection 4 (30 m, class 4.2 mining, legal and illegal), our pixel accounting."
 NO_SEE = "Satellites cannot see river dredges or mercury."
-PARTS_NOTE = "New land = mined for the first time since 1985; re-mined = mined again after a gap; stopped = left the mining class."
-PART_COL = {"new": C["new"], "remined": C["remined"], "stopped": C["stopped"]}
 PART_LAB = {"new": "New land", "remined": "Re-mined", "stopped": "Stopped (below zero)", "net": "Net additions"}
+EV_LABEL = {"Mercurio": "Mercurio, Feb 2019", "Emergency": "Emergency, Apr 2023"}   # the only events labelled on charts
 
 
 # --------------------------------------------------------------------------- data helpers (zonedata only)
@@ -55,11 +54,7 @@ def _pm(unit: str, m: str, p) -> float:
 
 def _later_ex(unit: str, m: str) -> float:
     a, b = D.PERIODS[LATER]
-    s = _w(m)[unit].loc[a:b]
-    return float(s.drop(D.LATER_EX).mean())
-
-def _yr(unit: str, m: str, y: int) -> float:
-    return float(_w(m)[unit].loc[y])
+    return float(_w(m)[unit].loc[a:b].drop(D.LATER_EX).mean())
 
 def _add(reg, id, v, unit, desc, measure, zone, period, claim="description", src=D.SOURCE, check=None, tol=0.5):
     """Register a slide number (sl_*) with measure/zone/period; assert it equals the canonical id if given."""
@@ -71,6 +66,15 @@ def _add(reg, id, v, unit, desc, measure, zone, period, claim="description", src
 def _fmt(v, d=0):
     return f"{v:,.{d}f}".replace("-", "−")
 
+def _ordinal(n):
+    n = int(n)
+    return f"{n}{'th' if 10 <= n % 100 <= 20 else {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')}"
+
+def _fold(r):
+    words = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten"}
+    k = int(np.floor(r))
+    return ("more than " if r - k >= 0.2 else "") + f"{words.get(k, str(k))}-fold"
+
 
 # --------------------------------------------------------------------------- drawing helpers
 def _fig(nrows=1, ncols=1, **kw):
@@ -79,54 +83,57 @@ def _fig(nrows=1, ncols=1, **kw):
     return fig, axes
 
 def _head(fig, title, sub):
-    """Takeaway title + subtitle (measure, unit, zone, period) go to slide_titles.json, drawn by the PPT."""
-    if len(title) > 66:
-        print(f"  WARNING slide title over one line at 28 pt ({len(title)} chars): {title}")
+    """Takeaway title (<= 10 words) + subtitle (measure, unit, zone, period) go to slide_titles.json."""
+    assert len(title.split()) <= 10, f"slide title over 10 words: {title}"
     fig._slide_title = (title, sub)
 
 def _ticks(ax, years, step=1):
+    years = list(years)
     ax.set_xticks(years[::step])
-    ax.set_xticklabels([str(y) if i == 0 or y % 5 == 0 else f"'{str(y)[2:]}" for i, y in enumerate(years)][::step])
-    ax.tick_params(labelsize=FS["tick"])
+    ax.set_xticklabels([str(y) if i == 0 or y % 5 == 0 or y == years[-1] else f"'{str(y)[2:]}"
+                        for i, y in enumerate(years)][::step])
+    ax.tick_params(axis="x", labelsize=FS["tick"], length=0, pad=6)
 
-def _events(ax, label=True, keep=None):
-    """Event lines at Y − 0.5 (common.py convention); short labels in two rows above the axes."""
+def _events(ax, label=True):
+    """Only Mercurio (solid) and the April 2023 emergency (dashed), drawn at Y − 0.5 (common.py convention)."""
     lo, hi = ax.get_xlim()
-    k = 0
     for ev in PERU_EVENTS:
         x = ev["year"] - 0.5
-        if not lo <= x <= hi or (keep and ev["short"] not in keep):
+        if ev["short"] not in EV_LABEL or not lo + 0.2 <= x <= hi - 0.2:
             continue
         solid = ev["style"] == "solid"
-        ax.axvline(x, color=INK if solid else AXIS, ls="-" if solid else (0, (3, 2)), lw=1.4 if solid else 1.0, zorder=0.5)
+        ax.axvline(x, color=INK if solid else INK2, ls="-" if solid else (0, (4, 3)), lw=1.6 if solid else 1.3, zorder=0.5)
         if label:
-            ax.annotate(ev["short"], xy=(x, 1.0), xycoords=("data", "axes fraction"), xytext=(0, 4 + 17 * (k % 2)),
+            ax.annotate(EV_LABEL[ev["short"]], xy=(x, 1.0), xycoords=("data", "axes fraction"), xytext=(0, 6),
                         textcoords="offset points", ha="center", va="bottom", fontsize=FS["small"],
                         color=INK if solid else INK2, fontweight="bold" if solid else "normal", annotation_clip=False)
-        k += 1
     ax.set_xlim(lo, hi)
 
-def _band(ax, key=DUR, label=None):
+def _band(ax, key=DUR):
     a, b = D.PERIODS[key]
     ax.axvspan(a - 0.5, b + 0.5, color=BAND, zorder=-1, lw=0)
-    if label:
-        ax.text((a + b) / 2, 0.02, label, transform=ax.get_xaxis_transform(), ha="center", va="bottom",
-                fontsize=FS["small"] - 1, color=INK2, linespacing=1.1)
 
 def _label(ax, x, y, text, dx=10, dy=0, fs=None, weight="bold", ha="left", va="center", color=INK):
     ax.annotate(text, xy=(x, y), xytext=(dx, dy), textcoords="offset points", ha=ha, va=va,
-                fontsize=fs or FS["body"], color=color, fontweight=weight, annotation_clip=False, linespacing=1.15)
+                fontsize=fs or FS["body"], color=color, fontweight=weight, annotation_clip=False, linespacing=1.2)
+
+def _callout(ax, xy, xytext, text, ha="left", va="center"):
+    """The one callout per chart: boxed text with a thin leader to the mark."""
+    ax.annotate(text, xy=xy, xytext=xytext, textcoords="data", ha=ha, va=va, fontsize=FS["small"], color=INK,
+                linespacing=1.35, zorder=9, annotation_clip=False,
+                bbox=dict(boxstyle="round,pad=0.45", fc="white", ec=AXIS, lw=0.8),
+                arrowprops=dict(arrowstyle="-", color=INK2, lw=1.0, shrinkA=0, shrinkB=6))
 
 def _fmt_y(ax, pct=False):
     style_axes(ax)
     ax.yaxis.set_major_formatter(FuncFormatter((lambda v, p: f"{v:.0%}") if pct else (lambda v, p: _fmt(v))))
     ax.tick_params(axis="y", labelsize=FS["tick"])
 
-def _parts_bars(ax, x, new, rem, stp, width=0.74, alpha=1.0):
-    """Stacked parts: new + re-mined above zero, stopped below zero. A 1.5-pt surface gap between segments."""
-    ax.bar(x, new, width=width, color=C["new"], lw=0, zorder=2, alpha=alpha)
-    ax.bar(x, rem, bottom=new, width=width, color=C["remined"], lw=0, zorder=2, alpha=alpha)
-    ax.bar(x, -np.asarray(stp), width=width, color=C["stopped"], lw=0, zorder=2, alpha=alpha)
+def _parts_bars(ax, x, new, rem, stp, width=0.66):
+    """Stacked parts: new + re-mined above zero, stopped below zero, a surface gap between segments."""
+    ax.bar(x, new, width=width, color=C["new"], lw=0, zorder=2)
+    ax.bar(x, rem, bottom=new, width=width, color=C["remined"], lw=0, zorder=2)
+    ax.bar(x, -np.asarray(stp), width=width, color=C["stopped"], lw=0, zorder=2)
     ax.bar(x, np.zeros(len(np.atleast_1d(x))), bottom=new, width=width, color=SURFACE, edgecolor=SURFACE, lw=1.5, zorder=3)
     ax.axhline(0, color=INK2, lw=1.0, zorder=3)
 
@@ -134,26 +141,22 @@ def _net_line(ax, x, net, ms=8):
     ax.plot(x, net, "-", color=INK, lw=2.6, zorder=5)
     ax.plot(x, net, "o", color=INK, ms=ms, mec="white", mew=1.4, zorder=6)
 
-def _parts_legend(ax, net=True, loc="upper left", ncol=4, anchor=None, net_bar=False):
+def _parts_legend(ax, loc="upper left", ncol=4):
     h = [Patch(color=C["new"], label=PART_LAB["new"]), Patch(color=C["remined"], label=PART_LAB["remined"]),
-         Patch(color=C["stopped"], label=PART_LAB["stopped"])]
-    if net_bar:
-        h.append(Patch(color=INK, label="Net additions"))
-    elif net:
-        h.append(Line2D([], [], color=INK, marker="o", ms=7, mec="white", lw=2.4, label="Net additions"))
-    kw = dict(bbox_to_anchor=anchor) if anchor else {}
+         Patch(color=C["stopped"], label=PART_LAB["stopped"]),
+         Line2D([], [], color=INK, marker="o", ms=8, mec="white", lw=2.4, label=PART_LAB["net"])]
     ax.legend(handles=h, loc=loc, ncol=ncol, fontsize=FS["small"], frameon=False, handlelength=1.2, columnspacing=1.4,
-              borderaxespad=0.2, **kw)
+              borderaxespad=0.1)
 
-def _save(fig, name, source, top=0.88, bottom=None, left=0.07, right=0.97, xlab=False, **adj):
+def _save(fig, name, source, top=0.88, bottom=None, left=0.085, right=0.97, xlab=False, **adj):
     t, sub = getattr(fig, "_slide_title", ("", ""))
     w_in, h_in = fig.get_size_inches()
     TITLES[name.removesuffix(".png")] = dict(title=t, subtitle=sub.replace("\n", " "), source="Source: " + source,
                                              w_in=round(float(w_in), 2), h_in=round(float(h_in), 2))
-    text = "\n".join(textwrap.wrap("Source: " + source, 165))
+    text = "\n".join(textwrap.wrap("Source: " + source, 140))
     n = text.count("\n") + 1
-    fig.text(0.015, 0.015, text, fontsize=FS["source"], color=MUTED, va="bottom", ha="left", linespacing=1.3)
-    bottom = bottom if bottom is not None else (0.55 + 0.21 * n + (0.3 if xlab else 0)) / H
+    fig.text(0.012, 0.015, text, fontsize=FS["source"], color=MUTED, va="bottom", ha="left", linespacing=1.3)
+    bottom = bottom if bottom is not None else (0.6 + 0.22 * n + (0.35 if xlab else 0)) / H
     fig.subplots_adjust(top=top, bottom=bottom, left=left, right=right, **adj)
     SL.mkdir(parents=True, exist_ok=True)
     fig.savefig(SL / name, dpi=DPI)
@@ -161,391 +164,392 @@ def _save(fig, name, source, top=0.88, bottom=None, left=0.07, right=0.97, xlab=
     print(f"Saved output/slides/{name}")
 
 
-# --------------------------------------------------------------------------- slide 6: net, two zones
-def s01_net(reg):
-    tb, am = D.TREATED_ZONE, "amarakaeri_bz"
-    net = _w("net").loc[2010:2025]
-    yrs = list(net.index)
-    m = {u: {p: _add(reg, f"sl_net_{u}_{p}", _pm(u, "net", p), "ha/yr",
-                     f"Net mining additions, {D.UNIT_NAME[u]}, {PSHORT[p]}: mean per year (slide 6)", "net", u, PSHORT[p],
-                     check=f"{u}_{p}_net") for p in (PRE, DUR, LATER)} for u in (tb, am)}
-    fall = _add(reg, "sl_net_tambopata_bz_fall_share", 1 - m[tb][DUR] / m[tb][PRE], "share",
-                "Fall in mean net mining additions, Tambopata buffer zone, 2016–18 to 2019–21 (slide 6)", "net", tb,
-                f"{PSHORT[PRE]} vs {PSHORT[DUR]}")
+# --------------------------------------------------------------------------- slide 9: net additions fell, came back
+def s09_net(reg):
+    s = _w("net")[TB].loc[Y0:Y1]
+    yrs = list(s.index)
+    m = {p: _add(reg, f"sl_net_{TB}_{p}", _pm(TB, "net", p), "ha/yr",
+                 f"Net mining additions, {D.UNIT_NAME[TB]}, {PSHORT[p]}: mean per year (slide 9)", "net", TB, PSHORT[p],
+                 check=f"{TB}_{p}_net") for p in (PRE, DUR, LATER)}
+    ex = _add(reg, f"sl_net_{TB}_later_ex2023", _later_ex(TB, "net"), "ha/yr", f"Net mining additions, "
+              f"{D.UNIT_NAME[TB]}, 2022, 2024, 2025 (without 2023): mean per year (slide 9)", "net", TB, "2022, 2024, 2025",
+              check=f"{TB}_later_ex2023_net")
+    fall = _add(reg, f"sl_net_{TB}_fall_share", 1 - m[DUR] / m[PRE], "share", "Fall in mean net mining additions, "
+                f"{D.UNIT_NAME[TB]}, 2016–18 to 2019–21 (slide 9)", "net", TB, f"{PSHORT[PRE]} vs {PSHORT[DUR]}")
     fig, ax = _fig()
     _band(ax, DUR)
     ax.axhline(0, color=AXIS, lw=1)
-    for u, col, nm in ((am, C["buffer"], "Amarakaeri\nbuffer zone"), (tb, C["lapampa"], "Tambopata\nbuffer zone")):
-        s = net[u]
-        ax.plot(yrs, s, "-", color=col, lw=3, zorder=3)
-        ax.plot(yrs, s, "o", color=col, ms=7.5, mec="white", mew=1.4, zorder=4)
-        for p in (PRE, DUR, LATER):
-            a, b = D.PERIODS[p]
-            ax.plot([a - 0.42, b + 0.42], [m[u][p]] * 2, color=col, lw=8, alpha=0.38, solid_capstyle="butt", zorder=2)
-        _label(ax, 2025, s.loc[2025], nm, dx=12, fs=FS["small"])
-    for p in (PRE, DUR, LATER):                     # period means as a two-row strip at the top of the plot
+    for p in (PRE, DUR, LATER):
         a, b = D.PERIODS[p]
-        xc = (a + b) / 2
-        for row, (u, col) in enumerate(((tb, C["lapampa"]), (am, C["buffer"]))):
-            yf = 0.965 - 0.085 * row
-            ax.plot([xc - 0.62], [yf], "s", ms=10, color=col, transform=ax.get_xaxis_transform(), clip_on=False, zorder=7)
-            ax.text(xc - 0.42, yf, _fmt(m[u][p]), transform=ax.get_xaxis_transform(), ha="left", va="center",
-                    fontsize=FS["body"], color=INK if row == 0 else INK2, fontweight="bold")
-    ax.set_xlim(2009.4, 2025.6)
-    lo = min(net[[tb, am]].min().min(), 0)
-    ax.set_ylim(lo * 1.25 - 150, net[[tb, am]].max().max() * 1.42)
+        ax.plot([a - 0.42, b + 0.42], [m[p]] * 2, color=C["lapampa"], lw=10, alpha=0.30, solid_capstyle="butt", zorder=2)
+    ax.plot(yrs, s, "-", color=C["lapampa"], lw=3.2, zorder=3)
+    ax.plot(yrs, s, "o", color=C["lapampa"], ms=9, mec="white", mew=1.5, zorder=4)
+    ax.set_xlim(Y0 - 0.6, Y1 + 0.6)
+    ax.set_ylim(min(s.min(), 0) - 300, s.max() * 1.32)
+    for p in (PRE, DUR, LATER):                 # the callout: the three period means, in one row at the top
+        a, b = D.PERIODS[p]
+        txt = f"{_fmt(m[p])} ha/yr" + (f"\n({_fmt(ex)} without 2023)" if p == LATER else "")
+        ax.text((a + b) / 2, 0.97, txt, transform=ax.get_xaxis_transform(), ha="center", va="top",
+                fontsize=FS["body"], color=INK, fontweight="bold", linespacing=1.15,
+                bbox=dict(boxstyle="round,pad=0.25", fc=SURFACE, ec="none", alpha=0.9), zorder=8)
     _fmt_y(ax); _ticks(ax, yrs); _events(ax)
     ax.set_ylabel("ha/yr", fontsize=FS["small"], color=INK2)
-    _head(fig, f"Net additions in the Tambopata buffer zone fell {fall:.0%} in 2019–21",
-          f"Net mining additions, ha/yr · Tambopata buffer zone (orange) vs Amarakaeri buffer zone (green) · 2010–2025 · "
-          f"Tambopata {_fmt(m[tb][PRE])} → {_fmt(m[tb][DUR])}, Amarakaeri {_fmt(m[am][PRE])} → {_fmt(m[am][DUR])} "
-          f"(2016–18 → 2019–21). Thick bars and numbers at the top: period means.")
-    _save(fig, "slide_01_net_two_zones.png", f"{SRC} Both buffer zones whole (official SERNANP polygons). {NO_SEE}",
-          top=0.86, right=0.88)
+    _head(fig, f"Net mining fell {fall:.0%}, then came back",
+          f"Net mining additions, ha/yr · Tambopata buffer zone · {Y0}–{Y1} · thick bars and numbers: means for "
+          f"{PSHORT[PRE]}, {PSHORT[DUR]} (shaded) and {PSHORT[LATER]}")
+    _save(fig, "slide_09_net.png", f"{SRC} Official SERNANP buffer-zone polygon. {NO_SEE}", top=0.9, right=0.985)
 
 
-# --------------------------------------------------------------------------- slide 7: parts, small multiples
-def s02_parts(reg):
-    units = [(D.TREATED_ZONE, "Tambopata buffer zone (targeted)"), ("amarakaeri_bz", "Amarakaeri buffer zone (less treated)")]
-    vals = {}
-    for u, _ in units:
-        for p in (PRE, DUR, LATER):
-            for mm in ["net"] + D.PARTS:
-                vals[(u, p, mm)] = _add(reg, f"sl_parts_{u}_{p}_{mm}", _pm(u, mm, p), "ha/yr",
-                                        f"{D.MEASURE_NAME[mm]}, {D.UNIT_NAME[u]}, {PSHORT[p]}: mean per year (slide 7)",
-                                        mm, u, PSHORT[p], check=f"{u}_{p}_{mm}")
-    tb = D.TREATED_ZONE
-    fall = vals[(tb, PRE, "net")] - vals[(tb, DUR, "net")]
-    sh_stop = _add(reg, "sl_fall_share_stopped", (vals[(tb, DUR, "stopped")] - vals[(tb, PRE, "stopped")]) / fall, "share",
-                   "Share of the fall in net additions, Tambopata buffer zone, 2016–18 to 2019–21, from more stopped land "
-                   "(slide 7)", "stopped", tb, f"{PSHORT[PRE]} vs {PSHORT[DUR]}", check="tambopata_bz_fall_share_stopped", tol=1e-6)
-    sh_new = _add(reg, "sl_fall_share_new", (vals[(tb, PRE, "new")] - vals[(tb, DUR, "new")]) / fall, "share",
-                  "Share of the fall in net additions, Tambopata buffer zone, 2016–18 to 2019–21, from less new land "
-                  "(slide 7)", "new", tb, f"{PSHORT[PRE]} vs {PSHORT[DUR]}", check="tambopata_bz_fall_share_new", tol=1e-6)
-    new_ratio = vals[(tb, DUR, "new")] / vals[(tb, PRE, "new")]
-    stop_ratio = vals[(tb, DUR, "stopped")] / vals[(tb, PRE, "stopped")]
-    fig, axes = _fig(1, 2, sharey=True, gridspec_kw={"wspace": 0.08})
-    x = np.arange(3)
-    for ax, (u, ttl) in zip(axes, units):
-        new = [vals[(u, p, "new")] for p in (PRE, DUR, LATER)]
-        rem = [vals[(u, p, "remined")] for p in (PRE, DUR, LATER)]
-        stp = [vals[(u, p, "stopped")] for p in (PRE, DUR, LATER)]
-        net = [vals[(u, p, "net")] for p in (PRE, DUR, LATER)]
-        ax.axvspan(0.5, 1.5, color=BAND, zorder=-1, lw=0)
-        xb, xn = x - 0.1, x + 0.27                      # parts bar, and the net bar beside it (never on top)
-        _parts_bars(ax, xb, new, rem, stp, width=0.5)
-        ax.bar(xn, net, width=0.12, color=INK, lw=0, zorder=4)
-        for i in range(3):
-            ax.annotate(f"net\n{_fmt(net[i])}", xy=(xn[i], max(net[i], 0)), xytext=(0, 5), textcoords="offset points",
-                        ha="center", va="bottom", fontsize=FS["small"], color=INK, fontweight="bold", zorder=7,
-                        linespacing=1.0)
-            ax.annotate(_fmt(new[i]), xy=(xb[i], new[i] / 2), ha="center", va="center", fontsize=FS["small"] - 1,
-                        color="white", fontweight="bold", zorder=7)
-            ax.annotate(_fmt(stp[i]), xy=(xb[i], -stp[i] / 2), ha="center", va="center", fontsize=FS["small"] - 1,
-                        color="white", fontweight="bold", zorder=7)
-            if rem[i] > 250:
-                ax.annotate(_fmt(rem[i]), xy=(xb[i], new[i] + rem[i] / 2), ha="center", va="center",
-                            fontsize=FS["small"] - 1, color=INK, fontweight="bold", zorder=7)
-        ax.set_xticks(x); ax.set_xticklabels([PNAME[p] for p in (PRE, DUR, LATER)], fontsize=FS["small"])
-        ax.set_xlim(-0.5, 2.5)
-        ax.set_title(ttl, loc="left", fontsize=FS["label"] + 1, color=INK, pad=10, fontweight="medium")
-        _fmt_y(ax)
-        ax.tick_params(axis="x", length=0)
-    axes[0].set_ylabel("ha/yr (period mean)", fontsize=FS["small"], color=INK2)
-    lo, hi = axes[0].get_ylim(); axes[0].set_ylim(lo * 1.08, hi * 1.28)
-    _parts_legend(axes[1], loc="upper right", ncol=2, net_bar=True)
-    word = "halved" if 0.4 <= new_ratio <= 0.6 else f"fell {1 - new_ratio:.0%}"
-    so_lo, so_hi = reg.get("tambopata_bz_stopped_share_of_fall_min"), reg.get("tambopata_bz_stopped_share_of_fall_max")
-    so_19 = reg.get("tambopata_bz_excess_stopped_share_in_2019")
-    for k, v, d in (("lo", so_lo, "lowest"), ("hi", so_hi, "highest")):
-        _add(reg, f"sl_stopped_share_of_fall_{k}", v, "share", f"Share of the 2016–18 to 2019–21 fall in net additions, "
-             f"Tambopata buffer zone, that is more stopped land: {d} of the variants (raw, excluding land back within 2 "
-             "years, excess rate, DiD) (slide 7)", "stopped", tb, f"{PSHORT[PRE]} vs {PSHORT[DUR]}",
-             check=f"tambopata_bz_stopped_share_of_fall_{'min' if k == 'lo' else 'max'}", tol=1e-9)
-    _add(reg, "sl_excess_stopped_share_in_2019", so_19, "share", "Share of the 2019–21 excess stopped land (vs 2016–18) "
-         "that falls in 2019, Tambopata buffer zone (slide 7)", "stopped", tb, "2019", check="tambopata_bz_excess_stopped_share_in_2019",
-         tol=1e-9)
-    _head(fig, f"Pits going out of use made {so_lo:.0%}–{so_hi:.0%} of the fall, most of it in 2019",
-          f"Net mining additions and their parts, ha/yr, period means · Tambopata buffer zone vs Amarakaeri buffer zone · "
-          f"Tambopata 2016–18 → 2019–21: new land {_fmt(vals[(tb, PRE, 'new')])} → {_fmt(vals[(tb, DUR, 'new')])}, "
-          f"stopped {_fmt(vals[(tb, PRE, 'stopped')])} → {_fmt(vals[(tb, DUR, 'stopped')])} ({stop_ratio:.1f}×). "
-          f"Stopped land makes {so_lo:.0%}–{so_hi:.0%} of the fall (four ways of counting map flicker); "
-          f"{so_19:.0%} of the extra stopping is in 2019.")
-    _save(fig, "slide_02_parts_two_zones.png", f"{SRC} {PARTS_NOTE} Net = new + re-mined − stopped. {NO_SEE}",
-          top=0.90, left=0.075, right=0.985)
-
-
-# --------------------------------------------------------------------------- slide 8: La Pampa, yearly parts
-def s03_lapampa_2019(reg):
-    u = "lapampa"
-    y0, y1 = D.PERIODS[PRE][0], D.PERIODS[LATER][0]
+# --------------------------------------------------------------------------- slide 10: 2019, year by year (parts)
+def s10_2019(reg):
+    y0, y1 = D.PERIODS[PRE][0], D.PERIODS[LATER][0]          # 2016–2022
     yrs = list(range(y0, y1 + 1))
-    P = {mm: _w(mm)[u].loc[y0:y1] for mm in ["net"] + D.PARTS}
-    for y in (D.REF_YEAR, D.FIRST_POST):
-        for mm in ["net"] + D.PARTS:
-            _add(reg, f"sl_lapampa_{y}_{mm}", P[mm].loc[y], "ha/yr", f"{D.MEASURE_NAME[mm]}, La Pampa sector, {y} (slide 8)",
-                 mm, u, str(y), check=f"lapampa_{y}_{mm}")
+    P = {mm: _w(mm)[TB].loc[y0:y1] for mm in ["net"] + D.PARTS}
+    r, f = D.REF_YEAR, D.FIRST_POST
+    v = {}
+    for y, mm in ((r, "new"), (f, "new"), (f, "stopped"), (f, "net"), (r, "stopped")):
+        v[(y, mm)] = _add(reg, f"sl_tbz_{y}_{mm}", P[mm].loc[y], "ha/yr", f"{D.MEASURE_NAME[mm]}, {D.UNIT_NAME[TB]}, {y} "
+                          "(slide 10)", mm, TB, str(y), check=f"{TB}_{y}_{mm}")
+    lo_, hi_ = (_add(reg, f"sl_stopped_share_of_fall_{k}", reg.get(f"{TB}_stopped_share_of_fall_{c}"), "share",
+                     f"Share of the 2016–18 to 2019–21 fall in net additions, {D.UNIT_NAME[TB]}, that is more stopped "
+                     f"land: {c} of the four ways of counting map flicker (slide 10)", "stopped", TB,
+                     f"{PSHORT[PRE]} vs {PSHORT[DUR]}", check=f"{TB}_stopped_share_of_fall_{c}", tol=1e-9)
+                for k, c in (("lo", "min"), ("hi", "max")))
+    am = {p: _add(reg, f"sl_amarakaeri_stopped_{p}", _pm("amarakaeri_bz", "stopped", p), "ha/yr",
+                  f"Stopped land, Amarakaeri buffer zone, {PSHORT[p]}: mean per year (slide 10)", "stopped", "amarakaeri_bz",
+                  PSHORT[p], check=f"amarakaeri_bz_{p}_stopped") for p in (PRE, DUR)}
     fig, ax = _fig()
     _band(ax, DUR)
-    _parts_bars(ax, yrs, P["new"].values, P["remined"].values, P["stopped"].values, width=0.62)
-    _net_line(ax, yrs, P["net"].values)
-    r, f = D.REF_YEAR, D.FIRST_POST
-    hi = (P["new"] + P["remined"]).max()
-    ax.set_xlim(y0 - 0.6, y1 + 0.6); ax.set_ylim(-P["stopped"].max() * 1.45, hi * 1.32)
-    _label(ax, r, P["new"].loc[r] + P["remined"].loc[r], f"new {_fmt(P['new'].loc[r])}", dx=0, dy=8, ha="center",
-           va="bottom", fs=FS["small"])
-    _label(ax, f, P["new"].loc[f] + P["remined"].loc[f], f"new {_fmt(P['new'].loc[f])}", dx=0, dy=8, ha="center",
-           va="bottom", fs=FS["small"])
-    _label(ax, f, -P["stopped"].loc[f], f"stopped {_fmt(P['stopped'].loc[f])}", dx=0, dy=-8, ha="center", va="top",
-           fs=FS["small"])
-    for yy in (r, f):                                    # net labels under the dot, boxed so they read on the bars
-        ax.annotate(f"net {_fmt(P['net'].loc[yy])}", xy=(yy, P["net"].loc[yy]), xytext=(0, -16), textcoords="offset points",
-                    ha="center", va="top", fontsize=FS["small"], color=INK, fontweight="bold", zorder=8,
-                    bbox=dict(boxstyle="round,pad=0.2", fc=SURFACE, ec="none", alpha=0.95))
-    _fmt_y(ax); _ticks(ax, yrs); _events(ax, keep={"Mercurio", "COVID", "Restauración"})
+    _parts_bars(ax, yrs, P["new"].values, P["remined"].values, P["stopped"].values, width=0.6)
+    _net_line(ax, yrs, P["net"].values, ms=10)
+    top = (P["new"] + P["remined"]).max()
+    ax.set_xlim(y0 - 0.6, y1 + 0.6); ax.set_ylim(-P["stopped"].max() * 1.25, top * 1.85)
+    _callout(ax, (f + 0.3, P["net"].loc[f]), (f + 0.75, top * 1.78),
+             f"2019\nNew land {_fmt(v[(f, 'new')])} ha (2018: {_fmt(v[(r, 'new')])})\n"
+             f"Stopped {_fmt(v[(f, 'stopped')])} ha (2018: {_fmt(v[(r, 'stopped')])})\nNet {_fmt(v[(f, 'net')])} ha",
+             va="top")
+    _fmt_y(ax); _ticks(ax, yrs); _events(ax)
     ax.set_ylabel("ha/yr", fontsize=FS["small"], color=INK2)
-    _parts_legend(ax, loc="upper right", ncol=2)
-    _head(fig, "New pits kept opening in 2019; pits stopped where the patrols were",
-          f"Net mining additions and their parts, ha/yr · La Pampa sector (the target) · {y0}–{y1} · "
-          f"2019: new land {_fmt(P['new'].loc[f])} (2018: {_fmt(P['new'].loc[r])}), stopped {_fmt(P['stopped'].loc[f])}, "
-          f"net {_fmt(P['net'].loc[f])}. Shaded: 2019–21.")
-    _save(fig, "slide_03_lapampa_parts.png", f"{SRC} {PARTS_NOTE} {NO_SEE}", top=0.86, right=0.98)
+    _parts_legend(ax, ncol=2)
+    _head(fig, "2019: new pits kept opening, old ones went quiet",
+          f"Net mining additions and parts, ha/yr · Tambopata buffer zone · {y0}–{y1} · more stopping explains "
+          f"{lo_:.0%}–{hi_:.0%} of the {PSHORT[PRE]} → {PSHORT[DUR]} fall; in Amarakaeri stopped land stayed flat "
+          f"({_fmt(am[PRE])} → {_fmt(am[DUR])} ha/yr)")
+    _save(fig, "slide_10_2019_parts.png", f"{SRC} New land = mined for the first time since 1985; re-mined = mined again "
+          f"after a gap; stopped = left the mining class (water, regrowth). {NO_SEE}", top=0.9, right=0.985)
 
 
-# --------------------------------------------------------------------------- slide 9: across the road + department
-def s04_moved(reg):
-    u = "corridor_across"
-    yrs = list(range(2010, 2026))
-    P = {mm: _w(mm)[u].loc[yrs] for mm in ["net"] + D.PARTS}
-    across = {p: _add(reg, f"sl_across_{p}_net", _pm(u, "net", p), "ha/yr",
-                      f"Net mining additions, corridor across the road, {PSHORT[p]}: mean per year (slide 9)", "net", u,
-                      PSHORT[p], check=f"corridor_across_{p}_net") for p in (PRE, DUR, LATER)}
-    mdd = {p: _add(reg, f"sl_mdd_{p}_net", _pm("mdd", "net", p), "ha/yr",
-                   f"Net mining additions, Madre de Dios (department), {PSHORT[p]}: mean per year (slide 9)", "net", "mdd",
-                   PSHORT[p], check=f"mdd_{p}_net") for p in (PRE, DUR, LATER)}
-    # department by area (zones inside Madre de Dios; they sum to the department)
+# --------------------------------------------------------------------------- slide 11: the region, by legal corridor
+def s11_region(reg):
     z = Z._zone_year()
     z = z[z.in_mdd == 1]
-    grp = {"lapampa": "tbz", "tambopata_bz_rest": "tbz", "corridor_across": "cor", "corridor_rest": "cor"}
-    g = z.assign(g=z.zone.map(grp).fillna("other")).groupby(["year", "g"]).net_ha.sum().unstack().fillna(0)
-    gm = {p: {k: Z.period_mean(g[k], p) for k in ("tbz", "cor", "other")} for p in (PRE, DUR, LATER)}
+    cor = z[z.tenure == "corridor"].groupby("year").net_ha.sum()
+    tot = z.groupby("year").net_ha.sum()
+    tm, cm, sh = {}, {}, {}
     for p in (PRE, DUR, LATER):
-        assert abs(sum(gm[p].values()) - mdd[p]) < 1.0
-        _add(reg, f"sl_mdd_corridor_outside_bz_{p}_net", gm[p]["cor"], "ha/yr",
-             f"Net mining additions, mining corridor outside buffer zones (inside Madre de Dios), {PSHORT[p]}: mean per year "
-             "(slide 9)", "net", "corridor_outside_bz", PSHORT[p])
-    fig, (a1, a2) = _fig(1, 2, gridspec_kw={"width_ratios": [1.35, 1], "wspace": 0.22})
-    _band(a1, DUR)
-    _parts_bars(a1, yrs, P["new"].values, P["remined"].values, P["stopped"].values, width=0.66)
-    _net_line(a1, yrs, P["net"].values, ms=6.5)
-    a1.set_xlim(yrs[0] - 0.6, yrs[-1] + 0.6)
-    lo, hi = a1.get_ylim(); a1.set_ylim(lo * 1.1, hi * 1.45)
-    _fmt_y(a1); _ticks(a1, yrs, step=3)
-    a1.set_title("Corridor across the road (D.L. 1100)", loc="left", fontsize=FS["label"] + 1, color=INK, pad=10, fontweight="medium")
-    a1.set_ylabel("ha/yr", fontsize=FS["small"], color=INK2)
-    _parts_legend(a1, loc="upper left", ncol=2)
-    a1.text(0.02, 0.72, f"Mean net: {PSHORT[PRE]} {_fmt(across[PRE])}/yr → {PSHORT[DUR]} {_fmt(across[DUR])}/yr",
-            transform=a1.transAxes, ha="left", va="top", fontsize=FS["small"], color=INK, fontweight="bold", zorder=8,
-            bbox=dict(boxstyle="round,pad=0.25", fc=SURFACE, ec="none", alpha=0.95))
-    x = np.arange(3); bot = np.zeros(3)
-    for k, col, lab in (("tbz", C["lapampa"], "Tambopata buffer zone"), ("cor", C["corridor"], "Mining corridor\n(outside buffer zones)"),
-                        ("other", C["other"], "Rest of the department")):
-        v = np.array([gm[p][k] for p in (PRE, DUR, LATER)])
-        pos = np.clip(v, 0, None)
-        a2.bar(x, pos, bottom=bot, width=0.58, color=col, lw=0, zorder=2)
-        a2.bar(x, np.zeros(3), bottom=bot + pos, width=0.58, color=SURFACE, edgecolor=SURFACE, lw=1.5, zorder=3)
-        _label(a2, 2.32, bot[-1] + pos[-1] / 2, lab, dx=8, fs=FS["small"] - 1, weight="normal")
-        bot = bot + pos
-    for i, p in enumerate((PRE, DUR, LATER)):
-        a2.annotate(_fmt(mdd[p]), xy=(i, bot[i]), xytext=(0, 6), textcoords="offset points", ha="center", va="bottom",
-                    fontsize=FS["body"], color=INK, fontweight="bold")
-    a2.set_xticks(x); a2.set_xticklabels([PSHORT[p] for p in (PRE, DUR, LATER)], fontsize=FS["small"])
-    a2.tick_params(axis="x", length=0)
-    a2.set_xlim(-0.5, 2.5); a2.set_ylim(0, bot.max() * 1.15)
-    _fmt_y(a2)
-    a2.set_title("All of Madre de Dios, by area (period means)", loc="left", fontsize=FS["label"] + 1, color=INK, pad=10,
-                 fontweight="medium")
-    neg = {p: k for p in (PRE, DUR, LATER) for k in ("tbz", "cor", "other") if gm[p][k] < 0}
-    _head(fig, "Mining moved across the road; the department never fell",
-          f"Net mining additions (and parts), ha/yr · left: corridor across the road, 2010–2025, "
-          f"{_fmt(across[PRE])} → {_fmt(across[DUR])} (2016–18 → 2019–21) · right: Madre de Dios "
-          f"{_fmt(mdd[PRE])} → {_fmt(mdd[DUR])} → {_fmt(mdd[LATER])} (2016–18 → 2019–21 → 2022–25).")
-    _save(fig, "slide_04_moved.png", f"{SRC} Right: zones inside the department; they sum to the total. "
-          f"Legality is by location; the map class can't tell legal from illegal. {NO_SEE}",
-          top=0.89, left=0.065, right=0.86)
-    return neg
-
-
-# --------------------------------------------------------------------------- slide 10: it came back on old pits
-def s05_later(reg):
-    u = D.TREATED_ZONE
-    yrs = list(range(2010, 2026))
-    P = {mm: _w(mm)[u].loc[yrs] for mm in ["net"] + D.PARTS}
-    later = {mm: _add(reg, f"sl_later_{mm}", _pm(u, mm, LATER), "ha/yr",
-                      f"{D.MEASURE_NAME[mm]}, Tambopata buffer zone, {PSHORT[LATER]}: mean per year (slide 10)", mm, u,
-                      PSHORT[LATER], check=f"tambopata_bz_later_{mm}") for mm in ["net"] + D.PARTS}
-    ex = {mm: _add(reg, f"sl_later_ex2023_{mm}", _later_ex(u, mm), "ha/yr",
-                   f"{D.MEASURE_NAME[mm]}, Tambopata buffer zone, 2022, 2024, 2025 (without 2023): mean per year (slide 10)",
-                   mm, u, "2022, 2024, 2025", check=f"tambopata_bz_later_ex2023_{mm}") for mm in ["net", "new", "remined"]}
-    sh = _add(reg, "sl_later_remined_share", later["remined"] / (later["new"] + later["remined"]), "share",
-              "Re-mined land as a share of land added (new + re-mined), Tambopata buffer zone, 2022–25 (slide 10)",
-              "remined", u, PSHORT[LATER])
-    sh_ex = _add(reg, "sl_later_ex2023_remined_share", ex["remined"] / (ex["new"] + ex["remined"]), "share",
-                 "Re-mined land as a share of land added (new + re-mined), Tambopata buffer zone, 2022, 2024, 2025 (slide 10)",
-                 "remined", u, "2022, 2024, 2025")
+        a, b = D.PERIODS[p]
+        tm[p] = _add(reg, f"sl_mdd_{p}_net", Z.period_mean(tot, p), "ha/yr", f"Net mining additions, Madre de Dios "
+                     f"(department), {PSHORT[p]}: mean per year (slide 11)", "net", "mdd", PSHORT[p], check=f"mdd_{p}_net")
+        cm[p] = _add(reg, f"sl_mdd_legal_corridor_{p}_net", Z.period_mean(cor, p), "ha/yr", "Net mining additions on "
+                     f"legal-mining-corridor land (all D.L. 1100 land in Madre de Dios, native communities excluded), "
+                     f"{PSHORT[p]}: mean per year (slide 11)", "net", "legal_corridor_mdd", PSHORT[p])
+        sh[p] = _add(reg, f"sl_corridor_share_{p}_net", cor.loc[a:b].sum() / tot.loc[a:b].sum(), "share",
+                     f"Share of Madre de Dios net additions on legal-corridor land, {PSHORT[p]}: period sum / period sum "
+                     "(slide 11)", "net", "mdd", PSHORT[p], check=f"v2_corridor_share_{p}_net", tol=1e-9)
     fig, ax = _fig()
-    a, b = D.PERIODS[LATER]
-    ax.axvspan(a - 0.5, b + 0.5, color=BAND, zorder=-1, lw=0)
-    _parts_bars(ax, yrs, P["new"].values, P["remined"].values, P["stopped"].values, width=0.66)
-    _net_line(ax, yrs, P["net"].values, ms=7)
-    ax.set_xlim(yrs[0] - 0.6, yrs[-1] + 0.6)
-    lo, hi = ax.get_ylim(); ax.set_ylim(lo * 1.45, hi * 1.25)
-    ax.text((a + b) / 2, 0.03, f"Later years: net {_fmt(later['net'])}/yr\n({_fmt(ex['net'])} without 2023)",
-            transform=ax.get_xaxis_transform(), ha="center", va="bottom", fontsize=FS["small"], color=INK, fontweight="bold")
-    y23 = D.LATER_EX
-    _label(ax, y23, P["new"].loc[y23] + P["remined"].loc[y23], f"2023: re-mined {_fmt(P['remined'].loc[y23])} ha",
-           dx=0, dy=6, fs=FS["small"], ha="center", va="bottom")
-    _fmt_y(ax); _ticks(ax, yrs); _events(ax)
-    ax.set_ylabel("ha/yr", fontsize=FS["small"], color=INK2)
-    _parts_legend(ax, loc="upper left", ncol=4)
-    _head(fig, f"It came back on old pits: {sh:.0%} of added land was re-mined",
-          f"Net mining additions and their parts, ha/yr · Tambopata buffer zone · 2010–2025 · later years (2022–25): "
-          f"re-mined {_fmt(later['remined'])}/yr, new land {_fmt(later['new'])}/yr; without the 2023 spike year "
-          f"re-mined {_fmt(ex['remined'])}/yr ({sh_ex:.0%}).")
-    _save(fig, "slide_05_later_old_pits.png", f"{SRC} {PARTS_NOTE} 2023 is a MapBiomas-only spike (GLAD alerts and "
-          f"Amazon Mining Watch are flat): read 2022–25 with and without it. MAAP #193 (2023) reports miners back on "
-          f"degraded land. {NO_SEE}", top=0.86, right=0.98)
+    x = np.arange(3)
+    c = np.array([cm[p] for p in (PRE, DUR, LATER)]); t = np.array([tm[p] for p in (PRE, DUR, LATER)])
+    assert (t - c > 0).all()
+    ax.bar(x, c, width=0.56, color=C["corridor"], lw=0, zorder=2)
+    ax.bar(x, t - c, bottom=c, width=0.56, color=C["other"], lw=0, zorder=2)
+    ax.bar(x, 0, bottom=c, width=0.56, edgecolor=SURFACE, lw=2, zorder=3)
+    for i, p in enumerate((PRE, DUR, LATER)):
+        ax.text(i, c[i] / 2, f"{sh[p]:.0%}", ha="center", va="center", fontsize=FS["body"] + 3, color="white",
+                fontweight="bold", zorder=4)
+        ax.annotate(f"{_fmt(t[i])}", xy=(i, t[i]), xytext=(0, 6), textcoords="offset points", ha="center", va="bottom",
+                    fontsize=FS["body"], color=INK, fontweight="bold")
+    _label(ax, 2.3, c[-1] / 2, "Legal mining corridor\n(all D.L. 1100 land)", dx=4, fs=FS["small"], color=C["corridor"])
+    _label(ax, 2.3, c[-1] + (t[-1] - c[-1]) / 2, "Rest of Madre de Dios", dx=4, fs=FS["small"], color=INK2)
+    ax.set_xticks(x); ax.set_xticklabels([f"Before\n({PSHORT[PRE]})", f"Mercurio and what\nfollowed ({PSHORT[DUR]})",
+                                          f"Later years\n({PSHORT[LATER]})"], fontsize=FS["small"])
+    ax.tick_params(axis="x", length=0)
+    ax.set_xlim(-0.5, 3.15); ax.set_ylim(0, t.max() * 1.13)
+    _fmt_y(ax)
+    ax.set_ylabel("ha/yr (period mean)", fontsize=FS["small"], color=INK2)
+    _head(fig, "The region kept growing, mostly in the legal corridor",
+          f"Net mining additions, ha/yr, period means · Madre de Dios · % = the legal corridor's share of the department's "
+          f"net additions (period sums) · legal corridor = all D.L. 1100 land, not only the strip across the road")
+    _save(fig, "slide_11_region.png", f"{SRC} Legal mining corridor: D.L. 1100 polygon (INGEMMET), native communities "
+          f"excluded; legality is by location, the map class cannot tell legal from illegal. {NO_SEE}",
+          top=0.95, left=0.085, right=0.985)
 
 
-# --------------------------------------------------------------------------- slide 11: inside the reserve
-def s06_reserve(reg):
-    u = "tambopata_nr"
-    yrs = list(range(2011, 2026))
-    s = _w("net")[u].loc[yrs]
-    stock = _w("stock")[u]
-    v25 = _add(reg, "sl_reserve_2025_net", s.loc[2025], "ha/yr", "Net mining additions, Tambopata National Reserve, 2025 "
-               "(slide 11)", "net", u, "2025", check="tambopata_nr_2025_net")
-    v17 = _add(reg, "sl_reserve_2017_net", s.loc[2017], "ha/yr", "Net mining additions, Tambopata National Reserve, 2017 "
-               "(slide 11)", "net", u, "2017", check="tambopata_nr_2017_net")
-    st = _add(reg, "sl_reserve_2025_stock", stock.loc[2025], "ha", "Mining area (stock), Tambopata National Reserve, 2025 "
-              "(slide 11)", "stock", u, "2025", check="tambopata_nr_stock_2025")
-    dur = _add(reg, "sl_reserve_during_net", _pm(u, "net", DUR), "ha/yr", "Net mining additions, Tambopata National "
-               "Reserve, 2019–21: mean per year (slide 11)", "net", u, PSHORT[DUR], check="tambopata_nr_during_net")
+# --------------------------------------------------------------------------- slide 12: across the road
+def s12_across(reg):
+    u, lp = "corridor_across", "lapampa"
+    net = _w("net").loc[Y0:Y1]
+    yrs = list(net.index)
+    a = {p: _add(reg, f"sl_across_{p}_net", _pm(u, "net", p), "ha/yr", f"Net mining additions, corridor across the "
+                 f"road (D.L. 1100 strip ≤ 10 km north of the highway, La Pampa longitudes), {PSHORT[p]}: mean per year "
+                 "(slide 12)", "net", u, PSHORT[p], check=f"{u}_{p}_net") for p in (PRE, DUR, LATER)}
+    l = {p: _add(reg, f"sl_lapampa_{p}_net", _pm(lp, "net", p), "ha/yr", f"Net mining additions, La Pampa sector, "
+                 f"{PSHORT[p]}: mean per year (slide 12)", "net", lp, PSHORT[p], check=f"{lp}_{p}_net")
+         for p in (PRE, DUR, LATER)}
+    ratio = _add(reg, "sl_across_ratio_during_pre", a[DUR] / a[PRE], "ratio", "Net mining additions, corridor across the "
+                 f"road: {PSHORT[DUR]} mean / {PSHORT[PRE]} mean (slide 12)", "net", u, f"{PSHORT[PRE]} vs {PSHORT[DUR]}")
     fig, ax = _fig()
     _band(ax, DUR)
-    ax.axhline(0, color=INK2, lw=1)
-    cols = [C["reserve"] if y == 2025 else "#b9cdb2" for y in yrs]
-    ax.bar(yrs, s.values, color=cols, width=0.7, zorder=2)
-    _label(ax, 2025, s.loc[2025], f"+{_fmt(v25)} ha\nin 2025", dx=0, dy=8, ha="center", va="bottom")
-    _label(ax, 2016.6, s.loc[2017], f"+{_fmt(v17)} ha in 2017:\nan earlier jump", dx=-8, dy=-4, va="top",
-           ha="right", fs=FS["small"], weight="normal")
-    ax.set_xlim(yrs[0] - 0.6, yrs[-1] + 0.6); ax.set_ylim(min(-80, s.min() * 1.4), max(s.max(), v25) * 1.25)
+    ax.axhline(0, color=AXIS, lw=1)
+    for k, col, nm in ((lp, C["lapampa"], "La Pampa"), (u, C["corridor"], "Corridor across\nthe road")):
+        ax.plot(yrs, net[k], "-", color=col, lw=3.2 if k == u else 2.4, zorder=4 if k == u else 3)
+        ax.plot(yrs, net[k], "o", color=col, ms=8, mec="white", mew=1.4, zorder=4 if k == u else 3)
+        _label(ax, Y1, net[k].loc[Y1], nm, dx=12, fs=FS["small"], color=col)
+    for p in (PRE, DUR):
+        b0, b1 = D.PERIODS[p]
+        ax.plot([b0 - 0.42, b1 + 0.42], [a[p]] * 2, color=C["corridor"], lw=10, alpha=0.3, solid_capstyle="butt", zorder=2)
+    ax.set_xlim(Y0 - 0.6, Y1 + 0.6)
+    hi = net[[u, lp]].max().max()
+    ax.set_ylim(min(net[[u, lp]].min().min(), 0) - 250, hi * 1.15)
+    b0, b1 = D.PERIODS[DUR]
+    _callout(ax, ((b0 + b1) / 2, a[DUR]), ((b0 + b1) / 2 - 0.2, hi * 0.95),
+             f"Across the road: {_fmt(a[PRE])} → {_fmt(a[DUR])} ha/yr\n(means, {PSHORT[PRE]} → {PSHORT[DUR]})",
+             ha="center", va="top")
     _fmt_y(ax); _ticks(ax, yrs); _events(ax)
     ax.set_ylabel("ha/yr", fontsize=FS["small"], color=INK2)
-    _head(fig, f"2025: mining inside the reserve jumped {_fmt(v25)} ha after the navy left",
-          f"Net mining additions, ha/yr · Tambopata National Reserve (inside the reserve, not the buffer zone) · 2011–2025 · "
-          f"2019–21 mean {_fmt(dur)}/yr; mining area 2025: {_fmt(st)} ha. Navy left the Malinowski River posts in 2025 "
-          f"(MAAP #241, 2026).")
-    _save(fig, "slide_06_reserve.png", f"{SRC} Platform check: 777 ha of mining inside the reserve in 2025 (protected-area "
+    _head(fig, f"Across the road, net mining rose {_fold(ratio)}",
+          f"Net mining additions, ha/yr · corridor across the road (legal strip ≤ 10 km north of the highway) vs "
+          f"La Pampa sector ({_fmt(l[PRE])} → {_fmt(l[DUR])} ha/yr) · {Y0}–{Y1} · thick bars: means")
+    _save(fig, "slide_12_across.png", f"{SRC} La Pampa sector = Tambopata buffer zone 70.15–69.80° W (our boundary); "
+          f"corridor across the road = D.L. 1100 land at the same longitudes. We cannot show it was the same miners. "
+          f"{NO_SEE}", top=0.9, right=0.86)
+
+
+# --------------------------------------------------------------------------- slide 13: money and gold (context)
+def s13_money(pack, reg):
+    import v2_tests
+    money = v2_tests.mef_series().loc[Y0:Y1] / 1e6
+    gold = pack["prices"].set_index("year")["gold"].loc[Y0:Y1]
+    net = _w("net")[TB].loc[Y0:Y1]
+    ratio = _add(reg, "sl_gold_ratio_2025_2018", gold.loc[Y1] / gold.loc[D.REF_YEAR], "ratio", "Gold price 2025 / 2018 "
+                 "(annual mean, nominal; slide 13)", "price", "world", "2018–2025", src=SRC_PRICE,
+                 check="gold_price_ratio_2025_2018", tol=1e-6)
+    peak = int(money.idxmax())
+    for y in sorted({D.REF_YEAR, peak, Y1}):
+        _add(reg, f"sl_pp0128_{y}_msoles", money.loc[y], "million soles", f"PP 0128 executed spending (devengado) booked "
+             f"in Madre de Dios, {y} (lower bound; slide 13)", "spending", "mdd", str(y), src="MEF Consulta Amigable")
+    fig, axes = _fig(1, 3, gridspec_kw={"wspace": 0.3})
+    a1, a2, a3 = axes
+    a1.bar(money.index, money.values, color=C["buffer"], width=0.7, zorder=2)
+    _label(a1, peak - 0.45, money.loc[peak], f"{money.loc[peak]:.0f} M\nin {peak}", dx=-6, dy=-4, fs=FS["small"], va="top",
+           ha="right")
+    _label(a1, Y1, money.loc[Y1], f"{money.loc[Y1]:.0f} M", dx=0, dy=6, fs=FS["small"], ha="center", va="bottom")
+    a1.set_ylim(0, money.max() * 1.25)
+    a2.plot(gold.index, gold.values, "-", color=C["gold"], lw=3.2)
+    a2.plot(gold.index, gold.values, "o", color=C["gold"], ms=7, mec="white", mew=1.2)
+    _label(a2, Y1, gold.loc[Y1], f"${gold.loc[Y1]:,.0f}", dx=0, dy=10, fs=FS["small"], ha="right", va="bottom")
+    _label(a2, D.REF_YEAR, gold.loc[D.REF_YEAR], f"${gold.loc[D.REF_YEAR]:,.0f}", dx=0, dy=-12, fs=FS["small"],
+           ha="center", va="top")
+    a2.set_ylim(0, gold.max() * 1.22)
+    a3.axhline(0, color=INK2, lw=1)
+    a3.bar(net.index, net.values, color=[C["lapampa"] if v >= 0 else MUTED for v in net.values], width=0.7, zorder=2)
+    a3.set_ylim(min(net.min() * 1.3, -150), net.max() * 1.2)
+    titles = ("Enforcement money,\nMadre de Dios (M soles)", "Gold price\n(US$ per ounce)",
+              "Net mining additions,\nTambopata buffer zone")
+    for ax, t in zip(axes, titles):
+        _band(ax, DUR)
+        _fmt_y(ax); ax.set_xlim(Y0 - 0.6, Y1 + 0.6)
+        ticks = [Y0 + 1, D.REF_YEAR, D.REF_YEAR + 3, Y1 - 1]
+        ax.set_xticks(ticks); ax.set_xticklabels([str(ticks[0])] + [f"'{str(y)[2:]}" for y in ticks[1:]], fontsize=FS["tick"])
+        ax.tick_params(axis="x", length=0)
+        ax.set_title(t, loc="left", fontsize=FS["label"], color=INK, pad=12, fontweight="medium")
+        _events(ax, label=False)
+    _head(fig, f"Money faded after {peak}, while gold rose {ratio:.1f}-fold",
+          f"Same years in each panel, {Y0}–{Y1} · PP 0128 executed spending booked in Madre de Dios (a lower bound) · "
+          f"gold price, nominal · net mining additions, Tambopata buffer zone · shaded: {PSHORT[DUR]} · context, not a test")
+    _save(fig, "slide_13_money.png", f"MEF Consulta Amigable, PP 0128 devengado, Madre de Dios; {SRC_PRICE}; {SRC} "
+          "No correlation shown: 11 years, and money follows mining.", top=0.84, left=0.055, right=0.985)
+
+
+# --------------------------------------------------------------------------- slide 14: it came back (parts)
+def s14_back(reg):
+    yrs = list(range(Y0, Y1 + 1))
+    P = {mm: _w(mm)[TB].loc[Y0:Y1] for mm in ["net"] + D.PARTS}
+    later = {mm: _add(reg, f"sl_later_{mm}", _pm(TB, mm, LATER), "ha/yr", f"{D.MEASURE_NAME[mm]}, {D.UNIT_NAME[TB]}, "
+                      f"{PSHORT[LATER]}: mean per year (slide 14)", mm, TB, PSHORT[LATER], check=f"{TB}_later_{mm}")
+             for mm in ["net"] + D.PARTS}
+    ex = {mm: _add(reg, f"sl_later_ex2023_{mm}", _later_ex(TB, mm), "ha/yr", f"{D.MEASURE_NAME[mm]}, {D.UNIT_NAME[TB]}, "
+                   "2022, 2024, 2025 (without 2023): mean per year (slide 14)", mm, TB, "2022, 2024, 2025",
+                   check=f"{TB}_later_ex2023_{mm}") for mm in ["net", "new", "remined"]}
+    sh = _add(reg, "sl_later_remined_share", later["remined"] / (later["new"] + later["remined"]), "share",
+              f"Re-mined land as a share of land added (new + re-mined), {D.UNIT_NAME[TB]}, {PSHORT[LATER]} (slide 14)",
+              "remined", TB, PSHORT[LATER], check=f"{TB}_later_remined_share_added", tol=1e-9)
+    sh_ex = _add(reg, "sl_later_ex2023_remined_share", ex["remined"] / (ex["new"] + ex["remined"]), "share",
+                 f"Re-mined land as a share of land added (new + re-mined), {D.UNIT_NAME[TB]}, 2022, 2024, 2025 "
+                 "(without 2023; slide 14)", "remined", TB, "2022, 2024, 2025",
+                 check=f"{TB}_later_ex2023_remined_share_added", tol=1e-9)
+    lo_, hi_ = sorted([sh, sh_ex])
+    assert 0.28 <= lo_ and hi_ <= 0.55, f"title 'a third to a half' no longer fits: {lo_:.0%}–{hi_:.0%}"
+    fig, ax = _fig()
+    _band(ax, LATER)
+    _parts_bars(ax, yrs, P["new"].values, P["remined"].values, P["stopped"].values)
+    _net_line(ax, yrs, P["net"].values)
+    top = (P["new"] + P["remined"]).max()
+    ax.set_xlim(Y0 - 0.6, Y1 + 0.6); ax.set_ylim(-P["stopped"].max() * 1.25, top * 1.9)
+    a, b = D.PERIODS[LATER]
+    _callout(ax, (a + 0.2, top * 1.02), (D.REF_YEAR + 0.6, top * 1.86),
+             f"Later years ({PSHORT[LATER]})\nNet {_fmt(later['net'])} ha/yr ({_fmt(ex['net'])} without 2023)\n"
+             f"Re-mined: {sh:.0%} of added land ({sh_ex:.0%} without 2023)", va="top")
+    _fmt_y(ax); _ticks(ax, yrs); _events(ax)
+    ax.set_ylabel("ha/yr", fontsize=FS["small"], color=INK2)
+    _parts_legend(ax, ncol=2)
+    _head(fig, "It came back, partly on old pits (33–46%)",
+          f"Net mining additions and parts, ha/yr · Tambopata buffer zone · {Y0}–{Y1} · shaded: later years "
+          f"({PSHORT[LATER]}) · share = re-mined ÷ (new + re-mined)")
+    _save(fig, "slide_14_came_back.png", f"{SRC} 2023 is a spike in MapBiomas only (forest-loss alerts and Amazon Mining "
+          f"Watch are flat), so later years are shown with and without it. MAAP #193 (2023) reports miners back on "
+          f"degraded land. {NO_SEE}", top=0.9, right=0.985)
+
+
+# --------------------------------------------------------------------------- slide 15: inside the reserve
+def s15_reserve(reg):
+    u = "tambopata_nr"
+    s = _w("net")[u].loc[Y0:Y1]
+    yrs = list(s.index)
+    v25 = _add(reg, "sl_reserve_2025_net", s.loc[Y1], "ha/yr", "Net mining additions, Tambopata National Reserve, 2025 "
+               "(slide 15)", "net", u, str(Y1), check="tambopata_nr_2025_net")
+    _add(reg, "sl_reserve_2017_net", s.loc[2017], "ha/yr", "Net mining additions, Tambopata National Reserve, 2017 "
+         "(slide 15 notes)", "net", u, "2017", check="tambopata_nr_2017_net")
+    dur = _add(reg, "sl_reserve_during_net", _pm(u, "net", DUR), "ha/yr", "Net mining additions, Tambopata National "
+               f"Reserve, {PSHORT[DUR]}: mean per year (slide 15 notes)", "net", u, PSHORT[DUR], check="tambopata_nr_during_net")
+    fig, ax = _fig()
+    ax.axhline(0, color=INK2, lw=1)
+    ax.bar(yrs, s.values, color=[C["reserve"] if y == Y1 else "#c4d6bd" for y in yrs], width=0.68, zorder=2)
+    _label(ax, Y1, s.loc[Y1], f"+{_fmt(v25)} ha\nin {Y1}", dx=0, dy=8, ha="center", va="bottom")
+    _label(ax, 2017, s.loc[2017], "an earlier jump", dx=0, dy=6, ha="center", va="bottom", fs=FS["small"],
+           weight="normal", color=INK2)
+    ax.set_xlim(Y0 - 0.6, Y1 + 0.6); ax.set_ylim(min(-80, s.min() * 1.4), max(s.max(), v25) * 1.3)
+    _fmt_y(ax); _ticks(ax, yrs); _events(ax)
+    ax.set_ylabel("ha/yr", fontsize=FS["small"], color=INK2)
+    _head(fig, f"In {Y1}, mining inside the reserve jumped {_fmt(v25)} ha",
+          f"Net mining additions, ha/yr · Tambopata National Reserve (inside the reserve, not the buffer zone) · {Y0}–{Y1}")
+    _save(fig, "slide_15_reserve.png", f"{SRC} Platform check: 777 ha of mining inside the reserve in 2025 (protected-area "
           f"statistics). MAAP #241 (Pacsi et al., 2026) reports ~500 ha inside the reserve, late 2025 to Feb 2026. {NO_SEE}",
-          top=0.86, right=0.96)
+          top=0.9, right=0.985)
 
 
-# --------------------------------------------------------------------------- slide 12: estimates with parts + ranks
-def s07_causal(reg):
-    tb = D.TREATED_ZONE
+# --------------------------------------------------------------------------- slide 18: placebo dots, raw vs scaled
+def _placebo_sets(pack):
+    import peru_models as PM
+    ad = PM._zone_adds()
+    gold = pack["prices"].set_index("year")["gold"]
+    poolB, big, _, _ = PM.pools(ad)
+    res = {}
+    for m, units in (("M1", poolB), ("M4", big)):
+        noT = [v for v in units if v != TB]
+        g = {u: PM.fit(ad, noT, u, m, *PM.EST, PM.REAL, gold)["post_during"] for u in noT}
+        g[TB] = PM.fit(ad, units, TB, m, *PM.EST, PM.REAL, gold)["post_during"]
+        res[m] = pd.Series(g).sort_values()
+    return res
+
+def s18_placebo(pack, reg):
+    res = _placebo_sets(pack)
+    r1 = placebo_rank(res["M1"][TB], res["M1"].drop(TB)); n1 = len(res["M1"])
+    r4 = placebo_rank(res["M4"][TB], res["M4"].drop(TB)); n4 = len(res["M4"])
+    assert r1 == reg.get("model_m1_rank") and n1 == reg.get("model_m1_n")
+    assert r4 == reg.get("model_m4_rank") and n4 == reg.get("model_m4_n")
+    assert abs(res["M1"][TB] - reg.get("model_m1_during_net")) < 1e-6
+    sc_lo, sc_hi = int(reg.get("sl_rank_scaled_lo")), int(reg.get("sl_rank_scaled_hi"))
+    _add(reg, "sl_placebo_rank_ha", r1, "rank", f"Rank of the Tambopata buffer zone's 2019–21 change in net additions among "
+         f"{n1} Peruvian buffer zones, hectares (1 = biggest fall; slide 18)", "rank", TB, PSHORT[DUR], claim="causal",
+         check="model_m1_rank", tol=0)
+    _add(reg, "sl_placebo_rank_scaled", r4, "rank", f"Same rank, scaled to each zone's own pre-2019 size, among {n4} zones "
+         "(slide 18)", "rank", TB, PSHORT[DUR], claim="causal", check="model_m4_rank", tol=0)
+    fig, axes = _fig(2, 1, gridspec_kw={"hspace": 1.15})
+    rows = [(res["M1"], "In hectares", f"Tambopata: {_ordinal(r1)} of {n1}",
+             f"change in net additions in {PSHORT[DUR]}, ha/yr, vs the other zones", lambda x, p: _fmt(x)),
+            (res["M4"], "Relative to its own size", f"Tambopata: {_ordinal(r4)} of {n4} ({_ordinal(sc_lo)}–{_ordinal(sc_hi)} "
+             "depending on the scaling)", "same change, in multiples of each zone's normal pre-2019 year",
+             lambda x, p: _fmt(x, 1))]
+    rng = np.random.default_rng(3)
+    for i, (ax, (ser, lab, rank_txt, unit, fmt)) in enumerate(zip(axes, rows)):
+        others = ser.drop(TB)
+        jit = rng.uniform(-0.16, 0.16, len(others))
+        ax.axvline(0, color=AXIS, lw=1.2, zorder=1)
+        ax.scatter(others.values, jit, s=260, color="#bdb9b0", edgecolor="white", lw=1.5, zorder=2)
+        ax.scatter([ser[TB]], [0], s=560, color=C["lapampa"], edgecolor="white", lw=2, zorder=3)
+        ax.annotate(f"Tambopata {fmt(ser[TB], None)}", xy=(ser[TB], 0), xytext=(0, -24), textcoords="offset points",
+                    ha="left" if i == 0 else "center", va="top", fontsize=FS["small"], color=C["lapampa"], fontweight="bold")
+        ax.annotate(f"{len(others)} other zones, each given a fake operation", xy=(others.median(), 0), xytext=(0, -24),
+                    textcoords="offset points", ha="center", va="top", fontsize=FS["small"], color=INK2)
+        ax.set_ylim(-1.0, 0.45); ax.set_yticks([])
+        for sp in ("left", "right", "top"):
+            ax.spines[sp].set_visible(False)
+        ax.spines["bottom"].set_color(AXIS)
+        ax.xaxis.set_major_formatter(FuncFormatter(fmt)); ax.tick_params(axis="x", labelsize=FS["tick"], colors=INK2)
+        ax.set_xlabel(unit, fontsize=FS["small"], color=INK2)
+        lo_x, hi_x = min(ser.min(), 0), max(ser.max(), 0)
+        pad = (hi_x - lo_x) * 0.1
+        ax.set_xlim(lo_x - pad, hi_x + pad)
+        ax.text(0.0, 1.12, lab, transform=ax.transAxes, fontsize=FS["label"] + 1, color=INK, fontweight="bold", ha="left")
+        ax.text(1.0, 1.12, rank_txt, transform=ax.transAxes, fontsize=FS["label"] + 1, ha="right",
+                color=C["lapampa"] if i == 0 else INK2, fontweight="bold")
+    _head(fig, "The fall stands out in hectares, not for its size",
+          f"Each grey dot: one Peruvian buffer zone given a fake operation in 2019 · orange: the Tambopata buffer zone's "
+          f"real {PSHORT[DUR]} change · net mining additions, after each zone's level and each year's shared change")
+    _save(fig, "slide_18_placebo.png", f"{SRC} {n1} Peruvian buffer zones with mining before 2019 (scaled: {n4} with more "
+          f"than 10 ha/yr). Tambopata removed from each fake zone's comparison pool. A rank shows whether the real result "
+          "stands out; with one target it is not a significance test.", top=0.84, left=0.03, right=0.97, xlab=True)
+
+
+# --------------------------------------------------------------------------- backup: estimates, one causal range
+def b_estimates(reg):
     g = reg.get
-    rows = [("2×2 vs Amarakaeri\n(2014–18 base)", "did_base2014"), ("Zone + year effects\n(M1, 15 zones)", "model_m1_during"),
-            ("Synthetic DiD\n(15 zones, net only)", "sdid_sdid_ha_during")]
-    est = {}
-    for lab, k in rows:
-        est[k] = {mm: g(f"{k}_{mm}") for mm in ["net"] + D.PARTS if f"{k}_{mm}" in reg.rows}
-        for mm, v in est[k].items():
-            _add(reg, f"sl_est_{k}_{mm}", v, "ha/yr", f"{D.MEASURE_NAME[mm]}, Tambopata buffer zone, 2019–21: estimate "
-                 f"{k} (slide 12; conditional on the comparison zones showing the counterfactual)", mm, tb, PSHORT[DUR],
-                 claim="causal", check=f"{k}_{mm}", tol=1e-6)
-    lo_ = _add(reg, "sl_causal_range_lo", abs(g("model_m1_during_net")), "ha/yr", "Conditional causal range, low end: "
-               "|M1 zone + year effects|, net additions, Tambopata buffer zone, 2019–21 (slide 12)", "net", tb, PSHORT[DUR],
-               claim="causal")
-    hi_ = _add(reg, "sl_causal_range_hi", abs(g("did_base2014_net")), "ha/yr", "Conditional causal range, high end: "
-               "|2×2 vs Amarakaeri, 2014–18 base|, net additions, Tambopata buffer zone, 2019–21 (slide 12)", "net", tb,
-               PSHORT[DUR], claim="causal")
-    stop_sh = {k: est[k]["stopped"] / -est[k]["net"] for k in ("did_base2014", "model_m1_during")}
-    _add(reg, "sl_causal_stopped_share_m1", stop_sh["model_m1_during"], "share", "Share of the M1 estimate (net, 2019–21) "
-         "that is more stopped land (slide 12)", "stopped", tb, PSHORT[DUR], claim="causal")
-    _add(reg, "sl_causal_stopped_share_2x2", stop_sh["did_base2014"], "share", "Share of the 2×2 estimate (2014–18 base, "
-         "net, 2019–21) that is more stopped land (slide 12)", "stopped", tb, PSHORT[DUR], claim="causal")
-    scaled = {k: int(g(k)) for k in ("model_m4_rank", "model_m1_rank_scaled", "sdid_sdid_scaled_during_rank",
-                                     "placebo_space_rank_scaled")}
-    n_raw, n_sc = int(g("model_m1_n")), int(g("model_m4_n"))
-    r_raw, r14, r15 = int(g("model_m1_rank")), int(g("placebo_space_rank_raw_preyear_2014")), int(g("placebo_space_rank_raw_preyear_2015"))
-    sc_lo, sc_hi = min(scaled.values()), max(scaled.values())
-    _add(reg, "sl_rank_scaled_lo", sc_lo, "rank", "Best size-relative placebo rank of the Tambopata buffer zone across "
-         "M1, M4, SDID and the event study (slide 12)", "rank", tb, PSHORT[DUR])
-    _add(reg, "sl_rank_scaled_hi", sc_hi, "rank", "Worst size-relative placebo rank of the Tambopata buffer zone across "
-         "M1, M4, SDID and the event study (slide 12)", "rank", tb, PSHORT[DUR])
-
-    fig, (a1, a2) = _fig(1, 2, gridspec_kw={"width_ratios": [1.55, 1], "wspace": 0.12})
+    lo_, hi_ = abs(g("model_m1_during_net")), abs(g("did_base2014_net"))
+    _add(reg, "sl_causal_range_lo", lo_, "ha/yr", "Conditional causal range, low end: |zone + year effects (M1), 15 zones|, "
+         f"net additions, {D.UNIT_NAME[TB]}, {PSHORT[DUR]}", "net", TB, PSHORT[DUR], claim="causal")
+    _add(reg, "sl_causal_range_hi", hi_, "ha/yr", "Conditional causal range, high end: |Tambopata vs Amarakaeri buffer zone, "
+         f"2014–18 baseline|, net additions, {D.UNIT_NAME[TB]}, {PSHORT[DUR]}", "net", TB, PSHORT[DUR], claim="causal")
+    rows = [("Zone + year effects, 15 zones", "model_m1_during_net", "low end of the range"),
+            ("Synthetic DiD, 15 zones", "sdid_sdid_ha_during_net", "inside"),
+            ("+ gold price × zone size", "model_m2_during_net", "inside"),
+            ("Tambopata vs Amarakaeri,\n2014–18 baseline", "did_base2014_net", "high end of the range"),
+            ("+ each zone's own trend", "model_m3_during_net",
+             f"left out: fails the fake-2016 test ({_fmt(g('model_m3_placebo_net'))} ha/yr)"),
+            ("Synthetic control", "sdid_sc_ha_during_net", "left out: all weight on Amarakaeri, no pre-2019 fit")]
+    rows = sorted(rows, key=lambda r: g(r[1]))
+    fig, ax = _fig()
     yy = np.arange(len(rows))[::-1]
-    a1.axvspan(-hi_, -lo_, color="#f1d9c8", lw=0, zorder=0)
-    a1.text(-(hi_ + lo_) / 2, len(rows) - 0.42, f"conditional range\n{_fmt(lo_)}–{_fmt(hi_)} ha/yr", ha="center",
+    ax.axvspan(-hi_, -lo_, color="#f1d9c8", lw=0, zorder=0)
+    ax.text(-(hi_ + lo_) / 2, len(rows) - 0.6, f"the one causal range: {_fmt(lo_)}–{_fmt(hi_)} ha/yr", ha="center",
             va="bottom", fontsize=FS["small"], color=INK, fontweight="bold")
-    a1.axvline(0, color=INK2, lw=1.4)
-    h = 0.22
-    for yv, (lab, k) in zip(yy, rows):
-        e = est[k]
-        if "new" in e:
-            parts = [("new", e["new"], 0.0), ("remined", e["remined"], 0.0), ("stopped", -e["stopped"], 0.0)]
-            pos, neg = 0.0, 0.0
-            for mm, v, _ in parts:
-                left = pos if v >= 0 else neg + v
-                a1.barh(yv - 0.08, v, left=pos if v >= 0 else neg, height=h * 1.6, color=PART_COL[mm], lw=0, zorder=2)
-                a1.barh(yv - 0.08, 0, left=(pos + v) if v >= 0 else (neg + v), height=h * 1.6, edgecolor=SURFACE, lw=1.5, zorder=3)
-                if v >= 0:
-                    pos += v
-                else:
-                    neg += v
-            a1.annotate(f"−{_fmt(e['stopped'])} stopped", xy=(neg, yv - 0.08), xytext=(-6, 0), textcoords="offset points",
-                        ha="right", va="center", fontsize=FS["small"] - 1, color=INK2)
-        a1.plot(e["net"], yv + 0.27, "D", ms=11, color=INK, mec="white", mew=1.5, zorder=5)
-        a1.annotate(_fmt(e["net"]), xy=(e["net"], yv + 0.27), xytext=(12, 0), textcoords="offset points", ha="left",
-                    va="center", fontsize=FS["body"], color=INK, fontweight="bold")
-    a1.set_yticks(yy); a1.set_yticklabels([r[0] for r in rows], fontsize=FS["small"])
-    style_axes(a1, fmt=False); a1.yaxis.grid(False); a1.xaxis.grid(True, color=GRID, lw=0.6)
-    a1.xaxis.set_major_formatter(FuncFormatter(lambda x, p: _fmt(x)))
-    a1.set_xlim(-2650, 700); a1.set_ylim(-0.6, len(rows) + 0.35)
-    a1.tick_params(axis="x", labelsize=FS["small"])
-    a1.set_xlabel("Estimated change, Tambopata buffer zone, 2019–21, ha/yr (◆ net; bars = parts)", fontsize=FS["small"], color=INK2)
-    h_ = [Patch(color=C["new"], label="New land"), Patch(color=C["remined"], label="Re-mined"),
-          Patch(color=C["stopped"], label="More stopped (−)"), Line2D([], [], color=INK, marker="D", ls="", ms=9, label="Net")]
-    a1.legend(handles=h_, loc="lower left", ncol=4, fontsize=FS["small"] - 1, frameon=False, handlelength=1.0,
-              columnspacing=1.0, bbox_to_anchor=(-0.02, -0.02))
-
-    # right: ranks, raw vs scaled
-    a2.set_xlim(0, 16.5); a2.set_ylim(-0.6, 3.6); a2.axis("off")
-    ladder = [("In hectares, 2019–21", n_raw, {r_raw}, f"{r_raw} of {n_raw}"),
-              ("In hectares, 2014 (before)", n_raw, {r14}, f"{r14} of {n_raw}: size"),
-              ("Scaled to own size, 2019–21", n_sc, set(range(sc_lo, sc_hi + 1)), f"{sc_lo}–{sc_hi} of {n_sc}")]
-    for i, (lab, n, hit, txt) in enumerate(ladder):
-        y = 3 - i * 1.25
-        a2.text(0.3, y + 0.42, lab, fontsize=FS["small"], color=INK, fontweight="bold", va="bottom")
-        a2.text(16.3, y + 0.42, txt, fontsize=FS["small"], color=C["lapampa"] if i != 1 else INK2, fontweight="bold",
-                va="bottom", ha="right")
-        for k in range(1, n + 1):
-            on = k in hit
-            a2.plot(k, y, "o", ms=13 if on else 10, color=C["lapampa"] if on else "#d3d1cb",
-                    mec="white", mew=1.2, alpha=1 if (on and i != 1) else (0.55 if on else 1))
-        a2.text(0.45, y, "1", fontsize=FS["small"] - 2, color=MUTED, ha="right", va="center")
-    a2.text(0.3, -0.55, "1 = biggest fall. Raw rank 1 also before 2019: it ranks\nsize as much as effect. Not a significance test.",
-            fontsize=FS["small"] - 1, color=INK2, va="bottom", linespacing=1.3)
-    _head(fig, "Did Mercurio cause the fall? Only conditionally, in hectares only",
-          f"Estimated change in net mining additions and its parts, ha/yr · Tambopata buffer zone · 2019–21 vs before · "
-          f"causal only if the comparison zones show what Tambopata would have done; upper bound (spillovers, peak at "
-          f"targeting); coincides with COVID. Right: placebo ranks.")
-    _save(fig, "slide_07_causal.png", "MapBiomas Peru Collection 4 rasters, national buffer-zone panel on the v3 registry "
-          "(15 zones with pre-2019 mining; scaled ranks: 7 zones above 10 ha/yr). 2×2 = Tambopata minus Amarakaeri, "
-          "2019–21 vs 2014–18; M1 = zone + year effects 2014–25; synthetic DiD = own weights (peru_sdid.py, net only). "
-          "Parts add up to net for the linear estimators.", top=0.90, left=0.15, right=0.985, xlab=True)
+    ax.axvline(0, color=INK2, lw=1.4)
+    for yv, (lab, k, why) in zip(yy, rows):
+        v = g(k)
+        inside = -hi_ - 1e-6 <= v <= -lo_ + 1e-6
+        assert inside == (not why.startswith("left out")), f"{k} = {v} vs range"
+        _add(reg, f"sl_est_{k}", v, "ha/yr", f"Estimate {lab.replace(chr(10), ' ')}, net additions, {D.UNIT_NAME[TB]}, "
+             f"{PSHORT[DUR]} (backup estimates slide; conditional)", "net", TB, PSHORT[DUR], claim="causal", check=k, tol=1e-6)
+        ax.plot([v, 0], [yv, yv], color="#d3d1cb", lw=2, zorder=1)
+        ax.plot(v, yv, "o", ms=15, color=C["lapampa"] if inside else "#a9a8a2", mec="white", mew=2, zorder=3)
+        ax.annotate(_fmt(v), xy=(v, yv), xytext=(-16, 0), textcoords="offset points", ha="right", va="center",
+                    fontsize=FS["small"], color=INK, fontweight="bold")
+        if not inside:
+            right = v < -lo_
+            ax.annotate(why, xy=(v, yv), xytext=(14 if right else -14, -12), textcoords="offset points",
+                        ha="left" if right else "right", va="top", fontsize=FS["small"] - 1, color=INK2)
+    ax.set_yticks(yy); ax.set_yticklabels([r[0] for r in rows], fontsize=FS["small"])
+    style_axes(ax, fmt=False); ax.yaxis.grid(False); ax.xaxis.grid(True, color=GRID, lw=0.6)
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda x, p: _fmt(x)))
+    ax.tick_params(axis="x", labelsize=FS["tick"])
+    ax.set_xlim(-2250, 150); ax.set_ylim(-0.75, len(rows) - 0.1)
+    ax.set_xlabel(f"Estimated change in net mining additions, Tambopata buffer zone, {PSHORT[DUR]}, ha/yr",
+                  fontsize=FS["small"], color=INK2)
+    _head(fig, f"One causal range: {_fmt(lo_)}–{_fmt(hi_)} ha a year",
+          f"Estimated change in net mining additions, ha/yr · Tambopata buffer zone · {PSHORT[DUR]} · causal only if the "
+          f"comparison zones show what Tambopata would have done; an upper bound; part of it is pits stopping")
+    _save(fig, "slide_b0_estimates.png", f"{SRC} 15 Peruvian buffer zones, 2014–25 (zone + year effects and synthetic DiD); "
+          "Tambopata vs Amarakaeri on the 2014–18 baseline. Fake-2016 test: same model with a fake start in 2016.",
+          top=0.97, left=0.25, right=0.985, xlab=True)
 
 
 # --------------------------------------------------------------------------- backup: stopped split
@@ -573,20 +577,21 @@ def b1_stopped_split(reg):
             back = sl["stopped_back_2y_ha"].sum(min_count=1) / sl.loc[sl["stopped_back_2y_ha"].notna(), "stopped_ha"].sum()
             _add(reg, f"sl_stopped_back2y_{u}_{p}", back, "share", f"Share of stopped land mining again within 2 years, "
                  f"{D.UNIT_NAME[u]}, {PSHORT[p]} (years with 2 years of follow-up; backup slide)", "stopped", u, PSHORT[p])
-            ax.text(i, 1.03, f"{back:.0%}", ha="center", va="bottom", fontsize=FS["small"], color=INK, fontweight="bold")
-            ax.text(i, -0.06, f"{_fmt(tot[i])}", ha="center", va="top", fontsize=FS["small"] - 2, color=INK2)
-        ax.set_xticks(x); ax.set_xticklabels([PSHORT[p] for p in (PRE, DUR, LATER)], fontsize=FS["small"] - 1)
-        ax.tick_params(axis="x", pad=26, length=0)
-        ax.set_title(ttl, loc="left", fontsize=FS["label"], color=INK, pad=44, fontweight="medium")
+            ax.text(i, 1.03, f"{back:.0%}", ha="center", va="bottom", fontsize=13, color=INK, fontweight="bold")
+            ax.text(i, -0.06, f"{_fmt(tot[i])}", ha="center", va="top", fontsize=11, color=INK2)
+        ax.set_xticks(x); ax.set_xticklabels([PSHORT[p] for p in (PRE, DUR, LATER)], fontsize=11)
+        ax.tick_params(axis="x", pad=24, length=0)
+        ax.tick_params(axis="y", labelsize=12)
+        ax.set_title(ttl, loc="left", fontsize=14, color=INK, pad=40, fontweight="medium")
         ax.set_ylim(0, 1.0); _fmt_y(ax, pct=True); ax.set_xlim(-0.5, 2.5)
-    axes[0].text(-0.5, 1.115, "back within 2 yrs ↓", fontsize=FS["small"] - 2, color=INK2, transform=axes[0].get_xaxis_transform())
-    axes[0].set_ylabel("share of stopped land", fontsize=FS["small"], color=INK2)
-    axes[-1].legend(loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=FS["small"] - 1, frameon=False, handlelength=1.0)
+    axes[0].text(-0.5, 1.115, "back within 2 yrs ↓", fontsize=11, color=INK2, transform=axes[0].get_xaxis_transform())
+    axes[0].set_ylabel("share of stopped land", fontsize=13, color=INK2)
+    axes[-1].legend(loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=12, frameon=False, handlelength=1.0)
     _head(fig, "Stopped land: often water, often mined again within 2 years",
           "Stopped land (left the mining class), share by what it became and share mining again within 2 years, "
           "period means · four zones · 2016–18, 2019–21, 2022–25 (small numbers under the bars: stopped ha/yr). Numbers on top: share mining again within 2 years.")
     _save(fig, "slide_b1_stopped_split.png", f"{SRC} Back within 2 years = classifier flicker or re-entry; the last two "
-          "years cannot be followed up. No image validation sample (plan v3, V3-5).", top=0.80, left=0.06, right=0.865, xlab=True)
+          "years cannot be followed up. No image validation sample.", top=0.80, left=0.075, right=0.85, xlab=True)
 
 
 # --------------------------------------------------------------------------- backup: twins (other measure)
@@ -620,76 +625,44 @@ def b2_twins(reg):
     a1.set_xlim(yrs[0] - 0.4, yrs[-1] + 0.4); a1.tick_params(axis="y", labelleft=False)
     a1.set_ylim(0, 115)
     _fmt_y(a1); _ticks(a1, yrs)
-    a1.set_title("Before: mining area (stock), index 2018 = 100", loc="left", fontsize=FS["label"], color=INK, pad=10)
+    a1.set_title("Before: mining area (stock), index 2018 = 100", loc="left", fontsize=FS["small"], color=INK, pad=10)
     order = [ct.TU] + ids
     a2.barh(range(len(order))[::-1], [pace[k] for k in order], color=[sd["color"][k] for k in order], height=0.6)
     for i, k in zip(range(len(order))[::-1], order):
         _label(a2, pace[k], i, f"{pace[k]:.0f}%", dx=6, fs=FS["body"])
     a2.set_yticks(range(len(order))[::-1]); a2.set_yticklabels([sd["short"][k] for k in order], fontsize=FS["small"])
     style_axes(a2, ygrid=False, fmt=False); a2.set_xticks([]); a2.spines["bottom"].set_visible(False)
-    a2.set_title("2019–21: AMW new area per year,\n% of own 2018 area", loc="left", fontsize=FS["label"], color=INK, pad=10)
+    a2.set_title("2019–21: AMW new area per year,\n% of own 2018 area", loc="left", fontsize=FS["small"], color=INK, pad=10)
     a2.set_xlim(0, max(pace.values()) * 1.3)
     p = sd["pretrend_p_max"]
     r_ex = reg.get("top3_ratio_excl_unverified") if "top3_ratio_excl_unverified" in reg.rows else ratio
     _head(fig, f"Twins: Tambopata at {ratio:.0%}–{r_ex:.0%} of their pace; trends differed before",
           f"Left: mining area (stock), index 2018 = 100, 2010–18 (pre-trends rejected, p {'< 0.001' if p < 0.001 else '≤ ' + format(p, '.3f')}). "
           "Right: Amazon Mining Watch new area 2019–21 per year, % of own 2018 area: a different measure, not net additions.")
-    _save(fig, "slide_b2_twins.png", f"{sd['source_index']}; {sd['source_pace']}. Twins chosen by fixed rules (rule R*, "
-          "control_select.py). Different collections: compared as indices, never subtracted.", top=0.82, left=0.2, right=0.97)
+    _save(fig, "slide_b2_twins.png", f"{sd['source_index']}; {sd['source_pace']}. Twins chosen by fixed rules (Ruby's "
+          "four rules). Different collections: compared as indices, never subtracted.", top=0.82, left=0.2, right=0.97)
 
-
-# --------------------------------------------------------------------------- backup: money and gold (context)
-def b3_context(pack, reg):
-    import v2_tests
-    money = v2_tests.mef_series().loc[2015:2025] / 1e6
-    gold = pack["prices"].set_index("year")["gold"].loc[2012:2025]
-    lp = _w("net")["lapampa"].loc[2012:2025]
-    ratio = gold.loc[2025] / gold.loc[D.REF_YEAR]
-    _add(reg, "sl_gold_ratio_2025_2018", ratio, "ratio", "Gold price 2025 / 2018 (annual mean, nominal; backup slide)",
-         "price", "world", "2018–2025", src=SRC_PRICE, check="gold_price_ratio_2025_2018", tol=1e-6)
-    peak = int(money.idxmax()) if len(money) else D.FIRST_POST
-    fig, axes = _fig(1, 3, gridspec_kw={"wspace": 0.32})
-    a1, a2, a3 = axes
-    for ax in axes:
-        _band(ax, DUR)
-    if len(money):
-        a1.bar(money.index, money.values, color=C["buffer"], width=0.7, zorder=2)
-        _label(a1, peak - 0.45, money.loc[peak], f"{money.loc[peak]:.0f} M\nin {peak}", dx=-8, dy=-2, fs=FS["small"], ha="right", va="top")
-        a1.set_ylim(0, money.max() * 1.25)
-    a2.plot(gold.index, gold.values, "-", color=C["gold"], lw=3)
-    a2.plot(gold.index, gold.values, "o", color=C["gold"], ms=6, mec="white", mew=1.2)
-    _label(a2, 2025, gold.loc[2025], f"${gold.loc[2025]:,.0f}", dx=0, dy=10, fs=FS["small"], ha="right", va="bottom")
-    _label(a2, D.REF_YEAR, gold.loc[D.REF_YEAR], f"${gold.loc[D.REF_YEAR]:,.0f}", dx=0, dy=-12, fs=FS["small"], ha="center", va="top")
-    a2.set_ylim(0, gold.max() * 1.2)
-    a3.axhline(0, color=INK2, lw=1)
-    a3.bar(lp.index, lp.values, color=[INK if v >= 0 else MUTED for v in lp.values], width=0.7, zorder=2)
-    a3.set_ylim(min(lp.min() * 1.3, -100), lp.max() * 1.2)
-    titles = ("Enforcement money,\nMadre de Dios (M soles)", "Gold price\n(US$ per ounce)", "La Pampa sector: net mining\nadditions (ha/yr)")
-    for ax, t in zip(axes, titles):
-        _fmt_y(ax); ax.set_xlim(2011.4, 2025.6)
-        ax.set_xticks([2012, 2015, 2018, 2021, 2024]); ax.set_xticklabels(["2012", "'15", "'18", "'21", "'24"], fontsize=FS["tick"])
-        ax.set_title(t, loc="left", fontsize=FS["label"] + 1, color=INK, pad=12, fontweight="medium")
-        _events(ax, label=False)
-    _head(fig, f"Enforcement money peaked in {peak} and faded; gold rose {ratio:.1f}-fold",
-          "Same years in each panel · PP 0128 executed spending, Madre de Dios (lower bound) · gold price, nominal · "
-          "net mining additions, La Pampa sector, ha/yr · 2012–2025. Shaded: 2019–21. Context, not a test.")
-    _save(fig, "slide_b3_context.png", f"MEF Consulta Amigable, PP 0128 devengado, Madre de Dios; {SRC_PRICE}; {SRC} "
-          "Correlation not shown: 11 years, and money follows mining.", top=0.78, left=0.06, right=0.98)
 
 
 def run(pack, reg):
-    print("\n== Slide figures (storyline v3: net additions + parts) ==")
-    s01_net(reg)
-    s02_parts(reg)
-    s03_lapampa_2019(reg)
-    s04_moved(reg)
-    s05_later(reg)
-    s06_reserve(reg)
-    s07_causal(reg)
+    print("\n== Slide figures (storyline v3.1: net additions + parts, lean) ==")
+    s09_net(reg)
+    s10_2019(reg)
+    s11_region(reg)
+    s12_across(reg)
+    s13_money(pack, reg)
+    s14_back(reg)
+    s15_reserve(reg)
+    for k, c in (("lo", min), ("hi", max)):        # scaled placebo rank across M1, M4, synthetic DiD and the event study
+        v = c(int(reg.get(i)) for i in ("model_m4_rank", "model_m1_rank_scaled", "sdid_sdid_scaled_during_rank",
+                                         "placebo_space_rank_scaled"))
+        _add(reg, f"sl_rank_scaled_{k}", v, "rank", f"{'Best' if k == 'lo' else 'Worst'} size-relative placebo rank of the "
+             "Tambopata buffer zone across M1, M4, synthetic DiD and the event study (slides 17-18)", "rank", TB, PSHORT[DUR])
+    s18_placebo(pack, reg)
+    b_estimates(reg)
     b1_stopped_split(reg)
     b2_twins(reg)
-    b3_context(pack, reg)
-    for old in SL.glob("*.png"):                       # remove superseded v2 slide images
+    for old in SL.glob("*.png"):                       # remove superseded slide images
         if old.stem not in TITLES:
             old.unlink()
     (SL / "slide_titles.json").write_text(json.dumps(TITLES, ensure_ascii=False, indent=2))

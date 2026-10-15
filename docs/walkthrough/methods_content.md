@@ -248,8 +248,8 @@ one zone registry, one treatment (Mercurio, Feb 2019; first treated year 2019; r
 
 - **Stream chart:** net additions per zone and year (zones with a net loss drawn below zero); a second stream for re-mined land.
 - **Sankey:** per period, the gross inflow (new land and re-mined land) flowing into zones, with stopped land and net additions named. Flows are pixels, not people.
-- **Corridor share:** net additions on corridor-tenure land (any zone, native communities excluded), period sum / period sum, and the same for new land.
-- **Displacement bound:** the sum of rises in net additions in other Madre de Dios zones, divided by the target's fall ({{mdd_rise_elsewhere_vs_tambopata_fall:.1f}} for 2016–18 to 2019–21).
+- **Corridor share:** the department's net additions on legal-mining-corridor land (D.L. 1100 tenure, any zone, native communities excluded) divided by all of the department's net additions, period sum / period sum, and the same for new land. Not to be confused with the *corridor across the road* (the ≤ 10-km strip north of the highway at La Pampa's longitudes).
+- **Displacement bound:** the sum of the rises in net additions in the other Madre de Dios zones whose net additions rose (inside the department), divided by the Tambopata buffer zone's fall ({{mdd_rise_elsewhere_vs_tambopata_fall:.1f}} for 2016–18 to 2019–21).
 - **Legality (new land only, a per-pixel grade at first mining):** each pixel crossed with MAAP #235's legality layer (Low / Medium / High / Very high); time-consistent version counts a concession only if filed by the mining year.
 - **Second product:** Amazon Mining Watch on the same zones; it flags a 480-m square only once, so it misses infill and has no net version.
 

@@ -165,6 +165,14 @@ def compare(ru, reg):
                 period="2016–18")
         reg.add(f"{u}_stopping_rate_2019", rate.loc[dur[0]], "share", f"Stopped land as a share of the previous year's "
                 f"mining area, 2019, {D.UNIT_NAME[u]}", "description", SRC, measure="stopped", zone=u, period="2019")
+    # how it came back: re-mined land as a share of land added (new + re-mined), later years, with and without 2023
+    d = ru[ru.unit == T].set_index("year")
+    a, b = D.PERIODS["later"]
+    for k, yrs_ in (("", list(range(a, b + 1))), ("_ex2023", [y for y in range(a, b + 1) if y != D.LATER_EX])):
+        rem, new = d.loc[yrs_, "remined_ha"].sum(), d.loc[yrs_, "new_ha"].sum()
+        reg.add(f"tambopata_bz_later{k}_remined_share_added", rem / (rem + new), "share", "Re-mined land as a share of "
+                "land added (new land + re-mined), Tambopata buffer zone, 2022–25" + (" without 2023" if k else ""),
+                "description", SRC, measure="remined", zone=T, period="2022–25" + (" ex 2023" if k else ""))
     # placebo in time on Tambopata alone: every 2019-21 year below every 2011-18 year?
     w = _w(ru, "net")[T]
     a, b = D.PERIODS["during"]

@@ -219,7 +219,7 @@ footer.foot .in{max-width:1280px;margin:0 auto;padding:28px 20px;display:flex;fl
 }
 </style>
 <a class="skip" href="#main">Skip to content</a>
-<div class="top"><div class="in"><span class="brand"><b>Giant Anteater</b> · Question 2</span><nav class="pages" aria-label="Pages"><a href="EXPLAINER.html">Walkthrough</a><a href="METHODS.html" aria-current="page">Methods</a><a href="../brief/BRIEF.html">Brief draft</a></nav><span class="pill">Team draft</span><button id="theme" class="theme" type="button">Dark mode</button></div></div>
+<div class="top"><div class="in"><span class="brand"><b>Giant Anteater</b> · Question 2</span><nav class="pages" aria-label="Pages"><a href="EXPLAINER.html">Walkthrough</a><a href="METHODS.html" aria-current="page">Methods</a><a href="../brief/BRIEF.html">Brief</a></nav><span class="pill">Final</span><button id="theme" class="theme" type="button">Dark mode</button></div></div>
 <header class="hero"><div class="in"><div class="kicker">Data for Good · Group Giant Anteater · Methods</div><h1>How the analysis is built: one outcome, one zone map, one treatment</h1><p class="lede">One chapter per method: the question it answers, how it works, what it controls for, what it can't, and where the code lives. Version: plan v3 (15 Oct 2026). Every number comes from <code>output/numbers.csv</code>.</p></div></header>
 <div class="shell">
 <nav class="toc" aria-label="Contents"><ol><li class="toc-part"><a href="#part-overview">Overview</a><ol>
@@ -609,8 +609,8 @@ footer.foot .in{max-width:1280px;margin:0 auto;padding:28px 20px;display:flex;fl
 <section class="ch" id="displacement-layers" aria-labelledby="displacement-layers-h"><header class="ch-head"><div class="ch-eb"><span class="ch-no">17</span>Displacement layers</div><h2 id="displacement-layers-h">Streams, Sankey, corridor share and legality</h2></header><ul>
 <li><strong>Stream chart:</strong> net additions per zone and year (zones with a net loss drawn below zero); a second stream for re-mined land.</li>
 <li><strong>Sankey:</strong> per period, the gross inflow (new land and re-mined land) flowing into zones, with stopped land and net additions named. Flows are pixels, not people.</li>
-<li><strong>Corridor share:</strong> net additions on corridor-tenure land (any zone, native communities excluded), period sum / period sum, and the same for new land.</li>
-<li><strong>Displacement bound:</strong> the sum of rises in net additions in other Madre de Dios zones, divided by the target's fall (1.8 for 2016–18 to 2019–21).</li>
+<li><strong>Corridor share:</strong> the department's net additions on legal-mining-corridor land (D.L. 1100 tenure, any zone, native communities excluded) divided by all of the department's net additions, period sum / period sum, and the same for new land. Not to be confused with the <em>corridor across the road</em> (the ≤ 10-km strip north of the highway at La Pampa's longitudes).</li>
+<li><strong>Displacement bound:</strong> the sum of the rises in net additions in the other Madre de Dios zones whose net additions rose (inside the department), divided by the Tambopata buffer zone's fall (1.8 for 2016–18 to 2019–21).</li>
 <li><strong>Legality (new land only, a per-pixel grade at first mining):</strong> each pixel crossed with MAAP #235's legality layer (Low / Medium / High / Very high); time-consistent version counts a concession only if filed by the mining year.</li>
 <li><strong>Second product:</strong> Amazon Mining Watch on the same zones; it flags a 480-m square only once, so it misses infill and has no net version.</li>
 </ul>
@@ -681,7 +681,7 @@ footer.foot .in{max-width:1280px;margin:0 auto;padding:28px 20px;display:flex;fl
 <li><strong>Code map and every number:</strong> the <a href="EXPLAINER.html">Walkthrough</a>, chapters Files and Appendix.</li>
 </ul></div></details></section>
 </main></div>
-<footer class="foot"><div class="in"><span>Group Giant Anteater · Data for Good, October 2026 · 0 figures · satellites cannot see river dredges or mercury</span><span>Built 2026-10-15 20:09 from git commit 2ac0c6f (working tree may contain uncommitted changes). Numbers from output/numbers.csv (2740 rows).</span></div></footer>
+<footer class="foot"><div class="in"><span>Group Giant Anteater · Data for Good, October 2026 · 0 figures · satellites cannot see river dredges or mercury</span><span>Built 2026-10-15 21:11 from git commit d531caa (working tree may contain uncommitted changes). Numbers from output/numbers.csv (2717 rows).</span></div></footer>
 <dialog id="lb" class="lb" aria-label="Enlarged figure"><button type="button">Close</button><img alt=""></dialog>
 <script>
 (function(){var r=document.documentElement,k='mercurio-theme',b=document.getElementById('theme');

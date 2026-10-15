@@ -25,7 +25,7 @@ function runs(inline, style = {}) {
   const out = [];
   for (const t of inline || []) {
     if (t.type === "strong") {
-      const lab = /^\[(Description|Prediction|Causal)\]$/.exec(t.text);
+      const lab = /^\[(description|prediction|causal)\]$/i.exec(t.text); if (lab) lab[1] = lab[1][0].toUpperCase() + lab[1].slice(1).toLowerCase();
       if (lab) out.push(new TextRun({ text: ` ${lab[1].toUpperCase()} `, bold: true, size: 15, color: "FFFFFF",
         shading: { type: ShadingType.CLEAR, color: "auto", fill: LABEL[lab[1]] } }));
       else out.push(...runs(t.tokens, { ...style, bold: true }));
@@ -46,7 +46,7 @@ function imagePara(tok) {
   const file = path.resolve(BRIEF, tok.href);
   const buf = fs.readFileSync(file);
   const w = buf.readUInt32BE(16), h = buf.readUInt32BE(20);   // PNG header
-  const width = 560, height = Math.round((560 * h) / w);
+  const width = 520, height = Math.round((560 * h) / w);
   return [
     new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 60, after: 40 },
       children: [new ImageRun({ type: "png", data: buf, transformation: { width, height }, altText: { title: "Figure 1", description: tok.text, name: "Figure 1" } })] }),
@@ -101,7 +101,7 @@ for (const t of tokens) {
 const doc = new Document({
   creator: "Group Giant Anteater", title: "When the patrols leave: what Operation Mercurio tells FZS",
   styles: {
-    default: { document: { run: { font: "Calibri", size: 20, color: INK }, paragraph: { spacing: { line: 264 } } } },
+    default: { document: { run: { font: "Calibri", size: 19, color: INK }, paragraph: { spacing: { line: 252 } } } },
     paragraphStyles: [
       { id: "Title", name: "Title", basedOn: "Normal", next: "Normal", run: { size: 34, bold: true, color: INK }, paragraph: { spacing: { after: 60 } } },
       { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true,
