@@ -393,7 +393,7 @@ def to_markdown(text: str, nums: dict, extra_md: dict[str, str], build_info: str
 
 # ---------------------------------------------------------------------------------------- brief
 def brief_html(nums: dict) -> str:
-    text = prepare(BRIEF_CONTENT.read_text(encoding="utf-8"))
+    text = prepare_brief()
     text = fill(text, nums)
     def fig(m):
         uri, w, h = img_data_uri(m.group(2), 1500, 88)
@@ -430,8 +430,17 @@ def write_brief_numbers(text: str, nums: dict) -> None:
         w.writeheader(); w.writerows(rows)
     print(f"Saved output/brief_numbers.csv ({len(rows)} numbers, order of appearance)")
 
+def ai_raw_md() -> str:
+    """The raw AI answer for brief Appendix B1, verbatim, with its headings demoted below the appendix heading."""
+    raw = (ROOT / "docs" / "brief" / "ai_part4_raw.md").read_text(encoding="utf-8")
+    raw = raw.split("## Raw answer", 1)[1].strip()
+    return re.sub(r"(?m)^#{1,3} ", "#### ", raw)
+
+def prepare_brief() -> str:
+    return prepare(BRIEF_CONTENT.read_text(encoding="utf-8")).replace("{{TEXT:ai_part4_raw}}", ai_raw_md())
+
 def build_brief(nums: dict, build_info: str, links: dict) -> tuple[str, str, str]:
-    text = prepare(BRIEF_CONTENT.read_text(encoding="utf-8"))
+    text = prepare_brief()
     write_brief_numbers(text, nums)
     text = fill(text, nums)
     md_text = re.sub(r"\[\[([DPC])\]\]", lambda m: f"**[{BADGE_NAME[m.group(1)]}]**", text)
@@ -453,7 +462,7 @@ def as_document(fragment: str) -> str:
 
 ART = HERE / "_artifact"          # artifact fragments (git-ignored); published with the Artifact tool
 
-def main():
+def main(only_brief: bool = False):
     nums = load_numbers()
     decisions = parse_decisions()
     try:
@@ -477,8 +486,8 @@ def main():
                 "METHODS_LINK": "[METHODS.html](METHODS.html)", "WALK_LINK": "[EXPLAINER.html](EXPLAINER.html)"}
     ART.mkdir(exist_ok=True)
     out = {}
-    for kind, src, page_title, dst in (("walk", CONTENT, "Mercurio Team Walkthrough", "EXPLAINER"),
-                                       ("methods", HERE / "methods_content.md", "Mercurio Methods Guide", "METHODS")):
+    for kind, src, page_title, dst in (() if only_brief else (("walk", CONTENT, "Mercurio Team Walkthrough", "EXPLAINER"),
+                                       ("methods", HERE / "methods_content.md", "Mercurio Methods Guide", "METHODS"))):
         text = src.read_text(encoding="utf-8")
         frag = render_page(Page(text, nums, extra), kind, page_title, info, links)
         (ART / f"{dst.lower()}.html").write_text(frag, encoding="utf-8")
@@ -491,7 +500,7 @@ def main():
     (BRIEF_DIR / "BRIEF_DRAFT.md").write_text(bm, encoding="utf-8")
     (BRIEF_DIR / "BRIEF_DRAFT.html").write_text(bdoc, encoding="utf-8")
     (ART / "brief.html").write_text(bfrag, encoding="utf-8")
-    print(f"EXPLAINER.html {out['EXPLAINER']/1e6:.2f} MB, METHODS.html {out['METHODS']/1e6:.2f} MB, BRIEF_DRAFT.html {len(bdoc)/1e6:.2f} MB")
+    print(", ".join(f"{k}.html {v/1e6:.2f} MB" for k, v in out.items()) + f" BRIEF_DRAFT.html {len(bdoc)/1e6:.2f} MB")
 
 # ---------------------------------------------------------------------------------------- templates
 # Design: the partner's visual language (FZS): Roboto, light display weight, slate-teal bands, warm off-white,
@@ -823,4 +832,5 @@ def localize(frag: str, where: str) -> str:
     return frag
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(only_brief="--brief" in sys.argv)

@@ -44,8 +44,8 @@ def run(pack=None, reg=None):
                 "2019–21 / mean 2016–18", "description", D.SOURCE, measure="net", zone="corridor_across",
                 period="2019–21 vs 2016–18")
 
-    fig = plt.figure(figsize=(7.4, 6.6))
-    gs = fig.add_gridspec(2, 2, height_ratios=[1.15, 1], hspace=0.62, wspace=0.12)
+    fig = plt.figure(figsize=(7.4, 5.7))
+    gs = fig.add_gridspec(2, 2, height_ratios=[1.1, 1], hspace=0.66, wspace=0.12)
     a1 = fig.add_subplot(gs[0, 0]); a2 = fig.add_subplot(gs[0, 1], sharey=a1); a3 = fig.add_subplot(gs[1, :])
     word = "halved" if 0.4 <= new_ratio <= 0.6 else f"fell {1 - new_ratio:.0%}"
     headline(fig, f"La Pampa's net mining fell from {lp_pre:,.0f} to {lp_dur:,.0f} ha/yr in 2019–21;\n"

@@ -13,6 +13,7 @@ import peru_production, brazil_deter, spatial, brief_figure, peru_synth, spatial
 import control_amw, control_elevation, control_mb_amazonia, control_select, brazil_deter_all, brazil_stagger
 import raster_zones, raster_layers, raster_gold, glad_alerts, v2_tests, v2_stats, v2_extra, control_top3
 import brazil_raster, brazil_v2, v2_legality, peru_gold_minem, v2_products_check
+import brief_checks
 import v2_rdd, peru_context_models, placebo_explainer, control_psm, peru_sdid, v2_economics, slides_figures
 
 def main():
@@ -56,6 +57,7 @@ def main():
     brazil_raster.run(); brazil_v2.run(reg)   # Brazil, same pixel method (Col 11 rasters) + staggered DiD + RI
     brief_figure.run(pack, reg)      # the ONE figure for the brief (v3: net additions + parts)
     # slides_figures.run(pack, reg)  # TEMP (v3 migration): rebuilt with the new storyline; 16:9 slide figures + slide_titles.json for the FZS talk (output/slides/)
+    brief_checks.run(reg)            # source checks cited in the brief, as numbers (from output/checks.csv)
     reg.save()
 
 if __name__ == "__main__":
