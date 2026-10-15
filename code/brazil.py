@@ -1,4 +1,11 @@
-"""Brazil case: weaker federal enforcement 2019-22, then the Yanomami operation (Feb 2023).
+"""Brazil case (backup slides only): a boom in 2019-22, then the Yanomami operation (Feb 2023) and others.
+
+SUPERSEDED as the Brazil design by brazil_v2.py (MapBiomas Brazil Collection 11 rasters, net additions with the
+new / re-mined / stopped split, rule R*). This module keeps the course tables and the Collection 10.1 territory
+statistics as DESCRIPTION; their 2x2 (A12) is inconclusive on sign (review card 12, T10). Windows, groups and the
+operation dates come from brazil_v2 (BRAZIL, rule R*: first verified operation against mining; Kayapo's first verified
+operation in 2021-25 is the PF action of Jun 2023, so Kayapo is PARTLY TREATED in 2023-24, not a clean control).
+"Weaker federal enforcement 2019-22" needs an external source: our IBAMA counts do not show fewer MINING notices.
 
 Three data sources, never mixed in one series (agent.md rule 7):
   * pack mining_area.csv            = MapBiomas Brazil Collection 11 (1985-2025), ALL indigenous lands combined,
@@ -12,17 +19,21 @@ a descriptive contrast of means, not a causal estimate (no standard errors repor
 from __future__ import annotations
 import pandas as pd, numpy as np
 import matplotlib.pyplot as plt
-from common import ROOT, OUT, additions, period_mean, style_axes, finish_figure
+from common import ROOT, OUT, additions, period_mean, style_axes, finish_figure, INK, MUTED, AXIS
+import definitions as D
 import brazil_ibama
 import checks
+from brazil_v2 import BRAZIL, br_events, first_verified, month_label
 
 TI101 = ROOT / "data_raw/mapbiomas_brazil/MAPBIOMAS_BRAZIL-COVERAGE_STATISTICS-COL.10.1-INDIGENOUS_TERRITORIES_STATE_BIOME.xlsx"
 TI10 = ROOT / "data_raw/mapbiomas_brazil/MAPBIOMAS_BRAZIL-COL.10-INDIGENOUS_TERRITORIES_STATE_BIOME_DOI.xlsx"
 SHEET = "COVERAGE_INDIGENOUS_TERRITORIES"
-YAN, MUN, KAY = 50901, 29801, 23001
+YAN, MUN, KAY = (BRAZIL["geocode_col101"][k] for k in ("Yanomami", "Munduruku", "Kayapó"))   # Col 10.1: no Sai-Cinza row
 BIG3 = [YAN, MUN, KAY]
-PRE, POST = (2020, 2022), (2023, 2024)
-SRC101 = "MapBiomas Brazil, Collection 10.1, Indigenous Territories (class 4.3 Mining, all mining)"
+PRE, POST = BRAZIL["pre_col101"], BRAZIL["post_col101"]
+P_CARD, P_BOOM, P_LATER = D.PERIODS["pre"], BRAZIL["boom"], (BRAZIL["later"][0], 2025)
+WIN101 = [P_CARD, P_BOOM, PRE, POST]
+SRC101 = "MapBiomas Brazil, Collection 10.1, Indigenous Territories (class 4.3 Mining, all mining); net = stock difference"
 SRC11 = "MapBiomas Brazil, Collection 11, all indigenous lands combined (artisanal mining)"
 SRCMUN = "MapBiomas Brazil, Collection 10.1, municipalities (class 4.3 Mining, all mining)"
 SRCIB = "IBAMA open data, autos de infracao (non-cancelled), Legal Amazon states"
@@ -37,33 +48,34 @@ def bcheck(label, value, expected, tol=1.0):
     if not ok:
         raise AssertionError(label)
 
-# ------------------------------------------------------------------ events (local marker, same style as common)
-# Convention: the addition of year t is drawn at x = t; an event in year Y is drawn at x = Y - 0.5.
-BR_EVENTS = [
-    (2019, "Jan 2019: federal government change;\n2019-22: weaker federal enforcement (see sources)", "#7F8C8D", 0.97),
-    (2023, "Jan 2023 Yanomami emergency (20 Jan); Feb 2023 Yanomami operation;\nAug 2023 Munduruku operation", "#B03A2E", 0.97),
-    (2024, "Nov 2024:\nMunduruku\ndesintrusao", "#2E6F9E", 0.78),
-    (2025, "May 2025:\nKayapo\ndesintrusao", "#7A5C1E", 0.78),
-]
-def add_br_events(ax, last_year, label=False):
-    for Y, text, col, ypos in BR_EVENTS:
-        if Y > last_year:
+# ------------------------------------------------------------------ events (from operations_coded.csv, rule R*)
+# Convention: the addition of year t is drawn at x = t; an event is drawn at x = first treated year - 0.5 (R*: Jan-Jun
+# treats that year, Jul-Dec the next). Context lines (government change, emergency) are grey.
+def _events():
+    ev = [dict(year=int(BRAZIL["gov_change"][:4]), text="Jan 2019: federal government change (context)", color=MUTED),
+          dict(year=int(BRAZIL["emergency"][:4]), text="Jan 2023: Yanomami public-health emergency (context)", color=MUTED)]
+    for e in br_events(["Yanomami", "Munduruku", "Kayapó"]):
+        if e["kind"] == "unverified":
             continue
-        ax.axvline(Y - 0.5, color=col, linestyle="--", linewidth=0.9, alpha=0.85, zorder=0)
-        if label:
-            ax.annotate(text, xy=(Y - 0.5, ypos), xycoords=("data", "axes fraction"), xytext=(3, 0),
-                        textcoords="offset points", fontsize=6.3, color=col, va="top", ha="left")
+        ev.append(dict(year=e["year"], text=f"{e['label']}" + (" (first verified operation, R*)" if e["kind"] == "coded" else
+                                                                 " (other verified operation)"),
+                       color=INK if e["kind"] == "coded" else AXIS))
+    return ev
+
+def add_br_events(ax, last_year, label=False):
+    for e in _events():
+        if e["year"] > last_year:
+            continue
+        ax.axvline(e["year"] - 0.5, color=e["color"], linestyle="--", linewidth=0.9, alpha=0.85, zorder=0)
 
 def events_legend(fig, last_year, y=0.085):
-    """Event key as a figure-level legend (labels on the axes collided: several 2023 events share one x)."""
+    """Event key as a figure-level legend (several events share one x)."""
     from matplotlib.lines import Line2D
-    keys = {2019: "Jan 2019 federal government change; 2019-22: weaker federal enforcement (see sources)",
-            2023: "2023: Yanomami emergency (20 Jan), Yanomami operation (Feb), Munduruku operation (Aug)",
-            2024: "Nov 2024: Munduruku desintrusao", 2025: "May 2025: Kayapo desintrusao"}
-    hs = [Line2D([0], [0], color=c, ls="--", lw=1.1) for Y, _, c, _ in BR_EVENTS if Y <= last_year]
-    ls = [keys[Y] for Y, _, _, _ in BR_EVENTS if Y <= last_year]
-    fig.legend(hs, ls, loc="lower center", bbox_to_anchor=(0.5, y), ncol=1, frameon=False, fontsize=7.3,
-               title="Dashed lines (drawn between the year before and the year of the event)", title_fontsize=7.3)
+    ev = [e for e in _events() if e["year"] <= last_year]
+    fig.legend([Line2D([0], [0], color=e["color"], ls="--", lw=1.1) for e in ev], [e["text"] for e in ev],
+               loc="lower center", bbox_to_anchor=(0.5, y), ncol=2, frameon=False, fontsize=7.0,
+               title="Dashed lines: drawn before the first year that can reflect the event (rule R*, operations_coded.csv)",
+               title_fontsize=7.0)
 
 def year_axis(ax, y0, y1):
     ax.set_xticks(range(y0, y1 + 1)); ax.set_xticklabels([str(y) for y in range(y0, y1 + 1)], fontsize=8)
@@ -101,14 +113,17 @@ def group_adds_mean(w, codes):
 SUM_SPECS = {"vs_Munduruku+Kayapo_pooled", "vs_other_top5_by_2022_stock", "vs_all_19_other_territories"}
 
 # ------------------------------------------------------------------ DiD (descriptive)
-def did_row(spec, tname, cname, t_add, c_add, t_stock, c_stock, pre=PRE, post=POST, note="", claim="description"):
+def did_row(spec, tname, cname, t_add, c_add, t_stock, c_stock, pre=PRE, post=POST, note="", claim="description", norm_year=None):
     tp0, tp1 = period_mean(t_add, *pre), period_mean(t_add, *post)
     cp0, cp1 = period_mean(c_add, *pre), period_mean(c_add, *post)
     out = dict(spec=spec, treated=tname, control=cname, pre=f"{pre[0]}-{pre[1]}", post=f"{post[0]}-{post[1]}",
                treated_pre_ha_yr=tp0, treated_post_ha_yr=tp1, control_pre_ha_yr=cp0, control_post_ha_yr=cp1,
                DiD_ha_yr=(tp1 - tp0) - (cp1 - cp0))
-    # relative: additions as % of each group's 2022 stock (stock of the year before the post period)
-    ts, cs = t_stock.loc[2022], c_stock.loc[2022]
+    # relative: additions as % of each group's stock in the year before the post period (2022 for the main 2x2;
+    # the placebo uses its own pre-period end, not a post-period normaliser: review card 12, T10)
+    ny = norm_year or post[0] - 1
+    ts, cs = t_stock.loc[ny], c_stock.loc[ny]
+    out["norm_year"] = ny
     out["DiD_pct_of_2022_stock"] = 100 * ((tp1 - tp0) / ts - (cp1 - cp0) / cs)
     out["treated_pre_pct"], out["treated_post_pct"] = 100 * tp0 / ts, 100 * tp1 / ts
     out["control_pre_pct"], out["control_post_pct"] = 100 * cp0 / cs, 100 * cp1 / cs
@@ -131,13 +146,13 @@ def run(pack, reg):
                           ("gold_or_nosub_artisanal_ha", "gns", "artisanal gold-or-no-substance (working measure of illegal gold)")]:
         a = additions(ti.reset_index().assign(unit="all"), "unit", col).set_index("year")["addition_ha"]
         pk[tag] = a
-        for (y0, y1) in [(2016, 2018), (2019, 2022), (2023, 2025)]:
+        for (y0, y1) in [P_CARD, P_BOOM, P_LATER]:
             reg.add(f"br_pack_{tag}_add_mean_{y0}_{y1}", period_mean(a, y0, y1), "ha/yr",
-                    f"Mean annual addition, {lab}, all indigenous lands combined, {y0}-{y1} ({SRC11})",
-                    "description", "data/mining_area.csv")
+                    f"Mean annual net addition, {lab}, all indigenous lands combined, {y0}-{y1} ({SRC11})",
+                    "description", "data/mining_area.csv", measure="net_col11_pack", zone="br_all_ti", period=f"{y0}-{y1}")
         for y in (2018, 2022, 2025):
-            reg.add(f"br_pack_{tag}_level_{y}", ti.loc[y, col], "ha", f"Level, {lab}, all indigenous lands, {y}",
-                    "description", "data/mining_area.csv")
+            reg.add(f"br_pack_{tag}_level_{y}", ti.loc[y, col], "ha", f"Level, {lab}, all indigenous lands, {y} ({SRC11})",
+                    "description", "data/mining_area.csv", measure="stock_col11_pack", zone="br_all_ti", period=str(y))
     pd.DataFrame({"year": range(2014, 2026),
                   "artisanal_level_ha": [ti.loc[y, "mining_artisanal_ha"] for y in range(2014, 2026)],
                   "artisanal_addition_ha": [pk["art"][y] for y in range(2014, 2026)],
@@ -189,21 +204,25 @@ def run(pack, reg):
     tab.sort_values("stock_2022_ha", ascending=False).round(2).to_csv(OUT / "brazil_ti_additions_all22.csv")
     # three focus territories: period means
     rows = []
+    zk = lambda c: "br_" + names[c].lower().replace("ó", "o")
     for c in BIG3:
         r = dict(territory=names[c], geocode=c)
-        for (y0, y1) in [(2016, 2018), (2019, 2022), (2020, 2022), (2023, 2024)]:
+        for (y0, y1) in WIN101:
             v = period_mean(A[c], y0, y1); r[f"mean_add_{y0}_{y1}"] = v
             reg.add(f"br_ti_{names[c].lower().replace('ó','o')}_add_mean_{y0}_{y1}", v, "ha/yr",
-                    f"Mean annual addition in {names[c]} TI, {y0}-{y1} ({SRC101})", "description", TI101.name)
+                    f"Mean annual net addition in {names[c]} TI, {y0}-{y1} ({SRC101})", "description", TI101.name,
+                    measure="net_col10.1", zone=zk(c), period=f"{y0}-{y1}")
         r["stock_2022"] = w.loc[2022, c]; r["stock_2024"] = w.loc[2024, c]
         rows.append(r)
     pd.DataFrame(rows).round(2).to_csv(OUT / "brazil_ti_period_means.csv", index=False)
     for c in BIG3:
         k = names[c].lower().replace("ó", "o")
-        reg.add(f"br_ti_{k}_stock_2022", w.loc[2022, c], "ha", f"Mining stock {names[c]} 2022 ({SRC101})", "description", TI101.name)
-        reg.add(f"br_ti_{k}_stock_2024", w.loc[2024, c], "ha", f"Mining stock {names[c]} 2024 ({SRC101})", "description", TI101.name)
+        for y in (2022, 2024):
+            reg.add(f"br_ti_{k}_stock_{y}", w.loc[y, c], "ha", f"Mining stock {names[c]} {y} ({SRC101})", "description",
+                    TI101.name, measure="stock_col10.1", zone=zk(c), period=str(y))
         for y in (2022, 2023, 2024):
-            reg.add(f"br_ti_{k}_add_{y}", A[c][y], "ha", f"Addition {names[c]} {y} ({SRC101})", "description", TI101.name)
+            reg.add(f"br_ti_{k}_add_{y}", A[c][y], "ha", f"Net addition {names[c]} {y} ({SRC101})", "description",
+                    TI101.name, measure="net_col10.1", zone=zk(c), period=str(y))
 
     # DiD specs ------------------------------------------------------------------------------------------
     Yd, Ys = A[YAN], STK[YAN]
@@ -212,10 +231,13 @@ def run(pack, reg):
     O19_a, O19_s = group_adds(w, others)
     T5_a, T5_s = group_adds(w, top_other)
     R = []
+    fv = first_verified()
+    mun_t = month_label(fv.get("BR-TI-29801", "")) if "BR-TI-29801" in fv else "none"
+    kay_t = month_label(fv.get("BR-TI-23001", "")) if "BR-TI-23001" in fv else "none"
     R.append(did_row("main_vs_Munduruku", "Yanomami", "Munduruku", Yd, Mc, Ys, STK[MUN],
-                     note="Munduruku had its own operation from Aug 2023 and desintrusao Nov 2024 (partly treated): contrast of more vs less enforcement"))
+                     note=f"Munduruku partly treated: first verified operation {mun_t} (rule R*); contrast of more vs less enforcement"))
     R.append(did_row("main_vs_Kayapo", "Yanomami", "Kayapo", Yd, Kc, Ys, STK[KAY],
-                     note="Best control 2023-24 (one PF action Jun 2023; desintrusao only May 2025)"))
+                     note=f"Kayapo PARTLY TREATED: first verified operation {kay_t} (rule R*: PF closed six garimpos); not a clean control"))
     R.append(did_row("vs_Munduruku+Kayapo_pooled", "Yanomami", "Munduruku + Kayapo (pooled)", Yd, MK_a, Ys, MK_s,
                      note="Pooled control is dominated by Kayapo (about 2/3 of the stock)"))
     MKm_a, MKm_s = group_adds_mean(w, [MUN, KAY])
@@ -234,12 +256,14 @@ def run(pack, reg):
                      note="All other territories with a class-30 row; Tenharim do Igarape Preto is the largest"))
     R.append(did_row("Munduruku_vs_Kayapo", "Munduruku", "Kayapo", Mc, Kc, STK[MUN], STK[KAY],
                      note="Munduruku treated from Aug 2023 (operation) / Nov 2024 (desintrusao): partial treatment, reading is descriptive"))
-    R.append(did_row("persistence_2023_only", "Yanomami", "Kayapo", Yd, Kc, Ys, STK[KAY], post=(2023, 2023),
-                     note="First post year only"))
-    R.append(did_row("persistence_2024_only", "Yanomami", "Kayapo", Yd, Kc, Ys, STK[KAY], post=(2024, 2024),
-                     note="Second post year only"))
-    R.append(did_row("placebo_time_start_2020", "Yanomami", "Kayapo", Yd, Kc, Ys, STK[KAY], pre=(2017, 2019), post=(2020, 2022),
-                     note="Pseudo-operation 3 years earlier; a non-zero value means pre-trends are not parallel (Yanomami boom 2019-22)"))
+    R.append(did_row("persistence_2023_only", "Yanomami", "Kayapo", Yd, Kc, Ys, STK[KAY], post=(POST[0], POST[0]),
+                     note="First post year only", norm_year=PRE[1]))
+    R.append(did_row("persistence_2024_only", "Yanomami", "Kayapo", Yd, Kc, Ys, STK[KAY], post=(POST[1], POST[1]),
+                     note="Second post year only", norm_year=PRE[1]))
+    pl_pre, pl_post = BRAZIL["placebo_col101"]
+    R.append(did_row("placebo_time_start_2020", "Yanomami", "Kayapo", Yd, Kc, Ys, STK[KAY], pre=pl_pre, post=pl_post,
+                     note="Pseudo-operation 3 years earlier; a non-zero value means pre-trends are not parallel (Yanomami "
+                          "boom 2019-22). Relative version normalised by the 2019 stock (pre-period), not 2022"))
     R[-1]["claim_type"] = "description"
     # relative stock for placebo uses 2022 stock too (same normaliser) -> keep, flagged in note
     rob = pd.DataFrame(R)
@@ -248,8 +272,9 @@ def run(pack, reg):
     print(rob[["spec", "treated_pre_ha_yr", "treated_post_ha_yr", "control_pre_ha_yr", "control_post_ha_yr", "DiD_ha_yr", "DiD_pct_of_2022_stock"]].round(1).to_string())
     for r in R:
         pre_txt = "SUM of controls (scale mismatch; do not cite): " if r["spec"] in SUM_SPECS else ""
-        reg.add(f"br_did_{r['spec']}_ha_yr", r["DiD_ha_yr"], "ha/yr", f"{pre_txt}Descriptive DiD in mean annual additions: {r['treated']} vs {r['control']}, {r['pre']} -> {r['post']} ({SRC101})", "description", TI101.name)
-        reg.add(f"br_did_{r['spec']}_pct", r["DiD_pct_of_2022_stock"], "pp of 2022 stock", f"{pre_txt}Same, additions as % of 2022 stock", "description", TI101.name)
+        reg.add(f"br_did_{r['spec']}_ha_yr", r["DiD_ha_yr"], "ha/yr", f"{pre_txt}SUPERSEDED (use brazil_v2 brv2_net_*). Descriptive DiD in mean annual net additions: {r['treated']} vs {r['control']}, {r['pre']} -> {r['post']} ({SRC101}). {r['note']}", "description", TI101.name,
+                measure="net_col10.1", zone="br_" + r["treated"].lower().replace("ó", "o"), period=f"{r['pre']} vs {r['post']}")
+        reg.add(f"br_did_{r['spec']}_pct", r["DiD_pct_of_2022_stock"], f"pp of {r['norm_year']} stock", f"{pre_txt}Same, net additions as % of each territory's {r['norm_year']} stock", "description", TI101.name)
     out["did"] = rob
 
     # ---- 3. displacement ---------------------------------------------------------------------------------
@@ -278,48 +303,61 @@ def run(pack, reg):
                   "yanomami_ti_addition_ha": A[YAN].loc[2014:2024].values,
                   "roraima_minus_yanomami_ti_level_ha": (rr_lev.loc[2014:2024] - w[YAN].loc[2014:2024]).values,
                   "collection": "MapBiomas Brazil Collection 10.1 (both columns)"}).round(2).to_csv(OUT / "brazil_roraima.csv", index=False)
-    reg.add("br_rr_level_2018", rr_lev[2018], "ha", f"Roraima mining stock 2018, all Amazonia municipalities ({SRCMUN})", "description", "data/brazil_municipality_year.csv")
-    reg.add("br_rr_level_2024", rr_lev[2024], "ha", f"Roraima mining stock 2024 ({SRCMUN})", "description", "data/brazil_municipality_year.csv")
-    for (y0, y1) in [(2016, 2018), (2019, 2022), (2020, 2022), (2023, 2024)]:
-        reg.add(f"br_rr_add_mean_{y0}_{y1}", period_mean(rr_add, y0, y1), "ha/yr", f"Roraima mean annual mining addition {y0}-{y1} ({SRCMUN})", "description", "data/brazil_municipality_year.csv")
+    kw = dict(zone="br_roraima_municipalities")
+    for y in (2018, 2024):
+        reg.add(f"br_rr_level_{y}", rr_lev[y], "ha", f"Roraima mining stock {y}, all Amazonia municipalities ({SRCMUN})", "description", "data/brazil_municipality_year.csv",
+                measure="stock_col10.1", period=str(y), **kw)
+    for (y0, y1) in WIN101:
+        reg.add(f"br_rr_add_mean_{y0}_{y1}", period_mean(rr_add, y0, y1), "ha/yr", f"Roraima mean annual net mining addition {y0}-{y1} ({SRCMUN})", "description", "data/brazil_municipality_year.csv",
+                measure="net_col10.1", period=f"{y0}-{y1}", **kw)
     reg.add("br_rr_minus_yanomami_ti_2024", rr_lev[2024] - w.loc[2024, YAN], "ha",
-            "Roraima municipal mining stock 2024 minus Yanomami TI stock 2024 (both Col 10.1): mining in Roraima outside the TI, plus land in the TI that lies in AM", "description", "pack + territory xlsx (Col 10.1)")
+            "Roraima municipal mining stock 2024 minus Yanomami TI stock 2024 (both Col 10.1): mining in Roraima outside the TI, plus land in the TI that lies in AM", "description", "pack + territory xlsx (Col 10.1)",
+            measure="stock_col10.1", zone="br_roraima_outside_yanomami", period="2024")
     reg.add("br_rr_yanomami_share_2024", 100 * w.loc[2024, YAN] / rr_lev[2024], "%", "Yanomami TI stock as share of Roraima municipal stock 2024", "description", "pack + territory xlsx (Col 10.1)")
     reg.add("br_rr_outside_yanomami_add_2023_24", float((rr_lev[2024] - w.loc[2024, YAN]) - (rr_lev[2022] - w.loc[2022, YAN])), "ha",
-            "Change 2022 to 2024 in Roraima mining outside the Yanomami TI (Roraima stock minus TI stock)", "description", "pack + territory xlsx (Col 10.1)")
+            "Change 2022 to 2024 in Roraima mining outside the Yanomami TI (Roraima stock minus TI stock)", "description", "pack + territory xlsx (Col 10.1)",
+            measure="net_col10.1", zone="br_roraima_outside_yanomami", period="2023-2024")
 
     # other territories excluding the big three -> did mining rise in 2023-24?
     o_add, o_stk = group_adds(w, others)
-    for (y0, y1) in [(2016, 2018), (2019, 2022), (2020, 2022), (2023, 2024)]:
-        reg.add(f"br_other19_add_mean_{y0}_{y1}", period_mean(o_add, y0, y1), "ha/yr", f"Mean annual addition, 19 other territories with mining, {y0}-{y1} ({SRC101})", "description", TI101.name)
-    reg.add("br_other19_stock_2022", o_stk[2022], "ha", "Stock of 19 other territories 2022", "description", TI101.name)
-    reg.add("br_other19_stock_2024", o_stk[2024], "ha", "Stock of 19 other territories 2024", "description", TI101.name)
+    kw = dict(zone="br_other19_ti")
+    for (y0, y1) in WIN101:
+        reg.add(f"br_other19_add_mean_{y0}_{y1}", period_mean(o_add, y0, y1), "ha/yr", f"Mean annual net addition, 19 other territories with mining, {y0}-{y1} ({SRC101})", "description", TI101.name,
+                measure="net_col10.1", period=f"{y0}-{y1}", **kw)
+    for y in (2022, 2024):
+        reg.add(f"br_other19_stock_{y}", o_stk[y], "ha", f"Stock of 19 other territories {y} ({SRC101})", "description", TI101.name,
+                measure="stock_col10.1", period=str(y), **kw)
     for c in [c for c in others if c in (42101, 44701, 12101)]:
-        reg.add(f"br_ti_{c}_add_2023_24_sum", float(A[c][2023] + A[c][2024]), "ha", f"Sum of additions 2023+2024, {names[c]} ({SRC101})", "description", TI101.name)
+        reg.add(f"br_ti_{c}_add_2023_24_sum", float(A[c][2023] + A[c][2024]), "ha", f"Sum of net additions 2023+2024, {names[c]} ({SRC101})", "description", TI101.name,
+                measure="net_col10.1", zone=f"br_ti_{c}", period="2023-2024")
     SAR = 42101
     print("Territory 42101 =", names[SAR])
     oex = [c for c in others if c != SAR]
     oex_a, _ = group_adds_mean(w, oex)
-    for (y0, y1) in [(2020, 2022), (2023, 2024)]:
+    for (y0, y1) in [PRE, POST]:
         reg.add(f"br_other18_ex_sarare_add_mean_{y0}_{y1}", period_mean(oex_a, y0, y1), "ha/yr",
-                f"Per-unit MEAN annual addition of the {len(oex)} other territories with mining excluding {names[SAR]} (geocode 42101), {y0}-{y1}; "
-                f"each territory's addition averaged over the group, then over years ({SRC101})", "description", TI101.name)
+                f"Per-unit MEAN annual net addition of the {len(oex)} other territories with mining excluding {names[SAR]} (geocode 42101), {y0}-{y1}; "
+                f"each territory's addition averaged over the group, then over years ({SRC101})", "description", TI101.name,
+                measure="net_col10.1", zone="br_other18_ex_sarare_mean", period=f"{y0}-{y1}")
     reg.add("br_sarare_add_2023_24_sum", float(A[SAR][2023] + A[SAR][2024]), "ha",
-            f"Sum of additions 2023+2024, {names[SAR]} (geocode 42101)", "description", TI101.name)
+            f"Sum of net additions 2023+2024, {names[SAR]} (geocode 42101) ({SRC101})", "description", TI101.name,
+            measure="net_col10.1", zone="br_sarare", period="2023-2024")
     big3_a, big3_s = group_adds(w, BIG3)
     all_a, all_s = group_adds(w, list(w.columns))
-    reg.add("br_all22_stock_2022", all_s[2022], "ha", f"All 22 territories with mining, stock 2022 ({SRC101})", "description", TI101.name)
-    reg.add("br_all22_stock_2024", all_s[2024], "ha", f"All 22 territories with mining, stock 2024 ({SRC101})", "description", TI101.name)
+    for y in (2022, 2024):
+        reg.add(f"br_all22_stock_{y}", all_s[y], "ha", f"All 22 territories with mining, stock {y} ({SRC101})", "description", TI101.name,
+                measure="stock_col10.1", zone="br_all22_ti", period=str(y))
     disp = pd.DataFrame({"yanomami": A[YAN], "munduruku": A[MUN], "kayapo": A[KAY], "other19": o_add, "all22": all_a}).loc[2014:2024]
     disp["roraima_minus_yanomami_ti_addition"] = (rr_add - A[YAN]).loc[2014:2024]
     disp.round(2).to_csv(OUT / "brazil_displacement.csv"); print(disp.round(0).to_string())
-    reg.add("br_all22_add_mean_2020_22", period_mean(all_a, 2020, 2022), "ha/yr", "All 22 territories: mean annual addition 2020-22 (Col 10.1)", "description", TI101.name)
-    reg.add("br_all22_add_mean_2023_24", period_mean(all_a, 2023, 2024), "ha/yr", "All 22 territories: mean annual addition 2023-24 (Col 10.1); total fell vs 2020-22", "description", TI101.name)
+    for (y0, y1) in [PRE, POST]:
+        reg.add(f"br_all22_add_mean_{y0}_{str(y1)[2:]}", period_mean(all_a, y0, y1), "ha/yr", f"All 22 territories: mean annual net addition {y0}-{y1} ({SRC101})", "description", TI101.name,
+                measure="net_col10.1", zone="br_all22_ti", period=f"{y0}-{y1}")
 
     # ---- 4. IBAMA ---------------------------------------------------------------------------------------
     ib, how = brazil_ibama.load()
     ib = ib.set_index("year")
-    for (y0, y1) in [(2015, 2018), (2019, 2022)]:
+    for (y0, y1) in [(D.PERIODS["pre_long"][0] + 1, D.PERIODS["pre_long"][1]), P_BOOM]:
         reg.add(f"br_ibama_aml_mean_{y0}_{y1}", ib.loc[y0:y1, "n_legal_amazon_states"].mean(), "autos/yr", f"Mean IBAMA autos per year, Legal Amazon states, {y0}-{y1} ({SRCIB})", "description", "data_raw/ibama/auto_infracao_csv.zip")
         reg.add(f"br_ibama_mining_aml_mean_{y0}_{y1}", ib.loc[y0:y1, "n_mining_legal_amazon"].mean(), "autos/yr", f"Mean mining-flagged IBAMA autos (noisy regex), Legal Amazon, {y0}-{y1}", "description", "data_raw/ibama/auto_infracao_csv.zip")
     for y in (2018, 2020, 2022, 2023, 2024):

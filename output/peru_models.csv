@@ -1,5 +1,5 @@
-model,label,n_zones,unit,during_2019_21,after_2022_25,placebo_fake_2016,rank_in_space,rank_amazon,n_amazon,placebo_min,placebo_max,gold_slope
-M1,"Zone + year effects (gold price, COVID as common shocks)",15,ha/yr,-1453.636,160.73,255.041,1,1,8,-66.094,225.981,
-M2,M1 + bigger zones react more to the gold price,15,ha/yr,-1604.817,-174.53,187.47,1,1,8,-81.585,418.165,0.343
-M3,M1 + own linear trend per zone,15,ha/yr,-1858.98,-599.292,-337.385,1,1,8,-67.655,546.463,
-M4,"M1, scaled to each zone's own size",7,share of own pre-2019 mean,-1.449,-0.205,-0.331,3,2,4,-1.566,2.196,
+model,label,n_zones,unit,during,later,placebo_fake_2016,rank_in_space,rank_scaled,n_scaled,rank_amazon,n_amazon,placebo_min,placebo_max,gold_slope
+M1,Zone + year effects,15,ha/yr,-1452.17,161.182,254.926,1,4,7,1,8,-65.556,226.335,
+M2,M1 + bigger zones react more to the gold price,15,ha/yr,-1603.962,-175.431,187.388,1,3,7,1,8,-81.134,417.464,0.345
+M3,M1 + own linear trend per zone,15,ha/yr,-1857.58,-598.962,-337.142,1,4,7,1,8,-67.462,545.999,
+M4,"M1, scaled to each zone's own size",7,share of own pre-2019 mean,-1.449,-0.205,-0.331,3,3,7,2,4,-1.566,2.197,

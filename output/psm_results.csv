@@ -1,9 +1,9 @@
-method,label,ctl_during,ctl_after,gap_during,gap_after,n_ctl,controls,rank,n_placebo,p,rank_after,p_after,plac_lo,plac_hi,plac_q10,plac_q90,gap_during_no_r3,gap_during_unknown_none,ratio_during
-twin,Rule-based twin (Amanã),20.909,14.326,-13.005,-7.784,1,Amanã (Floresta Nacional),,,,,,,,,,,,0.378
-ps_nn1,"Propensity score, nearest 1",14.575,16.491,-6.672,-9.95,1,Yapacana 100%,12.0,21.0,0.571,11.0,0.524,-143.108,143.108,-124.419,38.048,-6.672,-0.152,0.542
-ps_nn5,"Propensity score, nearest 5",15.988,18.569,-8.084,-12.027,5,Yapacana 20%; Tapajós 20%; Amanã 20%; Sawré Muybu 20%,10.0,21.0,0.476,13.0,0.619,-62.486,127.122,-52.587,23.314,-8.084,-17.408,0.494
-maha1,"Mahalanobis, nearest 1",14.575,16.491,-6.672,-9.95,1,Yapacana 100%,9.0,21.0,0.429,8.0,0.381,-69.274,139.774,-17.942,61.778,-6.672,-6.672,0.542
-maha3,"Mahalanobis, nearest 3",16.215,14.4,-8.311,-7.859,3,Yapacana 33%; Canaima 33%; Amanã 33%,11.0,21.0,0.524,11.0,0.524,-70.139,131.324,-50.419,60.489,-8.311,-2.249,0.487
-cem,Coarsened exact matching,19.64,13.57,-11.736,-7.029,2,Amanã 50%; Tapajós 50%,12.0,21.0,0.571,14.0,0.667,-39.139,116.466,-32.981,54.098,-11.736,-11.736,0.402
-ebal,Entropy balancing (closest),22.287,70.617,-14.383,-64.075,4,Tapajós 50%; Altitudinal Llanganates - Reserva de Biosfera Yasuní 23%; Yapacana 16%; Sararé 11%,5.0,21.0,0.238,5.0,0.238,-62.473,126.06,-26.122,66.495,-14.383,-10.744,0.355
-ipw,Inverse-probability weighting,22.693,40.091,-14.789,-33.549,20,Yapacana 23%; Tapajós 13%; Amanã 12%; Sawré Muybu 6%,4.0,21.0,0.19,4.0,0.19,-24.015,125.482,-16.954,65.606,-14.789,-18.577,0.348
+method,label,ctl_during,gap_during,n_ctl,controls,rank,n_placebo,p,plac_lo,plac_hi,plac_q10,plac_q90,gap_during_no_r3,gap_during_unknown_none,ratio_during
+twin,Rule-based twin (Amanã),20.783,-12.877,1,Amanã (Floresta Nacional),,,,,,,,,,0.38
+ps_nn1,"Propensity score, nearest 1 (no match within caliper)",,,0,,,,,,,,,,,
+ps_nn5,"Propensity score, nearest 5 (no match within caliper)",,,0,,,,,,,,,,,
+maha1,"Mahalanobis, nearest 1",14.575,-6.669,1,Yapacana 100%,8.0,20.0,0.4,-64.171,138.806,-16.937,74.362,-6.669,-6.669,0.542
+maha3,"Mahalanobis, nearest 3",15.858,-7.952,3,Yapacana 33%; Canaima 33%; Amanã 33%,12.0,20.0,0.6,-64.199,129.785,-46.267,33.432,-7.952,-2.251,0.499
+cem,Coarsened exact matching,49.388,-41.482,3,Munduruku 33%; Amanã 33%; Tapajós 33%,4.0,20.0,0.2,-46.859,110.462,-41.878,93.208,-41.482,-41.482,0.16
+ebal,Entropy balancing (closest),22.002,-14.096,4,Tapajós 48%; Altitudinal Llanganates - Reserva de Biosfera Yasuní 25%; Yapacana 18%; Sararé 9%,4.0,20.0,0.2,-63.603,124.31,-15.372,72.933,-14.096,-10.757,0.359
+ipw,Inverse-probability weighting,28.68,-20.773,19,Tapajós 32%; Altitudinal Llanganates - Reserva de Biosfera Yasuní 11%; Amanã 9%; Apolobamba 9%,3.0,20.0,0.15,-25.895,119.582,-18.63,87.956,-20.773,-20.151,0.276

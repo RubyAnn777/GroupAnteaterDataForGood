@@ -5,6 +5,11 @@ high-Andean veins. For every candidate area with AMW mining, sample up to N patc
 existed when Mercurio began; else any onset), seed 0, and look up SRTM 90 m elevation of the patch centroids from the
 public OpenTopoData API (no account). Raw API responses are saved unchanged in data_raw/opentopodata/.
 Output (committed): data_intermediate/amw_candidates_elevation.csv (unit_id, n_points, median and p10/p90 elevation, m).
+Plan v3 (2026-10-15): NOT rebuilt. Elevation is a covariate (where the mining is), not an outcome, so the centroid
+sample stays valid after control_amw.py switched to area-weighted AMW areas; Tambopata's sample lies in the official
+Tambopata buffer zone polygon (the registry unit). Nine areas that only appear with area weighting (all < 100 ha of AMW
+area in 2018) have no elevation and drop out of R4 and of the matching universe. Caution: the API cache
+(data_raw/opentopodata/srtm90m_batchNNN.json) is keyed by batch number, not coordinates: delete it before re-sampling.
 """
 from __future__ import annotations
 import json

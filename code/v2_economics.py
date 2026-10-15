@@ -5,8 +5,12 @@ Every outside parameter below is cited (full quotes, pages and URLs: docs/overni
 None of it is a measured quantity: the brief must not present it as one. Numbers carry claim_type "prediction" only where
 they are forward-looking; the rest are "description" of a calculation, and every description says "informed speculation".
 
-Chain (per year, Madre de Dios, 2022-25 unless stated):
-  hectares worked   = land mined for the first time; returns to old pits reported as hectares only     [MapBiomas, ours]
+MEASURE (plan v3, decision 5): gold comes out of land being WORKED, so the physically relevant flow is land newly mined
+or re-mined (gross, ha/yr), NOT net additions (net subtracts land that stopped, which yields no gold). Registered with
+measure "new" (first-time land, the base of the gold range) and "new+remined" (all land worked).
+Chain (per year, Madre de Dios part of the zone registry, in_mdd = 1, 2022-25 unless stated):
+  hectares worked   = land mined for the first time (new land); re-mined old pits reported as hectares only
+                                                                                           [MapBiomas, ours]
   gold (kg)         = first-time hectares x 1.6 (low) ... 1.9 (high) kg Au/ha                          [CSF-PE 2023, Cuadro 3]
                       Old pits get NO gold: CSF's yields are for fresh 2.5 m pits, and CSF found no grades at all for
                       suction-pump mining (p.22), La Pampa's method. So both ends understate gold if old pits still pay.
@@ -19,7 +23,9 @@ Chain (per year, Madre de Dios, 2022-25 unless stated):
                       calculator web page US$ 81,000-364,000 per kg; CSF-PE report p.7 US$ 1.2-1.8 M per kg
   enforcement money = PP 0128 spending booked in Madre de Dios, soles -> US$ at each year's BCRP annual average
                       exchange rate (PEN_PER_USD below)
-Cost per hectare kept from mining in the target, 2019-21 = PP 0128 Madre de Dios spending 2019-21 / (|M1 gap| x 3).
+Cost per hectare kept from mining in the target, 2019-21 = PP 0128 Madre de Dios spending 2019-21 / (|gap| x 3), gap =
+peru.py's pooled-reference event-study gap in NET additions, Tambopata buffer zone vs every Peruvian buffer zone with
+pre-2019 mining (es_poolB_pooledref_during_net, raster net additions, 2019-21 vs 2014-18).
 It is an upper-bound effect on the target only: the region mined MORE, so these hectares moved, they weren't saved.
 """
 from __future__ import annotations
@@ -29,6 +35,7 @@ import matplotlib.pyplot as plt
 
 from common import ROOT, OUT, finish_figure, headline, C, INK, INK2, MUTED, GRID, AXIS
 import raster_zones as rz
+import definitions as D
 
 SRC = "docs/overnight/notes/economics_sources.md (cited parameters) x MapBiomas Peru Col 4 rasters, MINEM, MEF PP 0128, prices_annual.csv"
 OZ_G = 31.1034768
@@ -53,13 +60,15 @@ PEN_PER_USD = _pen_per_usd()
 
 
 def mdd_year():
+    """Land newly mined and re-mined per year, Madre de Dios part (zone_year.csv, in_mdd = 1)."""
     z = pd.read_csv(rz.OUT_ZONE)
-    return z.groupby("year")[["new_land_ha", "remined_ha"]].sum()
+    return z[z.in_mdd == 1].groupby("year")[["new_ha", "remined_ha"]].sum()
 
 
 def run(pack, reg):
-    def add(id_, v, unit, desc, claim="description"):
-        reg.add(f"eco_{id_}", v, unit, desc + " Informed speculation (cited parameters, our arithmetic).", claim, SRC)
+    def add(id_, v, unit, desc, claim="description", measure="", period=""):
+        kw = dict(measure=measure, zone="mdd", period=period) if measure else {}
+        reg.add(f"eco_{id_}", v, unit, desc + " Informed speculation (cited parameters, our arithmetic).", claim, SRC, **kw)
     for k, (lo, hi, src) in P.items():
         add(f"param_{k}_lo", lo, k, f"Parameter {k}, low: {src}.")
         add(f"param_{k}_hi", hi, k, f"Parameter {k}, high: {src}.")
@@ -70,25 +79,30 @@ def run(pack, reg):
     minem = pd.read_csv(ROOT / "data_intermediate" / "minem_mdd_gold.csv").set_index("year")
     spend = pd.Series({yy: reg.get(f"t8_pp0128_mdd_{yy}") for yy in range(2015, 2026)})
     out = {}
-    for per, (a, b) in {"2016_18": (2016, 2018), "2022_25": (2022, 2025)}.items():
-        new, rem = y.loc[a:b, "new_land_ha"].mean(), y.loc[a:b, "remined_ha"].mean()
+    for key in ("pre", "later"):
+        (a, b), per, pl = D.PERIODS[key], key, D.period_label(key)
+        new, rem = y.loc[a:b, "new_ha"].mean(), y.loc[a:b, "remined_ha"].mean()
         usd_g = gold.loc[a:b].mean() / OZ_G
         kg = (new * P["yield_kg_ha"][0], new * P["yield_kg_ha"][1])     # first-time land only (old pits: no yield known)
         val = tuple(k * 1000 * usd_g for k in kg)
         out[per] = dict(new=new, rem=rem, kg=kg, val=val, usd_g=usd_g)
-        add(f"ha_low_{per}", new, "ha/yr", f"Hectares worked per year, low = first-time mining, Madre de Dios, {per}.")
-        add(f"ha_high_{per}", new + rem, "ha/yr", f"Hectares worked per year, high = first-time + returns to old pits, {per} (hectares only; old pits are given no gold below).")
-        add(f"gold_t_lo_{per}", kg[0] / 1000, "t/yr", f"Gold from mapped mining, low = first-time mined land x 1.6 kg/ha, Madre de Dios, {per}. Old pits excluded (no yield known), so this understates gold if they still pay.")
-        add(f"gold_t_hi_{per}", kg[1] / 1000, "t/yr", f"Gold from mapped mining, high = first-time mined land x 1.9 kg/ha, {per}. Old pits excluded, as in the low case.")
-        add(f"value_musd_lo_{per}", val[0] / 1e6, "million US$/yr", f"Gross value of that gold at the {per} mean price, low.")
+        add(f"ha_low_{per}", new, "ha/yr", f"Hectares worked per year, low = land mined for the first time (new land; "
+            f"not net additions), Madre de Dios, {pl}.", measure="new", period=pl)
+        add(f"ha_high_{per}", new + rem, "ha/yr", f"Hectares worked per year, high = land newly mined or re-mined (ha/yr; "
+            f"not net additions), Madre de Dios, {pl} (hectares only; old pits are given no gold below).",
+            measure="new+remined", period=pl)
+        add(f"gold_t_lo_{per}", kg[0] / 1000, "t/yr", f"Gold from mapped mining, low = new land (first-time mined) x 1.6 kg/ha, Madre de Dios, {pl}. Old pits excluded (no yield known), so this understates gold if they still pay.")
+        add(f"gold_t_hi_{per}", kg[1] / 1000, "t/yr", f"Gold from mapped mining, high = new land x 1.9 kg/ha, {pl}. Old pits excluded, as in the low case.")
+        add(f"value_musd_lo_{per}", val[0] / 1e6, "million US$/yr", f"Gross value of that gold at the {pl} mean price, low.")
         add(f"value_musd_hi_{per}", val[1] / 1e6, "million US$/yr", f"Same, high.")
     # cross-check: gold per hectare implied by MINEM's own estimate (declared + artisanal estimate), 2016-18
-    k1618 = minem.loc[2016:2018, "total_kg"].mean()
-    ha1618 = (y.loc[2016:2018, "new_land_ha"] + y.loc[2016:2018, "remined_ha"]).mean()
-    add("implied_kg_ha_2016_18", k1618 / ha1618, "kg/ha", "MINEM gold for Madre de Dios (declared + artisanal estimate), 2016-18 mean, per hectare worked (first-time + old pits, our raster accounting). Cross-check of the CSF yield of 1.6-1.9 kg/ha (same order; river dredges add gold but no mapped land).")
-    add("implied_kg_ha_new_2016_18", k1618 / y.loc[2016:2018, "new_land_ha"].mean(), "kg/ha", "Same, per hectare of first-time mined land only (the base of our gold range): above the CSF yield, so a range built on first-time land x 1.6-1.9 kg/ha is if anything low.")
-    o = out["2022_25"]
-    decl = minem.loc[2022:2025, "declared_kg"].mean()
+    a0, a1 = D.PERIODS["pre"]
+    k1618 = minem.loc[a0:a1, "total_kg"].mean()
+    ha1618 = (y.loc[a0:a1, "new_ha"] + y.loc[a0:a1, "remined_ha"]).mean()
+    add("implied_kg_ha_pre", k1618 / ha1618, "kg/ha", "MINEM gold for Madre de Dios (declared + artisanal estimate), 2016-18 mean, per hectare worked (land newly mined or re-mined, our raster accounting; not net additions). Cross-check of the CSF yield of 1.6-1.9 kg/ha (same order; river dredges add gold but no mapped land).", measure="new+remined", period="2016–18")
+    add("implied_kg_ha_new_pre", k1618 / y.loc[a0:a1, "new_ha"].mean(), "kg/ha", "Same, per hectare of new land (first-time mined) only (the base of our gold range): above the CSF yield, so a range built on new land x 1.6-1.9 kg/ha is if anything low.", measure="new", period="2016–18")
+    o = out["later"]
+    decl = minem.loc[D.PERIODS["later"][0]:D.PERIODS["later"][1], "declared_kg"].mean()
     add("declared_t_2022_25", decl / 1000, "t/yr", "Gold declared by producers in Madre de Dios, 2022-25 mean (MINEM; no artisanal estimate after 2019).")
     sh = (decl / o["kg"][1], decl / o["kg"][0])
     add("declared_share_lo", sh[0], "share", "Declared gold as a share of gold from mapped mining, 2022-25, low.")
@@ -108,14 +122,15 @@ def run(pack, reg):
         soc[k] = (o["kg"][0] * pr[0], o["kg"][1] * pr[1])
         add(f"social_busd_{k}_lo", soc[k][0] / 1e9, "billion US$/yr", f"Social cost of the gold mined (health, forest, rivers), Madre de Dios 2022-25, low gold x low cost, {nm}.")
         add(f"social_busd_{k}_hi", soc[k][1] / 1e9, "billion US$/yr", f"Same, high gold x high cost, {nm}.")
-    spu = float(np.mean([spend[yy] / PEN_PER_USD[yy] for yy in range(2022, 2026)]))
+    spu = float(np.mean([spend[yy] / PEN_PER_USD[yy] for yy in range(D.PERIODS["later"][0], D.PERIODS["later"][1] + 1)]))
     add("spend_musd", spu / 1e6, "million US$/yr", "PP 0128 spending booked in Madre de Dios, 2022-25 mean, each year converted at its BCRP annual average exchange rate (a lower bound: national units book under Lima).")
     add("spend_share_of_value", spu / o["val"][0], "share", "Enforcement money as a share of the gold value mined (low), 2022-25: the most generous ratio.")
     # cost per hectare kept from mining in the target, 2019-21
-    gap = abs(reg.get("model_m1_during")) * 3
-    s1921 = spend.loc[2019:2021].sum()
-    add("soles_per_ha_kept", s1921 / gap, "soles/ha", "PP 0128 Madre de Dios spending 2019-21 divided by hectares of net mining kept out of the Tambopata buffer zone (M1 gap x 3 years; upper-bound effect, local only). Numerator and denominator differ in scope: the money is ALL PP 0128 spending booked in Madre de Dios (not only Tambopata, and missing national units booked under Lima), the hectares are the Tambopata buffer zone only; the direction of the bias is unclear.")
-    usd_g1921 = gold.loc[2019:2021].mean() / OZ_G
+    d0, d1 = D.PERIODS["during"]
+    gap = abs(reg.get("es_poolB_pooledref_during_net")) * (d1 - d0 + 1)
+    s1921 = spend.loc[d0:d1].sum()
+    add("soles_per_ha_kept", s1921 / gap, "soles/ha", "PP 0128 Madre de Dios spending 2019-21 divided by hectares of net mining additions kept out of the Tambopata buffer zone (peru.py es_poolB_pooledref_during_net: raster net additions, Tambopata buffer zone vs every Peruvian buffer zone with pre-2019 mining, 2019-21 vs 2014-18, x 3 years; an upper-bound effect, local only, and conditional on that comparison). Numerator and denominator differ in scope: the money is ALL PP 0128 spending booked in Madre de Dios (not only Tambopata, and missing national units booked under Lima), the hectares are the Tambopata buffer zone only; the direction of the bias is unclear.", measure="net", period="2019–21 vs 2014–18")
+    usd_g1921 = gold.loc[d0:d1].mean() / OZ_G
     add("gold_usd_per_ha_1921_lo", P["yield_kg_ha"][0] * 1000 * usd_g1921, "US$/ha", "Gold value of one hectare at the 2019-21 price, low.")
     add("gold_usd_per_ha_1921_hi", P["yield_kg_ha"][1] * 1000 * usd_g1921, "US$/ha", "Same, high.")
     add("gold_usd_per_ha_2025_lo", P["yield_kg_ha"][0] * 1000 * gold.loc[2025] / OZ_G, "US$/ha", "Gold value of one hectare at the 2025 price, low: why old pits are worth re-mining.")
@@ -152,7 +167,7 @@ def figure(o, decl, tax, soc, spu):
     ax.set_yticks([]); ax.set_ylim(-0.6, len(rows) - 0.2)
     for sp in ("top", "right", "left"): ax.spines[sp].set_visible(False)
     ax.xaxis.grid(True, color=GRID, lw=0.6); ax.set_axisbelow(True)
-    finish_figure(fig, "Sources: our first-time mined hectares (MapBiomas Peru Col 4; old pits given no gold) x CSF (2023) 1.6–1.9 kg gold/ha; "
+    finish_figure(fig, "Sources: our new land, first-time mined hectares (MapBiomas Peru Col 4; old pits given no gold; not net additions) x CSF (2023) 1.6–1.9 kg gold/ha; "
                        "World Bank gold price; MINEM declared gold; income tax 29.5% x 11–37% margin (D.L. 1269; Torres 2015); social "
                        "cost: two CSF estimates shown separately; MEF PP 0128 at BCRP annual exchange rates. Full citations: "
                        "docs/overnight/notes/economics_sources.md.",
@@ -164,7 +179,7 @@ if __name__ == "__main__":
     import csv
     reg = Numbers()
     for r in csv.DictReader(open(OUT / "numbers.csv")):
-        if r["id"].startswith(("t8_", "model_m1_during")):
+        if r["id"].startswith(("t8_", "es_poolB_pooledref_during_net")):
             reg.rows[r["id"]] = dict(value=float(r["value"]))
     run(load_pack(), reg)
     for k, v in reg.rows.items():

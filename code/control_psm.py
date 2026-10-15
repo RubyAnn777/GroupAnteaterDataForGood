@@ -8,15 +8,18 @@ UNITS: the Amazon areas with Amazon Mining Watch (AMW) mining data (amw_candidat
 1,174 screened that had any AMW mining). Treated = Tambopata buffer zone (PE-BZ-RN09).
 COVARIATES (all 2018 or time-invariant, so they cannot be moved by Mercurio): log AMW mining stock 2018,
 log median elevation of the mining, log area, Brazil, indigenous territory. Distance to La Pampa is NOT a covariate.
-CONTROL POOL: no operation reported 2017-21 (verdict "none", or first operation 2022 or later; = rule R2b),
-AMW stock 2018 >= MIN_STOCK, outside Madre de Dios (R3). Variants: without R3; with "unclear / not searched" areas
-counted as no-operation.
-PROPENSITY SCORE: logit of P(operation reported 2017-21) on the covariates, fitted on the areas whose operation
-status we coded (operations_coded.csv), Tambopata included as treated. Small n: a light ridge penalty (L2_PS) keeps
-the fit finite.
-OUTCOME (same as the twin): AMW new mining per year as % of the area's own 2018 stock; 2019-21 mean and 2022-25 mean
-(2025 provisional). Gap = Tambopata minus the matched controls (percentage points); ratio = Tambopata's pace as a
-share of the controls' pace (the twin: 38%).
+CONTROL POOL: no VERIFIED operation 2017-21 under the one dating rule R* (brazil_v2; verdict "none", or first verified
+operation 2022 or later; = rule R2b), AMW stock 2018 >= MIN_STOCK, outside the v3 registry region (R3, as
+control_select). Variants: without R3; with "unclear / not searched" areas counted as no-operation. Recoded per review
+D-S10-1: areas searched only for 2022-25 (Sawre Muybu, Menkragnoti, Enawene-Nawe) are "unclear".
+PROPENSITY SCORE: logit of P(verified operation 2017-21) on the covariates, fitted on the areas whose operation
+status is known, Tambopata included as treated. Small n: a light ridge penalty (L2_PS) keeps the fit finite.
+Nearest-neighbour PS matching uses the CALIPER (0.25 SD of the logit score; review D-S11-1): if no control lies within
+it, the estimator reports "no match" (Tambopata is outside common support) instead of a gap.
+OUTCOME (same as the twin): AMW new area per year as % of the area's own 2018 AMW area, 2019-21 mean
+(definitions.PERIODS["during"]); comparable to first-time mining, NOT to net additions. No later-years gaps: pool areas
+had their own operations from 2022 (review D-S11-3). Gap = Tambopata minus the matched controls (percentage points);
+ratio = Tambopata's pace as a share of the controls' pace. Tambopata = the official whole buffer zone (registry).
 INFERENCE: placebo in space. Each control area in turn plays "treated" (Tambopata removed), the same estimator picks
 its matches from the rest of the pool; Tambopata's rank among all gaps (1 = biggest slowdown) gives p = rank / n.
 
@@ -34,10 +37,10 @@ import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 
 from common import ROOT, OUT, style_axes, finish_figure, headline, C, INK, INK2, MUTED, GRID, AXIS, placebo_rank
+import definitions as D
 
 INTER = ROOT / "data_intermediate"
 TU = "PE-BZ-RN09"
-MDD_BOX = (-72.6, -14.6, -68.6, -10.5)                 # same as control_select.py
 MIN_STOCK = 100.0                                     # ha of AMW mining by 2018 (a pool needs some mining to compare)
 L2_PS = 0.1                                           # ridge penalty for the small-sample logit
 CALIPER_SD = 0.25                                     # caliper: 0.25 SD of the logit propensity score in the pool
@@ -48,35 +51,34 @@ EBAL_COVS = ["ln_stock", "ln_elev", "ln_area", "indigenous"]
 EBAL_RIDGE = 1e-4
 COV_LABEL = {"ln_stock": "log mining stock 2018", "ln_elev": "log elevation of mining", "ln_area": "log area",
              "brazil": "Brazil", "indigenous": "indigenous territory"}
-DURING, AFTER = list(range(2019, 2022)), list(range(2022, 2026))
-SRC = ("Amazon Mining Watch (AMW) x SERNANP / RAISG / FUNAI polygons; SRTM elevation (OpenTopoData); "
-       "operations: data_intermediate/operations_coded.csv")
+DURING = list(range(D.PERIODS["during"][0], D.PERIODS["during"][1] + 1))
+PER = f"{DURING[0]}-{DURING[-1]}"
+SRC = ("Amazon Mining Watch (AMW) new area x SERNANP / RAISG / FUNAI polygons (area-weighted); SRTM elevation "
+       "(OpenTopoData); operations: data_intermediate/operations_coded.csv, rule R* (brazil_v2)")
 
 
 # --------------------------------------------------------------------------- data
 def load() -> pd.DataFrame:
+    import control_select as cs
     u = pd.read_csv(INTER / "amw_candidates_units.csv").set_index("unit_id")
-    w = pd.read_csv(INTER / "amw_candidates_year.csv").pivot(index="unit_id", columns="year", values="new_ha")
+    w = pd.read_csv(INTER / "amw_candidates_year.csv").pivot(index="unit_id", columns="year", values="new_ha").fillna(0)
     e = pd.read_csv(INTER / "amw_candidates_elevation.csv").set_index("unit_id")
-    ops = pd.read_csv(INTER / "operations_coded.csv").set_index("unit_id")
     t = u.join(w, how="inner").join(e[["elev_median_m"]], how="inner")
     t = t.rename(columns={2018: "stock_2018"})
-    v = ops["verdict_2017_2025"].reindex(t.index).fillna("not searched")
-    first = ops["first_op_2017_2025"].reindex(t.index).fillna("")
+    v, first = cs.op_status(t.index)                                  # rule R*, twin window 2017-25
+    fy = pd.to_numeric(first.str[:4], errors="coerce")
     t["verdict"] = v
-    t["op_2017_21"] = v.isin(["yes", "treated"]) & (first < "2022")           # 2008-01 = ongoing since 2008: counts
-    t["no_op_2017_21"] = v.eq("none") | (v.eq("yes") & (first >= "2022"))
+    t["op_2017_21"] = v.eq("treated") | (v.eq("yes") & (fy <= DURING[-1]))
+    t["no_op_2017_21"] = v.eq("none") | (v.eq("yes") & (fy > DURING[-1]))
     t["status_known"] = v.isin(["yes", "none", "treated"])
-    t["in_mdd"] = (t.lon.between(MDD_BOX[0], MDD_BOX[2]) & t.lat.between(MDD_BOX[1], MDD_BOX[3])
-                   & t.country.eq("Peru"))
+    t["in_mdd"] = cs.in_registry(t.lon.to_numpy(), t.lat.to_numpy()) & t.country.eq("Peru").to_numpy()
     t["ln_stock"] = np.log1p(t.stock_2018)
     t["ln_elev"] = np.log(t.elev_median_m.clip(lower=20))
     t["ln_area"] = np.log(t.area_km2.clip(lower=0.1))
     t["brazil"] = t.country.eq("Brazil").astype(float)
     t["indigenous"] = t.kind.eq("indigenous territory").astype(float)
-    pace = t[DURING + AFTER].div(t.stock_2018.where(t.stock_2018 > 0), axis=0) * 100
+    pace = t[DURING].div(t.stock_2018.where(t.stock_2018 > 0), axis=0) * 100
     t["pace_during"] = pace[DURING].mean(axis=1)
-    t["pace_after"] = pace[AFTER].mean(axis=1)
     return t
 
 
@@ -170,8 +172,8 @@ def w_ipw(score, tr, P):
 
 def weights(method, t, tr, P, score, bins):
     cal = CALIPER_SD * score.loc[P].std()
-    if method == "ps_nn1":  return w_nn(score, tr, P, 1)
-    if method == "ps_nn5":  return w_nn(score, tr, P, 5)
+    if method == "ps_nn1":  return w_nn(score, tr, P, 1, caliper=cal)
+    if method == "ps_nn5":  return w_nn(score, tr, P, 5, caliper=cal)
     if method == "maha1":   return w_maha(t, tr, P, 1)
     if method == "maha3":   return w_maha(t, tr, P, 3)
     if method == "cem":     return w_cem(t, tr, P, bins)
@@ -189,9 +191,8 @@ def estimate(method, t, tr, P, score, bins):
     w = weights(method, t, tr, P, score, bins)
     if w is None or w.sum() == 0:
         return None
-    cd, ca = (w * t.loc[w.index, "pace_during"]).sum(), (w * t.loc[w.index, "pace_after"]).sum()
-    return dict(ctl_during=cd, ctl_after=ca, gap_during=t.loc[tr, "pace_during"] - cd,
-                gap_after=t.loc[tr, "pace_after"] - ca, w=w)
+    cd = (w * t.loc[w.index, "pace_during"]).sum()
+    return dict(ctl_during=cd, gap_during=t.loc[tr, "pace_during"] - cd, w=w)
 
 
 def placebo(method, t, P, score, bins, real_gap, col="gap_during"):
@@ -223,30 +224,23 @@ def run(reg):
     variants = {"main": P, "no_r3": pool(t, r3=False), "unknown_none": pool(t, unknown_as_none=True)}
     tam = t.loc[TU]
 
-    # rule-based twin (control_select.py, relaxed rules) for the comparison row
+    # rule-based twin (control_select.py, relaxed rules, rule R*) for the comparison row
     import control_select as cs
-    u_, w_, e_, o_ = cs.load()
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore")             # log(0) for areas without mining, inside control_select
-        ft = cs.funnel(u_, w_, e_, o_)
-    twin = (ft[ft.pass_strict].index.tolist() or ft[ft.pass_relaxed].index.tolist())[0]
+    twin = cs.twins()[0][0]
 
     rows, bal = [], {"before (all pool, unweighted)": smd(t, P, pd.Series(1 / len(P), index=P))}
     rows.append(dict(method="twin", label="Rule-based twin (" + t.loc[twin, "name"].split(" (")[0] + ")",
-                     ctl_during=t.loc[twin, "pace_during"], ctl_after=t.loc[twin, "pace_after"],
-                     gap_during=tam.pace_during - t.loc[twin, "pace_during"],
-                     gap_after=tam.pace_after - t.loc[twin, "pace_after"], n_ctl=1,
-                     controls=t.loc[twin, "name"]))
+                     ctl_during=t.loc[twin, "pace_during"], gap_during=tam.pace_during - t.loc[twin, "pace_during"],
+                     n_ctl=1, controls=t.loc[twin, "name"]))
     for m, lab in METHODS.items():
         r = estimate(m, t, TU, P, score, bins)
         if r is None:
-            rows.append(dict(method=m, label=lab, n_ctl=0)); continue
+            rows.append(dict(method=m, label=lab + " (no match within caliper)", n_ctl=0)); continue
         rank, n, g = placebo(m, t, P, score, bins, r["gap_during"])
-        rank_a, n_a, _ = placebo(m, t, P, score, bins, r["gap_after"], "gap_after")
         top = r["w"].sort_values(ascending=False)
-        rows.append(dict(method=m, label=lab, ctl_during=r["ctl_during"], ctl_after=r["ctl_after"],
-                         gap_during=r["gap_during"], gap_after=r["gap_after"], n_ctl=int((r["w"] > 1e-3).sum()),
-                         rank=rank, n_placebo=n, p=rank / n, rank_after=rank_a, p_after=rank_a / n_a,
+        rows.append(dict(method=m, label=lab, ctl_during=r["ctl_during"],
+                         gap_during=r["gap_during"], n_ctl=int((r["w"] > 1e-3).sum()),
+                         rank=rank, n_placebo=n, p=rank / n,
                          plac_lo=g.min(), plac_hi=g.max(), plac_q10=np.quantile(g, 0.1), plac_q90=np.quantile(g, 0.9),
                          controls="; ".join(f"{t.loc[i, 'name'].split(' (')[0]} {v:.0%}" for i, v in top.head(4).items())))
         bal[lab] = smd(t, P, r["w"])
@@ -280,8 +274,7 @@ def run(reg):
     reg.add("psm_ps_pseudo_r2", info["pseudo_r2"], "pseudo-R2", "McFadden pseudo-R2 of the propensity logit (ridge-penalised)", "description", SRC)
     reg.add("psm_ps_tam", 1 / (1 + np.exp(-score.loc[TU])), "probability", "Tambopata's predicted probability of an operation 2017-21", "description", SRC)
     reg.add("psm_ps_pool_max", 1 / (1 + np.exp(-score.loc[P].max())), "probability", "Highest predicted probability of an operation in the control pool", "description", SRC)
-    reg.add("psm_tam_pace_during", tam.pace_during, "% of 2018 stock per yr", "Tambopata 2019-21 AMW new mining per year, % of own 2018 stock", "description", SRC)
-    reg.add("psm_tam_pace_after", tam.pace_after, "% of 2018 stock per yr", "Tambopata 2022-25 AMW new mining per year, % of own 2018 stock (2025 provisional)", "description", SRC)
+    reg.add("psm_tam_pace_during", tam.pace_during, "% of 2018 stock per yr", f"Tambopata {PER} AMW new area per year, % of own 2018 AMW area (comparable to first-time mining, not to net additions)", "description", SRC, measure="amw_pace", zone="tambopata_bz", period=PER)
     reg.add("psm_ebal_max_imbalance", ebal_imb, "pool SD", "Entropy balancing (stock, elevation, area, indigenous): largest remaining covariate gap after weighting (0 = exact balance)", "description", SRC)
     reg.add("psm_ebal_imbalance_all_covs", ebal_imb_all, "pool SD", "Entropy balancing with the Brazil dummy too: largest remaining gap (> 0 = exact balance impossible)", "description", SRC)
     reg.add("psm_ps_nn1_within_caliper", float(nn_dist <= cal), "0/1", f"1 if the nearest control lies within {CALIPER_SD} SD of the logit propensity score (common support)", "description", SRC)
@@ -291,10 +284,10 @@ def run(reg):
     for r in res.to_dict("records"):
         m = r["method"]
         if not r.get("n_ctl"):
-            reg.add(f"psm_{m}_n_ctl", 0, "count", f"{r['label']}: no control found", "description", SRC); continue
+            reg.add(f"psm_{m}_n_ctl", 0, "count", f"{r['label']}: no control within the caliper (Tambopata outside "
+                    "common support): no gap reported", "description", SRC); continue
         reg.add(f"psm_{m}_ctl_during", r["ctl_during"], "% of 2018 stock per yr", f"{r['label']}: matched controls' 2019-21 pace." + one, "description", SRC)
         reg.add(f"psm_{m}_gap_during", r["gap_during"], "pp", f"{r['label']}: Tambopata minus matched controls, 2019-21 pace." + one, "description", SRC)
-        reg.add(f"psm_{m}_gap_after", r["gap_after"], "pp", f"{r['label']}: Tambopata minus matched controls, 2022-25 pace." + one, "description", SRC)
         reg.add(f"psm_{m}_ratio_during", r["ratio_during"], "ratio", f"{r['label']}: Tambopata's 2019-21 pace as a share of the matched controls'", "description", SRC)
         reg.add(f"psm_{m}_n_ctl", r["n_ctl"], "count", f"{r['label']}: controls with weight > 0.1%", "description", SRC)
         if m == "twin":
@@ -302,12 +295,12 @@ def run(reg):
         reg.add(f"psm_{m}_rank", r["rank"], "rank", f"{r['label']}: Tambopata's rank among placebo gaps 2019-21 (1 = biggest slowdown)", "description", SRC)
         reg.add(f"psm_{m}_n_placebo", r["n_placebo"], "count", f"{r['label']}: areas in the placebo ranking (pool + Tambopata)", "description", SRC)
         reg.add(f"psm_{m}_p", r["p"], "p-value", f"{r['label']}: placebo-in-space p = rank / n, 2019-21", "description", SRC)
-        reg.add(f"psm_{m}_p_after", r["p_after"], "p-value", f"{r['label']}: placebo-in-space p, 2022-25 gap", "description", SRC)
         for vk in ("no_r3", "unknown_none"):
             reg.add(f"psm_{m}_gap_during_{vk}", r.get(f"gap_during_{vk}", np.nan), "pp",
                     f"{r['label']}: 2019-21 gap with pool variant {vk}", "description", SRC)
     ok = res[res.method != "twin"].dropna(subset=["gap_during"])
-    reg.add("psm_n_methods", len(ok), "count", "Matching estimators with a result", "description", SRC)
+    reg.add("psm_n_methods", len(ok), "count", "Matching estimators with a result (PS nearest-neighbour needs a control within the caliper)", "description", SRC)
+    reg.add("psm_n_methods_no_match", int((res.method != "twin").sum() - len(ok)), "count", "Matching estimators with no control within the caliper", "description", SRC)
     reg.add("psm_n_methods_negative", int((ok.gap_during < 0).sum()), "count", "... of which show Tambopata slower than its matches in 2019-21", "description", SRC)
     reg.add("psm_n_methods_p10", int((ok.p <= 0.10).sum()), "count", "... of which with placebo p <= 0.10", "description", SRC)
     reg.add("psm_gap_during_min", ok.gap_during.min(), "pp", "Smallest (most negative) 2019-21 gap across matching estimators", "description", SRC)
@@ -332,8 +325,10 @@ def _figure(res, tam, p_min, p_max):
     fig = plt.figure(figsize=(9, 4.9))
     # explicit axes: row labels on the left and rank notes on the right need fixed room (tight_layout ignores them)
     a1 = fig.add_axes([0.255, 0.2, 0.33, 0.6]); a2 = fig.add_axes([0.61, 0.2, 0.24, 0.6], sharey=a1)
-    headline(fig, title, "New mining per year 2019–21, % of each area’s own 2018 mining (Amazon Mining Watch). "
-             "Each row is one way to pick\nthe comparison areas from places with no operation in 2017–21.")
+    nm = int((res.method != "twin").sum() - len(est))
+    headline(fig, title, "AMW new area per year 2019–21, % of own 2018 AMW area (comparable to first-time mining, not to "
+             "net additions). Each row picks\ncomparison areas with no verified operation in 2017–21 (rule R*)"
+             + (f"; propensity-score matching ({nm}) finds no area within the caliper." if nm else "."))
     y = np.arange(len(r))[::-1]
     # left: paces
     a1.axvline(tam.pace_during, color=C["lapampa"], lw=2, zorder=2)

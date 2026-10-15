@@ -259,7 +259,7 @@ def fig_event_study(bB, bA, W, poolB, n):
     yrs = sorted(bB["net"].index)
     fig, (ax, ax2) = plt.subplots(2, 1, figsize=(9, 7.6), sharex=True,
                                   gridspec_kw={"height_ratios": [1.4, 1], "hspace": 0.38})
-    lo = bB["net"].loc[2019:2021].min()
+    lo = bB["net"].loc[D.PERIODS["during"][0]:D.PERIODS["during"][1]].min()
     headline(fig, f"Net additions in the Tambopata buffer zone fell to {lo:,.0f} ha below the comparison in 2019–21"
              .replace("-", "−"),
              f"Event-study coefficient vs {n-1} Peruvian buffer zones with mining, relative to {D.REF_YEAR}, "

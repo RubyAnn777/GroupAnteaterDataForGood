@@ -5,8 +5,12 @@ Raw files (~260 MB each, git-ignored, URLs in DOWNLOAD_LOG.csv):
   data_raw/mapbiomas_amazonia/statistics_amazonia_col6_indigenous.xlsx  sheet COVERAGE_IT  (indigenous territories)
 One row = territory x class; years 1985..2023 as columns; a territory without a class-30 row has 0 ha mining.
 Output (small, committed): data_intermediate/mb_amazonia_col6_mining.csv (one row per territory with mining, long by year).
-Used ONLY to screen candidate controls (mining before 2019, pre-2019 trend). Collection 6 is never added to or subtracted
-from MapBiomas Peru Collection 4 (agent.md rules 6-7).
+Used ONLY to show the twins' pre-2019 paths (control_select / control_top3), as an index (2018 = 100). Plan v3:
+Collection 6 is a DIFFERENT collection (and a different product, statistics tables, from our Peru Col 4 raster
+accounting): every figure and number built from it says "Amazonía Col 6", it is never added to, subtracted from or
+spliced with MapBiomas Peru Collection 4 numbers (agent.md rules 6-7), and Tambopata's own path always comes from the
+Peru Col 4 rasters on the v3 registry, never from this file. Publisher check (RAISG mining 2023 vs factsheet 0.78 Mha)
+is asserted in checks.run_new_data_checks().
 """
 from __future__ import annotations
 import warnings
@@ -19,6 +23,7 @@ CHECK_FILE = ROOT / "data_intermediate" / "mb_amazonia_col6_check.csv"   # publi
 FILES = {"protected area": ("statistics_amazonia_col6_protected.xlsx", "COVER_PA"),
          "indigenous territory": ("statistics_amazonia_col6_indigenous.xlsx", "COVERAGE_IT")}
 MINING = 30
+COLLECTION = "MapBiomas Amazonía Collection 6 (statistics)"     # label for every use of this file
 
 def build():
     parts = []

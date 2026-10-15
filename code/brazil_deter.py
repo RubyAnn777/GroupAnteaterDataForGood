@@ -2,8 +2,10 @@
 
 Rebuilds the scout's tables from the two committed raw files (data_raw/inpe_deter/): alert polygons are
 intersected with FUNAI territory polygons in EPSG:5880 (Albers, equal area); the area of the intersection is
-assigned to the month of `view_date`. Munduruku = Munduruku + Sai-Cinza + Munduruku-Taquara (the scout's choice;
-Sai-Cinza has alerts from 2020). DETER is an alert system (new or expanded mining only, not the stock; minimum
+assigned to the month of `view_date`. Munduruku = the package's one complex, Munduruku + Sai-Cinza (brazil_v2.BRAZIL;
+review D-S12-8). The scout's table (Munduruku + Sai-Cinza + Munduruku-Taquara) is reproduced only as a CHECK.
+Event lines come from operations_coded.csv under the one dating rule R* (brazil_v2.br_events): solid = first verified
+operation against mining 2021-25, dashed = other verified operations and unverified reports (context). DETER is an alert system (new or expanded mining only, not the stock; minimum
 mappable area of a few ha; cloud gaps; no river dredging). It is a different measurement from MapBiomas: never
 add, subtract or splice the two. All claims here are DESCRIPTION.
 """
@@ -14,12 +16,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-from common import ROOT, OUT, style_axes, finish_figure
+from common import ROOT, OUT, style_axes, finish_figure, INK, MUTED, headline
+from brazil_v2 import BRAZIL, br_events
 
 RAW = ROOT / "data_raw" / "inpe_deter"
 SCOUT_ANNUAL = ROOT / "docs" / "overnight" / "notes" / "deter_mining_ti_annual_km2.csv"
-MUN = "Munduruku (incl. Sai-Cinza, Taquara)"
+MUN = "Munduruku (incl. Sai-Cinza)"
+MUN_SCOUT = "Munduruku (incl. Sai-Cinza, Taquara)"
 TERR = ["Yanomami", MUN, "Kayapó"]
+SCOUT = ["Yanomami", MUN_SCOUT, "Kayapó"]
 SRC = "INPE TerraBrasilis, DETER-Amazonia class MINERACAO (WFS layer deter-amz:deter_amz, fetched 2026-10-10); FUNAI territory polygons"
 LAST_MONTH = "2026-08"          # September 2026 is partial (data to 29 Sep) so it is left out of the figure
 
@@ -35,7 +40,10 @@ def build_tables():
     t["geometry"] = t.geometry.buffer(0)
     j = gpd.overlay(d5[["gid", "view_date", "ym", "year", "geometry"]], t, how="intersection")
     j["km2"] = j.area / 1e6
-    j["ti"] = j.terrai_nome.replace({"Sai-Cinza": MUN, "Munduruku-Taquara": MUN, "Munduruku": MUN})
+    j["ti_scout"] = j.terrai_nome.replace({"Sai-Cinza": MUN_SCOUT, "Munduruku-Taquara": MUN_SCOUT, "Munduruku": MUN_SCOUT})
+    j = j[j.terrai_nome != "Munduruku-Taquara"].assign(ti=lambda x: x.terrai_nome.replace(
+        {n: MUN for n in BRAZIL["funai_names"]["Munduruku"]})).pipe(lambda x: pd.concat(
+        [x, j[j.terrai_nome == "Munduruku-Taquara"].assign(ti="Munduruku-Taquara")]))
     full = pd.period_range("2016-08", "2026-09", freq="M").astype(str)
     mon = j.groupby(["ti", "ym"]).km2.sum().unstack(0).reindex(full, fill_value=0.0).fillna(0.0)[TERR]
     mon.index.name = "month"
@@ -46,9 +54,10 @@ def run(pack, reg):
     ann_cal = j.groupby(["ti", "year"]).km2.sum().unstack(0).fillna(0.0)[TERR]
     ann_cal.index.name = "calendar_year"
 
-    # check 1: annual tables equal the scout's (3 decimals)
-    sc = pd.read_csv(SCOUT_ANNUAL, index_col=0)[TERR]
-    diff = (ann_cal.round(3).reindex(sc.index).fillna(0) - sc).abs().max().max()
+    # check 1: the scout's definition (Munduruku incl. Taquara) reproduces the scout's annual table (3 decimals)
+    ann_sc = j.groupby(["ti_scout", "year"]).km2.sum().unstack(0).fillna(0.0)[SCOUT]
+    sc = pd.read_csv(SCOUT_ANNUAL, index_col=0)[SCOUT]
+    diff = (ann_sc.round(3).reindex(sc.index).fillna(0) - sc).abs().max().max()
     assert diff < 2e-3, f"annual DETER table differs from the scout's by {diff}"
     print(f"DETER check OK: annual territory tables equal the scout's (max abs diff {diff:.4f} km2)")
 
@@ -83,7 +92,8 @@ def run(pack, reg):
         o.round(4).to_csv(OUT / f"brazil_deter_annual_{name}.csv")
 
     # numbers (description): 12 months before vs after Feb 2023 (Feb 2022-Jan 2023 vs Feb 2023-Jan 2024)
-    before = mon.loc["2022-02":"2023-01"].sum(); after = mon.loc["2023-02":"2024-01"].sum()
+    (b0, b1), (a0, a1) = BRAZIL["deter_months"]
+    before = mon.loc[b0:b1].sum(); after = mon.loc[a0:a1].sum()
     s = "INPE DETER-Amazonia MINERACAO alerts x FUNAI polygons"
     for key, c in (("yan", "Yanomami"), ("kay", "Kayapó"), ("mun", MUN)):
         reg.add(f"br_deter_{key}_12m_before_feb2023_km2", before[c], "km2",
@@ -104,14 +114,17 @@ def run(pack, reg):
     m = mon.loc["2019-01":LAST_MONTH].copy()
     m.index = pd.PeriodIndex(m.index, freq="M").to_timestamp()
     roll = mon.rolling(12).sum().loc["2019-01":LAST_MONTH]; roll.index = m.index
-    ev = {  # territory -> [(date, label, colour, solid)]
-        "Yanomami": [("2023-01-20", "Emergency 20 Jan 2023", "#6C7A7B", False),
-                     ("2023-02-01", "Operation Feb 2023", "#B03A2E", True)],
-        MUN: [("2023-08-01", "Operation Aug 2023", "#B03A2E", True),
-              ("2024-11-01", "Operation Nov 2024", "#2E6F9E", True)],
-        "Kayapó": [("2025-05-01", "Operation May 2025", "#7A5C1E", True)],
-    }
+    ev = {c: [] for c in TERR}                       # territory -> [(date, label, colour, solid)], rule R*
+    ev["Yanomami"].append(("2023-01-20", "Emergency 20 Jan 2023", MUTED, False))
+    gmap = {"Yanomami": "Yanomami", "Munduruku": MUN, "Kayapó": "Kayapó"}
+    for e in [e for e in br_events(list(gmap)) if e["ym"] >= "2019-01"]:
+        ev[gmap[e["group"]]].append((e["ym"] + "-01", e["label"].split(" ", 1)[1].replace(e["group"] + " ", "")
+                                     + (" (R*)" if e["kind"] == "coded" else ""),
+                                     INK if e["kind"] == "coded" else MUTED, e["kind"] == "coded"))
     fig = plt.figure(figsize=(9, 9.6))
+    headline(fig, "DETER mining alerts in three Brazilian territories, 2019–2026",
+             "Measure: DETER alert area (new or expanded mining, km² per month, dated by detection); not MapBiomas, not "
+             "net additions.\nSolid line = first verified operation against mining 2021–25 (rule R*); dashed = context.")
     outer = fig.add_gridspec(3, 1, hspace=0.42)
     axs = []
     for g in range(3):
@@ -124,7 +137,7 @@ def run(pack, reg):
         a, r = axs[2 * k], axs[2 * k + 1]
         a.bar(m.index, m[c], width=28, align="edge", color=cols[c])
         a.set_ylabel("km2 per month", fontsize=8)
-        a.set_title(c if c != MUN else "Munduruku (incl. Sai-Cinza and Taquara territories)", loc="left", fontsize=10, pad=22)
+        a.set_title(c if c != MUN else "Munduruku (incl. Sai-Cinza)", loc="left", fontsize=10, pad=30)
         r.plot(roll.index, roll[c], color="#222222", lw=1.5)
         r.set_ylabel("km2, trailing\n12-month sum", fontsize=8)
         r.set_ylim(bottom=0)
@@ -133,7 +146,7 @@ def run(pack, reg):
             for dt, lab, col, solid in ev[c]:
                 aa.axvline(pd.Timestamp(dt), color=col, ls="-" if solid else "--", lw=1.3 if solid else 0.9, zorder=0)
         for i, (dt, lab, col, solid) in enumerate(ev[c]):
-            a.annotate(lab, xy=(pd.Timestamp(dt), 1.0), xycoords=("data", "axes fraction"), xytext=(0, 2 + 8 * i),
+            a.annotate(lab, xy=(pd.Timestamp(dt), 1.0), xycoords=("data", "axes fraction"), xytext=(0, 2 + 8 * (i % 3)),
                        textcoords="offset points", fontsize=6.8, color=col, ha="center", va="bottom", annotation_clip=False)
         a.tick_params(labelbottom=False)
         if k < 2:

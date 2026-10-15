@@ -1,0 +1,174 @@
+year,zone,where,ha
+2019,amarakaeri_bz,inside earlier AMW patch,312.604651487704
+2019,amarakaeri_bz,inside same/later AMW patch,158.8062838924346
+2019,amarakaeri_bz,outside AMW,6.535261990621889
+2019,communities,inside earlier AMW patch,343.50417655707156
+2019,communities,inside same/later AMW patch,100.71515164254187
+2019,communities,outside AMW,14.645425974650028
+2019,corridor_across,inside earlier AMW patch,232.2680496743849
+2019,corridor_across,inside same/later AMW patch,74.60217618852883
+2019,corridor_across,outside AMW,0.9587680903439142
+2019,corridor_rest,inside earlier AMW patch,1723.4520982643012
+2019,corridor_rest,inside same/later AMW patch,1134.3973472430923
+2019,corridor_rest,outside AMW,210.35125294600806
+2019,lapampa,inside earlier AMW patch,1011.2868697439067
+2019,lapampa,inside same/later AMW patch,490.9117657599492
+2019,lapampa,outside AMW,29.70379217603858
+2019,rest_mdd,inside earlier AMW patch,15.878796857515162
+2019,rest_mdd,inside same/later AMW patch,3.5763086832909137
+2019,rest_mdd,outside AMW,0.5225588160115083
+2019,tambopata_bz_rest,inside earlier AMW patch,181.9361665130445
+2019,tambopata_bz_rest,inside same/later AMW patch,129.67859009761813
+2019,tambopata_bz_rest,outside AMW,81.15553745308037
+2019,tambopata_nr,inside earlier AMW patch,38.409472115928686
+2019,tambopata_nr,inside same/later AMW patch,5.9226788174304374
+2019,tambopata_nr,outside AMW,3.30961884852784
+2020,amarakaeri_bz,inside earlier AMW patch,424.3472984103897
+2020,amarakaeri_bz,inside same/later AMW patch,110.88464906098663
+2020,amarakaeri_bz,outside AMW,24.831089697416488
+2020,communities,inside earlier AMW patch,487.0550115210887
+2020,communities,inside same/later AMW patch,149.0105418527575
+2020,communities,outside AMW,11.076696591584994
+2020,corridor_across,inside earlier AMW patch,308.25885978941756
+2020,corridor_across,inside same/later AMW patch,94.81924206185352
+2020,corridor_across,outside AMW,0.08717505937015939
+2020,corridor_rest,inside earlier AMW patch,2239.7599942172483
+2020,corridor_rest,inside same/later AMW patch,1000.6104478362384
+2020,corridor_rest,outside AMW,280.1507260266921
+2020,lapampa,inside earlier AMW patch,259.8013253030547
+2020,lapampa,inside same/later AMW patch,69.78264182085336
+2020,lapampa,outside AMW,9.667507418847617
+2020,rest_mdd,inside earlier AMW patch,35.25818268787108
+2020,rest_mdd,inside same/later AMW patch,17.45073132565802
+2020,rest_mdd,outside AMW,6.183102349848576
+2020,tambopata_bz_rest,inside earlier AMW patch,149.11737510721022
+2020,tambopata_bz_rest,inside same/later AMW patch,44.765532264369504
+2020,tambopata_bz_rest,outside AMW,100.66151682654402
+2020,tambopata_nr,inside earlier AMW patch,43.81001395078732
+2020,tambopata_nr,inside same/later AMW patch,2.874302700707485
+2020,tambopata_nr,outside AMW,6.793763083023508
+2021,amarakaeri_bz,inside earlier AMW patch,618.1143409682378
+2021,amarakaeri_bz,inside same/later AMW patch,130.39733885298335
+2021,amarakaeri_bz,outside AMW,22.13778109183853
+2021,bahuaja_bz,outside AMW,0.6964357642507711
+2021,communities,inside earlier AMW patch,665.3709339027223
+2021,communities,inside same/later AMW patch,167.20725909579585
+2021,communities,outside AMW,18.659360681385316
+2021,corridor_across,inside earlier AMW patch,589.781239690895
+2021,corridor_across,inside same/later AMW patch,82.3634755995543
+2021,corridor_across,outside AMW,3.2245420555482296
+2021,corridor_rest,inside earlier AMW patch,3195.8884747127427
+2021,corridor_rest,inside same/later AMW patch,1081.1339374749612
+2021,corridor_rest,outside AMW,205.21948677904524
+2021,lapampa,inside earlier AMW patch,288.468168567037
+2021,lapampa,inside same/later AMW patch,71.00224628493878
+2021,lapampa,outside AMW,33.012928638192314
+2021,rest_mdd,inside earlier AMW patch,75.66171819038766
+2021,rest_mdd,inside same/later AMW patch,13.961982646749345
+2021,rest_mdd,outside AMW,10.276885874791672
+2021,tambopata_bz_rest,inside earlier AMW patch,141.10535121794652
+2021,tambopata_bz_rest,inside same/later AMW patch,36.667508974357226
+2021,tambopata_bz_rest,outside AMW,52.949288323285444
+2021,tambopata_nr,inside earlier AMW patch,20.64255909923281
+2021,tambopata_nr,inside same/later AMW patch,0.1741997954464547
+2021,tambopata_nr,outside AMW,5.487133574727053
+2022,amarakaeri_bz,inside earlier AMW patch,741.2210492550814
+2022,amarakaeri_bz,inside same/later AMW patch,177.76431099627854
+2022,amarakaeri_bz,outside AMW,65.20836356981899
+2022,bahuaja_bz,outside AMW,0.8705252597731699
+2022,communities,inside earlier AMW patch,895.8418407013854
+2022,communities,inside same/later AMW patch,95.212953279238
+2022,communities,outside AMW,36.44267629395047
+2022,corridor_across,inside earlier AMW patch,616.1348162309721
+2022,corridor_across,inside same/later AMW patch,147.8263818419051
+2022,corridor_across,outside AMW,14.031242741050917
+2022,corridor_rest,inside earlier AMW patch,4506.163394913919
+2022,corridor_rest,inside same/later AMW patch,1518.1150268415454
+2022,corridor_rest,outside AMW,603.5210868997374
+2022,lapampa,inside earlier AMW patch,456.54482741485015
+2022,lapampa,inside same/later AMW patch,81.37234637897825
+2022,lapampa,outside AMW,19.426560322832316
+2022,rest_mdd,inside earlier AMW patch,74.98217478764882
+2022,rest_mdd,inside same/later AMW patch,12.749306988692393
+2022,rest_mdd,outside AMW,6.9750588564964495
+2022,tambopata_bz_rest,inside earlier AMW patch,104.01398130022609
+2022,tambopata_bz_rest,inside same/later AMW patch,27.43612533422464
+2022,tambopata_bz_rest,outside AMW,47.72298581131123
+2022,tambopata_nr,inside earlier AMW patch,10.104606621923363
+2022,tambopata_nr,inside same/later AMW patch,1.4808181901707846
+2022,tambopata_nr,outside AMW,1.6548983352065314
+2023,amarakaeri_bz,inside earlier AMW patch,838.1413126073028
+2023,amarakaeri_bz,inside same/later AMW patch,263.23533930684505
+2023,amarakaeri_bz,outside AMW,79.59116077093113
+2023,communities,inside earlier AMW patch,1209.327741487612
+2023,communities,inside same/later AMW patch,172.946315163922
+2023,communities,outside AMW,39.41840046643827
+2023,corridor_across,inside earlier AMW patch,551.3849226254471
+2023,corridor_across,inside same/later AMW patch,147.39598221440352
+2023,corridor_across,outside AMW,28.501808018098707
+2023,corridor_rest,inside earlier AMW patch,6243.7484269924735
+2023,corridor_rest,inside same/later AMW patch,2064.3662354431685
+2023,corridor_rest,outside AMW,885.9745700180158
+2023,lapampa,inside earlier AMW patch,987.0782049740345
+2023,lapampa,inside same/later AMW patch,168.7497707535813
+2023,lapampa,outside AMW,73.7773979614433
+2023,other_anp,outside AMW,1.8282445146964752
+2023,rest_mdd,inside earlier AMW patch,100.16924594315172
+2023,rest_mdd,inside same/later AMW patch,35.9506074088165
+2023,rest_mdd,outside AMW,19.360762994455506
+2023,tambopata_bz_rest,inside earlier AMW patch,166.3690860855561
+2023,tambopata_bz_rest,inside same/later AMW patch,54.09141341128256
+2023,tambopata_bz_rest,outside AMW,159.62430623877336
+2023,tambopata_nr,inside earlier AMW patch,44.332418931826325
+2023,tambopata_nr,inside same/later AMW patch,20.558890053974867
+2023,tambopata_nr,outside AMW,25.263944987346733
+2024,amarakaeri_bz,inside earlier AMW patch,464.0733016933352
+2024,amarakaeri_bz,inside same/later AMW patch,194.2094136693319
+2024,amarakaeri_bz,outside AMW,78.5582330752497
+2024,bahuaja_bz,outside AMW,2.2637236336837714
+2024,communities,inside earlier AMW patch,502.13892787613395
+2024,communities,inside same/later AMW patch,183.8621743753425
+2024,communities,outside AMW,45.69682331380657
+2024,corridor_across,inside earlier AMW patch,282.32072806163023
+2024,corridor_across,inside same/later AMW patch,68.07457689020335
+2024,corridor_across,outside AMW,6.886168386360694
+2024,corridor_rest,inside earlier AMW patch,3296.098435993851
+2024,corridor_rest,inside same/later AMW patch,1209.8028391765306
+2024,corridor_rest,outside AMW,688.4873944037552
+2024,lapampa,inside earlier AMW patch,742.5238592460945
+2024,lapampa,inside same/later AMW patch,198.01982902390696
+2024,lapampa,outside AMW,45.901881896342275
+2024,rest_mdd,inside earlier AMW patch,46.849300760360734
+2024,rest_mdd,inside same/later AMW patch,4.975343106698921
+2024,rest_mdd,outside AMW,9.33395726532563
+2024,tambopata_bz_rest,inside earlier AMW patch,75.86613603944042
+2024,tambopata_bz_rest,inside same/later AMW patch,39.63139021332806
+2024,tambopata_bz_rest,outside AMW,55.21379603243648
+2024,tambopata_nr,inside earlier AMW patch,6.096885831006974
+2024,tambopata_nr,inside same/later AMW patch,22.477462791686886
+2024,tambopata_nr,outside AMW,25.787907103831298
+2025,amarakaeri_bz,inside earlier AMW patch,719.9978943346752
+2025,amarakaeri_bz,inside same/later AMW patch,193.45677068438474
+2025,amarakaeri_bz,outside AMW,192.52884276318355
+2025,communities,inside earlier AMW patch,941.4480569582732
+2025,communities,inside same/later AMW patch,186.30632172158707
+2025,communities,outside AMW,80.23625711733595
+2025,corridor_across,inside earlier AMW patch,259.39636579367635
+2025,corridor_across,inside same/later AMW patch,13.945642405997104
+2025,corridor_across,outside AMW,14.81740278456317
+2025,corridor_rest,inside earlier AMW patch,5178.88935456077
+2025,corridor_rest,inside same/later AMW patch,1101.4564425467536
+2025,corridor_rest,outside AMW,1370.5201543523133
+2025,lapampa,inside earlier AMW patch,1164.63693036775
+2025,lapampa,inside same/later AMW patch,284.6005964887179
+2025,lapampa,outside AMW,46.518028552652794
+2025,other_anp,outside AMW,0.8712283030434621
+2025,rest_mdd,inside earlier AMW patch,78.61009695223356
+2025,rest_mdd,inside same/later AMW patch,15.085965852002646
+2025,rest_mdd,outside AMW,94.53220150549136
+2025,tambopata_bz_rest,inside earlier AMW patch,122.04267631493346
+2025,tambopata_bz_rest,inside same/later AMW patch,84.42036927704804
+2025,tambopata_bz_rest,outside AMW,171.40853317194913
+2025,tambopata_nr,inside earlier AMW patch,40.156950903005374
+2025,tambopata_nr,inside same/later AMW patch,135.4681685364074
+2025,tambopata_nr,outside AMW,62.378090758138214

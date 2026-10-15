@@ -1,31 +1,36 @@
-spec,treated,control,pre,post,DiD_ha_per_yr,claim_type,note
-(a) main: control = Amarakaeri BZ (main),Tambopata BZ,Amarakaeri|Reserva Comunal,2016-2018,2019-2021,-1761.8,description,Main control; partly treated too (Camanti)
-(a) placebo: control = Amarakaeri BZ (main),Tambopata BZ,Amarakaeri|Reserva Comunal,2013-2015,2016-2018,208.7,description,"Main control; partly treated too (Camanti); PLACEBO window: no real treatment, a large value = pre-trend/noise"
-(a) persistence: control = Amarakaeri BZ (main),Tambopata BZ,Amarakaeri|Reserva Comunal,2016-2018,2022-2025,-737.0,description,Main control; partly treated too (Camanti)
-(a) main: control = Bahuaja-Sonene BZ,Tambopata BZ,Bahuaja-Sonene|Parque Nacional,2016-2018,2019-2021,-1506.1,description,"Tiny pre-period mining (mean ~13 ha/yr), so a weak counterfactual"
-(a) placebo: control = Bahuaja-Sonene BZ,Tambopata BZ,Bahuaja-Sonene|Parque Nacional,2013-2015,2016-2018,72.2,description,"Tiny pre-period mining (mean ~13 ha/yr), so a weak counterfactual; PLACEBO window: no real treatment, a large value = pre-trend/noise"
-(a) persistence: control = Bahuaja-Sonene BZ,Tambopata BZ,Bahuaja-Sonene|Parque Nacional,2016-2018,2022-2025,120.2,description,"Tiny pre-period mining (mean ~13 ha/yr), so a weak counterfactual"
-"(a) main: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",Tambopata BZ,Amarakaeri|Reserva Comunal; Bahuaja-Sonene|Parque Nacional,2016-2018,2019-2021,-1634.0,description,Mean of the two zones
-"(a) placebo: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",Tambopata BZ,Amarakaeri|Reserva Comunal; Bahuaja-Sonene|Parque Nacional,2013-2015,2016-2018,140.4,description,"Mean of the two zones; PLACEBO window: no real treatment, a large value = pre-trend/noise"
-"(a) persistence: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",Tambopata BZ,Amarakaeri|Reserva Comunal; Bahuaja-Sonene|Parque Nacional,2016-2018,2022-2025,-308.4,description,Mean of the two zones
-"(a) main: control = Amarakaeri + Bahuaja-Sonene, summed",Tambopata BZ,Amarakaeri|Reserva Comunal; Bahuaja-Sonene|Parque Nacional,2016-2018,2019-2021,-1790.8,description,Sum of the two zones
-"(a) placebo: control = Amarakaeri + Bahuaja-Sonene, summed",Tambopata BZ,Amarakaeri|Reserva Comunal; Bahuaja-Sonene|Parque Nacional,2013-2015,2016-2018,205.2,description,"Sum of the two zones; PLACEBO window: no real treatment, a large value = pre-trend/noise"
-"(a) persistence: control = Amarakaeri + Bahuaja-Sonene, summed",Tambopata BZ,Amarakaeri|Reserva Comunal; Bahuaja-Sonene|Parque Nacional,2016-2018,2022-2025,-806.3,description,Sum of the two zones
-(a) main: control = Rest of Madre de Dios,Tambopata BZ,dept. minus MdD buffer zones,2016-2018,2019-2021,-3726.5,description,Includes the legal mining corridor; ~5-10x the scale of the treated unit; see (d)
-(a) placebo: control = Rest of Madre de Dios,Tambopata BZ,dept. minus MdD buffer zones,2013-2015,2016-2018,-10.3,description,"Includes the legal mining corridor; ~5-10x the scale of the treated unit; see (d); PLACEBO window: no real treatment, a large value = pre-trend/noise"
-(a) persistence: control = Rest of Madre de Dios,Tambopata BZ,dept. minus MdD buffer zones,2016-2018,2022-2025,-7143.3,description,Includes the legal mining corridor; ~5-10x the scale of the treated unit; see (d)
-"(a) main: control = Other Peruvian-Amazon-department buffer zones with 2014-18 mining (n=12), mean",Tambopata BZ,12 zones,2016-2018,2019-2021,-1504.8,description,Equal-weight mean; department-based Amazon filter
-"(a) placebo: control = Other Peruvian-Amazon-department buffer zones with 2014-18 mining (n=12), mean",Tambopata BZ,12 zones,2013-2015,2016-2018,86.8,description,"Equal-weight mean; department-based Amazon filter; PLACEBO window: no real treatment, a large value = pre-trend/noise"
-"(a) persistence: control = Other Peruvian-Amazon-department buffer zones with 2014-18 mining (n=12), mean",Tambopata BZ,12 zones,2016-2018,2022-2025,96.3,description,Equal-weight mean; department-based Amazon filter
-"(a) main: control = All Peru buffer zones with 2014-18 mining (n=14), mean (event-study pool B)",Tambopata BZ,14 zones,2016-2018,2019-2021,-1502.1,description,Any department; includes non-Amazon zones
-"(a) placebo: control = All Peru buffer zones with 2014-18 mining (n=14), mean (event-study pool B)",Tambopata BZ,14 zones,2013-2015,2016-2018,84.8,description,"Any department; includes non-Amazon zones; PLACEBO window: no real treatment, a large value = pre-trend/noise"
-"(a) persistence: control = All Peru buffer zones with 2014-18 mining (n=14), mean (event-study pool B)",Tambopata BZ,14 zones,2016-2018,2022-2025,112.2,description,Any department; includes non-Amazon zones
-"(b) event study (ref 2018), pool B without Amarakaeri",Tambopata BZ,13 zones,2018 (reference),2019-2021,-1595.5,description,Mean event-study coefficient over the post window (reference year 2018 only; not the same baseline as the 2016-18 DiD)
-"(b) event study (ref 2018), pool B without Amarakaeri",Tambopata BZ,13 zones,2018 (reference),2022-2025,64.2,description,Mean event-study coefficient over the post window (reference year 2018 only; not the same baseline as the 2016-18 DiD)
-"(b) event study (ref 2018), pool A without Amarakaeri",Tambopata BZ,1 zones,2018 (reference),2019-2021,-1611.0,description,Mean event-study coefficient over the post window (reference year 2018 only; not the same baseline as the 2016-18 DiD)
-"(b) event study (ref 2018), pool A without Amarakaeri",Tambopata BZ,1 zones,2018 (reference),2022-2025,15.4,description,Mean event-study coefficient over the post window (reference year 2018 only; not the same baseline as the 2016-18 DiD)
-"(b) event study (ref 2018), pool B full (reference for the two rows above)",Tambopata BZ,14 zones,2018 (reference),2019-2021,-1632.5,description,"Same estimator, nothing dropped"
-"(b) event study (ref 2018), pool B full (reference for the two rows above)",Tambopata BZ,14 zones,2018 (reference),2022-2025,-18.2,description,"Same estimator, nothing dropped"
-"(b) displacement: sum of the 2 other zones (Tambopata dropped), before/after change",Amarakaeri + Bahuaja-Sonene (summed),(none),2016-18,2019-2021,313.6,description,Not a DiD: change in mean annual addition. Positive = the neighbours gained
-"(b) displacement: sum of the 2 other zones (Tambopata dropped), before/after change",Amarakaeri + Bahuaja-Sonene (summed),(none),2016-18,2022-2025,995.8,description,Not a DiD: change in mean annual addition. Positive = the neighbours gained
-(d) rest-of-MdD definition: all biomes vs Amazonia only,Rest of Madre de Dios,(n/a),2014-25,,0.0,description,Value = max abs difference in annual additions (ha). MdD non-Amazon-biome mining max 0.00 ha; that biome is 0.07% of the department area. Mismatch negligible; the real issue is the legal mining corridor inside 'rest'.
+spec,window,note,did_net,did_new,did_remined,did_stopped
+(a) main: control = Amarakaeri buffer zone (main),2016–18 vs 2019–21,Main control; partly treated too (Mercurio II covered all of Madre de Dios),-1760.6,-1108.9,-2.1,649.5
+(a) placebo: control = Amarakaeri buffer zone (main),2013–15 vs 2016–18,Main control; partly treated too (Mercurio II covered all of Madre de Dios),208.5,281.1,96.0,168.6
+(a) persistence: control = Amarakaeri buffer zone (main),2016–18 vs 2022–25,Main control; partly treated too (Mercurio II covered all of Madre de Dios),-736.5,-1209.9,485.7,12.3
+(a) main: control = Bahuaja-Sonene buffer zone,2016–18 vs 2019–21,Tiny pre-period mining: a weak counterfactual,-1505.2,-984.5,168.5,689.2
+(a) placebo: control = Bahuaja-Sonene buffer zone,2013–15 vs 2016–18,Tiny pre-period mining: a weak counterfactual,72.2,63.4,239.4,230.6
+(a) persistence: control = Bahuaja-Sonene buffer zone,2016–18 vs 2022–25,Tiny pre-period mining: a weak counterfactual,120.1,-746.4,784.7,-81.8
+"(a) main: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",2016–18 vs 2019–21,,-1632.9,-1046.7,83.2,669.4
+"(a) placebo: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",2013–15 vs 2016–18,,140.4,172.3,167.7,199.6
+"(a) persistence: control = Amarakaeri + Bahuaja-Sonene, equal-weight mean",2016–18 vs 2022–25,,-308.2,-978.1,635.2,-34.7
+"(a) main: control = Amarakaeri + Bahuaja-Sonene, summed",2016–18 vs 2019–21,Scale mismatch; do not cite,-1789.6,-1138.5,-3.7,647.4
+"(a) placebo: control = Amarakaeri + Bahuaja-Sonene, summed",2013–15 vs 2016–18,Scale mismatch; do not cite,205.1,278.0,94.6,167.5
+"(a) persistence: control = Amarakaeri + Bahuaja-Sonene, summed",2016–18 vs 2022–25,Scale mismatch; do not cite,-805.8,-1285.0,475.3,-4.0
+(a) main: control = Mining corridor outside buffer zones (Madre de Dios),2016–18 vs 2019–21,"Legal corridor: a likely destination of displaced miners, so spillovers bias the DiD away from zero",-3543.8,-2906.1,-614.1,23.6
+(a) placebo: control = Mining corridor outside buffer zones (Madre de Dios),2013–15 vs 2016–18,"Legal corridor: a likely destination of displaced miners, so spillovers bias the DiD away from zero",59.5,314.7,-29.6,225.6
+(a) persistence: control = Mining corridor outside buffer zones (Madre de Dios),2016–18 vs 2022–25,"Legal corridor: a likely destination of displaced miners, so spillovers bias the DiD away from zero",-6006.5,-6174.5,-1054.1,-1222.1
+"(a) main: control = Native communities (Madre de Dios, outside buffer zones)",2016–18 vs 2019–21,,-1796.6,-1194.0,-23.0,579.6
+"(a) placebo: control = Native communities (Madre de Dios, outside buffer zones)",2013–15 vs 2016–18,,166.4,221.4,171.9,226.9
+"(a) persistence: control = Native communities (Madre de Dios, outside buffer zones)",2016–18 vs 2022–25,,-920.2,-1355.1,330.0,-104.9
+(a) main: control = Rest of Madre de Dios (outside every other zone),2016–18 vs 2019–21,Little mining,-1534.5,-1006.2,165.3,693.5
+(a) placebo: control = Rest of Madre de Dios (outside every other zone),2013–15 vs 2016–18,Little mining,77.1,80.4,235.3,238.6
+(a) persistence: control = Rest of Madre de Dios (outside every other zone),2016–18 vs 2022–25,Little mining,81.8,-787.8,785.0,-84.6
+"(a) main: control = Other Amazon buffer zones with 2014-18 mining (n=7), mean",2016–18 vs 2019–21,definitions.AMAZON_BZ,-1524.4,-990.7,145.1,678.8
+"(a) placebo: control = Other Amazon buffer zones with 2014-18 mining (n=7), mean",2013–15 vs 2016–18,definitions.AMAZON_BZ,96.9,97.0,220.6,220.7
+"(a) persistence: control = Other Amazon buffer zones with 2014-18 mining (n=7), mean",2016–18 vs 2022–25,definitions.AMAZON_BZ,28.8,-828.8,741.3,-116.3
+"(a) main: control = All other Peruvian buffer zones with 2014-18 mining (n=14), mean",2016–18 vs 2019–21,Event-study pool B; includes non-Amazon zones,-1500.7,-973.7,158.1,685.1
+"(a) placebo: control = All other Peruvian buffer zones with 2014-18 mining (n=14), mean",2013–15 vs 2016–18,Event-study pool B; includes non-Amazon zones,84.8,83.2,229.5,227.9
+"(a) persistence: control = All other Peruvian buffer zones with 2014-18 mining (n=14), mean",2016–18 vs 2022–25,Event-study pool B; includes non-Amazon zones,112.7,-751.3,769.0,-95.0
+"(b) event study (ref 2018), pool B without Amarakaeri buffer zone",2019–21,13 zones,-1593.8,-1313.4,92.9,373.3
+"(b) event study (ref 2018), pool B without Amarakaeri buffer zone",2022–25,13 zones,64.8,-1066.1,713.3,-417.7
+"(b) event study (ref 2018), pool A without Amarakaeri buffer zone",2019–21,1 zones,-1609.9,-1325.3,90.1,374.7
+"(b) event study (ref 2018), pool A without Amarakaeri buffer zone",2022–25,1 zones,15.4,-1087.2,706.2,-396.3
+"(b) event study (ref 2018), pool B full",2019–21,14 zones,-1630.9,-1330.6,76.4,376.7
+"(b) event study (ref 2018), pool B full",2022–25,14 zones,-17.5,-1108.2,687.3,-403.3
+"(b) displacement: Amarakaeri + Bahuaja-Sonene summed, change in mean",2016–18 vs 2019–21,not a DiD,313.4,183.6,173.8,44.1
+"(b) displacement: Amarakaeri + Bahuaja-Sonene summed, change in mean",2016–18 vs 2022–25,not a DiD,995.1,613.8,319.8,-61.5

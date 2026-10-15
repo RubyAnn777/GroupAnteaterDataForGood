@@ -8,6 +8,10 @@ Filters: SIT_CANCELADO == "N" (not cancelled); year of DAT_HORA_AUTO_INFRACAO ==
 Legal Amazon = autos whose UF is AC AP AM MA MT PA RO RR TO. All types of autos (fines, warnings) are counted.
 Mining flag = NOISY regex on the accent-stripped lower-case text of DES_INFRACAO + DES_AUTO_INFRACAO
 (see MIN below). It will include some non-mining autos and miss autos with generic text. Description only.
+Review card 12 (D-S12-7, 2026-10-15): bare `lavra` also matched "lavrado"/"lavratura" (the verbs for ISSUING an auto);
+it is now a whole word (\blavra\b). The reference table in docs/overnight/notes/ibama_annual.csv used the old regex,
+so only the columns that do not depend on the mining regex are compared with it.
+Do not read the all-autos counts as evidence of weaker MINING enforcement in 2019-22 (card 12, T9).
 """
 from __future__ import annotations
 import re, unicodedata, zipfile
@@ -20,7 +24,7 @@ NOTES_REF = ROOT / "docs" / "overnight" / "notes" / "ibama_annual.csv"
 YEARS = range(2014, 2026)
 COLS = ["SIT_CANCELADO", "DAT_HORA_AUTO_INFRACAO", "UF", "DES_INFRACAO", "DES_AUTO_INFRACAO",
         "DES_LOCAL_INFRACAO", "DS_BIOMAS_ATINGIDOS", "OPERACAO"]
-MIN = re.compile(r"garimp|lavra|minerio|mineracao|extracao mineral|extrair.*(ouro|minerio|mineral)|\bouro\b|"
+MIN = re.compile(r"garimp|\blavra\b|minerio|mineracao|extracao mineral|extrair.*(?:ouro|minerio|mineral)|\bouro\b|"
                  r"cassiterita|dragagem|recursos minerais|bens minerais|permissao de lavra|ccaa|mercurio")
 IND = re.compile(r"terra indigena|terras indigenas|\bti\b|indigena|yanomami|munduruku|kayapo|raposa serra")
 AML = {"AC", "AP", "AM", "MA", "MT", "PA", "RO", "RR", "TO"}
@@ -59,8 +63,9 @@ def load() -> tuple[pd.DataFrame, str]:
         t.to_csv(INTERMEDIATE, index=False)
         if NOTES_REF.exists():
             ref = pd.read_csv(NOTES_REF)
-            pd.testing.assert_frame_equal(t.reset_index(drop=True), ref.reset_index(drop=True), check_dtype=False)
-            print("OK   IBAMA rebuilt table equals docs/overnight/notes/ibama_annual.csv")
+            same = [c for c in t.columns if "mining" not in c]              # mining columns use the new regex
+            pd.testing.assert_frame_equal(t[same].reset_index(drop=True), ref[same].reset_index(drop=True), check_dtype=False)
+            print("OK   IBAMA rebuilt table equals docs/overnight/notes/ibama_annual.csv on all non-mining columns")
         return t, "rebuilt"
     print(f"WARNING: {ZIP.relative_to(ROOT)} not found; using committed intermediate "
           f"{INTERMEDIATE.relative_to(ROOT)} (not rebuilt from raw).")

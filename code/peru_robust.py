@@ -1,240 +1,118 @@
-"""Phase 5 robustness for the Peru 2x2 DiD (Tambopata buffer zone = more-treated unit). Description only.
+"""Robustness of the Peru 2x2 DiD (plan v3): alternative controls, drop the largest unit. Description only.
 
-(a) alternative controls, (b) drop the largest unit, (c) output/peru_robustness.csv, (d) the "rest of Madre de
-Dios" definition issue. One treated unit: no standard errors anywhere, by design.
+Outcome = NET mining additions (ha/yr) = new land + re-mined - stopped, MapBiomas Peru Collection 4 rasters, our pixel
+accounting. Buffer zones come whole from the national raster panel (zonedata.bz_panel); Madre de Dios land outside
+buffer zones from the region registry (zonedata.region_units: corridor outside buffer zones, native communities,
+rest of Madre de Dios). Every quantity here is a mean, a difference or an equal-weight event-study coefficient, so all
+are linear: each is registered for net AND new land, re-mined and stopped, and net = new + re-mined - stopped holds
+(asserted). One treated unit: no standard errors anywhere, by design.
 
-Definitions
-- Additions: one row per unit-year first (sum over departments), then diff (rule 2).
-- Multi-unit controls are the EQUAL-WEIGHT MEAN of the units' additions (same weighting as the event study),
-  except where the spec says "summed".
-- "Peruvian Amazon" controls: the buffer-zone table has no biome column, so we keep only the ROWS whose
-  department has an Amazonía-biome row in peru_department_year.csv (16 departments), drop the rest (e.g.
-  Ancash, Lambayeque, Ica, Tumbes, Arequipa, Apurimac, Moquegua), sum to zone-year, and keep zones with non-zero
-  additions in 2014-18 (pre-2019 mining; selecting on pre-period only, not on the outcome). Department is a
-  coarse proxy: Cusco, Junin, Puno etc. also hold Andean land, so some retained rows may be non-Amazonian.
+Windows from definitions: main = pre (2016-18) vs during (2019-21); placebo = fake start 2016 (2013-15 vs 2016-18);
+persistence = pre vs later years (2022-25). Multi-unit controls are EQUAL-WEIGHT MEANS of the units' net additions
+(as in the event study) unless the spec says "summed". "Amazon" pool = definitions.AMAZON_BZ (one filter for all
+modules). The v2 checks of the workbook's "rest of Madre de Dios" definition and of buffer-zone overlaps are gone:
+the raster registry is an exclusive partition (raster_zones.py), and the workbook is only a reconciliation check.
 """
 from __future__ import annotations
-import numpy as np
 import pandas as pd
 
-from common import ROOT, OUT, period_mean
+from common import OUT
+import definitions as D
+import zonedata as Z
 import peru
 
-TU = "Tambopata|Reserva Nacional"
-AM = "Amarakaeri|Reserva Comunal"
-BA = "Bahuaja-Sonene|Parque Nacional"
+T, AM, BA = D.TREATED_ZONE, "amarakaeri_bz", "bahuaja_bz"
+MEAS = ["net"] + D.PARTS
 WINDOWS = {  # name -> (pre, post)
-    "main": ((2016, 2018), (2019, 2021)),
-    "placebo": ((2013, 2015), (2016, 2018)),
-    "persistence": ((2016, 2018), (2022, 2025)),
+    "main": (D.PERIODS["pre"], D.PERIODS["during"]),
+    "placebo": (D.PLACEBO_PERIODS["pre"], D.PLACEBO_PERIODS["during"]),
+    "persistence": (D.PERIODS["pre"], D.PERIODS["later"]),
 }
-SRC = "peru_bufferzone_year.csv, peru_department_year.csv"
+SRC = D.SOURCE
 
-def _unit_adds(zb: pd.DataFrame) -> pd.DataFrame:
-    zb = zb.assign(unit=zb["buffer_zone"] + "|" + zb["pa_category"])
-    lv = zb.groupby(["unit", "year"])["mining_ha"].sum().unstack("unit")
-    assert lv.index.is_monotonic_increasing and (np.diff(lv.index) == 1).all()
-    return lv.diff()
+
+def _lab(w):
+    (a, b), (c, d) = w
+    return f"{a}–{str(b)[2:]} vs {c}–{str(d)[2:]}"
+
 
 def _did(t: pd.Series, c: pd.Series, pre, post) -> float:
-    return (period_mean(t, *post) - period_mean(t, *pre)) - (period_mean(c, *post) - period_mean(c, *pre))
+    return (Z.period_mean(t, post) - Z.period_mean(t, pre)) - (Z.period_mean(c, post) - Z.period_mean(c, pre))
 
-GEOJSON = ROOT / "data_raw" / "sernanp" / "zonas_amortiguamiento.geojson"
 
-def bz_overlap_check(zb, pe, reg):
-    """Do the Madre de Dios buffer zones overlap each other? 'Rest of MdD' = department minus the SUM of buffer-zone
-    rows, which double-subtracts any overlap. Part 1: geometry (SERNANP polygons, equal-area CRS ESRI:102033).
-    Part 2: MapBiomas, sum of MdD buffer-zone total_ha vs department total_ha (Amazonia). Descriptive."""
-    # ---- part 2 (always possible): MapBiomas areas
-    mdd_bz = zb[zb["department"] == "Madre de Dios"]
-    bz_area = float(mdd_bz[mdd_bz["year"] == 2025]["total_ha"].sum())
-    dep_area = float(pe[(pe["department"] == "Madre de Dios") & (pe["biome"] == "Amazonía") & (pe["year"] == 2025)]["total_ha"].sum())
-    reg.add("bz_mdd_total_ha_sum_2025", bz_area, "ha", "Sum of total_ha over all buffer-zone rows in Madre de Dios, 2025 (MapBiomas Peru Col 4). "
-            "If buffer zones overlapped, this would double-count area.", "description", SRC)
-    reg.add("bz_mdd_dept_total_ha_2025", dep_area, "ha", "total_ha of Madre de Dios department, Amazonia biome, 2025 (MapBiomas Peru Col 4)", "description", SRC)
-    reg.add("bz_mdd_share_of_dept_area", 100 * bz_area / dep_area, "%", "Sum of MdD buffer-zone area as % of the department area (Amazonia biome). "
-            "Below 100 is plausible for non-overlapping zones; the subtraction in 'rest of MdD' is then possible.", "description", SRC)
-    print(f"(e) MdD buffer-zone area sum {bz_area:,.0f} ha = {100*bz_area/dep_area:.1f}% of department {dep_area:,.0f} ha")
-    # ---- part 1: geometry
-    if not GEOJSON.exists():
-        print(f"WARNING: {GEOJSON} missing; skipping buffer-zone overlap geometry check")
-        return
-    import geopandas as gpd
-    g = gpd.read_file(GEOJSON)
-    cols = list(g.columns)
-    print("buffer-zone geojson columns:", cols)
-    namecol = next((c for c in cols if c.lower() in ("anp_nomb", "nombre", "name", "anp_nombre", "zoa_nomb")), None) \
-        or next(c for c in cols if g[c].dtype == object)
-    g = g.to_crs("ESRI:102033")
-    g["geometry"] = g.geometry.make_valid()
-    wanted = ["Tambopata", "Bahuaja", "Amarakaeri", "Manu", "Purús", "Purus", "Megantoni"]
-    mask = g[namecol].astype(str).str.contains("|".join(wanted), case=False, regex=True)
-    sel = g[mask].reset_index(drop=True)
-    names = sel[namecol].astype(str).tolist()
-    # merge polygons that belong to the same-named zone
-    sel = sel.dissolve(by=namecol).reset_index()
-    names = sel[namecol].astype(str).tolist()
-    print("zones used for overlap check:", names)
-    rows = []
-    for i in range(len(sel)):
-        for j in range(i + 1, len(sel)):
-            a, b = sel.geometry[i], sel.geometry[j]
-            inter = a.intersection(b).area / 1e4
-            amin = min(a.area, b.area) / 1e4
-            rows.append(dict(zone_a=names[i], zone_b=names[j], overlap_ha=inter, smaller_zone_ha=amin,
-                             overlap_pct_of_smaller=100 * inter / amin if amin else np.nan))
-    ov = pd.DataFrame(rows).sort_values("overlap_ha", ascending=False)
-    top = ov.iloc[0]
-    # Is the overlap double-counted in the PACK? (referee C10) MapBiomas assigns each pixel to one buffer zone: if a
-    # zone's pack total_ha (all departments, 2025) falls short of its polygon area by the overlap, the overlap went to
-    # the other zone only, and the pack series are overlap-free.
-    poly = dict(zip(names, sel.geometry.area / 1e4))
-    pack = zb[zb["year"] == 2025].groupby("buffer_zone")["total_ha"].sum()
-    def pack_ha(nm):                                     # SERNANP anp_nomb = pack buffer_zone name
-        return float(pack[nm]) if nm in pack.index else np.nan
-    short = {nm: poly[nm] - pack_ha(nm) for nm in (top.zone_a, top.zone_b)}
-    owner_less = max(short, key=lambda k: short[k])                       # the zone that lost the overlap in the pack
-    gap = short[owner_less] - float(top.overlap_ha)
-    free = abs(gap) <= 0.01 * float(top.overlap_ha)
-    ov["in_pack"] = np.where(ov["overlap_pct_of_smaller"] > 1, "overlap pixels counted once in the pack (see bz_overlap_pack_*)", "")
-    ov.round(2).to_csv(OUT / "peru_bz_overlap.csv", index=False)
-    print(ov.round(1).head(6).to_string(index=False))
-    print(f"pack vs polygon: {owner_less} polygon - pack = {short[owner_less]:,.0f} ha vs overlap {top.overlap_ha:,.0f} ha -> "
-          + ("overlap-free" if free else "CHECK: overlap may be double-counted"))
-    note = (f" The pack's {owner_less} total_ha is smaller than its polygon by about the overlap (bz_overlap_pack_*), so "
-            "MapBiomas assigned the overlap to one zone only: the pack series are overlap-free and 'rest of MdD' is not "
-            "double-subtracted." if free else " CHECK: the pack areas do not absorb the overlap; 'rest of MdD' may be understated.")
-    gsrc = "data_raw/sernanp/zonas_amortiguamiento.geojson; peru_bufferzone_year.csv"
-    reg.add("bz_overlap_max_ha", float(top.overlap_ha), "ha",
-            f"Largest pairwise geographic overlap among Madre de Dios buffer zones (SERNANP polygons, ESRI:102033): "
-            f"{top.zone_a} x {top.zone_b} ({top.overlap_pct_of_smaller:.2f}% of the smaller zone).{note} Pair table: output/peru_bz_overlap.csv",
-            "description", gsrc)
-    reg.add("bz_overlap_max_pct_of_smaller", float(top.overlap_pct_of_smaller), "%",
-            f"Same pair ({top.zone_a} x {top.zone_b}), overlap as % of the smaller zone (SERNANP polygons).{note}", "description", gsrc)
-    reg.add("bz_overlap_pack_polygon_ha", poly[owner_less], "ha", f"{owner_less} buffer zone, SERNANP polygon area (ESRI:102033)", "description", gsrc)
-    reg.add("bz_overlap_pack_total_ha", pack_ha(owner_less), "ha", f"{owner_less} buffer zone, pack total_ha 2025, all departments (MapBiomas Peru Col 4)", "description", gsrc)
-    reg.add("bz_overlap_pack_shortfall_ha", short[owner_less], "ha", f"{owner_less}: polygon area minus pack total_ha; equals the overlap if MapBiomas assigned it to the other zone", "description", gsrc)
-    reg.add("bz_overlap_pack_free", float(free), "0/1", "1 if the polygon-minus-pack shortfall equals the overlap within 1% (pack series overlap-free)", "description", gsrc)
-
-def run(pack, reg, series=None):
-    print("\n== Peru robustness (Phase 5) ==")
-    zb, pe = pack["zb"], pack["pe"]
-    ad_all = _unit_adds(zb)
-
-    # ---- Amazon-department-restricted pool
-    amz_depts = set(pe.loc[pe["biome"] == "Amazonía", "department"])
-    zr = zb[zb["department"].isin(amz_depts)]
-    dropped = sorted(set(zb["department"]) - amz_depts)
-    ad_amz = _unit_adds(zr)
-    nz = ad_amz.loc[2014:2018].abs().sum() > 0
-    amz_pool = sorted(u for u in nz[nz].index if u != TU)
-    print(f"Amazon-department rows kept; departments dropped: {dropped}; pool = {len(amz_pool)} zones")
-    # all-Peru pool B (as in the event study, any department)
-    nzB = ad_all.loc[2014:2018].abs().sum() > 0
-    poolB = sorted(u for u in nzB[nzB].index if u != TU)
-
-    levels, adds, _ = series if series is not None else peru.build_series(pack)
-    rest = adds["Rest of Madre de Dios"]
-    controls = {
-        "Amarakaeri BZ (main)": (AM, ad_all[AM], "Main control; partly treated too (Camanti)"),
-        "Bahuaja-Sonene BZ": (BA, ad_all[BA], "Tiny pre-period mining (mean ~13 ha/yr), so a weak counterfactual"),
-        "Amarakaeri + Bahuaja-Sonene, equal-weight mean": (f"{AM}; {BA}", (ad_all[AM] + ad_all[BA]) / 2,
-                                                          "Mean of the two zones"),
-        "Amarakaeri + Bahuaja-Sonene, summed": (f"{AM}; {BA}", ad_all[AM] + ad_all[BA], "Sum of the two zones"),
-        "Rest of Madre de Dios": ("dept. minus MdD buffer zones", rest,
-                                  "Includes the legal mining corridor; ~5-10x the scale of the treated unit; see (d)"),
-        f"Other Peruvian-Amazon-department buffer zones with 2014-18 mining (n={len(amz_pool)}), mean":
-            ("; ".join(amz_pool), ad_amz[amz_pool].mean(axis=1), "Equal-weight mean; department-based Amazon filter"),
-        f"All Peru buffer zones with 2014-18 mining (n={len(poolB)}), mean (event-study pool B)":
-            ("; ".join(poolB), ad_all[poolB].mean(axis=1), "Any department; includes non-Amazon zones"),
+def run(pack, reg):
+    print("\n== Peru robustness (v3: net additions, raster registry) ==")
+    bz, _, poolB_all = peru.pools()
+    W = {m: Z.wide(bz, D.COLS[m]) for m in MEAS}
+    R = {m: Z.wide(Z.region_units(), D.COLS[m]) for m in MEAS}
+    code = bz.groupby("unit").bz_code.first()
+    poolB = [u for u in poolB_all if u != T]
+    amz = [u for u in poolB if code[u] in D.AMAZON_BZ]
+    controls = {   # sid: (name, function measure -> series, note)
+        "amarakaeri": ("Amarakaeri buffer zone (main)", lambda m: W[m][AM],
+                       "Main control; partly treated too (Mercurio II covered all of Madre de Dios)"),
+        "bahuaja": ("Bahuaja-Sonene buffer zone", lambda m: W[m][BA], "Tiny pre-period mining: a weak counterfactual"),
+        "ama_bah_mean": ("Amarakaeri + Bahuaja-Sonene, equal-weight mean", lambda m: (W[m][AM] + W[m][BA]) / 2, ""),
+        "ama_bah_sum": ("Amarakaeri + Bahuaja-Sonene, summed", lambda m: W[m][AM] + W[m][BA], "Scale mismatch; do not cite"),
+        "corridor_outside_bz": ("Mining corridor outside buffer zones (Madre de Dios)",
+                                lambda m: R[m]["corridor_outside_bz"], "Legal corridor: a likely destination of "
+                                "displaced miners, so spillovers bias the DiD away from zero"),
+        "communities": ("Native communities (Madre de Dios, outside buffer zones)", lambda m: R[m]["communities"], ""),
+        "rest_mdd": ("Rest of Madre de Dios (outside every other zone)", lambda m: R[m]["rest_mdd"], "Little mining"),
+        "amazon_pool": (f"Other Amazon buffer zones with 2014-18 mining (n={len(amz)}), mean",
+                        lambda m: W[m][amz].mean(axis=1), "definitions.AMAZON_BZ"),
+        "all_peru_poolB": (f"All other Peruvian buffer zones with 2014-18 mining (n={len(poolB)}), mean",
+                           lambda m: W[m][poolB].mean(axis=1), "Event-study pool B; includes non-Amazon zones"),
     }
     rows = []
-    def add_row(spec, treated, control, win, did, note, kind="did"):
-        pre, post = WINDOWS[win] if win in WINDOWS else win
-        rows.append(dict(spec=spec, treated=treated, control=control, pre=f"{pre[0]}-{pre[1]}",
-                         post=f"{post[0]}-{post[1]}", DiD_ha_per_yr=round(float(did), 1),
-                         claim_type="description", note=note))
-    for name, (cid, cs, note) in controls.items():
+    for sid, (name, f, note) in controls.items():
         for w, (pre, post) in WINDOWS.items():
-            d = _did(ad_all[TU], cs, pre, post)
-            add_row(f"(a) {w}: control = {name}", "Tambopata BZ", cid if len(cid) < 90 else f"{len(cid.split('; '))} zones", w, d,
-                    note + ("; PLACEBO window: no real treatment, a large value = pre-trend/noise" if w == "placebo" else ""))
-    # register the main-window numbers under stable ids
-    ids = ["amarakaeri", "bahuaja", "ama_bah_mean", "ama_bah_sum", "rest_mdd", "amazon_pool", "all_peru_poolB"]
-    for (name, (cid, cs, note)), sid in zip(controls.items(), ids):
-        for w, (pre, post) in WINDOWS.items():
-            sp = "SUM of controls (scale mismatch; do not cite): " if sid == "ama_bah_sum" else ""
-            reg.add(f"robust_did_{w}_{sid}", _did(ad_all[TU], cs, pre, post), "ha/yr",
-                    f"{sp}DiD of mean annual additions, Tambopata BZ minus control [{name}], {w} windows "
-                    f"{pre[0]}-{pre[1]} -> {post[0]}-{post[1]}. Descriptive contrast; not causal.", "description", SRC)
+            vals = {m: _did(W[m][T], f(m), pre, post) for m in MEAS}
+            assert abs(vals["net"] - (vals["new"] + vals["remined"] - vals["stopped"])) < 0.01
+            per = _lab((pre, post))
+            Z.register_parts(reg, f"robust_did_{w}_{sid}", vals, T, per,
+                             f"DiD of period means, Tambopata buffer zone minus [{name}], {w} windows"
+                             + ("; SUM of controls, scale mismatch, do not cite" if sid == "ama_bah_sum" else "")
+                             + ("; PLACEBO: no real treatment" if w == "placebo" else ""), source=SRC)
+            rows.append(dict(spec=f"(a) {w}: control = {name}", window=per, note=note,
+                             **{f"did_{m}": round(vals[m], 1) for m in MEAS}))
 
-    # ---- (b) drop the largest unit
-    def largest(units):   # largest by mean annual addition 2014-18 (pre-2019 mining)
-        m = ad_all.loc[2014:2018, units].mean()
-        return m.idxmax(), float(m.max())
-    big_B, mB = largest(poolB)
-    poolB2 = [u for u in poolB if u != big_B]
+    # ---- (b) drop the largest control unit (by mean net addition 2014-18)
+    a, b = D.PERIODS["pre_long"]
+    pre = W["net"].loc[a:b].mean()
+    big_B = pre[poolB].idxmax()
     poolA = [AM, BA]
-    big_A, mA = largest(poolA)
-    print(f"Largest pre-2019 control: pool B = {big_B} ({mB:,.0f} ha/yr); pool A = {big_A} ({mA:,.0f} ha/yr)")
-    for lab, units, sid in [("pool B without " + big_B.split("|")[0], poolB2, "poolB_drop_largest"),
-                            ("pool A without " + big_A.split("|")[0], [u for u in poolA if u != big_A], "poolA_drop_largest")]:
-        b = peru.beta_by_formula(ad_all[[TU] + units], TU)
-        for lo, hi in [(2019, 2021), (2022, 2025)]:
-            v = float(b.loc[lo:hi].mean())
-            rows.append(dict(spec=f"(b) event study (ref 2018), {lab}", treated="Tambopata BZ", control=f"{len(units)} zones",
-                             pre="2018 (reference)", post=f"{lo}-{hi}", DiD_ha_per_yr=round(v, 1), claim_type="description",
-                             note="Mean event-study coefficient over the post window (reference year 2018 only; not the same "
-                                  "baseline as the 2016-18 DiD)"))
-            reg.add(f"robust_es_{sid}_{lo}_{hi}", v, "ha/yr", f"Mean event-study coefficient {lo}-{hi}, {lab}", "description", SRC)
-    b_full = peru.beta_by_formula(ad_all[[TU] + poolB], TU)
-    for lo, hi in [(2019, 2021), (2022, 2025)]:
-        v = float(b_full.loc[lo:hi].mean())
-        rows.append(dict(spec="(b) event study (ref 2018), pool B full (reference for the two rows above)", treated="Tambopata BZ",
-                         control=f"{len(poolB)} zones", pre="2018 (reference)", post=f"{lo}-{hi}", DiD_ha_per_yr=round(v, 1),
-                         claim_type="description", note="Same estimator, nothing dropped"))
-        reg.add(f"robust_es_poolB_full_{lo}_{hi}", v, "ha/yr", f"Mean event-study coefficient {lo}-{hi}, pool B full", "description", SRC)
-    # displacement sum without Tambopata: Amarakaeri + Bahuaja-Sonene
-    s2 = ad_all[AM] + ad_all[BA]
-    base = period_mean(s2, 2016, 2018)
-    for lo, hi in [(2019, 2021), (2022, 2025)]:
-        v = period_mean(s2, lo, hi) - base
-        rows.append(dict(spec="(b) displacement: sum of the 2 other zones (Tambopata dropped), before/after change",
-                         treated="Amarakaeri + Bahuaja-Sonene (summed)", control="(none)", pre="2016-18", post=f"{lo}-{hi}",
-                         DiD_ha_per_yr=round(v, 1), claim_type="description",
-                         note="Not a DiD: change in mean annual addition. Positive = the neighbours gained"))
-        reg.add(f"robust_displ_two_zones_chg_{lo}_{hi}", v, "ha/yr",
-                f"Change in mean annual addition, Amarakaeri + Bahuaja-Sonene summed (Tambopata dropped), {lo}-{hi} vs 2016-18",
-                "description", SRC)
-
-    # ---- (d) rest-of-MdD definition issue
-    mdd_all = pe[pe["department"] == "Madre de Dios"].groupby("year")["mining_ha"].sum()
-    mdd_amz = pe[(pe["department"] == "Madre de Dios") & (pe["biome"] == "Amazonía")].groupby("year")["mining_ha"].sum()
-    non_amz = (mdd_all - mdd_amz)
-    mdd_bz = zb[zb["department"] == "Madre de Dios"].groupby("year")["mining_ha"].sum()
-    rest_all = mdd_all - mdd_bz
-    area = pe[pe["department"] == "Madre de Dios"].groupby("biome")["total_ha"].first()
-    adds_alt = rest_all.diff()
-    out_d = pd.DataFrame({"MdD mining, Amazonia biome": mdd_amz, "MdD mining, all biomes": mdd_all,
-                          "non-Amazon-biome mining (diff)": non_amz, "buffer-zone rows in MdD": mdd_bz,
-                          "rest of MdD (Amazonia - BZ)": mdd_amz - mdd_bz, "rest of MdD (all biomes - BZ)": rest_all})
-    out_d.round(2).to_csv(OUT / "peru_rest_mdd_definition_check.csv")
-    mx = float(non_amz.abs().max())
-    print(f"(d) MdD non-Amazon-biome mining: max over years {mx:.3f} ha (2025: {non_amz.loc[2025]:.3f} ha); "
-          f"non-Amazon biome area {area.get('Andes', np.nan):,.0f} ha of {area.sum():,.0f} ha ({area.get('Andes', np.nan)/area.sum():.2%})")
-    diff_adds = float((adds_alt - adds["Rest of Madre de Dios"]).abs().loc[2014:2025].max())
-    reg.add("restmdd_nonamazon_mining_max_ha", mx, "ha", "Max over 1985-2025 of MdD mining outside the Amazonia biome (department table, all biomes minus Amazonia)", "description", SRC)
-    reg.add("restmdd_nonamazon_area_share", float(area.get("Andes", 0) / area.sum()), "share", "Share of Madre de Dios department area in the non-Amazon (Andes) biome", "description", SRC)
-    reg.add("restmdd_definition_max_abs_diff_additions", diff_adds, "ha", "Max abs difference in annual additions 2014-25 between 'rest of MdD' defined with all biomes vs Amazonia only", "description", SRC)
-    rows.append(dict(spec="(d) rest-of-MdD definition: all biomes vs Amazonia only", treated="Rest of Madre de Dios", control="(n/a)",
-                     pre="2014-25", post="", DiD_ha_per_yr=round(diff_adds, 3), claim_type="description",
-                     note=f"Value = max abs difference in annual additions (ha). MdD non-Amazon-biome mining max {mx:.2f} ha; "
-                          f"that biome is {area.get('Andes', np.nan)/area.sum():.2%} of the department area. Mismatch negligible; the real "
-                          f"issue is the legal mining corridor inside 'rest'."))
-    bz_overlap_check(zb, pe, reg)
+    big_A = pre[poolA].idxmax()
+    print(f"Largest pre-2019 control: pool B = {big_B} ({pre[big_B]:,.0f} ha/yr); pool A = {big_A} ({pre[big_A]:,.0f})")
+    specs = [(f"pool B without {Z.bz_name(big_B)}", [u for u in poolB if u != big_B], "poolB_drop_largest"),
+             (f"pool A without {Z.bz_name(big_A)}", [u for u in poolA if u != big_A], "poolA_drop_largest"),
+             ("pool B full", poolB, "poolB_full")]
+    for lab, units, sid in specs:
+        bm = {m: peru.beta(W[m][[T] + units], T) for m in MEAS}
+        for key in ("during", "later"):
+            lo, hi = D.PERIODS[key]
+            vals = {m: float(bm[m].loc[lo:hi].mean()) for m in MEAS}
+            assert abs(vals["net"] - (vals["new"] + vals["remined"] - vals["stopped"])) < 0.01
+            Z.register_parts(reg, f"robust_es_{sid}_{key}", vals, T, D.period_label(key),
+                             f"mean event-study coefficient (reference {D.REF_YEAR}), Tambopata buffer zone vs {lab} "
+                             f"({len(units)} zones, equal weights)", source=SRC)
+            rows.append(dict(spec=f"(b) event study (ref {D.REF_YEAR}), {lab}", window=D.period_label(key),
+                             note=f"{len(units)} zones", **{f"did_{m}": round(vals[m], 1) for m in MEAS}))
+    # displacement into the two other Madre de Dios-linked buffer zones (Tambopata dropped)
+    for key in ("during", "later"):
+        vals = {m: Z.period_mean(W[m][AM] + W[m][BA], key) - Z.period_mean(W[m][AM] + W[m][BA], "pre") for m in MEAS}
+        Z.register_parts(reg, f"robust_displ_two_zones_chg_{key}", vals, "amarakaeri_bz + bahuaja_bz",
+                         f"{D.period_label('pre')} vs {D.period_label(key)}", "change in the period mean, Amarakaeri + "
+                         "Bahuaja-Sonene buffer zones summed (positive = the neighbours gained); not a DiD", source=SRC)
+        rows.append(dict(spec="(b) displacement: Amarakaeri + Bahuaja-Sonene summed, change in mean",
+                         window=f"{D.period_label('pre')} vs {D.period_label(key)}", note="not a DiD",
+                         **{f"did_{m}": round(vals[m], 1) for m in MEAS}))
     tab = pd.DataFrame(rows)
     tab.to_csv(OUT / "peru_robustness.csv", index=False)
-    show = tab[tab.spec.str.startswith("(a)")][["spec", "DiD_ha_per_yr"]]
-    print(show.to_string(index=False, max_colwidth=110))
-    print(tab[~tab.spec.str.startswith("(a)")][["spec", "post", "DiD_ha_per_yr"]].to_string(index=False, max_colwidth=100))
+    print(tab[["spec", "window", "did_net", "did_new", "did_remined", "did_stopped"]].to_string(index=False, max_colwidth=90))
     return tab
+
+
+if __name__ == "__main__":
+    from common import Numbers, load_pack
+    reg = Numbers(); run(load_pack(), reg)

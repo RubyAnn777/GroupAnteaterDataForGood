@@ -1,7 +1,7 @@
-definition,unit,p2016_18,p2019_21,p2022_25
-main,Corridor across the road,69.0,463.0,538.0
-main,La Pampa sector,1395.0,722.0,987.0
-narrow,Corridor across the road,69.0,462.0,536.0
-narrow,La Pampa sector,1370.0,664.0,851.0
-wide,Corridor across the road,69.0,463.0,543.0
-wide,La Pampa sector,1441.0,743.0,1023.0
+definition,zone,net_pre,new_pre,remined_pre,stopped_pre,net_during,new_during,remined_during,stopped_during,net_later,new_later,remined_later,stopped_later
+main,corridor_across,60.0,69.0,65.0,74.0,395.0,462.0,192.0,259.0,602.0,538.0,241.0,177.0
+main,lapampa,1208.0,1441.0,257.0,491.0,85.0,755.0,389.0,1059.0,1629.0,1067.0,932.0,370.0
+narrow,corridor_across,60.0,69.0,65.0,74.0,394.0,462.0,192.0,259.0,601.0,535.0,241.0,175.0
+narrow,lapampa,1184.0,1373.0,249.0,438.0,39.0,666.0,366.0,994.0,1426.0,872.0,858.0,305.0
+wide,corridor_across,60.0,69.0,65.0,74.0,395.0,462.0,192.0,259.0,607.0,543.0,241.0,177.0
+wide,lapampa,1322.0,1593.0,258.0,530.0,123.0,863.0,409.0,1149.0,1683.0,1149.0,979.0,445.0

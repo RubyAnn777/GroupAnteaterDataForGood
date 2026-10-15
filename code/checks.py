@@ -1,4 +1,15 @@
-"""Source checks. Re-runs the starter's 6 checks plus the Q2 card numbers. Any failure raises."""
+"""Source checks. Any failure raises.
+
+Three kinds (plan v3, docs/PLAN_v3.md):
+  1. PUBLISHER checks: the starter's six checks (our number = the publisher's number).
+  2. REPRODUCTION checks: the course card numbers (Tambopata 1,640 -> 163, Amarakaeri 289 -> 574, DiD -1,762 ha/yr)
+     recomputed from the course statistics workbook (data/peru_bufferzone_year.csv). They show we reproduce the card;
+     the ANALYSIS no longer uses the workbook (it uses the raster zone registry, zonedata.py).
+  3. v3 RECONCILIATION checks: the raster zone registry (MapBiomas Peru Col 4 rasters, our pixel accounting) against
+     the publisher's statistics workbook, from data_intermediate/bz_reconciliation.csv (written by raster_zones.py):
+     Tambopata and Amarakaeri buffer-zone stock within 1% in every year with real mining, the card's period means
+     within 2 ha/yr, and Madre de Dios 2025 within 1%.
+"""
 from __future__ import annotations
 import pandas as pd
 from common import OUT, BZ_KEY, additions, period_mean
@@ -12,6 +23,10 @@ def check(label: str, value: float, expected: float, tol: float = 1.0):
     _rows.append(dict(label=label, value=value, expected=expected, ok=ok))
     if not ok:
         raise AssertionError(f"{label}: got {value:,.0f}, expected {expected:,.0f}")
+
+def check_rel(label: str, value: float, expected: float, rel: float = 0.01):
+    """Relative check: |value - expected| <= rel * |expected|, else raise."""
+    check(label, value, expected, tol=rel * abs(expected) + 1e-9)
 
 def check_pending(label: str, our_value: float, note: str = "pending: platform check"):
     """Publisher-side check not yet done: recorded in checks.csv as pending (not a pass, not a failure)."""
@@ -44,19 +59,19 @@ def run_checks(pack: dict) -> None:
           sub.loc[(sub["territory"] == "all indigenous lands combined") & (sub["year"] == 2025),
                   "mining_artisanal_ha"].sum(), 39915)
 
-    # --- Q2 card: mean annual additions 2016-18 -> 2019-21, buffer zone summed over ALL its departments
-    # (the starter's definition; it reproduces the card). Rounded numbers, tolerance 0.5 ha.
+    # --- REPRODUCTION checks (course card), from the statistics workbook: mean annual additions 2016-18 -> 2019-21,
+    # buffer zone summed over ALL its departments (the starter's definition). Not used by any analysis (plan v3).
     w = (zb.groupby(["buffer_zone", "pa_category", "year"], as_index=False)["mining_ha"].sum())
     a = additions(w.assign(unit=w["buffer_zone"] + "|" + w["pa_category"]), "unit")
     s = {u: g.set_index("year")["addition_ha"] for u, g in a.groupby("unit")}
     tam, ama = s["Tambopata|Reserva Nacional"], s["Amarakaeri|Reserva Comunal"]
     t0, t1 = period_mean(tam, 2016, 2018), period_mean(tam, 2019, 2021)
     a0, a1 = period_mean(ama, 2016, 2018), period_mean(ama, 2019, 2021)
-    check("Card: Tambopata mean annual addition 2016-18, ha/yr", t0, 1640, tol=1)
-    check("Card: Tambopata mean annual addition 2019-21, ha/yr", t1, 163, tol=1)
-    check("Card: Amarakaeri mean annual addition 2016-18, ha/yr", a0, 289, tol=1)
-    check("Card: Amarakaeri mean annual addition 2019-21, ha/yr", a1, 574, tol=1)
-    check("Starter: hand-computed DiD (Tambopata minus Amarakaeri), ha/yr", (t1 - t0) - (a1 - a0), -1762, tol=1.5)
+    check("REPRODUCTION (course card, workbook): Tambopata mean annual addition 2016-18, ha/yr", t0, 1640, tol=1)
+    check("REPRODUCTION (course card, workbook): Tambopata mean annual addition 2019-21, ha/yr", t1, 163, tol=1)
+    check("REPRODUCTION (course card, workbook): Amarakaeri mean annual addition 2016-18, ha/yr", a0, 289, tol=1)
+    check("REPRODUCTION (course card, workbook): Amarakaeri mean annual addition 2019-21, ha/yr", a1, 574, tol=1)
+    check("REPRODUCTION (starter, workbook): hand-computed DiD (Tambopata minus Amarakaeri), ha/yr", (t1 - t0) - (a1 - a0), -1762, tol=1.5)
 
     # --- why does agent.md §10 show 1,638 / 284 / 540? Those are the Madre de Dios ROWS only; Amarakaeri and
     # Tambopata also have small rows in Cusco / Puno. Documented, not a check on the card.
@@ -67,8 +82,38 @@ def run_checks(pack: dict) -> None:
     print(f"     (info) MdD-rows-only means: Tambopata 2016-18 {period_mean(ms['Tambopata|Reserva Nacional'],2016,2018):,.1f}, "
           f"Amarakaeri 2016-18 {period_mean(ms['Amarakaeri|Reserva Comunal'],2016,2018):,.1f} "
           f"vs all-department definition {t0:,.1f} / {a0:,.1f}")
+    reconcile_v3(pe)
     save()
     print("All checks OK.")
+
+
+def reconcile_v3(pe=None) -> None:
+    """v3 RECONCILIATION: raster zone registry vs the publisher's statistics workbook (check, not data)."""
+    from common import ROOT
+    import zonedata as Z
+    f = ROOT / "data_intermediate" / "bz_reconciliation.csv"
+    if not f.exists():
+        print("PEND v3 reconciliation: data_intermediate/bz_reconciliation.csv missing (run raster_zones.py)"); return
+    print("\n== v3 reconciliation: raster registry vs statistics workbook ==")
+    r = pd.read_csv(f)
+    for code, name in (("RN09", "Tambopata"), ("RC03", "Amarakaeri")):
+        d = r[(r.bz_code == code) & (r.mining_ha_workbook >= 100)]
+        rel = (d.diff_ha.abs() / d.mining_ha_workbook)
+        worst = d.loc[rel.idxmax()]
+        check(f"RECONCILIATION: {name} BZ raster stock vs workbook, worst year {int(worst.year)} of {len(d)}, rel. diff <= 1% "
+              "(value = max rel. diff x 100)", 100 * rel.max(), 0.0, tol=1.0)
+    t = r[(r.bz_code == "RN09") & (r.year == 2025)].iloc[0]
+    check_rel("RECONCILIATION: Tambopata BZ mining 2025, raster registry vs workbook (20,730 ha), ha", t.mining_ha_raster,
+              t.mining_ha_workbook, 0.01)
+    ru = Z.region_units()
+    s = lambda u: ru[ru.unit == u].set_index("year")
+    card = {("tambopata_bz", "pre"): 1640, ("tambopata_bz", "during"): 163,
+            ("amarakaeri_bz", "pre"): 289, ("amarakaeri_bz", "during"): 574}
+    for (u, p), v in card.items():
+        check(f"RECONCILIATION: {u} net additions {p} mean, raster registry vs card {v} ha/yr (tol 2)",
+              Z.period_mean(s(u).net_ha, p), v, tol=2.0)
+    check_rel("RECONCILIATION: Madre de Dios mining 2025, raster registry vs department table (112,622 ha), ha",
+              s("mdd").loc[2025, "mining_ha"], 112622, 0.01)
 
 def run_new_data_checks() -> None:
     """Publisher checks for data added on 2026-10-11 (rule-based control search, Brazil). Called from main after the

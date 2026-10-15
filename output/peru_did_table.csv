@@ -1,0 +1,17 @@
+design,note,measure,change_tambopata_bz,change_amarakaeri_bz,did
+main,2016–18 vs 2019–21,net,-1476.2,284.4,-1760.6
+main,2016–18 vs 2019–21,new,-954.9,154.0,-1108.9
+main,2016–18 vs 2019–21,remined,170.1,172.2,-2.1
+main,2016–18 vs 2019–21,stopped,691.4,41.9,649.5
+base2014,2014–18 vs 2019–21,net,-1430.9,231.4,-1662.3
+base2014,2014–18 vs 2019–21,new,-931.3,81.7,-1012.9
+base2014,2014–18 vs 2019–21,remined,267.1,222.9,44.2
+base2014,2014–18 vs 2019–21,stopped,766.7,73.1,693.6
+placebo,fake start 2016: 2013–15 vs 2016–18,net,75.6,-132.9,208.5
+placebo,fake start 2016: 2013–15 vs 2016–18,new,66.5,-214.6,281.1
+placebo,fake start 2016: 2013–15 vs 2016–18,remined,240.9,144.8,96.0
+placebo,fake start 2016: 2013–15 vs 2016–18,stopped,231.8,63.1,168.6
+persistence,2016–18 vs 2022–25 (later years),net,189.4,925.9,-736.5
+persistence,2016–18 vs 2022–25 (later years),new,-671.2,538.6,-1209.9
+persistence,2016–18 vs 2022–25 (later years),remined,795.1,309.4,485.7
+persistence,2016–18 vs 2022–25 (later years),stopped,-65.5,-77.8,12.3

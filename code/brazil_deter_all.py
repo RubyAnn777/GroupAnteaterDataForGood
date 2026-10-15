@@ -1,7 +1,8 @@
 """INPE DETER mining alerts (class MINERACAO) per month for EVERY Brazilian indigenous territory (FUNAI polygons).
 
-Extends brazil_deter.py (three territories) to all territories, so the staggered-operation analysis (brazil_stagger.py)
-can compare each operation with territories that had no operation yet. Alert polygons are intersected with territory
+Extends brazil_deter.py (three territories) to all territories. Context only: no module reads it at present
+(brazil_stagger.py uses AMW; the Brazil headline is brazil_v2.py, Collection 11 net additions). Munduruku and
+Sai-Cinza are kept as separate FUNAI codes here; the package's one complex is defined in brazil_v2.BRAZIL. Alert polygons are intersected with territory
 polygons in EPSG:5880 (equal area); area goes to the month of view_date. DETER = alerts of NEW or expanded mining
 (not a stock), few-ha minimum, cloud gaps, no river dredges. Never added to or subtracted from MapBiomas or AMW.
 Inputs: data_raw/inpe_deter/deter_amz_mineracao.geojson (committed), data_raw/funai/tis_poligonais.geojson (big).

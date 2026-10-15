@@ -405,8 +405,34 @@ def brief_html(nums: dict) -> str:
     body = re.sub(r"(<h1>.*?</h1>)\s*<p>(.*?)</p>", r'<header class="b-head">\1<p class="b-meta">\2</p></header>', body, count=1, flags=re.S)
     return body
 
+def write_brief_numbers(text: str, nums: dict) -> None:
+    """output/brief_numbers.csv: every registered number in the brief, in order of appearance (course rule: the
+    replication output lists the brief's numbers in the order they appear). The figure's own numbers (fig_brief_*,
+    title and subtitle) are listed where the figure stands."""
+    head = text.split("## References")[0]
+    used: list[str] = []
+    for i, part in enumerate(re.split(r"(?m)^!\[[^\]]*\]\(output/fig_brief_main\.png\)\s*$", head)):
+        if i == 1:
+            used += sorted(k for k in nums if k.startswith("fig_brief_"))
+        fill(part, nums, used)
+    rows, seen = [], set()
+    for k in used:
+        if k in seen:
+            continue
+        seen.add(k)
+        r = nums[k]
+        rows.append({"order": len(rows) + 1, "id": k, "value": r["value"], "unit": r.get("unit", ""),
+                     "measure": r.get("measure", ""), "zone": r.get("zone", ""), "period": r.get("period", ""),
+                     "claim_type": r.get("claim_type", ""), "description": r.get("description", "")})
+    out = ROOT / "output" / "brief_numbers.csv"
+    with open(out, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0]) if rows else ["order", "id"])
+        w.writeheader(); w.writerows(rows)
+    print(f"Saved output/brief_numbers.csv ({len(rows)} numbers, order of appearance)")
+
 def build_brief(nums: dict, build_info: str, links: dict) -> tuple[str, str, str]:
     text = prepare(BRIEF_CONTENT.read_text(encoding="utf-8"))
+    write_brief_numbers(text, nums)
     text = fill(text, nums)
     md_text = re.sub(r"\[\[([DPC])\]\]", lambda m: f"**[{BADGE_NAME[m.group(1)]}]**", text)
     md_text = md_text.replace("](output/", "](../../output/") + f"\n\n---\n*{build_info}*\n"

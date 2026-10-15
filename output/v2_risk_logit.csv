@@ -1,14 +1,15 @@
 term,coef,p
-const,-2.4621,0.0
-road_abs_km,-0.0015,0.4915
-north,-0.6131,0.0003
-river_km,-1.425,0.0
-gold_share,0.8059,0.0
-mined_share,0.1677,0.4954
-neigh_mining_km2,0.072,0.0
-z_Reserves and,-1.5569,0.0
-z_Native commu,2.414,0.0
-z_La Pampa sec,1.4969,0.0
-z_Rest of Tamb,0.5752,0.0683
-z_Other buffer,-0.1363,0.809
-corridor,2.8683,0.0
+const,-2.3081,0.0
+road_km,0.0001,0.9863
+north,-0.0427,0.9373
+river_km,-1.3841,0.0
+gold_share,0.5657,0.0
+mined_share,0.2971,0.2353
+neigh_mining_km2,0.0808,0.0
+z_protected,-1.6005,0.0067
+z_communities,2.1612,0.0
+z_lapampa,1.4881,0.0069
+z_tambopata_bz_rest,1.2183,0.0264
+z_amarakaeri_bz,0.4406,0.0103
+z_other_bz,-0.8746,0.3952
+corridor,2.2302,0.0

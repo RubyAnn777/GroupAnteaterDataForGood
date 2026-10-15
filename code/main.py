@@ -55,7 +55,7 @@ def main():
     v2_products_check.run(reg)       # why MapBiomas and AMW disagree in the corridor (densification)
     brazil_raster.run(); brazil_v2.run(reg)   # Brazil, same pixel method (Col 11 rasters) + staggered DiD + RI
     brief_figure.run(pack, reg)      # the ONE figure for the brief (v3: net additions + parts)
-    slides_figures.run(pack, reg)    # 16:9 slide figures + slide_titles.json for the FZS talk (output/slides/)
+    # slides_figures.run(pack, reg)  # TEMP (v3 migration): rebuilt with the new storyline; 16:9 slide figures + slide_titles.json for the FZS talk (output/slides/)
     reg.save()
 
 if __name__ == "__main__":

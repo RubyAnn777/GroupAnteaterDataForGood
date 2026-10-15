@@ -3,17 +3,24 @@
 The four rules, applied in order to every protected area, buffer zone and indigenous territory in the Amazon we have
 polygons for (SERNANP Peru, RAISG for the other countries and Brazil's conservation units, FUNAI territories):
   R1  Mining before 2019:  Amazon Mining Watch (AMW) detected at least MIN_STOCK ha of mining scars by 2018.
-  R2  No operation:        no enforcement operation against mining reported 2017-2025 in our documented searches
-                           (data_intermediate/operations_coded.csv; 'unclear' and 'not searched' fail).
-                           Relaxed version (R2b): no operation reported 2017-2021, i.e. during Mercurio's own years.
-  R3  Far enough away:     outside Madre de Dios (rules out the nearby areas MAAP shows received miners).
+  R2  No operation:        no VERIFIED operation against mining 2017-2025 (rule R*, brazil_v2.verdict over
+                           data_intermediate/operations_coded.csv; 'unclear' and 'not searched' fail; an area searched
+                           only for 2022-25 is 'unclear'). Relaxed version (R2b): no verified operation 2017-2021, i.e.
+                           in Mercurio's own years. Under R* an UNVERIFIED report (Munduruku, May 2021 snippet) is
+                           context, not a reason to exclude; sensitivity: count it (the area becomes 'unclear').
+  R3  Far enough away:     outside the v3 registry region (Madre de Dios + the Tambopata and Amarakaeri buffer zones),
+                           tested at the area's centre on data_intermediate/zones_mdd.tif (v2: a lon/lat box).
   R4  Geographic twin:     lowland mining like La Pampa (median elevation of the area's mining < MAX_ELEV m) AND a similar
                            scale (2018 mining at least MIN_SCALE x Tambopata's); survivors are ranked by distance to
                            Tambopata on elevation and on size of mining in 2018 (both on a log scale); best = chosen.
-Then compare Tambopata with the chosen area on the SAME measure (AMW new mining per year as % of the 2018 stock).
-AMW starts in 2018, so there is no pre-2019 trend in this comparison; pre-2019 trends are shown from MapBiomas, each area
-from its own collection (Peru Col 4 / Amazonía Col 6), side by side, never subtracted (agent.md rules 6-7).
-All results are DESCRIPTION.
+Then compare Tambopata with the chosen area on the SAME measure: AMW new area per year as % of the area's own 2018
+AMW stock, 2019-21 only (definitions.PERIODS["during"]; the twins had their own operations from 2023, so no later-years
+comparison is registered). MEASURE: AMW new area (comparable to first-time mining, NOT to net additions).
+Tambopata = the official whole Tambopata buffer zone (PE-BZ-RN09 = registry units lapampa + tambopata_bz_rest); its AMW
+series is checked against the registry raster (spatial.py). AMW starts in 2018, so pre-2019 paths come from MapBiomas,
+each area from its OWN collection: Tambopata from the MapBiomas Peru Collection 4 rasters (registry, zonedata.py), the
+twin from MapBiomas Amazonía Collection 6 statistics; shown side by side as indices, never subtracted (rules 6-7).
+Review card 10: pre-2019 growth was converging on the twins', not parallel. All results are DESCRIPTION.
 """
 from __future__ import annotations
 import warnings
@@ -24,37 +31,62 @@ from matplotlib.lines import Line2D
 
 from common import (ROOT, OUT, style_axes, finish_figure, headline, label_end, callout, period_band, C, INK, INK2,
                     MUTED, GRID, AXIS, SURFACE)
+import definitions as D
+import checks
 
 INTER = ROOT / "data_intermediate"
-TU = "PE-BZ-RN09"                         # Tambopata buffer zone (treated)
+TU = "PE-BZ-RN09"                         # official whole Tambopata buffer zone (treated; registry tambopata_bz)
 AMARAKAERI = "PE-BZ-RC03"
-MDD_BOX = (-72.6, -14.6, -68.6, -10.5)    # lon/lat box around Madre de Dios (same as spatial.py)
 MIN_STOCK, MAX_ELEV, MIN_SCALE = 500.0, 500.0, 0.2
-SRC = ("Amazon Mining Watch (AMW) x SERNANP / RAISG / FUNAI polygons; SRTM 90 m elevation (OpenTopoData); "
-       "operations: data_intermediate/operations_coded.csv")
-YRS = list(range(2019, 2026))
+MEASURE = "amw_new_area"
+SRC = ("Amazon Mining Watch (AMW) new area x SERNANP / RAISG / FUNAI polygons (area-weighted); SRTM 90 m elevation "
+       "(OpenTopoData); operations: data_intermediate/operations_coded.csv, rule R* (brazil_v2)")
+SRC_MB_TAM = "MapBiomas Peru Collection 4 rasters, v3 registry (zonedata.region_units, Tambopata buffer zone)"
+SRC_MB_TWIN = "MapBiomas Amazonía Collection 6 statistics (control_mb_amazonia.py)"
+DURING = list(range(D.PERIODS["during"][0], D.PERIODS["during"][1] + 1))
+YRS = list(range(D.FIRST_POST, 2026))
 
 
 def load():
     u = pd.read_csv(INTER / "amw_candidates_units.csv").set_index("unit_id")
-    w = pd.read_csv(INTER / "amw_candidates_year.csv").pivot(index="unit_id", columns="year", values="new_ha")
+    w = pd.read_csv(INTER / "amw_candidates_year.csv").pivot(index="unit_id", columns="year", values="new_ha").fillna(0)
     e = pd.read_csv(INTER / "amw_candidates_elevation.csv").set_index("unit_id")
     ops = pd.read_csv(INTER / "operations_coded.csv").set_index("unit_id")
     assert ops.index.is_unique
     return u, w, e, ops
 
 
-def funnel(u, w, e, ops) -> pd.DataFrame:
+def in_registry(lon, lat) -> np.ndarray:
+    """True where (lon, lat) lies inside the v3 registry region (zones_mdd.tif band 1 > 0)."""
+    import rasterio
+    f = INTER / "zones_mdd.tif"
+    with rasterio.open(f) as r:
+        b = r.bounds
+        ok = (lon > b.left) & (lon < b.right) & (lat > b.bottom) & (lat < b.top)
+        out = np.zeros(len(lon), bool)
+        idx = np.where(ok)[0]
+        if len(idx):
+            out[idx] = np.array([v[0] for v in r.sample(list(zip(lon[idx], lat[idx])), indexes=1)]) > 0
+    return out
+
+
+def op_status(index, count_unverified=False):
+    """Rule R* (brazil_v2): verdict over the twin window and the first verified operation (YYYY-MM) per area."""
+    from brazil_v2 import verdict, first_verified, BRAZIL
+    v = verdict(BRAZIL["twin_window"], count_unverified=count_unverified).reindex(index).fillna("not searched")
+    first = first_verified(BRAZIL["twin_window"]).reindex(index).fillna("")
+    return v, first
+
+
+def funnel(u, w, e, ops, count_unverified=False) -> pd.DataFrame:
     t = u.join(w[[2018]].rename(columns={2018: "stock_2018"}), how="inner").join(e[["elev_median_m"]])
     t = t.drop(index=TU)
-    v = ops["verdict_2017_2025"].reindex(t.index).fillna("not searched")
-    first = ops["first_op_2017_2025"].reindex(t.index).fillna("")
-    t["verdict"] = v; t["first_op"] = first
+    t["verdict"], t["first_op"] = op_status(t.index, count_unverified)
+    fy = pd.to_numeric(t.first_op.str[:4], errors="coerce")
     t["r1_mining"] = t.stock_2018 >= MIN_STOCK
     t["r2_no_op"] = t.verdict.eq("none")
-    t["r2b_no_op_2017_21"] = t.r2_no_op | (t.verdict.eq("yes") & (t.first_op >= "2022"))
-    in_mdd = t.lon.between(MDD_BOX[0], MDD_BOX[2]) & t.lat.between(MDD_BOX[1], MDD_BOX[3]) & t.country.eq("Peru")
-    t["r3_outside_mdd"] = ~in_mdd
+    t["r2b_no_op_2017_21"] = t.r2_no_op | (t.verdict.eq("yes") & (fy > D.PERIODS["during"][1]))
+    t["r3_outside_mdd"] = ~(in_registry(t.lon.to_numpy(), t.lat.to_numpy()) & t.country.eq("Peru").to_numpy())
     t["r4_lowland"] = (t.elev_median_m < MAX_ELEV) & (t.stock_2018 >= MIN_SCALE * w.loc[TU, 2018])
     tam = (u.loc[TU], w.loc[TU, 2018], e.loc[TU, "elev_median_m"])
     t["fit_distance"] = (np.abs(np.log(t.elev_median_m.clip(lower=20) / tam[2])) + np.abs(np.log(t.stock_2018 / tam[1])))
@@ -70,17 +102,39 @@ def shares(w, ids):
 
 def compare(w, ids, label):
     s, t = shares(w, ids), shares(w, [TU])
-    d = dict(control=label, tam_during=t.loc[2019:2021].mean(), tam_after=t.loc[2022:2025].mean(),
-             ctl_during=s.loc[2019:2021].mean(), ctl_after=s.loc[2022:2025].mean())
-    d["rebound_gap"] = (d["tam_after"] - d["tam_during"]) - (d["ctl_after"] - d["ctl_during"])
+    d = dict(control=label, tam_during=t.loc[DURING].mean(), ctl_during=s.loc[DURING].mean())
     d["during_gap"] = d["tam_during"] - d["ctl_during"]
     return d
+
+
+def twins(count_unverified=False):
+    """The rule-based twins: every area passing all four rules with R2b (relaxed), best fit first. The ONE list used
+    by control_top3 / control_psm (rule R*)."""
+    u, w, e, ops = load()
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        t = funnel(u, w, e, ops, count_unverified)
+    return t[t.pass_strict | t.pass_relaxed].index.tolist(), t
+
+
+def registry_check(w):
+    """Same unit everywhere: the AMW series of the official Tambopata buffer zone polygon (vector clip, this file)
+    must equal the registry raster (spatial.py: zones lapampa + tambopata_bz_rest) within 2%."""
+    f = INTER / "amw_zone_year.csv"
+    if not f.exists():
+        return
+    z = pd.read_csv(f)
+    z = z[z.zone.isin(D.UNITS["tambopata_bz"])].groupby("year").new_ha.sum()
+    for lab, ys in (("2018 stock", [2018]), ("2019-21 sum", DURING)):
+        a, b = float(w.loc[TU, ys].sum()), float(z.loc[ys].sum())
+        checks.check(f"AMW Tambopata BZ {lab}: polygon clip vs registry raster, ha (within 2%)", a, b, tol=0.02 * b)
+    checks.save()
 
 
 def fig_funnel(t, n_all):
     steps = [("All protected areas, buffer zones and\nindigenous territories with polygons", n_all),
              ("R1  had mining before 2019 (≥ 500 ha)", int(t.r1_mining.sum())),
-             ("R2  + no operation found, 2017–25", int((t.r1_mining & t.r2_no_op).sum())),
+             ("R2  + no verified operation, 2017–25", int((t.r1_mining & t.r2_no_op).sum())),
              ("R3  + outside Madre de Dios", int((t.r1_mining & t.r2_no_op & t.r3_outside_mdd).sum())),
              ("R4  + lowland and similar scale", int(t.pass_strict.sum()))]
     names = t[t.pass_strict].name.tolist()
@@ -98,7 +152,7 @@ def fig_funnel(t, n_all):
     ax.set_xscale("symlog", linthresh=1); ax.set_xlim(0, n_all * 4)
     ax.set_xticks([]); ax.tick_params(axis="both", length=0); ax.xaxis.set_minor_locator(plt.NullLocator())
     for sp in ("top", "right", "bottom", "left"): ax.spines[sp].set_visible(False)
-    ax.text(0.99, 0.02, f"If operations after 2021 are allowed (R2b), {len(rel)} pass:\n" + ("\n".join(rel[:6]) if rel else "none"),
+    ax.text(0.99, 0.02, f"If verified operations after 2021 are allowed (R2b), {len(rel)} more pass:\n" + ("\n".join(rel[:6]) if rel else "none"),
             transform=ax.transAxes, ha="right", va="bottom", fontsize=8.5, color=INK2, linespacing=1.4)
     note = "Survivors of all four rules: " + (", ".join(names) if names else "none") + "."
     finish_figure(fig, f"Sources: {SRC}. {note} Description.", OUT / "fig_control_funnel.png")
@@ -160,19 +214,19 @@ def fig_map(t, u, w, chosen):
 
 def fig_compare(w, u, chosen_strict, chosen_relaxed, mbpre):
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(9, 4.4), gridspec_kw={"width_ratios": [1.15, 1], "wspace": 0.55})
-    tam_d = shares(w, [TU]).loc[2019:2021].mean()
+    tam_d = shares(w, [TU]).loc[DURING].mean()
     twin_id = chosen_strict or chosen_relaxed
-    twin_d = shares(w, [twin_id]).loc[2019:2021].mean() if twin_id else np.nan
-    headline(fig, "Tambopata added new mining far more slowly than its twin in 2019–21",
-             "Left: new mining per year, % of each area’s own 2018 mining (Amazon Mining Watch). "
-             "Right: mining area, index 2018 = 100 (MapBiomas).")
+    twin_d = shares(w, [twin_id]).loc[DURING].mean() if twin_id else np.nan
+    headline(fig, "Tambopata added new mining more slowly than its twin in 2019–21",
+             "Left: AMW new area per year, % of each area’s own 2018 AMW area (comparable to first-time mining, not to net\n"
+             "additions). Right: mining area (stock), index 2018 = 100, each area from its own MapBiomas collection.")
     lines = [([TU], "Tambopata BZ\n(treated)", C["lapampa"], "-")]
     if chosen_strict:
         lines.append(([chosen_strict], u.loc[chosen_strict, "name"].split(" (")[0], C["corridor"], "-"))
     if chosen_relaxed:
         lines.append(([chosen_relaxed], u.loc[chosen_relaxed, "name"].split(" (")[0] + "\n(twin; own op. 2023)", C["twin"], "-"))
     lines.append(([AMARAKAERI], "Amarakaeri BZ\n(neighbour)", C["buffer"], "-"))
-    period_band(a1, 2018.5, 2021.5, "Operation years")
+    period_band(a1, DURING[0] - 0.5, DURING[-1] + 0.5, "Mercurio and what\nfollowed (2019–21)")
     ends, ymax = [], 0.0
     for ids, lab, col, ls in lines:
         s = shares(w, ids)
@@ -195,7 +249,7 @@ def fig_compare(w, u, chosen_strict, chosen_relaxed, mbpre):
                     fontsize=7.5, color=INK, fontweight="semibold", annotation_clip=False, linespacing=1.1,
                     arrowprops=dict(arrowstyle="-", color=AXIS, lw=0.6, shrinkA=0, shrinkB=3))
     a1.set_ylabel("% of own 2018 mining")
-    a1.set_title("Pace of new mining, 2019–2025", pad=8)
+    a1.set_title("Pace of AMW new area, 2019–2025", pad=8)
     a1.set_xticks(YRS); a1.set_xticklabels([f"'{str(y)[2:]}" for y in YRS])
     a1.set_xlim(2018.6, 2025.3)
     if twin_id:
@@ -208,20 +262,27 @@ def fig_compare(w, u, chosen_strict, chosen_relaxed, mbpre):
     a2.axhline(100, color=AXIS, lw=0.8)
     style_axes(a2)
     a2.set_ylabel("Index, 2018 = 100")
-    a2.set_title("Before 2019: similar growth paths", pad=8)
+    a2.set_title("Mining area, 2010–2023 (two collections)", pad=8)
     a2.set_xticks(range(2010, 2024, 3))
-    finish_figure(fig, f"{SRC}; MapBiomas Peru Collection 4 (Tambopata) and MapBiomas Amazonía Collection 6 "
-                       "(twin, to 2023). Left: 2025 provisional (hollow dot, dashed). Right: the two collections are shown "
-                       "side by side, never subtracted. Description.", OUT / "fig_control_compare.png")
+    finish_figure(fig, f"{SRC}; right: {SRC_MB_TAM} and {SRC_MB_TWIN} (twin, to 2023). Left: 2025 provisional (hollow "
+                       "dot, dashed); the twin had its own operation from Mar 2023. Right: the two collections are shown "
+                       "side by side, never subtracted; Tambopata's growth was converging on the twin's before 2019 "
+                       "(review card 10). Description.", OUT / "fig_control_compare.png")
+
+
+def tambopata_index(y0=2009, y1=2023) -> pd.Series:
+    """Tambopata buffer zone mining area (stock), index 2018 = 100, from the MapBiomas Peru Col 4 rasters on the v3
+    registry (the official whole buffer zone; replaces the statistics workbook). Used by control_top3 / slides."""
+    import zonedata as Z
+    ru = Z.region_units()
+    t = ru[ru.unit == D.TREATED_ZONE].set_index("year").mining_ha
+    return (100 * t / t.loc[D.REF_YEAR]).loc[y0:y1]
 
 
 def mb_pre(chosen_name, col="#6250d6"):
-    """MapBiomas mining AREA (stock), index 2018 = 100: Tambopata BZ (Peru Col 4), control (Amazonía Col 6). A stock index is
-    used, not additions, because additions of a small area are too noisy to read relative to their own mean."""
-    out = []
-    zb = pd.read_csv(ROOT / "data" / "peru_bufferzone_year.csv")
-    t = zb[(zb.buffer_zone == "Tambopata") & (zb.pa_category == "Reserva Nacional")].groupby("year").mining_ha.sum()
-    out.append(("Tambopata BZ (Peru Col 4)", (100 * t / t.loc[2018]).loc[2010:2023], "#eb6834", "-"))
+    """MapBiomas mining AREA (stock), index 2018 = 100: Tambopata BZ (Peru Col 4 rasters, registry) and the control
+    (Amazonía Col 6). A stock index, not additions: additions of a small area are too noisy relative to their mean."""
+    out = [("Tambopata BZ (Peru Col 4)", tambopata_index(2010, 2023), C["lapampa"], "-")]
     f = INTER / "mb_amazonia_col6_mining.csv"
     if chosen_name and f.exists():
         m = pd.read_csv(f)
@@ -229,16 +290,25 @@ def mb_pre(chosen_name, col="#6250d6"):
         sel = m[m.territory_level_2.str.fullmatch(key, case=False)]
         if sel.geocode.nunique() >= 1:
             s = sel.groupby("year").mining_ha.sum()
-            out.append((f"{key} (Amazonía Col 6)", (100 * s / s.loc[2018]).loc[2010:2023], col, "-"))
+            out.append((f"{key} (Amazonía Col 6)", (100 * s / s.loc[D.REF_YEAR]).loc[2010:2023], col, "-"))
     return out
 
 
+def _add_ha(reg, id, v, desc, zone, period, unit="ha"):
+    reg.add(id, v, unit, desc + ". Measure: AMW new area (comparable to first-time mining, not to net additions)",
+            "description", SRC, measure=MEASURE, zone=zone, period=period)
+
+
 def run(reg):
-    print("\n== Rule-based control (Ruby's design) ==")
+    print("\n== Rule-based control (Ruby's design, rule R*) ==")
     if not (INTER / "amw_candidates_units.csv").exists():
         warnings.warn("control_select: intermediates missing; skipping"); return
     u, w, e, ops = load()
+    registry_check(w)
     t = funnel(u, w, e, ops)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        t_s = funnel(u, w, e, ops, count_unverified=True)
     keep = ["country", "kind", "name", "stock_2018", "elev_median_m", "dist_la_pampa_km", "verdict", "first_op",
             "r1_mining", "r2_no_op", "r2b_no_op_2017_21", "r3_outside_mdd", "r4_lowland", "fit_distance", "pass_strict", "pass_relaxed"]
     t[t.r1_mining][keep].round(2).to_csv(OUT / "control_funnel.csv")
@@ -253,38 +323,43 @@ def run(reg):
     print(res.round(1).to_string(index=False))
     n_all = len(u)
     reg.add("ctl_n_areas", n_all, "count", "Areas with polygons screened (SERNANP ANP+BZ, RAISG national PAs outside Peru, FUNAI TIs)", "description", SRC)
-    reg.add("ctl_n_r1", t.r1_mining.sum(), "count", f"Areas with >= {MIN_STOCK:.0f} ha AMW mining by 2018 (excl. Tambopata BZ)", "description", SRC)
-    reg.add("ctl_n_r2", (t.r1_mining & t.r2_no_op).sum(), "count", "... and no operation found 2017-2025", "description", SRC)
-    reg.add("ctl_n_r3", (t.r1_mining & t.r2_no_op & t.r3_outside_mdd).sum(), "count", "... and outside Madre de Dios", "description", SRC)
+    reg.add("ctl_n_r1", t.r1_mining.sum(), "count", f"Areas with >= {MIN_STOCK:.0f} ha AMW area by 2018 (excl. Tambopata BZ)", "description", SRC)
+    reg.add("ctl_n_r2", (t.r1_mining & t.r2_no_op).sum(), "count", "... and no verified operation 2017-2025, searched over the whole window (rule R*)", "description", SRC)
+    reg.add("ctl_n_r3", (t.r1_mining & t.r2_no_op & t.r3_outside_mdd).sum(), "count", "... and outside the registry region (Madre de Dios + Tambopata/Amarakaeri buffer zones)", "description", SRC)
     reg.add("ctl_n_r4", t.pass_strict.sum(), "count", "... and lowland mining (< 500 m) of similar scale (>= 1/5 of Tambopata): passes all rules", "description", SRC)
-    reg.add("ctl_n_relaxed", t.pass_relaxed.sum(), "count", "Pass all rules if operations after 2021 are allowed", "description", SRC)
+    reg.add("ctl_n_relaxed", t.pass_relaxed.sum(), "count", "Pass all rules if verified operations after 2021 are allowed (R2b, rule R*)", "description", SRC)
+    reg.add("ctl_n_relaxed_excl_unverified", t_s.pass_relaxed.sum(), "count", "Sensitivity: same, but an UNVERIFIED report in 2017-25 makes an area 'unclear' (fails R2b)", "description", SRC)
     reg.add("ctl_n_r1_unclear_or_unsearched", (t.r1_mining & t.verdict.isin(["unclear", "not searched"])).sum(), "count",
-            "Areas with mining whose operation status is unclear or not searched", "description", SRC)
-    reg.add("ctl_tam_stock_2018", w.loc[TU, 2018], "ha", "AMW mining stock 2018, Tambopata BZ", "description", SRC)
+            "Areas with mining whose operation status is unclear (incl. searched 2022-25 only) or not searched", "description", SRC)
+    per = D.period_label("during").replace("–", "-20")
+    _add_ha(reg, "ctl_tam_stock_2018", w.loc[TU, 2018], "AMW area detected by 2018 (stock), Tambopata buffer zone (official polygon, whole)", "tambopata_bz", "2018")
     reg.add("ctl_tam_elev_m", e.loc[TU, "elev_median_m"], "m", "Median elevation of AMW mining, Tambopata BZ", "description", SRC)
-    for r, tag in zip(rows, ["strict", "relaxed", "amarakaeri"] if cs and cr else (["strict" if cs else "relaxed", "amarakaeri"])):
-        for k in ("tam_during", "tam_after", "ctl_during", "ctl_after", "during_gap", "rebound_gap"):
-            reg.add(f"ctl_{tag}_{k}", r[k], "percent of 2018 stock / pp",
-                    f"{k}, Tambopata BZ vs {r['control']} (AMW new mining per year as % of own 2018 stock; during = 2019-21, "
-                    "after = 2022-25, 2025 provisional)", "description", SRC)
-    for r, tag in zip(rows, ["strict", "relaxed"] if cs and cr else ["strict" if cs else "relaxed"]):
+    tags = (["strict"] if cs else []) + (["relaxed"] if cr else []) + ["amarakaeri"]
+    for r, tag in zip(rows, tags):
+        for k in ("tam_during", "ctl_during", "during_gap"):
+            reg.add(f"ctl_{tag}_{k}", r[k], "pp" if k == "during_gap" else "% of 2018 AMW stock per yr",
+                    f"{k}, Tambopata BZ vs {r['control']}: AMW new area per year as % of own 2018 AMW area, {per} "
+                    "(comparable to first-time mining, not to net additions)", "description", SRC,
+                    measure="amw_pace", zone="tambopata_bz", period=per)
+    for r, tag in zip(rows, tags[:-1]):
         reg.add(f"ctl_{tag}_during_ratio", r["tam_during"] / r["ctl_during"], "ratio",
-                f"Tambopata's 2019-21 pace of new mining as a share of {r['control']}'s (both as % of own 2018 AMW stock)",
-                "description", SRC)
-        reg.add(f"ctl_{tag}_during_gap_ha", r["during_gap"] / 100 * w.loc[TU, 2018], "ha/yr (AMW scale)",
-                f"During gap vs {r['control']} converted to hectares at Tambopata's 2018 AMW stock (AMW hectares run large; "
-                "never compare with MapBiomas hectares)", "description", SRC)
+                f"Tambopata's {per} pace of AMW new area as a share of {r['control']}'s (both as % of own 2018 AMW area)",
+                "description", SRC, measure="amw_pace", zone="tambopata_bz", period=per)
+        _add_ha(reg, f"ctl_{tag}_during_gap_ha", r["during_gap"] / 100 * w.loc[TU, 2018],
+                f"Gap vs {r['control']} converted to hectares at Tambopata's 2018 AMW area (AMW hectares run large; never "
+                "compare with MapBiomas hectares)", "tambopata_bz", per, unit="ha/yr")
     for tag, c in (("strict", cs), ("relaxed", cr)):
         if c:
-            reg.add(f"ctl_{tag}_stock_2018", w.loc[c, 2018], "ha", f"AMW stock 2018, {u.loc[c, 'name']}", "description", SRC)
+            _add_ha(reg, f"ctl_{tag}_stock_2018", w.loc[c, 2018], f"AMW area detected by 2018 (stock), {u.loc[c, 'name']}", c, "2018")
             reg.add(f"ctl_{tag}_elev_m", e.loc[c, "elev_median_m"], "m", f"Median mining elevation, {u.loc[c, 'name']}", "description", SRC)
-            reg.add(f"ctl_{tag}_dist_km", u.loc[c, "dist_la_pampa_km"], "km", f"Distance to La Pampa, {u.loc[c, 'name']}", "description", SRC)
+            reg.add(f"ctl_{tag}_dist_km", u.loc[c, "dist_la_pampa_km"], "km", f"Distance to the La Pampa sector (registry), {u.loc[c, 'name']}", "description", SRC)
     fig_funnel(t, n_all)
     fig_map(t, u, w, [c for c in (cs, cr) if c])
-    pre = mb_pre(u.loc[cs, "name"] if cs else (u.loc[cr, "name"] if cr else None), "#2a78d6" if cs else "#6250d6")
+    pre = mb_pre(u.loc[cs, "name"] if cs else (u.loc[cr, "name"] if cr else None), C["corridor"] if cs else C["twin"])
     for (lab, sr, _, _), tag in zip(pre, ["tam", "twin"]):
-        reg.add(f"ctl_mb_{tag}_index_2014", sr.loc[2014], "index 2018=100", f"MapBiomas mining area 2014, index 2018 = 100: {lab}", "description", SRC)
-        reg.add(f"ctl_mb_{tag}_index_2021", sr.loc[2021], "index 2018=100", f"MapBiomas mining area 2021, index 2018 = 100: {lab}", "description", SRC)
-        reg.add(f"ctl_mb_{tag}_index_2023", sr.loc[2023], "index 2018=100", f"MapBiomas mining area 2023, index 2018 = 100: {lab}", "description", SRC)
+        src = SRC_MB_TAM if tag == "tam" else SRC_MB_TWIN
+        for y in (2014, 2021, 2023):
+            reg.add(f"ctl_mb_{tag}_index_{y}", sr.loc[y], "index 2018=100", f"Mining area (stock) {y}, index 2018 = 100: {lab}",
+                    "description", src, measure="stock", zone="tambopata_bz" if tag == "tam" else "twin", period=str(y))
     fig_compare(w, u, cs, cr, pre)
     return t, res

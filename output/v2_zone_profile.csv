@@ -1,9 +1,10 @@
 zone,legal_status,main_cost,area_km2,km_to_highway,km_to_river,gold_bearing_share,gold_mined_by_2018
-La Pampa sector,illegal,enforcement risk (illegal; operations 2019-20),542.68,7.37,1.52,0.99,0.21
-Corridor across the road,legal if titled,"taxes, permits, competition (legal if titled)",374.92,5.01,2.17,1.0,0.08
-Rest of mining corridor,legal if titled,"taxes, permits, competition",4013.48,24.93,2.02,0.85,0.1
-Native communities,depends on concession,community consent; mixed legality,1530.25,30.27,2.1,0.79,0.11
-Rest of Tambopata buffer zone,illegal,enforcement risk (illegal),1034.06,8.78,2.82,0.87,0.02
-Other buffer zones,illegal,enforcement risk (illegal),158.97,66.27,1.61,0.86,0.0
-Reserves and parks,illegal,highest enforcement risk; no road,3286.13,36.15,3.8,0.81,0.0
-Rest of Madre de Dios,illegal outside concessions,mixed; far from deposits,2455.29,40.3,6.6,0.93,0.0
+La Pampa sector,illegal,enforcement risk (illegal; Mercurio from 2019 and the operations that followed),627.09,7.76,1.52,0.92,0.2
+Corridor across the road,legal if titled,"taxes, permits, competition (legal if titled)",373.02,4.6,2.18,1.0,0.08
+Rest of mining corridor,legal if titled,"taxes, permits, competition",3928.99,19.01,2.1,0.85,0.09
+Native communities,depends on concession,community consent; mixed legality,776.21,19.32,2.52,0.92,0.09
+Rest of Tambopata buffer zone,illegal,enforcement risk (illegal),1286.22,8.41,2.53,0.74,0.04
+Amarakaeri buffer zone,illegal outside corridor land,enforcement risk (illegal outside corridor land),596.43,39.62,1.27,0.91,0.17
+Other buffer zones,illegal,enforcement risk (illegal),69.66,52.66,2.22,0.83,0.0
+Reserves and parks,illegal,highest enforcement risk; no road,3286.13,31.81,3.8,0.81,0.0
+Rest of Madre de Dios,illegal outside concessions,mixed; far from deposits,2455.29,34.58,6.6,0.93,0.0

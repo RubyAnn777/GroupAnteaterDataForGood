@@ -15,7 +15,7 @@ CODE = ROOT / "code"
 sys.path.insert(0, str(CODE))
 
 # Modules allowed to read the publisher's statistics workbook for buffer zones: course checks and the reconciliation.
-WORKBOOK_OK = {"checks.py", "raster_zones.py"}
+WORKBOOK_OK = {"checks.py", "raster_zones.py", "common.py", "definitions.py"}   # loader, docstring, checks, reconciliation
 MODULES = sorted(p for p in CODE.glob("*.py"))
 
 

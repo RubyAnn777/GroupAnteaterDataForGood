@@ -6,8 +6,13 @@ brazil_coverage-col11_<year>.tif (~750 MB each, Brazil-wide). We read only small
 /vsicurl range requests), one window per territory, so nothing big is stored. Class 30 = mining (all mining).
 Years read: 1985, 1990, 1995, 2000 and every year 2001-2025 ("first-ever mining" uses this history; mining that
 appeared and vanished between the 5-year steps before 2001 is missed - a small effect for gold fronts after 2010).
-Units: every TI in the AMW candidate list with mining (data_intermediate/amw_candidates_*), plus Yanomami rings
-0-10 km and 10-25 km outside its border (displacement next door).
+Units READ: every TI in the AMW candidate list with >= 50 ha of AMW new area (data_intermediate/amw_candidates_*), plus
+Yanomami rings 0-10 km and 10-25 km outside its border. This is only the list of windows to read. The ANALYSIS sample is
+chosen in brazil_v2.load() on PRE-treatment MapBiomas Col 11 mining (2014-18), with Munduruku + Sai-Cinza merged into
+one complex and non-mining removals dropped (review card 12, D-S12-2/8), because the AMW total includes post-treatment
+years. The intermediate is not rebuilt when it exists (network reads); a rebuild after the 2026-10-15 area-weighted
+AMW rebuild (control_amw.py) could add TIs near the 50-ha line, which the pre-2018 sample rule would drop again.
+Outcome identity: net = new_land + remined - stopped = mining(t) - mining(t-1) for t >= 2002 (checked in brazil_v2).
 Check: Kayapo mining 2024 and 2025 on the MapBiomas platform (Collection 11, FUNAI 2026 boundary): 17,632 and 18,573 ha.
 Output: data_intermediate/brazil_raster_unit_year.csv (unit x year: mining, new_land, remined, stopped ha).
 """

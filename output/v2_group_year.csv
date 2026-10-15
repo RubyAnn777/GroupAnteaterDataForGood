@@ -1,329 +1,370 @@
-year,group,mining_ha,new_land_ha,remined_ha,stopped_ha,new_ha,from_forest_ha
-1985,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1985,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1985,Native communities,0.0,0.0,0.0,0.0,0.0,0.0
-1985,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1985,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1985,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0,0.0
-1985,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1985,Rest of mining corridor,440.7,0.0,0.0,0.0,0.0,0.0
-1986,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1986,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1986,Native communities,0.0,0.0,0.0,0.0,0.0,0.0
-1986,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1986,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1986,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0,0.0
-1986,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1986,Rest of mining corridor,457.6,18.6,0.0,1.7,18.6,5.7
-1987,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1987,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1987,Native communities,0.0,0.0,0.0,0.0,0.0,0.0
-1987,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1987,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1987,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0,0.0
-1987,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1987,Rest of mining corridor,940.9,523.6,0.3,40.7,523.9,124.8
-1988,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1988,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1988,Native communities,0.0,0.0,0.0,0.0,0.0,0.0
-1988,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1988,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1988,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0,0.0
-1988,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1988,Rest of mining corridor,918.5,1.8,0.0,24.2,1.8,1.0
-1989,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1989,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1989,Native communities,0.0,0.0,0.0,0.0,0.0,0.0
-1989,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1989,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1989,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0,0.0
-1989,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1989,Rest of mining corridor,1037.3,217.7,1.9,100.8,219.6,52.0
-1990,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1990,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1990,Native communities,1.1,1.1,0.0,0.0,1.1,0.0
-1990,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1990,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1990,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0,0.0
-1990,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1990,Rest of mining corridor,1036.3,82.5,2.9,86.3,85.4,28.7
-1991,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1991,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1991,Native communities,1.9,1.4,0.0,0.6,1.4,0.8
-1991,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1991,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1991,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0,0.0
-1991,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1991,Rest of mining corridor,1262.9,301.5,16.5,91.5,318.0,38.5
-1992,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1992,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1992,Native communities,0.0,0.0,0.0,1.9,0.0,0.0
-1992,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1992,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1992,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0,0.0
-1992,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1992,Rest of mining corridor,1505.5,312.7,15.2,85.2,327.9,38.2
-1993,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1993,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1993,Native communities,1.8,1.8,0.0,0.0,1.8,0.7
-1993,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1993,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1993,Rest of Madre de Dios,0.1,0.1,0.0,0.0,0.1,0.0
-1993,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1993,Rest of mining corridor,1693.9,287.8,21.0,120.5,308.8,72.5
-1994,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1994,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1994,Native communities,0.0,0.0,0.0,1.8,0.0,0.0
-1994,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1994,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1994,Rest of Madre de Dios,0.0,0.0,0.0,0.1,0.0,0.0
-1994,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1994,Rest of mining corridor,1951.4,280.1,24.7,47.3,304.8,93.2
-1995,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1995,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1995,Native communities,1.4,1.4,0.0,0.0,1.4,0.2
-1995,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1995,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1995,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0,0.0
-1995,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1995,Rest of mining corridor,2390.8,388.7,63.4,12.7,452.1,194.2
-1996,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1996,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1996,Native communities,34.6,34.2,0.0,1.0,34.2,7.8
-1996,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1996,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1996,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0,0.0
-1996,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1996,Rest of mining corridor,4103.0,1619.4,141.3,48.4,1760.7,829.4
-1997,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1997,La Pampa sector,0.0,0.0,0.0,0.0,0.0,0.0
-1997,Native communities,24.1,15.3,0.0,25.8,15.3,5.2
-1997,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1997,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1997,Rest of Madre de Dios,0.3,0.3,0.0,0.0,0.3,0.0
-1997,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1997,Rest of mining corridor,5516.5,1436.4,148.5,171.4,1584.9,617.7
-1998,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1998,La Pampa sector,5.2,5.2,0.0,0.0,5.2,3.7
-1998,Native communities,40.6,27.3,0.2,11.0,27.5,13.7
-1998,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-1998,Reserves and parks,0.0,0.0,0.0,0.0,0.0,0.0
-1998,Rest of Madre de Dios,0.3,0.3,0.0,0.3,0.3,0.2
-1998,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1998,Rest of mining corridor,6014.1,666.8,59.1,228.3,725.9,131.0
-1999,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-1999,La Pampa sector,8.4,4.1,0.0,0.9,4.1,2.3
-1999,Native communities,111.7,78.9,1.2,9.0,80.1,30.7
-1999,Other buffer zones,0.1,0.1,0.0,0.0,0.1,0.0
-1999,Reserves and parks,2.5,2.5,0.0,0.0,2.5,1.1
-1999,Rest of Madre de Dios,0.3,0.1,0.0,0.1,0.1,0.1
-1999,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-1999,Rest of mining corridor,7022.0,1018.7,69.4,80.2,1088.1,236.2
-2000,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-2000,La Pampa sector,12.8,6.3,0.0,1.9,6.3,3.7
-2000,Native communities,130.1,58.1,1.2,40.9,59.3,31.9
-2000,Other buffer zones,0.0,0.0,0.0,0.1,0.0,0.0
-2000,Reserves and parks,4.9,3.4,0.0,1.0,3.4,0.6
-2000,Rest of Madre de Dios,0.1,0.1,0.0,0.3,0.1,0.0
-2000,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0,0.0
-2000,Rest of mining corridor,7229.8,484.3,31.9,308.4,516.2,215.5
-2001,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-2001,La Pampa sector,9.2,1.7,0.1,5.4,1.8,0.1
-2001,Native communities,72.1,17.1,0.5,75.7,17.6,8.0
-2001,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-2001,Reserves and parks,4.2,0.8,0.0,1.5,0.8,0.0
-2001,Rest of Madre de Dios,0.1,0.0,0.0,0.0,0.0,0.0
-2001,Rest of Tambopata buffer zone,13.3,13.3,0.0,0.0,13.3,10.1
-2001,Rest of mining corridor,7436.4,457.4,39.3,290.1,496.7,273.9
-2002,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-2002,La Pampa sector,12.1,2.7,0.3,0.2,3.0,2.2
-2002,Native communities,206.4,142.2,4.4,12.3,146.6,80.5
-2002,Other buffer zones,0.0,0.0,0.0,0.0,0.0,0.0
-2002,Reserves and parks,4.6,0.5,0.0,0.1,0.5,0.2
-2002,Rest of Madre de Dios,4.7,4.6,0.0,0.0,4.6,0.5
-2002,Rest of Tambopata buffer zone,46.3,35.0,0.0,2.0,35.0,12.5
-2002,Rest of mining corridor,7534.0,285.4,34.8,222.7,320.2,77.9
-2003,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-2003,La Pampa sector,12.3,3.4,0.0,3.2,3.4,3.4
-2003,Native communities,233.8,120.1,2.4,95.1,122.5,63.3
-2003,Other buffer zones,5.2,5.2,0.0,0.0,5.2,4.9
-2003,Reserves and parks,3.5,0.0,0.0,1.1,0.0,0.0
-2003,Rest of Madre de Dios,8.7,5.0,0.1,1.0,5.1,0.3
-2003,Rest of Tambopata buffer zone,126.2,84.4,0.0,4.5,84.4,30.1
-2003,Rest of mining corridor,8301.0,1040.5,152.6,426.1,1193.2,415.9
-2004,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-2004,La Pampa sector,13.8,6.4,0.3,5.1,6.7,3.3
-2004,Native communities,276.9,119.1,8.0,84.0,127.1,57.7
-2004,Other buffer zones,4.0,0.1,0.0,1.3,0.1,0.0
-2004,Reserves and parks,10.8,7.7,0.2,0.5,7.8,2.4
-2004,Rest of Madre de Dios,10.2,2.7,0.0,1.2,2.7,1.6
-2004,Rest of Tambopata buffer zone,104.9,3.9,0.0,25.2,3.9,2.0
-2004,Rest of mining corridor,8577.4,690.8,123.7,538.1,814.5,309.5
-2005,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-2005,La Pampa sector,14.0,5.9,0.1,5.8,6.0,5.5
-2005,Native communities,431.4,223.5,9.9,78.8,233.4,148.8
-2005,Other buffer zones,6.1,3.4,0.1,1.4,3.5,1.9
-2005,Reserves and parks,3.3,0.1,0.1,7.7,0.2,0.0
-2005,Rest of Madre de Dios,47.1,39.0,0.1,2.2,39.1,6.4
-2005,Rest of Tambopata buffer zone,138.9,46.5,0.2,12.7,46.7,8.7
-2005,Rest of mining corridor,8841.0,730.4,73.9,540.8,804.3,400.5
-2006,Corridor across the road,0.0,0.0,0.0,0.0,0.0,0.0
-2006,La Pampa sector,24.7,13.9,1.0,4.4,15.0,12.4
-2006,Native communities,913.9,484.8,29.3,31.6,514.1,300.4
-2006,Other buffer zones,1.0,0.5,0.0,5.7,0.5,0.3
-2006,Reserves and parks,10.9,7.8,0.3,0.6,8.2,4.2
-2006,Rest of Madre de Dios,61.2,15.8,0.4,2.1,16.2,6.1
-2006,Rest of Tambopata buffer zone,169.1,34.3,1.1,5.2,35.4,16.9
-2006,Rest of mining corridor,9757.6,1086.2,138.5,308.0,1224.6,629.4
-2007,Corridor across the road,4.8,4.8,0.0,0.0,4.8,4.8
-2007,La Pampa sector,48.7,34.8,0.4,11.1,35.2,31.9
-2007,Native communities,1615.1,758.2,33.0,90.0,791.2,564.6
-2007,Other buffer zones,1.0,0.1,0.0,0.1,0.1,0.1
-2007,Reserves and parks,4.5,2.1,0.0,8.4,2.1,2.1
-2007,Rest of Madre de Dios,65.4,8.3,0.2,4.3,8.4,6.4
-2007,Rest of Tambopata buffer zone,244.5,82.2,1.5,8.3,83.7,57.2
-2007,Rest of mining corridor,11141.2,1815.7,177.1,609.1,1992.7,1201.3
-2008,Corridor across the road,475.1,470.9,0.0,0.5,470.9,456.0
-2008,La Pampa sector,96.0,57.0,0.9,10.5,57.8,48.5
-2008,Native communities,2009.0,507.6,39.7,153.4,547.3,334.2
-2008,Other buffer zones,1.1,0.3,0.0,0.1,0.3,0.0
-2008,Reserves and parks,2.4,0.0,0.0,2.1,0.0,0.0
-2008,Rest of Madre de Dios,70.9,8.0,0.4,3.0,8.5,4.5
-2008,Rest of Tambopata buffer zone,360.4,131.7,7.3,23.2,139.0,77.7
-2008,Rest of mining corridor,12248.2,1482.3,216.7,592.1,1699.0,855.4
-2009,Corridor across the road,1407.5,938.0,0.5,6.1,938.5,739.7
-2009,La Pampa sector,185.3,115.2,2.8,28.7,118.0,69.7
-2009,Native communities,2676.5,942.3,59.5,334.3,1001.8,565.4
-2009,Other buffer zones,1.1,0.0,0.0,0.0,0.0,0.0
-2009,Reserves and parks,5.1,1.8,1.0,0.2,2.8,0.4
-2009,Rest of Madre de Dios,95.2,27.8,1.1,4.7,29.0,4.9
-2009,Rest of Tambopata buffer zone,347.5,43.1,3.8,59.8,47.0,26.3
-2009,Rest of mining corridor,13208.7,1746.0,200.9,986.4,1946.9,732.7
-2010,Corridor across the road,1986.8,624.4,3.7,48.8,628.0,415.6
-2010,La Pampa sector,363.6,214.8,2.0,38.5,216.8,137.6
-2010,Native communities,3531.5,1134.8,78.3,358.1,1213.1,798.2
-2010,Other buffer zones,1.4,0.3,0.0,0.0,0.3,0.1
-2010,Reserves and parks,13.5,10.3,0.3,2.2,10.6,6.9
-2010,Rest of Madre de Dios,105.4,16.1,0.9,6.8,17.0,8.5
-2010,Rest of Tambopata buffer zone,578.2,255.6,11.0,35.9,266.5,173.4
-2010,Rest of mining corridor,14629.5,2044.5,318.3,942.0,2362.8,1180.1
-2011,Corridor across the road,2188.5,275.9,9.5,83.7,285.4,125.2
-2011,La Pampa sector,1794.1,1479.1,7.6,56.2,1486.7,1189.0
-2011,Native communities,4635.0,1391.9,118.9,407.4,1510.9,922.2
-2011,Other buffer zones,8.7,7.4,0.0,0.1,7.4,1.1
-2011,Reserves and parks,51.0,38.8,1.4,2.7,40.2,14.0
-2011,Rest of Madre de Dios,68.8,14.5,2.1,53.2,16.6,8.9
-2011,Rest of Tambopata buffer zone,630.4,149.3,7.3,104.4,156.6,75.2
-2011,Rest of mining corridor,16544.2,2542.1,454.8,1082.2,2996.9,1523.7
-2012,Corridor across the road,2186.8,109.1,12.9,123.8,122.0,69.7
-2012,La Pampa sector,2412.5,841.5,16.7,239.8,858.3,693.6
-2012,Native communities,5286.4,1197.4,152.7,698.7,1350.1,730.7
-2012,Other buffer zones,11.2,4.4,0.2,2.0,4.5,3.1
-2012,Reserves and parks,53.5,19.3,1.0,17.9,20.4,1.0
-2012,Rest of Madre de Dios,85.2,25.8,0.3,9.8,26.2,18.1
-2012,Rest of Tambopata buffer zone,721.8,183.2,8.0,99.7,191.2,43.9
-2012,Rest of mining corridor,18141.1,2573.7,470.9,1447.7,3044.6,1531.3
-2013,Corridor across the road,2397.9,273.1,37.5,99.5,310.6,120.5
-2013,La Pampa sector,3759.1,1461.1,87.6,202.1,1548.7,779.5
-2013,Native communities,6194.0,1395.4,250.3,738.0,1645.7,920.9
-2013,Other buffer zones,17.3,10.4,0.2,4.4,10.5,7.1
-2013,Reserves and parks,48.1,9.8,0.9,16.1,10.7,3.2
-2013,Rest of Madre de Dios,96.5,33.2,1.7,23.6,34.9,22.5
-2013,Rest of Tambopata buffer zone,764.9,181.0,14.1,152.0,195.1,71.9
-2013,Rest of mining corridor,20153.2,3165.6,629.2,1782.6,3794.7,1978.0
-2014,Corridor across the road,2393.5,130.4,34.2,168.9,164.6,93.3
-2014,La Pampa sector,5182.6,1709.3,45.0,330.8,1754.3,1440.5
-2014,Native communities,6638.5,1103.8,252.0,911.4,1355.8,840.7
-2014,Other buffer zones,33.4,19.4,0.0,3.3,19.4,17.2
-2014,Reserves and parks,43.1,10.4,1.0,16.3,11.3,5.9
-2014,Rest of Madre de Dios,89.0,16.2,1.0,24.8,17.2,14.8
-2014,Rest of Tambopata buffer zone,831.7,161.4,23.2,117.8,184.6,97.9
-2014,Rest of mining corridor,21536.7,2921.1,597.9,2135.5,3518.9,2032.8
-2015,Corridor across the road,2330.2,40.4,32.3,136.0,72.7,31.6
-2015,La Pampa sector,6100.3,1207.9,78.6,368.8,1286.5,892.9
-2015,Native communities,7396.7,1056.4,369.7,667.8,1426.1,708.1
-2015,Other buffer zones,33.8,6.4,0.3,6.2,6.6,3.6
-2015,Reserves and parks,68.0,18.0,11.0,4.1,29.0,5.9
-2015,Rest of Madre de Dios,99.1,17.1,2.0,9.0,19.1,9.3
-2015,Rest of Tambopata buffer zone,900.5,85.8,30.5,47.4,116.3,30.8
-2015,Rest of mining corridor,22722.1,2059.6,752.5,1626.7,2812.1,1332.0
-2016,Corridor across the road,2320.3,17.9,41.1,68.9,59.0,10.7
-2016,La Pampa sector,6438.6,581.7,101.9,345.4,683.7,454.3
-2016,Native communities,7971.6,930.3,383.8,739.2,1314.1,680.5
-2016,Other buffer zones,31.9,1.3,1.0,4.2,2.3,1.4
-2016,Reserves and parks,62.1,4.0,1.7,11.6,5.7,0.4
-2016,Rest of Madre de Dios,89.4,6.9,1.9,18.5,8.8,5.9
-2016,Rest of Tambopata buffer zone,917.8,66.1,24.4,73.3,90.5,30.3
-2016,Rest of mining corridor,24214.7,2250.3,1003.5,1761.2,3253.8,1605.7
-2017,Corridor across the road,2393.6,96.1,58.4,81.2,154.5,50.6
-2017,La Pampa sector,8249.4,1821.1,377.6,387.8,2198.6,1252.5
-2017,Native communities,8688.6,1146.7,440.5,870.2,1587.2,935.8
-2017,Other buffer zones,38.7,11.2,0.6,5.0,11.8,9.6
-2017,Reserves and parks,592.3,524.8,15.8,10.4,540.6,191.8
-2017,Rest of Madre de Dios,87.6,4.4,2.1,8.3,6.5,2.7
-2017,Rest of Tambopata buffer zone,1141.4,241.1,56.6,74.0,297.7,86.8
-2017,Rest of mining corridor,25885.2,2613.3,1038.4,1981.2,3651.7,1984.1
-2018,Corridor across the road,2512.5,93.4,97.4,71.9,190.8,62.8
-2018,La Pampa sector,9680.8,1781.9,277.9,628.4,2059.8,1237.3
-2018,Native communities,9194.7,1007.9,488.1,989.9,1496.0,721.1
-2018,Other buffer zones,46.5,12.9,0.7,5.8,13.6,7.8
-2018,Reserves and parks,565.1,77.7,5.6,110.5,83.3,20.3
-2018,Rest of Madre de Dios,108.5,13.6,17.5,10.2,31.1,9.1
-2018,Rest of Tambopata buffer zone,1260.2,161.8,93.1,136.0,254.9,108.1
-2018,Rest of mining corridor,27104.0,2485.1,924.5,2190.7,3409.6,1604.3
-2019,Corridor across the road,2903.8,308.3,148.6,65.5,456.9,241.6
-2019,La Pampa sector,9914.8,1493.7,193.8,1453.5,1687.5,885.6
-2019,Native communities,9650.2,980.3,561.8,1086.7,1542.1,815.7
-2019,Other buffer zones,49.4,5.2,1.0,3.4,6.3,3.5
-2019,Reserves and parks,537.7,47.6,14.3,89.3,61.9,10.7
-2019,Rest of Madre de Dios,141.2,20.0,18.7,6.0,38.7,17.3
-2019,Rest of Tambopata buffer zone,1310.1,100.0,52.3,102.4,152.3,58.2
-2019,Rest of mining corridor,29768.8,3350.1,1441.2,2126.5,4791.3,2493.9
-2020,Corridor across the road,3091.6,405.3,93.4,311.0,498.8,289.8
-2020,La Pampa sector,10043.6,314.5,563.3,748.9,877.8,114.6
-2020,Native communities,10806.8,1082.0,895.8,821.1,1977.7,741.5
-2020,Other buffer zones,57.2,9.1,1.0,2.4,10.2,3.7
-2020,Reserves and parks,510.9,53.5,25.4,105.7,78.9,1.4
-2020,Rest of Madre de Dios,198.1,58.9,9.2,11.2,68.1,36.7
-2020,Rest of Tambopata buffer zone,1367.3,116.7,88.9,148.4,205.7,59.7
-2020,Rest of mining corridor,33368.8,3837.0,1893.9,2130.9,5730.9,2271.8
-2021,Corridor across the road,3696.4,675.5,336.5,407.2,1012.0,570.1
-2021,La Pampa sector,9916.8,357.9,379.3,864.1,737.2,157.3
-2021,Native communities,11513.6,1301.4,720.1,1314.7,2021.5,1155.7
-2021,Other buffer zones,99.0,41.2,3.1,2.5,44.4,37.6
-2021,Reserves and parks,464.3,26.3,28.1,101.0,54.4,2.5
-2021,Rest of Madre de Dios,292.6,99.9,8.0,13.3,107.9,77.1
-2021,Rest of Tambopata buffer zone,1405.7,101.2,78.3,141.2,179.5,51.2
-2021,Rest of mining corridor,36991.1,4926.2,1903.4,3207.3,6829.6,4096.5
-2022,Corridor across the road,4535.7,778.8,362.1,301.6,1140.9,548.2
-2022,La Pampa sector,10277.3,504.6,513.0,657.0,1017.5,367.2
-2022,Native communities,13353.5,1530.1,1124.7,814.9,2654.8,1286.5
-2022,Other buffer zones,140.8,42.4,6.7,7.2,49.1,33.2
-2022,Reserves and parks,466.0,13.2,18.1,29.7,31.4,2.2
-2022,Rest of Madre de Dios,385.6,94.7,9.2,11.0,104.0,61.3
-2022,Rest of Tambopata buffer zone,1527.6,107.0,75.6,60.6,182.6,65.9
-2022,Rest of mining corridor,44224.9,7192.1,2621.1,2579.4,9813.2,5515.1
-2023,Corridor across the road,5619.4,727.8,549.6,193.8,1277.4,421.8
-2023,La Pampa sector,13346.5,1120.6,2308.3,359.8,3429.0,854.0
-2023,Native communities,16517.6,2229.2,1929.4,994.5,4158.6,1584.1
-2023,Other buffer zones,220.1,86.6,8.9,16.2,95.5,77.6
-2023,Reserves and parks,527.5,92.0,49.4,79.8,141.4,32.1
-2023,Rest of Madre de Dios,536.9,155.5,32.2,36.5,187.7,86.7
-2023,Rest of Tambopata buffer zone,1731.5,181.5,170.7,148.4,352.3,103.9
-2023,Rest of mining corridor,55739.6,9787.9,5158.5,3431.7,14946.4,6815.3
-2024,Corridor across the road,5972.4,357.3,32.9,37.1,390.1,328.7
-2024,La Pampa sector,14469.3,915.7,285.1,78.0,1200.8,899.2
-2024,Native communities,17646.2,1223.9,520.8,616.1,1744.7,1049.6
-2024,Other buffer zones,304.1,84.4,2.6,3.1,87.0,81.9
-2024,Reserves and parks,539.9,54.4,5.8,47.8,60.2,37.4
-2024,Rest of Madre de Dios,574.7,61.2,9.2,32.5,70.3,41.8
-2024,Rest of Tambopata buffer zone,1781.1,85.2,68.7,104.3,153.9,66.6
-2024,Rest of mining corridor,60520.5,5513.1,1294.2,2026.5,6807.4,4625.7
-2025,Corridor across the road,6107.9,288.2,25.0,177.7,313.2,254.8
-2025,La Pampa sector,16106.7,1405.8,463.8,232.2,1869.5,1464.1
-2025,Native communities,19245.8,2006.6,761.8,1168.8,2768.4,1766.9
-2025,Other buffer zones,363.7,70.8,2.0,13.2,72.8,67.3
-2025,Reserves and parks,781.2,238.9,55.1,52.8,294.0,174.1
-2025,Rest of Madre de Dios,735.5,188.2,18.6,46.0,206.8,131.3
-2025,Rest of Tambopata buffer zone,2000.4,296.0,99.2,175.9,395.2,210.9
-2025,Rest of mining corridor,67195.5,8059.3,2477.9,3862.2,10537.2,6228.5
+year,grp,mining_ha,net_ha,new_ha,remined_ha,stopped_ha
+1985,Amarakaeri buffer zone,0.0,,,,
+1985,Corridor across the road,0.0,,,,
+1985,La Pampa sector,0.0,,,,
+1985,Native communities,0.0,,,,
+1985,Other buffer zones,0.0,,,,
+1985,Reserves and parks,0.0,,,,
+1985,Rest of Madre de Dios,0.0,,,,
+1985,Rest of Tambopata buffer zone,0.0,,,,
+1985,Rest of mining corridor,440.7,,,,
+1986,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1986,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1986,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1986,Native communities,0.0,0.0,0.0,0.0,0.0
+1986,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1986,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1986,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0
+1986,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1986,Rest of mining corridor,457.6,16.9,18.6,0.0,1.7
+1987,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1987,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1987,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1987,Native communities,0.0,0.0,0.0,0.0,0.0
+1987,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1987,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1987,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0
+1987,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1987,Rest of mining corridor,940.9,483.2,523.6,0.3,40.7
+1988,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1988,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1988,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1988,Native communities,0.0,0.0,0.0,0.0,0.0
+1988,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1988,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1988,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0
+1988,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1988,Rest of mining corridor,918.5,-22.4,1.8,0.0,24.2
+1989,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1989,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1989,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1989,Native communities,0.0,0.0,0.0,0.0,0.0
+1989,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1989,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1989,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0
+1989,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1989,Rest of mining corridor,1037.3,118.8,217.7,1.9,100.8
+1990,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1990,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1990,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1990,Native communities,1.1,1.1,1.1,0.0,0.0
+1990,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1990,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1990,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0
+1990,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1990,Rest of mining corridor,1036.3,-0.9,82.5,2.9,86.3
+1991,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1991,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1991,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1991,Native communities,1.8,0.7,1.3,0.0,0.6
+1991,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1991,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1991,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0
+1991,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1991,Rest of mining corridor,1263.0,226.6,301.6,16.5,91.5
+1992,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1992,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1992,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1992,Native communities,0.0,-1.8,0.0,0.0,1.8
+1992,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1992,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1992,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0
+1992,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1992,Rest of mining corridor,1505.5,242.6,312.7,15.2,85.3
+1993,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1993,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1993,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1993,Native communities,1.5,1.5,1.5,0.0,0.0
+1993,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1993,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1993,Rest of Madre de Dios,0.1,0.1,0.1,0.0,0.0
+1993,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1993,Rest of mining corridor,1694.2,188.7,288.2,21.0,120.5
+1994,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1994,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1994,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1994,Native communities,0.0,-1.5,0.0,0.0,1.5
+1994,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1994,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1994,Rest of Madre de Dios,0.0,-0.1,0.0,0.0,0.1
+1994,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1994,Rest of mining corridor,1951.4,257.2,280.1,24.7,47.7
+1995,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1995,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1995,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1995,Native communities,1.4,1.4,1.4,0.0,0.0
+1995,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1995,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1995,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0
+1995,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1995,Rest of mining corridor,2390.8,439.3,388.7,63.4,12.7
+1996,Amarakaeri buffer zone,0.0,0.0,0.0,0.0,0.0
+1996,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1996,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1996,Native communities,33.9,32.5,33.5,0.0,1.0
+1996,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1996,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1996,Rest of Madre de Dios,0.0,0.0,0.0,0.0,0.0
+1996,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1996,Rest of mining corridor,4103.7,1712.9,1620.1,141.3,48.4
+1997,Amarakaeri buffer zone,11.1,11.1,11.1,0.0,0.0
+1997,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1997,La Pampa sector,0.0,0.0,0.0,0.0,0.0
+1997,Native communities,22.1,-11.9,13.5,0.0,25.4
+1997,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1997,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1997,Rest of Madre de Dios,0.3,0.3,0.3,0.0,0.0
+1997,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1997,Rest of mining corridor,5507.5,1403.8,1427.1,148.5,171.8
+1998,Amarakaeri buffer zone,0.0,-11.1,0.0,0.0,11.1
+1998,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1998,La Pampa sector,5.2,5.2,5.2,0.0,0.0
+1998,Native communities,39.9,17.8,27.0,0.2,9.3
+1998,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1998,Reserves and parks,0.0,0.0,0.0,0.0,0.0
+1998,Rest of Madre de Dios,0.3,0.0,0.3,0.0,0.3
+1998,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1998,Rest of mining corridor,6014.8,507.4,667.1,59.1,218.9
+1999,Amarakaeri buffer zone,25.0,25.0,25.0,0.0,0.0
+1999,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+1999,La Pampa sector,8.4,3.2,4.1,0.0,0.9
+1999,Native communities,103.3,63.5,71.1,1.2,8.8
+1999,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+1999,Reserves and parks,2.5,2.5,2.5,0.0,0.0
+1999,Rest of Madre de Dios,0.3,0.0,0.1,0.0,0.1
+1999,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+1999,Rest of mining corridor,7005.5,990.7,1001.6,69.4,80.3
+2000,Amarakaeri buffer zone,13.8,-11.2,3.0,0.0,14.3
+2000,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+2000,La Pampa sector,12.8,4.4,6.3,0.0,1.9
+2000,Native communities,125.3,22.0,57.9,1.2,37.1
+2000,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2000,Reserves and parks,4.9,2.4,3.4,0.0,1.0
+2000,Rest of Madre de Dios,0.1,-0.2,0.1,0.0,0.3
+2000,Rest of Tambopata buffer zone,0.0,0.0,0.0,0.0,0.0
+2000,Rest of mining corridor,7220.9,215.4,481.5,31.9,298.0
+2001,Amarakaeri buffer zone,28.0,14.2,22.5,0.0,8.3
+2001,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+2001,La Pampa sector,9.2,-3.6,1.7,0.1,5.4
+2001,Native communities,70.7,-54.7,16.3,0.5,71.5
+2001,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2001,Reserves and parks,4.2,-0.7,0.8,0.0,1.5
+2001,Rest of Madre de Dios,0.1,0.0,0.0,0.0,0.0
+2001,Rest of Tambopata buffer zone,13.3,13.3,13.3,0.0,0.0
+2001,Rest of mining corridor,7409.9,189.0,435.7,39.3,286.0
+2002,Amarakaeri buffer zone,23.4,-4.5,8.2,0.1,12.8
+2002,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+2002,La Pampa sector,12.1,2.9,2.7,0.3,0.2
+2002,Native communities,202.1,131.4,139.2,4.3,12.0
+2002,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2002,Reserves and parks,4.6,0.4,0.5,0.0,0.1
+2002,Rest of Madre de Dios,4.7,4.6,4.6,0.0,0.0
+2002,Rest of Tambopata buffer zone,46.3,33.0,35.0,0.0,2.0
+2002,Rest of mining corridor,7514.8,104.9,280.3,34.8,210.1
+2003,Amarakaeri buffer zone,91.4,68.0,77.0,0.8,9.8
+2003,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+2003,La Pampa sector,12.3,0.2,3.4,0.0,3.2
+2003,Native communities,206.3,4.2,96.1,2.4,94.2
+2003,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2003,Reserves and parks,3.5,-1.1,0.0,0.0,1.1
+2003,Rest of Madre de Dios,8.7,4.0,5.0,0.1,1.0
+2003,Rest of Tambopata buffer zone,126.2,79.9,84.4,0.0,4.5
+2003,Rest of mining corridor,8242.3,727.5,992.8,151.8,417.2
+2004,Amarakaeri buffer zone,166.3,74.9,91.4,1.0,17.5
+2004,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+2004,La Pampa sector,13.8,1.6,6.4,0.3,5.1
+2004,Native communities,216.7,10.3,82.6,7.7,79.9
+2004,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2004,Reserves and parks,10.8,7.3,7.7,0.2,0.5
+2004,Rest of Madre de Dios,10.2,1.5,2.7,0.0,1.2
+2004,Rest of Tambopata buffer zone,104.9,-21.2,3.9,0.0,25.2
+2004,Rest of mining corridor,8475.3,233.0,636.0,123.0,526.0
+2005,Amarakaeri buffer zone,429.8,263.4,312.7,4.0,53.3
+2005,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+2005,La Pampa sector,14.0,0.2,5.9,0.1,5.8
+2005,Native communities,290.2,73.5,122.0,9.6,58.1
+2005,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2005,Reserves and parks,3.3,-7.5,0.1,0.1,7.7
+2005,Rest of Madre de Dios,47.1,36.9,39.0,0.1,2.2
+2005,Rest of Tambopata buffer zone,138.9,34.0,46.5,0.2,12.7
+2005,Rest of mining corridor,8558.5,83.2,522.6,70.2,509.6
+2006,Amarakaeri buffer zone,1104.3,674.5,697.7,3.6,26.8
+2006,Corridor across the road,0.0,0.0,0.0,0.0,0.0
+2006,La Pampa sector,24.7,10.6,13.9,1.0,4.4
+2006,Native communities,495.0,204.8,202.7,28.0,25.9
+2006,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2006,Reserves and parks,10.9,7.6,7.8,0.3,0.6
+2006,Rest of Madre de Dios,61.2,14.1,15.8,0.4,2.1
+2006,Rest of Tambopata buffer zone,169.1,30.2,34.3,1.1,5.2
+2006,Rest of mining corridor,9073.2,514.7,671.0,136.2,292.6
+2007,Amarakaeri buffer zone,2141.3,1037.0,1126.4,6.8,96.2
+2007,Corridor across the road,4.8,4.8,4.8,0.0,0.0
+2007,La Pampa sector,48.7,24.0,34.8,0.4,11.1
+2007,Native communities,834.1,339.1,377.6,31.5,70.0
+2007,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2007,Reserves and parks,4.5,-6.4,2.1,0.0,8.4
+2007,Rest of Madre de Dios,65.4,4.2,8.3,0.2,4.3
+2007,Rest of Tambopata buffer zone,244.5,75.4,82.2,1.5,8.3
+2007,Rest of mining corridor,9781.9,708.7,1070.0,171.7,533.0
+2008,Amarakaeri buffer zone,2376.3,235.0,329.8,13.0,107.7
+2008,Corridor across the road,475.1,470.3,470.9,0.0,0.5
+2008,La Pampa sector,96.0,47.3,57.0,0.9,10.5
+2008,Native communities,1182.4,348.3,421.2,35.0,107.9
+2008,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2008,Reserves and parks,2.4,-2.1,0.0,0.0,2.1
+2008,Rest of Madre de Dios,70.9,5.5,8.0,0.4,3.0
+2008,Rest of Tambopata buffer zone,360.4,115.9,131.7,7.3,23.2
+2008,Rest of mining corridor,10699.6,917.7,1239.2,208.5,529.9
+2009,Amarakaeri buffer zone,3253.5,877.2,1073.9,28.2,224.9
+2009,Corridor across the road,1407.5,932.4,938.0,0.5,6.1
+2009,La Pampa sector,200.3,104.4,130.3,2.8,28.7
+2009,Native communities,1436.0,253.6,454.0,46.5,246.9
+2009,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2009,Reserves and parks,5.1,2.6,1.8,1.0,0.2
+2009,Rest of Madre de Dios,95.2,24.3,27.8,1.1,4.7
+2009,Rest of Tambopata buffer zone,347.5,-12.9,43.1,3.8,59.8
+2009,Rest of mining corridor,11181.8,482.1,1145.4,185.6,848.9
+2010,Amarakaeri buffer zone,3905.7,652.2,914.0,48.8,310.6
+2010,Corridor across the road,1986.8,579.2,624.4,3.7,48.8
+2010,La Pampa sector,398.9,198.6,242.0,2.0,45.4
+2010,Native communities,1797.0,361.0,510.1,52.4,201.5
+2010,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2010,Reserves and parks,13.5,8.4,10.3,0.3,2.2
+2010,Rest of Madre de Dios,105.4,10.2,16.1,0.9,6.8
+2010,Rest of Tambopata buffer zone,609.5,262.0,286.9,11.0,35.9
+2010,Rest of mining corridor,12393.0,1211.2,1697.0,295.4,781.1
+2011,Amarakaeri buffer zone,4786.7,881.0,1070.7,97.3,287.0
+2011,Corridor across the road,2183.6,196.9,271.1,9.5,83.7
+2011,La Pampa sector,1864.9,1465.9,1524.0,8.0,66.1
+2011,Native communities,2370.4,573.4,771.0,82.1,279.7
+2011,Other buffer zones,1.1,1.1,1.1,0.0,0.0
+2011,Reserves and parks,51.0,37.5,38.8,1.4,2.7
+2011,Rest of Madre de Dios,68.8,-36.5,14.5,2.1,53.2
+2011,Rest of Tambopata buffer zone,705.5,96.0,198.3,7.3,109.6
+2011,Rest of mining corridor,13888.6,1495.7,2009.6,393.9,907.8
+2012,Amarakaeri buffer zone,5373.7,587.0,953.1,99.2,465.3
+2012,Corridor across the road,2182.2,-1.5,108.8,12.9,123.2
+2012,La Pampa sector,2493.7,628.8,872.7,18.6,262.5
+2012,Native communities,2746.1,375.7,667.1,115.5,407.0
+2012,Other buffer zones,0.9,-0.3,0.0,0.0,0.3
+2012,Reserves and parks,53.5,2.4,19.3,1.0,17.9
+2012,Rest of Madre de Dios,85.2,16.4,25.8,0.3,9.8
+2012,Rest of Tambopata buffer zone,818.8,113.3,213.0,8.1,107.8
+2012,Rest of mining corridor,15144.6,1256.0,2094.6,407.1,1245.8
+2013,Amarakaeri buffer zone,5796.5,422.8,765.4,166.1,508.7
+2013,Corridor across the road,2387.4,205.2,267.4,37.4,99.5
+2013,La Pampa sector,3863.9,1370.2,1514.1,90.0,233.9
+2013,Native communities,3232.9,486.9,766.2,159.4,438.7
+2013,Other buffer zones,0.0,-0.9,0.0,0.0,0.9
+2013,Reserves and parks,48.1,-5.4,9.8,0.9,16.1
+2013,Rest of Madre de Dios,96.5,11.3,33.2,1.7,23.6
+2013,Rest of Tambopata buffer zone,1086.6,267.8,419.7,15.9,167.8
+2013,Rest of mining corridor,16919.2,1774.6,2753.8,550.1,1529.3
+2014,Amarakaeri buffer zone,6336.9,540.5,810.8,194.8,465.1
+2014,Corridor across the road,2383.9,-3.5,129.6,34.2,167.3
+2014,La Pampa sector,5293.2,1429.3,1755.9,46.4,373.0
+2014,Native communities,3346.2,113.2,575.2,136.4,598.4
+2014,Other buffer zones,0.3,0.3,0.3,0.0,0.0
+2014,Reserves and parks,43.1,-5.0,10.4,1.0,16.3
+2014,Rest of Madre de Dios,89.0,-7.6,16.2,1.0,24.8
+2014,Rest of Tambopata buffer zone,1246.1,159.5,330.8,26.2,197.4
+2014,Rest of mining corridor,18009.6,1090.3,2442.7,514.3,1866.7
+2015,Amarakaeri buffer zone,6634.1,297.1,512.7,246.7,462.2
+2015,Corridor across the road,2323.5,-60.5,40.3,32.2,133.0
+2015,La Pampa sector,6206.4,913.2,1237.8,80.6,405.2
+2015,Native communities,3543.8,197.6,363.1,247.7,413.2
+2015,Other buffer zones,0.0,-0.3,0.0,0.0,0.3
+2015,Reserves and parks,68.0,24.9,18.0,11.0,4.1
+2015,Rest of Madre de Dios,99.1,10.1,17.1,2.0,9.0
+2015,Rest of Tambopata buffer zone,1794.9,548.8,588.6,49.0,88.8
+2015,Rest of mining corridor,18981.1,971.5,1714.1,607.6,1350.1
+2016,Amarakaeri buffer zone,6993.9,359.8,439.9,346.6,426.7
+2016,Corridor across the road,2313.6,-9.8,17.9,41.0,68.7
+2016,La Pampa sector,6566.5,360.1,625.7,103.9,369.5
+2016,Native communities,3701.1,157.3,412.3,222.2,477.1
+2016,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2016,Reserves and parks,62.1,-5.9,4.0,1.7,11.6
+2016,Rest of Madre de Dios,89.4,-9.7,6.9,1.9,18.5
+2016,Rest of Tambopata buffer zone,2141.6,346.7,423.9,41.6,118.9
+2016,Rest of mining corridor,20178.2,1197.1,1927.9,800.4,1531.2
+2017,Amarakaeri buffer zone,7443.1,449.2,616.4,404.0,571.2
+2017,Corridor across the road,2386.7,73.1,95.3,58.0,80.1
+2017,La Pampa sector,8369.2,1802.6,1863.6,382.6,443.6
+2017,Native communities,3801.6,100.5,359.7,225.7,484.9
+2017,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2017,Reserves and parks,592.3,530.2,524.8,15.8,10.4
+2017,Rest of Madre de Dios,87.6,-1.8,4.4,2.1,8.3
+2017,Rest of Tambopata buffer zone,2792.2,650.6,766.1,79.4,194.9
+2017,Rest of mining corridor,21604.0,1425.9,2228.4,822.3,1624.8
+2018,Amarakaeri buffer zone,7485.2,42.0,377.5,290.7,626.2
+2018,Corridor across the road,2503.2,116.4,92.8,95.5,71.9
+2018,La Pampa sector,9829.5,1460.4,1833.7,285.1,658.5
+2018,Native communities,4069.3,267.7,468.0,302.3,502.7
+2018,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2018,Reserves and parks,565.1,-27.3,77.7,5.6,110.5
+2018,Rest of Madre de Dios,108.5,20.9,13.6,17.5,10.2
+2018,Rest of Tambopata buffer zone,3083.9,291.7,529.7,138.0,376.0
+2018,Rest of mining corridor,22827.7,1223.6,2241.2,769.9,1787.5
+2019,Amarakaeri buffer zone,7726.6,241.5,477.9,339.9,576.4
+2019,Corridor across the road,2894.3,391.2,307.8,148.3,64.9
+2019,La Pampa sector,10072.7,243.2,1531.9,205.2,1493.9
+2019,Native communities,4291.7,222.5,458.9,351.7,588.1
+2019,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2019,Reserves and parks,537.7,-27.3,47.6,14.3,89.3
+2019,Rest of Madre de Dios,141.2,32.7,20.0,18.7,6.0
+2019,Rest of Tambopata buffer zone,3257.6,173.7,392.8,92.3,311.4
+2019,Rest of mining corridor,25354.0,2526.4,3068.2,1261.5,1803.3
+2020,Amarakaeri buffer zone,8459.9,733.3,560.1,607.5,434.3
+2020,Corridor across the road,3079.9,185.5,403.2,91.4,309.1
+2020,La Pampa sector,10196.9,124.3,339.3,571.1,786.0
+2020,Native communities,5092.3,800.6,647.1,559.9,406.4
+2020,Other buffer zones,0.0,0.0,0.0,0.0,0.0
+2020,Reserves and parks,510.9,-26.8,53.5,25.4,105.7
+2020,Rest of Madre de Dios,198.1,56.9,58.9,9.2,11.2
+2020,Rest of Tambopata buffer zone,3316.3,58.7,294.5,147.5,383.3
+2020,Rest of mining corridor,28589.9,3235.9,3520.5,1559.0,1843.6
+2021,Amarakaeri buffer zone,9103.5,643.6,770.6,598.6,725.6
+2021,Corridor across the road,3687.2,607.4,675.4,335.2,403.2
+2021,La Pampa sector,10084.2,-112.8,392.5,390.6,895.8
+2021,Native communities,5555.9,463.6,851.2,417.9,805.6
+2021,Other buffer zones,0.7,0.7,0.7,0.0,0.0
+2021,Reserves and parks,464.3,-46.6,26.3,28.1,101.0
+2021,Rest of Madre de Dios,292.6,94.6,99.9,8.0,13.3
+2021,Rest of Tambopata buffer zone,3318.2,1.9,230.7,134.4,363.2
+2021,Rest of mining corridor,31872.9,3282.9,4482.2,1544.1,2743.5
+2022,Amarakaeri buffer zone,10171.3,1067.8,984.2,734.1,650.5
+2022,Corridor across the road,4523.8,836.6,778.0,359.7,301.1
+2022,La Pampa sector,10505.1,420.9,557.3,531.8,668.2
+2022,Native communities,6865.6,1309.7,1027.5,757.8,475.6
+2022,Other buffer zones,1.6,0.9,0.9,0.0,0.0
+2022,Reserves and parks,466.0,1.7,13.2,18.1,29.7
+2022,Rest of Madre de Dios,385.6,93.0,94.7,9.2,11.0
+2022,Rest of Tambopata buffer zone,3477.1,158.9,179.2,130.4,150.7
+2022,Rest of mining corridor,38515.5,6642.7,6627.8,2189.4,2174.6
+2023,Amarakaeri buffer zone,12266.2,2094.9,1181.0,1348.3,434.3
+2023,Corridor across the road,5604.1,1080.3,727.3,546.5,193.5
+2023,La Pampa sector,13684.9,3179.8,1229.6,2362.3,412.1
+2023,Native communities,8963.1,2097.5,1421.7,1256.1,580.3
+2023,Other buffer zones,1.5,-0.1,0.0,0.0,0.1
+2023,Reserves and parks,527.5,61.6,92.0,49.4,79.8
+2023,Rest of Madre de Dios,536.9,151.3,155.5,32.2,36.5
+2023,Rest of Tambopata buffer zone,3862.0,384.9,380.1,342.3,337.5
+2023,Rest of mining corridor,48793.1,10277.6,9194.1,4270.0,3186.6
+2024,Amarakaeri buffer zone,12986.1,719.9,736.8,213.5,230.4
+2024,Corridor across the road,5957.0,352.9,357.3,32.7,37.0
+2024,La Pampa sector,14882.7,1197.8,986.4,310.5,99.1
+2024,Native communities,9678.4,715.4,731.7,357.1,373.4
+2024,Other buffer zones,3.7,2.3,2.3,0.0,0.0
+2024,Reserves and parks,539.9,12.4,54.4,5.8,47.8
+2024,Rest of Madre de Dios,574.7,37.8,61.2,9.2,32.5
+2024,Rest of Tambopata buffer zone,3939.2,77.3,170.7,144.0,237.5
+2024,Rest of mining corridor,53246.4,4453.3,5194.4,1146.5,1887.6
+2025,Amarakaeri buffer zone,13896.9,910.8,1106.0,306.6,501.8
+2025,Corridor across the road,6093.5,136.5,288.2,25.0,176.7
+2025,La Pampa sector,16598.7,1716.1,1495.8,521.9,301.6
+2025,Native communities,10694.6,1016.2,1208.0,489.6,681.4
+2025,Other buffer zones,1.5,-2.3,0.0,0.0,2.3
+2025,Reserves and parks,781.2,241.2,238.9,55.1,52.8
+2025,Rest of Madre de Dios,735.5,160.8,188.2,18.6,46.0
+2025,Rest of Tambopata buffer zone,4116.0,176.8,377.9,210.2,411.3
+2025,Rest of mining corridor,59618.6,6372.3,7650.9,2276.4,3555.0
