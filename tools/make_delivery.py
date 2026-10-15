@@ -22,11 +22,11 @@ OUT = ROOT / "replication"
 DELIV = ROOT / "deliverables"
 MAX = 50 * 1024 * 1024
 PERSONAL = ("data_raw/reinfo/", "data_raw/ingemmet/catastro_")          # names / tax IDs: never shipped
-SKIP_PARTS = {"__pycache__", "node_modules", ".venv", ".git", ".claude", ".pytest_cache", "_artifact", ".ipynb_checkpoints"}
+SKIP_PARTS = {"qa", "__pycache__", "node_modules", ".venv", ".git", ".claude", ".pytest_cache", "_artifact", ".ipynb_checkpoints"}
 SKIP_NAMES = {".DS_Store"}
 REPLICATION = ["README.txt", "DOWNLOAD_LOG.csv", "pyproject.toml", "uv.lock", "data", "data_raw", "data_intermediate",
                "code", "output", "tests"]
-ALL = REPLICATION + ["README.md", "agent.md", "CLAUDE.md", "deliverables", "docs", "presentation", "tools", "archive"]
+ALL = REPLICATION + ["README.md", "agent.md", "deliverables", "docs", "presentation", "tools", "archive"]
 
 DELIVERABLES = {   # source -> name in deliverables/
     "docs/brief/BRIEF.pdf": "GroupAnteater_Q2_brief.pdf",
@@ -70,6 +70,9 @@ def write_zip(name: str, items) -> None:
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         for p in walk(items):
             z.write(p, p.relative_to(ROOT).as_posix()); n += 1
+        if name.endswith("_replication.zip"):          # offline pages (brief, walkthrough, methods) at pages/
+            for p in sorted((DELIV / "pages").glob("*.html")):
+                z.write(p, f"pages/{p.name}"); n += 1
     print(f"wrote {path.relative_to(ROOT)}: {n} files, {path.stat().st_size / 1e6:,.0f} MB")
 
 

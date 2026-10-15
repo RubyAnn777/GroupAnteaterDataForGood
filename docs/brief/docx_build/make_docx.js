@@ -85,7 +85,7 @@ for (const t of tokens) {
   if (t.type === "heading") {
     const txt = t.text;
     if (t.depth === 1) { body.push(new Paragraph({ heading: HeadingLevel.TITLE, children: runs(t.tokens) })); continue; }
-    if (t.depth === 2 && /^References/.test(txt)) body.push(new Paragraph({ children: [new PageBreak()] }));
+    if (t.depth === 2 && /^(References|Appendix A)/.test(txt)) body.push(new Paragraph({ children: [new PageBreak()] }));
     const lvl = { 2: HeadingLevel.HEADING_1, 3: HeadingLevel.HEADING_2 }[t.depth] || HeadingLevel.HEADING_3;
     body.push(new Paragraph({ heading: lvl, children: runs(t.tokens) }));
   } else if (t.type === "paragraph") {

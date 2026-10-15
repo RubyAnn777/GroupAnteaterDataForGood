@@ -197,14 +197,14 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
       s.addText(v, { x, y: 5.08, w: 2.05, h: 0.6, fontFace: LIGHT, fontSize: 28, color: X.lime, margin: 0, isTextBox: true });
       s.addText(l, { x, y: 5.68, w: 2.0, h: 0.4, fontFace: BODY, fontSize: 12, color: X.onSlate2, margin: 0, valign: "top", isTextBox: true });
     });
-    await cropFill(s, path.join(ASSETS, "cover_lapampa_2019_ccbysa.jpg"), 7.75, 0.42, W - 7.75 - M, H - 1.32, [0.4, 0, 0.47],
-      "aerial view of mined land in La Pampa during the 2019 operation");
-    s.addText("Photo: La Pampa, Madre de Dios, 2019 (army operation). Eliftoledo, Wikimedia Commons, CC BY-SA 4.0, cropped.",
+    await cropFill(s, path.join(ASSETS, "cover_mercurio_2019_afp.jpg"), 7.75, 0.42, W - 7.75 - M, H - 1.32, [0.43, 0, 0.57],
+      "Peruvian soldier at an illegal miners' camp in La Pampa during Operation Mercurio, 19 February 2019");
+    s.addText("Photo: Operation Mercurio, La Pampa, 19 Feb 2019. Cris Bouroncle / AFP via Getty Images (NBC News, 20 Feb 2019).",
       { x: 7.75, y: H - 0.86, w: W - 7.75 - M, h: 0.3, fontFace: BODY, fontSize: 8, color: X.onSlate2, margin: 0, valign: "top", isTextBox: true });
     s.addText(TEAM, { x: M, y: 4.35, w: 6.7, h: 0.45, fontFace: BODY, fontSize: 12, color: X.onSlate2, margin: 0, valign: "top", isTextBox: true });
     s.addNotes(
       "About 20 seconds. Good morning, we are Group Giant Anteater. We are Ruby Ann Grambauer, Sebastian Schmid, Laurens van der Lely, Omkar Mate and Dhruv Chaudhari.\n\n" +
-      "Our title is our main finding: Operation Mercurio bought a pause, not an end. The photo shows La Pampa from an army helicopter in 2019: everything brown and blue is mined land.\n\n" +
+      "Our title is our main finding: Operation Mercurio bought a pause, not an end. The photo shows La Pampa on 19 February 2019, the first days of Operation Mercurio: soldiers at an illegal miners' camp.\n\n" +
       "Our case is Operation Mercurio, Peru's biggest operation against illegal gold mining, which started in February 2019 in La Pampa, right next to the Tambopata reserve where FZS works. " +
       "We used 30-metre satellite maps for every year since 1985 and tried six ways to test whether the operation caused what we see.");
   }
@@ -354,7 +354,7 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
   // ---------------------------------------------------------------- 8 Timeline video
   {
     const s = slide("LIGHT", "Where");
-    header(s, { no: "02", label: "2010–2025 in one minute", title: "2010–2025: new pits, old pits re-mined, pits stopping", claim: "D",
+    header(s, { no: "04", label: "2010–2025 in one minute", title: "2010–2025: new pits, old pits re-mined, pits stopping", claim: "D",
       sub: "Net mining additions as three flows on the map: new land (brown), re-mined (amber), stopped (teal) · counter: net ha per year, La Pampa sector and corridor across the road" });
     video(s, "MiningTimeline.mp4", "stills/timeline_2019.png", "mining timeline animation");
     s.addNotes(
@@ -366,36 +366,36 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
 
   // ---------------------------------------------------------------- 9–15 What happened (figures; titles from slide_titles.json)
   const what = [
-    ["slide_09_net.png", "What happened", "03", "What happened in the target",
+    ["slide_09_net.png", "What happened", "05", "It fell",
       `About 40 seconds. One measure on every chart from here: net mining additions, the mining area this year minus last year, in hectares per year. Zone: the Tambopata buffer zone, exactly as SERNANP draws it.\n\n` +
       `Before the operation, 2016 to 2018, it added about ${ha("tambopata_bz_pre_net")} hectares a year. In 2019 to 2021, Mercurio and what followed, only ${ha("tambopata_bz_during_net")}: a ${pct("sl_net_tambopata_bz_fall_share")} fall. In the later years, 2022 to 2025, it was back at ${ha("tambopata_bz_later_net")}, or ${ha("tambopata_bz_later_ex2023_net")} without 2023, a spike only these maps show.\n\n` +
       `For comparison, the less-treated Amarakaeri buffer zone went the other way over the same years, ${ha("amarakaeri_bz_pre_net")} to ${ha("amarakaeri_bz_during_net")}. All description so far. Other events (COVID in 2020, Plan Restauración in 2021) are in the shaded years; we only mark Mercurio and the 2023 emergency on the charts.`],
-    ["slide_10_2019_parts.png", "What happened", "03", "2019, year by year",
+    ["slide_10_2019_parts.png", "What happened", "05", "What fell: 2019, year by year",
       `About 50 seconds. Same zone, now split into its three parts, year by year. Brown up is new land, mined for the first time; amber is old pits mined again; teal below zero is stopped land, pits that left the mining class; the black line is net.\n\n` +
       `In 2019 new pits kept opening: ${ha("tambopata_bz_2019_new")} hectares of new land, against ${ha("tambopata_bz_2018_new")} in 2018. But ${ha("tambopata_bz_2019_stopped")} hectares stopped, against ${ha("tambopata_bz_2018_stopped")} in 2018, so net additions fell to ${ha("tambopata_bz_2019_net")}. New land only drops from 2020, which is also the first COVID year.\n\n` +
       `Over 2019 to 2021, more stopping explains ${stopShare} of the fall in net additions, depending on how we count map flicker; ${pct("tambopata_bz_excess_stopped_share_in_2019")} of the extra stopping came in 2019. In Amarakaeri, stopped land stayed flat, ${ha("amarakaeri_bz_pre_stopped")} to ${ha("amarakaeri_bz_during_stopped")} hectares a year.\n\n` +
       "Why it matters for FZS: in the first year of an operation, new pits keep opening at the edges while the targeted pits go quiet. That is why a ring around the operation matters."],
-    ["slide_11_region.png", "Where it went", "04", "Where it went",
+    ["slide_11_region.png", "Where it went", "06", "Where it went",
       `About 40 seconds. Zoom out to the whole department. Net additions in Madre de Dios never fell: ${arrow("mdd_pre_net", "mdd_during_net", "mdd_later_net")} hectares a year across the three periods.\n\n` +
       `Blue is the legal mining corridor: all the land in the D.L. 1100 decree, not only the strip across the road we show next. The percentage is the corridor's share of the department's net additions, summed over each period: ${pct("v2_corridor_share_pre_net")}, then ${pct("v2_corridor_share_during_net")}, then ${pct("v2_corridor_share_later_net")}.\n\n` +
       `Careful: the rise elsewhere in the department was ${need("mdd_rise_elsewhere_vs_tambopata_fall").toFixed(1)} times the size of Tambopata's fall, so this is not just the same miners moving; new entrants and the gold price play a part. MAAP #208 finds the same: most mining deforestation in 2021 to 2024 was inside the corridor.`],
-    ["slide_12_across.png", "Where it went", "05", "Across the road",
+    ["slide_12_across.png", "Where it went", "07", "Across the road",
       `About 40 seconds. Now the strip of legal corridor directly across the highway from La Pampa: up to 10 kilometres north of the road, at La Pampa's longitudes. Blue is that strip, orange is La Pampa itself.\n\n` +
       `Across the road, net additions rose from about ${ha("corridor_across_pre_net")} hectares a year in 2016 to 2018 to ${ha("corridor_across_during_net")} in 2019 to 2021, while La Pampa fell from ${ha("lapampa_pre_net")} to ${ha("lapampa_during_net")}.\n\n` +
       "Independent evidence points the same way: Dethier and colleagues (2023) report most activity abandoned in the targeted zones and faster mining just outside them. But we cannot show it was the same people who crossed the road."],
-    ["slide_12b_bands.png", "Where it went", "05", "Across the road",
+    ["slide_12b_bands.png", "Where it went", "07", "Across the road: 1-km bands",
       `About 30 seconds. The same story in 1-kilometre bands, at La Pampa's longitudes: orange south of the highway, the La Pampa side; blue north, the corridor side.\n\n` +
       `In 2016 to 2018 nearly all net additions were south of the road: ${ha("sl_band_south_pre_net")} hectares a year south against ${ha("sl_band_north_pre_net")} north. In 2019 to 2021 the south dropped to ${ha("sl_band_south_during_net")} while the north rose to ${ha("sl_band_north_during_net")}, first right next to the road, then deeper in. In the later years both sides grew.\n\n` +
       "Description only: the bands show where mining happened, not who did it."],
-    ["slide_13_money.png", "Why it came back", "06", "Why it came back",
+    ["slide_13_money.png", "Why it came back", "08", "Why it came back",
       `About 40 seconds. Why did it come back? Three things line up; this is context, not a test.\n\n` +
       `Left: the anti-illegal-mining budget booked in Madre de Dios, programme PP 0128, peaked at about ${Math.round(need("t8_pp0128_mdd_2019") / 1e6)} million soles in 2019 and fell to about ${Math.round(need("t8_pp0128_mdd_2025") / 1e6)} million in 2025; it's a lower bound because national units book in Lima. Middle: the gold price, up ${need("gold_price_ratio_2025_2018").toFixed(1)}-fold from 2018 to 2025. Right: net additions in the Tambopata buffer zone, back up as the money faded and the price rose.\n\n` +
       "We don't show a correlation: eleven years is too few, and money also follows mining."],
-    ["slide_14_came_back.png", "Why it came back", "07", "How it came back",
+    ["slide_14_came_back.png", "Why it came back", "09", "How it came back",
       `About 40 seconds. Back to the parts, 2014 to 2025. In the later years the buffer zone averaged ${ha("tambopata_bz_later_net")} hectares a year net, ${ha("tambopata_bz_later_ex2023_net")} without the 2023 spike.\n\n` +
       `Much of it came back on old pits: re-mined land was ${pct("tambopata_bz_later_remined_share_added")} of the land added, or ${pct("tambopata_bz_later_ex2023_remined_share_added")} without 2023 — a third to a half. Forest-loss alerts miss this, because there is no forest left to lose. MAAP #193 (2023) reports the same return to degraded land.\n\n` +
       "We call 2022 to 2025 'the later years', not 'after enforcement', because enforcement went on in waves: Plan Restauración in 2021 and a state of emergency from April 2023."],
-    ["slide_15_reserve.png", "Why it came back", "08", "Inside the reserve",
+    ["slide_15_reserve.png", "Why it came back", "10", "Inside the reserve",
       `About 30 seconds. This is FZS's core area: the Tambopata National Reserve itself, not the buffer zone.\n\n` +
       `Net additions inside the reserve stayed small or negative for years; in 2019 to 2021 they averaged ${ha("tambopata_nr_during_net")} hectares a year. In 2025 they jumped by ${ha("tambopata_nr_2025_net")} hectares. MAAP #241 (2026) reports about 500 hectares from late 2025 to February 2026, and that the navy withdrew from its Malinowski river posts in 2025 for lack of funds.\n\n` +
       `The 2017 bar, about ${ha("tambopata_nr_2017_net")} hectares, is an earlier jump; treat single years with care.`],
@@ -405,7 +405,7 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
   // ---------------------------------------------------------------- 16 Six methods (old slide 18 grid)
   {
     const s = slide("LIGHT", "Is it causal?");
-    header(s, { no: "09", label: "Is it causal?", title: "Six methods: two hold up, none is clean", claim: "C",
+    header(s, { no: "11", label: "Is it causal?", title: "Six methods: two hold up, none is clean", claim: "C",
       sub: "Each builds a stand-in for the Tambopata buffer zone without Mercurio · all six point down · green = holds up, in net additions, in hectares only" });
     const methods = [
       ["Compare with other zones", "Tambopata vs 14 other Peruvian buffer zones, before and after", true, "Holds up · in hectares only"],
@@ -436,7 +436,7 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
   // ---------------------------------------------------------------- 17 The claim (old slide 19, dark)
   {
     const s = slide("DARK", "Is it causal?");
-    header(s, { no: "10", label: "The causal claim", title: "What we can say about cause", claim: "C", dark: true });
+    header(s, { no: "12", label: "The causal claim", title: "What we can say about cause", claim: "C", dark: true });
     s.addText([
       { text: "If the other zones show what Tambopata would have done, ", options: { color: X.onSlate2, italic: true } },
       { text: "Mercurio and the operations that followed lowered net mining additions by ", options: { color: X.onSlate } },
@@ -460,7 +460,7 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
   }
 
   // ---------------------------------------------------------------- 18 The evidence (old slide 20: raw vs scaled placebo dots)
-  await figSlide("slide_18_placebo.png", { section: "Is it causal?", no: "10", label: "The evidence", claim: "C",
+  await figSlide("slide_18_placebo.png", { section: "Is it causal?", no: "12", label: "The evidence", claim: "C",
     notes: "About 40 seconds. How the test works: we pretend each of the other zones was the one targeted, and compute the same number. If Mercurio mattered, Tambopata's real change should stand out from all the fake ones.\n\n" +
       `Top row, in hectares: the Tambopata buffer zone, the orange dot, is far to the left of every grey dot: ${ordinal(Math.round(need("model_m1_rank")))} of ${int("model_m1_n")}. But it was also first in 2014, before Mercurio: it is simply the biggest zone.\n\n` +
       `Bottom row, the same change scaled to each zone's normal pre-2019 year: Tambopata sits among the others, ${ordinal(Math.round(need("model_m4_rank")))} of ${int("model_m4_n")} here, and ${scaledRank} across the ways of scaling. A big zone falls a lot in hectares just by being big. That is why our claim is in hectares only, and a rank is not a significance test.` });
@@ -468,7 +468,7 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
   // ---------------------------------------------------------------- 19 Limits (old slide 21)
   {
     const s = slide("LIGHT", "Limits");
-    header(s, { no: "11", label: "Limits", title: "Most biases make the fall look bigger", claim: "D",
+    header(s, { no: "13", label: "Limits", title: "Most biases make the fall look bigger", claim: "D",
       sub: "Net mining additions measure land, not people, rivers or mercury · direction of each bias for the 2019–21 fall, Tambopata buffer zone" });
     s.addText("SATELLITES CAN'T SEE", { x: M, y: G.top, w: 5.6, h: 0.3, fontFace: MED, fontSize: 11, charSpacing: 2, color: X.accent, margin: 0, isTextBox: true });
     const cant = [["LuShip", "River dredges", "148 → 598 in La Pampa, 2021–23 (MAAP #193)"], ["LuDroplets", "Mercury", "in rivers and fish"],
@@ -507,7 +507,7 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
   // ---------------------------------------------------------------- 20 For FZS (old slide 22 + ring monitoring)
   {
     const s = slide("DARK", "For FZS");
-    header(s, { no: "12", label: "For FZS", title: "Plan for the months after the operation ends", claim: "P", dark: true,
+    header(s, { no: "14", label: "For FZS", title: "Plan for the months after the operation ends", claim: "P", dark: true,
       sub: "Informed expectations from one case, not proven rules · net mining additions, Tambopata buffer zone, corridor across the road, reserve" });
     const recs = [
       ["LuCalendarClock", "Stay after the sweep", arrow("tambopata_bz_during_net", "tambopata_bz_later_net"),

@@ -126,7 +126,7 @@ All on net additions, Tambopata buffer zone, 2019–21. None passes all of its o
 - **Walkthrough** (every analysis and figure, in the order of this brief): https://claude.ai/artifact/VT9wkZqxhH8WAHU4v36mg6
 - **Methods page** (each method: question, how it works, limits, code): https://claude.ai/artifact/83ZeCu4frkocBDJ46RV1pA
 - **This brief online:** https://claude.ai/artifact/NRjV7R75F8Wvogn6Bs3ycJ
-- Offline copies of all three pages are in `deliverables/pages/` and in the replication zip (`docs/walkthrough/EXPLAINER.html`, `METHODS.html`, `docs/brief/BRIEF.html`).
+- Offline copies of all three pages are in the replication zip, folder `pages/` (start with `pages/index.html`).
 
 ### Appendix B1. Raw AI answer (unedited)
 

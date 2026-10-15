@@ -19,6 +19,9 @@ Output:        output/fig_brief_main.png    the one figure in the brief
                output/peru_levels_and_additions.csv   the required table: mining area (levels) and annual
                                             additions (net, new, re-mined, stopped) by unit and year, 2014-2025
                other output/*.csv and *.png: the tables and figures behind the walkthrough and the slides
+Pages:         pages/index.html  offline copies of the brief, the team walkthrough (every analysis and figure) and
+                                 the methods page; images embedded, no internet needed. Online versions are linked
+                                 in Appendix D of the brief.
 Definitions:   code/definitions.py (one place): outcome = net mining additions, ha/yr = new land + re-mined -
                stopped (MapBiomas Peru Collection 4, class 4.2, our pixel accounting); one zone registry (official
                SERNANP buffer zones kept whole); treatment = start of Operation Mercurio, first treated year 2019.
@@ -47,3 +50,4 @@ Folder structure
   code/                 main.py + the modules it calls (+ fonts/ for the figures; review/ = teammate's read-only checks)
   output/               the figure, brief_numbers.csv, numbers.csv, checks.csv, all tables and figures
   tests/                guards for the shared definitions
+  pages/                offline HTML pages: brief, walkthrough, methods (start with pages/index.html)

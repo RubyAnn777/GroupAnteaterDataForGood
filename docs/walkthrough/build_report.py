@@ -402,6 +402,7 @@ def brief_html(nums: dict) -> str:
     text = re.sub(r"(?m)^!\[([^\]]*)\]\(([^)]+)\)\s*$", fig, text)
     body = markdown.markdown(badges(text), extensions=["tables", "sane_lists"])
     body = body.replace("<h2>References</h2>", '<h2 class="pb">References</h2>')
+    body = re.sub(r"<h2>(Appendix A[^<]*)</h2>", r'<h2 class="pb">\1</h2>', body, count=1)
     body = re.sub(r"(<h1>.*?</h1>)\s*<p>(.*?)</p>", r'<header class="b-head">\1<p class="b-meta">\2</p></header>', body, count=1, flags=re.S)
     return body
 
