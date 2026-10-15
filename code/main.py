@@ -8,7 +8,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from common import Numbers, load_pack
-import checks, peru, peru_anp, brazil
+import checks, peru, peru_robust, peru_anp, brazil
 import peru_production, brazil_deter, spatial, brief_figure, peru_synth, spatial_zones, peru_models
 import control_amw, control_elevation, control_mb_amazonia, control_select, brazil_deter_all, brazil_stagger
 import raster_zones, raster_layers, raster_gold, glad_alerts, v2_tests, v2_stats, v2_extra, control_top3
@@ -17,9 +17,11 @@ import v2_rdd, peru_context_models, placebo_explainer, control_psm, peru_sdid, v
 
 def main():
     pack = load_pack()
+    raster_zones.run()               # v3 zone registry + pixel accounting (rebuilds from rasters only if missing)
     checks.run_checks(pack)          # raises if any check fails
     reg = Numbers()
-    peru.run(pack, reg)
+    peru.run(pack, reg)              # v3: raster net additions + parts, 2x2, displacement, event study
+    peru_robust.run(pack, reg)       # alternative controls, drop the largest unit
     peru_anp.run(pack, reg)          # Peru protected areas (our ANP download)
     brazil.run(pack, reg)            # Brazil course tables + indigenous territories
     peru_production.run(pack, reg)
@@ -38,7 +40,6 @@ def main():
     control_psm.run(reg)             # matching estimators (propensity score, Mahalanobis, CEM, entropy balancing)
     brazil_stagger.run(reg)          # each territory vs its own operation date; no-operation pool
     # Plan v2 (2026-10-12): one raster backbone, layered zones (rebuilds from rasters only if intermediates are missing)
-    raster_zones.run()
     raster_layers.run(reg)           # zone map, stream, Sankey, road bands, corridor share
     raster_gold.run(reg)             # gold-left proxy (geology x first-mined year)
     glad_alerts.run(reg)             # quarterly forest-loss alerts on mining land
@@ -53,7 +54,7 @@ def main():
     v2_legality.run(reg)             # MAAP #235 legality levels x first-time mining
     v2_products_check.run(reg)       # why MapBiomas and AMW disagree in the corridor (densification)
     brazil_raster.run(); brazil_v2.run(reg)   # Brazil, same pixel method (Col 11 rasters) + staggered DiD + RI
-    brief_figure.run(pack)           # the ONE figure for the brief (needs peru + peru_anp modules only)
+    brief_figure.run(pack, reg)      # the ONE figure for the brief (v3: net additions + parts)
     slides_figures.run(pack, reg)    # 16:9 slide figures + slide_titles.json for the FZS talk (output/slides/)
     reg.save()
 

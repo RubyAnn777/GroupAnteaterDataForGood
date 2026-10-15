@@ -113,6 +113,13 @@ C = dict(
     gold_tint="#ebcf86",      # a part of the gold (e.g. declared gold), same family, always labelled
     other="#a9a8a2",          # rest / other / pools (deliberately grey: folds, not a series)
     brazil="#d0692f",         # Brazil treated territory (Yanomami): treated = orange, as in Peru
+    # The three parts of net additions (plan v3). Validated as a set (dataviz validate_palette.js, light surface:
+    # CVD worst 14.1, normal 21.6; re-mined < 3:1 contrast, so always direct-labelled). Net itself is drawn in INK.
+    # Do not put the parts next to an orange La Pampa line (new vs lapampa: normal-vision 11.8): show parts as small
+    # multiples, one panel per zone, zone named in the panel title.
+    new="#9a5520",            # new land (first-time mining): earth brown
+    remined="#d99a1e",        # re-mined old land: amber
+    stopped="#14998a",        # stopped (left the mining class; half becomes water): teal, drawn below zero
 )
 FONT_DIR = Path(__file__).resolve().parent / "fonts"     # Roboto (Apache 2.0), the face of the pages and of FZS
 
@@ -169,10 +176,13 @@ def style_axes(ax, ygrid: bool = True, fmt: bool = True):
 def headline(fig, title: str, subtitle: str | None = None, x: float = 0.012):
     """Takeaway title (what the reader should conclude) + subtitle (what is measured, unit), left-aligned
     to the figure edge. Call BEFORE finish_figure; it reserves the top band in tight_layout."""
-    fig.text(x, 0.995, title, fontsize=14, fontweight="medium", color=INK, va="top", ha="left")
+    fig.text(x, 0.995, title, fontsize=14, fontweight="medium", color=INK, va="top", ha="left", linespacing=1.25)
+    nt = title.count("\n") + 1                       # multi-line titles push the subtitle down
     if subtitle:
-        fig.text(x, 0.995, "\n" + subtitle, fontsize=9.5, color=INK2, va="top", ha="left", linespacing=1.9)
-    fig._headline_lines = 1 + (subtitle.count("\n") + 1 if subtitle else 0)
+        h_in = fig.get_size_inches()[1]
+        y = 0.995 - (nt * 14 * 1.25 / 72 + 0.06) / h_in
+        fig.text(x, y, subtitle, fontsize=9.5, color=INK2, va="top", ha="left", linespacing=1.45)
+    fig._headline_lines = nt + (subtitle.count("\n") + 1 if subtitle else 0)
 
 def label_end(ax, x, y, text, color, dx: float = 6, dy: float = 0, weight: str = "semibold", ha: str = "left",
               va: str = "center", fontsize: float = 8.5):

@@ -28,7 +28,7 @@ T, A = D.TREATED_ZONE, "amarakaeri_bz"
 Y0, Y1 = D.YEARS
 SRC = D.SOURCE
 MEAS = ["net"] + D.PARTS
-PART_C = {"new": C["lapampa"], "remined": C["gold"], "stopped": C["other"]}
+PART_C = {m: C[m] for m in D.PARTS}
 
 
 def _w(df, m):
