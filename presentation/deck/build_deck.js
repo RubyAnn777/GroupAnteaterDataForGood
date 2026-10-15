@@ -278,17 +278,41 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
       "And the same zones everywhere: the Tambopata buffer zone as SERNANP draws it, La Pampa as its western part, the strip of legal corridor across the road, the Amarakaeri buffer zone as the less-treated comparison, and the whole department. Hectares measure mining activity, not the number of miners.");
   }
 
-  // ---------------------------------------------------------------- 4 Map build (part A)
-  {
+  // ---------------------------------------------------------------- 4 Map build (part A): four click-through slides
+  // Same layout as the 2026-10-13 deck (flippable steps, fixed positions); stills from the v3 map export
+  // (presentation/animation/out/stills/map_step{1-4}_clean.png). The video version is in the backup.
+  const steps = [
+    ["Protected areas", "Tambopata reserve, its buffer zone and the Amarakaeri buffer zone. Pink: communities."],
+    ["The Interoceanic Highway", "One road runs along the buffer zone and splits it from the land to the north."],
+    ["Where mining can be legal", "The legal mining corridor, north of the road. South of it, in the buffer zone: a crime."],
+    ["The target", "La Pampa, Mercurio's target from Feb 2019, and the corridor strip across the road."],
+  ];
+  const stepNotes = [
+    "This is Madre de Dios, in the south-east of the Peruvian Amazon. In green, the protected areas: Tambopata National Reserve in the south, the core FZS helps protect, ringed by its buffer zone. We use the buffer zone exactly as SERNANP draws it, including the Kotsimba native community inside it. West of it the Amarakaeri buffer zone, our less-treated comparison. Pink outlines are native communities.",
+    "The white line is the Interoceanic Highway, the paved road from Brazil to the Pacific. It runs right along the edge of the buffer zone. Remember this road: it becomes the border in our story. Blue lines are rivers: the gold here is alluvial, in the floodplains.",
+    "The blue area is the mining corridor created by decree in 2012, D.L. 1100. Inside it, small-scale mining can be permitted. South of the road, in the buffer zone, the same work is a crime. Legality is about location: the satellite maps themselves cannot tell legal from illegal mining.",
+    "In orange, La Pampa, the target of Operation Mercurio from February 2019. We define it as the buffer zone's part between 70.15 and 69.80 degrees west; there is no official boundary. The blue box just across the road is the part of the legal corridor directly opposite. Watch these two boxes: every number on the next slides is net mining additions in these zones.",
+  ];
+  for (let k = 0; k < steps.length; k++) {
     const s = slide("LIGHT", "Where");
     header(s, { no: "03", label: "Where we are", title: "La Pampa sits one road away from legal mining land", claim: "D",
-      sub: "Madre de Dios, Peru · protected areas → Interoceanic Highway → D.L. 1100 mining corridor → La Pampa sector · click to play (21 s)" });
-    video(s, "MapLayers.mp4", "stills/map_step4.png", "map layers animation");
-    s.addNotes(
-      "About 50 seconds, click to play. Step 1: the protected areas. Tambopata National Reserve in the south, the core FZS helps protect, ringed by its buffer zone. West: the Amarakaeri buffer zone. Pink outlines: native communities.\n\n" +
-      "Step 2: the Interoceanic Highway runs right along the buffer zone. Blue lines are rivers: the gold here is alluvial, in the floodplains.\n\n" +
-      "Step 3: the blue area is the mining corridor created by decree in 2012, D.L. 1100, where small-scale mining can be permitted. South of the road, in the buffer zone, the same work is a crime. Legality is about location: the satellite maps themselves cannot tell legal from illegal.\n\n" +
-      "Step 4: in orange, La Pampa, the target of Operation Mercurio from February 2019, which we define as the buffer zone's part between 70.15 and 69.80 degrees west; there is no official boundary. The blue box just across the road is the part of the legal corridor directly opposite. Watch these two boxes.");
+      sub: `Madre de Dios, Peru · step ${k + 1} of ${steps.length} · zones as used on every slide` });
+    const lx = M, lw = 3.5, rowH = (G.bottom - G.top) / steps.length;
+    steps.forEach(([head, text], i) => {
+      const on = i === k, past = i < k, y = G.top + i * rowH;
+      s.addText(`${i + 1}`, { shape: pres.shapes.OVAL, x: lx, y: y + 0.02, w: 0.36, h: 0.36, align: "center", valign: "middle", fontFace: MED,
+        fontSize: 12, color: on ? "FFFFFF" : (past ? X.eyebrow : X.muted), fill: on ? { color: X.eyebrow } : { type: "none" },
+        line: { color: on || past ? X.eyebrow : X.rule2, width: 1 }, margin: 0 });
+      s.addText(head, { x: lx + 0.5, y, w: lw - 0.5, h: 0.4, fontFace: on ? MED : BODY, fontSize: 16, color: on ? X.ink : (past ? X.ink2 : X.muted),
+        margin: 0, valign: "middle", isTextBox: true });
+      if (on) s.addText(text, { x: lx + 0.5, y: y + 0.42, w: lw - 0.5, h: rowH - 0.5, fontFace: BODY, fontSize: 13, color: X.ink2, margin: 0, valign: "top", isTextBox: true });
+    });
+    const clean = path.join(ANIM, "stills", `map_step${k + 1}_clean.png`), cap = path.join(ANIM, "stills", `map_step${k + 1}.png`);
+    const f = fs.existsSync(clean) ? clean : cap;
+    const mx = M + lw + 0.25, mw = W - M - mx, mh = Math.min(mw * 9 / 16, G.bottom - G.top);
+    if (fs.existsSync(f)) s.addImage({ path: f, x: mx, y: G.top, w: mh * 16 / 9, h: mh, altText: `map step ${k + 1}` });
+    else photo(s, mx, G.top, mw, mh, `map step ${k + 1}`);
+    s.addNotes(`Step ${k + 1} of ${steps.length}, about 12 seconds; click for the next step. ${stepNotes[k]}`);
   }
 
   // ---------------------------------------------------------------- 5 Timeline (part B)
@@ -508,17 +532,10 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
   }
   {
     const s = slide("LIGHT", "Backup");
-    header(s, { label: "Backup · Map steps", title: "The map build as four stills", claim: "D",
-      sub: "Fallback if the video does not play · protected areas → highway → corridor → La Pampa" });
-    const gw = (CW - 0.3) / 2, gh = gw * 9 / 16;
-    const sc = Math.min(1, (G.bottom - G.top - 0.2) / (2 * gh));
-    for (let k = 0; k < 4; k++) {
-      const f = path.join(ANIM, "stills", `map_step${k + 1}_clean.png`);
-      const w = gw * sc, h = gh * sc, x = M + (k % 2) * (w + 0.3) + (CW - 2 * w - 0.3) / 2, y = G.top + Math.floor(k / 2) * (h + 0.2);
-      if (fs.existsSync(f)) s.addImage({ path: f, x, y, w, h, altText: `map step ${k + 1}` });
-      else photo(s, x, y, w, h, `map step ${k + 1}`);
-    }
-    s.addNotes("Same four steps as the map video on slide 4, as stills.");
+    header(s, { label: "Backup · Map video", title: "The map build as one animation", claim: "D",
+      sub: "Same four steps as the click-through map slides · protected areas → highway → corridor → La Pampa · click to play (21 s)" });
+    video(s, "MapLayers.mp4", "stills/map_step4.png", "map layers animation");
+    s.addNotes("Optional: the same four steps as the click-through map slides, as one video.");
   }
 
   for (const [k, t] of titles) {
