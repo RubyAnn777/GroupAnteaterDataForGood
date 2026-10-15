@@ -152,11 +152,11 @@ The outcome definitions are examined in S1.
 
 | Assumption | Supported by | Threatened by | Tested in |
 |---|---|---|---|
-| No interference | — | Displacement to Amarakaeri (Camanti), across the road, into the reserve (MAAP #130, #241) | S2, S8, S9 |
+| No interference | none | Displacement to Amarakaeri (Camanti), across the road, into the reserve (MAAP #130, #241) | S2, S8, S9 |
 | One version of treatment | Single start date for Peru | Treatment is a bundle; Brazil territories have different kinds of operations | S0 (this decision), S12 |
 | No anticipation | Mercurio was a surprise operation (to verify) | 2017-18 operations already in the pre-period | S2, S3 |
-| Parallel trends | Some pre-period placebos pass | Tambopata is 5× Amarakaeri and ~100× most zones; scale-dependence | S2-S4 |
-| Overlap | — | Tambopata is outside the donor range in hectares; no common support in matching | S6, S11 |
+| Parallel trends | Not supported in hectares (S2 T3, S3 T3) | Tambopata is 5× Amarakaeri and ~100× most zones; scale-dependence | S2-S4 |
+| Overlap | none | Tambopata is outside the donor range in hectares; no common support in matching | S6, S11 |
 
 ## 9. Weaknesses found
 
@@ -171,7 +171,7 @@ None run (card only). One check done: every Peru module codes 2019 as the first 
 ## 11. Verdict and wording for the brief
 
 - **Treatment wording:** "We treat the start of Operation Mercurio in February 2019 as the treatment. Enforcement continued afterwards (COVID-19 in 2020, Plan Restauración in 2021, a state of emergency from April 2023), so our estimates measure Mercurio together with what followed in those years. We show these events in the figures but do not separate their effects."
-- **Causal sentences** must have the form: "*If* [comparison] shows what Tambopata would have done without Mercurio, then Mercurio and the operations that followed lowered [measure] by [range] in 2019-21." Whether any range survives is decided in S14.
+- **Causal sentences** must have the form: "*If* [comparison] shows what Tambopata would have done without Mercurio, then Mercurio and the operations that followed lowered [measure] by [range] in 2019-21." Whether any range survives is decided in S14 (proposal: about 1,450-1,660 ha/yr of net additions, read as an upper bound; see `14_synthesis.md` §10-11).
 - **Never** write "after the operation ended" for 2022-25.
 
 ## References

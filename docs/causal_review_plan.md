@@ -147,12 +147,12 @@ These three measure different things. Net additions drop when re-mined land stay
 3. **Single treatment date, different year-mapping rules:** Peru always 2019; Brazil stagger uses the operation's calendar year, `brazil_v2` shifts Jul-Dec operations to the next year (`brazil_v2.py:59-61`).
 4. **"Rest of Madre de Dios" is mislabelled** (`peru.py:43-47, 316, 356`): it also contains the reserve interiors and native communities, not only the legal corridor.
 5. **Bahuaja-Sonene is a Puno unit**: it enters pool A through a 145-ha Madre de Dios row (`peru.py:160-162`).
-6. **Running variable is a north-south offset, not a perpendicular distance**, while the docstring says ESRI:102033 (`raster_zones.py:113-114`). Ratio to true distance: median 1.08, up to 1.44 near the road.
+6. **Running variable is a north-south offset, not a perpendicular distance**, while the docstring says ESRI:102033 (`raster_zones.py:113-114`). Ratio to true distance: median 1.08, p90 1.24 (1.40 within 1 km of the road; card 09).
 7. **La Pampa window was chosen by looking at the outcome map** (`raster_zones.py:21-22`); the `ACROSS_KM = 10` parameter is never varied.
 8. **Today's boundaries applied to 1985-2025** (corridor, communities).
 9. **Checks:** some are reproductions of the instructor's numbers, not publisher checks (`checks.py:55-59`). Real publisher checks: Tambopata BZ 20,730 (platform screenshot), Tambopata NR 777, raster checks (`raster_layers.py:273-275`).
 10. **MINEM gold rebuild does not match BCRP** after 2014 (2015 +48%, 2016 +8%, 2020 +47%, 2021-25 +10-16%), but the check tests only 2012 and 2019 (`peru_gold_minem.py:119-120`). `explainer_content.md:352` and log row 65 claim 2016 matches exactly. Confirmed: rebuilt 2020 declared = 2,152 kg vs BCRP 1,460 kg.
-11. "2017 = map reclassification" inside the reserve (`peru_anp.py:62-93`) is asserted, but the transition table shows ~390 ha came from forest and farm classes.
+11. "2017 = map reclassification" inside the reserve (`peru_anp.py:62-93`) is asserted, but the transition table shows ~390 ha came from forest and farm classes (card 13: 343 ha from natural classes, 198 ha from farm or bare land).
 
 **Tests**
 - Gross vs net: split Tambopata BZ 2019-21 net additions into first-time, re-mined and outflow (mining → water/beach) using `zone_year_v2.csv`.
@@ -173,14 +173,14 @@ These three measure different things. Net additions drop when re-mined land stay
 **Spec:** (mean addition Tambopata 2019-21 − 2016-18) − (same for Amarakaeri) = −1,477 − (+285) = **−1,762 ha/yr**. Placebo window 2013-15 vs 2016-18 = +209. Persistence 2016-18 vs 2022-25 = −737.
 
 **Assumptions and leads**
-- *Parallel trends in hectares between units of very different size*: in 2016-18 Tambopata added 20.5% of its stock per year, Amarakaeri 4.4%.
+- *Parallel trends in hectares between units of very different size*: in 2016-18 Tambopata added 17.6% of its stock per year, Amarakaeri 4.2% (card 02).
 - *Untreated control*: Amarakaeri had Camanti displacement and Mercurio II; under spillover the DiD is biased **away from zero**.
 - *Clean pre-period*: 2017-18 operations sit in it; Amarakaeri 2018 = 54 ha is an outlier (301-542 in 2014-17).
 - Pre-window sensitivity: 2016-17 only → −1,586; 2014-18 → −1,663.
 
 **Tests**
 - Re-run with 2014-18 and 2016-17 bases; report the spread.
-- Placebo in time for every fake start 2008-16 (audit: all positive, +167 to +1,034; real ranks 1 of 10, p = 0.10).
+- Placebo in time for every fake start 2008-16 (audit: all positive, +167 to +1,034; real ranks 1 of 10, p = 0.10; card 02 extends the fakes to 2003-16: rank 1 of 15, p 0.07).
 - Log and scaled versions of the 2×2.
 
 ---
@@ -194,8 +194,8 @@ These three measure different things. Net additions drop when re-mined land stay
 **Spec:** `y ~ Σ_k d_k (k ≠ 2018) | unit + year`, CRV1 saved but flagged not informative; pool A = Tambopata, Amarakaeri, Bahuaja; pool B = 15 zones with any 2014-18 change.
 
 **Leads to verify**
-1. **Rank 1 also fires in a pre-year**: 2016 coefficient −1,195 (pool A), below every placebo (−67 to +314). Raw-hectare ranks mainly measure that Tambopata swings 5× Amarakaeri and ~100× the others.
-2. Scale-free rank is **10 of 15** (`placebo_space_rank_scaled`), registered but not discussed.
+1. **Rank 1 also fires in a pre-year**: 2016 coefficient −1,195 (pool A), below every placebo (−67 to +314; that band is pool B's, and pool B's own 2016 coefficient, −1,066, gives the same verdict; card 03). Raw-hectare ranks mainly measure that Tambopata swings 5× Amarakaeri and ~100× the others.
+2. Scale-free rank is **10 of 11** (`placebo_space_rank_scaled`; 4 zones with a pre-mean ≤ 0 drop out, so the registered "of 15" is wrong), registered but not discussed.
 3. **Reference year 2018** inflates magnitudes: mean 2019-21 coefficient −1,863 (ref 2018), −1,634 (ref 2016-18), −1,562 (ref 2014-18).
 4. **Restricted "Amazon" pool contains Andean zones** (Junín, Río Abiseo) (`peru.py:268-294`); three modules use three "Amazon" definitions.
 5. Pool B includes coastal and Andean zones and zones with negative pre-means.
@@ -255,7 +255,7 @@ These three measure different things. Net additions drop when re-mined land stay
 
 **Card:** Abadie et al. (2003, 2010, 2015); convex-hull condition; pre-period fit (RMSPE); donor pool rules; post/pre RMSPE ratio test; interpolation bias; why it fails for extreme units.
 
-**Files:** `peru_synth.py`, SC branch of `peru_sdid.py:262-263`.
+**Files:** `peru_synth.py`, SC branch of `peru_sdid.py:72-73`.
 
 **Leads to verify**
 1. **Convex-hull failure is real and documented**: in hectares Tambopata is outside the donor range in 9 of 9 pre-years (pre-RMSPE 1,467).
@@ -299,9 +299,9 @@ These three measure different things. Net additions drop when re-mined land stay
 3. **"Across the road" gains also occur east of La Pampa**: corridor strip east of the window +0.89 vs across +0.94. Only the relative jump is distinctive. Threat to the displacement reading.
 4. **La Pampa pre-trend failure (p 0.0055)** comes from the 2010-13 ramp-up; 2019 coefficient +0.13 (p 0.87); the fall starts in 2020 with COVID.
 5. **Clustering vs shock level**: one contiguous treated zone (14 blocks); p = 0.081 (10 km), 0.088 (20 km), 0.051 (30 km). `st_n_clusters` = 161 is counted on the full panel; the regression uses 136.
-6. Gradient reference band contains La Pampa and Kotsimba cells; cells beyond ±30 km fall into the omitted category.
+6. Gradient reference band contains La Pampa and Kotsimba cells; cells beyond ±30 km fall into the omitted category (1,760 cells, via `pd.cut` returning NaN; card 08).
 7. Gold × year control is nearly empty (82% of cells "high gold").
-8. GLAD mask still looks ahead (`glad_alerts.py:67`, `first > 0`).
+8. GLAD mask still looks ahead (`glad_alerts.py:71`, `first > 0`).
 9. Doc drift (`v2_stats.py:12-19`, `raster_zones.py:113`).
 10. 12 × 5 + 12 + 2 tests, no multiple-testing correction.
 
@@ -318,7 +318,7 @@ These three measure different things. Net additions drop when re-mined land stay
 **Spec:** outcome = first-time mined ha / bin area × 100 per year; diff-in-disc of 2019-21 mean minus 2014-18 mean; north (corridor, zone 5) vs south (La Pampa, zone 7); rdrobust triangular kernel, mserd h, area weights, CR1 by 2-km segment (19 clusters).
 
 **Leads to verify**
-1. **Constant-gap assumption is weak**: yearly north-south gap swings ±3 points without treatment (2011 −3.52, 2017-18 −1.3); PRE window choice moves the estimate 1.9-2.6 and p 0.04-0.72.
+1. **Constant-gap assumption is weak**: yearly north-south gap swings ±3 points without treatment (2011 −3.52, 2017-18 −1.3); PRE window choice moves the estimate 1.9-2.6 and p 0.04-0.72 (card 09: +1.6 to +2.9, p 0.036-0.37, always positive).
 2. **Timing**: 2019 alone +0.82 (p 0.22); 2020-21 +2.75 (p 0.09). "Within a year" overstates.
 3. **Fake-year rank 1 of 10** wins by 1.2% over fake 2011 (|2.077|); minimum attainable p = 0.10.
 4. Running variable is a vertical offset (see S1).
@@ -326,9 +326,9 @@ These three measure different things. Net additions drop when re-mined land stay
 6. **Depletion differs across the line**: 16.4% south vs 9.7% north already mined by 2018; the gold proxy cannot test continuity (gold_share = 1 everywhere within ±6 km).
 7. Reserve: fake-year pool still padded with 1998-2006 zeros; the 2017 invasion sits in PRE; "outside" includes treated La Pampa.
 8. "0.04-0.98 across bandwidths" in the brief includes the donut run.
-9. **Road fake-date test (A9)** uses ±30 km bands, while the docs say 0-15 km; with ±15 km 2019 ranks 2 of 7. Start year 2022 is still in the "clean" set though its pre-window is 2019-21. A two-sided rank gives 2 of 8.
+9. **Road fake-date test (A9)** uses ±30 km bands, while the docs say 0-15 km; with ±15 km 2019 ranks 2 of 8 (2 of 7 once 2022 is dropped). Start year 2022 is still in the "clean" set though its pre-window is 2019-21. A two-sided rank gives 3 of 8 (card 09).
 
-**Tests:** perpendicular distance; PRE-window table; 2019-only vs 2020-21; CR3 and 4/6-km clusters; at-risk denominator (audit: 2.05, p 0.24); LP window variants; reserve pool from 2007.
+**Tests:** perpendicular distance; PRE-window table; 2019-only vs 2020-21; CR3 and 4/6-km clusters; at-risk denominator (audit: 2.05, p 0.24; card 09 gets 1.98, p 0.39, counting land mined since 1985); LP window variants; reserve pool from 2007.
 
 ---
 
@@ -345,9 +345,9 @@ These three measure different things. Net additions drop when re-mined land stay
 2. **R2b selects on the outcome**: operations from 2022 plausibly responded to fast growth.
 3. **R2 measures media coverage, not enforcement**: Kayapó excluded for a 3-day raid; Amanã's "none" rests on two searches.
 4. **Coding bug**: Sawré Muybu, Menkragnoti and Enawenê-Nawê are coded "none" but were searched for 2022-25 only. Sawré Muybu passes R1-R3 and sits in the PSM pool.
-5. **Pre-trends predict the gap**: a linear trend in the growth difference predicts a larger 2019-21 gap than observed, so trend-adjusted Tambopata did *better* than predicted.
+5. **Pre-trends predict the gap**: a linear trend in the growth difference predicts a larger 2019-21 gap than observed, so trend-adjusted Tambopata did *better* than predicted. (Card 10: this holds only for a 2010-18 trend window; with 2012-14 starts the trend-adjusted gap is about 0 against Amanã and −0.07 to −0.13 log points against Tapajós.)
 6. **AMW vs MapBiomas ratio** 1.65× (Tambopata) vs 5-6× (twins): size matching depends on the product; overlap-free AMW accounting penalises dense mining.
-7. Pre-trend test subtracts Col 4 and Col 6 growth rates (`control_top3.py:47`).
+7. Pre-trend test subtracts Col 4 and Col 6 growth rates (`control_top3.py:47`). (Card 10: the two collections differ by +0.001/yr on the same land in 2011-18, so this is a rule-7 wording issue, not a material error.)
 8. Stale "three twins" text; `methods_content.md:209` cites the slope-test p as a level test.
 
 **Tests:** trend-adjusted gap; recode the three territories; MapBiomas-based twin choice; non-Brazil pool; Col 4 vs Col 6 on the Tambopata reserve.
@@ -375,12 +375,12 @@ These three measure different things. Net additions drop when re-mined land stay
 
 ## S12. Brazil (A12-A14)
 
-**Card:** staggered adoption; why TWFE fails with heterogeneous effects (Goodman-Bacon 2021, de Chaisemartin and D'Haultfœuille 2020); Gardner's two-stage did2s; Callaway and Sant'Anna; randomization inference with targeted assignment.
+**Card:** staggered adoption; why TWFE can fail with heterogeneous effects (card 12: not the problem here, no negative weights) (Goodman-Bacon 2021, de Chaisemartin and D'Haultfœuille 2020); Gardner's two-stage did2s; Callaway and Sant'Anna; randomization inference with targeted assignment.
 
 **Files:** `brazil.py`, `brazil_stagger.py`, `brazil_v2.py`, `brazil_raster.py`, `brazil_deter*.py`, `brazil_ibama.py`.
 
 **Leads to verify**
-1. **Critical: 13 of 24 territories have zero mapped mining in every year** (confirmed: 14 of 26 units in `brazil_raster_unit_year.csv` incl. a ring). Units were chosen with AMW, measured with MapBiomas. Dropping them flips the sign: TWFE −0.22, did2s −0.37. The brief's "wrong sign" sentence rests on this.
+1. **Critical: 13 of 24 territories have zero mapped mining in every year** (confirmed: 14 of 26 units in `brazil_raster_unit_year.csv` incl. a ring). Units were chosen with AMW, measured with MapBiomas. (Card 12: not a processing error; the Col 10.1 workbook agrees, so it is a real AMW vs MapBiomas disagreement.) Dropping them flips the sign: TWFE −0.22, did2s −0.37. The brief's "wrong sign" sentence rests on this.
 2. **Critical: parallel trends fail**: treated territories rise 1.10 → 3.72 (2015-2020) in ln(1+ha), never-treated stay flat. Operations target booms.
 3. **Treatment dates**: Kayapó's verified PF action (Jun 2023) is ignored (coded Sep 2024); Munduruku's May 2021 snippet excludes it as a twin but is rejected as a treatment date. Estimates range −0.37 to +0.62 across defensible choices. Event lines in figures are hard-coded.
 4. **Pools never searched**: 10 of 13 never-treated (v2) and 14 of 18 (stagger); 58% of the pool's 2023-25 growth is in Aripuanã, next to Golden Border targets.
@@ -399,7 +399,7 @@ These three measure different things. Net additions drop when re-mined land stay
 **Topics and leads**
 - **Displacement sums** (`peru.py:115-125`): MdD total 3,610 → 4,640 → 12,049 ha/yr; no counterfactual trend; "rest" includes reserve interiors.
 - **Corridor share** (`raster_layers.py`): 49 → 68 → 72%; the rest-of-corridor rise (+1,588) is larger than La Pampa's fall (−673), so most corridor growth cannot be the same miners.
-- **Inside the reserve** (`peru_anp.py`): +241 ha in 2025; the 2017 step needs a source; `anp_..._share_..._2019_21` = −0.257 should not be cited.
+- **Inside the reserve** (`peru_anp.py`): +241 ha in 2025; the 2017 step needs a source (card 13: 525 ha first-time in raster zone 1, real mining land mapped in one year; Asner and Tupayachi 2017 report 521 ha cumulative to Oct 2016); `anp_..._share_..._2019_21` = −0.257 should not be cited.
 - **AMW zones** (`spatial.py`): the "Madre de Dios box" is 58% outside the department; zone precedence differs from `raster_zones`; "two sources agree" with MAAP holds for direction only (AMW ~4× larger).
 - **Legality** (`v2_legality.py`): time-consistency correction is one-directional.
 - **Gold proxy** (`raster_gold.py`): strict vs broad definitions reverse the depletion ranking.
@@ -417,41 +417,49 @@ These three measure different things. Net additions drop when re-mined land stay
 4. Re-check the one brief figure against the agreed measure and wording.
 5. Update `agent.md`, the walkthrough and the brief.
 
+**Done 2026-10-15:** card `docs/methods/14_synthesis.md`. Result: every attempt is description (A15 prediction); the Peru zone designs are one piece of evidence (Tambopata's own before/after is 86-98% of each); four partly independent views agree that the target's mining fell in 2019-21, and nearly every named bias makes the fall look larger. Proposed: net additions + split for zone claims, first-time mining for pixel claims and the figure; one conditional [C] sentence with **about 1,450-1,660 ha/yr** (M1 −1,454 and the 2×2 with a 2014-18 base −1,663), read as an upper bound; prioritised text and code fix list in its §10.1. Steps 4-5 (brief, walkthrough, code) wait for Ruby's decisions.
+
 ---
 
 ## 3. Cross-cutting issues register
 
+Updated 2026-10-15 with the results of S3-S14 (card numbers in brackets).
+
 | # | Issue | Affects | Severity |
 |---|---|---|---|
-| X1 | Raw-hectare placebo ranks measure scale, not effect (rank 1 also in 2016) | A2, A3, A6 | High |
+| X1 | Raw-hectare placebo ranks measure scale, not effect: Tambopata is rank 1 in pre-years 2014, 2015 and 2016 too; size-free ranks from 1 (MSPE ratio, fragile) to 10 of 11 (03, 04, 06, 07) | A2, A3, A5, A6 | High |
 | X2 | Comparison units partly treated (Amarakaeri; Brazil de-enforcement for twins) | A1-A6, A10-A11 | High |
-| X3 | Fall starts 2020, with COVID; 2019 shows nothing | A2, A7, A8 | High |
+| X3 | New clearing does not fall in 2019 (cells +0.13, RD +0.82, La Pampa first-time 1,494 ha); it falls in 2020-21 with COVID. Net additions do fall in 2019 (417 ha), because land stopped (1,453 ha in La Pampa) (04, 08, 09, 14) | A2-A3, A7, A8 | High |
 | X4 | Net additions vs first-time vs AMW measure different things | all | High |
-| X5 | Specifications whose controls absorb the treatment's own dynamics (binned post dummies) | A3, A4 | High |
-| X6 | Treatment dating rules differ across modules | A9, A10, A12-A14 | High |
-| X7 | Pools and "Amazon" lists defined differently per module | A2-A6, A10-A11 | Medium |
-| X8 | Absorbing outcome / depletion not controlled | A7, A8 | Medium |
-| X9 | Clustering level below the shock level | A7, A8 | Medium |
-| X10 | Text and docstrings out of sync with code | many | Low-Medium |
-| X11 | Several raw inputs are git-ignored, so some steps verify only from intermediates | S1, S8-S12 | Process |
-| X12 | Amarakaeri BZ's mined land is 58% legal corridor and 41% native communities (found in S2): the main comparison is a mostly legal mining area and the likely destination of displaced miners | A1-A6 | High |
+| X5 | Binned post dummies let controls absorb the treatment's own dynamics: M2's gold slope, M3's trend, K1's COVID term (04, 05) | A3, A4 | High |
+| X6 | Treatment dating rules differ across modules; proposed rule R\* (12) | A9, A10, A12-A14 | High |
+| X7 | Three "Amazon" lists (`peru.py:268-294`, `peru_robust.py:124-130`, `peru_models.AMAZON`) (03, 04) | A2-A6, A10-A11 | Medium |
+| X8 | Absorbing outcome / depletion not controlled: the La Pampa cell fall disappears on an at-risk basis (08, 09) | A7, A8 | High |
+| X9 | Clustering level below the shock level; p-values swing with the dependence model (08, 09) | A7, A8 | Medium |
+| X10 | Text and docstrings out of sync with code (list in 14 §10.1) | many | Medium |
+| X11 | Several raw inputs are git-ignored, so some steps verify only from intermediates | S1, S8-S13 | Process |
+| X12 | Amarakaeri BZ's mined land is 58% legal corridor and 41% native communities; it also identifies M2's gold slope and K1/K2's slopes (02, 04, 05) | A1-A6 | High |
+| X13 | `peru_synth.fit_weights` (SLSQP) stops short of the optimum in the cumulative specs (06) | A5 | Low |
+| X14 | Several numbers look alike but are different quantities (18% / 20.7% / 21%; 525 / 521 / 521 ha; 38% / 40%; placebo in time vs in space) (14 §7.4) | text | Medium |
 
 ## 4. Progress tracker
+
+"Decisions logged" means proposed decisions are written in the card and wait for Ruby. "Fixes merged" means code or text changed in the pipeline; none yet.
 
 | Session | Card written | Tests run | Decisions logged | Fixes merged |
 |---|---|---|---|---|
 | S0 Potential outcomes | ☑ | n/a | ☑ | n/a |
-| S1 Data and outcomes | ☑ | ☑ | ☐ | ☐ |
-| S2 2×2 DiD | ☑ | ☑ | ☐ | ☐ |
-| S3 Event study, placebos | ☐ | ☐ | ☐ | ☐ |
-| S4 TWFE ladder | ☐ | ☐ | ☐ | ☐ |
-| S5 Context controls | ☐ | ☐ | ☐ | ☐ |
-| S6 Synthetic control | ☐ | ☐ | ☐ | ☐ |
-| S7 Synthetic DiD | ☐ | ☐ | ☐ | ☐ |
-| S8 Cell panel | ☐ | ☐ | ☐ | ☐ |
-| S9 Spatial RD, road tests | ☐ | ☐ | ☐ | ☐ |
-| S10 Rule-based twins | ☐ | ☐ | ☐ | ☐ |
-| S11 Matching | ☐ | ☐ | ☐ | ☐ |
-| S12 Brazil | ☐ | ☐ | ☐ | ☐ |
-| S13 Descriptive blocks | ☐ | ☐ | ☐ | ☐ |
-| S14 Synthesis | n/a | n/a | ☐ | ☐ |
+| S1 Data and outcomes | ☑ | ☑ | ☑ proposed | ☐ |
+| S2 2×2 DiD | ☑ | ☑ | ☑ proposed | ☐ |
+| S3 Event study, placebos | ☑ | ☑ | ☑ proposed | ☐ |
+| S4 TWFE ladder | ☑ | ☑ | ☑ proposed | ☐ |
+| S5 Context controls | ☑ | ☑ | ☑ proposed | ☐ |
+| S6 Synthetic control | ☑ | ☑ | ☑ proposed | ☐ |
+| S7 Synthetic DiD | ☑ | ☑ | ☑ proposed | ☐ |
+| S8 Cell panel | ☑ | ☑ | ☑ proposed | ☐ |
+| S9 Spatial RD, road tests | ☑ | ☑ | ☑ proposed | ☐ |
+| S10 Rule-based twins | ☑ | ☑ | ☑ proposed | ☐ |
+| S11 Matching | ☑ | ☑ | ☑ proposed | ☐ |
+| S12 Brazil | ☑ | ☑ | ☑ proposed | ☐ |
+| S13 Descriptive blocks | ☑ | ☑ | ☑ proposed | ☐ |
+| S14 Synthesis | ☑ | cross-checks | ☑ proposed | ☐ |
