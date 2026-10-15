@@ -1,0 +1,755 @@
+unit_id,unit,year,mining_ha,new_land_ha,remined_ha,stopped_ha,first_treat
+BR-TI-23001,Kayapó,1985,997.48,,,,2025
+BR-TI-23001,Kayapó,1990,2421.84,,,,2025
+BR-TI-23001,Kayapó,1995,3351.96,,,,2025
+BR-TI-23001,Kayapó,2000,4099.13,,,,2025
+BR-TI-23001,Kayapó,2001,4128.67,,,,2025
+BR-TI-23001,Kayapó,2002,4109.38,18.18,13.3,50.77,2025
+BR-TI-23001,Kayapó,2003,4082.75,12.49,12.76,51.88,2025
+BR-TI-23001,Kayapó,2004,4074.14,9.66,20.12,38.39,2025
+BR-TI-23001,Kayapó,2005,4098.95,19.14,32.62,26.95,2025
+BR-TI-23001,Kayapó,2006,4118.87,25.88,40.33,46.28,2025
+BR-TI-23001,Kayapó,2007,4133.86,22.33,26.51,33.86,2025
+BR-TI-23001,Kayapó,2008,4157.95,26.84,30.05,32.8,2025
+BR-TI-23001,Kayapó,2009,4178.6,18.25,49.37,46.97,2025
+BR-TI-23001,Kayapó,2010,4177.52,27.9,24.91,53.89,2025
+BR-TI-23001,Kayapó,2011,4246.87,47.83,58.39,36.87,2025
+BR-TI-23001,Kayapó,2012,4341.38,79.72,61.24,46.45,2025
+BR-TI-23001,Kayapó,2013,4624.86,253.15,71.61,41.28,2025
+BR-TI-23001,Kayapó,2014,4901.13,255.87,53.82,33.41,2025
+BR-TI-23001,Kayapó,2015,5063.52,149.79,51.6,39.0,2025
+BR-TI-23001,Kayapó,2016,5489.33,417.65,33.51,25.35,2025
+BR-TI-23001,Kayapó,2017,6409.06,929.21,33.33,42.81,2025
+BR-TI-23001,Kayapó,2018,7494.58,1112.99,39.79,67.27,2025
+BR-TI-23001,Kayapó,2019,9085.59,1527.34,94.18,30.5,2025
+BR-TI-23001,Kayapó,2020,11350.25,2239.26,71.15,45.76,2025
+BR-TI-23001,Kayapó,2021,13870.23,2522.2,44.86,47.08,2025
+BR-TI-23001,Kayapó,2022,15390.5,1584.73,64.02,128.48,2025
+BR-TI-23001,Kayapó,2023,16707.09,1375.79,43.54,102.75,2025
+BR-TI-23001,Kayapó,2024,17627.71,987.2,66.58,133.16,2025
+BR-TI-23001,Kayapó,2025,18568.56,900.5,99.76,59.41,2025
+BR-TI-28701,Menkragnoti,1985,0.0,,,,0
+BR-TI-28701,Menkragnoti,1990,0.0,,,,0
+BR-TI-28701,Menkragnoti,1995,0.0,,,,0
+BR-TI-28701,Menkragnoti,2000,0.0,,,,0
+BR-TI-28701,Menkragnoti,2001,0.0,,,,0
+BR-TI-28701,Menkragnoti,2002,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2003,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2004,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2005,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2006,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2007,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2008,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2009,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2010,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2011,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2012,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2013,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2014,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2015,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2016,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2017,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2018,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2019,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2020,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2021,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2022,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2023,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2024,0.0,0.0,0.0,0.0,0
+BR-TI-28701,Menkragnoti,2025,0.0,0.0,0.0,0.0,0
+BR-TI-29801,Munduruku,1985,42.42,,,,2024
+BR-TI-29801,Munduruku,1990,290.53,,,,2024
+BR-TI-29801,Munduruku,1995,526.87,,,,2024
+BR-TI-29801,Munduruku,2000,610.17,,,,2024
+BR-TI-29801,Munduruku,2001,621.87,,,,2024
+BR-TI-29801,Munduruku,2002,622.58,10.29,4.44,14.02,2024
+BR-TI-29801,Munduruku,2003,622.93,6.12,4.35,10.11,2024
+BR-TI-29801,Munduruku,2004,620.45,9.58,6.83,18.89,2024
+BR-TI-29801,Munduruku,2005,615.84,5.24,7.01,16.86,2024
+BR-TI-29801,Munduruku,2006,605.81,3.55,6.65,20.23,2024
+BR-TI-29801,Munduruku,2007,612.55,5.59,8.25,7.1,2024
+BR-TI-29801,Munduruku,2008,609.8,8.96,7.36,19.08,2024
+BR-TI-29801,Munduruku,2009,598.79,7.72,3.46,22.19,2024
+BR-TI-29801,Munduruku,2010,567.22,10.92,2.13,44.62,2024
+BR-TI-29801,Munduruku,2011,539.89,22.18,3.11,52.62,2024
+BR-TI-29801,Munduruku,2012,526.57,26.35,1.95,41.63,2024
+BR-TI-29801,Munduruku,2013,503.4,37.18,5.68,66.03,2024
+BR-TI-29801,Munduruku,2014,502.68,27.06,6.21,33.99,2024
+BR-TI-29801,Munduruku,2015,554.74,66.88,6.83,21.65,2024
+BR-TI-29801,Munduruku,2016,678.92,128.97,8.17,12.96,2024
+BR-TI-29801,Munduruku,2017,1038.53,354.11,17.74,12.25,2024
+BR-TI-29801,Munduruku,2018,1484.24,414.93,44.0,13.22,2024
+BR-TI-29801,Munduruku,2019,2516.55,1024.15,29.81,21.65,2024
+BR-TI-29801,Munduruku,2020,4154.05,1657.37,22.01,41.89,2024
+BR-TI-29801,Munduruku,2021,5113.02,1220.27,21.65,282.94,2024
+BR-TI-29801,Munduruku,2022,5165.44,367.67,18.46,333.71,2024
+BR-TI-29801,Munduruku,2023,4717.82,171.0,27.43,646.05,2024
+BR-TI-29801,Munduruku,2024,4684.89,161.46,71.0,265.39,2024
+BR-TI-29801,Munduruku,2025,4887.41,136.23,70.73,4.44,2024
+BR-TI-3002,Apyterewa,1985,0.0,,,,2024
+BR-TI-3002,Apyterewa,1990,7.02,,,,2024
+BR-TI-3002,Apyterewa,1995,9.07,,,,2024
+BR-TI-3002,Apyterewa,2000,23.93,,,,2024
+BR-TI-3002,Apyterewa,2001,26.68,,,,2024
+BR-TI-3002,Apyterewa,2002,27.48,1.25,0.0,0.44,2024
+BR-TI-3002,Apyterewa,2003,28.11,0.44,0.18,0.0,2024
+BR-TI-3002,Apyterewa,2004,30.33,1.96,0.44,0.18,2024
+BR-TI-3002,Apyterewa,2005,30.95,0.53,0.27,0.18,2024
+BR-TI-3002,Apyterewa,2006,31.22,0.53,0.18,0.44,2024
+BR-TI-3002,Apyterewa,2007,36.56,5.25,0.27,0.18,2024
+BR-TI-3002,Apyterewa,2008,37.18,0.71,0.18,0.27,2024
+BR-TI-3002,Apyterewa,2009,37.27,0.18,0.18,0.27,2024
+BR-TI-3002,Apyterewa,2010,38.16,0.8,0.27,0.18,2024
+BR-TI-3002,Apyterewa,2011,37.89,0.0,0.0,0.27,2024
+BR-TI-3002,Apyterewa,2012,38.42,0.18,0.62,0.27,2024
+BR-TI-3002,Apyterewa,2013,38.42,0.27,0.36,0.62,2024
+BR-TI-3002,Apyterewa,2014,39.85,0.8,0.71,0.09,2024
+BR-TI-3002,Apyterewa,2015,41.27,1.6,0.18,0.36,2024
+BR-TI-3002,Apyterewa,2016,41.8,0.71,0.0,0.18,2024
+BR-TI-3002,Apyterewa,2017,46.61,4.8,0.53,0.53,2024
+BR-TI-3002,Apyterewa,2018,51.05,4.98,0.09,0.62,2024
+BR-TI-3002,Apyterewa,2019,96.42,45.63,0.27,0.53,2024
+BR-TI-3002,Apyterewa,2020,278.4,181.98,0.53,0.53,2024
+BR-TI-3002,Apyterewa,2021,361.56,84.67,0.62,2.13,2024
+BR-TI-3002,Apyterewa,2022,432.71,73.99,1.24,4.09,2024
+BR-TI-3002,Apyterewa,2023,448.81,19.03,0.98,3.91,2024
+BR-TI-3002,Apyterewa,2024,458.05,10.14,1.42,2.31,2024
+BR-TI-3002,Apyterewa,2025,467.93,9.43,2.76,2.31,2024
+BR-TI-33601,Parque do Aripuanã,1985,0.0,,,,2025
+BR-TI-33601,Parque do Aripuanã,1990,0.53,,,,2025
+BR-TI-33601,Parque do Aripuanã,1995,6.22,,,,2025
+BR-TI-33601,Parque do Aripuanã,2000,3.42,,,,2025
+BR-TI-33601,Parque do Aripuanã,2001,17.26,,,,2025
+BR-TI-33601,Parque do Aripuanã,2002,33.11,15.68,0.26,0.09,2025
+BR-TI-33601,Parque do Aripuanã,2003,64.56,31.44,0.0,0.0,2025
+BR-TI-33601,Parque do Aripuanã,2004,86.8,21.63,0.61,0.0,2025
+BR-TI-33601,Parque do Aripuanã,2005,98.1,12.26,0.09,1.05,2025
+BR-TI-33601,Parque do Aripuanã,2006,102.13,4.55,0.0,0.53,2025
+BR-TI-33601,Parque do Aripuanã,2007,104.67,2.1,0.44,0.0,2025
+BR-TI-33601,Parque do Aripuanã,2008,105.99,1.05,0.7,0.44,2025
+BR-TI-33601,Parque do Aripuanã,2009,108.79,2.8,0.53,0.53,2025
+BR-TI-33601,Parque do Aripuanã,2010,112.21,3.5,0.26,0.35,2025
+BR-TI-33601,Parque do Aripuanã,2011,111.51,0.35,1.31,2.37,2025
+BR-TI-33601,Parque do Aripuanã,2012,111.42,0.35,0.35,0.79,2025
+BR-TI-33601,Parque do Aripuanã,2013,110.45,0.09,0.26,1.31,2025
+BR-TI-33601,Parque do Aripuanã,2014,112.38,1.14,0.88,0.09,2025
+BR-TI-33601,Parque do Aripuanã,2015,112.56,0.18,0.09,0.09,2025
+BR-TI-33601,Parque do Aripuanã,2016,113.34,0.79,0.0,0.0,2025
+BR-TI-33601,Parque do Aripuanã,2017,113.87,0.35,0.44,0.26,2025
+BR-TI-33601,Parque do Aripuanã,2018,115.36,1.4,0.44,0.35,2025
+BR-TI-33601,Parque do Aripuanã,2019,115.27,0.44,0.0,0.53,2025
+BR-TI-33601,Parque do Aripuanã,2020,230.98,112.12,3.68,0.09,2025
+BR-TI-33601,Parque do Aripuanã,2021,243.95,13.49,0.53,1.05,2025
+BR-TI-33601,Parque do Aripuanã,2022,258.4,14.19,0.44,0.18,2025
+BR-TI-33601,Parque do Aripuanã,2023,294.31,35.83,0.53,0.44,2025
+BR-TI-33601,Parque do Aripuanã,2024,303.6,9.55,0.18,0.44,2025
+BR-TI-33601,Parque do Aripuanã,2025,311.57,7.8,0.61,0.44,2025
+BR-TI-34101,Paukalirajausu,1985,0.0,,,,0
+BR-TI-34101,Paukalirajausu,1990,0.0,,,,0
+BR-TI-34101,Paukalirajausu,1995,0.0,,,,0
+BR-TI-34101,Paukalirajausu,2000,0.0,,,,0
+BR-TI-34101,Paukalirajausu,2001,0.0,,,,0
+BR-TI-34101,Paukalirajausu,2002,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2003,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2004,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2005,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2006,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2007,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2008,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2009,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2010,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2011,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2012,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2013,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2014,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2015,0.0,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2016,0.17,0.17,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2017,0.17,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2018,0.17,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2019,1.47,1.3,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2020,1.38,0.0,0.0,0.09,0
+BR-TI-34101,Paukalirajausu,2021,0.26,0.0,0.0,1.12,0
+BR-TI-34101,Paukalirajausu,2022,0.26,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2023,0.26,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2024,0.26,0.0,0.0,0.0,0
+BR-TI-34101,Paukalirajausu,2025,52.91,52.65,0.0,0.0,0
+BR-TI-38902,Kuruáya,1985,0.0,,,,2024
+BR-TI-38902,Kuruáya,1990,0.0,,,,2024
+BR-TI-38902,Kuruáya,1995,0.0,,,,2024
+BR-TI-38902,Kuruáya,2000,0.0,,,,2024
+BR-TI-38902,Kuruáya,2001,0.0,,,,2024
+BR-TI-38902,Kuruáya,2002,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2003,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2004,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2005,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2006,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2007,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2008,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2009,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2010,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2011,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2012,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2013,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2014,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2015,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2016,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2017,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2018,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2019,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2020,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2021,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2022,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2023,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2024,0.0,0.0,0.0,0.0,2024
+BR-TI-38902,Kuruáya,2025,0.0,0.0,0.0,0.0,2024
+BR-TI-40201,Rio Paru DEste,1985,0.0,,,,0
+BR-TI-40201,Rio Paru DEste,1990,0.0,,,,0
+BR-TI-40201,Rio Paru DEste,1995,0.0,,,,0
+BR-TI-40201,Rio Paru DEste,2000,0.0,,,,0
+BR-TI-40201,Rio Paru DEste,2001,0.0,,,,0
+BR-TI-40201,Rio Paru DEste,2002,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2003,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2004,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2005,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2006,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2007,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2008,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2009,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2010,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2011,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2012,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2013,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2014,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2015,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2016,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2017,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2018,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2019,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2020,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2021,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2022,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2023,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2024,0.0,0.0,0.0,0.0,0
+BR-TI-40201,Rio Paru DEste,2025,0.0,0.0,0.0,0.0,0
+BR-TI-40701,Roosevelt,1985,0.0,,,,2025
+BR-TI-40701,Roosevelt,1990,0.0,,,,2025
+BR-TI-40701,Roosevelt,1995,0.0,,,,2025
+BR-TI-40701,Roosevelt,2000,0.0,,,,2025
+BR-TI-40701,Roosevelt,2001,0.0,,,,2025
+BR-TI-40701,Roosevelt,2002,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2003,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2004,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2005,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2006,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2007,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2008,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2009,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2010,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2011,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2012,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2013,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2014,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2015,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2016,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2017,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2018,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2019,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2020,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2021,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2022,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2023,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2024,0.0,0.0,0.0,0.0,2025
+BR-TI-40701,Roosevelt,2025,0.0,0.0,0.0,0.0,2025
+BR-TI-40901,Sai-Cinza,1985,2.49,,,,2024
+BR-TI-40901,Sai-Cinza,1990,2.67,,,,2024
+BR-TI-40901,Sai-Cinza,1995,2.22,,,,2024
+BR-TI-40901,Sai-Cinza,2000,2.22,,,,2024
+BR-TI-40901,Sai-Cinza,2001,2.22,,,,2024
+BR-TI-40901,Sai-Cinza,2002,2.22,0.0,0.0,0.0,2024
+BR-TI-40901,Sai-Cinza,2003,2.49,0.0,0.27,0.0,2024
+BR-TI-40901,Sai-Cinza,2004,2.58,0.0,0.09,0.0,2024
+BR-TI-40901,Sai-Cinza,2005,2.58,0.0,0.0,0.0,2024
+BR-TI-40901,Sai-Cinza,2006,2.58,0.0,0.0,0.0,2024
+BR-TI-40901,Sai-Cinza,2007,2.84,0.27,0.0,0.0,2024
+BR-TI-40901,Sai-Cinza,2008,2.84,0.0,0.0,0.0,2024
+BR-TI-40901,Sai-Cinza,2009,2.84,0.0,0.0,0.0,2024
+BR-TI-40901,Sai-Cinza,2010,5.33,2.66,0.0,0.18,2024
+BR-TI-40901,Sai-Cinza,2011,5.33,0.0,0.0,0.0,2024
+BR-TI-40901,Sai-Cinza,2012,5.33,0.0,0.0,0.0,2024
+BR-TI-40901,Sai-Cinza,2013,5.15,0.0,0.0,0.18,2024
+BR-TI-40901,Sai-Cinza,2014,5.06,0.0,0.0,0.09,2024
+BR-TI-40901,Sai-Cinza,2015,4.62,0.0,0.0,0.44,2024
+BR-TI-40901,Sai-Cinza,2016,4.62,0.0,0.09,0.09,2024
+BR-TI-40901,Sai-Cinza,2017,4.09,0.0,0.27,0.8,2024
+BR-TI-40901,Sai-Cinza,2018,4.18,0.0,0.18,0.09,2024
+BR-TI-40901,Sai-Cinza,2019,4.18,0.0,0.0,0.0,2024
+BR-TI-40901,Sai-Cinza,2020,232.92,228.74,0.0,0.0,2024
+BR-TI-40901,Sai-Cinza,2021,351.06,121.08,0.09,3.02,2024
+BR-TI-40901,Sai-Cinza,2022,360.48,19.19,0.27,10.04,2024
+BR-TI-40901,Sai-Cinza,2023,369.72,26.83,0.53,18.12,2024
+BR-TI-40901,Sai-Cinza,2024,365.37,10.13,2.75,17.23,2024
+BR-TI-40901,Sai-Cinza,2025,374.69,6.57,3.38,0.62,2024
+BR-TI-4201,Aripuanã,1985,0.0,,,,0
+BR-TI-4201,Aripuanã,1990,0.0,,,,0
+BR-TI-4201,Aripuanã,1995,0.0,,,,0
+BR-TI-4201,Aripuanã,2000,0.0,,,,0
+BR-TI-4201,Aripuanã,2001,0.0,,,,0
+BR-TI-4201,Aripuanã,2002,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2003,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2004,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2005,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2006,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2007,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2008,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2009,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2010,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2011,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2012,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2013,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2014,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2015,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2016,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2017,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2018,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2019,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2020,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2021,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2022,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2023,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2024,0.0,0.0,0.0,0.0,0
+BR-TI-4201,Aripuanã,2025,0.0,0.0,0.0,0.0,0
+BR-TI-42101,Sararé,1985,0.0,,,,2025
+BR-TI-42101,Sararé,1990,0.0,,,,2025
+BR-TI-42101,Sararé,1995,68.32,,,,2025
+BR-TI-42101,Sararé,2000,131.3,,,,2025
+BR-TI-42101,Sararé,2001,132.94,,,,2025
+BR-TI-42101,Sararé,2002,135.88,4.41,0.26,1.73,2025
+BR-TI-42101,Sararé,2003,136.14,0.52,0.95,1.21,2025
+BR-TI-42101,Sararé,2004,137.09,0.95,0.6,0.6,2025
+BR-TI-42101,Sararé,2005,134.24,0.86,0.26,3.97,2025
+BR-TI-42101,Sararé,2006,134.07,0.26,1.12,1.56,2025
+BR-TI-42101,Sararé,2007,134.15,0.86,0.6,1.38,2025
+BR-TI-42101,Sararé,2008,134.15,0.17,0.09,0.26,2025
+BR-TI-42101,Sararé,2009,137.18,2.07,1.55,0.6,2025
+BR-TI-42101,Sararé,2010,137.0,1.12,1.64,2.94,2025
+BR-TI-42101,Sararé,2011,137.26,0.6,1.3,1.64,2025
+BR-TI-42101,Sararé,2012,142.1,4.75,0.95,0.86,2025
+BR-TI-42101,Sararé,2013,140.63,0.78,2.25,4.49,2025
+BR-TI-42101,Sararé,2014,144.87,0.09,4.49,0.35,2025
+BR-TI-42101,Sararé,2015,147.98,1.55,2.16,0.6,2025
+BR-TI-42101,Sararé,2016,148.41,0.52,0.69,0.78,2025
+BR-TI-42101,Sararé,2017,149.53,1.9,0.69,1.47,2025
+BR-TI-42101,Sararé,2018,151.69,2.51,1.9,2.25,2025
+BR-TI-42101,Sararé,2019,154.37,1.81,1.3,0.43,2025
+BR-TI-42101,Sararé,2020,156.01,0.69,1.64,0.69,2025
+BR-TI-42101,Sararé,2021,159.9,2.07,2.33,0.52,2025
+BR-TI-42101,Sararé,2022,163.96,5.79,0.95,2.68,2025
+BR-TI-42101,Sararé,2023,722.83,557.75,2.07,0.95,2025
+BR-TI-42101,Sararé,2024,980.76,258.1,2.51,2.68,2025
+BR-TI-42101,Sararé,2025,3792.08,2811.15,2.59,2.42,2025
+BR-TI-42601,Serra Morena,1985,0.0,,,,0
+BR-TI-42601,Serra Morena,1990,0.0,,,,0
+BR-TI-42601,Serra Morena,1995,0.0,,,,0
+BR-TI-42601,Serra Morena,2000,0.0,,,,0
+BR-TI-42601,Serra Morena,2001,0.0,,,,0
+BR-TI-42601,Serra Morena,2002,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2003,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2004,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2005,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2006,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2007,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2008,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2009,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2010,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2011,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2012,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2013,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2014,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2015,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2016,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2017,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2018,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2019,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2020,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2021,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2022,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2023,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2024,0.0,0.0,0.0,0.0,0
+BR-TI-42601,Serra Morena,2025,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,1985,0.0,,,,0
+BR-TI-43001,Sete de Setembro,1990,0.0,,,,0
+BR-TI-43001,Sete de Setembro,1995,0.0,,,,0
+BR-TI-43001,Sete de Setembro,2000,0.0,,,,0
+BR-TI-43001,Sete de Setembro,2001,0.0,,,,0
+BR-TI-43001,Sete de Setembro,2002,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2003,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2004,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2005,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2006,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2007,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2008,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2009,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2010,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2011,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2012,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2013,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2014,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2015,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2016,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2017,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2018,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2019,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2020,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2021,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2022,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2023,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2024,0.0,0.0,0.0,0.0,0
+BR-TI-43001,Sete de Setembro,2025,0.0,0.0,0.0,0.0,0
+BR-TI-44701,Tenharim do Igarapé Preto,1985,916.75,,,,0
+BR-TI-44701,Tenharim do Igarapé Preto,1990,1045.45,,,,0
+BR-TI-44701,Tenharim do Igarapé Preto,1995,1039.89,,,,0
+BR-TI-44701,Tenharim do Igarapé Preto,2000,1039.18,,,,0
+BR-TI-44701,Tenharim do Igarapé Preto,2001,1036.35,,,,0
+BR-TI-44701,Tenharim do Igarapé Preto,2002,1039.71,0.62,3.71,0.97,0
+BR-TI-44701,Tenharim do Igarapé Preto,2003,1039.27,0.27,5.75,6.45,0
+BR-TI-44701,Tenharim do Igarapé Preto,2004,1039.0,0.88,1.41,2.56,0
+BR-TI-44701,Tenharim do Igarapé Preto,2005,1045.01,3.01,4.6,1.59,0
+BR-TI-44701,Tenharim do Igarapé Preto,2006,1063.66,6.54,14.14,2.03,0
+BR-TI-44701,Tenharim do Igarapé Preto,2007,1099.82,30.76,9.1,3.71,0
+BR-TI-44701,Tenharim do Igarapé Preto,2008,1141.1,38.19,3.98,0.88,0
+BR-TI-44701,Tenharim do Igarapé Preto,2009,1156.66,20.51,0.97,5.92,0
+BR-TI-44701,Tenharim do Igarapé Preto,2010,1161.7,2.83,2.65,0.44,0
+BR-TI-44701,Tenharim do Igarapé Preto,2011,1164.17,2.56,3.27,3.36,0
+BR-TI-44701,Tenharim do Igarapé Preto,2012,1165.41,1.77,3.18,3.71,0
+BR-TI-44701,Tenharim do Igarapé Preto,2013,1174.52,8.22,2.3,1.41,0
+BR-TI-44701,Tenharim do Igarapé Preto,2014,1183.98,8.66,2.74,1.94,0
+BR-TI-44701,Tenharim do Igarapé Preto,2015,1187.25,3.98,1.5,2.21,0
+BR-TI-44701,Tenharim do Igarapé Preto,2016,1213.24,27.23,1.86,3.09,0
+BR-TI-44701,Tenharim do Igarapé Preto,2017,1252.5,39.35,1.33,1.41,0
+BR-TI-44701,Tenharim do Igarapé Preto,2018,1264.0,12.46,1.59,2.56,0
+BR-TI-44701,Tenharim do Igarapé Preto,2019,1270.71,6.1,1.59,0.97,0
+BR-TI-44701,Tenharim do Igarapé Preto,2020,1307.05,32.88,5.22,1.77,0
+BR-TI-44701,Tenharim do Igarapé Preto,2021,1328.88,23.34,1.33,2.83,0
+BR-TI-44701,Tenharim do Igarapé Preto,2022,1343.91,13.88,2.12,0.97,0
+BR-TI-44701,Tenharim do Igarapé Preto,2023,1350.1,8.4,1.5,3.71,0
+BR-TI-44701,Tenharim do Igarapé Preto,2024,1366.27,14.59,3.09,1.5,0
+BR-TI-44701,Tenharim do Igarapé Preto,2025,1393.94,22.98,5.04,0.35,0
+BR-TI-44801,Tenharim Marmelos,1985,0.0,,,,0
+BR-TI-44801,Tenharim Marmelos,1990,0.0,,,,0
+BR-TI-44801,Tenharim Marmelos,1995,0.0,,,,0
+BR-TI-44801,Tenharim Marmelos,2000,0.0,,,,0
+BR-TI-44801,Tenharim Marmelos,2001,0.0,,,,0
+BR-TI-44801,Tenharim Marmelos,2002,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2003,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2004,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2005,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2006,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2007,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2008,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2009,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2010,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2011,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2012,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2013,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2014,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2015,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2016,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2017,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2018,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2019,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2020,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2021,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2022,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2023,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2024,0.0,0.0,0.0,0.0,0
+BR-TI-44801,Tenharim Marmelos,2025,0.0,0.0,0.0,0.0,0
+BR-TI-46201,Trincheira Bacaja,1985,0.0,,,,2024
+BR-TI-46201,Trincheira Bacaja,1990,0.0,,,,2024
+BR-TI-46201,Trincheira Bacaja,1995,0.0,,,,2024
+BR-TI-46201,Trincheira Bacaja,2000,0.0,,,,2024
+BR-TI-46201,Trincheira Bacaja,2001,0.0,,,,2024
+BR-TI-46201,Trincheira Bacaja,2002,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2003,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2004,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2005,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2006,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2007,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2008,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2009,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2010,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2011,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2012,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2013,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2014,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2015,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2016,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2017,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2018,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2019,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2020,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2021,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2022,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2023,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2024,0.0,0.0,0.0,0.0,2024
+BR-TI-46201,Trincheira Bacaja,2025,0.0,0.0,0.0,0.0,2024
+BR-TI-49801,Wawi,1985,0.0,,,,0
+BR-TI-49801,Wawi,1990,0.0,,,,0
+BR-TI-49801,Wawi,1995,0.0,,,,0
+BR-TI-49801,Wawi,2000,0.0,,,,0
+BR-TI-49801,Wawi,2001,0.0,,,,0
+BR-TI-49801,Wawi,2002,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2003,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2004,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2005,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2006,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2007,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2008,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2009,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2010,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2011,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2012,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2013,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2014,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2015,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2016,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2017,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2018,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2019,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2020,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2021,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2022,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2023,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2024,0.0,0.0,0.0,0.0,0
+BR-TI-49801,Wawi,2025,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,1985,0.0,,,,0
+BR-TI-51101,Zoró,1990,0.0,,,,0
+BR-TI-51101,Zoró,1995,0.0,,,,0
+BR-TI-51101,Zoró,2000,0.0,,,,0
+BR-TI-51101,Zoró,2001,0.0,,,,0
+BR-TI-51101,Zoró,2002,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2003,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2004,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2005,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2006,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2007,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2008,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2009,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2010,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2011,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2012,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2013,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2014,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2015,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2016,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2017,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2018,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2019,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2020,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2021,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2022,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2023,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2024,0.0,0.0,0.0,0.0,0
+BR-TI-51101,Zoró,2025,0.0,0.0,0.0,0.0,0
+BR-TI-56701,Sawré Muybu (Pimental),1985,3.74,,,,0
+BR-TI-56701,Sawré Muybu (Pimental),1990,19.32,,,,0
+BR-TI-56701,Sawré Muybu (Pimental),1995,18.87,,,,0
+BR-TI-56701,Sawré Muybu (Pimental),2000,12.02,,,,0
+BR-TI-56701,Sawré Muybu (Pimental),2001,12.55,,,,0
+BR-TI-56701,Sawré Muybu (Pimental),2002,12.55,0.0,0.0,0.0,0
+BR-TI-56701,Sawré Muybu (Pimental),2003,15.67,1.87,1.78,0.53,0
+BR-TI-56701,Sawré Muybu (Pimental),2004,15.94,0.09,0.18,0.0,0
+BR-TI-56701,Sawré Muybu (Pimental),2005,15.67,0.0,0.0,0.27,0
+BR-TI-56701,Sawré Muybu (Pimental),2006,14.78,0.0,0.0,0.89,0
+BR-TI-56701,Sawré Muybu (Pimental),2007,14.78,0.0,0.0,0.0,0
+BR-TI-56701,Sawré Muybu (Pimental),2008,14.96,0.0,0.18,0.0,0
+BR-TI-56701,Sawré Muybu (Pimental),2009,13.98,0.0,0.0,0.98,0
+BR-TI-56701,Sawré Muybu (Pimental),2010,13.62,0.0,0.0,0.36,0
+BR-TI-56701,Sawré Muybu (Pimental),2011,19.23,7.66,0.0,2.05,0
+BR-TI-56701,Sawré Muybu (Pimental),2012,105.73,89.08,0.0,2.58,0
+BR-TI-56701,Sawré Muybu (Pimental),2013,126.48,27.35,0.0,6.59,0
+BR-TI-56701,Sawré Muybu (Pimental),2014,117.04,11.58,0.0,21.02,0
+BR-TI-56701,Sawré Muybu (Pimental),2015,112.32,5.26,0.36,10.33,0
+BR-TI-56701,Sawré Muybu (Pimental),2016,125.23,23.15,3.03,13.27,0
+BR-TI-56701,Sawré Muybu (Pimental),2017,134.67,10.06,2.76,3.38,0
+BR-TI-56701,Sawré Muybu (Pimental),2018,139.57,4.54,5.08,4.72,0
+BR-TI-56701,Sawré Muybu (Pimental),2019,142.42,1.34,5.79,4.28,0
+BR-TI-56701,Sawré Muybu (Pimental),2020,143.93,5.97,1.6,6.06,0
+BR-TI-56701,Sawré Muybu (Pimental),2021,133.07,2.94,0.98,14.78,0
+BR-TI-56701,Sawré Muybu (Pimental),2022,109.55,1.78,0.53,25.83,0
+BR-TI-56701,Sawré Muybu (Pimental),2023,101.53,2.67,1.87,12.56,0
+BR-TI-56701,Sawré Muybu (Pimental),2024,110.7,11.4,3.65,5.88,0
+BR-TI-56701,Sawré Muybu (Pimental),2025,115.96,2.49,2.76,0.0,0
+BR-TI-6101,Baú,1985,0.0,,,,2023
+BR-TI-6101,Baú,1990,4.34,,,,2023
+BR-TI-6101,Baú,1995,7.18,,,,2023
+BR-TI-6101,Baú,2000,9.75,,,,2023
+BR-TI-6101,Baú,2001,9.22,,,,2023
+BR-TI-6101,Baú,2002,8.69,0.0,0.09,0.62,2023
+BR-TI-6101,Baú,2003,7.8,0.0,0.0,0.89,2023
+BR-TI-6101,Baú,2004,8.16,0.62,0.0,0.27,2023
+BR-TI-6101,Baú,2005,7.8,0.0,0.18,0.53,2023
+BR-TI-6101,Baú,2006,6.56,0.0,0.53,1.77,2023
+BR-TI-6101,Baú,2007,5.85,0.0,0.18,0.89,2023
+BR-TI-6101,Baú,2008,5.32,0.0,0.09,0.62,2023
+BR-TI-6101,Baú,2009,4.79,0.0,0.18,0.71,2023
+BR-TI-6101,Baú,2010,4.87,0.0,0.18,0.09,2023
+BR-TI-6101,Baú,2011,4.7,0.0,0.0,0.18,2023
+BR-TI-6101,Baú,2012,4.34,0.0,0.35,0.71,2023
+BR-TI-6101,Baú,2013,4.34,0.0,0.09,0.09,2023
+BR-TI-6101,Baú,2014,4.52,0.35,0.35,0.53,2023
+BR-TI-6101,Baú,2015,4.25,0.0,0.18,0.44,2023
+BR-TI-6101,Baú,2016,4.17,0.0,0.18,0.27,2023
+BR-TI-6101,Baú,2017,5.58,0.8,0.71,0.09,2023
+BR-TI-6101,Baú,2018,4.52,0.0,0.53,1.6,2023
+BR-TI-6101,Baú,2019,4.43,0.0,0.18,0.27,2023
+BR-TI-6101,Baú,2020,45.03,40.42,0.27,0.09,2023
+BR-TI-6101,Baú,2021,158.31,113.64,0.44,0.8,2023
+BR-TI-6101,Baú,2022,160.79,11.97,0.18,9.66,2023
+BR-TI-6101,Baú,2023,148.56,5.05,0.71,17.99,2023
+BR-TI-6101,Baú,2024,145.81,2.66,3.55,8.95,2023
+BR-TI-6101,Baú,2025,154.59,4.96,3.99,0.18,2023
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),1985,0.0,,,,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),1990,0.0,,,,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),1995,0.0,,,,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2000,0.0,,,,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2001,0.0,,,,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2002,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2003,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2004,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2005,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2006,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2007,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2008,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2009,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2010,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2011,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2012,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2013,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2014,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2015,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2016,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2017,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2018,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2019,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2020,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2021,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2022,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2023,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2024,0.0,0.0,0.0,0.0,0
+BR-TI-62101,Aracá-Padauiri (Baixo Rio Negro),2025,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),1985,0.0,,,,0
+BR-TI-73727,Sawré Bap in (Apompu),1990,0.0,,,,0
+BR-TI-73727,Sawré Bap in (Apompu),1995,0.0,,,,0
+BR-TI-73727,Sawré Bap in (Apompu),2000,0.0,,,,0
+BR-TI-73727,Sawré Bap in (Apompu),2001,0.0,,,,0
+BR-TI-73727,Sawré Bap in (Apompu),2002,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2003,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2004,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2005,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2006,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2007,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2008,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2009,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2010,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2011,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2012,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2013,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2014,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2015,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2016,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2017,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2018,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2019,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2020,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2021,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2022,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2023,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2024,0.0,0.0,0.0,0.0,0
+BR-TI-73727,Sawré Bap in (Apompu),2025,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,1985,2.59,,,,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,1985,0.0,,,,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,1985,0.0,,,,0
+BR-TI-50901,Yanomami,1990,665.93,,,,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,1990,0.0,,,,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,1990,0.0,,,,0
+BR-TI-50901,Yanomami,1995,1317.71,,,,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,1995,1.52,,,,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,1995,0.0,,,,0
+BR-TI-50901,Yanomami,2000,1366.28,,,,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2000,1.43,,,,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2000,0.0,,,,0
+BR-TI-50901,Yanomami,2001,1373.15,,,,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2001,2.59,,,,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2001,0.0,,,,0
+BR-TI-50901,Yanomami,2002,1370.3,3.3,4.38,10.54,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2002,2.59,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2002,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2003,1373.6,2.5,7.95,7.14,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2003,2.59,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2003,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2004,1380.21,2.86,10.09,6.34,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2004,2.59,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2004,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2005,1391.82,1.16,12.77,2.32,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2005,3.21,0.62,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2005,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2006,1393.61,2.77,5.27,6.25,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2006,3.21,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2006,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2007,1394.59,1.96,4.11,5.09,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2007,3.21,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2007,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2008,1403.07,2.14,8.39,2.05,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2008,3.21,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2008,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2009,1411.11,1.07,9.11,2.14,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2009,3.21,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2009,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2010,1415.13,1.61,5.89,3.48,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2010,3.21,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2010,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2011,1410.4,0.63,3.39,8.75,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2011,3.21,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2011,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2012,1410.84,0.89,5.89,6.34,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2012,2.59,0.0,0.0,0.62,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2012,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2013,1419.24,2.32,11.34,5.27,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2013,2.59,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2013,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2014,1426.83,3.84,10.8,7.06,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2014,2.59,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2014,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2015,1431.29,1.34,7.23,4.11,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2015,2.59,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2015,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2016,1439.06,5.53,5.27,3.04,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2016,2.59,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2016,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2017,1493.58,48.54,7.68,1.7,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2017,2.59,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2017,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2018,1682.37,190.4,2.14,3.75,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2018,2.94,0.36,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2018,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2019,1885.49,208.21,2.68,7.77,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2019,2.94,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2019,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2020,2362.9,490.17,7.14,19.91,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2020,2.94,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2020,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2021,2750.85,422.5,11.52,46.07,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2021,2.94,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2021,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2022,3682.08,952.91,24.2,45.88,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2022,2.94,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2022,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2023,4627.11,922.25,34.38,11.6,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2023,2.94,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2023,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2024,4936.29,279.01,34.55,4.37,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2024,4.73,1.16,0.62,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2024,0.0,0.0,0.0,0.0,0
+BR-TI-50901,Yanomami,2025,5127.01,173.31,19.46,2.05,2023
+Yanomami_ring_0-10_km,Yanomami ring 0-10 km,2025,4.73,0.0,0.0,0.0,0
+Yanomami_ring_10-25_km,Yanomami ring 10-25 km,2025,0.0,0.0,0.0,0.0,0

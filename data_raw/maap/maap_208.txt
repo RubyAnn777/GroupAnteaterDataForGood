@@ -1,0 +1,33 @@
+RENDERED TEXT (abridged, not raw HTML) of https://www.maapprogram.org/maap-208-gold-mining-in-the-southern-peruvian-amazon-summary-2021-2024/ , captured 2026-10-10 via Chrome get_page_text (<main>). Sections omitted: FENAMAD process steps 1-5, footnote lists of previous reports, acknowledgments. Table 1 is an image (not in text).
+MAAP #208: Gold mining in the southern Peruvian Amazon, summary 2021-2024
+May 8, 2024
+
+Illegal gold mining reached crisis levels between 2017 and 2018 in the area known as La Pampa (Madre de Dios region), eliminating thousands of hectares of primary forest in the buffer zone of the Tambopata National Reserve.
+
+In early 2019, the Peruvian government implemented Operation Mercury, a multi-sectoral intervention against illegal mining, initially focusing on La Pampa. This operation was later replaced (in 2021) by the Restoration Plan, which included interventions in other critical mining areas of the Madre de Dios region in the southern Peruvian Amazon.
+
+In this report, we offer a concise summary of the mining situation during the past three years (between January 2021 and March 2024) ... in the context of the Restoration Plan.
+
+During this period, we recorded a total mining deforestation of 30,846 hectares (76,222 acres), equivalent to over 40,000 soccer fields.[8]
+
+Of this total, three-quarters (74%) of the deforestation occurred within the official Mining Corridor, a large area (almost half a million hectares) where the government permits artisanal and small-scale mining ... In other words, the vast majority of mining deforestation is not necessarily illegal, because it is in the corridor designated for this activity.
+
+The remaining one-quarter (26%) corresponds to probable illegal mining ... in prohibited areas outside the Mining Corridor, such as protected areas, their buffer zones, territories of Native Communities, and bodies of water.[4]
+
+We found that mining deforestation is concentrated within the Mining Corridor, representing 73.8% of the total (22,756 hectares). The rest (26.2%) is outside. The majority of this (14.6%) is occurring in the 10 Native Communities of the area, covering a total of 4,494 hectares. Most affected: San José de Karene (1,099 ha), Barranco Chico (1,008 ha), Tres Islas (827 ha), then Puerto Luz (305), Boca Inambari (305), Kotsimba (297), San Jacinto (269), Shiringayoc (267), Arazaire (78), El Pilar (40). Mining deforestation 2021-2024 decreased in Barranco Chico, increased in San José de Karene, Tres Islas and Boca Inambari.
+
+We also identified mining deforestation of 2,439 hectares (7.9%) in buffer zones of Protected Areas. The most affected are Tambopata National Reserve (such as the Mangote area), Bahuaja Sonene National Park, and Amarakaeri Communal Reserve. However, it must be emphasized that mining within the actual Protected Areas has been effectively controlled by the Peruvian government, through ... SERNANP.
+
+198 hectares in Brazil nut forestry concessions in the Pariamanu area.
+
+In the critical area known as La Pampa, the expansion of mining deforestation has been effectively stopped after Operation Mercury. A recent report (MAAP #193), however, showed a large increase in mining activity in previously deforested areas of La Pampa.
+
+FENAMAD/Amazon Conservation: 5 government-led operations between 2022 and 2024 in three communities (Barranco Chico, Kotsimba, San José de Karene); 3 in Barranco Chico (967 hectares in the last three years). "mining deforestation in Barranco Chico has decreased between 2021 and 2024, likely due to these types of interventions."
+
+Note 3: Mining Corridor (Legislative Decree 1100) categories: Formal / Informal ("an administrative infraction, but not a crime") / Illegal (art. 207-A Penal Code).
+Note 8: Of 30,846 ha, 28,292 ha in 2021-2023 and 2,554 ha in Q1 2024.
+
+Methodology: LandTrendR on NICFI-Planet monthly mosaics (4.7 m), Jan 2021-Mar 2024; 2016-2020 baseline to exclude earlier clearing; manual separation of mining vs other forest loss (RAMI radar alerts, CINCIA 1985-2021, Geobosques, UMD).
+
+Citation
+Finer M, Mamani N (2024) Gold mining in the southern Peruvian Amazon, summary 2021-2024. MAAP: 208.

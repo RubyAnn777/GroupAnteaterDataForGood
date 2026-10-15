@@ -1,0 +1,8 @@
+MapBiomas Brazil platform check, 2026-10-10 (Chrome, anonymous)
+URL: https://plataforma.brasil.mapbiomas.org/ (redirects to plataforma.mapbiomas.org/projects/mapbiomas/brazil)
+Collection shown: Coverage 30m, "col. 11" (informational note: "Collection 11 ... 1985 to 2025 ... Updated on: 08/2026"). Collection 10.1 is NOT selectable on the platform (only col. 11 offered).
+Path: dismiss note (Continue) > Group by > "Terras Indigenas (FUNAI, 2026)" > search "Kayapo" > tick Kayapo (Terras Indigenas, Para) > Apply > Legend > Non-vegetated Area > Mining ("Mineracao") ticked > right panel Time series 1985-2025, hover bars.
+Readings (class Mining, ha): 2024 = 17,632 ; 2025 = 18,573.
+Expected from our data (Collection 10.1 pack, 2024): ~18,176. Difference -544 ha (-3.0%): collection change (11 vs 10.1) and FUNAI 2026 boundary, not an error in our file. Status: MISMATCH (explained: different collection). Not a valid check for the Col 10.1 numbers; use Col 10.1 download from brasil.mapbiomas.org/en/estatisticas instead.
+Yanomami not read (not done).
+Screenshot: platform_check_kayapo_2026-10-10.jpg (hover on 2025 bar: 18,573 ha)

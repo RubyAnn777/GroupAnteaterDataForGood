@@ -3,3 +3,42 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 starter/output/
+
+# Raw downloads > 50 MB (linked in DOWNLOAD_LOG.csv instead)
+data_raw/amw/amazon_basin_detections.geojson
+data_raw/ibama/*.zip
+data_raw/ibama/*.csv
+data_raw/funai/tis_poligonais.geojson
+replication/
+
+# RAISG protected areas (ArcGIS REST pages, 17-64 MB each; URLs in DOWNLOAD_LOG.csv)
+data_raw/raisg/*.geojson
+# 29 MB road file, needed by raster_zones.py and under the 50 MB limit: committed
+!data_raw/raisg/vias_nacionales_mdd_box.geojson
+data_raw/mapbiomas_amazonia/*.xlsx
+
+# MapBiomas Peru Col 4 national rasters (~90 MB/yr; URLs in DOWNLOAD_LOG.csv)
+data_raw/mapbiomas_peru_raster/*.tif
+data_raw/mapbiomas_amazonia/*.zip
+data_raw/glad_alerts/*S2*
+data_raw/glad_alerts/*.tif
+data_raw/enforcement_peru/*.zip
+data_raw/ingemmet/geologia_100k_mdd_tiles/
+data_raw/enforcement_peru/mininter_produccion_policial_*.csv
+
+# Personal data (names, tax IDs) or >50 MB: kept local, links in DOWNLOAD_LOG.csv
+data_raw/reinfo/
+data_raw/ingemmet/catastro_*/
+data_raw/amw_github/illegality_v2_areas_simplified.geojson
+data_raw/anm_cfem/
+data_raw/anm_sigmine/
+data_raw/minem_produccion/*.7z
+.DS_Store
+
+# Office lock files
+~$*
+docs/overnight/_artifact/
+
+# Presentation build deps
+presentation/**/node_modules/
+presentation/deck/qa/

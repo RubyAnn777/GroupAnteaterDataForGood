@@ -1,0 +1,53 @@
+unit_id,area,verdict_2017_2025,first_op_2017_2025,ops_text,source_url,first_op_2021_2025
+PE-BZ-RN09,Tambopata buffer zone,treated,2019-02,Operation Mercurio (treated unit),https://www.maapprogram.org/gold-mining-peru/,
+PE-BZ-RC03,Amarakaeri buffer zone,yes,2019-02,Camanti targeted by Mercurio-era operations (MAAP #130); 2023 state of emergency districts,https://www.maapprogram.org/gold-mining-peru/,
+PE-BZ-PN08,Bahuaja-Sonene buffer zone,yes,2017-11,Puno side interdictions 2015-17; shares landscape with Tambopata,https://es.mongabay.com/2018/05/mineria-ilegal-bahuaja-sonene-alto-inambari/,
+PE-ANP-RN09,Tambopata (Reserva Nacional),yes,2019-02,Inside the Mercurio landscape; Jan-Mar 2026 operations (MAAP #241),https://www.maapprogram.org/mining-peru-tambopata/,
+PE-BZ-RC02,El Sira buffer zone,yes,2022-09,Dredges destroyed near El Sira (published 2022-09-20),https://www.actualidadambiental.pe/huanuco-destruyen-dragas-usadas-para-la-mineria-ilegal-cerca-de-la-reserva-comunal-el-sira,2022-09
+RAISG-182,Apolobamba ANMI (Bolivia),none,,No operation found 2017-2025 (cooperative mining in a legal grey zone),,
+RAISG-98,Yapacana PN (Venezuela),yes,2022-12,Operation Autana Dec 2022-2023; clash 2023-09-13,https://eldiario.com/2023/09/21/detuvieron-personas-por-mineria-ilegal-amazonia/,2022-12
+RAISG-67,Canaima PN (Venezuela),yes,2022-12,Operation announced 2022-12-03,https://elmercurio.com.ec/?p=996987,2022-12
+RAISG-46,Caura PN (Venezuela),yes,2024-06,Military destroy mining camp (reported 2024-06-08),https://www.elespectador.com/mundo/militares-de-venezuela-destruyen-un-campamento-de-mineria-ilegal-en-el-amazonas/,2024-06
+RAISG-40,Parc Amazonien de Guyane (French Guiana),yes,2008-01,Operation Harpie permanent since 2008,https://www.gendarmerie.interieur.gouv.fr/gendinfo/terrain/immersion/2024/lutte-contre-l-orpaillage-illegal-en-guyane-quel-bilan,
+RAISG-13,Parc Amazonien de Guyane (French Guiana),yes,2008-01,Operation Harpie permanent since 2008,https://www.gendarmerie.interieur.gouv.fr/gendinfo/terrain/immersion/2024/lutte-contre-l-orpaillage-illegal-en-guyane-quel-bilan,
+RAISG-10,Brownsberg Nature Reserve (Suriname),unclear,,No dated operation found; MAAP #237 (Feb 2026) says enforcement only expected,,
+RAISG-723,Puinawai RN (Colombia),unclear,,Guainia arrests yearly 2018-2023 not tied to the reserve; raid before 2024-11-17,https://www.semana.com/nacion/articulo/redada-contra-la-mineria-ilegal-deja-siete-capturados-en-el-departamento-del-guainia/202421/,
+RAISG-34,Extended Kaieteur NP (Guyana),yes,2017-05,Operation 2017-05-28,https://op.gov.gy/?p=5518,
+RAISG-673,Podocarpus-Yacuri corridor (Ecuador),yes,2023-09,Podocarpus machinery seizure 2023-09-27,https://primicias.ec/noticias/economia/decomiso-maquinaria-mineria-podocarpus,2023-09
+BR-TI-50901,Yanomami,yes,2023-02,Federal removal of miners from February 2023,https://www.maapprogram.org/gold-mining-brazil-yanomami/,2023-02
+BR-TI-29801,Munduruku,yes,2021-05,"Op. Mundurukania (PF, PRF, Ibama, Forca Nacional) 2021-05-25..28, ended early after protests (search snippets, unverified; logged in notes/enforcement_timeline.md); Ibama from 2023-08-10; removal from 2024-11-09",https://www.greenpeace.org/brasil/?p=50921,2021-05
+BR-TI-40901,Sai-Cinza,yes,2021-05,Part of Op. Mundurukania 2021-05 (snippet); reportedly in the Nov 2024 removal,,2021-05
+BR-TI-23001,Kayapó,yes,2017-10,"Ibama 3-day operation, 12 diving rafts and 12 excavators destroyed (Ibama news 2017-10-24); Ibama Xapiri-Tuire Kayapo 2024-09-06..14; removal from 2025-05-02",https://ihu.unisinos.br/572998-fiscalizacao-do-ibama-desativa-29-balsas-e-maquinas-de-garimpo-na-terra-indigena-kayapo-pa,2024-09
+BR-TI-42101,Sararé,yes,2024-09,Ibama + PRF from 2024-09-23 (earlier 2023 operations: snippets),https://ihu.unisinos.br/644159-garimpeiros-atacam-equipes-do-ibama-e-da-prf-na-terra-indigena-sarare-no-mato-grosso,2024-09
+BR-TI-3002,Apyterewa,yes,2023-10,Removal of invaders from 2023-10-02 (mainly cattle),https://www.agazeta.com.br/brasil/terra-indigena-apyterewa-governo-inicia-retirada-de-invasores-1023,2023-10
+BR-TI-46201,Trincheira Bacaja,yes,2023-10,Removal of invaders from 2023-10-02,https://www.agazeta.com.br/brasil/terra-indigena-apyterewa-governo-inicia-retirada-de-invasores-1023,2023-10
+BR-TI-6101,Baú,yes,2022-07,Police Operacao Mercurio 2022-07-08..10,https://dol.com.br/carajas/noticias/policia/731427/video-pf-destroi-garimpos-ilegais-em-area-indigena-no-para,2022-07
+BR-TI-38902,Kuruáya,yes,2023-12,Ibama + PF 2023-12-05..07,https://diariodopara.com.br/para/ibama-e-pf-combatem-garimpo-em-terras-indigenas-no-para-video/,2023-12
+BR-TI-33601,Parque do Aripuanã,yes,2025-03,Operation Golden Border 2025-03-13,https://www.observaro.org.br/operacao-do-ibama-e-policia-federal-mira-em-garimpo-ilegal-em-terras-indigenas-em-ro/,2025-03
+BR-TI-40701,Roosevelt,yes,2025-03,Operation Golden Border 2025-03-13,https://www.observaro.org.br/operacao-do-ibama-e-policia-federal-mira-em-garimpo-ilegal-em-terras-indigenas-em-ro/,2025-03
+BR-TI-37901,Raposa Serra do Sol,yes,2025-06,Operation Fox Uno 2025-06-24..25,https://www.folhabv.com.br/?p=546368,2025-06
+BR-TI-44701,Tenharim do Igarapé Preto,unclear,,Operation Wara II undated; court injunction May 2025,,
+BR-TI-56701,Sawré Muybu (Pimental),none,,No operation found 2022-2025 (searched 2022-2025 only),,
+BR-TI-28701,Menkragnoti,none,,No operation found 2022-2025 (searched 2022-2025 only),,
+BR-TI-11201,Enawenê-Nawê,none,,No operation found 2022-2025 (searched 2022-2025 only),,
+RAISG-512,APA do Tapajós,yes,2023-03,ICMBio Operacao Amazonia Verde 2023-03-04..22; Operacao Ajuri 2023-12-03..22 (Feb 2022: snippet),,2023-03
+RAISG-434,Flona do Amanã,yes,2023-03,ICMBio Operacao Amazonia Verde 2023-03-04..22,,2023-03
+RAISG-508,Flona do Crepori,yes,2018-05,Ibama fines on or before 2018-05-15,,
+RAISG-579,Parque Nacional do Rio Novo,yes,2018-11,"Ibama, 8 excavators destroyed (c. Nov 2018); Amazonia Verde Mar 2023",,
+RAISG-449,Flona do Urupadi,yes,2023-05,Operacao Aurum from 2023-05-18; Ajuri Dec 2023,,2023-05
+RAISG-487,Parque Nacional do Jamanxim,yes,2018-11,c. Nov 2018; Amazonia Verde Mar 2023,,
+RAISG-527,Flona do Jamanxim,yes,2023-03,Amazonia Verde 2023-03-04..22,,2023-03
+RAISG-431,Flona de Itaituba I,unclear,,Apr 2023 shooting during garimpo operation in unnamed Itaituba-region federal units,,
+RAISG-546,Flona de Itaituba II,unclear,,No operation naming the unit,,
+RAISG-492,Flona do Jamari,yes,2025-06,Agents attacked during operation at illegal garimpo 2025-06-15..25,,2025-06
+RAISG-502,Flona de Altamira,unclear,,Only mining operation Dec 2016; Feb 2022 PF operation was about deforestation,,
+RAISG-541,Parque Nacional do Juruena,yes,2021-07,Operation near the park 2021-07-08; 95 mining fronts inside 2023-08-01 (snippet),,2021-07
+RAISG-479,Parque Nacional Mapinguari,yes,2023-07,Operacao Oportunidade V 2023-07-26,,2023-07
+RAISG-552,Parque Nacional do Acari,none,,No operation and no garimpo reported,,
+RAISG-569,Parque Nacional Montanhas do Tumucumaque,none,,No operation inside the park; mining grows since 2022,,
+RAISG-571,Estação Ecológica Alto Maués,yes,2023-12,Operacao Ajuri 2023-12-03..22,,2023-12
+RAISG-537,Parque Nacional Campos Amazônicos,yes,2023-06,Operacao Retomada 2023-06-29..07-02; Ramus 2025-04-12,,2023-06
+RAISG-33,Lucifer Dékou-Dékou (French Guiana),unclear,,Harpie department-wide since 2008; Paul Isnard controls Mar 2023,,
+RAISG-43,Parc Naturel Régional de la Guyane,unclear,,Harpie department-wide since 2008; Roura Oct 2025 (not opened),,
+RAISG-45,Cerro Guaiquinima (Venezuela),unclear,,Bulla Loca eviction 2024-02-27..03-12 near the area,,
+RAISG-676,Llanganates-Yasuní corridor (Ecuador),none,,No mining operation reported; corridor recognised Mar 2026,,

@@ -1,0 +1,9 @@
+MapBiomas Peru platform check, 2026-10-10 (Chrome, anonymous, no login)
+Platform URL: https://plataforma.peru.mapbiomas.org/ (redirects to plataforma.mapbiomas.org/projects/mapbiomas/peru)
+Theme shown: Land Cover, "col. 4" (Coleccion 4), Coverage, year 2025.
+Path: Group by (dropdown, top of map) > "Natural Protected Area" > search "Tambopata" > tick "Reserva Nacional Tambopata" (under Natural Protected Area) > Apply. Legend > Non-vegetated Area > "Mining" ticked ("View this one only"). Right panel > Time series 1985-2025, hover 2025 bar.
+Reading 1: Reserva Nacional Tambopata (Natural Protected Area), Mining 2025 = 777 ha (tooltip rounds to integer). Expected 776.9. OK.
+  Context shown same panel: non-vegetated area 2,815 ha; beach 1,985 ha (70.5%) of that.
+Path 2: Group by "Buffer zone" > tick "Reserva Nacional Tambopata" under Buffer zone > Apply, same Mining time series, hover 2025.
+Reading 2: Tambopata buffer zone, Mining 2025 = 20,730 ha. Expected 20,730. OK.
+Screenshots: platform_check_tambopata_reserve_2026-10-10.jpg, platform_check_tambopata_bufferzone_2026-10-10.jpg

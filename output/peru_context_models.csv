@@ -1,0 +1,5 @@
+model,label,during,after,rank,n,covid,spend
+K0,"Gold price × size (M2), 2015–25",-1607.762,-172.045,1,15,,
+K1,+ COVID 2020–21 × size,-1321.571,-340.143,1,15,-0.348,
+K2,+ Madre de Dios × enforcement money,-1852.557,-324.188,1,15,,93.278
+K3,+ both,-1566.57,-491.97,1,15,-0.348,93.217

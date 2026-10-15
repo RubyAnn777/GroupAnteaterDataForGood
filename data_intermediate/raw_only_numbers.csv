@@ -1,0 +1,8 @@
+id,value,unit,description,source_data
+s2_lp_west_2019_aug_ha,167.52307046811046,ha,"GLAD-S2 alerts, western La Pampa sector, August 2019",UMD GLAD-S2 alerts
+s2_lp_west_2019_mar_sep_ha,532.0050996277843,ha,"GLAD-S2 alerts, western La Pampa sector, Mar-Sep 2019",UMD GLAD-S2 alerts
+s2_lp_west_2020_mar_sep_ha,361.67518407235184,ha,"GLAD-S2 alerts, western La Pampa sector, Mar-Sep 2020",UMD GLAD-S2 alerts
+sp_lp_dist_to_tambopata_bz_km,0.0,km,La Pampa centre verification: sp_lp_dist_to_tambopata_bz_km,Amazon Mining Watch (AMW) onset patches x SERNANP / INGEMMET / FUNAI geometry (data_intermediate/amw_*.csv)
+sp_lp_dist_to_tambopata_nr_km,6.792303917286168,km,La Pampa centre verification: sp_lp_dist_to_tambopata_nr_km,Amazon Mining Watch (AMW) onset patches x SERNANP / INGEMMET / FUNAI geometry (data_intermediate/amw_*.csv)
+sp_lp_lat,-12.954496288372798,deg,La Pampa centre verification: sp_lp_lat,Amazon Mining Watch (AMW) onset patches x SERNANP / INGEMMET / FUNAI geometry (data_intermediate/amw_*.csv)
+sp_lp_lon,-70.02750063942537,deg,La Pampa centre verification: sp_lp_lon,Amazon Mining Watch (AMW) onset patches x SERNANP / INGEMMET / FUNAI geometry (data_intermediate/amw_*.csv)

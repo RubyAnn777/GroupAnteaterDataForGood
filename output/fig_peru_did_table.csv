@@ -1,0 +1,4 @@
+design,note,pre,post,tambopata_pre,tambopata_post,amarakaeri_pre,amarakaeri_post,change_tambopata,change_amarakaeri,did_ha_per_yr
+main_2016-18_vs_2019-21,Main: Tambopata vs Amarakaeri,2016-2018,2019-2021,1639.6,162.5,289.2,573.8,-1477.1,284.7,-1761.8
+placebo_2013-15_vs_2016-18,Placebo: fake operation in 2016 (no real-treatment years in window),2013-2015,2016-2018,1564.0,1639.6,422.2,289.2,75.6,-133.0,208.7
+persistence_2016-18_vs_2022-25,Persistence: 2016-18 vs 2022-25,2016-2018,2022-2025,1639.6,1829.2,289.2,1215.7,189.6,926.5,-737.0
