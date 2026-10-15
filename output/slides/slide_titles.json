@@ -27,6 +27,13 @@
     "w_in": 12.2,
     "h_in": 5.0
   },
+  "slide_12b_bands": {
+    "title": "2019–21: mining fell south of the highway, rose north",
+    "subtitle": "Net mining additions per 1-km band, ha/yr · La Pampa's longitudes, 30 km either side of the Interoceanic Highway · means for 2016–18, 2019–21, 2022–25 · shaded: more than 10 km north",
+    "source": "Source: MapBiomas Peru Collection 4 (30 m, class 4.2 mining, legal and illegal), our pixel accounting. Bands are measured north–south from the highway at 70.15–69.80° W; all land in each band. Description: we cannot show it was the same miners. Satellites cannot see river dredges or mercury.",
+    "w_in": 12.2,
+    "h_in": 5.0
+  },
   "slide_13_money": {
     "title": "Money faded after 2019, while gold rose 2.7-fold",
     "subtitle": "Same years in each panel, 2014–2025 · PP 0128 executed spending booked in Madre de Dios (a lower bound) · gold price, nominal · net mining additions, Tambopata buffer zone · shaded: 2019–21 · context, not a test",

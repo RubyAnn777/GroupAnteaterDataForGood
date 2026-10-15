@@ -73,8 +73,39 @@ def write_zip(name: str, items) -> None:
     print(f"wrote {path.relative_to(ROOT)}: {n} files, {path.stat().st_size / 1e6:,.0f} MB")
 
 
+PAGES = {"docs/walkthrough/EXPLAINER.html": "EXPLAINER.html", "docs/walkthrough/METHODS.html": "METHODS.html",
+         "docs/brief/BRIEF.html": "BRIEF.html"}
+INDEX = """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Group Giant Anteater, Question 2: pages</title>
+<style>body{font-family:Roboto,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#f2efea;color:#22383f;margin:0}
+main{max-width:760px;margin:0 auto;padding:48px 20px}h1{font-weight:300;font-size:2rem;margin:0 0 6px}p{line-height:1.6}
+a.card{display:block;background:#fbfaf7;border:1px solid #d9d2c7;border-top:3px solid #3c7d2c;padding:16px 18px;margin:14px 0;color:#22383f;text-decoration:none}
+a.card b{display:block;font-weight:500;font-size:1.1rem;margin-bottom:4px}a.card span{color:#4a5b60}small{color:#6c7b80}</style></head>
+<body><main><h1>When the patrols leave</h1>
+<p>Data for Good, Question 2 (Operation Mercurio, Peru) · Group Giant Anteater: Ruby Ann Grambauer, Sebastian Schmid, Laurens van der Lely, Omkar Mate, Dhruv Chaudhari.</p>
+<a class="card" href="BRIEF.html"><b>The brief</b><span>The two-page brief with references and appendix (also as PDF and Word in deliverables/).</span></a>
+<a class="card" href="EXPLAINER.html"><b>Walkthrough</b><span>Every analysis and figure, in the order of the brief and the talk.</span></a>
+<a class="card" href="METHODS.html"><b>Methods</b><span>Each method: the question it answers, how it works, what it can't do, where the code lives.</span></a>
+<p><small>Offline copies; images are embedded, no internet needed. Online versions: walkthrough https://claude.ai/artifact/VT9wkZqxhH8WAHU4v36mg6 · methods https://claude.ai/artifact/83ZeCu4frkocBDJ46RV1pA · brief https://claude.ai/artifact/NRjV7R75F8Wvogn6Bs3ycJ</small></p>
+</main></body></html>
+"""
+
+
+def pages():
+    """deliverables/pages/: the three pages side by side, with their local cross-links rewritten, plus index.html."""
+    out = DELIV / "pages"
+    out.mkdir(parents=True, exist_ok=True)
+    for src, dst in PAGES.items():
+        html = (ROOT / src).read_text(encoding="utf-8")
+        for old in ("../brief/BRIEF.html", "../walkthrough/EXPLAINER.html", "../walkthrough/METHODS.html"):
+            html = html.replace(old, old.rsplit("/", 1)[1])
+        (out / dst).write_text(html, encoding="utf-8")
+    (out / "index.html").write_text(INDEX, encoding="utf-8")
+
+
 def main():
     DELIV.mkdir(exist_ok=True)
+    pages()
     for src, dst in DELIVERABLES.items():
         s = ROOT / src
         if s.exists():

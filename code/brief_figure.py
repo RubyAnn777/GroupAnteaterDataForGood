@@ -48,8 +48,8 @@ def run(pack=None, reg=None):
                         "per year (brief figure)", "description", D.SOURCE, measure="net",
                         zone="corridor_outside_bz" if k == "cor" else "mdd_rest_ex_tbz_cor", period=D.period_label(p))
 
-    fig = plt.figure(figsize=(7.4, 5.6))
-    gs = fig.add_gridspec(2, 1, height_ratios=[1.45, 1], hspace=0.55)
+    fig = plt.figure(figsize=(7.4, 4.75))
+    gs = fig.add_gridspec(2, 1, height_ratios=[1.5, 1], hspace=0.62)
     a1 = fig.add_subplot(gs[0]); a2 = fig.add_subplot(gs[1])
     headline(fig, f"Tambopata buffer zone: net mining fell from {pre:,.0f} to {dur:,.0f} ha/yr,\n"
                   f"then came back; the legal corridor kept growing",

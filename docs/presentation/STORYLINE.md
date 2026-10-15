@@ -21,7 +21,7 @@ simpler; reference copy: `archive/old_deck_2026-10-13.pdf`) while keeping plan v
 
 | # | Title (takeaway) | Visual | Label | Key ids |
 |---|---|---|---|---|
-| 1 | Cover: "When the patrols leave, mining comes back for seconds" (old cover, photo) | photo + 3 stat tiles (Feb 2019 · 30 m · 6 tests) | — | — |
+| 1 | Cover: "A pause, not an end: mining after Operation Mercurio" (old cover layout; La Pampa 2019 aerial, CC BY-SA; FZS logo on every slide) | photo + 3 stat tiles (Feb 2019 · 30 m · 6 tests) | — | — |
 | 2 | Anteaters eat 35,000 ants a day, and never destroy a nest (old slide 2) | photo + 2 facts | — | — |
 | 3 | FZS pays for operations. What happens when one ends? (three findings: fell 1,640 → 163 · moved 60 → 395 · came back 1,829) | dark, 3 icons (current v3 slide 2) | D | `tambopata_bz_*_net`, `corridor_across_*_net` |
 | 4–7 | La Pampa sits one road away from legal mining land (4 click-through map steps) | map stills | D | — |
@@ -30,6 +30,7 @@ simpler; reference copy: `archive/old_deck_2026-10-13.pdf`) while keeping plan v
 | 10 | In 2019, new pits kept opening while old ones went quiet | user's chart 1 style: parts, Tambopata BZ, 2016–22; callout 2019 | D | `tambopata_bz_2018_new`, `tambopata_bz_2019_{new,stopped,net}`, `tambopata_bz_stopped_share_of_fall_{min,max}` |
 | 11 | The region kept growing, mostly in the legal corridor | Madre de Dios net additions by area, period means | D | `mdd_*_net`, `v2_corridor_share_*_net` |
 | 12 | Across the road, mining rose six-fold | corridor across the road vs La Pampa, net, 2014–25 | D | `corridor_across_*_net`, `lapampa_*_net` |
+| 12b | 2019–21: mining fell south of the highway, rose north (1-km road bands, three periods) | road bands | D | `sl_band_{south,north}_*_net` |
 | 13 | Money faded after 2019, while gold rose 2.7-fold | old slide 15 (spending · gold · Tambopata BZ net) | D | `sl_pp0128_*`, `gold_price_ratio_2025_2018` |
 | 14 | It came back, partly on old pits (33–46%) | user's chart 2 style: parts, Tambopata BZ, 2014–25, lean | D | `tambopata_bz_later_{net,new,remined}`, `*_later_ex2023_*` |
 | 15 | In 2025, mining inside the reserve jumped 241 ha | old slide 17 | D | `tambopata_nr_2025_net` |

@@ -77,7 +77,10 @@ async function icon(lib, name, color, px = 256) {
 const FOOT = "WHEN THE PATROLS LEAVE  ·  GROUP GIANT ANTEATER  ·  DATA FOR GOOD";
 for (const [name, bg, fg] of [["DARK", X.slate, X.onSlate2], ["LIGHT", X.bg, X.muted]]) {
   pres.defineSlideMaster({ title: name, background: { color: bg },
-    objects: [{ text: { text: FOOT, options: { x: M, y: H - 0.38, w: 9, h: 0.24, fontFace: MED, fontSize: 9, color: fg, charSpacing: 1.5, margin: 0 } } }],
+    objects: [{ text: { text: FOOT, options: { x: M, y: H - 0.38, w: 9, h: 0.24, fontFace: MED, fontSize: 9, color: fg, charSpacing: 1.5, margin: 0 } } },
+      // FZS logo (prepared for FZS, who want to use the deck internally); on dark slides on a white plate
+      ...(name === "DARK" ? [{ rect: { x: W - M - 1.24, y: H - 0.6, w: 0.5, h: 0.5, fill: { color: "FFFFFF" }, rectRadius: 0.04 } }] : []),
+      { image: { x: W - M - 1.2, y: H - 0.56, w: 0.44, h: 0.42, path: path.join(__dirname, "assets", "fzs_logo.png") } }],
     slideNumber: { x: W - M - 0.6, y: H - 0.38, w: 0.6, h: 0.24, fontFace: BODY, fontSize: 9, color: fg, align: "right" } });
 }
 
@@ -180,12 +183,12 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
   // ---------------------------------------------------------------- 1 Title (hero layout, as in the 2026-10-13 deck)
   {
     const s = slide("DARK", "Opening");
-    header(s, { label: "Data for Good · Question 2", dark: true });
+    header(s, { label: "When the patrols leave · Data for Good · Question 2", dark: true });
     s.addText([
-      { text: "When the patrols leave,", options: { color: X.onSlate, breakLine: true } },
-      { text: "mining comes back for seconds.", options: { color: X.lime } },
+      { text: "A pause, not an end:", options: { color: X.onSlate, breakLine: true } },
+      { text: "mining after Operation Mercurio", options: { color: X.lime } },
     ], { x: M, y: 1.2, w: 6.9, h: 2.4, fontFace: LIGHT, fontSize: 46, margin: 0, valign: "top", isTextBox: true, objectName: "title" });
-    s.addText("What Operation Mercurio means for FZS's work in Tambopata.",
+    s.addText("What it means for FZS's work in Tambopata. Prepared for the Frankfurt Zoological Society.",
       { x: M, y: 3.65, w: 6.3, h: 0.6, fontFace: BODY, fontSize: 17, color: X.onSlate2, margin: 0, valign: "top", isTextBox: true });
     s.addShape(pres.shapes.LINE, { x: M, y: 4.95, w: 6.7, h: 0, line: { color: "FFFFFF", width: 0.75, transparency: 82 } });
     [["Feb 2019", "Operation Mercurio starts"], ["30 m", "satellite pixels since 1985"], ["6", "ways we tested for cause"]].forEach(([v, l], i) => {
@@ -194,11 +197,14 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
       s.addText(v, { x, y: 5.08, w: 2.05, h: 0.6, fontFace: LIGHT, fontSize: 28, color: X.lime, margin: 0, isTextBox: true });
       s.addText(l, { x, y: 5.68, w: 2.0, h: 0.4, fontFace: BODY, fontSize: 12, color: X.onSlate2, margin: 0, valign: "top", isTextBox: true });
     });
-    await cropFill(s, path.join(ASSETS, "anteater.jpeg"), 7.75, 0.42, W - 7.75 - M, H - 1.0, [0.17, 0, 0.5], "giant anteater at a termite mound");
+    await cropFill(s, path.join(ASSETS, "cover_lapampa_2019_ccbysa.jpg"), 7.75, 0.42, W - 7.75 - M, H - 1.32, [0.4, 0, 0.47],
+      "aerial view of mined land in La Pampa during the 2019 operation");
+    s.addText("Photo: La Pampa, Madre de Dios, 2019 (army operation). Eliftoledo, Wikimedia Commons, CC BY-SA 4.0, cropped.",
+      { x: 7.75, y: H - 0.86, w: W - 7.75 - M, h: 0.3, fontFace: BODY, fontSize: 8, color: X.onSlate2, margin: 0, valign: "top", isTextBox: true });
     s.addText(TEAM, { x: M, y: 4.35, w: 6.7, h: 0.45, fontFace: BODY, fontSize: 12, color: X.onSlate2, margin: 0, valign: "top", isTextBox: true });
     s.addNotes(
       "About 20 seconds. Good morning, we are Group Giant Anteater. We are Ruby Ann Grambauer, Sebastian Schmid, Laurens van der Lely, Omkar Mate and Dhruv Chaudhari.\n\n" +
-      "Our title is a small pun you'll understand in a minute: when enforcement leaves, mining comes back for seconds, the way our animal comes back to the same termite mound.\n\n" +
+      "Our title is our main finding: Operation Mercurio bought a pause, not an end. The photo shows La Pampa from an army helicopter in 2019: everything brown and blue is mined land.\n\n" +
       "Our case is Operation Mercurio, Peru's biggest operation against illegal gold mining, which started in February 2019 in La Pampa, right next to the Tambopata reserve where FZS works. " +
       "We used 30-metre satellite maps for every year since 1985 and tried six ways to test whether the operation caused what we see.");
   }
@@ -296,6 +302,55 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
     s.addNotes(`Step ${k + 1} of ${steps.length}, about 12 seconds; click for the next step. ${stepNotes[k]}`);
   }
 
+  // ---------------------------------------------------------------- 8 Definition: one measure (after the map steps)
+  {
+    const s = slide("LIGHT", "Where");
+    header(s, { no: "03", label: "What we measure", title: "One measure on every slide: net mining additions", claim: "D",
+      sub: "Net additions (ha/yr) = new land + re-mined − stopped · per 30-m pixel, year t vs the years before · MapBiomas Peru Collection 4, 1985–2025" });
+    const lx = M, ly = G.top + 0.1, sz = 0.62;
+    s.addText("YEAR", { x: lx + 2.55, y: ly, w: 0.8, h: 0.25, fontFace: MED, fontSize: 10, charSpacing: 1.5, color: X.muted, margin: 0, align: "center", isTextBox: true });
+    s.addText("t − 1", { x: lx + 2.55, y: ly + 0.25, w: 0.8, h: 0.25, fontFace: BODY, fontSize: 11, color: X.ink2, margin: 0, align: "center", isTextBox: true });
+    s.addText("t", { x: lx + 3.75, y: ly + 0.25, w: 0.8, h: 0.25, fontFace: BODY, fontSize: 11, color: X.ink2, margin: 0, align: "center", isTextBox: true });
+    const rows = [
+      ["New land", "never mined before", X.new, "E7E1D6", "forest", X.new, "mined", "+"],
+      ["Re-mined", "out of use a year or more, mined again", X.remined, "E7E1D6", "old pit", X.remined, "mined", "+"],
+      ["Stopped", "mined last year, not this year", X.stopped, "8A6B4E", "mined", "DDEFEC", "water / regrowth", "−"],
+    ];
+    rows.forEach(([name, rule, col, c0, l0, c1, l1, sign], i) => {
+      const y = ly + 0.6 + i * 1.05;
+      s.addText(sign, { x: lx, y, w: 0.4, h: sz, fontFace: LIGHT, fontSize: 30, color: col, margin: 0, valign: "middle", isTextBox: true });
+      s.addText([{ text: name, options: { fontFace: MED, fontSize: 17, color: X.ink, breakLine: true } },
+        { text: rule, options: { fontFace: BODY, fontSize: 12, color: X.ink2 } }],
+        { x: lx + 0.4, y: y - 0.05, w: 2.1, h: sz + 0.1, margin: 0, valign: "middle", isTextBox: true });
+      px(s, lx + 2.64, y, sz, c0, l0, c0 === "E7E1D6" ? X.ink2 : "FFFFFF");
+      s.addShape(pres.shapes.LINE, { x: lx + 3.32, y: y + sz / 2, w: 0.48, h: 0, line: { color: X.ink2, width: 1.25, endArrowType: "triangle" } });
+      px(s, lx + 3.84, y, sz, c1, l1, c1 === "DDEFEC" ? X.ink2 : "FFFFFF");
+    });
+    const ey = ly + 3.85;
+    s.addShape(pres.shapes.RECTANGLE, { x: lx, y: ey, w: 5.1, h: 0.95, fill: { color: X.surface }, line: { color: X.rule, width: 0.75 } });
+    s.addText([
+      { text: "Net", options: { color: X.ink, bold: true } }, { text: " = ", options: { color: X.ink2 } },
+      { text: "new", options: { color: X.new, bold: true } }, { text: " + ", options: { color: X.ink2 } },
+      { text: "re-mined", options: { color: X.remined, bold: true } }, { text: " − ", options: { color: X.ink2 } },
+      { text: "stopped", options: { color: X.stopped, bold: true } },
+    ], { x: lx + 0.2, y: ey + 0.08, w: 4.8, h: 0.5, fontFace: MED, fontSize: 22, margin: 0, valign: "middle", isTextBox: true });
+    s.addText("= mining area this year − last year. Hectares are a proxy for mining activity, not for miners.",
+      { x: lx + 0.2, y: ey + 0.55, w: 4.8, h: 0.35, fontFace: BODY, fontSize: 11, color: X.ink2, margin: 0, isTextBox: true });
+    // zone map
+    const mx = M + 5.5, mw = W - M - mx, mh = mw * 9 / 16;
+    const f = path.join(ANIM, "stills", "map_zones_clean.png");
+    if (fs.existsSync(f)) s.addImage({ path: f, x: mx, y: G.top, w: mw, h: mh, altText: "zone map" });
+    else photo(s, mx, G.top, mw, mh, "zone map");
+    s.addText([
+      { text: "Same zones everywhere: ", options: { fontFace: MED, color: X.ink } },
+      { text: "Tambopata buffer zone (whole, incl. Kotsimba) · La Pampa sector (its 70.15–69.80° W part) · corridor across the road (D.L. 1100, ≤ 10 km north of the highway) · Amarakaeri buffer zone (less treated) · Madre de Dios.", options: { fontFace: BODY, color: X.ink2 } },
+    ], { x: mx, y: G.top + mh + 0.12, w: mw, h: 0.85, fontSize: 12, margin: 0, valign: "top", isTextBox: true });
+    s.addNotes(
+      "About 40 seconds. One measure on every slide from here on: net mining additions, in hectares per year. It is simply the mining area this year minus last year, from the MapBiomas Peru satellite maps at 30 metres.\n\n" +
+      "We split it into three parts, always in the same colours. Brown: new land, mined for the first time since 1985. Amber: re-mined, old pits that were out of use for at least a year and are mined again. A pit worked in both years is in none of the three flows; it simply stays in the mining area. Teal: stopped, pits that left the mining class, most often because they flooded or started to regrow. Net equals new plus re-mined minus stopped.\n\n" +
+      "Why it matters: a fall in net additions can mean fewer new pits, or more pits going out of use. Those are different stories for FZS.\n\n" +
+      "And the same zones everywhere: the Tambopata buffer zone as SERNANP draws it, La Pampa as its western part, the strip of legal corridor across the road, the Amarakaeri buffer zone as the less-treated comparison, and the whole department. Hectares measure mining activity, not the number of miners.");
+  }
   // ---------------------------------------------------------------- 8 Timeline video
   {
     const s = slide("LIGHT", "Where");
@@ -328,6 +383,10 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
       `About 40 seconds. Now the strip of legal corridor directly across the highway from La Pampa: up to 10 kilometres north of the road, at La Pampa's longitudes. Blue is that strip, orange is La Pampa itself.\n\n` +
       `Across the road, net additions rose from about ${ha("corridor_across_pre_net")} hectares a year in 2016 to 2018 to ${ha("corridor_across_during_net")} in 2019 to 2021, while La Pampa fell from ${ha("lapampa_pre_net")} to ${ha("lapampa_during_net")}.\n\n` +
       "Independent evidence points the same way: Dethier and colleagues (2023) report most activity abandoned in the targeted zones and faster mining just outside them. But we cannot show it was the same people who crossed the road."],
+    ["slide_12b_bands.png", "Where it went", "05", "Across the road",
+      `About 30 seconds. The same story in 1-kilometre bands, at La Pampa's longitudes: orange south of the highway, the La Pampa side; blue north, the corridor side.\n\n` +
+      `In 2016 to 2018 nearly all net additions were south of the road: ${ha("sl_band_south_pre_net")} hectares a year south against ${ha("sl_band_north_pre_net")} north. In 2019 to 2021 the south dropped to ${ha("sl_band_south_during_net")} while the north rose to ${ha("sl_band_north_during_net")}, first right next to the road, then deeper in. In the later years both sides grew.\n\n` +
+      "Description only: the bands show where mining happened, not who did it."],
     ["slide_13_money.png", "Why it came back", "06", "Why it came back",
       `About 40 seconds. Why did it come back? Three things line up; this is context, not a test.\n\n` +
       `Left: the anti-illegal-mining budget booked in Madre de Dios, programme PP 0128, peaked at about ${Math.round(need("t8_pp0128_mdd_2019") / 1e6)} million soles in 2019 and fell to about ${Math.round(need("t8_pp0128_mdd_2025") / 1e6)} million in 2025; it's a lower bound because national units book in Lima. Middle: the gold price, up ${need("gold_price_ratio_2025_2018").toFixed(1)}-fold from 2018 to 2025. Right: net additions in the Tambopata buffer zone, back up as the money faded and the price rose.\n\n` +
@@ -353,7 +412,7 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
       ["A weighted copy", "a mix of zones built to track Tambopata before 2019", false, "No good copy before 2019"],
       ["Twins in Brazil", "look-alike mining areas picked by fixed rules", false, "Different trends before 2019"],
       ["Either side of the road", "land just north vs just south of the highway", false, "Too noisy to tell"],
-      ["Matching, 7 ways", "look-alike areas picked by algorithm", false, "Can't beat chance"],
+      [`Matching, ${need("psm_n_methods").toFixed(0)} ways`, "look-alike areas picked by algorithm", false, "Can't beat chance"],
       ["Weighted zones and years", "zones and years weighted to match Tambopata's past", true, "Holds up · in hectares only"],
     ];
     const icons = ["LuGitCompare", "LuLayers", "LuSearch", "LuSplit", "LuCrosshair", "LuSigma"];
@@ -481,7 +540,7 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
     header(s, { label: "Thank you", dark: true });
     s.addText([
       { text: "Questions?", options: { color: X.onSlate, breakLine: true } },
-      { text: "Like the anteater, mining comes back for seconds.", options: { color: X.lime, fontSize: 22 } },
+      { text: "Like the anteater: a pause, not an end.", options: { color: X.lime, fontSize: 22 } },
     ], { x: M, y: 1.2, w: 5.4, h: 2.4, fontFace: LIGHT, fontSize: 54, margin: 0, valign: "top", isTextBox: true });
     s.addImage({ data: anteaterLime, x: M, y: 3.9, w: 1.3, h: 1.3 });
     { const mw = 6.6, mh = mw * 9 / 16;
@@ -511,7 +570,7 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
         `Tambopata at ${pct("top3_ratio")}–${pct("top3_ratio_excl_unverified")} of their pace (Amazon Mining Watch, another product)`, "Different trends"],
       ["4  Spatial discontinuity: land just north vs just south of the road",
         `${need("rd_road_did_net") >= 0 ? "+" : "−"}${Math.abs(need("rd_road_did_net")).toFixed(1)} pts of land/yr (p = ${p2("rd_road_did_net_p")})`, "Too noisy"],
-      ["5  Matching, 7 ways: look-alike areas picked by algorithm",
+      [`5  Matching, ${need("psm_n_methods").toFixed(0)} ways: look-alike areas picked by algorithm`,
         `All slower; fake-test p ${p2("psm_p_min")}–${p2("psm_p_max")}; no common support`, "Can't decide"],
       ["6  Synthetic DiD: zones and years weighted to match Tambopata's past",
         `${ha("sdid_sdid_ha_during_net")}; size rank ${int("sdid_sdid_scaled_during_rank")} of ${int("sdid_sdid_scaled_during_n")}`, "Holds up in ha"],
@@ -572,55 +631,6 @@ function px(s, x, y, size, fill, label, txt = "FFFFFF") {
       sub: "Same four steps as the click-through map slides · protected areas → highway → corridor → La Pampa · click to play" });
     video(s, "MapLayers.mp4", "stills/map_step4.png", "map layers animation");
     s.addNotes("Optional: the same four steps as the click-through map slides, as one video.");
-  }
-  // ---------------------------------------------------------------- 3 Definition: one measure
-  {
-    const s = slide("LIGHT", "Backup");
-    header(s, { label: "Backup · One measure", title: "One measure on every slide: net mining additions", claim: "D",
-      sub: "Net additions (ha/yr) = new land + re-mined − stopped · per 30-m pixel, year t vs the years before · MapBiomas Peru Collection 4, 1985–2025" });
-    const lx = M, ly = G.top + 0.1, sz = 0.62;
-    s.addText("YEAR", { x: lx + 2.55, y: ly, w: 0.8, h: 0.25, fontFace: MED, fontSize: 10, charSpacing: 1.5, color: X.muted, margin: 0, align: "center", isTextBox: true });
-    s.addText("t − 1", { x: lx + 2.55, y: ly + 0.25, w: 0.8, h: 0.25, fontFace: BODY, fontSize: 11, color: X.ink2, margin: 0, align: "center", isTextBox: true });
-    s.addText("t", { x: lx + 3.75, y: ly + 0.25, w: 0.8, h: 0.25, fontFace: BODY, fontSize: 11, color: X.ink2, margin: 0, align: "center", isTextBox: true });
-    const rows = [
-      ["New land", "never mined before", X.new, "E7E1D6", "forest", X.new, "mined", "+"],
-      ["Re-mined", "mined years ago, not last year", X.remined, "E7E1D6", "old pit", X.remined, "mined", "+"],
-      ["Stopped", "mined last year, not this year", X.stopped, "8A6B4E", "mined", "DDEFEC", "water / regrowth", "−"],
-    ];
-    rows.forEach(([name, rule, col, c0, l0, c1, l1, sign], i) => {
-      const y = ly + 0.6 + i * 1.05;
-      s.addText(sign, { x: lx, y, w: 0.4, h: sz, fontFace: LIGHT, fontSize: 30, color: col, margin: 0, valign: "middle", isTextBox: true });
-      s.addText([{ text: name, options: { fontFace: MED, fontSize: 17, color: X.ink, breakLine: true } },
-        { text: rule, options: { fontFace: BODY, fontSize: 12, color: X.ink2 } }],
-        { x: lx + 0.4, y: y - 0.05, w: 2.1, h: sz + 0.1, margin: 0, valign: "middle", isTextBox: true });
-      px(s, lx + 2.64, y, sz, c0, l0, c0 === "E7E1D6" ? X.ink2 : "FFFFFF");
-      s.addShape(pres.shapes.LINE, { x: lx + 3.32, y: y + sz / 2, w: 0.48, h: 0, line: { color: X.ink2, width: 1.25, endArrowType: "triangle" } });
-      px(s, lx + 3.84, y, sz, c1, l1, c1 === "DDEFEC" ? X.ink2 : "FFFFFF");
-    });
-    const ey = ly + 3.85;
-    s.addShape(pres.shapes.RECTANGLE, { x: lx, y: ey, w: 5.1, h: 0.95, fill: { color: X.surface }, line: { color: X.rule, width: 0.75 } });
-    s.addText([
-      { text: "Net", options: { color: X.ink, bold: true } }, { text: " = ", options: { color: X.ink2 } },
-      { text: "new", options: { color: X.new, bold: true } }, { text: " + ", options: { color: X.ink2 } },
-      { text: "re-mined", options: { color: X.remined, bold: true } }, { text: " − ", options: { color: X.ink2 } },
-      { text: "stopped", options: { color: X.stopped, bold: true } },
-    ], { x: lx + 0.2, y: ey + 0.08, w: 4.8, h: 0.5, fontFace: MED, fontSize: 22, margin: 0, valign: "middle", isTextBox: true });
-    s.addText("= mining area this year − last year. Hectares are a proxy for mining activity, not for miners.",
-      { x: lx + 0.2, y: ey + 0.55, w: 4.8, h: 0.35, fontFace: BODY, fontSize: 11, color: X.ink2, margin: 0, isTextBox: true });
-    // zone map
-    const mx = M + 5.5, mw = W - M - mx, mh = mw * 9 / 16;
-    const f = path.join(ANIM, "stills", "map_zones_clean.png");
-    if (fs.existsSync(f)) s.addImage({ path: f, x: mx, y: G.top, w: mw, h: mh, altText: "zone map" });
-    else photo(s, mx, G.top, mw, mh, "zone map");
-    s.addText([
-      { text: "Same zones everywhere: ", options: { fontFace: MED, color: X.ink } },
-      { text: "Tambopata buffer zone (whole, incl. Kotsimba) · La Pampa sector (its 70.15–69.80° W part) · corridor across the road (D.L. 1100, ≤ 10 km north of the highway) · Amarakaeri buffer zone (less treated) · Madre de Dios.", options: { fontFace: BODY, color: X.ink2 } },
-    ], { x: mx, y: G.top + mh + 0.12, w: mw, h: 0.85, fontSize: 12, margin: 0, valign: "top", isTextBox: true });
-    s.addNotes(
-      "About 40 seconds. One measure on every slide from here on: net mining additions, in hectares per year. It is simply the mining area this year minus last year, from the MapBiomas Peru satellite maps at 30 metres.\n\n" +
-      "We split it into three parts, always in the same colours. Brown: new land, mined for the first time since 1985. Amber: re-mined, old pits mined again after a gap. Teal: stopped, pits that left the mining class, most often because they flooded or started to regrow. Net equals new plus re-mined minus stopped.\n\n" +
-      "Why it matters: a fall in net additions can mean fewer new pits, or more pits going out of use. Those are different stories for FZS.\n\n" +
-      "And the same zones everywhere: the Tambopata buffer zone as SERNANP draws it, La Pampa as its western part, the strip of legal corridor across the road, the Amarakaeri buffer zone as the less-treated comparison, and the whole department. Hectares measure mining activity, not the number of miners.");
   }
   {
     const s = slide("LIGHT", "Backup");

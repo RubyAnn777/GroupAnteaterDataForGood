@@ -324,6 +324,49 @@ def s12_across(reg):
           f"{NO_SEE}", top=0.9, right=0.86)
 
 
+# --------------------------------------------------------------------------- slide 12b: road bands
+def s12b_bands(reg):
+    """Net additions per 1-km band north/south of the Interoceanic Highway (La Pampa longitudes), three periods.
+    Same definition as raster_layers.fig_road_bands (all bands −30..+30 km; south = km < 0). Description."""
+    import raster_zones as rz
+    b = pd.read_csv(rz.OUT_BAND)
+    res, tot = {}, {}
+    for p in (PRE, DUR, LATER):
+        a, c = D.PERIODS[p]
+        res[p] = b[b.year.between(a, c)].groupby("km_from_road").net_ha.mean()
+        tot[p] = {side: _add(reg, f"sl_band_{side}_{p}_net", float(res[p][(res[p].index < 0) if side == "south" else
+                             (res[p].index >= 0)].sum()), "ha/yr", f"Net mining additions summed over 1-km bands "
+                             f"{'south' if side == 'south' else 'north'} of the Interoceanic Highway (0–30 km, La Pampa "
+                             f"longitudes, all land), {PSHORT[p]}: mean per year (slide 12b)", "net",
+                             "road bands, La Pampa longitudes", PSHORT[p]) for side in ("south", "north")}
+    fig, axes = plt.subplots(1, 3, figsize=(W, H), sharey=True)
+    ymax = max(float(r.max()) for r in res.values()) * 1.12
+    ymin = min(min(float(r.min()) for r in res.values()) * 1.15, -20)
+    for ax, p in zip(axes, (PRE, DUR, LATER)):
+        d = res[p]
+        ax.axvspan(10, 30, color=BAND, zorder=0, lw=0)
+        ax.bar(d.index + 0.5, d.values, width=0.9, color=[C["lapampa"] if k < 0 else C["corridor"] for k in d.index], lw=0)
+        ax.axvline(0, color=INK, lw=1.6)
+        ax.axhline(0, color=AXIS, lw=1)
+        ax.set_title(PSHORT[p], loc="left", fontsize=FS["label"], fontweight="bold", color=INK, pad=30)
+        ax.text(0, 1.03, f"south {_fmt(tot[p]['south'])} · north {_fmt(tot[p]['north'])} ha/yr", transform=ax.transAxes,
+                fontsize=FS["small"], color=INK2, va="bottom")
+        ax.set_xlim(-30, 30); ax.set_xticks([-20, 0, 20]); ax.set_ylim(ymin, ymax); ax.tick_params(labelsize=FS["tick"])
+        ax.set_xlabel("km from the highway", fontsize=FS["small"], color=INK2)
+        style_axes(ax)
+    axes[0].text(-1.5, ymax * 0.93, "← La Pampa\nside", fontsize=FS["small"] - 1, color=INK, ha="right", va="top")
+    axes[0].text(1.5, ymax * 0.93, "corridor\nside →", fontsize=FS["small"] - 1, color=INK, ha="left", va="top")
+    axes[0].text(20, ymin * 0.9, "> 10 km north", fontsize=FS["small"] - 2, color=INK2, ha="center", va="bottom")
+    _fmt_y(axes[0])
+    axes[0].set_ylabel("ha/yr per 1-km band", fontsize=FS["small"], color=INK2)
+    _head(fig, "2019–21: mining fell south of the highway, rose north",
+          f"Net mining additions per 1-km band, ha/yr · La Pampa's longitudes, 30 km either side of the Interoceanic "
+          f"Highway · means for {PSHORT[PRE]}, {PSHORT[DUR]}, {PSHORT[LATER]} · shaded: more than 10 km north")
+    _save(fig, "slide_12b_bands.png", f"{SRC} Bands are measured north–south from the highway at 70.15–69.80° W; "
+          f"all land in each band. Description: we cannot show it was the same miners. {NO_SEE}",
+          top=0.8, left=0.08, wspace=0.12, xlab=True)
+
+
 # --------------------------------------------------------------------------- slide 13: money and gold (context)
 def s13_money(pack, reg):
     import v2_tests
@@ -650,6 +693,7 @@ def run(pack, reg):
     s10_2019(reg)
     s11_region(reg)
     s12_across(reg)
+    s12b_bands(reg)
     s13_money(pack, reg)
     s14_back(reg)
     s15_reserve(reg)

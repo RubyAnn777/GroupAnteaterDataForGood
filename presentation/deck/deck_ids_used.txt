@@ -22,6 +22,7 @@ model_m1_rank
 model_m3_during_net
 model_m4_n
 model_m4_rank
+psm_n_methods
 psm_p_max
 psm_p_min
 rd_reserve_did_net
@@ -35,6 +36,10 @@ sdid_sc_ha_during_net
 sdid_sdid_ha_during_net
 sdid_sdid_scaled_during_n
 sdid_sdid_scaled_during_rank
+sl_band_north_during_net
+sl_band_north_pre_net
+sl_band_south_during_net
+sl_band_south_pre_net
 sl_net_tambopata_bz_fall_share
 sl_rank_scaled_hi
 sl_rank_scaled_lo

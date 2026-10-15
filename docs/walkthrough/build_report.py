@@ -787,7 +787,7 @@ body{background:var(--bg);margin:0;font-family:var(--sans)}
 :root[data-theme="dark"] .note{color:#bccac9}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .note{color:#bccac9}}
 .sheet{background:var(--paper);color:var(--ink);max-width:210mm;margin:14px auto 48px;padding:16mm 17mm;box-shadow:0 1px 2px rgba(0,0,0,.08),0 10px 30px rgba(0,0,0,.08);
-  font-size:10pt;line-height:1.38;color-scheme:light}
+  font-size:9.7pt;line-height:1.36;color-scheme:light}
 .sheet .b-head{border-bottom:2px solid var(--slate);padding-bottom:6px;margin-bottom:8px}
 .sheet h1{font-size:15pt;font-weight:500;margin:0 0 2px;line-height:1.2;color:var(--slate);text-wrap:balance}
 .sheet .b-meta{color:#5d6b70;margin:0;font-size:8.6pt;letter-spacing:.02em}
@@ -796,15 +796,23 @@ body{background:var(--bg);margin:0;font-family:var(--sans)}
 .sheet p{margin:0 0 5px}.sheet ul{margin:0 0 5px;padding-left:1.2em}.sheet li{margin:0 0 2px}
 .sheet strong{font-weight:500}
 .sheet a{color:var(--accent);overflow-wrap:anywhere}
-.sheet figure{margin:4px 0 6px;text-align:center}.sheet figure img{width:72%;height:auto}
+.sheet figure{margin:4px 0 6px;text-align:center}.sheet figure img{width:64%;height:auto}
 .sheet figcaption{font-size:8pt;color:#5d6b70;text-align:left}
 .sheet code{font-size:8.5pt;font-family:"Roboto Mono",ui-monospace,monospace}
+.sheet table{border-collapse:collapse;width:100%;font-size:7.8pt;line-height:1.25;margin:3px 0 5px}
+.sheet th,.sheet td{padding:1.5px 6px 1.5px 0;border-bottom:1px solid #e4e1da;text-align:left;vertical-align:top}
+.sheet th{font-weight:500;color:#4a5b60;border-bottom:1px solid #9aa4a7}
+.sheet h2 + p + table{table-layout:fixed}
+.sheet h2 + p + table th:nth-child(1){width:37%}.sheet h2 + p + table th:nth-child(2){width:37%}
+.sheet h2 + p + table th:nth-child(3),.sheet h2 + p + table th:nth-child(4){width:13%}
+.sheet h2 + p + table td:nth-last-child(-n+2),.sheet h2 + p + table th:nth-last-child(-n+2){text-align:right}
+.sheet table{max-width:100%}
 .badge{font-size:6.6pt;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:0 5px;border:1px solid currentColor;border-radius:999px;white-space:nowrap}
 .badge.d{color:var(--d)}.badge.p{color:var(--p)}.badge.c{color:var(--c);background:#f3e3e9}
 .pb{break-before:page}
 .foot{max-width:210mm;margin:0 auto 40px;padding:0 16px;color:#7a878b;font-size:.75rem}
 @media screen and (max-width:820px){.sheet{padding:22px 18px;margin:12px 12px 32px;font-size:15px}.sheet figure img{width:100%}.brand{display:none}}
-@page{size:A4;margin:16mm 17mm}
+@page{size:A4;margin:13mm 16mm}
 @media print{body{background:#fff}.top,.note,.foot{display:none}.sheet{box-shadow:none;margin:0;padding:0;max-width:none}}
 """
 

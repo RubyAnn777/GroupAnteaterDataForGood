@@ -1152,4 +1152,4 @@ See [`output/numbers.csv`](../../output/numbers.csv).
 </details>
 
 ---
-*Built 2026-10-15 21:11 from git commit d531caa (working tree may contain uncommitted changes). Numbers from output/numbers.csv (2717 rows).*
+*Built 2026-10-15 22:37 from git commit 34c2c5f (working tree may contain uncommitted changes). Numbers from output/numbers.csv (2723 rows).*
